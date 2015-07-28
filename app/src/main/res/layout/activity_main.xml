@@ -1,17 +1,50 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:layout_height="fill_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
-    android:clickable="false">
+    android:clickable="false"
+    android:orientation="vertical">
 
-    <Button
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Dropbox"
+            android:id="@+id/button"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="top" />
+
+
+    <ScrollView
+        android:id="@+id/scroll"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Dropbox"
-        android:id="@+id/button"
-        android:layout_alignParentTop="true" />
+        android:layout_height="172dp"
+        android:layout_gravity="top"
+        android:fillViewport="true"
+        android:transitionGroup="false">
+
+        <HorizontalScrollView
+            android:id="@+id/scroll_hor"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="false">
+
+            <TextView
+                android:id="@+id/textview"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textSize="12px"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="0"
+                android:shadowColor="#FFFFFF"
+                android:isScrollContainer="true"
+                 />
+        </HorizontalScrollView>
+    </ScrollView>
 
     <Button
         android:layout_width="fill_parent"
@@ -22,10 +55,11 @@
         android:layout_alignLeft="@+id/button"
         android:layout_alignStart="@+id/button"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="bottom" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Статус"
         android:id="@+id/button4"
@@ -36,10 +70,11 @@
         android:layout_alignParentEnd="true"
         android:clickable="true"
         android:enabled="true"
-        android:onClick="showStatus" />
+        android:onClick="showStatus"
+        android:layout_gravity="bottom" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Настройка"
         android:id="@+id/button5"
@@ -48,30 +83,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:onClick="showSettings" />
+        android:onClick="showSettings"
+        android:layout_gravity="bottom" />
 
-    <ScrollView
-        android:id="@+id/scroll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
 
-    <HorizontalScrollView
-        android:id="@+id/scroll_hor"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-
-        <TextView
-            android:id="@+id/textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#000000"
-            android:background="#FFFFFF"
-            android:textSize="24px"
-            android:shadowDx="0"
-            android:shadowDy="0"
-            android:shadowRadius="0"
-            android:shadowColor="#FFFFFF"
-            android:isScrollContainer="true"/>
-    </HorizontalScrollView>
-    </ScrollView>
-</RelativeLayout>
+</LinearLayout>

@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TextView text = (TextView)findViewById(R.id.textview);
+       TextView text = (TextView)findViewById(R.id.textview);
         text.setText("Преимущество использования ядра Linux, \n" +
                 "как основы платформы Android состоит в\n" +
                 "том, что ядро системы позволяет верхним\n" +
