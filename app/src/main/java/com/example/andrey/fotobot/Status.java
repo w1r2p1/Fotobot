@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class Status extends AppCompatActivity {
 
@@ -11,6 +12,30 @@ public class Status extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_status);
+        TextView text = (TextView)findViewById(R.id.textView);
+        text.setText("Преимущество использования ядра Linux, \n" +
+                "как основы платформы Android состоит в\n" +
+                "том, что ядро системы позволяет верхним\n" +
+                "уровням\n" +
+                "программного стека оставаться неизменным\n" +
+                "несмотря на изменения в используемом оборудовании. \n" +
+                "Конечно, хорошая практика программирования\n" +
+                "требует, чтобы пользовательские приложения корректно \n" +
+                "завершали свою работу в случае вызова\n" +
+                "ресурса, являющегося недоступным, например, камеры, не \n" +
+                "присутствующей в специфической модели\n" +
+                "смартофона. Поскольку новое вспомогательное \n" +
+                "оборудование для мобильных устройств постоянно\n" +
+                "появляется на рынке, драйверы для них должны быть \n" +
+                "быть написаны на уровне ядра Linux для\n" +
+                "обеспечения поддержку оборудования также, \n" +
+                "как на настольных Linux-системах.\n" +
+                "Поскольку новое вспомогательное \n" +
+                "оборудование для мобильных устройств постоянно\n" +
+                "появляется на рынке, драйверы для них должны быть \n" +
+                "быть написаны на уровне ядра Linux для\n" +
+                "обеспечения поддержку оборудования также, \n" +
+                "как на настольных Linux-системах.");
     }
 
     @Override

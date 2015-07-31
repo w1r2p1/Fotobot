@@ -13,38 +13,8 @@
             android:layout_height="wrap_content"
             android:text="Dropbox"
             android:id="@+id/button"
-            android:layout_alignParentTop="true"
-            android:layout_gravity="top" />
+            android:layout_alignParentTop="true" />
 
-
-    <ScrollView
-        android:id="@+id/scroll"
-        android:layout_width="fill_parent"
-        android:layout_height="172dp"
-        android:layout_gravity="top"
-        android:fillViewport="true"
-        android:transitionGroup="false">
-
-        <HorizontalScrollView
-            android:id="@+id/scroll_hor"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:fillViewport="false">
-
-            <TextView
-                android:id="@+id/textview"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:textSize="12px"
-                android:shadowDx="0"
-                android:shadowDy="0"
-                android:shadowRadius="0"
-                android:shadowColor="#FFFFFF"
-                android:isScrollContainer="true"
-                 />
-        </HorizontalScrollView>
-    </ScrollView>
 
     <Button
         android:layout_width="fill_parent"
