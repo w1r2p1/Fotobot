@@ -1,6 +1,7 @@
 package com.example.andrey.fotobot;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,7 +10,8 @@ import android.view.View;
 import android.widget.TextView;
 
 public class Status extends AppCompatActivity {
-
+Handler h;
+    TextView text;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +21,7 @@ public class Status extends AppCompatActivity {
         Intent intent = getIntent();
 
 
-        TextView text = (TextView)findViewById(R.id.textView);
+        text = (TextView)findViewById(R.id.textView);
         text.setText("Преимущество использования ядра Linux, \n" +
                 "как основы платформы Android состоит в\n" +
                 "том, что ядро системы позволяет верхним\n" +
@@ -43,6 +45,19 @@ public class Status extends AppCompatActivity {
                 "быть написаны на уровне ядра Linux для\n" +
                 "обеспечения поддержку оборудования также, \n" +
                 "как на настольных Linux-системах.");
+
+     //   String str1 = getIntent().getExtras().getString("var1");
+     //   text.setText(str1);
+
+/*       h = new Handler() {
+            public void handleMessage(android.os.Message msg) {
+                // обновляем TextView
+                text.setText("Закачано файлов: " + msg.what);
+              //  if (msg.what == 10) btnStart.setEnabled(true);
+            }
+        };
+*/
+
     }
 
     @Override

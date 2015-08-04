@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     Button btnStart;
     Handler h;
     TextView tvInfo;
+    TextView text;
+    Intent intent;
 
 
     @Override
@@ -26,11 +28,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         btnStart = (Button) findViewById(R.id.button2);
         tvInfo = (TextView) findViewById(R.id.tvInfo);
+        text = (TextView)findViewById(R.id.textView);
+
+        intent = new Intent(MainActivity.this, Status.class);
+
         h = new Handler() {
             public void handleMessage(android.os.Message msg) {
                 // обновляем TextView
                 tvInfo.setText("Закачано файлов: " + msg.what);
                 if (msg.what == 10) btnStart.setEnabled(true);
+
+            //    intent.putExtra("var1", msg.what);
+
             }
         };
     }
