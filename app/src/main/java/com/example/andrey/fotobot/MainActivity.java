@@ -10,7 +10,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     TextView tvInfo;
     TextView text;
     Intent intent;
-
+    String str1 = "Fotobot str to file";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,12 +86,32 @@ public class MainActivity extends AppCompatActivity {
         switch (v.getId()) {
             case R.id.button2:
                 btnStart.setEnabled(false);
+
                 Thread t = new Thread(new Runnable() {
                     public void run() {
                         for (int i = 1; i <= 10; i++) {
                             // долгий процесс
                             downloadFile();
                             h.sendEmptyMessage(i);
+
+
+
+
+                                try {
+                                    FileOutputStream fileout=openFileOutput("mytextfile.txt", MODE_PRIVATE);
+                                    OutputStreamWriter outputWriter=new OutputStreamWriter(fileout);
+                                    outputWriter.write(str1);
+                                    outputWriter.close();
+
+
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+
+
+
                             // пишем лог
                             Log.d(LOG_TAG, "i = " + i);
                         }
