@@ -26,7 +26,9 @@
         android:layout_alignStart="@+id/button"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_gravity="bottom" />
+        android:layout_gravity="bottom"
+        android:onClick="startFotobot"
+        android:nestedScrollingEnabled="false" />
 
     <Button
         android:layout_width="fill_parent"
@@ -55,6 +57,11 @@
         android:layout_alignParentEnd="true"
         android:onClick="showSettings"
         android:layout_gravity="bottom" />
-
+    <TextView
+        android:id="@+id/tvInfo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="">
+    </TextView>
 
 </LinearLayout>

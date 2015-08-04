@@ -1,9 +1,11 @@
 package com.example.andrey.fotobot;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 public class Status extends AppCompatActivity {
@@ -12,6 +14,11 @@ public class Status extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_status);
+
+        // Get the message from the intent
+        Intent intent = getIntent();
+
+
         TextView text = (TextView)findViewById(R.id.textView);
         text.setText("Преимущество использования ядра Linux, \n" +
                 "как основы платформы Android состоит в\n" +
@@ -59,4 +66,11 @@ public class Status extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    /** Called when the user clicks the Settings button */
+    public void showMain(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
 }
