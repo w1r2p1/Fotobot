@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
@@ -98,9 +97,9 @@ public class MainActivity extends AppCompatActivity {
 
 
                                 try {
-                                    FileOutputStream fileout=openFileOutput("mytextfile.txt", MODE_PRIVATE);
+                                    FileOutputStream fileout=openFileOutput("mytextfile.txt", MODE_PRIVATE | MODE_APPEND);
                                     OutputStreamWriter outputWriter=new OutputStreamWriter(fileout);
-                                    outputWriter.write(str1);
+                                    outputWriter.write("Закачан файл:" + Integer.toString(i) + "\n");
                                     outputWriter.close();
 
 

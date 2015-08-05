@@ -25,12 +25,20 @@
             android:layout_height="wrap_content"
             android:text="Очистить"
             android:id="@+id/id2"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:onClick="cleanLogs" />
 
     </LinearLayout>
 
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Обновить"
+        android:id="@+id/button3"
+        android:onClick="reloadLogs" />
+
     <ScrollView
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/scrollView" >
 

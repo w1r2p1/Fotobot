@@ -10,7 +10,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
 public class Status extends AppCompatActivity {
 Handler h;
@@ -26,30 +28,6 @@ Handler h;
 
 
         text = (TextView)findViewById(R.id.textView);
-        text.setText("Преимущество использования ядра Linux, \n" +
-                "как основы платформы Android состоит в\n" +
-                "том, что ядро системы позволяет верхним\n" +
-                "уровням\n" +
-                "программного стека оставаться неизменным\n" +
-                "несмотря на изменения в используемом оборудовании. \n" +
-                "Конечно, хорошая практика программирования\n" +
-                "требует, чтобы пользовательские приложения корректно \n" +
-                "завершали свою работу в случае вызова\n" +
-                "ресурса, являющегося недоступным, например, камеры, не \n" +
-                "присутствующей в специфической модели\n" +
-                "смартофона. Поскольку новое вспомогательное \n" +
-                "оборудование для мобильных устройств постоянно\n" +
-                "появляется на рынке, драйверы для них должны быть \n" +
-                "быть написаны на уровне ядра Linux для\n" +
-                "обеспечения поддержку оборудования также, \n" +
-                "как на настольных Linux-системах.\n" +
-                "Поскольку новое вспомогательное \n" +
-                "оборудование для мобильных устройств постоянно\n" +
-                "появляется на рынке, драйверы для них должны быть \n" +
-                "быть написаны на уровне ядра Linux для\n" +
-                "обеспечения поддержку оборудования также, \n" +
-                "как на настольных Linux-системах.");
-
 
         //reading text from file
         try {
@@ -116,6 +94,51 @@ Handler h;
     public void showMain(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+    }
+
+    public void cleanLogs(View view) {
+        try {
+            FileOutputStream fileout=openFileOutput("mytextfile.txt", MODE_PRIVATE);
+            OutputStreamWriter outputWriter=new OutputStreamWriter(fileout);
+            outputWriter.write("");
+            outputWriter.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Intent intent = new Intent(this, Status.class);
+        finish();
+        startActivity(intent);
+
+    }
+
+    public void reloadLogs(View view) {
+        text = (TextView)findViewById(R.id.textView);
+
+        //reading text from file
+        try {
+            FileInputStream fileIn=openFileInput("mytextfile.txt");
+            InputStreamReader InputRead= new InputStreamReader(fileIn);
+
+            char[] inputBuffer= new char[READ_BLOCK_SIZE];
+            String s="";
+            int charRead;
+
+            while ((charRead=InputRead.read(inputBuffer))>0) {
+                // char to string conversion
+                String readstring=String.copyValueOf(inputBuffer,0,charRead);
+                s +=readstring;
+            }
+            InputRead.close();
+            //   Toast.makeText(getBaseContext(), s,Toast.LENGTH_SHORT).show();
+            text.setText(s);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Intent intent = new Intent(this, Status.class);
+        finish();
+        startActivity(intent);
+
     }
 
 }
