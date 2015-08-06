@@ -105,9 +105,12 @@ Handler h;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Intent intent = new Intent(this, Status.class);
-        finish();
-        startActivity(intent);
+
+        text.setText("");
+
+//        Intent intent = new Intent(this, Status.class);
+ //       finish();
+ //       startActivity(intent);
 
     }
 
@@ -135,9 +138,9 @@ Handler h;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Intent intent = new Intent(this, Status.class);
-        finish();
-        startActivity(intent);
+    //    Intent intent = new Intent(this, Status.class);
+     //   finish();
+     //   startActivity(intent);
 
     }
 
