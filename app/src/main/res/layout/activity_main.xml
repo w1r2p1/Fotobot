@@ -19,7 +19,7 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Запустить Фотобот"
+        android:text="Стартовать Фотобот"
         android:id="@+id/button2"
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/button"

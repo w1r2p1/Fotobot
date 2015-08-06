@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         switch (v.getId()) {
             case R.id.button2:
                 btnStart.setEnabled(false);
+                btnStart.setText("Фотобот работает");
 
                 Thread t = new Thread(new Runnable() {
                     public void run() {
@@ -114,9 +115,11 @@ public class MainActivity extends AppCompatActivity {
                             // пишем лог
                             Log.d(LOG_TAG, "i = " + i);
                         }
+
                     }
                 });
                 t.start();
+
                 break;
            // case R.id.btnTest:
            //     Log.d(LOG_TAG, "test");
@@ -124,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
             default:
                 break;
         }
+
     }
     void downloadFile() {
         // пауза - 1 секунда
