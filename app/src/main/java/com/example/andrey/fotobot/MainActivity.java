@@ -16,6 +16,11 @@ import java.io.OutputStreamWriter;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
+
+    final int STATUS_STARTED = 111;
+    final int STATUS_WORKING = 222;
+    final int STATUS_STOPPED = 333;
+
     final String LOG_TAG = "Logs";
     Button btnStart;
     Handler h;
@@ -37,8 +42,12 @@ public class MainActivity extends AppCompatActivity {
         h = new Handler() {
             public void handleMessage(android.os.Message msg) {
                 // обновляем TextView
-                tvInfo.setText("Закачано файлов: " + msg.what);
-                if (msg.what == 10) btnStart.setEnabled(true);
+
+                if (msg.what == STATUS_STOPPED) btnStart.setText("Стартовать Фотобот");
+                if (msg.what == 10) {
+                    btnStart.setEnabled(true);
+                    tvInfo.setText("Закачано файлов: " + msg.what);
+                }
 
             //    intent.putExtra("var1", msg.what);
 
@@ -115,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                             // пишем лог
                             Log.d(LOG_TAG, "i = " + i);
                         }
-
+                        h.sendEmptyMessage(STATUS_STOPPED);
                     }
                 });
                 t.start();
