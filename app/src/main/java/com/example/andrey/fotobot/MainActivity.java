@@ -38,15 +38,19 @@ public class MainActivity extends AppCompatActivity {
         text = (TextView)findViewById(R.id.textView);
 
         intent = new Intent(MainActivity.this, Status.class);
+        tvInfo.setText("Before handler starts");
 
         h = new Handler() {
             public void handleMessage(android.os.Message msg) {
                 // обновляем TextView
 
                 if (msg.what == STATUS_STOPPED) btnStart.setText("Стартовать Фотобот");
+                tvInfo.setText("Закачан файл: " + msg.what);
+
                 if (msg.what == 10) {
                     btnStart.setEnabled(true);
                     tvInfo.setText("Закачано файлов: " + msg.what);
+
                 }
 
             //    intent.putExtra("var1", msg.what);
@@ -54,7 +58,12 @@ public class MainActivity extends AppCompatActivity {
             }
         };
     }
+    @Override
+    protected void onRestart() {
+        super.onRestart();  // Always call the superclass method first
 
+        // Activity being restarted from stopped state
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -101,6 +110,11 @@ public class MainActivity extends AppCompatActivity {
                         for (int i = 1; i <= 10; i++) {
                             // долгий процесс
                             downloadFile();
+
+//                          public final boolean sendEmptyMessage (int what)
+//                          Added in API level 1
+//                          Sends a Message containing only the what value.
+
                             h.sendEmptyMessage(i);
 
 
@@ -146,4 +160,5 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
 }
