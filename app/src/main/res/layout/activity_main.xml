@@ -33,6 +33,22 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:text="Остановить Фотобот"
+        android:id="@+id/button2_1"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/button"
+        android:layout_alignStart="@+id/button"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="bottom"
+        android:onClick="stopFotobot"
+        android:nestedScrollingEnabled="false"
+        android:enabled="false" />
+
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:text="Статус"
         android:id="@+id/button4"
         android:layout_above="@+id/button2"
