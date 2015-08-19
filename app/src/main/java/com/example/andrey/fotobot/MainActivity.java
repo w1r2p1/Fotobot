@@ -19,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 public class MainActivity extends AppCompatActivity {
 int n;
     Handler hndl;
+    FotoBot fb;
 
     Handler.Callback hc = new Handler.Callback() {
         public boolean handleMessage(Message msg) {
@@ -64,6 +65,9 @@ n = msg.what;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        fb = new FotoBot();
+
         btnStart = (Button) findViewById(R.id.button2);
         tvInfo = (TextView) findViewById(R.id.tvInfo);
         text = (TextView)findViewById(R.id.textView);
