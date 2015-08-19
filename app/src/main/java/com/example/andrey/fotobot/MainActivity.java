@@ -22,6 +22,29 @@ public class MainActivity extends AppCompatActivity {
 
     Handler.Callback hc = new Handler.Callback() {
         public boolean handleMessage(Message msg) {
+
+
+
+            //public void handleMessage (android.os.Message msg) {
+                // обновляем TextView
+
+                if (msg.what == STATUS_STOPPED) btnStart.setText("Стартовать Фотобот");
+                tvInfo.setText("Закачан файл: " + msg.what);
+
+                if (msg.what == 10) {
+                    btnStart.setEnabled(true);
+                    tvInfo.setText("Закачано файлов: " + msg.what);
+
+                }
+
+
+
+            //}
+
+
+
+
+
             Log.d(LOG_TAG, "what = " + msg.what);
             return false;
         }
