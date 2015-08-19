@@ -3,6 +3,7 @@ package com.example.andrey.fotobot;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -16,6 +17,17 @@ import java.io.OutputStreamWriter;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
+
+    Handler hndl;
+
+    Handler.Callback hc = new Handler.Callback() {
+        public boolean handleMessage(Message msg) {
+            Log.d(LOG_TAG, "what = " + msg.what);
+            return false;
+        }
+    };
+
+
 
     final int STATUS_STARTED = 111;
     final int STATUS_WORKING = 222;
@@ -40,7 +52,35 @@ public class MainActivity extends AppCompatActivity {
         intent = new Intent(MainActivity.this, Status.class);
         tvInfo.setText("Before handler starts");
 
-        h = new Handler() {
+        h = new Handler(hc);
+
+
+    }
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(LOG_TAG, "onDestroy");
+    }
+
+    protected void onPause() {
+        super.onPause();
+        Log.d(LOG_TAG, "onPause");
+    }
+
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(LOG_TAG, "onRestart");
+    }
+
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        Log.d(LOG_TAG, "onRestoreInstanceState");
+    }
+
+    protected void onResume() {
+        tvInfo = (TextView) findViewById(R.id.tvInfo);
+        super.onResume();
+        //tvInfo.setText("Закачано файлов: " + "returned from Status");
+  /*      h = new Handler() {
             public void handleMessage(android.os.Message msg) {
                 // обновляем TextView
 
@@ -53,17 +93,31 @@ public class MainActivity extends AppCompatActivity {
 
                 }
 
-            //    intent.putExtra("var1", msg.what);
+
 
             }
-        };
+        }; */
+        Log.d(LOG_TAG, "onResume ");
     }
-    @Override
-    protected void onRestart() {
-        super.onRestart();  // Always call the superclass method first
 
-        // Activity being restarted from stopped state
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.d(LOG_TAG, "onSaveInstanceState");
     }
+
+    protected void onStart() {
+        super.onStart();
+        Log.d(LOG_TAG, "onStart");
+    }
+
+    protected void onStop() {
+        super.onStop();
+        Log.d(LOG_TAG, "onStop");
+    }
+
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
