@@ -21,26 +21,28 @@ int n;
     Handler hndl;
     FotoBot fb;
 
+
+
     Handler.Callback hc = new Handler.Callback() {
         public boolean handleMessage(Message msg) {
 n = msg.what;
                 if (msg.what == STATUS_STOPPED) btnStart.setText("Стартовать Фотобот");
               //  tvInfo.setText("Handler.Callback: Закачан файл: " + msg.what);
 
-                if (msg.what == 10) {
-                    btnStart.setEnabled(true);
-//                    tvInfo.setText("Handler.Callback: Закачано файлов: " + msg.what);
+            final FotoBot fb = (FotoBot) getApplicationContext();
 
-                }
-            if (msg.what == 4444) {
+            if (fb.getstatus() == 3) {
                 btnStart.setEnabled(true);
                 btnStop.setEnabled(false);
-//                    tvInfo.setText("Handler.Callback: Закачано файлов: " + msg.what);
-
             }
 
+//            if (msg.what == 4444) {
+//                btnStart.setEnabled(true);
+//                btnStop.setEnabled(false);
+//            }
 
-            Log.d(LOG_TAG, "what = " + msg.what);
+
+        //    Log.d(LOG_TAG, "what = " + msg.what);
             return false;
         }
     };
@@ -66,7 +68,8 @@ n = msg.what;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        fb = new FotoBot();
+        final FotoBot fb = (FotoBot) getApplicationContext();
+       // fb.setstatus(1);
 
         btnStart = (Button) findViewById(R.id.button2);
         tvInfo = (TextView) findViewById(R.id.tvInfo);
@@ -107,6 +110,10 @@ n = msg.what;
         tvInfo.setText("onResume" + n);
 
         h = new Handler(hc);
+        btnStart = (Button) findViewById(R.id.button2);
+        btnStop = (Button) findViewById(R.id.button2_1);
+
+        final FotoBot fb = (FotoBot) getApplicationContext();
 
 
         //tvInfo.setText("Закачано файлов: " + "returned from Status");
@@ -127,7 +134,16 @@ n = msg.what;
 
             }
         }; */
-        Log.d(LOG_TAG, "onResume ");
+
+if (fb.getstatus() == 1) {
+        btnStart.setEnabled(true);
+        btnStop.setEnabled(false);}
+
+        if (fb.getstatus() == 2) {
+            btnStart.setEnabled(false);
+            btnStop.setEnabled(true);}
+
+        Log.d(LOG_TAG, "onResume fb.getstatus" + fb.getstatus());
     }
 
     protected void onSaveInstanceState(Bundle outState) {
@@ -187,6 +203,8 @@ n = msg.what;
     }
 
     public void startFotobot(View v) {
+        final FotoBot fb = (FotoBot) getApplicationContext();
+
         switch (v.getId()) {
             case R.id.button2:
                 btnStart.setEnabled(false);
@@ -196,10 +214,13 @@ n = msg.what;
                 Thread t = new Thread(new Runnable() {
                     public void run() {
 
-                        for (int i = 1; i <= 10; i++) {
+                        for (int i = 1; i <= 1000; i++) {
 
                             if (STOP_FOTOBOT) {
-                                h.sendEmptyMessage(4444);
+
+                              //  h.sendEmptyMessage(4444);
+                                fb.setstatus(3);
+                                Log.d(LOG_TAG, "STOP_FOTOBOT" + fb.status);
                                 return;
                             }
 
@@ -226,13 +247,14 @@ n = msg.what;
 
 
                             // пишем лог
-                            Log.d(LOG_TAG, "i = " + i);
+                         //   Log.d(LOG_TAG, "i = " + i);
                         }
                         h.sendEmptyMessage(STATUS_STOPPED);
                     }
                 });
                 t.start();
-
+                fb.setstatus(2);
+                Log.d(LOG_TAG, "fb.status" + fb.status);
                 break;
             // case R.id.btnTest:
             //     Log.d(LOG_TAG, "test");
