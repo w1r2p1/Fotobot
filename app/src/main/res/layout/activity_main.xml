@@ -54,11 +54,22 @@
 
 
     </LinearLayout>
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView" >
+
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/horizontalScrollView" >
+
     <TextView
         android:id="@+id/tvInfo"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:text="">
     </TextView>
-
+    </HorizontalScrollView>
+    </ScrollView>
 </LinearLayout>

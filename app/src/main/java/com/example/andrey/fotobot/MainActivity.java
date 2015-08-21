@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d(LOG_TAG, "Handler.Callback(): fb.getstatus()" + fb.getstatus());
             n = msg.what;
             if (msg.what == STATUS_STOPPED) btnStart.setText("Play");
-            log="Handler.Callback: Закачан файл: " + msg.what +log + "\n";
+            log="Закачан файл: " + msg.what + "\n" + log ;
             tvInfo.setText(log);
 
 
