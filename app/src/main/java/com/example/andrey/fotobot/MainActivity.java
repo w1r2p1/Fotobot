@@ -30,7 +30,9 @@ public class MainActivity extends AppCompatActivity {
 
     Handler.Callback hc = new Handler.Callback() {
         public boolean handleMessage(Message msg) {
-
+            String message = (String) msg.obj; //Extract the string from the Message
+            log=message + "\n" + log ;
+            tvInfo.setText(log);
 
             final FotoBot fb = (FotoBot) getApplicationContext();
             Log.d(LOG_TAG, "Handler.Callback(): fb.getstatus()" + fb.getstatus());
@@ -215,41 +217,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startFotobot(View v) {
-
-//        MobileData md;
-//        md = new MobileData();
-//        md.setMobileDataEnabled(getApplicationContext(), true);
-
-
-
-        ConnectivityManager dataManager;
-        dataManager  = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        Method dataMtd = null;
-        try {
-            dataMtd = ConnectivityManager.class.getDeclaredMethod("setMobileDataEnabled", boolean.class);
-        } catch (NoSuchMethodException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        dataMtd.setAccessible(true);
-        try {
-            dataMtd.invoke(dataManager, true);
-        } catch (IllegalArgumentException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-
-
-
-
         final FotoBot fb = (FotoBot) getApplicationContext();
+
+
+
+
+
+
+
+
 
         switch (v.getId()) {
             case R.id.play:
@@ -260,6 +236,68 @@ public class MainActivity extends AppCompatActivity {
                 btnConfig.setEnabled(false);
                 Thread t = new Thread(new Runnable() {
                     public void run() {
+                        MobileData md;
+                        md = new MobileData();
+                        md.setMobileDataEnabled(getApplicationContext(), true);
+
+                  /*      ConnectivityManager dataManager;
+                        dataManager  = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                        Method dataMtd = null;
+                        try {
+                            dataMtd = ConnectivityManager.class.getDeclaredMethod("setMobileDataEnabled", boolean.class);
+                        } catch (NoSuchMethodException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                        dataMtd.setAccessible(true);
+                        try {
+                            dataMtd.invoke(dataManager, true);
+                        } catch (IllegalArgumentException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (IllegalAccessException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (InvocationTargetException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+*/
+                        if ( fb.isOnline() )
+                        {
+                            String message = "мобильные данные включились";
+                            Message msg = Message.obtain(); // Creates an new Message instance
+                            msg.obj = message; // Put the string into Message, into "obj" field.
+                            msg.setTarget(h); // Set the Handler
+                            msg.sendToTarget(); //Send the message
+
+                            if ( fb.getData() ) {
+                                message = "удалось скачать пробный файл";
+                                msg = Message.obtain(); // Creates an new Message instance
+                                msg.obj = message; // Put the string into Message, into "obj" field.
+                                msg.setTarget(h); // Set the Handler
+                                msg.sendToTarget(); //Send the message
+                            } else {
+                                message = "не удалось скачать пробный файл";
+                                msg = Message.obtain(); // Creates an new Message instance
+                                msg.obj = message; // Put the string into Message, into "obj" field.
+                                msg.setTarget(h); // Set the Handler
+                                msg.sendToTarget(); //Send the message
+                            }
+                        } else {
+                            String message = "не удалось включить мобильные данные";
+                            Message msg = Message.obtain(); // Creates an new Message instance
+                            msg.obj = message; // Put the string into Message, into "obj" field.
+                            msg.setTarget(h); // Set the Handler
+                            msg.sendToTarget(); //Send the message
+                        }
+
+
+
+
+
+
+
 
                         for (int i = 1; i <= 1000; i++) {
 
@@ -313,12 +351,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void stopFotobot(View v) {
 
-        //MobileData md;
-        //md = new MobileData();
-        //md.setMobileDataEnabled(getApplicationContext(), false);
+        MobileData md;
+        md = new MobileData();
+        md.setMobileDataEnabled(getApplicationContext(), false);
 
 
-        ConnectivityManager dataManager;
+  /*      ConnectivityManager dataManager;
         dataManager  = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         Method dataMtd = null;
         try {
@@ -340,7 +378,7 @@ public class MainActivity extends AppCompatActivity {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
+*/
         final FotoBot fb = (FotoBot) getApplicationContext();
         Log.d(LOG_TAG, "stopFotobot: fb.getstatus()" + fb.getstatus());
         fb.setstatus(3);
