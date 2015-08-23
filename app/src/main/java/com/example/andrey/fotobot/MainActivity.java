@@ -17,6 +17,7 @@ import android.widget.TextView;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     Handler hndl;
     FotoBot fb;
     String log;
-MobileData mobile_data;
+
 
     Handler.Callback hc = new Handler.Callback() {
         public boolean handleMessage(Message msg) {
@@ -214,41 +215,33 @@ MobileData mobile_data;
     }
 
     public void startFotobot(View v) {
-Context context;
-        context=getApplicationContext();
+
+//        MobileData md;
+//        md = new MobileData();
+//        md.setMobileDataEnabled(getApplicationContext(), true);
 
 
 
+        ConnectivityManager dataManager;
+        dataManager  = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        Method dataMtd = null;
         try {
-            final ConnectivityManager conman = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            final Class conmanClass = Class.forName(conman.getClass().getName());
-            final Field iConnectivityManagerField = conmanClass.getDeclaredField("mService");
-            iConnectivityManagerField.setAccessible(true);
-            final Object iConnectivityManager = iConnectivityManagerField.get(conman);
-            final Class iConnectivityManagerClass = Class.forName(iConnectivityManager.getClass().getName());
-            final Method setMobileDataEnabledMethod = iConnectivityManagerClass.getDeclaredMethod("setMobileDataEnabled", Boolean.TYPE);
-            setMobileDataEnabledMethod.setAccessible(true);
-
-            setMobileDataEnabledMethod.invoke(iConnectivityManager, true);
-
-
-
-
-
-
-          /*  final ConnectivityManager conman = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            final Class<?> conmanClass = Class.forName(conman.getClass().getName());
-            final Method setMobileDataEnabledMethod = conmanClass.getMethod("setMobileDataEnabled", Boolean.TYPE);
-            setMobileDataEnabledMethod.setAccessible(true);
-            setMobileDataEnabledMethod.invoke(conman, enabled);
-*/
-
-
-
-
-
-
-        }catch (Exception e) {
+            dataMtd = ConnectivityManager.class.getDeclaredMethod("setMobileDataEnabled", boolean.class);
+        } catch (NoSuchMethodException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        dataMtd.setAccessible(true);
+        try {
+            dataMtd.invoke(dataManager, true);
+        } catch (IllegalArgumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -319,6 +312,35 @@ Context context;
     }
 
     public void stopFotobot(View v) {
+
+        //MobileData md;
+        //md = new MobileData();
+        //md.setMobileDataEnabled(getApplicationContext(), false);
+
+
+        ConnectivityManager dataManager;
+        dataManager  = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        Method dataMtd = null;
+        try {
+            dataMtd = ConnectivityManager.class.getDeclaredMethod("setMobileDataEnabled", boolean.class);
+        } catch (NoSuchMethodException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        dataMtd.setAccessible(true);
+        try {
+            dataMtd.invoke(dataManager, false);
+        } catch (IllegalArgumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
         final FotoBot fb = (FotoBot) getApplicationContext();
         Log.d(LOG_TAG, "stopFotobot: fb.getstatus()" + fb.getstatus());
         fb.setstatus(3);
