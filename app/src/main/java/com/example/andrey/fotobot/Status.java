@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +17,7 @@ import java.io.OutputStreamWriter;
 
 public class Status extends AppCompatActivity {
 Handler h;
+    final String LOG_TAG = "Logs";
     TextView text;
     static final int READ_BLOCK_SIZE = 100;
     @Override
@@ -116,6 +118,9 @@ Handler h;
     }
 
     public void reloadLogs(View view) {
+        final FotoBot fb = (FotoBot) getApplicationContext();
+        String str = fb.getstr();
+        Log.d(LOG_TAG, "Status:" + str );
         text = (TextView)findViewById(R.id.textView);
 
         //reading text from file

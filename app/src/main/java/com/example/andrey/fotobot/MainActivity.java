@@ -1,6 +1,8 @@
 package com.example.andrey.fotobot;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,6 +16,8 @@ import android.widget.TextView;
 
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     Handler hndl;
     FotoBot fb;
     String log;
-
+MobileData mobile_data;
 
     Handler.Callback hc = new Handler.Callback() {
         public boolean handleMessage(Message msg) {
@@ -210,6 +214,48 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startFotobot(View v) {
+Context context;
+        context=getApplicationContext();
+
+
+
+        try {
+            final ConnectivityManager conman = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            final Class conmanClass = Class.forName(conman.getClass().getName());
+            final Field iConnectivityManagerField = conmanClass.getDeclaredField("mService");
+            iConnectivityManagerField.setAccessible(true);
+            final Object iConnectivityManager = iConnectivityManagerField.get(conman);
+            final Class iConnectivityManagerClass = Class.forName(iConnectivityManager.getClass().getName());
+            final Method setMobileDataEnabledMethod = iConnectivityManagerClass.getDeclaredMethod("setMobileDataEnabled", Boolean.TYPE);
+            setMobileDataEnabledMethod.setAccessible(true);
+
+            setMobileDataEnabledMethod.invoke(iConnectivityManager, true);
+
+
+
+
+
+
+          /*  final ConnectivityManager conman = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            final Class<?> conmanClass = Class.forName(conman.getClass().getName());
+            final Method setMobileDataEnabledMethod = conmanClass.getMethod("setMobileDataEnabled", Boolean.TYPE);
+            setMobileDataEnabledMethod.setAccessible(true);
+            setMobileDataEnabledMethod.invoke(conman, enabled);
+*/
+
+
+
+
+
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
         final FotoBot fb = (FotoBot) getApplicationContext();
 
         switch (v.getId()) {
