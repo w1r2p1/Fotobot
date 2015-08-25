@@ -264,11 +264,7 @@ public class MainActivity extends AppCompatActivity {
                         }
 */
 
-                        try {
-                            TimeUnit.SECONDS.sleep(5);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        fbpause(5);
 
                         if ( fb.isOnline() )
                         {
@@ -317,7 +313,7 @@ public class MainActivity extends AppCompatActivity {
                             }
 
 
-                            downloadFile();
+                            fbpause(1);
 
 
 
@@ -413,10 +409,9 @@ public class MainActivity extends AppCompatActivity {
         */
     }
 
-    void downloadFile() {
-        // пауза - 1 секунда
-        try {
-            TimeUnit.SECONDS.sleep(1);
+    void fbpause(int delay) {
+                try {
+            TimeUnit.SECONDS.sleep(delay);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
