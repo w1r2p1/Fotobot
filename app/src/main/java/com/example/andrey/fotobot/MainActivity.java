@@ -1,8 +1,8 @@
 package com.example.andrey.fotobot;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -16,9 +16,6 @@ import android.widget.TextView;
 
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
             Log.d(LOG_TAG, "Handler.Callback(): fb.getstatus()" + fb.getstatus());
             n = msg.what;
             if (msg.what == STATUS_STOPPED) btnStart.setText("Play");
-            log="Закачан файл: " + msg.what + "\n" + log ;
-            tvInfo.setText(log);
+     //       log="Закачан файл: " + msg.what + "\n" + log ;
+     //       tvInfo.setText(log);
 
 
 
@@ -91,6 +88,9 @@ public class MainActivity extends AppCompatActivity {
 
         intent = new Intent(MainActivity.this, Status.class);
         log="Фотобот приветствует Вас!";
+        tvInfo.setTextSize(20);
+        tvInfo.setTypeface(Typeface.SANS_SERIF);
+        tvInfo.setTextColor(Color.BLUE);
         tvInfo.setText(log);
 
 
@@ -220,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
         final FotoBot fb = (FotoBot) getApplicationContext();
 
 
-
+        h = new Handler(hc);
 
 
 
@@ -263,6 +263,13 @@ public class MainActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
 */
+
+                        try {
+                            TimeUnit.SECONDS.sleep(5);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
                         if ( fb.isOnline() )
                         {
                             String message = "мобильные данные включились";
@@ -299,7 +306,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                        for (int i = 1; i <= 1000; i++) {
+                        for (int i = 1; i <= 1; i++) {
 
                             if ( fb.getstatus() == 3 ) {
 
@@ -309,14 +316,18 @@ public class MainActivity extends AppCompatActivity {
                                 return;
                             }
 
-                            // долгий процесс
+
                             downloadFile();
 
-//                          public final boolean sendEmptyMessage (int what)
-//                          Added in API level 1
-//                          Sends a Message containing only the what value.
 
-                            h.sendEmptyMessage(i);
+
+                        //    h.sendEmptyMessage(i);
+
+                            String message = Integer.toString(i);
+                            Message msg = Message.obtain(); // Creates an new Message instance
+                            msg.obj = message; // Put the string into Message, into "obj" field.
+                            msg.setTarget(h); // Set the Handler
+                            msg.sendToTarget(); //Send the message
 
 
                             try {
@@ -334,9 +345,11 @@ public class MainActivity extends AppCompatActivity {
                             // пишем лог
                             //   Log.d(LOG_TAG, "i = " + i);
                         }
-                        h.sendEmptyMessage(STATUS_STOPPED);
+                      //  h.sendEmptyMessage(STATUS_STOPPED);
                     }
-                });
+
+                }
+                );
                 t.start();
                 fb.setstatus(2);
                 Log.d(LOG_TAG, "startFotobot: fb.getstatus()" + fb.getstatus());
