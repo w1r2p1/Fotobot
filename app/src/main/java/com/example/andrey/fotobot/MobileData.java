@@ -13,9 +13,9 @@ import java.lang.reflect.Method;
  * Created by Andrey on 22.08.2015.
  */
 
-
 public class MobileData {
     final String LOG_TAG = "Logs";
+
     public void setMobileDataEnabled(Context context, boolean enabled) {
 
         if (Build.VERSION.SDK_INT <= 10) {
@@ -37,56 +37,32 @@ public class MobileData {
             }
         } else {
             Log.d(LOG_TAG, "Build.VERSION.SDK_INT" + Build.VERSION.SDK_INT);
-                  ConnectivityManager dataManager;
-                        dataManager  = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
-                        Method dataMtd = null;
-                        try {
-                            dataMtd = ConnectivityManager.class.getDeclaredMethod("setMobileDataEnabled", boolean.class);
-                        } catch (NoSuchMethodException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        }
-                        dataMtd.setAccessible(true);
-                        try {
-                            dataMtd.invoke(dataManager, enabled);
-                        } catch (IllegalArgumentException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        } catch (IllegalAccessException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        } catch (InvocationTargetException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        }
+            ConnectivityManager dataManager;
+            dataManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            Method dataMtd = null;
+            try {
+                dataMtd = ConnectivityManager.class.getDeclaredMethod("setMobileDataEnabled", boolean.class);
+            } catch (NoSuchMethodException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            dataMtd.setAccessible(true);
+            try {
+                dataMtd.invoke(dataManager, enabled);
+            } catch (IllegalArgumentException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
 
         }
     }
 
 }
 
-
-/*      ConnectivityManager dataManager;
-        dataManager  = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        Method dataMtd = null;
-        try {
-            dataMtd = ConnectivityManager.class.getDeclaredMethod("setMobileDataEnabled", boolean.class);
-        } catch (NoSuchMethodException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        dataMtd.setAccessible(true);
-        try {
-            dataMtd.invoke(dataManager, false);
-        } catch (IllegalArgumentException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-*/
 

@@ -199,15 +199,15 @@ public class MainActivity extends AppCompatActivity {
 
                 Thread t = new Thread(new Runnable() {
                     public void run() {
-                        MobileData md;
-                        md = new MobileData();
-                        md.setMobileDataEnabled(getApplicationContext(), true);
+            //            MobileData md;
+            //            md = new MobileData();
+            //            md.setMobileDataEnabled(getApplicationContext(), true);
 
 
                         fbpause(5);
 
                         if (fb.isOnline()) {
-                            String message = "мобильные данные включились";
+                            String message = "Internet есть";
                             Message msg = Message.obtain(); // Creates an new Message instance
                             msg.obj = message; // Put the string into Message, into "obj" field.
                             msg.setTarget(h); // Set the Handler
@@ -229,13 +229,43 @@ public class MainActivity extends AppCompatActivity {
                                 msg.sendToTarget(); //Send the message
                             }
                         } else {
-                            String message = "не удалось включить мобильные данные";
+                            String message = "Internet'а нет, попробуем подключиться";
                             Message msg = Message.obtain(); // Creates an new Message instance
                             msg.obj = message; // Put the string into Message, into "obj" field.
                             msg.setTarget(h); // Set the Handler
                             msg.sendToTarget(); //Send the message
-                        }
 
+                            WiFi wf;
+                            wf = new WiFi();
+                            wf.setWiFiEnabled(getApplicationContext(), true);
+
+                            fbpause(9);
+
+                            if (fb.isOnline()) {
+                                message = "Internet появился";
+                                msg = Message.obtain(); // Creates an new Message instance
+                                msg.obj = message; // Put the string into Message, into "obj" field.
+                                msg.setTarget(h); // Set the Handler
+                                msg.sendToTarget(); //Send the message
+
+                                fbpause(3);
+                                if (fb.getData()) {
+                                    message = "удалось скачать пробный файл,\n связь с Internet работает";
+                                    msg = Message.obtain(); // Creates an new Message instance
+                                    msg.obj = message; // Put the string into Message, into "obj" field.
+                                    msg.setTarget(h); // Set the Handler
+                                    msg.sendToTarget(); //Send the message
+                                } else {
+                                    message = "не удалось скачать пробный файл";
+                                    msg = Message.obtain(); // Creates an new Message instance
+                                    msg.obj = message; // Put the string into Message, into "obj" field.
+                                    msg.setTarget(h); // Set the Handler
+                                    msg.sendToTarget(); //Send the message
+                                }
+
+
+                            }
+                        }
                         String message = "Фотобот начинает свою работу";
                         Message msg = Message.obtain(); // Creates an new Message instance
                         msg.obj = message; // Put the string into Message, into "obj" field.
