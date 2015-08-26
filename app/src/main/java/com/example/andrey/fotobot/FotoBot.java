@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Message;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -79,5 +80,75 @@ public class FotoBot extends Application {
         }
     }
 
+    public boolean MakeInternetConnection(Context context) {
+
+        fbpause(5);
+
+        if (fb.isOnline()) {
+            String message = "Internet есть";
+            Message msg = Message.obtain(); // Creates an new Message instance
+            msg.obj = message; // Put the string into Message, into "obj" field.
+            msg.setTarget(h); // Set the Handler
+            msg.sendToTarget(); //Send the message
+
+            fbpause(3);
+
+            if (fb.getData()) {
+                message = "удалось скачать пробный файл,\n связь с Internet работает";
+                msg = Message.obtain(); // Creates an new Message instance
+                msg.obj = message; // Put the string into Message, into "obj" field.
+                msg.setTarget(h); // Set the Handler
+                msg.sendToTarget(); //Send the message
+            } else {
+                message = "не удалось скачать пробный файл";
+                msg = Message.obtain(); // Creates an new Message instance
+                msg.obj = message; // Put the string into Message, into "obj" field.
+                msg.setTarget(h); // Set the Handler
+                msg.sendToTarget(); //Send the message
+            }
+        } else {
+            String message = "Internet'а нет, попробуем подключиться";
+            Message msg = Message.obtain(); // Creates an new Message instance
+            msg.obj = message; // Put the string into Message, into "obj" field.
+            msg.setTarget(h); // Set the Handler
+            msg.sendToTarget(); //Send the message
+
+            WiFi wf;
+            wf = new WiFi();
+            wf.setWiFiEnabled(getApplicationContext(), true);
+
+            fbpause(9);
+
+            if (fb.isOnline()) {
+                message = "Internet появился";
+                msg = Message.obtain(); // Creates an new Message instance
+                msg.obj = message; // Put the string into Message, into "obj" field.
+                msg.setTarget(h); // Set the Handler
+                msg.sendToTarget(); //Send the message
+
+                fbpause(3);
+                if (fb.getData()) {
+                    message = "удалось скачать пробный файл,\n связь с Internet работает";
+                    msg = Message.obtain(); // Creates an new Message instance
+                    msg.obj = message; // Put the string into Message, into "obj" field.
+                    msg.setTarget(h); // Set the Handler
+                    msg.sendToTarget(); //Send the message
+                } else {
+                    message = "не удалось скачать пробный файл";
+                    msg = Message.obtain(); // Creates an new Message instance
+                    msg.obj = message; // Put the string into Message, into "obj" field.
+                    msg.setTarget(h); // Set the Handler
+                    msg.sendToTarget(); //Send the message
+                }
+
+
+            }
+        }
+
+
+
+
+        return true;
+    }
 
 }

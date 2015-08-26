@@ -337,7 +337,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    void fbpause(int delay) {
+    public void fbpause(int delay) {
         String message;
 
         for (int i = 1; i <= delay; i++) {
