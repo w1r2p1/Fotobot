@@ -1,8 +1,6 @@
 package com.example.andrey.fotobot;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -20,31 +18,25 @@ import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
     int n;
-    Handler hndl;
     FotoBot fb;
     String log;
-
 
     Handler.Callback hc = new Handler.Callback() {
         public boolean handleMessage(Message msg) {
             String message = (String) msg.obj; //Extract the string from the Message
-            log=message + "\n" + log ;
+            log = message + "\n" + log;
             tvInfo.setText(log);
 
             final FotoBot fb = (FotoBot) getApplicationContext();
             Log.d(LOG_TAG, "Handler.Callback(): fb.getstatus()" + fb.getstatus());
             n = msg.what;
             if (msg.what == STATUS_STOPPED) btnStart.setText("Play");
-     //       log="Закачан файл: " + msg.what + "\n" + log ;
-     //       tvInfo.setText(log);
-
-
 
             if (fb.getstatus() == 3) {
                 btnStart = (Button) findViewById(R.id.play);
                 btnStop = (Button) findViewById(R.id.stop);
-                Log.d(LOG_TAG, "Handler.Callback() if: fb.getstatus()" + fb.getstatus());
-                btnStart.setText("Play");
+           //     Log.d(LOG_TAG, "Handler.Callback() if: fb.getstatus()" + fb.getstatus());
+                btnStart.setText("Start");
                 btnStart.setEnabled(true);
                 btnStop.setEnabled(false);
                 btnConfig.setEnabled(true);
@@ -52,12 +44,9 @@ public class MainActivity extends AppCompatActivity {
                 btnStop.postInvalidate();
             }
 
-
-            //    Log.d(LOG_TAG, "what = " + msg.what);
             return false;
         }
     };
-
 
     final int STATUS_STARTED = 111;
     final int STATUS_WORKING = 222;
@@ -87,12 +76,11 @@ public class MainActivity extends AppCompatActivity {
         text = (TextView) findViewById(R.id.textView);
 
         intent = new Intent(MainActivity.this, Status.class);
-        log="Фотобот приветствует Вас!";
-        tvInfo.setTextSize(20);
-        tvInfo.setTypeface(Typeface.SANS_SERIF);
-        tvInfo.setTextColor(Color.BLUE);
+        log = "\n\n\n\n\nФотобот приветствует Вас!";
+        //    tvInfo.setTextSize(20);
+        //    tvInfo.setTypeface(Typeface.SANS_SERIF);
+        //    tvInfo.setTextColor(Color.BLUE);
         tvInfo.setText(log);
-
 
     }
 
@@ -127,38 +115,17 @@ public class MainActivity extends AppCompatActivity {
         btnStart = (Button) findViewById(R.id.play);
         btnStop = (Button) findViewById(R.id.stop);
 
-
-        //tvInfo.setText("Закачано файлов: " + "returned from Status");
-  /*      h = new Handler() {
-            public void handleMessage(android.os.Message msg) {
-                // обновляем TextView
-
-                if (msg.what == STATUS_STOPPED) btnStart.setText("Стартовать Фотобот");
-                tvInfo.setText("Закачан файл: " + msg.what);
-
-                if (msg.what == 10) {
-                    btnStart.setEnabled(true);
-                    tvInfo.setText("Закачано файлов: " + msg.what);
-
-                }
-
-
-
-            }
-        }; */
-
         if (fb.getstatus() == 1) {
-            btnStart.setText("Play");
+            btnStart.setText("Start");
             btnStart.setEnabled(true);
             btnStop.setEnabled(false);
         }
 
         if (fb.getstatus() == 2) {
-            btnStart.setText("Play");
+            btnStart.setText("Start");
             btnStart.setEnabled(false);
             btnStop.setEnabled(true);
         }
-
 
     }
 
@@ -176,7 +143,6 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         Log.d(LOG_TAG, "MainActivity: onStop");
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -223,59 +189,34 @@ public class MainActivity extends AppCompatActivity {
         h = new Handler(hc);
 
 
-
-
-
-
         switch (v.getId()) {
             case R.id.play:
                 btnStart.setEnabled(false);
-                btnStart.setText("Play");
+                btnStart.setText("Start");
                 btnStop = (Button) findViewById(R.id.stop);
                 btnStop.setEnabled(true);
                 btnConfig.setEnabled(false);
+
                 Thread t = new Thread(new Runnable() {
                     public void run() {
                         MobileData md;
                         md = new MobileData();
                         md.setMobileDataEnabled(getApplicationContext(), true);
 
-                  /*      ConnectivityManager dataManager;
-                        dataManager  = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-                        Method dataMtd = null;
-                        try {
-                            dataMtd = ConnectivityManager.class.getDeclaredMethod("setMobileDataEnabled", boolean.class);
-                        } catch (NoSuchMethodException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        }
-                        dataMtd.setAccessible(true);
-                        try {
-                            dataMtd.invoke(dataManager, true);
-                        } catch (IllegalArgumentException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        } catch (IllegalAccessException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        } catch (InvocationTargetException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        }
-*/
 
                         fbpause(5);
 
-                        if ( fb.isOnline() )
-                        {
+                        if (fb.isOnline()) {
                             String message = "мобильные данные включились";
                             Message msg = Message.obtain(); // Creates an new Message instance
                             msg.obj = message; // Put the string into Message, into "obj" field.
                             msg.setTarget(h); // Set the Handler
                             msg.sendToTarget(); //Send the message
 
-                            if ( fb.getData() ) {
-                                message = "удалось скачать пробный файл";
+                            fbpause(3);
+
+                            if (fb.getData()) {
+                                message = "удалось скачать пробный файл,\n связь с Internet работает";
                                 msg = Message.obtain(); // Creates an new Message instance
                                 msg.obj = message; // Put the string into Message, into "obj" field.
                                 msg.setTarget(h); // Set the Handler
@@ -295,36 +236,31 @@ public class MainActivity extends AppCompatActivity {
                             msg.sendToTarget(); //Send the message
                         }
 
+                        String message = "Фотобот начинает свою работу";
+                        Message msg = Message.obtain(); // Creates an new Message instance
+                        msg.obj = message; // Put the string into Message, into "obj" field.
+                        msg.setTarget(h); // Set the Handler
+                        msg.sendToTarget(); //Send the message
 
+                        for (int i = 1; i <= 1000; i++) {
 
-
-
-
-
-
-                        for (int i = 1; i <= 1; i++) {
-
-                            if ( fb.getstatus() == 3 ) {
-
-                                h.sendEmptyMessage(4444);
-
+                            if (fb.getstatus() == 3) {
+                                message = "Фотобот остановлен";
+                                msg = Message.obtain(); // Creates an new Message instance
+                                msg.obj = message; // Put the string into Message, into "obj" field.
+                                msg.setTarget(h); // Set the Handler
+                                msg.sendToTarget(); //Send the message
                                 Log.d(LOG_TAG, "startFotobot: fb.getstatus()" + fb.getstatus());
                                 return;
                             }
 
+                            fbpause(5);
 
-                            fbpause(1);
-
-
-
-                        //    h.sendEmptyMessage(i);
-
-                            String message = Integer.toString(i);
-                            Message msg = Message.obtain(); // Creates an new Message instance
+                            message = "сделано фото " + Integer.toString(i);
+                            msg = Message.obtain(); // Creates an new Message instance
                             msg.obj = message; // Put the string into Message, into "obj" field.
                             msg.setTarget(h); // Set the Handler
                             msg.sendToTarget(); //Send the message
-
 
                             try {
                                 FileOutputStream fileout = openFileOutput("mytextfile.txt", MODE_PRIVATE | MODE_APPEND);
@@ -337,11 +273,8 @@ public class MainActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
 
-
-                            // пишем лог
-                            //   Log.d(LOG_TAG, "i = " + i);
                         }
-                      //  h.sendEmptyMessage(STATUS_STOPPED);
+
                     }
 
                 }
@@ -350,9 +283,7 @@ public class MainActivity extends AppCompatActivity {
                 fb.setstatus(2);
                 Log.d(LOG_TAG, "startFotobot: fb.getstatus()" + fb.getstatus());
                 break;
-            // case R.id.btnTest:
-            //     Log.d(LOG_TAG, "test");
-            //     break;
+
             default:
                 break;
         }
@@ -364,30 +295,6 @@ public class MainActivity extends AppCompatActivity {
         md = new MobileData();
         md.setMobileDataEnabled(getApplicationContext(), false);
 
-
-  /*      ConnectivityManager dataManager;
-        dataManager  = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        Method dataMtd = null;
-        try {
-            dataMtd = ConnectivityManager.class.getDeclaredMethod("setMobileDataEnabled", boolean.class);
-        } catch (NoSuchMethodException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        dataMtd.setAccessible(true);
-        try {
-            dataMtd.invoke(dataManager, false);
-        } catch (IllegalArgumentException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-*/
         final FotoBot fb = (FotoBot) getApplicationContext();
         Log.d(LOG_TAG, "stopFotobot: fb.getstatus()" + fb.getstatus());
         fb.setstatus(3);
@@ -396,24 +303,26 @@ public class MainActivity extends AppCompatActivity {
         btnStart.setText("Play");
         btnStart.setEnabled(true);
         btnStop.setEnabled(false);
-        btnStart.postInvalidate();
-        btnStop.postInvalidate();
+        btnConfig.setEnabled(true);
 
-/*        switch (v.getId()) {
-            case R.id.button2_1:
-                break;
-
-            default:
-                break;
-        }
-        */
     }
 
     void fbpause(int delay) {
-                try {
-            TimeUnit.SECONDS.sleep(delay);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        String message;
+
+        for (int i = 1; i <= delay; i++) {
+            Message msg = Message.obtain(); // Creates an new Message instance
+            message = ". . . . . " + Integer.toString(i);
+
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            msg.obj = message; // Put the string into Message, into "obj" field.
+            msg.setTarget(h); // Set the Handler
+         //   msg.sendToTarget(); //Send the message
         }
     }
 

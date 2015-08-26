@@ -46,3 +46,54 @@ public class MobileData {
         }
     }
 }
+
+
+
+
+/*      ConnectivityManager dataManager;
+        dataManager  = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        Method dataMtd = null;
+        try {
+            dataMtd = ConnectivityManager.class.getDeclaredMethod("setMobileDataEnabled", boolean.class);
+        } catch (NoSuchMethodException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        dataMtd.setAccessible(true);
+        try {
+            dataMtd.invoke(dataManager, false);
+        } catch (IllegalArgumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+*/
+
+  /*      ConnectivityManager dataManager;
+                        dataManager  = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                        Method dataMtd = null;
+                        try {
+                            dataMtd = ConnectivityManager.class.getDeclaredMethod("setMobileDataEnabled", boolean.class);
+                        } catch (NoSuchMethodException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                        dataMtd.setAccessible(true);
+                        try {
+                            dataMtd.invoke(dataManager, true);
+                        } catch (IllegalArgumentException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (IllegalAccessException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (InvocationTargetException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+*/
