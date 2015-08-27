@@ -87,33 +87,18 @@ public class FotoBot extends Application {
         fbpause(h, 5);
 
         if (isOnline()) {
-            String message = "Internet есть";
-            Message msg = Message.obtain(); // Creates an new Message instance
-            msg.obj = message; // Put the string into Message, into "obj" field.
-            msg.setTarget(h); // Set the Handler
-            msg.sendToTarget(); //Send the message
+            SendMessage(h, "Internet есть");
 
             fbpause(h, 3);
 
             if (getData()) {
-                message = "удалось скачать пробный файл,\n связь с Internet работает";
-                msg = Message.obtain(); // Creates an new Message instance
-                msg.obj = message; // Put the string into Message, into "obj" field.
-                msg.setTarget(h); // Set the Handler
-                msg.sendToTarget(); //Send the message
-            } else {
-                message = "не удалось скачать пробный файл";
-                msg = Message.obtain(); // Creates an new Message instance
-                msg.obj = message; // Put the string into Message, into "obj" field.
-                msg.setTarget(h); // Set the Handler
-                msg.sendToTarget(); //Send the message
-            }
+                SendMessage(h, "удалось скачать пробный файл,\n" +
+                        " связь с Internet работает");
+                            } else {
+                SendMessage(h, "не удалось скачать пробный файл");
+                            }
         } else {
-            String message = "Internet'а нет, попробуем подключиться";
-            Message msg = Message.obtain(); // Creates an new Message instance
-            msg.obj = message; // Put the string into Message, into "obj" field.
-            msg.setTarget(h); // Set the Handler
-            msg.sendToTarget(); //Send the message
+            SendMessage(h, "Internet'а нет, попробуем подключиться");
 
         //    WiFi wf;
         //    wf = new WiFi();
@@ -126,26 +111,16 @@ public class FotoBot extends Application {
             fbpause(h, 9);
 
             if (isOnline()) {
-                message = "Internet появился";
-                msg = Message.obtain(); // Creates an new Message instance
-                msg.obj = message; // Put the string into Message, into "obj" field.
-                msg.setTarget(h); // Set the Handler
-                msg.sendToTarget(); //Send the message
+                SendMessage(h, "Internet появился");
 
                 fbpause(h, 3);
                 if (getData()) {
-                    message = "удалось скачать пробный файл,\n связь с Internet работает";
-                    msg = Message.obtain(); // Creates an new Message instance
-                    msg.obj = message; // Put the string into Message, into "obj" field.
-                    msg.setTarget(h); // Set the Handler
-                    msg.sendToTarget(); //Send the message
+                    SendMessage(h, "удалось скачать пробный файл,\n" +
+                            " связь с Internet работает");
+
                 } else {
-                    message = "не удалось скачать пробный файл";
-                    msg = Message.obtain(); // Creates an new Message instance
-                    msg.obj = message; // Put the string into Message, into "obj" field.
-                    msg.setTarget(h); // Set the Handler
-                    msg.sendToTarget(); //Send the message
-                }
+                    SendMessage(h, "не удалось скачать пробный файл");
+                                    }
             }
 
 
@@ -175,4 +150,14 @@ public class FotoBot extends Application {
             //   msg.sendToTarget(); //Send the message
         }
     }
+
+    public void SendMessage (Handler h, String str){
+
+        Message msg = Message.obtain(); // Creates an new Message instance
+        msg.obj = str; // Put the string into Message, into "obj" field.
+        msg.setTarget(h); // Set the Handler
+        msg.sendToTarget(); //Send the message
+    }
+
+
 }

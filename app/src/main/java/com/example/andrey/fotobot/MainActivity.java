@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     Handler.Callback hc = new Handler.Callback() {
         public boolean handleMessage(Message msg) {
             String message = (String) msg.obj; //Extract the string from the Message
-            log = message + "\n" + log;
+            log = message + "\n\n\n" + log;
             tvInfo.setText(log);
 
             final FotoBot fb = (FotoBot) getApplicationContext();
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
             if (fb.getstatus() == 3) {
                 btnStart = (Button) findViewById(R.id.play);
                 btnStop = (Button) findViewById(R.id.stop);
-           //     Log.d(LOG_TAG, "Handler.Callback() if: fb.getstatus()" + fb.getstatus());
+                //     Log.d(LOG_TAG, "Handler.Callback() if: fb.getstatus()" + fb.getstatus());
                 btnStart.setText("Start");
                 btnStart.setEnabled(true);
                 btnStop.setEnabled(false);
@@ -199,121 +199,36 @@ public class MainActivity extends AppCompatActivity {
 
                 Thread t = new Thread(new Runnable() {
                     public void run() {
-            //            MobileData md;
-            //            md = new MobileData();
-            //            md.setMobileDataEnabled(getApplicationContext(), true);
-
-
-                        fbpause(5);
 
                         fb.MakeInternetConnection(getApplicationContext(), h);
 
-      /*
-                        if (fb.isOnline()) {
-                            String message = "Internet есть";
-                            Message msg = Message.obtain(); // Creates an new Message instance
-                            msg.obj = message; // Put the string into Message, into "obj" field.
-                            msg.setTarget(h); // Set the Handler
-                            msg.sendToTarget(); //Send the message
-
-                            fbpause(3);
-
-                            if (fb.getData()) {
-                                message = "удалось скачать пробный файл,\n связь с Internet работает";
-                                msg = Message.obtain(); // Creates an new Message instance
-                                msg.obj = message; // Put the string into Message, into "obj" field.
-                                msg.setTarget(h); // Set the Handler
-                                msg.sendToTarget(); //Send the message
-                            } else {
-                                message = "не удалось скачать пробный файл";
-                                msg = Message.obtain(); // Creates an new Message instance
-                                msg.obj = message; // Put the string into Message, into "obj" field.
-                                msg.setTarget(h); // Set the Handler
-                                msg.sendToTarget(); //Send the message
-                            }
-                        } else {
-                            String message = "Internet'а нет, попробуем подключиться";
-                            Message msg = Message.obtain(); // Creates an new Message instance
-                            msg.obj = message; // Put the string into Message, into "obj" field.
-                            msg.setTarget(h); // Set the Handler
-                            msg.sendToTarget(); //Send the message
-
-                            WiFi wf;
-                            wf = new WiFi();
-                            wf.setWiFiEnabled(getApplicationContext(), true);
-
-                            fbpause(9);
-
-                            if (fb.isOnline()) {
-                                message = "Internet появился";
-                                msg = Message.obtain(); // Creates an new Message instance
-                                msg.obj = message; // Put the string into Message, into "obj" field.
-                                msg.setTarget(h); // Set the Handler
-                                msg.sendToTarget(); //Send the message
-
-                                fbpause(3);
-                                if (fb.getData()) {
-                                    message = "удалось скачать пробный файл,\n связь с Internet работает";
-                                    msg = Message.obtain(); // Creates an new Message instance
-                                    msg.obj = message; // Put the string into Message, into "obj" field.
-                                    msg.setTarget(h); // Set the Handler
-                                    msg.sendToTarget(); //Send the message
-                                } else {
-                                    message = "не удалось скачать пробный файл";
-                                    msg = Message.obtain(); // Creates an new Message instance
-                                    msg.obj = message; // Put the string into Message, into "obj" field.
-                                    msg.setTarget(h); // Set the Handler
-                                    msg.sendToTarget(); //Send the message
-                                }
-
-
-                            }
-                        }
-                        */
-
-                        String message = "Фотобот начинает свою работу";
-                        Message msg = Message.obtain(); // Creates an new Message instance
-                        msg.obj = message; // Put the string into Message, into "obj" field.
-                        msg.setTarget(h); // Set the Handler
-                        msg.sendToTarget(); //Send the message
+                        fb.SendMessage(h, "Фотобот начинает свою работу");
 
                         for (int i = 1; i <= 1000; i++) {
 
                             if (fb.getstatus() == 3) {
-                                message = "Фотобот остановлен";
-                                msg = Message.obtain(); // Creates an new Message instance
-                                msg.obj = message; // Put the string into Message, into "obj" field.
-                                msg.setTarget(h); // Set the Handler
-                                msg.sendToTarget(); //Send the message
-                                Log.d(LOG_TAG, "startFotobot: fb.getstatus()" + fb.getstatus());
+                                fb.SendMessage(h, "Фотобот остановлен");
                                 return;
                             }
 
                             fbpause(5);
-
-                            message = "сделано фото " + Integer.toString(i);
-                            msg = Message.obtain(); // Creates an new Message instance
-                            msg.obj = message; // Put the string into Message, into "obj" field.
-                            msg.setTarget(h); // Set the Handler
-                            msg.sendToTarget(); //Send the message
+                            fb.SendMessage(h, "сделано фото" + Integer.toString(i));
 
                             try {
                                 FileOutputStream fileout = openFileOutput("mytextfile.txt", MODE_PRIVATE | MODE_APPEND);
                                 OutputStreamWriter outputWriter = new OutputStreamWriter(fileout);
                                 outputWriter.write("Закачан файл:" + Integer.toString(i) + "\n");
                                 outputWriter.close();
-
-
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
 
                         }
-
                     }
 
                 }
                 );
+
                 t.start();
                 fb.setstatus(2);
                 Log.d(LOG_TAG, "startFotobot: fb.getstatus()" + fb.getstatus());
@@ -357,7 +272,7 @@ public class MainActivity extends AppCompatActivity {
 
             msg.obj = message; // Put the string into Message, into "obj" field.
             msg.setTarget(h); // Set the Handler
-         //   msg.sendToTarget(); //Send the message
+            //   msg.sendToTarget(); //Send the message
         }
     }
 
