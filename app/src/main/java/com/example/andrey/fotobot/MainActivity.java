@@ -253,6 +253,10 @@ public class MainActivity extends AppCompatActivity {
         md = new MobileData();
         md.setMobileDataEnabled(getApplicationContext(), false);
 
+        WiFi wf;
+        wf = new WiFi();
+        wf.setWiFiEnabled(getApplicationContext(), false);
+
         final FotoBot fb = (FotoBot) getApplicationContext();
         Log.d(LOG_TAG, "stopFotobot: fb.getstatus()" + fb.getstatus());
         fb.setstatus(3);

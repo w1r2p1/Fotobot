@@ -56,17 +56,19 @@ public class FotoBot extends Application {
      * isOnline - Check if there is a NetworkConnection
      * @return boolean
      */
-    public boolean isOnline() {
+    public boolean isOnline(Handler h) {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         if (netInfo != null && netInfo.isConnected()) {
+            SendMessage(h, "есть соединение с Internet");
             return true;
         } else {
+            SendMessage(h, "нет соединения с Internet");
             return false;
         }
     }
 
-    public boolean getData() {
+    public boolean getData(Handler h) {
         try {
             HttpURLConnection urlc = (HttpURLConnection) (new URL("http://www.google.com").openConnection());
             urlc.setRequestProperty("User-Agent", "Test");
@@ -75,56 +77,42 @@ public class FotoBot extends Application {
             urlc.setReadTimeout(4000); //choose your own timeframe
             urlc.connect();
             //  networkcode2 = urlc.getResponseCode();
+            SendMessage(h, "удалось скачать файл из Internet");
             return (urlc.getResponseCode() == 200);
         } catch (IOException e) {
+            SendMessage(h, "не удалось скачать файл из Internet");
             return (false);  //connectivity exists, but no internet.
         }
     }
 
     public boolean MakeInternetConnection(Context context, Handler h) {
 
-        fbpause(h, 5);
+        fbpause(h, 1);
 
-        if (isOnline()) {
-            SendMessage(h, "Internet есть");
+        WiFi wf;
+        wf = new WiFi();
 
-            fbpause(h, 3);
+        MobileData md;
+        md = new MobileData();
 
-            if (getData()) {
-                SendMessage(h, "удалось скачать пробный файл,\n" +
-                        " связь с Internet работает");
-            } else {
-                SendMessage(h, "не удалось скачать пробный файл");
-            }
-        } else {
-            SendMessage(h, "Internet'а нет, попробуем подключиться");
-
-            //    WiFi wf;
-            //    wf = new WiFi();
-            //    wf.setWiFiEnabled(getApplicationContext(), true);
-
-            MobileData md;
-            md = new MobileData();
-            md.setMobileDataEnabled(getApplicationContext(), true);
-
-            fbpause(h, 9);
-
-            if (isOnline()) {
-                SendMessage(h, "Internet появился");
-
-                fbpause(h, 3);
-                if (getData()) {
-                    SendMessage(h, "удалось скачать пробный файл,\n" +
-                            " связь с Internet работает");
-
-                } else {
-                    SendMessage(h, "не удалось скачать пробный файл");
-                }
-            }
-
+        if (!(isOnline(h) && getData(h))) {
+            SendMessage(h, "Для начала включим Wi-Fi");
+            wf.setWiFiEnabled(getApplicationContext(), true);
+            fbpause(h, 15);
         }
 
-        return true;
+        if (!(isOnline(h) && getData(h))) {
+            SendMessage(h, "По Wi-Fi нет связи,\nвключаем Mobile Data");
+            wf.setWiFiEnabled(getApplicationContext(), false);
+            fbpause(h, 5);
+            md.setMobileDataEnabled(getApplicationContext(), true);
+            fbpause(h, 5);
+        }
+        if ((isOnline(h) && getData(h))) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void fbpause(Handler h, int delay) {
