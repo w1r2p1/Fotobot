@@ -206,6 +206,9 @@ public class MainActivity extends AppCompatActivity {
 
                         fbpause(5);
 
+                        fb.MakeInternetConnection(getApplicationContext(), h);
+
+      /*
                         if (fb.isOnline()) {
                             String message = "Internet есть";
                             Message msg = Message.obtain(); // Creates an new Message instance
@@ -266,6 +269,8 @@ public class MainActivity extends AppCompatActivity {
 
                             }
                         }
+                        */
+
                         String message = "Фотобот начинает свою работу";
                         Message msg = Message.obtain(); // Creates an new Message instance
                         msg.obj = message; // Put the string into Message, into "obj" field.

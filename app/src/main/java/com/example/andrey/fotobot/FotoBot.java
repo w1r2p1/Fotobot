@@ -4,11 +4,13 @@ import android.app.Application;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Handler;
 import android.os.Message;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by admin on 8/19/2015.
@@ -80,20 +82,20 @@ public class FotoBot extends Application {
         }
     }
 
-    public boolean MakeInternetConnection(Context context) {
+    public boolean MakeInternetConnection(Context context, Handler h) {
 
-        fbpause(5);
+        fbpause(h, 5);
 
-        if (fb.isOnline()) {
+        if (isOnline()) {
             String message = "Internet есть";
             Message msg = Message.obtain(); // Creates an new Message instance
             msg.obj = message; // Put the string into Message, into "obj" field.
             msg.setTarget(h); // Set the Handler
             msg.sendToTarget(); //Send the message
 
-            fbpause(3);
+            fbpause(h, 3);
 
-            if (fb.getData()) {
+            if (getData()) {
                 message = "удалось скачать пробный файл,\n связь с Internet работает";
                 msg = Message.obtain(); // Creates an new Message instance
                 msg.obj = message; // Put the string into Message, into "obj" field.
@@ -113,21 +115,25 @@ public class FotoBot extends Application {
             msg.setTarget(h); // Set the Handler
             msg.sendToTarget(); //Send the message
 
-            WiFi wf;
-            wf = new WiFi();
-            wf.setWiFiEnabled(getApplicationContext(), true);
+        //    WiFi wf;
+        //    wf = new WiFi();
+        //    wf.setWiFiEnabled(getApplicationContext(), true);
 
-            fbpause(9);
+            MobileData md;
+            md = new MobileData();
+            md.setMobileDataEnabled(getApplicationContext(), true);
 
-            if (fb.isOnline()) {
+            fbpause(h, 9);
+
+            if (isOnline()) {
                 message = "Internet появился";
                 msg = Message.obtain(); // Creates an new Message instance
                 msg.obj = message; // Put the string into Message, into "obj" field.
                 msg.setTarget(h); // Set the Handler
                 msg.sendToTarget(); //Send the message
 
-                fbpause(3);
-                if (fb.getData()) {
+                fbpause(h, 3);
+                if (getData()) {
                     message = "удалось скачать пробный файл,\n связь с Internet работает";
                     msg = Message.obtain(); // Creates an new Message instance
                     msg.obj = message; // Put the string into Message, into "obj" field.
@@ -140,9 +146,10 @@ public class FotoBot extends Application {
                     msg.setTarget(h); // Set the Handler
                     msg.sendToTarget(); //Send the message
                 }
-
-
             }
+
+
+
         }
 
 
@@ -150,5 +157,22 @@ public class FotoBot extends Application {
 
         return true;
     }
+    public void fbpause(Handler h, int delay) {
+        String message;
 
+        for (int i = 1; i <= delay; i++) {
+            Message msg = Message.obtain(); // Creates an new Message instance
+            message = ". . . . . " + Integer.toString(i);
+
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            msg.obj = message; // Put the string into Message, into "obj" field.
+            msg.setTarget(h); // Set the Handler
+            //   msg.sendToTarget(); //Send the message
+        }
+    }
 }
