@@ -17,8 +17,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class FotoBot extends Application {
     public int Update;
-    public int status=1;
-    public String str="";
+    public int status = 1;
+    public String str = "";
 
     public int getstatus() {
 
@@ -39,15 +39,16 @@ public class FotoBot extends Application {
 
         str = fb_str;
     }
-    public void FotoBot () {
+
+    public void FotoBot() {
         Update = 300;
     }
 
-    public void Init (){
+    public void Init() {
 
     }
 
-    public void WriteData () {
+    public void WriteData() {
 
     }
 
@@ -66,18 +67,16 @@ public class FotoBot extends Application {
     }
 
     public boolean getData() {
-        try
-        {
+        try {
             HttpURLConnection urlc = (HttpURLConnection) (new URL("http://www.google.com").openConnection());
             urlc.setRequestProperty("User-Agent", "Test");
             urlc.setRequestProperty("Connection", "close");
             urlc.setConnectTimeout(3000); //choose your own timeframe
             urlc.setReadTimeout(4000); //choose your own timeframe
             urlc.connect();
-          //  networkcode2 = urlc.getResponseCode();
+            //  networkcode2 = urlc.getResponseCode();
             return (urlc.getResponseCode() == 200);
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             return (false);  //connectivity exists, but no internet.
         }
     }
@@ -94,15 +93,15 @@ public class FotoBot extends Application {
             if (getData()) {
                 SendMessage(h, "удалось скачать пробный файл,\n" +
                         " связь с Internet работает");
-                            } else {
+            } else {
                 SendMessage(h, "не удалось скачать пробный файл");
-                            }
+            }
         } else {
             SendMessage(h, "Internet'а нет, попробуем подключиться");
 
-        //    WiFi wf;
-        //    wf = new WiFi();
-        //    wf.setWiFiEnabled(getApplicationContext(), true);
+            //    WiFi wf;
+            //    wf = new WiFi();
+            //    wf.setWiFiEnabled(getApplicationContext(), true);
 
             MobileData md;
             md = new MobileData();
@@ -120,18 +119,14 @@ public class FotoBot extends Application {
 
                 } else {
                     SendMessage(h, "не удалось скачать пробный файл");
-                                    }
+                }
             }
-
-
 
         }
 
-
-
-
         return true;
     }
+
     public void fbpause(Handler h, int delay) {
         String message;
 
@@ -151,7 +146,7 @@ public class FotoBot extends Application {
         }
     }
 
-    public void SendMessage (Handler h, String str){
+    public void SendMessage(Handler h, String str) {
 
         Message msg = Message.obtain(); // Creates an new Message instance
         msg.obj = str; // Put the string into Message, into "obj" field.

@@ -14,6 +14,10 @@ import android.widget.TextView;
 
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,8 +27,12 @@ public class MainActivity extends AppCompatActivity {
 
     Handler.Callback hc = new Handler.Callback() {
         public boolean handleMessage(Message msg) {
+            DateFormat dateformat = new SimpleDateFormat("HH:mm:ss");
+            Date today = Calendar.getInstance().getTime();
+            String reportDate = dateformat.format(today);
+
             String message = (String) msg.obj; //Extract the string from the Message
-            log = message + "\n\n\n" + log;
+            log = reportDate + ":    " + message + "\n\n\n" + log;
             tvInfo.setText(log);
 
             final FotoBot fb = (FotoBot) getApplicationContext();
