@@ -98,7 +98,9 @@ public class FotoBot extends Application {
         if (!(isOnline(h) && getData(h))) {
             SendMessage(h, "Для начала включим Wi-Fi");
             wf.setWiFiEnabled(getApplicationContext(), true);
-            fbpause(h, 15);
+            fbpause(h, 5);
+            SendMessage(h, "Wi-Fi включается долго,\nнужно подождать");
+            fbpause(h, 9);
         }
 
         if (!(isOnline(h) && getData(h))) {
@@ -109,10 +111,21 @@ public class FotoBot extends Application {
             fbpause(h, 5);
         }
         if ((isOnline(h) && getData(h))) {
+            SendMessage(h, "Ура! Связь с Internet появилась!");
             return true;
         } else {
             return false;
         }
+    }
+
+    public void CloseInternetConnection(Context context, Handler h) {
+        MobileData md;
+        md = new MobileData();
+        md.setMobileDataEnabled(getApplicationContext(), false);
+
+        WiFi wf;
+        wf = new WiFi();
+        wf.setWiFiEnabled(getApplicationContext(), false);
     }
 
     public void fbpause(Handler h, int delay) {

@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
             String reportDate = dateformat.format(today);
 
             String message = (String) msg.obj; //Extract the string from the Message
-            log = reportDate + ":    " + message + "\n\n\n" + log;
+            log = reportDate + ":    " + message + "\n" + log;
             tvInfo.setText(log);
 
             final FotoBot fb = (FotoBot) getApplicationContext();
@@ -208,18 +208,18 @@ public class MainActivity extends AppCompatActivity {
                 Thread t = new Thread(new Runnable() {
                     public void run() {
 
-                        fb.MakeInternetConnection(getApplicationContext(), h);
-
                         fb.SendMessage(h, "Фотобот начинает свою работу");
 
                         for (int i = 1; i <= 1000; i++) {
+
+                            fb.MakeInternetConnection(getApplicationContext(), h);
 
                             if (fb.getstatus() == 3) {
                                 fb.SendMessage(h, "Фотобот остановлен");
                                 return;
                             }
 
-                            fbpause(5);
+                            fb.fbpause(h, 5);
                             fb.SendMessage(h, "сделано фото" + Integer.toString(i));
 
                             try {
@@ -230,6 +230,10 @@ public class MainActivity extends AppCompatActivity {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
+
+                            fb.CloseInternetConnection(getApplicationContext(), h);
+
+                            fb.fbpause(h, 15);
 
                         }
                     }
@@ -248,16 +252,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void stopFotobot(View v) {
-
-        MobileData md;
-        md = new MobileData();
-        md.setMobileDataEnabled(getApplicationContext(), false);
-
-        WiFi wf;
-        wf = new WiFi();
-        wf.setWiFiEnabled(getApplicationContext(), false);
-
+        h = new Handler(hc);
         final FotoBot fb = (FotoBot) getApplicationContext();
+        fb.CloseInternetConnection(getApplicationContext(), h);
+
         Log.d(LOG_TAG, "stopFotobot: fb.getstatus()" + fb.getstatus());
         fb.setstatus(3);
         Log.d(LOG_TAG, "stopFotobot: STOP_FOTOBOT" + STOP_FOTOBOT);
