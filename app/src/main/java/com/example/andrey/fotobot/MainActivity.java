@@ -12,6 +12,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.dropbox.client2.DropboxAPI;
+import com.dropbox.client2.android.AndroidAuthSession;
+
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.text.DateFormat;
@@ -21,6 +24,13 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
+
+    private DropboxAPI<AndroidAuthSession> dropbox;
+    private final static String FILE_DIR = "/MySampleFolder/";
+    private final static String DROPBOX_NAME = "YetAnotherUploader";
+    private final static String ACCESS_KEY = "pbzt6tzpran9oil";
+    private final static String ACCESS_SECRET = "pk53kqbm581o64z";
+
     int n;
     FotoBot fb;
     String log;

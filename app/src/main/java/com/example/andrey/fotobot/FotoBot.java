@@ -12,9 +12,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by admin on 8/19/2015.
- */
 public class FotoBot extends Application {
     public int Update;
     public int status = 1;
