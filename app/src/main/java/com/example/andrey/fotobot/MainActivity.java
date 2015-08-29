@@ -234,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
                             fb.SendMessage(h, "сделано фото" + Integer.toString(i));
 
                             try {
-                                FileOutputStream fileout = openFileOutput("mytextfile.txt", MODE_PRIVATE | MODE_APPEND);
+                                FileOutputStream fileout = openFileOutput("/sdcard0/mytextfile.txt", MODE_PRIVATE | MODE_APPEND);
                                 OutputStreamWriter outputWriter = new OutputStreamWriter(fileout);
                                 outputWriter.write("Закачан файл:" + Integer.toString(i) + "\n");
                                 outputWriter.close();
@@ -251,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
                             m.setBody("Email body.");
 
                             try {
-                           //     m.addAttachment("mytextfile.txt");
+                                m.addAttachment("/storage/sdcard0/CAM01165.jpg");
 
                                 if(m.send()) {
                                   //  Toast.makeText(MailApp.this, "Email was sent successfully.", Toast.LENGTH_LONG).show();
