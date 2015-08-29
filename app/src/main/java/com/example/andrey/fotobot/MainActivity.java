@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.android.AndroidAuthSession;
@@ -240,8 +241,43 @@ public class MainActivity extends AppCompatActivity {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
+// Mail
+                            Mail m = new Mail("voran.mail@gmail.com", "rasslabmishtsi");
 
-                            fb.CloseInternetConnection(getApplicationContext(), h);
+                            String[] toArr = {"voran@inbox.ru"};
+                            m.setTo(toArr);
+                            m.setFrom("voran.mail@gmail.com");
+                            m.setSubject("This is an email sent using my Mail JavaMail wrapper from an Android device.");
+                            m.setBody("Email body.");
+
+                            try {
+                           //     m.addAttachment("mytextfile.txt");
+
+                                if(m.send()) {
+                                  //  Toast.makeText(MailApp.this, "Email was sent successfully.", Toast.LENGTH_LONG).show();
+                                    fb.SendMessage(h, "Email was sent successfully.");
+                                } else {
+                                   // Toast.makeText(MailApp.this, "Email was not sent.", Toast.LENGTH_LONG).show();
+                                    fb.SendMessage(h, "Email was not sent.");
+                                }
+                            } catch(Exception e) {
+                                //Toast.makeText(MailApp.this, "There was a problem sending the email.", Toast.LENGTH_LONG).show();
+                                Log.e("MailApp", "Could not send email", e);
+                            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        fb.CloseInternetConnection(getApplicationContext(), h);
 
                             fb.fbpause(h, 15);
 
