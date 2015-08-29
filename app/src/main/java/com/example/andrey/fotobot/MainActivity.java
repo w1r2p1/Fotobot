@@ -242,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
 // Mail
-                            Mail m = new Mail("voran.mail@gmail.com", "rasslabmishtsi");
+                            Mail m = new Mail("mail", "passwd");
 
                             String[] toArr = {"voran@inbox.ru"};
                             m.setTo(toArr);
