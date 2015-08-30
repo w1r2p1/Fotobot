@@ -242,9 +242,9 @@ public class MainActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
 // Mail
-                            Mail m = new Mail("mail", "passwd");
+                            Mail m = new Mail("fotobotmail@gmail.com", "fotobotmailpasswd");
 
-                            String[] toArr = {"voran@inbox.ru"};
+                            String[] toArr = {"digibolt@mail.ru"};
                             m.setTo(toArr);
                             m.setFrom("voran.mail@gmail.com");
                             m.setSubject("This is an email sent using my Mail JavaMail wrapper from an Android device.");
