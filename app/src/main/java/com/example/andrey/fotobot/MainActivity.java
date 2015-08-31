@@ -2,6 +2,7 @@ package com.example.andrey.fotobot;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.android.AndroidAuthSession;
@@ -101,6 +101,17 @@ public class MainActivity extends AppCompatActivity {
         //    tvInfo.setTextColor(Color.BLUE);
         tvInfo.setText(log);
 
+        h = new Handler(hc);
+
+        if (fb.isExternalStorageWritable()) {
+            fb.SendMessage(h, "Внешняя SD карта доступна для чтения и записи");
+        } else {
+            fb.SendMessage(h, "Внешняя SD карта не доступна для записи");
+        }
+
+        fb.SendMessage(h, "getExternalStorageDirectory()" + Environment.getExternalStorageDirectory().toString());
+      //  fb.SendMessage(h, "EXTERNAL_STORAGE" + System.getenv("EXTERNAL_STORAGE"));
+      //  fb.SendMessage(h, "SECONDARY_STORAGE" + System.getenv("SECONDARY_STORAGE"));
     }
 
     protected void onDestroy() {
@@ -242,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
 // Mail
-                            Mail m = new Mail("fotobotmail@gmail.com", "fotobotmailpasswd");
+/*                            Mail m = new Mail("fotobotmail@gmail.com", "fotobotmailpasswd");
 
                             String[] toArr = {"digibolt@mail.ru"};
                             m.setTo(toArr);
@@ -264,9 +275,9 @@ public class MainActivity extends AppCompatActivity {
                                 //Toast.makeText(MailApp.this, "There was a problem sending the email.", Toast.LENGTH_LONG).show();
                                 Log.e("MailApp", "Could not send email", e);
                             }
+*/
 
-
-
+fb.SendMail(h, "/storage/sdcard0/CAM01165.jpg");
 
 
 

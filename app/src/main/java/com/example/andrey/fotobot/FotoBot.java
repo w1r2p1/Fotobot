@@ -4,13 +4,18 @@ import android.app.Application;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
+
+import static android.os.Environment.getExternalStoragePublicDirectory;
 
 public class FotoBot extends Application {
     public int Update;
@@ -89,6 +94,8 @@ public class FotoBot extends Application {
         WiFi wf;
         wf = new WiFi();
 
+        boolean wf_connect_attempt = false;
+
         MobileData md;
         md = new MobileData();
 
@@ -98,9 +105,10 @@ public class FotoBot extends Application {
             fbpause(h, 5);
             SendMessage(h, "Wi-Fi включается долго,\nнужно подождать");
             fbpause(h, 9);
+            wf_connect_attempt = true;
         }
 
-        if (!(isOnline(h) && getData(h))) {
+        if ( !(isOnline(h) && getData(h)) ) {
             SendMessage(h, "По Wi-Fi нет связи,\nвключаем Mobile Data");
             wf.setWiFiEnabled(getApplicationContext(), false);
             fbpause(h, 5);
@@ -145,12 +153,47 @@ public class FotoBot extends Application {
     }
 
     public void SendMessage(Handler h, String str) {
-
         Message msg = Message.obtain(); // Creates an new Message instance
         msg.obj = str; // Put the string into Message, into "obj" field.
         msg.setTarget(h); // Set the Handler
         msg.sendToTarget(); //Send the message
     }
 
+    public void SendMail (Handler h, String str) {
+        Mail m = new Mail("fotobotmail@gmail.com", "fotobotmailpasswd");
 
+        String[] toArr = {"digibolt@mail.ru"};
+        m.setTo(toArr);
+        m.setFrom("voran.mail@gmail.com");
+        m.setSubject("This is an email sent using my Mail JavaMail wrapper from an Android device.");
+        m.setBody("Email body.");
+
+        try {
+            m.addAttachment(str);
+
+            if(m.send()) {
+                //  Toast.makeText(MailApp.this, "Email was sent successfully.", Toast.LENGTH_LONG).show();
+                SendMessage(h, "Email was sent successfully.");
+            } else {
+                // Toast.makeText(MailApp.this, "Email was not sent.", Toast.LENGTH_LONG).show();
+                SendMessage(h, "Email was not sent.");
+            }
+        } catch(Exception e) {
+            //Toast.makeText(MailApp.this, "There was a problem sending the email.", Toast.LENGTH_LONG).show();
+            SendMessage(h, "Could not send email");
+            Log.e("MailApp", "Could not send email", e);
+        }
+    }
+
+    public boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+
+    public File getFolder(){
+        return getExternalStoragePublicDirectory(null);
+    }
 }
