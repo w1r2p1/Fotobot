@@ -1,6 +1,8 @@
 package com.example.andrey.fotobot;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -44,6 +46,11 @@ public class MainActivity extends AppCompatActivity {
 
             String message = (String) msg.obj; //Extract the string from the Message
             log = reportDate + ":    " + message + "\n" + log;
+
+            tvInfo.setTextSize(9);
+            tvInfo.setTypeface(Typeface.SANS_SERIF);
+            tvInfo.setTextColor(Color.rgb(5,5,5));
+
             tvInfo.setText(log);
 
             final FotoBot fb = (FotoBot) getApplicationContext();

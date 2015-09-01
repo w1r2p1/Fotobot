@@ -105,10 +105,18 @@ public class FotoBot extends Application {
             fbpause(h, 5);
             SendMessage(h, "Wi-Fi включается долго,\nнужно подождать");
             fbpause(h, 9);
-            wf_connect_attempt = true;
+
+
+            if ((isOnline(h) && getData(h))) {
+                SendMessage(h, "Ура! Связь с Internet появилась!");
+                return true;
+            } else {
+                wf_connect_attempt = true;
+            }
+
         }
 
-        if ( !(isOnline(h) && getData(h)) ) {
+        if ( !(isOnline(h) && getData(h)) && wf_connect_attempt) {
             SendMessage(h, "По Wi-Fi нет связи,\nвключаем Mobile Data");
             wf.setWiFiEnabled(getApplicationContext(), false);
             fbpause(h, 5);
