@@ -55,6 +55,8 @@
             android:onClick="showSettings"
             android:nestedScrollingEnabled="false" />
 
+        <SurfaceView android:id="@+id/surfaceView" android:layout_height="1dip" android:layout_width="1dip"></SurfaceView>
+        <ImageView android:layout_width="1dip" android:layout_height="1dip" android:id="@+id/imageView"></ImageView>
 
     </LinearLayout>
     <ScrollView

@@ -1,8 +1,11 @@
 package com.example.andrey.fotobot;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -11,14 +14,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.android.AndroidAuthSession;
 
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -26,7 +35,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
     private DropboxAPI<AndroidAuthSession> dropbox;
     private final static String FILE_DIR = "/MySampleFolder/";
@@ -37,6 +46,22 @@ public class MainActivity extends AppCompatActivity {
     int n;
     FotoBot fb;
     String log;
+
+    //a variable to store a reference to the Image View at the main.xml file
+    private ImageView iv_image;
+    //a variable to store a reference to the Surface View at the main.xml file
+    private SurfaceView sv;
+
+    //a bitmap to display the captured image
+    private Bitmap bmp;
+
+    //Camera variables
+    //a surface holder
+    private SurfaceHolder sHolder;
+    //a variable to control the camera
+    private Camera mCamera;
+    //the camera parameters
+    private Camera.Parameters parameters;
 
     Handler.Callback hc = new Handler.Callback() {
         public boolean handleMessage(Message msg) {
@@ -92,6 +117,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+    //    super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         final FotoBot fb = (FotoBot) getApplicationContext();
@@ -100,6 +128,23 @@ public class MainActivity extends AppCompatActivity {
         btnConfig = (Button) findViewById(R.id.config);
         tvInfo = (TextView) findViewById(R.id.tvInfo);
         text = (TextView) findViewById(R.id.textView);
+
+        //get the Image View at the main.xml file
+        iv_image = (ImageView) findViewById(R.id.imageView);
+
+        //get the Surface View at the main.xml file
+        sv = (SurfaceView) findViewById(R.id.surfaceView);
+
+        //Get a surface
+        sHolder = sv.getHolder();
+
+        //add the callback interface methods defined below as the Surface View callbacks
+        sHolder.addCallback(this);
+
+        //tells Android that this surface will have its data constantly replaced
+        sHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+
+
 
         intent = new Intent(MainActivity.this, Status.class);
         log = "\n\n\n\n\nФотобот приветствует Вас!";
@@ -350,4 +395,87 @@ fb.SendMail(h, "/storage/sdcard0/CAM01165.jpg");
         }
     }
 
+    @Override
+    public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3)
+    {
+        //get camera parameters
+        parameters = mCamera.getParameters();
+
+        //set camera parameters
+        mCamera.setParameters(parameters);
+        mCamera.startPreview();
+
+        //sets what code should be executed after the picture is taken
+        Camera.PictureCallback mCall = new Camera.PictureCallback()
+        {
+            @Override
+            public void onPictureTaken(byte[] data, Camera camera)
+            {
+                //decode the data obtained by the camera into a Bitmap
+                bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
+                //set the iv_image
+                // iv_image.setImageBitmap(bmp);
+
+                String fullPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+                Log.d(LOG_TAG, "fullPath: " + fullPath);
+                try {
+                    File dir = new File(fullPath);
+                    if (!dir.exists()) {
+                        dir.mkdirs();
+                    }
+
+                    OutputStream fOut = null;
+                    File file = new File(fullPath, "takepicturewithoutpreview.jpg");
+                    file.createNewFile();
+                    fOut = new FileOutputStream(file);
+
+                    Bitmap bmp_m = bmp.createScaledBitmap(bmp, 640,
+                            480, false);
+// 100 means no compression, the lower you go, the stronger the compression
+                    bmp_m.compress(Bitmap.CompressFormat.JPEG, 90, fOut);
+                    fOut.flush();
+                    fOut.close();
+
+
+
+                } catch (Exception e) {
+                    Log.e("saveToExternalStorage()", e.getMessage());
+                }
+
+
+            }
+
+
+        };
+
+        mCamera.takePicture(null, null, mCall);
+    }
+
+    @Override
+    public void surfaceCreated(SurfaceHolder holder)
+    {
+        // The Surface has been created, acquire the camera and tell it where
+        // to draw the preview.
+        mCamera = Camera.open();
+        try {
+            mCamera.setPreviewDisplay(holder);
+
+        } catch (IOException exception) {
+            mCamera.release();
+            mCamera = null;
+        }
+    }
+
+
+
+    @Override
+    public void surfaceDestroyed(SurfaceHolder holder)
+    {
+        //stop the preview
+        mCamera.stopPreview();
+        //release the camera
+        mCamera.release();
+        //unbind the camera from this object
+        mCamera = null;
+    }
 }
