@@ -63,6 +63,52 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     //the camera parameters
     private Camera.Parameters parameters;
 
+
+
+    //sets what code should be executed after the picture is taken
+    Camera.PictureCallback mCall = new Camera.PictureCallback()
+    {
+        @Override
+        public void onPictureTaken(byte[] data, Camera camera)
+        {
+            //decode the data obtained by the camera into a Bitmap
+            bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
+            //set the iv_image
+            // iv_image.setImageBitmap(bmp);
+
+            String fullPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+            Log.d(LOG_TAG, "fullPath: " + fullPath);
+            try {
+                File dir = new File(fullPath);
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+
+                OutputStream fOut = null;
+                File file = new File(fullPath, "fotobot.jpg");
+                file.createNewFile();
+                fOut = new FileOutputStream(file);
+
+                Bitmap bmp_m = bmp.createScaledBitmap(bmp, 640,
+                        480, false);
+// 100 means no compression, the lower you go, the stronger the compression
+                bmp_m.compress(Bitmap.CompressFormat.JPEG, 90, fOut);
+                fOut.flush();
+                fOut.close();
+
+
+
+            } catch (Exception e) {
+                Log.e("saveToExternalStorage()", e.getMessage());
+            }
+
+
+        }
+
+
+    };
+
+
     Handler.Callback hc = new Handler.Callback() {
         public boolean handleMessage(Message msg) {
             DateFormat dateformat = new SimpleDateFormat("HH:mm:ss");
@@ -143,8 +189,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         //tells Android that this surface will have its data constantly replaced
         sHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-
-
 
         intent = new Intent(MainActivity.this, Status.class);
         log = "\n\n\n\n\nФотобот приветствует Вас!";
@@ -305,31 +349,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 e.printStackTrace();
                             }
 // Mail
-/*                            Mail m = new Mail("fotobotmail@gmail.com", "fotobotmailpasswd");
 
-                            String[] toArr = {"digibolt@mail.ru"};
-                            m.setTo(toArr);
-                            m.setFrom("voran.mail@gmail.com");
-                            m.setSubject("This is an email sent using my Mail JavaMail wrapper from an Android device.");
-                            m.setBody("Email body.");
 
-                            try {
-                                m.addAttachment("/storage/sdcard0/CAM01165.jpg");
+                            mCamera.takePicture(null, null, mCall);
 
-                                if(m.send()) {
-                                  //  Toast.makeText(MailApp.this, "Email was sent successfully.", Toast.LENGTH_LONG).show();
-                                    fb.SendMessage(h, "Email was sent successfully.");
-                                } else {
-                                   // Toast.makeText(MailApp.this, "Email was not sent.", Toast.LENGTH_LONG).show();
-                                    fb.SendMessage(h, "Email was not sent.");
-                                }
-                            } catch(Exception e) {
-                                //Toast.makeText(MailApp.this, "There was a problem sending the email.", Toast.LENGTH_LONG).show();
-                                Log.e("MailApp", "Could not send email", e);
-                            }
-*/
-
-fb.SendMail(h, "/storage/sdcard0/CAM01165.jpg");
+fb.SendMail(h, "/storage/sdcard0/fotobot.jpg");
 
 
 
@@ -448,7 +472,7 @@ fb.SendMail(h, "/storage/sdcard0/CAM01165.jpg");
 
         };
 
-        mCamera.takePicture(null, null, mCall);
+     //   mCamera.takePicture(null, null, mCall);
     }
 
     @Override
@@ -464,6 +488,15 @@ fb.SendMail(h, "/storage/sdcard0/CAM01165.jpg");
             mCamera.release();
             mCamera = null;
         }
+
+
+        //get camera parameters
+        parameters = mCamera.getParameters();
+
+        //set camera parameters
+        mCamera.setParameters(parameters);
+        mCamera.startPreview();
+
     }
 
 
