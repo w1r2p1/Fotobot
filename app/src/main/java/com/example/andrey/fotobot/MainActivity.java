@@ -352,8 +352,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 
                             mCamera.takePicture(null, null, mCall);
-
-fb.SendMail(h, "/storage/sdcard0/fotobot.jpg");
+                            fb.fbpause(h, 5);
+                            fb.SendMail(h, "/mnt/sdcard/fotobot.jpg");
 
 
 

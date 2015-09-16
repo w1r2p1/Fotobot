@@ -2,6 +2,7 @@ package com.example.andrey.fotobot;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
@@ -21,6 +22,7 @@ public class FotoBot extends Application {
     public int Update;
     public int status = 1;
     public String str = "";
+
 
     public int getstatus() {
 
