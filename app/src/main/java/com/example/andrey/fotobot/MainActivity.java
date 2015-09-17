@@ -1,5 +1,6 @@
 package com.example.andrey.fotobot;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,6 +21,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.android.AndroidAuthSession;
@@ -71,6 +73,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         @Override
         public void onPictureTaken(byte[] data, Camera camera)
         {
+            Context context = getApplicationContext();
+            CharSequence text = "mCall MainActivity";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+
             //decode the data obtained by the camera into a Bitmap
             bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
             //set the iv_image
@@ -422,57 +431,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     @Override
     public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3)
     {
-        //get camera parameters
-        parameters = mCamera.getParameters();
 
-        //set camera parameters
-        mCamera.setParameters(parameters);
-        mCamera.startPreview();
-
-        //sets what code should be executed after the picture is taken
-        Camera.PictureCallback mCall = new Camera.PictureCallback()
-        {
-            @Override
-            public void onPictureTaken(byte[] data, Camera camera)
-            {
-                //decode the data obtained by the camera into a Bitmap
-                bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
-                //set the iv_image
-                // iv_image.setImageBitmap(bmp);
-
-                String fullPath = Environment.getExternalStorageDirectory().getAbsolutePath();
-                Log.d(LOG_TAG, "fullPath: " + fullPath);
-                try {
-                    File dir = new File(fullPath);
-                    if (!dir.exists()) {
-                        dir.mkdirs();
-                    }
-
-                    OutputStream fOut = null;
-                    File file = new File(fullPath, "takepicturewithoutpreview.jpg");
-                    file.createNewFile();
-                    fOut = new FileOutputStream(file);
-
-                    Bitmap bmp_m = bmp.createScaledBitmap(bmp, 640,
-                            480, false);
-// 100 means no compression, the lower you go, the stronger the compression
-                    bmp_m.compress(Bitmap.CompressFormat.JPEG, 90, fOut);
-                    fOut.flush();
-                    fOut.close();
-
-
-
-                } catch (Exception e) {
-                    Log.e("saveToExternalStorage()", e.getMessage());
-                }
-
-
-            }
-
-
-        };
-
-     //   mCamera.takePicture(null, null, mCall);
     }
 
     @Override
