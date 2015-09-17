@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId "com.example.andrey.fotobot"
         minSdkVersion 8
-        targetSdkVersion 22
+        targetSdkVersion 10
         versionCode 1
         versionName "1.0"
     }

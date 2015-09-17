@@ -75,13 +75,35 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         {
             Context context = getApplicationContext();
             CharSequence text = "mCall MainActivity";
-            int duration = Toast.LENGTH_SHORT;
+            int duration = Toast.LENGTH_LONG;
 
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
 
             //decode the data obtained by the camera into a Bitmap
-            bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
+            BitmapFactory.Options options=new BitmapFactory.Options();
+            options.inPurgeable=true;
+            // options.inJustDecodeBounds = true;
+     //       bmp = BitmapFactory.decodeByteArray(data, 0, data.length,options);
+
+
+
+
+
+
+            // Calculate inSampleSize
+            options.inSampleSize = 4;
+            // Decode bitmap with inSampleSize set
+            options.inJustDecodeBounds = false;
+            bmp=BitmapFactory.decodeByteArray(data,0,data.length,options);
+
+
+            try {
+                TimeUnit.SECONDS.sleep(5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             //set the iv_image
             // iv_image.setImageBitmap(bmp);
 
@@ -98,16 +120,32 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 file.createNewFile();
                 fOut = new FileOutputStream(file);
 
-                Bitmap bmp_m = bmp.createScaledBitmap(bmp, 640,
-                        480, false);
+                try {
+                    TimeUnit.SECONDS.sleep(3);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                Bitmap bmp_m = bmp.createScaledBitmap(bmp, 320,
+                        240, false);
 // 100 means no compression, the lower you go, the stronger the compression
-                bmp_m.compress(Bitmap.CompressFormat.JPEG, 90, fOut);
+
+                try {
+                    TimeUnit.SECONDS.sleep(3);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                bmp_m.compress(Bitmap.CompressFormat.JPEG, 50, fOut);
                 fOut.flush();
                 fOut.close();
 
-
+                toast = Toast.makeText(context, "фото записано на диск", duration);
+                toast.show();
 
             } catch (Exception e) {
+                toast = Toast.makeText(context, "фото не сохранено на диске", duration);
+                toast.show();
                 Log.e("saveToExternalStorage()", e.getMessage());
             }
 
