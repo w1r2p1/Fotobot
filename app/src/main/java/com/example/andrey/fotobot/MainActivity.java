@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.hardware.Camera;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -398,22 +399,26 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 // Mail
 
 
+
+
+                            AudioManager mgr = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+                            mgr.setStreamMute(AudioManager.STREAM_SYSTEM, true);
+
                             mCamera.takePicture(null, null, mCall);
-                            fb.fbpause(h, 5);
-                            fb.SendMail(h, "/mnt/sdcard/fotobot.jpg");
+
+                            mgr = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+                            mgr.setStreamMute(AudioManager.STREAM_SYSTEM, false);
 
 
 
 
-
-
-
-
-
-
-                        fb.CloseInternetConnection(getApplicationContext(), h);
 
                             fb.fbpause(h, 15);
+                            fb.SendMail(h, "/mnt/sdcard/fotobot.jpg");
+
+//                        fb.CloseInternetConnection(getApplicationContext(), h);
+
+                            fb.fbpause(h, 60);
 
                         }
                     }
