@@ -404,7 +404,29 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             AudioManager mgr = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
                             mgr.setStreamMute(AudioManager.STREAM_SYSTEM, true);
 
+
+//Get Camera Params for customisation
+                            Camera.Parameters parameters = mCamera.getParameters();
+
+//Check Whether device supports AutoFlash, If you YES then set AutoFlash
+                            //List<String> flashModes = parameters.getSupportedFlashModes();
+                            //if (flashModes.contains(android.hardware.Camera.Parameters.FLASH_MODE_AUTO))
+                            //{
+                                parameters.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
+                            //}
+                            mCamera.setParameters(parameters);
+
+
+
+
                             mCamera.takePicture(null, null, mCall);
+
+
+                            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+                            //}
+                            mCamera.setParameters(parameters);
+
+
 
                             mgr = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
                             mgr.setStreamMute(AudioManager.STREAM_SYSTEM, false);
@@ -418,7 +440,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 //                        fb.CloseInternetConnection(getApplicationContext(), h);
 
-                            fb.fbpause(h, 60);
+                            fb.fbpause(h, 5);
 
                         }
                     }
