@@ -24,10 +24,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dropbox.client2.DropboxAPI;
-import com.dropbox.client2.android.AndroidAuthSession;
-
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -40,11 +38,9 @@ import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
-    private DropboxAPI<AndroidAuthSession> dropbox;
+
     private final static String FILE_DIR = "/MySampleFolder/";
-    private final static String DROPBOX_NAME = "YetAnotherUploader";
-    private final static String ACCESS_KEY = "pbzt6tzpran9oil";
-    private final static String ACCESS_SECRET = "pk53kqbm581o64z";
+
 
     int n;
     FotoBot fb;
@@ -108,21 +104,29 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             //set the iv_image
             // iv_image.setImageBitmap(bmp);
 
-            String fullPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+        /*    String fullPath = Environment.getExternalStorageDirectory().getAbsolutePath();
             Log.d(LOG_TAG, "fullPath: " + fullPath);
             try {
                 File dir = new File(fullPath);
                 if (!dir.exists()) {
                     dir.mkdirs();
                 }
-
+*/
                 OutputStream fOut = null;
-                File file = new File(fullPath, "fotobot.jpg");
+                File file = new File(context.getFilesDir(), "fotobot.jpg");
+            try {
                 file.createNewFile();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            try {
                 fOut = new FileOutputStream(file);
+            } catch (FileNotFoundException e1) {
+                e1.printStackTrace();
+            }
 
-                try {
-                    TimeUnit.SECONDS.sleep(3);
+            try {
+                    TimeUnit.SECONDS.sleep(1);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -132,23 +136,38 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 // 100 means no compression, the lower you go, the stronger the compression
 
                 try {
-                    TimeUnit.SECONDS.sleep(3);
+                    TimeUnit.SECONDS.sleep(1);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
                 bmp_m.compress(Bitmap.CompressFormat.JPEG, 50, fOut);
+            try {
                 fOut.flush();
-                fOut.close();
-
-                toast = Toast.makeText(context, "фото записано на диск", duration);
-                toast.show();
-
-            } catch (Exception e) {
-                toast = Toast.makeText(context, "фото не сохранено на диске", duration);
-                toast.show();
-                Log.e("saveToExternalStorage()", e.getMessage());
+            } catch (IOException e1) {
+                e1.printStackTrace();
             }
+            try {
+                fOut.close();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+
+            try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+
+              //  toast = Toast.makeText(context, "фото записано на диск", duration);
+              //  toast.show();
+
+          /*  } catch (Exception e) {
+      //          toast = Toast.makeText(context, "фото не сохранено на диске", duration);
+        //        toast.show();
+                Log.e("saveToExternalStorage()", e.getMessage());
+            }*/
 
 
         }
@@ -252,8 +271,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         } else {
             fb.SendMessage(h, "Внешняя SD карта не доступна для записи");
         }
-
+    //    context.getFilesDir()
+      fb.SendMessage(h, "getFilesDir" + getApplicationContext().getFilesDir().toString());
         fb.SendMessage(h, "getExternalStorageDirectory()" + Environment.getExternalStorageDirectory().toString());
+
       //  fb.SendMessage(h, "EXTERNAL_STORAGE" + System.getenv("EXTERNAL_STORAGE"));
       //  fb.SendMessage(h, "SECONDARY_STORAGE" + System.getenv("SECONDARY_STORAGE"));
     }
@@ -389,7 +410,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             fb.SendMessage(h, "сделано фото" + Integer.toString(i));
 
                             try {
-                                FileOutputStream fileout = openFileOutput("/sdcard0/mytextfile.txt", MODE_PRIVATE | MODE_APPEND);
+                                FileOutputStream fileout = openFileOutput("mytextfile.txt", MODE_PRIVATE | MODE_APPEND);
                                 OutputStreamWriter outputWriter = new OutputStreamWriter(fileout);
                                 outputWriter.write("Закачан файл:" + Integer.toString(i) + "\n");
                                 outputWriter.close();
@@ -405,39 +426,33 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             mgr.setStreamMute(AudioManager.STREAM_SYSTEM, true);
 
 
-//Get Camera Params for customisation
-                            Camera.Parameters parameters = mCamera.getParameters();
 
-//Check Whether device supports AutoFlash, If you YES then set AutoFlash
-                            //List<String> flashModes = parameters.getSupportedFlashModes();
-                            //if (flashModes.contains(android.hardware.Camera.Parameters.FLASH_MODE_AUTO))
-                            //{
-                                parameters.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
-                            //}
-                            mCamera.setParameters(parameters);
-
+//                            Camera.Parameters parameters = mCamera.getParameters();
+//                            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+//                            mCamera.setParameters(parameters);
+//                            mCamera.startPreview();
 
 
 
                             mCamera.takePicture(null, null, mCall);
+                            fb.SendMessage(h, "Picture has been taken");
 
+//                            parameters = mCamera.getParameters();
+//                            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+//                            mCamera.setParameters(parameters);
+//                            mCamera.setPreviewCallback(null);
+//                            mCamera.stopPreview();
 
-                            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-                            //}
-                            mCamera.setParameters(parameters);
-
-
+//                            mCamera.unlock();
+                      //      mCamera.release();
+                      //      fb.SendMessage(h, "Camera has been released");
 
                             mgr = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
                             mgr.setStreamMute(AudioManager.STREAM_SYSTEM, false);
 
-
-
-
-
-                            fb.fbpause(h, 15);
-                            fb.SendMail(h, "/mnt/sdcard/fotobot.jpg");
-
+                            fb.fbpause(h, 9);
+                            fb.SendMail(h, "fotobot.jpg");
+                            fb.SendMessage(h, "fb.SendMail: mail sent");
 //                        fb.CloseInternetConnection(getApplicationContext(), h);
 
                             fb.fbpause(h, 5);

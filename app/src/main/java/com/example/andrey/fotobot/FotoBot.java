@@ -177,6 +177,16 @@ public class FotoBot extends Application {
         m.setFrom("voran.mail@gmail.com");
         m.setSubject("This is an email sent using my Mail JavaMail wrapper from an Android device.");
         m.setBody("Email body.");
+        SendMessage(h, "SendMail" + str);
+        str = getApplicationContext().getFilesDir().toString() + "/" + str;
+        SendMessage(h, "SendMail with file path" + str);
+
+        boolean fileExists =  new File(str).isFile();
+        if (fileExists) {
+            SendMessage(h, "SendMail: файл с фото есть");
+        } else {
+            SendMessage(h, "SendMail: файла с фото нет");
+        }
 
         try {
             m.addAttachment(str);
