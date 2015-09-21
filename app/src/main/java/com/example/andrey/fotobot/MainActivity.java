@@ -100,7 +100,33 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             //decode the data obtained by the camera into a Bitmap
             bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
             //set the iv_image
-            // iv_image.setImageBitmap(bmp);
+            //iv_image.setImageBitmap(bmp);
+
+
+            //decode the data obtained by the camera into a Bitmap
+            BitmapFactory.Options options=new BitmapFactory.Options();
+            options.inPurgeable=true;
+            // options.inJustDecodeBounds = true;
+            //       bmp = BitmapFactory.decodeByteArray(data, 0, data.length,options);
+
+
+
+
+
+
+            // Calculate inSampleSize
+            options.inSampleSize = 4;
+            // Decode bitmap with inSampleSize set
+            options.inJustDecodeBounds = false;
+            bmp=BitmapFactory.decodeByteArray(data,0,data.length,options);
+
+
+            try {
+                TimeUnit.SECONDS.sleep(5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
 
             String fullPath = Environment.getExternalStorageDirectory().getAbsolutePath();
             Log.d(LOG_TAG, "fullPath: " + fullPath);
@@ -115,10 +141,18 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 file.createNewFile();
                 fOut = new FileOutputStream(file);
 
-                //       Bitmap bmp_m = bmp.createScaledBitmap(bmp, 640,
-                //             480, false);
+                       Bitmap bmp_m = bmp.createScaledBitmap(bmp, 320,
+                             240, false);
+
+                try {
+                    TimeUnit.SECONDS.sleep(5);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+
 // 100 means no compression, the lower you go, the stronger the compression
-                bmp.compress(Bitmap.CompressFormat.JPEG, 50, fOut);
+                bmp_m.compress(Bitmap.CompressFormat.JPEG, 50, fOut);
                 fOut.flush();
                 fOut.close();
 
@@ -416,7 +450,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             fb.SendMessage(h, "fb.SendMail: mail sent");
 //                        fb.CloseInternetConnection(getApplicationContext(), h);
 
-                            fb.fbpause(h, 5);
+                            fb.fbpause(h, 15);
 
                         }
                     }
@@ -471,7 +505,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     @Override
     public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
+        //get camera parameters
+        parameters = mCamera.getParameters();
 
+        //set camera parameters
+        mCamera.setParameters(parameters);
+        mCamera.startPreview();
     }
 
     @Override
