@@ -22,14 +22,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -63,115 +60,73 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     private Camera.Parameters parameters;
 
 
+    private UnexpectedTerminationHelper mUnexpectedTerminationHelper = new UnexpectedTerminationHelper();
+
+    private class UnexpectedTerminationHelper {
+        private Thread mThread;
+        private Thread.UncaughtExceptionHandler mOldUncaughtExceptionHandler = null;
+        private Thread.UncaughtExceptionHandler mUncaughtExceptionHandler = new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(Thread thread, Throwable ex) { // gets called on the same (main) thread
+
+                releaseCamera();
+
+
+                if (mOldUncaughtExceptionHandler != null) {
+                    // it displays the "force close" dialog
+                    mOldUncaughtExceptionHandler.uncaughtException(thread, ex);
+                }
+            }
+        };
+
+        void init() {
+            mThread = Thread.currentThread();
+            mOldUncaughtExceptionHandler = mThread.getUncaughtExceptionHandler();
+            mThread.setUncaughtExceptionHandler(mUncaughtExceptionHandler);
+        }
+
+        void fini() {
+            mThread.setUncaughtExceptionHandler(mOldUncaughtExceptionHandler);
+            mOldUncaughtExceptionHandler = null;
+            mThread = null;
+        }
+    }
+
 
     //sets what code should be executed after the picture is taken
-    Camera.PictureCallback mCall = new Camera.PictureCallback()
-    {
+    Camera.PictureCallback mCall = new Camera.PictureCallback() {
         @Override
-        public void onPictureTaken(byte[] data, Camera camera)
-        {
-            Context context = getApplicationContext();
-            CharSequence text = "mCall MainActivity";
-            int duration = Toast.LENGTH_LONG;
-
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-
+        public void onPictureTaken(byte[] data, Camera camera) {
             //decode the data obtained by the camera into a Bitmap
-            BitmapFactory.Options options=new BitmapFactory.Options();
-            options.inPurgeable=true;
-            // options.inJustDecodeBounds = true;
-     //       bmp = BitmapFactory.decodeByteArray(data, 0, data.length,options);
-
-
-
-
-
-
-            // Calculate inSampleSize
-            options.inSampleSize = 4;
-            // Decode bitmap with inSampleSize set
-            options.inJustDecodeBounds = false;
-            bmp=BitmapFactory.decodeByteArray(data,0,data.length,options);
-
-
-            try {
-                TimeUnit.SECONDS.sleep(5);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
+            bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
             //set the iv_image
             // iv_image.setImageBitmap(bmp);
 
-        /*    String fullPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+            String fullPath = Environment.getExternalStorageDirectory().getAbsolutePath();
             Log.d(LOG_TAG, "fullPath: " + fullPath);
             try {
                 File dir = new File(fullPath);
                 if (!dir.exists()) {
                     dir.mkdirs();
                 }
-*/
+
                 OutputStream fOut = null;
-                File file = new File(context.getFilesDir(), "fotobot.jpg");
-            try {
+                File file = new File(fullPath, "fotobot.jpg");
                 file.createNewFile();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-            try {
                 fOut = new FileOutputStream(file);
-            } catch (FileNotFoundException e1) {
-                e1.printStackTrace();
-            }
 
-            try {
-                    TimeUnit.SECONDS.sleep(1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                Bitmap bmp_m = bmp.createScaledBitmap(bmp, 320,
-                        240, false);
+                //       Bitmap bmp_m = bmp.createScaledBitmap(bmp, 640,
+                //             480, false);
 // 100 means no compression, the lower you go, the stronger the compression
-
-                try {
-                    TimeUnit.SECONDS.sleep(1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                bmp_m.compress(Bitmap.CompressFormat.JPEG, 50, fOut);
-            try {
+                bmp.compress(Bitmap.CompressFormat.JPEG, 50, fOut);
                 fOut.flush();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-            try {
                 fOut.close();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
 
-            try {
-                    TimeUnit.SECONDS.sleep(1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-
-              //  toast = Toast.makeText(context, "фото записано на диск", duration);
-              //  toast.show();
-
-          /*  } catch (Exception e) {
-      //          toast = Toast.makeText(context, "фото не сохранено на диске", duration);
-        //        toast.show();
+            } catch (Exception e) {
                 Log.e("saveToExternalStorage()", e.getMessage());
-            }*/
-
+            }
 
         }
-
 
     };
 
@@ -187,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             tvInfo.setTextSize(9);
             tvInfo.setTypeface(Typeface.SANS_SERIF);
-            tvInfo.setTextColor(Color.rgb(5,5,5));
+            tvInfo.setTextColor(Color.rgb(5, 5, 5));
 
             tvInfo.setText(log);
 
@@ -197,6 +152,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             if (msg.what == STATUS_STOPPED) btnStart.setText("Play");
 
             if (fb.getstatus() == 3) {
+
+                releaseCamera();
+
                 btnStart = (Button) findViewById(R.id.play);
                 btnStop = (Button) findViewById(R.id.stop);
                 //     Log.d(LOG_TAG, "Handler.Callback() if: fb.getstatus()" + fb.getstatus());
@@ -232,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         super.onCreate(savedInstanceState);
 
 
-    //    super.onCreate(savedInstanceState);
+        //    super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         final FotoBot fb = (FotoBot) getApplicationContext();
@@ -271,21 +229,23 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         } else {
             fb.SendMessage(h, "Внешняя SD карта не доступна для записи");
         }
-    //    context.getFilesDir()
-      fb.SendMessage(h, "getFilesDir" + getApplicationContext().getFilesDir().toString());
+        //    context.getFilesDir()
+        fb.SendMessage(h, "getFilesDir" + getApplicationContext().getFilesDir().toString());
         fb.SendMessage(h, "getExternalStorageDirectory()" + Environment.getExternalStorageDirectory().toString());
 
-      //  fb.SendMessage(h, "EXTERNAL_STORAGE" + System.getenv("EXTERNAL_STORAGE"));
-      //  fb.SendMessage(h, "SECONDARY_STORAGE" + System.getenv("SECONDARY_STORAGE"));
+        //  fb.SendMessage(h, "EXTERNAL_STORAGE" + System.getenv("EXTERNAL_STORAGE"));
+        //  fb.SendMessage(h, "SECONDARY_STORAGE" + System.getenv("SECONDARY_STORAGE"));
     }
 
     protected void onDestroy() {
         super.onDestroy();
+        releaseCamera();
         Log.d(LOG_TAG, "MainActivity: onDestroy");
     }
 
     protected void onPause() {
         super.onPause();
+        releaseCamera();
         Log.d(LOG_TAG, "MainActivity: onPause");
     }
 
@@ -299,7 +259,18 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         Log.d(LOG_TAG, "MainActivity: onRestoreInstanceState");
     }
 
-    protected void onResume() {
+    protected void onResume(SurfaceHolder holder) {
+
+        mCamera = Camera.open();
+        try {
+            mCamera.setPreviewDisplay(holder);
+
+        } catch (IOException exception) {
+            mCamera.release();
+            mCamera = null;
+        }
+
+
         final FotoBot fb = (FotoBot) getApplicationContext();
         Log.d(LOG_TAG, "MainActivity: onResume");
         Log.d(LOG_TAG, "MainActivity: fb.getstatus()" + fb.getstatus());
@@ -378,6 +349,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     }
 
     public void startFotobot(View v) {
+
+
         final FotoBot fb = (FotoBot) getApplicationContext();
 
 
@@ -397,9 +370,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                         fb.SendMessage(h, "Фотобот начинает свою работу");
 
-                        for (int i = 1; i <= 1000; i++) {
+                        fb.MakeInternetConnection(getApplicationContext(), h);
 
-                            fb.MakeInternetConnection(getApplicationContext(), h);
+                        for (int i = 1; i <= 1000; i++) {
 
                             if (fb.getstatus() == 3) {
                                 fb.SendMessage(h, "Фотобот остановлен");
@@ -407,8 +380,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             }
 
                             fb.fbpause(h, 5);
-                            fb.SendMessage(h, "сделано фото" + Integer.toString(i));
-
+                            /*
                             try {
                                 FileOutputStream fileout = openFileOutput("mytextfile.txt", MODE_PRIVATE | MODE_APPEND);
                                 OutputStreamWriter outputWriter = new OutputStreamWriter(fileout);
@@ -417,22 +389,17 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
+                            */
 // Mail
 
 
-
-
-                            AudioManager mgr = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+                            AudioManager mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                             mgr.setStreamMute(AudioManager.STREAM_SYSTEM, true);
-
 
 
 //                            Camera.Parameters parameters = mCamera.getParameters();
 //                            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
 //                            mCamera.setParameters(parameters);
-//                            mCamera.startPreview();
-
-
 
                             mCamera.takePicture(null, null, mCall);
                             fb.SendMessage(h, "Picture has been taken");
@@ -440,17 +407,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 //                            parameters = mCamera.getParameters();
 //                            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
 //                            mCamera.setParameters(parameters);
-//                            mCamera.setPreviewCallback(null);
-//                            mCamera.stopPreview();
 
-//                            mCamera.unlock();
-                      //      mCamera.release();
-                      //      fb.SendMessage(h, "Camera has been released");
-
-                            mgr = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+                            mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                             mgr.setStreamMute(AudioManager.STREAM_SYSTEM, false);
 
-                            fb.fbpause(h, 9);
+                            fb.fbpause(h, 5);
                             fb.SendMail(h, "fotobot.jpg");
                             fb.SendMessage(h, "fb.SendMail: mail sent");
 //                        fb.CloseInternetConnection(getApplicationContext(), h);
@@ -509,16 +470,18 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     }
 
     @Override
-    public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3)
-    {
+    public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
 
     }
 
     @Override
-    public void surfaceCreated(SurfaceHolder holder)
-    {
+    public void surfaceCreated(SurfaceHolder holder) {
+        final FotoBot fb = (FotoBot) getApplicationContext();
+        fb.holder = holder;
         // The Surface has been created, acquire the camera and tell it where
         // to draw the preview.
+        mUnexpectedTerminationHelper.init();
+
         mCamera = Camera.open();
         try {
             mCamera.setPreviewDisplay(holder);
@@ -530,24 +493,29 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 
         //get camera parameters
-        parameters = mCamera.getParameters();
+        //parameters = mCamera.getParameters();
 
         //set camera parameters
-        mCamera.setParameters(parameters);
-        mCamera.startPreview();
+        //mCamera.setParameters(parameters);
+        //mCamera.startPreview();
 
     }
-
 
 
     @Override
-    public void surfaceDestroyed(SurfaceHolder holder)
-    {
-        //stop the preview
-        mCamera.stopPreview();
-        //release the camera
-        mCamera.release();
-        //unbind the camera from this object
-        mCamera = null;
+    public void surfaceDestroyed(SurfaceHolder holder) {
+        releaseCamera();
     }
+
+
+        private void releaseCamera() {
+        if (mCamera != null) {
+            mCamera.stopPreview();
+            mCamera.release();
+            mCamera = null;
+            mUnexpectedTerminationHelper.fini();
+        }
+    }
+
+
 }

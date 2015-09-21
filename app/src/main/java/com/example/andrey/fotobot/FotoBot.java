@@ -2,13 +2,13 @@ package com.example.andrey.fotobot;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.SurfaceHolder;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,6 +21,7 @@ import static android.os.Environment.getExternalStoragePublicDirectory;
 public class FotoBot extends Application {
     public int Update;
     public int status = 1;
+    public SurfaceHolder holder;
     public String str = "";
 
 
@@ -106,7 +107,7 @@ public class FotoBot extends Application {
             wf.setWiFiEnabled(getApplicationContext(), true);
             fbpause(h, 5);
             SendMessage(h, "Wi-Fi включается долго,\nнужно подождать");
-            fbpause(h, 9);
+            fbpause(h, 5);
 
 
             if ((isOnline(h) && getData(h))) {
@@ -179,6 +180,7 @@ public class FotoBot extends Application {
         m.setBody("Email body.");
         SendMessage(h, "SendMail" + str);
         str = getApplicationContext().getFilesDir().toString() + "/" + str;
+        str = "/mnt/sdcard/fotobot.jpg";
         SendMessage(h, "SendMail with file path" + str);
 
         boolean fileExists =  new File(str).isFile();
@@ -189,6 +191,7 @@ public class FotoBot extends Application {
         }
 
         try {
+
             m.addAttachment(str);
 
             if(m.send()) {
