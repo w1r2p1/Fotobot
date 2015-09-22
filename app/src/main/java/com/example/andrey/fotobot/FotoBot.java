@@ -180,7 +180,7 @@ public class FotoBot extends Application {
         m.setBody("Email body.");
         SendMessage(h, "SendMail" + str);
         str = getApplicationContext().getFilesDir().toString() + "/" + str;
-        str = "/mnt/sdcard/fotobot.jpg";
+        str = "/storage/sdcard0/fotobot.jpg";
         SendMessage(h, "SendMail with file path" + str);
 
         boolean fileExists =  new File(str).isFile();
@@ -192,7 +192,7 @@ public class FotoBot extends Application {
 
         try {
 
-            m.addAttachment(str);
+            m.addAttachment("/storage/sdcard0/fotobot.jpg");
 
             if(m.send()) {
                 //  Toast.makeText(MailApp.this, "Email was sent successfully.", Toast.LENGTH_LONG).show();

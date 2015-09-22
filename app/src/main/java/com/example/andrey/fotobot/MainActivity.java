@@ -556,14 +556,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     @Override
     public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
-      /*
+
         //get camera parameters
         parameters = mCamera.getParameters();
 
         //set camera parameters
         mCamera.setParameters(parameters);
         mCamera.startPreview();
-        */
+
     }
 
     @Override
