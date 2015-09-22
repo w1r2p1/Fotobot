@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     private Camera mCamera;
     //the camera parameters
     private Camera.Parameters parameters;
-
+    final String LOG_TAG = "Logs";
 
     private UnexpectedTerminationHelper mUnexpectedTerminationHelper = new UnexpectedTerminationHelper();
 
@@ -91,21 +91,50 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             mThread = null;
         }
     }
+    public static long getUsedMemorySize() {
+        final String LOG_USED_MEMORY = "UsedMem";
 
+        long freeSize = 0L;
+        long totalSize = 0L;
+        long usedSize = -1L;
+        try {
+            Runtime info = Runtime.getRuntime();
+            freeSize = info.freeMemory();
+            totalSize = info.totalMemory();
+            usedSize = totalSize - freeSize;
+
+            Log.d(LOG_USED_MEMORY, "***** totalSize, freeSize, usedSize  " + totalSize + ";" + freeSize + ";" + usedSize);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return usedSize;
+
+    }
 
     //sets what code should be executed after the picture is taken
     Camera.PictureCallback mCall = new Camera.PictureCallback() {
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
+
+
+
+
+
+            Log.d(LOG_TAG, "***** mCall started: " + getUsedMemorySize());
+
             //decode the data obtained by the camera into a Bitmap
             bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
             //set the iv_image
             //iv_image.setImageBitmap(bmp);
 
 
+
             //decode the data obtained by the camera into a Bitmap
             BitmapFactory.Options options=new BitmapFactory.Options();
             options.inPurgeable=true;
+
+
             // options.inJustDecodeBounds = true;
             //       bmp = BitmapFactory.decodeByteArray(data, 0, data.length,options);
 
@@ -115,11 +144,16 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 
             // Calculate inSampleSize
-            options.inSampleSize = 4;
-            // Decode bitmap with inSampleSize set
-            options.inJustDecodeBounds = false;
+
+            options.inSampleSize = 8;
+            options.inPreferredConfig = Bitmap.Config.RGB_565;
+
+            Log.d(LOG_TAG, "***** Options are defined: " + getUsedMemorySize());
+
+
             bmp=BitmapFactory.decodeByteArray(data,0,data.length,options);
 
+            Log.d(LOG_TAG, "***** BitmapFactory.decodeByteArray(data,0,data.length,options) done " + getUsedMemorySize());
 
             try {
                 TimeUnit.SECONDS.sleep(5);
@@ -141,8 +175,21 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 file.createNewFile();
                 fOut = new FileOutputStream(file);
 
-                       Bitmap bmp_m = bmp.createScaledBitmap(bmp, 320,
-                             240, false);
+                  //     Bitmap bmp_m = bmp.createScaledBitmap(bmp, 320,
+                  //           240, false);
+
+                try {
+                    TimeUnit.SECONDS.sleep(5);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                Log.d(LOG_TAG, "***** fotobot.jpg is created) done " + getUsedMemorySize());
+
+// 100 means no compression, the lower you go, the stronger the compression
+                bmp.compress(Bitmap.CompressFormat.JPEG, 50, fOut);
+
+                Log.d(LOG_TAG, "***** bmp.compress(Bitmap.CompressFormat.JPEG, 50, fOut); " + getUsedMemorySize());
 
                 try {
                     TimeUnit.SECONDS.sleep(5);
@@ -151,10 +198,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 }
 
 
-// 100 means no compression, the lower you go, the stronger the compression
-                bmp_m.compress(Bitmap.CompressFormat.JPEG, 50, fOut);
                 fOut.flush();
                 fOut.close();
+
+                bmp.recycle();
+
+                Log.d(LOG_TAG, "***** fOut.flush();  + getUsedMemorySize()");
 
             } catch (Exception e) {
                 Log.e("saveToExternalStorage()", e.getMessage());
@@ -209,7 +258,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     final int STATUS_STOPPED = 333;
     boolean STOP_FOTOBOT = false;
 
-    final String LOG_TAG = "Logs";
+
     Button btnStart;
     Button btnStop;
     Button btnConfig;
@@ -450,7 +499,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             fb.SendMessage(h, "fb.SendMail: mail sent");
 //                        fb.CloseInternetConnection(getApplicationContext(), h);
 
-                            fb.fbpause(h, 15);
+                            fb.fbpause(h, 60);
 
                         }
                     }
