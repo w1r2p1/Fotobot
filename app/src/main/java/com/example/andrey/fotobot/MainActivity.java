@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             // Calculate inSampleSize
 
             options.inSampleSize = 8;
-            options.inPreferredConfig = Bitmap.Config.RGB_565;
+        //    options.inPreferredConfig = Bitmap.Config.RGB_565;
 
             Log.d(LOG_TAG, "***** Options are defined: " + getUsedMemorySize());
 
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             Log.d(LOG_TAG, "***** BitmapFactory.decodeByteArray(data,0,data.length,options) done " + getUsedMemorySize());
 
             try {
-                TimeUnit.SECONDS.sleep(5);
+                TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                   //           240, false);
 
                 try {
-                    TimeUnit.SECONDS.sleep(5);
+                    TimeUnit.SECONDS.sleep(1);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -496,7 +496,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                             mgr.setStreamMute(AudioManager.STREAM_SYSTEM, false);
 
-                            fb.fbpause(h, 5);
+                            fb.fbpause(h, 9);
                             fb.SendMail(h, "fotobot.jpg");
                             fb.SendMessage(h, "fb.SendMail: mail sent");
 //                        fb.CloseInternetConnection(getApplicationContext(), h);
@@ -589,7 +589,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         //set camera parameters
         //mCamera.setParameters(parameters);
-        //mCamera.startPreview();
+        mCamera.startPreview();
 
     }
 
