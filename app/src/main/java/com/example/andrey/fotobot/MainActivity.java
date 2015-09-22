@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             Log.d(LOG_TAG, "***** mCall started: " + getUsedMemorySize());
 
             //decode the data obtained by the camera into a Bitmap
-            bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
+           // bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
             //set the iv_image
             //iv_image.setImageBitmap(bmp);
 
@@ -192,7 +192,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 Log.d(LOG_TAG, "***** bmp.compress(Bitmap.CompressFormat.JPEG, 50, fOut); " + getUsedMemorySize());
 
                 try {
-                    TimeUnit.SECONDS.sleep(5);
+                    TimeUnit.SECONDS.sleep(1);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -202,6 +202,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 fOut.close();
 
                 bmp.recycle();
+
+                bmp = null;
 
                 Log.d(LOG_TAG, "***** fOut.flush();  + getUsedMemorySize()");
 
@@ -328,7 +330,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     protected void onPause() {
         super.onPause();
-        releaseCamera();
+       // releaseCamera();
         Log.d(LOG_TAG, "MainActivity: onPause");
     }
 
@@ -343,7 +345,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     }
 
     protected void onResume(SurfaceHolder holder) {
-
+        Log.d(LOG_TAG, "MainActivity: onResume");
         mCamera = Camera.open();
         try {
             mCamera.setPreviewDisplay(holder);
@@ -499,7 +501,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             fb.SendMessage(h, "fb.SendMail: mail sent");
 //                        fb.CloseInternetConnection(getApplicationContext(), h);
 
-                            fb.fbpause(h, 60);
+                            fb.fbpause(h, 15);
 
                         }
                     }
@@ -554,12 +556,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     @Override
     public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
+      /*
         //get camera parameters
         parameters = mCamera.getParameters();
 
         //set camera parameters
         mCamera.setParameters(parameters);
         mCamera.startPreview();
+        */
     }
 
     @Override
