@@ -525,8 +525,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             fb.SendMessage(h, "setParameters");
 
-
-
                             mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                             fb.SendMessage(h, "Context.AUDIO_SERVICE");
                             mgr.setStreamMute(AudioManager.STREAM_SYSTEM, false);
