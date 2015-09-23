@@ -273,8 +273,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
+        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+        PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+                "MyWakelockTag");
+
+
+        super.onCreate(savedInstanceState);
+        wakeLock.acquire();
 
 
 
@@ -440,10 +446,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     public void startFotobot(View v) {
 
-        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
-        PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
-                "MyWakelockTag");
-        wakeLock.acquire();
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
@@ -461,6 +463,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                 Thread t = new Thread(new Runnable() {
                     public void run() {
+
+                        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+                        PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+                                "MyWakelockTag");
+
+
+
+                        wakeLock.acquire();
 
                         fb.SendMessage(h, "Фотобот начинает свою работу");
 
