@@ -510,11 +510,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             parameters = mCamera.getParameters();
                             fb.SendMessage(h, "getParameters");
                             fb.fbpause(h, 1);
+
                             try {
                             parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
                             }  catch (Exception e){
                                 fb.SendMessage(h, "Camera.Parameters.FLASH_MODE_OFF error");
                             }
+
                             fb.SendMessage(h, "FLASH_MODE_OFF");
                             fb.fbpause(h, 1);
                             try {

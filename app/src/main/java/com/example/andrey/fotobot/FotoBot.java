@@ -125,6 +125,7 @@ public class FotoBot extends Application {
             md.setMobileDataEnabled(getApplicationContext(), true);
             fbpause(h, 5);
         }
+
         if ((isOnline(h) && getData(h))) {
             SendMessage(h, "Ура! Связь с Internet появилась!");
             return true;
