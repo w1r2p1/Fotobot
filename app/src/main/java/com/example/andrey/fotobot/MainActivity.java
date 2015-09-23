@@ -464,7 +464,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 return;
                             }
 
-                            fb.fbpause(h, 5);
+                          //  fb.fbpause(h, 5);
                             /*
                             try {
                                 FileOutputStream fileout = openFileOutput("mytextfile.txt", MODE_PRIVATE | MODE_APPEND);
@@ -481,27 +481,62 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             AudioManager mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                             mgr.setStreamMute(AudioManager.STREAM_SYSTEM, true);
 
+                            mCamera.stopPreview();
+                            Camera.Parameters parameters = mCamera.getParameters();
+                            try {
+                                parameters.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
+                            }  catch (Exception e){
+                                fb.SendMessage(h, "Camera.Parameters.FLASH_MODE_ON error");
+                        }
+                            mCamera.setParameters(parameters);
+                            mCamera.startPreview();
 
-//                            Camera.Parameters parameters = mCamera.getParameters();
-//                            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-//                            mCamera.setParameters(parameters);
+                            fb.fbpause(h, 5);
+
 
                             mCamera.takePicture(null, null, mCall);
                             fb.SendMessage(h, "Picture has been taken");
 
-//                            parameters = mCamera.getParameters();
-//                            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-//                            mCamera.setParameters(parameters);
-
-                            mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-                            mgr.setStreamMute(AudioManager.STREAM_SYSTEM, false);
 
                             fb.fbpause(h, 5);
+
+                            mCamera.stopPreview();
+
+
+                            fb.fbpause(h, 5);
+
+                            fb.SendMessage(h, "Preview has been stopped");
+                            parameters = mCamera.getParameters();
+                            fb.SendMessage(h, "getParameters");
+                            fb.fbpause(h, 1);
+                            try {
+                            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+                            }  catch (Exception e){
+                                fb.SendMessage(h, "Camera.Parameters.FLASH_MODE_OFF error");
+                            }
+                            fb.SendMessage(h, "FLASH_MODE_OFF");
+                            fb.fbpause(h, 1);
+                            try {
+                            mCamera.setParameters(parameters);
+                            }  catch (Exception e){
+                                fb.SendMessage(h, "setParameters error");
+                            }
+
+                            fb.SendMessage(h, "setParameters");
+
+
+
+                            mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                            fb.SendMessage(h, "Context.AUDIO_SERVICE");
+                            mgr.setStreamMute(AudioManager.STREAM_SYSTEM, false);
+                            fb.SendMessage(h, "AudioManager.STREAM_SYSTEM");
+
+                            fb.fbpause(h, 1);
                             fb.SendMail(h, "fotobot.jpg");
                             fb.SendMessage(h, "fb.SendMail: mail sent");
 //                        fb.CloseInternetConnection(getApplicationContext(), h);
 
-                            fb.fbpause(h, 15);
+                            fb.fbpause(h, 9);
 
                         }
                     }

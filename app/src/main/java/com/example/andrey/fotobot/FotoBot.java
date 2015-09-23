@@ -179,9 +179,9 @@ public class FotoBot extends Application {
         m.setSubject("This is an email sent using my Mail JavaMail wrapper from an Android device.");
         m.setBody("Email body.");
         SendMessage(h, "SendMail" + str);
-        str = getApplicationContext().getFilesDir().toString() + "/" + str;
-        str = "/storage/sdcard0/fotobot.jpg";
-        SendMessage(h, "SendMail with file path" + str);
+    //    str = getApplicationContext().getFilesDir().toString() + "/" + str;
+        str = Environment.getExternalStorageDirectory().getAbsolutePath().toString() + "/fotobot.jpg";;
+        SendMessage(h, "SendMail with file path:" + str);
 
         boolean fileExists =  new File(str).isFile();
         if (fileExists) {
@@ -192,7 +192,7 @@ public class FotoBot extends Application {
 
         try {
 
-            m.addAttachment("/storage/sdcard0/fotobot.jpg");
+            m.addAttachment(str);
 
             if(m.send()) {
                 //  Toast.makeText(MailApp.this, "Email was sent successfully.", Toast.LENGTH_LONG).show();
