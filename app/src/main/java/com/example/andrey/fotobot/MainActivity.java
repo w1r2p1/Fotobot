@@ -506,6 +506,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             fb.fbpause(h, 5);
 
                             fb.SendMessage(h, "Preview has been stopped");
+
                             parameters = mCamera.getParameters();
                             fb.SendMessage(h, "getParameters");
                             fb.fbpause(h, 1);
