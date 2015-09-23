@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.PowerManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -225,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             String message = (String) msg.obj; //Extract the string from the Message
             log = reportDate + ":    " + message + "\n" + log;
 
-            tvInfo.setTextSize(9);
+            tvInfo.setTextSize(12);
             tvInfo.setTypeface(Typeface.SANS_SERIF);
             tvInfo.setTextColor(Color.rgb(5, 5, 5));
 
@@ -273,6 +274,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+
 
 
         //    super.onCreate(savedInstanceState);
@@ -435,6 +440,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     public void startFotobot(View v) {
 
+        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+        PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+                "MyWakelockTag");
+        wakeLock.acquire();
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
