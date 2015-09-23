@@ -91,7 +91,6 @@ public class FotoBot extends Application {
     }
 
     public boolean MakeInternetConnection(Context context, Handler h) {
-
         fbpause(h, 1);
 
         WiFi wf;
