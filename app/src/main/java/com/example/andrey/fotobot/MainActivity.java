@@ -118,7 +118,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
 
+            PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+            PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+                    "MyWakelockTag");
 
+
+            wakeLock.acquire();
 
 
 
@@ -219,6 +224,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     Handler.Callback hc = new Handler.Callback() {
         public boolean handleMessage(Message msg) {
+
+            PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+            PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+                    "MyWakelockTag");
+
+
+            wakeLock.acquire();
+
             DateFormat dateformat = new SimpleDateFormat("HH:mm:ss");
             Date today = Calendar.getInstance().getTime();
             String reportDate = dateformat.format(today);
@@ -356,6 +369,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     }
 
     protected void onResume(SurfaceHolder holder) {
+
+        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+        PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+                "MyWakelockTag");
+
+
+        wakeLock.acquire();
+
         Log.d(LOG_TAG, "MainActivity: onResume");
         mCamera = Camera.open();
         try {
@@ -445,7 +466,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     }
 
     public void startFotobot(View v) {
+        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+        PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+                "MyWakelockTag");
 
+
+        wakeLock.acquire();
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
