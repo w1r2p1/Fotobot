@@ -469,7 +469,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 "MyWakelockTag");
 
 
-
                         wakeLock.acquire();
 
                         fb.SendMessage(h, "Фотобот начинает свою работу");
