@@ -162,25 +162,35 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             Log.d(LOG_TAG, "***** BitmapFactory.decodeByteArray(data,0,data.length,options) done " + getUsedMemorySize());
 
             try {
-                TimeUnit.SECONDS.sleep(5);
+                TimeUnit.SECONDS.sleep(9);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
 
-            String fullPath = Environment.getExternalStorageDirectory().getAbsolutePath();
-            Log.d(LOG_TAG, "fullPath: " + fullPath);
-            try {
-                File dir = new File(fullPath);
-                if (!dir.exists()) {
-                    dir.mkdirs();
-                }
+           // String fullPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+
+
+           // Log.d(LOG_TAG, "fullPath: " + fullPath);
+           // try {
+           //     File dir = new File(fullPath);
+           //     if (!dir.exists()) {
+           //         dir.mkdirs();
+           //     }
 
                 OutputStream fOut = null;
-                File file = new File(fullPath, "fotobot.jpg");
-                file.createNewFile();
-                fOut = new FileOutputStream(file);
+                File file = new File(getApplicationContext().getFilesDir(), "fotobot.jpg");
 
+            try {
+                file.createNewFile();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                fOut = new FileOutputStream(file);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
                   //     Bitmap bmp_m = bmp.createScaledBitmap(bmp, 320,
                   //           240, false);
 
@@ -198,14 +208,32 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 Log.d(LOG_TAG, "***** bmp.compress(Bitmap.CompressFormat.JPEG, 50, fOut); " + getUsedMemorySize());
 
                 try {
-                    TimeUnit.SECONDS.sleep(1);
+                    TimeUnit.SECONDS.sleep(9);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
-
+            try {
                 fOut.flush();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            try {
+
                 fOut.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+
+                try {
+                    TimeUnit.SECONDS.sleep(9);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
                 bmp.recycle();
 
@@ -213,9 +241,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                 Log.d(LOG_TAG, "***** fOut.flush();  + getUsedMemorySize()");
 
-            } catch (Exception e) {
-                Log.e("saveToExternalStorage()", e.getMessage());
-            }
+                try {
+                    TimeUnit.SECONDS.sleep(5);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+          //  } catch (Exception e) {
+            //    Log.e("saveToExternalStorage()", e.getMessage());
+            //}
 
         }
 
@@ -525,6 +559,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             AudioManager mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                             mgr.setStreamMute(AudioManager.STREAM_SYSTEM, true);
 
+/* ***** Start Flash
                             mCamera.stopPreview();
                             Camera.Parameters parameters = mCamera.getParameters();
                             try {
@@ -536,7 +571,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             mCamera.startPreview();
 
                             fb.fbpause(h, 5);
-
+*/
 
                             mCamera.takePicture(null, null, mCall);
                             fb.SendMessage(h, "Picture has been taken");
@@ -544,6 +579,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             fb.fbpause(h, 5);
 
+/* ***** Stop Flash
                             mCamera.stopPreview();
 
 
@@ -570,18 +606,19 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             }
 
                             fb.SendMessage(h, "setParameters");
+*/
 
                             mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                             fb.SendMessage(h, "Context.AUDIO_SERVICE");
                             mgr.setStreamMute(AudioManager.STREAM_SYSTEM, false);
                             fb.SendMessage(h, "AudioManager.STREAM_SYSTEM");
 
-                            fb.fbpause(h, 1);
+                            fb.fbpause(h, 5);
                             fb.SendMail(h, "fotobot.jpg");
                             fb.SendMessage(h, "fb.SendMail: mail sent");
 //                        fb.CloseInternetConnection(getApplicationContext(), h);
 
-                            fb.fbpause(h, 60);
+                            fb.fbpause(h, 300);
 
                         }
                     }
