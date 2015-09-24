@@ -618,7 +618,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             fb.SendMessage(h, "fb.SendMail: mail sent");
 //                        fb.CloseInternetConnection(getApplicationContext(), h);
 
-                            fb.fbpause(h, 300);
+                            fb.fbpause(h, 30);
 
                         }
                     }
