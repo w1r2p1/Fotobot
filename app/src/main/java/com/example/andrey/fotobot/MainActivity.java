@@ -28,6 +28,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -208,7 +209,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 Log.d(LOG_TAG, "***** bmp.compress(Bitmap.CompressFormat.JPEG, 50, fOut); " + getUsedMemorySize());
 
                 try {
-                    TimeUnit.SECONDS.sleep(9);
+                    TimeUnit.SECONDS.sleep(3);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -217,11 +218,18 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 fOut.flush();
 
             } catch (Exception e) {
-                e.printStackTrace();
-            }
+               e.printStackTrace();
+         }
+
+        //    try {
+        //    fOut.getFD().sync();
+        //    } catch (Exception e) {
+        //        e.printStackTrace();
+        //    }
+
+
 
             try {
-
                 fOut.close();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -230,7 +238,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 
                 try {
-                    TimeUnit.SECONDS.sleep(9);
+                    TimeUnit.SECONDS.sleep(1);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -240,6 +248,16 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 bmp = null;
 
                 Log.d(LOG_TAG, "***** fOut.flush();  + getUsedMemorySize()");
+
+            try {
+                FileOutputStream fstream = openFileOutput("mytextfile.txt", MODE_PRIVATE | MODE_APPEND);
+                OutputStreamWriter outputWriter = new OutputStreamWriter(fstream);
+                outputWriter.write("flushstream");
+                outputWriter.flush();
+                outputWriter.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
                 try {
                     TimeUnit.SECONDS.sleep(5);
@@ -618,7 +636,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             fb.SendMessage(h, "fb.SendMail: mail sent");
 //                        fb.CloseInternetConnection(getApplicationContext(), h);
 
-                            fb.fbpause(h, 30);
+                            fb.fbpause(h, 60);
 
                         }
                     }

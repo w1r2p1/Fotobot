@@ -184,10 +184,13 @@ public class FotoBot extends Application {
 
         SendMessage(h, "SendMail with file path:" + str);
 
-        boolean fileExists =  new File(str).isFile();
+        File attach_file;
+        attach_file = new File(str);
+        boolean fileExists =  attach_file.isFile();
 
         if (fileExists) {
-            SendMessage(h, "SendMail: файл с фото есть");
+
+            SendMessage(h, "SendMail: файл с фото есть: " + attach_file.length());
         } else {
             SendMessage(h, "SendMail: файла с фото нет");
         }
