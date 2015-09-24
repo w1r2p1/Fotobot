@@ -199,6 +199,13 @@ public class FotoBot extends Application {
 
             m.addAttachment(str);
 
+            try {
+                TimeUnit.SECONDS.sleep(9);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+
             if(m.send()) {
                 //  Toast.makeText(MailApp.this, "Email was sent successfully.", Toast.LENGTH_LONG).show();
                 SendMessage(h, "Email was sent successfully.");
