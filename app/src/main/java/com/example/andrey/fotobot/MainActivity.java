@@ -204,7 +204,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 Log.d(LOG_TAG, "***** fotobot.jpg is created) done " + getUsedMemorySize());
 
 // 100 means no compression, the lower you go, the stronger the compression
-                bmp.compress(Bitmap.CompressFormat.JPEG, 50, fOut);
+                bmp.compress(Bitmap.CompressFormat.JPEG, 90, fOut);
 
                 Log.d(LOG_TAG, "***** bmp.compress(Bitmap.CompressFormat.JPEG, 50, fOut); " + getUsedMemorySize());
 
