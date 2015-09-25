@@ -40,6 +40,14 @@
             android:name=".Status"
             android:label="@string/title_activity_status" >
         </activity>
+        <activity
+            android:name=".Tab_Main_Activity"
+            android:label="@string/title_activity_settings" >
+        </activity>
+        <activity
+            android:name=".Tab_Network_Activity"
+            android:label="@string/title_activity_settings" >
+        </activity>
     </application>
 
 </manifest>
