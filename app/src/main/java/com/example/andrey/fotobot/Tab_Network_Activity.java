@@ -18,7 +18,7 @@ public class Tab_Network_Activity extends Activity {
 
     String[] connect_methods = {"Wi-Fi", "Mobile Data", "Both"};
 
-    private CheckBox check_box_wifi, check_box_mobile_data;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,10 +64,23 @@ public class Tab_Network_Activity extends Activity {
        // check_box_wifi = (CheckBox) findViewById(R.id.checkBox_WiFi);
       //  check_box_mobile_data = (CheckBox) findViewById(R.id.checkBox_MobileData);
 
-
-
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
+
+        switch (spinner_value) {
+            case "Wi-Fi":
+                editor.putBoolean("Use_WiFi", true);
+                editor.putBoolean("Use_Mobile_Data", false);
+                break;
+            case "Mobile Data":
+                editor.putBoolean("Use_WiFi", false);
+                editor.putBoolean("Use_Mobile_Data", true);
+                break;
+            case "Both":
+                editor.putBoolean("Use_WiFi", true);
+                editor.putBoolean("Use_Mobile_Data", true);
+                break;
+        }
 
         Log.d(LOG_NETWORK_ACTIVITY, "spinner" + spinner_value);
 

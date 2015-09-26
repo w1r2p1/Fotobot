@@ -10,7 +10,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Использовать вспышку"
-        android:id="@+id/checkBox1" />
+        android:id="@+id/checkBox_Flah" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <EditText
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/editText2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="JPEG сжатие"
+            android:id="@+id/textView2" />
 
 
+
+
+    </LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Применить"
+        android:id="@+id/button2"
+        android:layout_gravity="bottom|center_horizontal" />
 </LinearLayout>
