@@ -19,8 +19,14 @@ import java.util.concurrent.TimeUnit;
 import static android.os.Environment.getExternalStoragePublicDirectory;
 
 public class FotoBot extends Application {
+//Global variables
     public int Update;
+    public boolean Use_WiFi, Use_Mobile_Data;
+    public boolean Use_Flash;
+    public int JPEG_Compression;
+    public String EMail_Sender, EMail_Sender_Password, EMail_Recepient;
     public int status = 1;
+
     public SurfaceHolder holder;
     public String str = "";
 

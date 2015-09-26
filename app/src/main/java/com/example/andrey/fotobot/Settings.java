@@ -3,9 +3,12 @@ package com.example.andrey.fotobot;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.CheckBox;
 import android.widget.TabHost;
 
 public class Settings extends TabActivity {
+
+
 
     /** Called when the activity is first created. */
     @Override
@@ -22,16 +25,19 @@ public class Settings extends TabActivity {
         TabHost.TabSpec tabSpec;
 
         tabSpec = tabHost.newTabSpec("tag1");
-        tabSpec.setIndicator("Вкладка 1");
+        tabSpec.setIndicator("Главная");
         tabSpec.setContent(new Intent(this, Tab_Main_Activity.class));
         tabHost.addTab(tabSpec);
 
         tabSpec = tabHost.newTabSpec("tag2");
-        tabSpec.setIndicator("Вкладка 2");
+        tabSpec.setIndicator("Сеть");
         tabSpec.setContent(new Intent(this, Tab_Network_Activity.class));
         tabHost.addTab(tabSpec);
 
-
+        tabSpec = tabHost.newTabSpec("tag3");
+        tabSpec.setIndicator("График");
+        tabSpec.setContent(new Intent(this, Tab_Scheduler_Activity.class));
+        tabHost.addTab(tabSpec);
     }
 
 
