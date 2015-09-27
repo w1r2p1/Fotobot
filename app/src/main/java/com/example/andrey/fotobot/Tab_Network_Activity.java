@@ -82,6 +82,9 @@ public class Tab_Network_Activity extends Activity {
                 break;
         }
 
+        // Save the changes in SharedPreferences
+        editor.commit(); // commit changes
+
         Log.d(LOG_NETWORK_ACTIVITY, "spinner" + spinner_value);
 
      //   if (check_box_wifi.isChecked()) {

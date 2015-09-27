@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             mThread = null;
         }
     }
+
     public static long getUsedMemorySize() {
         final String LOG_USED_MEMORY = "UsedMem";
 
@@ -127,27 +128,21 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             wakeLock.acquire();
 
 
-
             Log.d(LOG_TAG, "***** mCall started: " + getUsedMemorySize());
 
             //decode the data obtained by the camera into a Bitmap
-           // bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
+            // bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
             //set the iv_image
             //iv_image.setImageBitmap(bmp);
 
 
-
             //decode the data obtained by the camera into a Bitmap
-            BitmapFactory.Options options=new BitmapFactory.Options();
-            options.inPurgeable=true;
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inPurgeable = true;
 
 
             // options.inJustDecodeBounds = true;
             //       bmp = BitmapFactory.decodeByteArray(data, 0, data.length,options);
-
-
-
-
 
 
             // Calculate inSampleSize
@@ -158,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             Log.d(LOG_TAG, "***** Options are defined: " + getUsedMemorySize());
 
 
-            bmp=BitmapFactory.decodeByteArray(data,0,data.length,options);
+            bmp = BitmapFactory.decodeByteArray(data, 0, data.length, options);
 
             Log.d(LOG_TAG, "***** BitmapFactory.decodeByteArray(data,0,data.length,options) done " + getUsedMemorySize());
 
@@ -169,18 +164,18 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
 
 
-           // String fullPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+            // String fullPath = Environment.getExternalStorageDirectory().getAbsolutePath();
 
 
-           // Log.d(LOG_TAG, "fullPath: " + fullPath);
-           // try {
-           //     File dir = new File(fullPath);
-           //     if (!dir.exists()) {
-           //         dir.mkdirs();
-           //     }
+            // Log.d(LOG_TAG, "fullPath: " + fullPath);
+            // try {
+            //     File dir = new File(fullPath);
+            //     if (!dir.exists()) {
+            //         dir.mkdirs();
+            //     }
 
-                OutputStream fOut = null;
-                File file = new File(getApplicationContext().getFilesDir(), "fotobot.jpg");
+            OutputStream fOut = null;
+            File file = new File(getApplicationContext().getFilesDir(), "fotobot.jpg");
 
             try {
                 file.createNewFile();
@@ -192,41 +187,40 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             } catch (Exception e) {
                 e.printStackTrace();
             }
-                  //     Bitmap bmp_m = bmp.createScaledBitmap(bmp, 320,
-                  //           240, false);
+            //     Bitmap bmp_m = bmp.createScaledBitmap(bmp, 320,
+            //           240, false);
 
-                try {
-                    TimeUnit.SECONDS.sleep(5);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            try {
+                TimeUnit.SECONDS.sleep(5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
-                Log.d(LOG_TAG, "***** fotobot.jpg is created) done " + getUsedMemorySize());
+            Log.d(LOG_TAG, "***** fotobot.jpg is created) done " + getUsedMemorySize());
 
 // 100 means no compression, the lower you go, the stronger the compression
-                bmp.compress(Bitmap.CompressFormat.JPEG, 90, fOut);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 90, fOut);
 
-                Log.d(LOG_TAG, "***** bmp.compress(Bitmap.CompressFormat.JPEG, 50, fOut); " + getUsedMemorySize());
+            Log.d(LOG_TAG, "***** bmp.compress(Bitmap.CompressFormat.JPEG, 50, fOut); " + getUsedMemorySize());
 
-                try {
-                    TimeUnit.SECONDS.sleep(3);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            try {
+                TimeUnit.SECONDS.sleep(3);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
             try {
                 fOut.flush();
 
             } catch (Exception e) {
-               e.printStackTrace();
-         }
+                e.printStackTrace();
+            }
 
-        //    try {
-        //    fOut.getFD().sync();
-        //    } catch (Exception e) {
-        //        e.printStackTrace();
-        //    }
-
+            //    try {
+            //    fOut.getFD().sync();
+            //    } catch (Exception e) {
+            //        e.printStackTrace();
+            //    }
 
 
             try {
@@ -236,18 +230,17 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
 
 
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
-                try {
-                    TimeUnit.SECONDS.sleep(1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            bmp.recycle();
 
-                bmp.recycle();
+            bmp = null;
 
-                bmp = null;
-
-                Log.d(LOG_TAG, "***** fOut.flush();  + getUsedMemorySize()");
+            Log.d(LOG_TAG, "***** fOut.flush();  + getUsedMemorySize()");
 
             try {
                 FileOutputStream fstream = openFileOutput("mytextfile.txt", MODE_PRIVATE | MODE_APPEND);
@@ -259,13 +252,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 e.printStackTrace();
             }
 
-                try {
-                    TimeUnit.SECONDS.sleep(5);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            try {
+                TimeUnit.SECONDS.sleep(5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
-          //  } catch (Exception e) {
+            //  } catch (Exception e) {
             //    Log.e("saveToExternalStorage()", e.getMessage());
             //}
 
@@ -348,9 +341,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         wakeLock.acquire();
 
 
-
-
-
         //    super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -406,7 +396,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     protected void onPause() {
         super.onPause();
-       // releaseCamera();
+        // releaseCamera();
         Log.d(LOG_TAG, "MainActivity: onPause");
     }
 
@@ -554,13 +544,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                         fb.MakeInternetConnection(getApplicationContext(), h);
 
                         for (int i = 1; i <= 1000; i++) {
+                            fb.LoadData(h);
 
                             if (fb.getstatus() == 3) {
                                 fb.SendMessage(h, "Фотобот остановлен");
                                 return;
                             }
 
-                          //  fb.fbpause(h, 5);
+                            //  fb.fbpause(h, 5);
                             /*
                             try {
                                 FileOutputStream fileout = openFileOutput("mytextfile.txt", MODE_PRIVATE | MODE_APPEND);
@@ -735,7 +726,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     }
 
 
-        private void releaseCamera() {
+    private void releaseCamera() {
         if (mCamera != null) {
             mCamera.stopPreview();
             mCamera.release();

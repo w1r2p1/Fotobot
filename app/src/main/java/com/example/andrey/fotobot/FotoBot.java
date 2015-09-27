@@ -2,6 +2,7 @@ package com.example.andrey.fotobot;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
@@ -19,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 import static android.os.Environment.getExternalStoragePublicDirectory;
 
 public class FotoBot extends Application {
-//Global variables
+    //Global variables
     public int Update;
     public boolean Use_WiFi, Use_Mobile_Data;
     public boolean Use_Flash;
@@ -124,7 +125,7 @@ public class FotoBot extends Application {
 
         }
 
-        if ( !(isOnline(h) && getData(h)) && wf_connect_attempt) {
+        if (!(isOnline(h) && getData(h)) && wf_connect_attempt) {
             SendMessage(h, "По Wi-Fi нет связи,\nвключаем Mobile Data");
             wf.setWiFiEnabled(getApplicationContext(), false);
             fbpause(h, 5);
@@ -176,7 +177,7 @@ public class FotoBot extends Application {
         msg.sendToTarget(); //Send the message
     }
 
-    public void SendMail (Handler h, String str) {
+    public void SendMail(Handler h, String str) {
         Mail m = new Mail("fotobotmail@gmail.com", "fotobotmailpasswd");
 
         String[] toArr = {"digibolt@mail.ru"};
@@ -186,13 +187,13 @@ public class FotoBot extends Application {
         m.setBody("Email body.");
         SendMessage(h, "SendMail" + str);
         str = getApplicationContext().getFilesDir().toString() + "/" + str;
-      //  str = Environment.getExternalStorageDirectory().getAbsolutePath().toString() + "/fotobot.jpg";;
+        //  str = Environment.getExternalStorageDirectory().getAbsolutePath().toString() + "/fotobot.jpg";;
 
         SendMessage(h, "SendMail with file path:" + str);
 
         File attach_file;
         attach_file = new File(str);
-        boolean fileExists =  attach_file.isFile();
+        boolean fileExists = attach_file.isFile();
 
         if (fileExists) {
 
@@ -212,14 +213,14 @@ public class FotoBot extends Application {
             }
 
 
-            if(m.send()) {
+            if (m.send()) {
                 //  Toast.makeText(MailApp.this, "Email was sent successfully.", Toast.LENGTH_LONG).show();
                 SendMessage(h, "Email was sent successfully.");
             } else {
                 // Toast.makeText(MailApp.this, "Email was not sent.", Toast.LENGTH_LONG).show();
                 SendMessage(h, "Email was not sent.");
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             //Toast.makeText(MailApp.this, "There was a problem sending the email.", Toast.LENGTH_LONG).show();
             SendMessage(h, "Could not send email");
             Log.e("MailApp", "Could not send email", e);
@@ -234,7 +235,26 @@ public class FotoBot extends Application {
         return false;
     }
 
-    public File getFolder(){
+    public File getFolder() {
         return getExternalStoragePublicDirectory(null);
     }
+
+    public void LoadData(Handler h) {
+        /******* Create SharedPreferences *******/
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+
+        Use_WiFi = pref.getBoolean("Use_WiFi", true);         // getting boolean
+        SendMessage(h, "LoadData: Use_WiFi " + Use_WiFi);
+        Use_Mobile_Data = pref.getBoolean("Use_Mobile_Data", true);         // getting boolean
+        SendMessage(h, "LoadData: Use_Mobile_Data " + Use_Mobile_Data);
+        Use_Flash = pref.getBoolean("Use_Flash", true);
+        SendMessage(h, "LoadData: Use_Flash " + Use_Flash);
+        JPEG_Compression = pref.getInt("JPEG_Compression", 50);
+        SendMessage(h, "LoadData: JPEG_Compression " + JPEG_Compression);
+
+    }
 }
+
+
