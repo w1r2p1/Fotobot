@@ -1,44 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:weightSum="1">
 
     <CheckBox
+        android:id="@+id/checkBox_Flash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Использовать вспышку"
-        android:id="@+id/checkBox_Flah" />
+        android:text="Использовать вспышку" />
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:orientation="horizontal">
 
         <EditText
+            android:id="@+id/editText_JPEG_Compression"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:inputType="number"
             android:ems="10"
-            android:id="@+id/editText2" />
+            android:inputType="number" />
 
         <TextView
+            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="JPEG сжатие"
-            android:id="@+id/textView2" />
-
-
-
+            android:text="JPEG сжатие" />
 
     </LinearLayout>
+
     <Button
+        android:id="@+id/button_Applay_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Применить"
-        android:id="@+id/button2"
-        android:layout_gravity="bottom|center_horizontal" />
+        android:layout_gravity="bottom|center_horizontal"
+        android:onClick="Apply"
+        android:text="Применить" />
 </LinearLayout>

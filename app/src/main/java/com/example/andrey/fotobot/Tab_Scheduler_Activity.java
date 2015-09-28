@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.EditText;
 
 
@@ -15,10 +14,12 @@ public class Tab_Scheduler_Activity  extends Activity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tab_main);
+        setContentView(R.layout.tab_scheduler);
     }
 
     public void Apply(View v) {
+
+        edit_text_photo_frequency = (EditText) findViewById(R.id.editText_photo_frequency);
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();

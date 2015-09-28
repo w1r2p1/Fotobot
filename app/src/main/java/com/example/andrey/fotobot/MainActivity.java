@@ -119,6 +119,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     Camera.PictureCallback mCall = new Camera.PictureCallback() {
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
+            final FotoBot fb = (FotoBot) getApplicationContext();
+            fb.LoadData(h);
 
             PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
             PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
@@ -158,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             Log.d(LOG_TAG, "***** BitmapFactory.decodeByteArray(data,0,data.length,options) done " + getUsedMemorySize());
 
             try {
-                TimeUnit.SECONDS.sleep(9);
+                TimeUnit.SECONDS.sleep(5);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -568,6 +570,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             AudioManager mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                             mgr.setStreamMute(AudioManager.STREAM_SYSTEM, true);
 
+/*
 if (fb.Use_Flash) {
     mCamera.stopPreview();
     Camera.Parameters parameters = mCamera.getParameters();
@@ -581,13 +584,14 @@ if (fb.Use_Flash) {
 
     fb.fbpause(h, 5);
 }
-
+*/
                             mCamera.takePicture(null, null, mCall);
                             fb.SendMessage(h, "Picture has been taken");
 
 
                             fb.fbpause(h, 5);
 
+/*
                             if (fb.Use_Flash) {
                                 mCamera.stopPreview();
 
@@ -616,6 +620,7 @@ if (fb.Use_Flash) {
 
                                 fb.SendMessage(h, "setParameters");
                             }
+*/
 
                             mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                             fb.SendMessage(h, "Context.AUDIO_SERVICE");

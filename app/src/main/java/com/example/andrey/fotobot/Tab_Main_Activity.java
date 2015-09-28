@@ -3,13 +3,9 @@ package com.example.andrey.fotobot;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.widget.TextViewCompat;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 public class Tab_Main_Activity extends Activity {
 
@@ -23,7 +19,8 @@ public class Tab_Main_Activity extends Activity {
     }
 
     public void Apply(View v) {
-        check_box_flash = (CheckBox) findViewById(R.id.checkBox_Flah);
+        check_box_flash = (CheckBox) findViewById(R.id.checkBox_Flash);
+        edit_text_jpeg_compression = (EditText) findViewById(R.id.editText_JPEG_Compression);
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
