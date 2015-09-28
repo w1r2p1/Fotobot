@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             Log.d(LOG_TAG, "***** fotobot.jpg is created) done " + getUsedMemorySize());
 
 // 100 means no compression, the lower you go, the stronger the compression
-            bmp.compress(Bitmap.CompressFormat.JPEG, 90, fOut);
+            bmp.compress(Bitmap.CompressFormat.JPEG, fb.JPEG_Compression, fOut);
 
             Log.d(LOG_TAG, "***** bmp.compress(Bitmap.CompressFormat.JPEG, 50, fOut); " + getUsedMemorySize());
 
@@ -568,19 +568,19 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             AudioManager mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                             mgr.setStreamMute(AudioManager.STREAM_SYSTEM, true);
 
-/* ***** Start Flash
-                            mCamera.stopPreview();
-                            Camera.Parameters parameters = mCamera.getParameters();
-                            try {
-                                parameters.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
-                            }  catch (Exception e){
-                                fb.SendMessage(h, "Camera.Parameters.FLASH_MODE_ON error");
-                        }
-                            mCamera.setParameters(parameters);
-                            mCamera.startPreview();
+if (fb.Use_Flash) {
+    mCamera.stopPreview();
+    Camera.Parameters parameters = mCamera.getParameters();
+    try {
+        parameters.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
+    } catch (Exception e) {
+        fb.SendMessage(h, "Camera.Parameters.FLASH_MODE_ON error");
+    }
+    mCamera.setParameters(parameters);
+    mCamera.startPreview();
 
-                            fb.fbpause(h, 5);
-*/
+    fb.fbpause(h, 5);
+}
 
                             mCamera.takePicture(null, null, mCall);
                             fb.SendMessage(h, "Picture has been taken");
@@ -588,34 +588,34 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             fb.fbpause(h, 5);
 
-/* ***** Stop Flash
-                            mCamera.stopPreview();
+                            if (fb.Use_Flash) {
+                                mCamera.stopPreview();
 
 
-                            fb.fbpause(h, 5);
+                                fb.fbpause(h, 5);
 
-                            fb.SendMessage(h, "Preview has been stopped");
+                                fb.SendMessage(h, "Preview has been stopped");
 
-                            parameters = mCamera.getParameters();
-                            fb.SendMessage(h, "getParameters");
-                            fb.fbpause(h, 1);
+                                parameters = mCamera.getParameters();
+                                fb.SendMessage(h, "getParameters");
+                                fb.fbpause(h, 1);
 
-                            try {
-                            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-                            }  catch (Exception e){
-                                fb.SendMessage(h, "Camera.Parameters.FLASH_MODE_OFF error");
+                                try {
+                                    parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+                                } catch (Exception e) {
+                                    fb.SendMessage(h, "Camera.Parameters.FLASH_MODE_OFF error");
+                                }
+
+                                fb.SendMessage(h, "FLASH_MODE_OFF");
+                                fb.fbpause(h, 1);
+                                try {
+                                    mCamera.setParameters(parameters);
+                                } catch (Exception e) {
+                                    fb.SendMessage(h, "setParameters error");
+                                }
+
+                                fb.SendMessage(h, "setParameters");
                             }
-
-                            fb.SendMessage(h, "FLASH_MODE_OFF");
-                            fb.fbpause(h, 1);
-                            try {
-                            mCamera.setParameters(parameters);
-                            }  catch (Exception e){
-                                fb.SendMessage(h, "setParameters error");
-                            }
-
-                            fb.SendMessage(h, "setParameters");
-*/
 
                             mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                             fb.SendMessage(h, "Context.AUDIO_SERVICE");
@@ -627,7 +627,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             fb.SendMessage(h, "fb.SendMail: mail sent");
 //                        fb.CloseInternetConnection(getApplicationContext(), h);
 
-                            fb.fbpause(h, 60);
+                            fb.fbpause(h, fb.Photo_Frequency);
 
                         }
                     }

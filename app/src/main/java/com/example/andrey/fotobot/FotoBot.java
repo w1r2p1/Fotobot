@@ -25,6 +25,7 @@ public class FotoBot extends Application {
     public boolean Use_WiFi, Use_Mobile_Data;
     public boolean Use_Flash;
     public int JPEG_Compression;
+    public int Photo_Frequency;
     public String EMail_Sender, EMail_Sender_Password, EMail_Recepient;
     public int status = 1;
 
@@ -253,6 +254,8 @@ public class FotoBot extends Application {
         SendMessage(h, "LoadData: Use_Flash " + Use_Flash);
         JPEG_Compression = pref.getInt("JPEG_Compression", 50);
         SendMessage(h, "LoadData: JPEG_Compression " + JPEG_Compression);
+        Photo_Frequency = pref.getInt("Photo_Frequency", 60);
+        SendMessage(h, "LoadData: Photo_Frequency " + Photo_Frequency);
 
     }
 }
