@@ -1,11 +1,15 @@
 package com.example.andrey.fotobot;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class Tab_Main_Activity extends Activity {
 
@@ -15,8 +19,47 @@ public class Tab_Main_Activity extends Activity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tab_main);
-    }
+
+        LinearLayout LLV = new LinearLayout(this);
+        LLV.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout.LayoutParams LLParamsV = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        LinearLayout LLH = new LinearLayout(this);
+        LLV.setOrientation(LinearLayout.HORIZONTAL);
+        LinearLayout.LayoutParams LLParamsH = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        TextView tv = new TextView(this);
+        tv.setText("TextView");
+      //  tv.setLayoutParams(lpView);
+
+        LLV.addView(tv);
+
+
+
+
+
+
+        Button btn = new Button(this);
+        btn.setText("Button");
+        LLV.addView(btn, LLParamsV);
+
+
+
+
+        // устанавливаем linLayout как корневой элемент экрана
+        setContentView(LLV, LLParamsV);
+
+
+
+        //LinearLayout.LayoutParams ladderFLParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 0);
+        //ladderFLParams.weight = 5f;
+        //LinearLayout.LayoutParams dummyParams = new LinearLayout.LayoutParams(0,0);
+        //dummyParams.weight = 1f;
+
+
+        //setContentView(R.layout.tab_main);
+
+        }
 
     public void Apply(View v) {
         check_box_flash = (CheckBox) findViewById(R.id.checkBox_Flash);
@@ -39,5 +82,10 @@ public class Tab_Main_Activity extends Activity {
         editor.commit(); // commit changes
 
     }
-
+    /** Called when the user clicks the Settings button */
+    public void showMain(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        //   intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 }
