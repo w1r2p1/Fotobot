@@ -2,10 +2,10 @@ package com.example.andrey.fotobot;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -21,35 +21,58 @@ public class Tab_Main_Activity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-// создание LinearLayout
-        LinearLayout linLayout = new LinearLayout(this);
-        // установим вертикальную ориентацию
-        linLayout.setOrientation(LinearLayout.VERTICAL);
-        // создаем LayoutParams
-        LinearLayout.LayoutParams linLayoutParam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        // устанавливаем linLayout как корневой элемент экрана
-        setContentView(linLayout, linLayoutParam);
+// Main Container (Vertical LinearLayout)
+        LinearLayout FullFrame = new LinearLayout(this);
+        FullFrame.setOrientation(LinearLayout.VERTICAL);
+        setContentView(FullFrame);
 
+// First Container (Horizontal LinearLayout)
+        LinearLayout linLayout1 = new LinearLayout(this);
+        linLayout1.setOrientation(LinearLayout.HORIZONTAL);
+//        LinearLayout.LayoutParams linLayoutParam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         LinearLayout.LayoutParams lpView = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams lpView_et = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
+// Second Container (Horizontal LinearLayout)
+        LinearLayout linLayout2 = new LinearLayout(this);
+        linLayout2.setOrientation(LinearLayout.HORIZONTAL);
+        LinearLayout.LayoutParams lpView2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        LinearLayout.LayoutParams lpViewbutton = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        //linLayout2.setBackgroundColor(Color.parseColor("#0000ff"));
+        linLayout2.setGravity(Gravity.BOTTOM|Gravity.CENTER);
+        linLayout2.setLayoutParams(lpView2);
+
+// TextView
         TextView tv = new TextView(this);
         tv.setText("JPEG Compression");
+        tv.setWidth(198);
         tv.setLayoutParams(lpView);
-        linLayout.addView(tv);
+        linLayout1.addView(tv);
 
+// EditText
         EditText et = new EditText(this);
-        et.setLayoutParams(lpView);
-        linLayout.addView(et);
+        et.setLayoutParams(lpView_et);
+        et.setText("90");
+        ViewGroup.LayoutParams lp = et.getLayoutParams();
+        lp.width = 40;
+        et.setLayoutParams(lp);
+        et.setGravity(Gravity.RIGHT);
+        linLayout1.addView(et);
 
+// Button
         Button btn = new Button(this);
         btn.setText("Применить");
-        linLayout.addView(btn, lpView);
+        btn.setGravity(Gravity.BOTTOM);
+        linLayout2.addView(btn, lpViewbutton);
 
 
-        LinearLayout.LayoutParams leftMarginParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        leftMarginParams.gravity = Gravity.BOTTOM;
-        leftMarginParams.leftMargin = 50;
+        FullFrame.addView(linLayout1);
+        FullFrame.addView(linLayout2);
+
+//        LinearLayout.LayoutParams leftMarginParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+//       leftMarginParams.gravity = Gravity.BOTTOM;
+      //  leftMarginParams.leftMargin = 50;
 
 /*
 
@@ -82,7 +105,7 @@ public class Tab_Main_Activity extends Activity {
         }
 
     public void Apply(View v) {
-        check_box_flash = (CheckBox) findViewById(R.id.checkBox_Flash);
+/*        check_box_flash = (CheckBox) findViewById(R.id.checkBox_Flash);
         edit_text_jpeg_compression = (EditText) findViewById(R.id.editText_JPEG_Compression);
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
@@ -100,7 +123,7 @@ public class Tab_Main_Activity extends Activity {
 
 // Save the changes in SharedPreferences
         editor.commit(); // commit changes
-
+*/
     }
     /** Called when the user clicks the Settings button */
     public void showMain(View view) {
