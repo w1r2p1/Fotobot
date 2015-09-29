@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -20,34 +21,53 @@ public class Tab_Main_Activity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        LinearLayout LLV = new LinearLayout(this);
-        LLV.setOrientation(LinearLayout.VERTICAL);
-        LinearLayout.LayoutParams LLParamsV = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+// создание LinearLayout
+        LinearLayout linLayout = new LinearLayout(this);
+        // установим вертикальную ориентацию
+        linLayout.setOrientation(LinearLayout.VERTICAL);
+        // создаем LayoutParams
+        LinearLayout.LayoutParams linLayoutParam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        // устанавливаем linLayout как корневой элемент экрана
+        setContentView(linLayout, linLayoutParam);
 
-        LinearLayout LLH = new LinearLayout(this);
-        LLV.setOrientation(LinearLayout.HORIZONTAL);
-        LinearLayout.LayoutParams LLParamsH = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams lpView = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
         TextView tv = new TextView(this);
-        tv.setText("TextView");
-      //  tv.setLayoutParams(lpView);
+        tv.setText("JPEG Compression");
+        tv.setLayoutParams(lpView);
+        linLayout.addView(tv);
 
-        LLV.addView(tv);
-
-
-
-
-
+        EditText et = new EditText(this);
+        et.setLayoutParams(lpView);
+        linLayout.addView(et);
 
         Button btn = new Button(this);
-        btn.setText("Button");
-        LLV.addView(btn, LLParamsV);
+        btn.setText("Применить");
+        linLayout.addView(btn, lpView);
 
 
+        LinearLayout.LayoutParams leftMarginParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        leftMarginParams.gravity = Gravity.BOTTOM;
+        leftMarginParams.leftMargin = 50;
+
+/*
+
+        Button btn1 = new Button(this);
+        btn1.setText("Button1");
+        linLayout.addView(btn1, leftMarginParams);
 
 
-        // устанавливаем linLayout как корневой элемент экрана
-        setContentView(LLV, LLParamsV);
+        LinearLayout.LayoutParams rightGravityParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        rightGravityParams.gravity = Gravity.RIGHT;
+
+        Button btn2 = new Button(this);
+        btn2.setText("Button2");
+        linLayout.addView(btn2, rightGravityParams);
+
+*/
+
 
 
 
