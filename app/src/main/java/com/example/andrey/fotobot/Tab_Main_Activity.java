@@ -20,6 +20,7 @@ public class Tab_Main_Activity extends Activity {
     private CheckBox check_box_flash;
     private EditText edit_text_jpeg_compression;
     private int screenWidth, screenHeight;
+    private int padding=15;
     CheckBox checkBox_Flash;
     EditText editText_JPEG_Compression;
 
@@ -33,6 +34,7 @@ public class Tab_Main_Activity extends Activity {
 // Main Container (Vertical LinearLayout)
         LinearLayout FullFrame = new LinearLayout(this);
         FullFrame.setOrientation(LinearLayout.VERTICAL);
+        FullFrame.setPadding(5,padding,0,0);
         setContentView(FullFrame);
 
 // First Container (Horizontal LinearLayout)
@@ -62,14 +64,14 @@ public class Tab_Main_Activity extends Activity {
 // TextView
         TextView tv = new TextView(this);
         tv.setText("JPEG Compression");
-        tv.setWidth(screenWidth/100*90);
+        tv.setWidth((screenWidth-padding)/100*90);
         tv.setLayoutParams(lpView);
         linLayout1.addView(tv);
 
 // Flash TextView
         TextView tv_Flash = new TextView(this);
         tv_Flash.setText("Use Flash");
-        tv_Flash.setWidth(screenWidth/100*98);
+        tv_Flash.setWidth((screenWidth-padding)/100*99);
         tv_Flash.setLayoutParams(lpView_Flash);
         linLayout_Flash.addView(tv_Flash);
 
@@ -82,7 +84,7 @@ public class Tab_Main_Activity extends Activity {
         editText_JPEG_Compression.setLayoutParams(lpView_et);
         editText_JPEG_Compression.setText("90");
         ViewGroup.LayoutParams lp = editText_JPEG_Compression.getLayoutParams();
-        lp.width = screenWidth-screenWidth/100*90;
+        lp.width = (screenWidth-padding)-((screenWidth-padding)/100*90);
         editText_JPEG_Compression.setLayoutParams(lp);
         editText_JPEG_Compression.setGravity(Gravity.RIGHT);
         linLayout1.addView(editText_JPEG_Compression);
@@ -92,7 +94,25 @@ public class Tab_Main_Activity extends Activity {
         btn.setText("Применить");
         btn.setGravity(Gravity.BOTTOM);
 
+        btn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
 
+                if (checkBox_Flash.isChecked()) {
+                    editor.putBoolean("Use_Flash", true);
+                } else {
+                    editor.putBoolean("Use_Flash", false);
+                }
+
+                String input = editText_JPEG_Compression.getText().toString();
+
+                editor.putInt("JPEG_Compression", Integer.parseInt(editText_JPEG_Compression.getText().toString()));
+
+// Save the changes in SharedPreferences
+                editor.commit(); // commit changes
+            }
+        });
 
 
 
