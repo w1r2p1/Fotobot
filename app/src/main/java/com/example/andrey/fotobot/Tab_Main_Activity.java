@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 //public class Tab_Main_Activity extends AppCompatActivity {
-    public class Tab_Main_Activity extends Activity {
+public class Tab_Main_Activity extends Activity {
 
     final String LOG_NETWORK_ACTIVITY = "Logs";
     private CheckBox check_box_flash;
@@ -115,7 +115,6 @@ import android.widget.TextView;
             }
         });
 
-
 // GoTo Main Page Button
         Button btn_mp = new Button(this);
         btn_mp.setText("На главную");
@@ -129,7 +128,6 @@ import android.widget.TextView;
             }
         });
 
-
         linLayout2.addView(btn, lpViewbutton);
         linLayout2.addView(btn_mp, lpViewbutton);
 
@@ -137,8 +135,6 @@ import android.widget.TextView;
         FullFrame.addView(linLayout_Flash);
         FullFrame.addView(linLayout2);
 
-
     }
-
 
 }
