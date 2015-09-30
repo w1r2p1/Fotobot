@@ -1,9 +1,9 @@
 package com.example.andrey.fotobot;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
@@ -14,13 +14,13 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class Tab_Main_Activity extends Activity {
+public class Tab_Main_Activity extends AppCompatActivity {
 
     final String LOG_NETWORK_ACTIVITY = "Logs";
     private CheckBox check_box_flash;
     private EditText edit_text_jpeg_compression;
     private int screenWidth, screenHeight;
-    private int padding=15;
+    private int padding = 15;
     CheckBox checkBox_Flash;
     EditText editText_JPEG_Compression;
 
@@ -34,7 +34,7 @@ public class Tab_Main_Activity extends Activity {
 // Main Container (Vertical LinearLayout)
         LinearLayout FullFrame = new LinearLayout(this);
         FullFrame.setOrientation(LinearLayout.VERTICAL);
-        FullFrame.setPadding(5,padding,0,0);
+        FullFrame.setPadding(5, padding, 0, 0);
         setContentView(FullFrame);
 
 // First Container (Horizontal LinearLayout)
@@ -58,20 +58,20 @@ public class Tab_Main_Activity extends Activity {
         LinearLayout.LayoutParams lpViewbutton = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
 //        linLayout2.setBackgroundColor(Color.parseColor("#0000ff"));
-        linLayout2.setGravity(Gravity.BOTTOM|Gravity.CENTER);
+        linLayout2.setGravity(Gravity.BOTTOM | Gravity.CENTER);
         linLayout2.setLayoutParams(lpView2);
 
 // TextView
         TextView tv = new TextView(this);
         tv.setText("JPEG Compression");
-        tv.setWidth((screenWidth-padding)/100*90);
+        tv.setWidth((screenWidth - padding) / 100 * 90);
         tv.setLayoutParams(lpView);
         linLayout1.addView(tv);
 
 // Flash TextView
         TextView tv_Flash = new TextView(this);
         tv_Flash.setText("Use Flash");
-        tv_Flash.setWidth((screenWidth-padding)/100*99);
+        tv_Flash.setWidth((screenWidth - padding) / 100 * 99);
         tv_Flash.setLayoutParams(lpView_Flash);
         linLayout_Flash.addView(tv_Flash);
 
@@ -84,12 +84,12 @@ public class Tab_Main_Activity extends Activity {
         editText_JPEG_Compression.setLayoutParams(lpView_et);
         editText_JPEG_Compression.setText("90");
         ViewGroup.LayoutParams lp = editText_JPEG_Compression.getLayoutParams();
-        lp.width = (screenWidth-padding)-((screenWidth-padding)/100*90);
+        lp.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 90);
         editText_JPEG_Compression.setLayoutParams(lp);
         editText_JPEG_Compression.setGravity(Gravity.RIGHT);
         linLayout1.addView(editText_JPEG_Compression);
 
-// Button
+// Apply Button
         Button btn = new Button(this);
         btn.setText("Применить");
         btn.setGravity(Gravity.BOTTOM);
@@ -115,74 +115,29 @@ public class Tab_Main_Activity extends Activity {
         });
 
 
+// GoTo Main Page Button
+        Button btn_mp = new Button(this);
+        btn_mp.setText("На главную");
+        btn_mp.setGravity(Gravity.BOTTOM);
+
+        btn_mp.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent;
+                intent = new Intent(v.getContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         linLayout2.addView(btn, lpViewbutton);
-
+        linLayout2.addView(btn_mp, lpViewbutton);
 
         FullFrame.addView(linLayout1);
         FullFrame.addView(linLayout_Flash);
         FullFrame.addView(linLayout2);
 
-//        LinearLayout.LayoutParams leftMarginParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-//       leftMarginParams.gravity = Gravity.BOTTOM;
-      //  leftMarginParams.leftMargin = 50;
-
-/*
-
-        Button btn1 = new Button(this);
-        btn1.setText("Button1");
-        linLayout.addView(btn1, leftMarginParams);
-
-
-        LinearLayout.LayoutParams rightGravityParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        rightGravityParams.gravity = Gravity.RIGHT;
-
-        Button btn2 = new Button(this);
-        btn2.setText("Button2");
-        linLayout.addView(btn2, rightGravityParams);
-
-*/
-
-
-
-
-        //LinearLayout.LayoutParams ladderFLParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 0);
-        //ladderFLParams.weight = 5f;
-        //LinearLayout.LayoutParams dummyParams = new LinearLayout.LayoutParams(0,0);
-        //dummyParams.weight = 1f;
-
-
-        //setContentView(R.layout.tab_main);
-
-        }
-
-    public void Apply(View v) {
-    //    check_box_flash = (CheckBox) findViewById(R.id.checkBox_Flash);
-    //    edit_text_jpeg_compression = (EditText) findViewById(R.id.editText_JPEG_Compression);
-
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-
-        if (check_box_flash.isChecked()) {
-            editor.putBoolean("Use_Flash", true);
-        } else {
-            editor.putBoolean("Use_Flash", false);
-        }
-
-        String input = edit_text_jpeg_compression.getText().toString();
-
-        editor.putInt("JPEG_Compression", Integer.parseInt(edit_text_jpeg_compression.getText().toString()));
-
-// Save the changes in SharedPreferences
-        editor.commit(); // commit changes
 
     }
-    /** Called when the user clicks the Settings button */
-    public void showMain(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        //   intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-    }
+
+
 }
