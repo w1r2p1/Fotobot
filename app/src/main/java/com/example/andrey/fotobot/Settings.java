@@ -28,19 +28,23 @@ public class Settings extends TabActivity {
         setContentView(R.layout.main);
 
         setupTabHost();
-        mTabHost.getTabWidget().setDividerDrawable(R.drawable.tab_divider);
 
-      //  setupTab(new TextView(this), "Главная");
+        mTabHost.getTabWidget().setDividerDrawable(R.drawable.tab_divider);
+// Главная
         View view = LayoutInflater.from(mTabHost.getContext()).inflate(R.layout.tabs_bg, null);
         TextView tv = (TextView) view.findViewById(R.id.tabsText);
         tv.setText("Главная");
         Intent intent = new Intent(this, Tab_Main_Activity.class);
-        View tabview = createTabView(mTabHost.getContext(), "Главная");
-        TabHost.TabSpec spec = mTabHost.newTabSpec("Tab One").setIndicator(tabview).setContent(intent);
+        TabHost.TabSpec spec = mTabHost.newTabSpec("Tab1").setIndicator(view).setContent(intent);
         mTabHost.addTab(spec);
+// Сеть
+        View view2 = LayoutInflater.from(mTabHost.getContext()).inflate(R.layout.tabs_bg, null);
+        TextView tv2 = (TextView) view.findViewById(R.id.tabsText);
+        tv2.setText("Сеть");
+        intent = new Intent(this, Tab_Network_Activity.class);
+        TabHost.TabSpec spec2 = mTabHost.newTabSpec("Tab2").setIndicator(view2).setContent(intent);
+        mTabHost.addTab(spec2);
 
-
-        setupTab(new TextView(this), "Сеть");
         setupTab(new TextView(this), "График");
 
     }
