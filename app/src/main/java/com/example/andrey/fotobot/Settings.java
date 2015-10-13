@@ -1,7 +1,6 @@
 package com.example.andrey.fotobot;
 
 import android.app.TabActivity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,7 +28,7 @@ public class Settings extends TabActivity {
 
         setupTabHost();
 
-        mTabHost.getTabWidget().setDividerDrawable(R.drawable.tab_divider);
+     //   mTabHost.getTabWidget().setDividerDrawable(R.drawable.tab_divider);
 // Главная
         View view = LayoutInflater.from(mTabHost.getContext()).inflate(R.layout.tabs_bg, null);
         TextView tv = (TextView) view.findViewById(R.id.tabsText);
@@ -39,17 +38,22 @@ public class Settings extends TabActivity {
         mTabHost.addTab(spec);
 // Сеть
         View view2 = LayoutInflater.from(mTabHost.getContext()).inflate(R.layout.tabs_bg, null);
-        TextView tv2 = (TextView) view.findViewById(R.id.tabsText);
+        TextView tv2 = (TextView) view2.findViewById(R.id.tabsText);
         tv2.setText("Сеть");
         intent = new Intent(this, Tab_Network_Activity.class);
         TabHost.TabSpec spec2 = mTabHost.newTabSpec("Tab2").setIndicator(view2).setContent(intent);
         mTabHost.addTab(spec2);
-
-        setupTab(new TextView(this), "График");
+//График
+        View view3 = LayoutInflater.from(mTabHost.getContext()).inflate(R.layout.tabs_bg, null);
+        TextView tv3 = (TextView) view3.findViewById(R.id.tabsText);
+        tv3.setText("График");
+        intent = new Intent(this, Tab_Scheduler_Activity.class);
+        TabHost.TabSpec spec3 = mTabHost.newTabSpec("Tab3").setIndicator(view3).setContent(intent);
+        mTabHost.addTab(spec3);
 
     }
 
-    private void setupTab(final View view, final String tag) {
+ /*   private void setupTab(final View view, final String tag) {
         View tabview = createTabView(mTabHost.getContext(), tag);
 
         TabHost.TabSpec setContent = mTabHost.newTabSpec(tag).setIndicator(tabview).setContent(new TabHost.TabContentFactory() {
@@ -65,7 +69,7 @@ public class Settings extends TabActivity {
         tv.setText(text);
         return view;
     }
-
+*/
 
 
 
