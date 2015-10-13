@@ -34,10 +34,10 @@ public class Settings extends TabActivity {
         View view = LayoutInflater.from(mTabHost.getContext()).inflate(R.layout.tabs_bg, null);
         TextView tv = (TextView) view.findViewById(R.id.tabsText);
         tv.setText("Главная");
+        Intent intent = new Intent(this, Tab_Main_Activity.class);
         View tabview = createTabView(mTabHost.getContext(), "Главная");
-        TabHost.TabSpec tabSpec;
-        tabSpec.setContent(new Intent(this, Tab_Main_Activity.class));
-        mTabHost.addTab(setContent);
+        TabHost.TabSpec spec = mTabHost.newTabSpec("Tab One").setIndicator(tabview).setContent(intent);
+        mTabHost.addTab(spec);
 
 
         setupTab(new TextView(this), "Сеть");
