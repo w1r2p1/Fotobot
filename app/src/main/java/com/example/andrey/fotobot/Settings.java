@@ -2,6 +2,7 @@ package com.example.andrey.fotobot;
 
 import android.app.TabActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +30,16 @@ public class Settings extends TabActivity {
         setupTabHost();
         mTabHost.getTabWidget().setDividerDrawable(R.drawable.tab_divider);
 
-        setupTab(new TextView(this), "Главная");
+      //  setupTab(new TextView(this), "Главная");
+        View view = LayoutInflater.from(mTabHost.getContext()).inflate(R.layout.tabs_bg, null);
+        TextView tv = (TextView) view.findViewById(R.id.tabsText);
+        tv.setText("Главная");
+        View tabview = createTabView(mTabHost.getContext(), "Главная");
+        TabHost.TabSpec tabSpec;
+        tabSpec.setContent(new Intent(this, Tab_Main_Activity.class));
+        mTabHost.addTab(setContent);
+
+
         setupTab(new TextView(this), "Сеть");
         setupTab(new TextView(this), "График");
 
