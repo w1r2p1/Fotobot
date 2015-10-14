@@ -43,10 +43,10 @@ public class Settings extends TabActivity {
         intent = new Intent(this, Tab_Network_Activity.class);
         TabHost.TabSpec spec2 = mTabHost.newTabSpec("Tab2").setIndicator(view2).setContent(intent);
         mTabHost.addTab(spec2);
-//График
+//Фото
         View view3 = LayoutInflater.from(mTabHost.getContext()).inflate(R.layout.tabs_bg, null);
         TextView tv3 = (TextView) view3.findViewById(R.id.tabsText);
-        tv3.setText("График");
+        tv3.setText("Фото");
         intent = new Intent(this, Tab_Scheduler_Activity.class);
         TabHost.TabSpec spec3 = mTabHost.newTabSpec("Tab3").setIndicator(view3).setContent(intent);
         mTabHost.addTab(spec3);

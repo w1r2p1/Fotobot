@@ -27,6 +27,9 @@ public class FotoBot extends Application {
     public int JPEG_Compression;
     public int Photo_Frequency;
     public String EMail_Sender, EMail_Sender_Password, EMail_Recepient;
+    public String Network_Channel;
+    public String Network_Connection_Method;
+
     public int status = 1;
 
     public SurfaceHolder holder;

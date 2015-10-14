@@ -3,6 +3,8 @@ package com.example.andrey.fotobot;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.Gravity;
@@ -34,6 +36,7 @@ public class Tab_Main_Activity extends Activity {
 
 // Main Container (Vertical LinearLayout)
         LinearLayout FullFrame = new LinearLayout(this);
+        FullFrame.setBackgroundColor(Color.parseColor("#3f4b4d"));
         FullFrame.setOrientation(LinearLayout.VERTICAL);
         FullFrame.setPadding(5, padding, 0, 0);
         setContentView(FullFrame);
@@ -64,21 +67,27 @@ public class Tab_Main_Activity extends Activity {
 
 // TextView
         TextView tv = new TextView(this);
-        tv.setText("JPEG Compression");
+        tv.setText("Интервал между фото(сек)");
         tv.setWidth((screenWidth - padding) / 100 * 90);
         tv.setLayoutParams(lpView);
+        tv.setTypeface(Typeface.DEFAULT_BOLD);
+        tv.setTextSize(14);
+        tv.setTextColor(Color.WHITE);
         linLayout1.addView(tv);
 
 // Flash TextView
         TextView tv_Flash = new TextView(this);
-        tv_Flash.setText("Use Flash");
+        tv_Flash.setText("Использовать вспышку");
         tv_Flash.setWidth((screenWidth - padding) / 100 * 99);
         tv_Flash.setLayoutParams(lpView_Flash);
-        linLayout_Flash.addView(tv_Flash);
+        tv_Flash.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Flash.setTextSize(14);
+        tv_Flash.setTextColor(Color.WHITE);
+      //  linLayout_Flash.addView(tv_Flash);
 
 // CheckBox
         checkBox_Flash = new CheckBox(this);
-        linLayout_Flash.addView(checkBox_Flash);
+      //  linLayout_Flash.addView(checkBox_Flash);
 
 // EditText
         editText_JPEG_Compression = new EditText(this);
@@ -88,6 +97,7 @@ public class Tab_Main_Activity extends Activity {
         lp.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 90);
         editText_JPEG_Compression.setLayoutParams(lp);
         editText_JPEG_Compression.setGravity(Gravity.RIGHT);
+        editText_JPEG_Compression.setBackgroundColor(Color.parseColor("#92adb1"));
         linLayout1.addView(editText_JPEG_Compression);
 
 // Apply Button
@@ -108,7 +118,7 @@ public class Tab_Main_Activity extends Activity {
 
                 String input = editText_JPEG_Compression.getText().toString();
 
-                editor.putInt("JPEG_Compression", Integer.parseInt(editText_JPEG_Compression.getText().toString()));
+                editor.putInt("Update", Integer.parseInt(editText_JPEG_Compression.getText().toString()));
 
 // Save the changes in SharedPreferences
                 editor.commit(); // commit changes
