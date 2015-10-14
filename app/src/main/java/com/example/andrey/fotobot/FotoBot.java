@@ -18,18 +18,23 @@ import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
+/*! FotoBot
 
+ */
 public class FotoBot extends Application {
 
 //Global variables
-    public int Update;
-    public boolean Use_WiFi, Use_Mobile_Data;
-    public boolean Use_Flash;
-    public int JPEG_Compression;
+    public int Update; /**< Интервал фотографирования (в секундах) */
+    public boolean Use_WiFi, /**< Нужно ли использовать Wi-Fi для выхода в Internet */
+            Use_Mobile_Data; /**< Нужно ли использовать 3G (2G) для выхода в Internet */
+    public boolean Use_Flash; /**< Делать фото со вспышкой */
+    public int JPEG_Compression; /**< Степень JPEG сжатия */
     public int Photo_Frequency;
-    public String EMail_Sender, EMail_Sender_Password, EMail_Recepient;
+    public String EMail_Sender, /**< вспомогательная почта для отправки писем */
+            EMail_Sender_Password, /**< пароль для вспомогательной почты */
+            EMail_Recepient /**< кому отправлять письма с фотками */;
     public String Network_Channel;
-    public String Network_Connection_Method;
+    public String Network_Connection_Method; /**< Соединятся с Internet один раз или на каждом шаге*/
 //End Global variables
 
 
