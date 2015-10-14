@@ -20,7 +20,8 @@ import java.util.concurrent.TimeUnit;
 import static android.os.Environment.getExternalStoragePublicDirectory;
 
 public class FotoBot extends Application {
-    //Global variables
+
+//Global variables
     public int Update;
     public boolean Use_WiFi, Use_Mobile_Data;
     public boolean Use_Flash;
@@ -29,6 +30,8 @@ public class FotoBot extends Application {
     public String EMail_Sender, EMail_Sender_Password, EMail_Recepient;
     public String Network_Channel;
     public String Network_Connection_Method;
+//End Global variables
+
 
     public int status = 1;
 

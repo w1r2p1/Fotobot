@@ -570,7 +570,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             AudioManager mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                             mgr.setStreamMute(AudioManager.STREAM_SYSTEM, true);
 
-/*
+
 if (fb.Use_Flash) {
     mCamera.stopPreview();
     Camera.Parameters parameters = mCamera.getParameters();
@@ -584,14 +584,14 @@ if (fb.Use_Flash) {
 
     fb.fbpause(h, 5);
 }
-*/
+
                             mCamera.takePicture(null, null, mCall);
                             fb.SendMessage(h, "Picture has been taken");
 
 
                             fb.fbpause(h, 5);
 
-/*
+
                             if (fb.Use_Flash) {
                                 mCamera.stopPreview();
 
@@ -620,7 +620,11 @@ if (fb.Use_Flash) {
 
                                 fb.SendMessage(h, "setParameters");
                             }
-*/
+
+
+
+
+
 
                             mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                             fb.SendMessage(h, "Context.AUDIO_SERVICE");
@@ -632,7 +636,7 @@ if (fb.Use_Flash) {
                             fb.SendMessage(h, "fb.SendMail: mail sent");
 //                        fb.CloseInternetConnection(getApplicationContext(), h);
 
-                            fb.fbpause(h, fb.Photo_Frequency);
+                            fb.fbpause(h, fb.Update);
 
                         }
                     }

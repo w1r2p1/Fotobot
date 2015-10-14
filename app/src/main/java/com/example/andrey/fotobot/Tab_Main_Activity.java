@@ -36,7 +36,7 @@ public class Tab_Main_Activity extends Activity {
 
 // Main Container (Vertical LinearLayout)
         LinearLayout FullFrame = new LinearLayout(this);
-        FullFrame.setBackgroundColor(Color.parseColor("#3f4b4d"));
+  //      FullFrame.setBackgroundColor(Color.parseColor("#3f4b4d"));
         FullFrame.setOrientation(LinearLayout.VERTICAL);
         FullFrame.setPadding(5, padding, 0, 0);
         setContentView(FullFrame);
@@ -97,7 +97,7 @@ public class Tab_Main_Activity extends Activity {
         lp.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 90);
         editText_JPEG_Compression.setLayoutParams(lp);
         editText_JPEG_Compression.setGravity(Gravity.RIGHT);
-        editText_JPEG_Compression.setBackgroundColor(Color.parseColor("#92adb1"));
+     //   editText_JPEG_Compression.setBackgroundColor(Color.parseColor("#92adb1"));
         linLayout1.addView(editText_JPEG_Compression);
 
 // Apply Button
