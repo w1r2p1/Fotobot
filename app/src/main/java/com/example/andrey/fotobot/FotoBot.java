@@ -18,31 +18,31 @@ import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
-/*! FotoBot
 
+/**
+ * <h1>FotoBot</h1>
+ * Умеет делать фото порасписанию и отправлять на почту
  */
 public class FotoBot extends Application {
 
 //Global variables
-    public int Update; /**< Интервал фотографирования (в секундах) */
-    public boolean Use_WiFi, /**< Нужно ли использовать Wi-Fi для выхода в Internet */
-            Use_Mobile_Data; /**< Нужно ли использовать 3G (2G) для выхода в Internet */
-    public boolean Use_Flash; /**< Делать фото со вспышкой */
-    public int JPEG_Compression; /**< Степень JPEG сжатия */
+    public int Update;                      /** Интервал фотографирования (в секундах) */
+    public boolean Use_WiFi;                /** Нужно ли использовать Wi-Fi для выхода в Internet */
+    public boolean Use_Mobile_Data;         /** Нужно ли использовать 3G (2G) для выхода в Internet */
+    public boolean Use_Flash;               /** Делать фото со вспышкой */
+    public int JPEG_Compression;             /** Степень JPEG сжатия */
     public int Photo_Frequency;
-    public String EMail_Sender, /**< вспомогательная почта для отправки писем */
-            EMail_Sender_Password, /**< пароль для вспомогательной почты */
-            EMail_Recepient /**< кому отправлять письма с фотками */;
+    public String EMail_Sender;              /** вспомогательная почта для отправки писем */
+    public String EMail_Sender_Password;     /** пароль для вспомогательной почты */
+    public String EMail_Recepient;           /** кому отправлять письма с фотками */;
     public String Network_Channel;
-    public String Network_Connection_Method; /**< Соединятся с Internet один раз или на каждом шаге*/
+    public String Network_Connection_Method; /** Соединятся с Internet один раз или на каждом шаге*/
 //End Global variables
-
 
     public int status = 1;
 
     public SurfaceHolder holder;
     public String str = "";
-
 
     public int getstatus() {
 
@@ -64,8 +64,11 @@ public class FotoBot extends Application {
         str = fb_str;
     }
 
+    /**
+     * В конструкторе проводим инициализацию объекта посредством считывания всей свойств из SharedPreferences.
+     */
     public void FotoBot() {
-        Update = 300;
+        LoadData();
     }
 
     public void Init() {
@@ -182,6 +185,11 @@ public class FotoBot extends Application {
         }
     }
 
+    /**
+     * Печатаем сообщение на экран
+     * @param h handler, который ловит сообщения
+     * @param str текст сообщения
+     */
     public void SendMessage(Handler h, String str) {
         Message msg = Message.obtain(); // Creates an new Message instance
         msg.obj = str; // Put the string into Message, into "obj" field.
@@ -251,6 +259,30 @@ public class FotoBot extends Application {
         return getExternalStoragePublicDirectory(null);
     }
 
+    /**
+     * Инициализируем глобальные переменные значениями из SharedPreferences
+     */
+    public void LoadData() {
+        /******* Create SharedPreferences *******/
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+
+        Use_WiFi = pref.getBoolean("Use_WiFi", true);         // getting boolean
+
+        Use_Mobile_Data = pref.getBoolean("Use_Mobile_Data", true);         // getting boolean
+
+        Use_Flash = pref.getBoolean("Use_Flash", true);
+
+        JPEG_Compression = pref.getInt("JPEG_Compression", 50);
+
+        Photo_Frequency = pref.getInt("Photo_Frequency", 60);
+
+
+    }
+    /**
+     * Инициализируем глобальные переменные значениями из SharedPreferences и выводим отладочную информацию на экран
+     */
     public void LoadData(Handler h) {
         /******* Create SharedPreferences *******/
 
