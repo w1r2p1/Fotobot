@@ -94,6 +94,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         }
     }
 
+    /**
+     * Печатает в консоль общее число памяти, доступная память
+      * @return используемая память
+     */
     public static long getUsedMemorySize() {
         final String LOG_USED_MEMORY = "UsedMem";
 
@@ -115,7 +119,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     }
 
-    //sets what code should be executed after the picture is taken
+    /** sets what code should be executed after the picture is taken
+     *
+     */
     Camera.PictureCallback mCall = new Camera.PictureCallback() {
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
@@ -268,7 +274,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     };
 
-
+    /**
+     * Печатает сообщения на экран телефона
+     */
     Handler.Callback hc = new Handler.Callback() {
         public boolean handleMessage(Message msg) {
 
@@ -509,6 +517,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         startActivity(intent);
     }
 
+    /**
+     * Запускаем Fotobot
+     * @param v
+     */
     public void startFotobot(View v) {
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
         PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,

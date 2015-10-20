@@ -21,34 +21,71 @@ import static android.os.Environment.getExternalStoragePublicDirectory;
 
 /**
  * <h1>FotoBot</h1>
- * Умеет делать фото порасписанию и отправлять на почту
+ * Умеет делать фото и отправлять на почту.
+ * Это глобальный класс, объект данного класса будет виден во всех активити. Инициализируется через Manifest.
  */
 public class FotoBot extends Application {
+    /**
+     * Интервал фотографирования (в секундах)
+     */
+    public int Update;
+    /**
+     * Нужно ли использовать Wi-Fi для выхода в Internet
+     */
+    public boolean Use_WiFi;
+    /**
+     * Нужно ли использовать 3G (2G) для выхода в Internet
+     */
+    public boolean Use_Mobile_Data;
+    /**
+     * Делать фото со вспышкой
+     */
+    public boolean Use_Flash;
+    /**
+     * Степень JPEG сжатия
+     */
+    public int JPEG_Compression;
 
-//Global variables
-    public int Update;                      /** Интервал фотографирования (в секундах) */
-    public boolean Use_WiFi;                /** Нужно ли использовать Wi-Fi для выхода в Internet */
-    public boolean Use_Mobile_Data;         /** Нужно ли использовать 3G (2G) для выхода в Internet */
-    public boolean Use_Flash;               /** Делать фото со вспышкой */
-    public int JPEG_Compression;             /** Степень JPEG сжатия */
     public int Photo_Frequency;
-    public String EMail_Sender;              /** вспомогательная почта для отправки писем */
-    public String EMail_Sender_Password;     /** пароль для вспомогательной почты */
-    public String EMail_Recepient;           /** кому отправлять письма с фотками */;
+
+    /**
+     * вспомогательная почта для отправки писем
+     */
+    public String EMail_Sender;
+
+    /**
+     * пароль для вспомогательной почты
+     */
+    public String EMail_Sender_Password;
+
+    /** кому отправлять письма с фотками */
+    public String EMail_Recepient;
+
     public String Network_Channel;
-    public String Network_Connection_Method; /** Соединятся с Internet один раз или на каждом шаге*/
-//End Global variables
+
+    /**
+     * Соединятся с Internet один раз или на каждом шаге
+     */
+    public String Network_Connection_Method;
 
     public int status = 1;
 
     public SurfaceHolder holder;
     public String str = "";
 
+    /**
+     * Возвращает текущее состояние FotoBot'а, сейчас не пользуюсь этим
+     * @return
+     */
     public int getstatus() {
 
         return status;
     }
 
+    /**
+     * Устанавливает статус
+     * @param fb_status
+     */
     public void setstatus(int fb_status) {
 
         status = fb_status;
@@ -65,7 +102,7 @@ public class FotoBot extends Application {
     }
 
     /**
-     * В конструкторе проводим инициализацию объекта посредством считывания всей свойств из SharedPreferences.
+     * В конструкторе проводим инициализацию объекта посредством считывания всех свойств из SharedPreferences.
      */
     public void FotoBot() {
         LoadData();
@@ -79,7 +116,7 @@ public class FotoBot extends Application {
 
     }
 
-    /*
+    /**
      * isOnline - Check if there is a NetworkConnection
      * @return boolean
      */
@@ -95,6 +132,11 @@ public class FotoBot extends Application {
         }
     }
 
+    /**
+     * Для проверки соединения выкачивает страницу из Internet
+     * @param h
+     * @return
+     */
     public boolean getData(Handler h) {
         try {
             HttpURLConnection urlc = (HttpURLConnection) (new URL("http://www.google.com").openConnection());
@@ -112,6 +154,12 @@ public class FotoBot extends Application {
         }
     }
 
+    /**
+     * FotoBot умеет самостоятельно подключаться к Internet для отправки фото на почту
+     * @param context
+     * @param h
+     * @return
+     */
     public boolean MakeInternetConnection(Context context, Handler h) {
         fbpause(h, 1);
 
@@ -156,6 +204,11 @@ public class FotoBot extends Application {
         }
     }
 
+    /** FotoBot может самостоятельно отключаться от Internet
+     *
+     * @param context
+     * @param h
+     */
     public void CloseInternetConnection(Context context, Handler h) {
         MobileData md;
         md = new MobileData();
@@ -166,7 +219,12 @@ public class FotoBot extends Application {
         wf.setWiFiEnabled(getApplicationContext(), false);
     }
 
-    public void fbpause(Handler h, int delay) {
+    /**
+     * Делаем паузу и печатаем на экран точки, чтобы было понятно, что программа не зависла
+     * @param h
+     * @param delay
+     */
+        public void fbpause(Handler h, int delay) {
         String message;
 
         for (int i = 1; i <= delay; i++) {
@@ -187,7 +245,8 @@ public class FotoBot extends Application {
 
     /**
      * Печатаем сообщение на экран
-     * @param h handler, который ловит сообщения
+     *
+     * @param h   handler, который ловит сообщения
      * @param str текст сообщения
      */
     public void SendMessage(Handler h, String str) {
@@ -197,6 +256,11 @@ public class FotoBot extends Application {
         msg.sendToTarget(); //Send the message
     }
 
+    /**
+     * Данный метод позволяет отправить письмл с аттачем
+     * @param h
+     * @param str
+     */
     public void SendMail(Handler h, String str) {
         Mail m = new Mail("fotobotmail@gmail.com", "fotobotmailpasswd");
 
@@ -247,6 +311,10 @@ public class FotoBot extends Application {
         }
     }
 
+    /**
+     * На внешнюю карту можно записывать файлы?
+     * @return
+     */
     public boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
         if (Environment.MEDIA_MOUNTED.equals(state)) {
@@ -280,6 +348,7 @@ public class FotoBot extends Application {
 
 
     }
+
     /**
      * Инициализируем глобальные переменные значениями из SharedPreferences и выводим отладочную информацию на экран
      */
