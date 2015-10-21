@@ -73,6 +73,8 @@ public class FotoBot extends Application {
     public SurfaceHolder holder;
     public String str = "";
 
+    public Handler h;
+
     /**
      * Возвращает текущее состояние FotoBot'а, сейчас не пользуюсь этим
      * @return
@@ -257,7 +259,21 @@ public class FotoBot extends Application {
     }
 
     /**
-     * Данный метод позволяет отправить письмл с аттачем
+     * Печатаем сообщение на экран
+     *
+     * @param str текст сообщения
+     */
+    public void SendMessage(String str) {
+        Message msg = Message.obtain(); // Creates an new Message instance
+        msg.obj = str; // Put the string into Message, into "obj" field.
+        msg.setTarget(h); // Set the Handler
+        msg.sendToTarget(); //Send the message
+    }
+
+
+
+    /**
+     * Данный метод позволяет отправить письма с аттачем
      * @param h
      * @param str
      */

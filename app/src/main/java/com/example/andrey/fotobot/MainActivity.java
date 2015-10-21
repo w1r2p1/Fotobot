@@ -37,9 +37,7 @@ import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
-
     private final static String FILE_DIR = "/MySampleFolder/";
-
 
     int n;
     FotoBot fb;
@@ -95,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     }
 
     /**
-     * Печатает в консоль общее число памяти, доступная память
+     * Печатает в консоль общее число памяти, доступная память, занятую память
       * @return используемая память
      */
     public static long getUsedMemorySize() {
@@ -275,7 +273,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     };
 
     /**
-     * Печатает сообщения на экран телефона
+     * Печатает сообщения на экран телефона, нужен для того чтобы получать данные из потока в котором работает FotoBot
      */
     Handler.Callback hc = new Handler.Callback() {
         public boolean handleMessage(Message msg) {
@@ -283,7 +281,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
             PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                     "MyWakelockTag");
-
 
             wakeLock.acquire();
 
@@ -333,7 +330,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     Button btnStart;
     Button btnStop;
     Button btnConfig;
-    Handler h;
+    Handler h = null;
     TextView tvInfo;
     TextView text;
     Intent intent;
@@ -349,7 +346,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         super.onCreate(savedInstanceState);
         wakeLock.acquire();
-
 
         //    super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -385,8 +381,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         h = new Handler(hc);
 
+        /**
+         * получили указатель на обработчик сообщений сразу же говорим FotoBot'у об этом
+         */
+        fb.h = h;
+
         if (fb.isExternalStorageWritable()) {
-            fb.SendMessage(h, "Внешняя SD карта доступна для чтения и записи");
+            fb.SendMessage("Внешняя SD карта доступна для чтения и записи");
         } else {
             fb.SendMessage(h, "Внешняя SD карта не доступна для записи");
         }
@@ -532,7 +533,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         final FotoBot fb = (FotoBot) getApplicationContext();
 
 
-        h = new Handler(hc);
+        // h = new Handler(hc);
 
 
         switch (v.getId()) {
@@ -553,7 +554,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                         wakeLock.acquire();
 
-                        fb.SendMessage(h, "Фотобот начинает свою работу");
+                        fb.SendMessage("Фотобот начинает свою работу");
 
                         fb.MakeInternetConnection(getApplicationContext(), h);
 
