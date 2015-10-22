@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -18,6 +19,18 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * Сетевые настройки для FotoBot
+ * <table border=1>
+ *     <caption>Layout</caption>
+ *     <tr>
+ *         <td>
+ *             FullFrame
+ *         </td>
+ *     </tr>
+ * </table>
+ *
+ */
 public class Tab_Network_Activity extends Activity {
     Spinner spinner1;
     Spinner spinner2;
@@ -68,6 +81,15 @@ public class Tab_Network_Activity extends Activity {
         linLayout2.setGravity(Gravity.BOTTOM | Gravity.CENTER);
         linLayout2.setLayoutParams(lpView2);
 
+// E-Mail Container
+        LinearLayout linLayout_email = new LinearLayout(this);
+        linLayout_email.setOrientation(LinearLayout.HORIZONTAL);
+//        linLayout_Flash.setBackgroundColor(Color.parseColor("#00ff00"));
+        LinearLayout.LayoutParams lpView_email = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+//        LinearLayout.LayoutParams lpView_et_Flash = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+
+
 // TextView1
         TextView tv = new TextView(this);
         tv.setText("Каналы связи");
@@ -107,6 +129,25 @@ public class Tab_Network_Activity extends Activity {
         spinner2.setMinimumWidth((screenWidth - padding) / 100 * 50);
         linLayout_Flash.addView(spinner2);
 
+// TextView3
+        TextView tv_email_sender = new TextView(this);
+        tv_email_sender.setText("FotoBot's e-mail");
+        tv_email_sender.setMinimumWidth((screenWidth - padding) / 100 * 50);
+        tv_email_sender.setLayoutParams(lpView_email);
+        linLayout_email.addView(tv_email_sender);
+
+// EditText
+        EditText editText_email_sender = new EditText(this);
+        editText_email_sender.setLayoutParams(lpView_et);
+        editText_email_sender.setText("fotobot@gmail.com");
+        ViewGroup.LayoutParams lp = editText_email_sender.getLayoutParams();
+        lp.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 50);
+        editText_email_sender.setLayoutParams(lpView_email);
+        editText_email_sender.setGravity(Gravity.RIGHT);
+        //   editText_JPEG_Compression.setBackgroundColor(Color.parseColor("#92adb1"));
+        linLayout_email.addView(editText_email_sender);
+
+
 // Apply Button
         Button btn = new Button(this);
         btn.setText("Применить");
@@ -144,7 +185,7 @@ public class Tab_Network_Activity extends Activity {
         FullFrame.addView(linLayout1);
         FullFrame.addView(linLayout_Flash);
         FullFrame.addView(linLayout2);
-
+        FullFrame.addView(linLayout_email);
     }
 
 
