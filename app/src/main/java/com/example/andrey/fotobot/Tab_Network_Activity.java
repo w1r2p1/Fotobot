@@ -84,10 +84,20 @@ public class Tab_Network_Activity extends Activity {
 // E-Mail Container
         LinearLayout linLayout_email = new LinearLayout(this);
         linLayout_email.setOrientation(LinearLayout.HORIZONTAL);
-//        linLayout_Flash.setBackgroundColor(Color.parseColor("#00ff00"));
+//        linLayout_email.setBackgroundColor(Color.parseColor("#00ff00"));
         LinearLayout.LayoutParams lpView_email = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-//        LinearLayout.LayoutParams lpView_et_Flash = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
+// Password Container
+        LinearLayout linLayout_email_password = new LinearLayout(this);
+        linLayout_email_password.setOrientation(LinearLayout.HORIZONTAL);
+//        linLayout_email_password.setBackgroundColor(Color.parseColor("#ff0000"));
+        LinearLayout.LayoutParams lpView_email_password = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+// E-Mail Container2
+        LinearLayout linLayout_email_recepient = new LinearLayout(this);
+        linLayout_email_recepient.setOrientation(LinearLayout.HORIZONTAL);
+//        linLayout_email.setBackgroundColor(Color.parseColor("#00ff00"));
+        LinearLayout.LayoutParams lpView_email_recepient = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
 
 // TextView1
@@ -144,8 +154,43 @@ public class Tab_Network_Activity extends Activity {
         lp.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 50);
         editText_email_sender.setLayoutParams(lpView_email);
         editText_email_sender.setGravity(Gravity.RIGHT);
-        //   editText_JPEG_Compression.setBackgroundColor(Color.parseColor("#92adb1"));
         linLayout_email.addView(editText_email_sender);
+
+// TextView4
+        TextView tv_email_password = new TextView(this);
+        tv_email_password.setText("e-mail passswd");
+        tv_email_password.setMinimumWidth((screenWidth - padding) / 100 * 50);
+        tv_email_password.setLayoutParams(lpView_email);
+        linLayout_email_password.addView(tv_email_password);
+
+// Password
+        EditText editText_email_password = new EditText(this);
+        editText_email_password.setLayoutParams(lpView_et);
+        editText_email_password.setText("password");
+        ViewGroup.LayoutParams lp_password = editText_email_password.getLayoutParams();
+        lp_password.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 50);
+        editText_email_password.setLayoutParams(lpView_email_password);
+        editText_email_password.setGravity(Gravity.RIGHT);
+        linLayout_email_password.addView(editText_email_password);
+
+        // TextView4
+        TextView tv_email_recepient = new TextView(this);
+        tv_email_recepient.setText("e-mail получателя");
+        tv_email_recepient.setMinimumWidth((screenWidth - padding) / 100 * 50);
+        tv_email_recepient.setLayoutParams(lpView_email);
+        linLayout_email_recepient.addView(tv_email_recepient);
+
+// EditText
+        EditText editText_email_recepient = new EditText(this);
+        editText_email_recepient.setLayoutParams(lpView_et);
+        editText_email_recepient.setText("user@gmail.com");
+        ViewGroup.LayoutParams lp_recepient = editText_email_recepient.getLayoutParams();
+        lp_recepient.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 50);
+        editText_email_recepient.setLayoutParams(lpView_email_recepient);
+        editText_email_recepient.setGravity(Gravity.RIGHT);
+        linLayout_email_recepient.addView(editText_email_recepient);
+
+
 
 
 // Apply Button
@@ -184,9 +229,11 @@ public class Tab_Network_Activity extends Activity {
 
         FullFrame.addView(linLayout1);
         FullFrame.addView(linLayout_Flash);
-        FullFrame.addView(linLayout2);
         FullFrame.addView(linLayout_email);
-    }
+        FullFrame.addView(linLayout_email_password);
+        FullFrame.addView(linLayout_email_recepient);
+        FullFrame.addView(linLayout2);
+        }
 
 
 

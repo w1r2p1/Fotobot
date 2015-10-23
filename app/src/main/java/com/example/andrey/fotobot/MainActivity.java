@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     //a variable to store a reference to the Image View at the main.xml file
     private ImageView iv_image;
+
     //a variable to store a reference to the Surface View at the main.xml file
     private SurfaceView sv;
 
