@@ -356,13 +356,17 @@ public class FotoBot extends Application {
 
         Use_Mobile_Data = pref.getBoolean("Use_Mobile_Data", true);         // getting boolean
 
-        Use_Flash = pref.getBoolean("Use_Flash", true);
+        Use_Flash = pref.getBoolean("Use_Flash", false);
 
         JPEG_Compression = pref.getInt("JPEG_Compression", 50);
 
         Photo_Frequency = pref.getInt("Photo_Frequency", 60);
 
+        EMail_Sender = pref.getString("EMail_Sender", "user@gmail.com");
 
+        EMail_Sender_Password = pref.getString("EMail_Sender_Password", "passwd");
+
+        EMail_Recepient = pref.getString("EMail_Recepient", "user@mail.ru");
     }
 
     /**

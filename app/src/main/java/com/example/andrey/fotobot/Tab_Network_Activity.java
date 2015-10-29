@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -34,6 +35,7 @@ import java.util.ArrayList;
 public class Tab_Network_Activity extends Activity {
     Spinner spinner1;
     Spinner spinner2;
+    EditText editText_email_sender;
     private CheckBox check_box_flash;
     private EditText edit_text_jpeg_compression;
     private int screenWidth, screenHeight;
@@ -47,6 +49,8 @@ public class Tab_Network_Activity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        final FotoBot fb = (FotoBot) getApplicationContext();
+
         Display display = getWindowManager().getDefaultDisplay();
         screenWidth = display.getWidth();
         screenHeight = display.getHeight();
@@ -55,7 +59,7 @@ public class Tab_Network_Activity extends Activity {
         LinearLayout FullFrame = new LinearLayout(this);
         FullFrame.setOrientation(LinearLayout.VERTICAL);
         FullFrame.setPadding(5, padding, 0, 0);
-        setContentView(FullFrame);
+//        setContentView(FullFrame);
 
 // First Container (Horizontal LinearLayout)
         LinearLayout linLayout1 = new LinearLayout(this);
@@ -147,9 +151,9 @@ public class Tab_Network_Activity extends Activity {
         linLayout_email.addView(tv_email_sender);
 
 // EditText
-        EditText editText_email_sender = new EditText(this);
+        editText_email_sender = new EditText(this);
         editText_email_sender.setLayoutParams(lpView_et);
-        editText_email_sender.setText("fotobot@gmail.com");
+        editText_email_sender.setText(fb.EMail_Sender);
         ViewGroup.LayoutParams lp = editText_email_sender.getLayoutParams();
         lp.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 50);
         editText_email_sender.setLayoutParams(lpView_email);
@@ -164,9 +168,9 @@ public class Tab_Network_Activity extends Activity {
         linLayout_email_password.addView(tv_email_password);
 
 // Password
-        EditText editText_email_password = new EditText(this);
+        final EditText editText_email_password = new EditText(this);
         editText_email_password.setLayoutParams(lpView_et);
-        editText_email_password.setText("password");
+        editText_email_password.setText(fb.EMail_Sender_Password);
         ViewGroup.LayoutParams lp_password = editText_email_password.getLayoutParams();
         lp_password.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 50);
         editText_email_password.setLayoutParams(lpView_email_password);
@@ -181,16 +185,14 @@ public class Tab_Network_Activity extends Activity {
         linLayout_email_recepient.addView(tv_email_recepient);
 
 // EditText
-        EditText editText_email_recepient = new EditText(this);
+        final EditText editText_email_recepient = new EditText(this);
         editText_email_recepient.setLayoutParams(lpView_et);
-        editText_email_recepient.setText("user@gmail.com");
+        editText_email_recepient.setText(fb.EMail_Recepient);
         ViewGroup.LayoutParams lp_recepient = editText_email_recepient.getLayoutParams();
         lp_recepient.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 50);
         editText_email_recepient.setLayoutParams(lpView_email_recepient);
         editText_email_recepient.setGravity(Gravity.RIGHT);
         linLayout_email_recepient.addView(editText_email_recepient);
-
-
 
 
 // Apply Button
@@ -205,6 +207,10 @@ public class Tab_Network_Activity extends Activity {
 
                 editor.putString("Network_Channel", spinner1.getSelectedItem().toString());
                 editor.putString("Network_Connection_Method", spinner2.getSelectedItem().toString());
+
+                editor.putString("EMail_Sender", editText_email_sender.getText().toString());
+                editor.putString("EMail_Sender_Password", editText_email_password.getText().toString());
+                editor.putString("EMail_Recepient", editText_email_recepient.getText().toString());
 
 // Save the changes in SharedPreferences
                 editor.commit(); // commit changes
@@ -233,6 +239,20 @@ public class Tab_Network_Activity extends Activity {
         FullFrame.addView(linLayout_email_password);
         FullFrame.addView(linLayout_email_recepient);
         FullFrame.addView(linLayout2);
+
+        ScrollView m_Scroll = new ScrollView(this);
+        m_Scroll.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
+                ViewGroup.LayoutParams.FILL_PARENT));
+        m_Scroll.addView( FullFrame, new
+                ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
+                ViewGroup.LayoutParams.FILL_PARENT) );
+
+//  addContentView(m_Scroll, new LayoutParams(LayoutParams.FILL_PARENT,
+//  LayoutParams.WRAP_CONTENT));
+
+        setContentView(m_Scroll);
+
+
         }
 
 

@@ -72,7 +72,7 @@ public class Tab_Main_Activity extends Activity {
         tv.setLayoutParams(lpView);
         tv.setTypeface(Typeface.DEFAULT_BOLD);
         tv.setTextSize(14);
-        tv.setTextColor(Color.WHITE);
+      //  tv.setTextColor(Color.WHITE);
         linLayout1.addView(tv);
 
 // Flash TextView
@@ -120,10 +120,15 @@ public class Tab_Main_Activity extends Activity {
 
                 editor.putInt("Update", Integer.parseInt(editText_JPEG_Compression.getText().toString()));
 
+
+
+
+
 // Save the changes in SharedPreferences
                 editor.commit(); // commit changes
             }
         });
+
 
 // GoTo Main Page Button
         Button btn_mp = new Button(this);
