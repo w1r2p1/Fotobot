@@ -46,20 +46,25 @@ public class FotoBot extends Application {
      */
     public int JPEG_Compression;
 
+    /**
+     * Коэффициент масштабирования фото (1/4,1/2,1)
+     */
+    public String Image_Scale;
+
     public int Photo_Frequency;
 
     /**
      * вспомогательная почта для отправки писем
      */
-    public String EMail_Sender;
+    public String EMail_Sender = "user@gmail.com";
 
     /**
      * пароль для вспомогательной почты
      */
-    public String EMail_Sender_Password;
+    public String EMail_Sender_Password = "passwd";
 
     /** кому отправлять письма с фотками */
-    public String EMail_Recepient;
+    public String EMail_Recepient = "user@mail.ru";
 
     public String Network_Channel;
 

@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 //public class Tab_Main_Activity extends AppCompatActivity {
@@ -39,7 +40,7 @@ public class Tab_Main_Activity extends Activity {
   //      FullFrame.setBackgroundColor(Color.parseColor("#3f4b4d"));
         FullFrame.setOrientation(LinearLayout.VERTICAL);
         FullFrame.setPadding(5, padding, 0, 0);
-        setContentView(FullFrame);
+     //   setContentView(FullFrame);
 
 // First Container (Horizontal LinearLayout)
         LinearLayout linLayout1 = new LinearLayout(this);
@@ -67,8 +68,11 @@ public class Tab_Main_Activity extends Activity {
 
 // TextView
         TextView tv = new TextView(this);
+        tv.setTypeface(Typeface.DEFAULT_BOLD);
+        tv.setTextSize(14);
+        tv.setTextColor(Color.BLACK);
         tv.setText("Интервал между фото(сек)");
-        tv.setWidth((screenWidth - padding) / 100 * 90);
+        tv.setWidth((screenWidth - padding) / 100 * 80);
         tv.setLayoutParams(lpView);
         tv.setTypeface(Typeface.DEFAULT_BOLD);
         tv.setTextSize(14);
@@ -78,7 +82,7 @@ public class Tab_Main_Activity extends Activity {
 // Flash TextView
         TextView tv_Flash = new TextView(this);
         tv_Flash.setText("Использовать вспышку");
-        tv_Flash.setWidth((screenWidth - padding) / 100 * 99);
+        tv_Flash.setWidth((screenWidth - padding) / 100 * 90);
         tv_Flash.setLayoutParams(lpView_Flash);
         tv_Flash.setTypeface(Typeface.DEFAULT_BOLD);
         tv_Flash.setTextSize(14);
@@ -94,7 +98,7 @@ public class Tab_Main_Activity extends Activity {
         editText_JPEG_Compression.setLayoutParams(lpView_et);
         editText_JPEG_Compression.setText("90");
         ViewGroup.LayoutParams lp = editText_JPEG_Compression.getLayoutParams();
-        lp.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 90);
+        lp.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 80);
         editText_JPEG_Compression.setLayoutParams(lp);
         editText_JPEG_Compression.setGravity(Gravity.RIGHT);
      //   editText_JPEG_Compression.setBackgroundColor(Color.parseColor("#92adb1"));
@@ -149,6 +153,18 @@ public class Tab_Main_Activity extends Activity {
         FullFrame.addView(linLayout1);
         FullFrame.addView(linLayout_Flash);
         FullFrame.addView(linLayout2);
+
+        ScrollView m_Scroll = new ScrollView(this);
+        m_Scroll.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
+                ViewGroup.LayoutParams.FILL_PARENT));
+        m_Scroll.addView( FullFrame, new
+                ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
+                ViewGroup.LayoutParams.FILL_PARENT) );
+
+//  addContentView(m_Scroll, new LayoutParams(LayoutParams.FILL_PARENT,
+//  LayoutParams.WRAP_CONTENT));
+
+        setContentView(m_Scroll);
 
     }
 

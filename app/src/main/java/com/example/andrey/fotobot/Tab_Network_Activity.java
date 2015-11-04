@@ -3,6 +3,8 @@ package com.example.andrey.fotobot;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
@@ -106,6 +108,9 @@ public class Tab_Network_Activity extends Activity {
 
 // TextView1
         TextView tv = new TextView(this);
+        tv.setTypeface(Typeface.DEFAULT_BOLD);
+        tv.setTextSize(14);
+        tv.setTextColor(Color.BLACK);
         tv.setText("Каналы связи");
         tv.setWidth((screenWidth - padding) / 100 * 50);
         tv.setLayoutParams(lpView);
@@ -118,7 +123,7 @@ public class Tab_Network_Activity extends Activity {
         spinnerArray.add("Both");
 
         spinner1 = new Spinner(this);
-        ArrayAdapter<String> spinnerArrayAdapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, spinnerArray);
+        ArrayAdapter<String> spinnerArrayAdapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
         spinner1.setAdapter(spinnerArrayAdapter1);
         spinner1.setSelection(spinnerArrayAdapter1.getPosition("Both"));
         spinner1.setMinimumWidth((screenWidth - padding) / 100 * 50);
@@ -126,6 +131,9 @@ public class Tab_Network_Activity extends Activity {
 
 // TextView2
         TextView tv_Flash = new TextView(this);
+        tv_Flash.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Flash.setTextSize(14);
+        tv_Flash.setTextColor(Color.BLACK);
         tv_Flash.setText("Метод подключения");
         tv_Flash.setWidth((screenWidth - padding) / 100 * 50);
         tv_Flash.setLayoutParams(lpView_Flash);
@@ -137,7 +145,7 @@ public class Tab_Network_Activity extends Activity {
         spinnerArray2.add("На каждом шаге");
 
         spinner2 = new Spinner(this);
-        ArrayAdapter<String> spinnerArrayAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, spinnerArray2);
+        ArrayAdapter<String> spinnerArrayAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray2);
         spinner2.setAdapter(spinnerArrayAdapter2);
         spinner2.setSelection(spinnerArrayAdapter2.getPosition("На каждом шаге"));
         spinner2.setMinimumWidth((screenWidth - padding) / 100 * 50);
@@ -145,6 +153,9 @@ public class Tab_Network_Activity extends Activity {
 
 // TextView3
         TextView tv_email_sender = new TextView(this);
+        tv_email_sender.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_email_sender.setTextSize(14);
+        tv_email_sender.setTextColor(Color.BLACK);
         tv_email_sender.setText("FotoBot's e-mail");
         tv_email_sender.setMinimumWidth((screenWidth - padding) / 100 * 50);
         tv_email_sender.setLayoutParams(lpView_email);
@@ -155,13 +166,17 @@ public class Tab_Network_Activity extends Activity {
         editText_email_sender.setLayoutParams(lpView_et);
         editText_email_sender.setText(fb.EMail_Sender);
         ViewGroup.LayoutParams lp = editText_email_sender.getLayoutParams();
-        lp.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 50);
+        editText_email_sender.setWidth((screenWidth - padding) - ((screenWidth - padding) / 100 * 50));
+       // lp.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 50);
         editText_email_sender.setLayoutParams(lpView_email);
         editText_email_sender.setGravity(Gravity.RIGHT);
         linLayout_email.addView(editText_email_sender);
 
 // TextView4
         TextView tv_email_password = new TextView(this);
+        tv_email_password.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_email_password.setTextSize(14);
+        tv_email_password.setTextColor(Color.BLACK);
         tv_email_password.setText("e-mail passswd");
         tv_email_password.setMinimumWidth((screenWidth - padding) / 100 * 50);
         tv_email_password.setLayoutParams(lpView_email);
@@ -172,13 +187,17 @@ public class Tab_Network_Activity extends Activity {
         editText_email_password.setLayoutParams(lpView_et);
         editText_email_password.setText(fb.EMail_Sender_Password);
         ViewGroup.LayoutParams lp_password = editText_email_password.getLayoutParams();
-        lp_password.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 50);
+      //  lp_password.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 50);
+        editText_email_password.setWidth((screenWidth - padding) - ((screenWidth - padding) / 100 * 50));
         editText_email_password.setLayoutParams(lpView_email_password);
         editText_email_password.setGravity(Gravity.RIGHT);
         linLayout_email_password.addView(editText_email_password);
 
         // TextView4
         TextView tv_email_recepient = new TextView(this);
+        tv_email_recepient.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_email_recepient.setTextSize(14);
+        tv_email_recepient.setTextColor(Color.BLACK);
         tv_email_recepient.setText("e-mail получателя");
         tv_email_recepient.setMinimumWidth((screenWidth - padding) / 100 * 50);
         tv_email_recepient.setLayoutParams(lpView_email);
@@ -189,7 +208,8 @@ public class Tab_Network_Activity extends Activity {
         editText_email_recepient.setLayoutParams(lpView_et);
         editText_email_recepient.setText(fb.EMail_Recepient);
         ViewGroup.LayoutParams lp_recepient = editText_email_recepient.getLayoutParams();
-        lp_recepient.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 50);
+        editText_email_recepient.setWidth((screenWidth - padding) - ((screenWidth - padding) / 100 * 50));
+    //    lp_recepient.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 50);
         editText_email_recepient.setLayoutParams(lpView_email_recepient);
         editText_email_recepient.setGravity(Gravity.RIGHT);
         linLayout_email_recepient.addView(editText_email_recepient);
