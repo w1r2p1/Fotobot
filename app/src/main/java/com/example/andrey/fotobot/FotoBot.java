@@ -367,6 +367,8 @@ public class FotoBot extends Application {
 
         Photo_Frequency = pref.getInt("Photo_Frequency", 60);
 
+        Image_Scale = pref.getString("Image_Scale","1/4");
+
         EMail_Sender = pref.getString("EMail_Sender", "user@gmail.com");
 
         EMail_Sender_Password = pref.getString("EMail_Sender_Password", "passwd");

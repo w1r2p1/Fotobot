@@ -140,9 +140,20 @@ public class Tab_Foto_Activity  extends Activity {
         spinner1 = new Spinner(this);
         spinnerArrayAdapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
         spinner1.setAdapter(spinnerArrayAdapter1);
-        spinner1.setSelection(spinnerArrayAdapter1.getPosition(fb.Image_Scale));
+      //  spinner1.setSelection(spinnerArrayAdapter1.getPosition(fb.Image_Scale));
+        spinner1.setSelection(getIndex(spinner1, fb.Image_Scale));
         spinner1.setMinimumWidth((screenWidth - padding) / 100 * 50);
         linLayout_photo_size.addView(spinner1);
+
+
+
+
+
+
+
+
+
+
 
 // Apply Button
         Button btn = new Button(this);
@@ -242,7 +253,7 @@ public class Tab_Foto_Activity  extends Activity {
         final FotoBot fb = (FotoBot) getApplicationContext();
         fb.LoadData();
         editText_JPEG_Compression.setText(Integer.toString(fb.JPEG_Compression));
-        spinner1.setSelection(spinnerArrayAdapter1.getPosition(fb.Image_Scale));
+      //  spinner1.setSelection(spinnerArrayAdapter1.getPosition(fb.Image_Scale));
         Log.d(LOG_TAG, "Tab3: onResume");
     }
 
@@ -263,8 +274,9 @@ public class Tab_Foto_Activity  extends Activity {
         fb.LoadData();
         // editText_JPEG_Compression.setText(Integer.toString(fb.JPEG_Compression));
         editText_JPEG_Compression.setText(Integer.toString(fb.JPEG_Compression));
+        spinner1.setSelection(getIndex(spinner1, fb.Image_Scale));
         //   spinner1.setSelection(spinnerArrayAdapter1.getPosition(fb.Image_Scale));
-        spinner1.setSelection(0);
+      //  spinner1.setSelection(0);
 
         // releaseCamera();
         Log.d(LOG_TAG, "Tab3: onPause");
@@ -274,5 +286,17 @@ public class Tab_Foto_Activity  extends Activity {
         super.onRestart();
         Log.d(LOG_TAG, "Tab3: onRestart");
     }
+    //private method of your class
+    private int getIndex(Spinner spinner, String myString)
+    {
+        int index = 0;
 
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
 }
