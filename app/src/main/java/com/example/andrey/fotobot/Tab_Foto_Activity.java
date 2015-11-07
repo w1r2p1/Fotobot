@@ -24,7 +24,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
-public class Tab_Scheduler_Activity  extends Activity {
+
+
+public class Tab_Foto_Activity  extends Activity {
     final String LOG_NETWORK_ACTIVITY = "Logs";
     private CheckBox check_box_flash;
     private EditText edit_text_jpeg_compression;
@@ -41,7 +43,7 @@ public class Tab_Scheduler_Activity  extends Activity {
         super.onCreate(savedInstanceState);
         fb.LoadData();
         Log.d(LOG_TAG, "Tab3: onCreate");
-  //      final FotoBot fb = (FotoBot) getApplicationContext();
+        //      final FotoBot fb = (FotoBot) getApplicationContext();
         Display display = getWindowManager().getDefaultDisplay();
         screenWidth = display.getWidth();
         screenHeight = display.getHeight();
@@ -50,7 +52,7 @@ public class Tab_Scheduler_Activity  extends Activity {
         LinearLayout FullFrame = new LinearLayout(this);
         FullFrame.setOrientation(LinearLayout.VERTICAL);
         FullFrame.setPadding(5, padding, 0, 0);
-      //  setContentView(FullFrame);
+        //  setContentView(FullFrame);
 
 // First Container (Horizontal LinearLayout)
         LinearLayout linLayout1 = new LinearLayout(this);
@@ -259,9 +261,9 @@ public class Tab_Scheduler_Activity  extends Activity {
         super.onPause();
         final FotoBot fb = (FotoBot) getApplicationContext();
         fb.LoadData();
-       // editText_JPEG_Compression.setText(Integer.toString(fb.JPEG_Compression));
+        // editText_JPEG_Compression.setText(Integer.toString(fb.JPEG_Compression));
         editText_JPEG_Compression.setText(Integer.toString(fb.JPEG_Compression));
-     //   spinner1.setSelection(spinnerArrayAdapter1.getPosition(fb.Image_Scale));
+        //   spinner1.setSelection(spinnerArrayAdapter1.getPosition(fb.Image_Scale));
         spinner1.setSelection(0);
 
         // releaseCamera();

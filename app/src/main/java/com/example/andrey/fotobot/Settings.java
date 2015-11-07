@@ -47,7 +47,7 @@ public class Settings extends TabActivity {
         View view3 = LayoutInflater.from(mTabHost.getContext()).inflate(R.layout.tabs_bg, null);
         TextView tv3 = (TextView) view3.findViewById(R.id.tabsText);
         tv3.setText("Фото");
-        intent = new Intent(this, Tab_Scheduler_Activity.class);
+        intent = new Intent(this, Tab_Foto_Activity.class);
         TabHost.TabSpec spec3 = mTabHost.newTabSpec("Tab3").setIndicator(view3).setContent(intent);
         mTabHost.addTab(spec3);
 

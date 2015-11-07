@@ -42,15 +42,15 @@
         </activity>
         <activity
             android:name=".Tab_Main_Activity"
-            android:label="@string/title_activity_settings" >
+            android:label="@string/title_main_activity_settings" >
         </activity>
         <activity
             android:name=".Tab_Network_Activity"
-            android:label="@string/title_activity_settings" >
+            android:label="@string/title_network_activity_settings" >
         </activity>
         <activity
-            android:name=".Tab_Scheduler_Activity"
-            android:label="@string/title_activity_settings" >
+            android:name=".Tab_Foto_Activity"
+            android:label="@string/title_foto_activity_settings" >
         </activity>
     </application>
 
