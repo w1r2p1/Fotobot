@@ -106,6 +106,7 @@ public class Tab_Foto_Activity  extends Activity {
 
 // CheckBox
         checkBox_Flash = new CheckBox(this);
+        checkBox_Flash.setChecked(fb.Use_Flash);
         linLayout_Flash.addView(checkBox_Flash);
 
 // EditText
@@ -275,6 +276,7 @@ public class Tab_Foto_Activity  extends Activity {
         // editText_JPEG_Compression.setText(Integer.toString(fb.JPEG_Compression));
         editText_JPEG_Compression.setText(Integer.toString(fb.JPEG_Compression));
         spinner1.setSelection(getIndex(spinner1, fb.Image_Scale));
+        checkBox_Flash.setChecked(fb.Use_Flash);
         //   spinner1.setSelection(spinnerArrayAdapter1.getPosition(fb.Image_Scale));
       //  spinner1.setSelection(0);
 
