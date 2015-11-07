@@ -6,8 +6,10 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
+import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -31,11 +33,15 @@ public class Tab_Scheduler_Activity  extends Activity {
     CheckBox checkBox_Flash;
     EditText editText_JPEG_Compression;
     Spinner spinner1;
-
+    ArrayAdapter<String> spinnerArrayAdapter1;
+    final String LOG_TAG = "Logs";
 
     protected void onCreate(Bundle savedInstanceState) {
+        final FotoBot fb = (FotoBot) getApplicationContext();
         super.onCreate(savedInstanceState);
-
+        fb.LoadData();
+        Log.d(LOG_TAG, "Tab3: onCreate");
+  //      final FotoBot fb = (FotoBot) getApplicationContext();
         Display display = getWindowManager().getDefaultDisplay();
         screenWidth = display.getWidth();
         screenHeight = display.getHeight();
@@ -103,7 +109,8 @@ public class Tab_Scheduler_Activity  extends Activity {
 // EditText
         editText_JPEG_Compression = new EditText(this);
         editText_JPEG_Compression.setLayoutParams(lpView_et);
-        editText_JPEG_Compression.setText("90");
+        String jpg = Integer.toString(fb.JPEG_Compression);
+        editText_JPEG_Compression.setText(jpg);
         ViewGroup.LayoutParams lp = editText_JPEG_Compression.getLayoutParams();
         lp.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 80);
         editText_JPEG_Compression.setLayoutParams(lp);
@@ -129,9 +136,9 @@ public class Tab_Scheduler_Activity  extends Activity {
         spinnerArray.add("1");
 
         spinner1 = new Spinner(this);
-        ArrayAdapter<String> spinnerArrayAdapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
+        spinnerArrayAdapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
         spinner1.setAdapter(spinnerArrayAdapter1);
-        spinner1.setSelection(spinnerArrayAdapter1.getPosition("1/4"));
+        spinner1.setSelection(spinnerArrayAdapter1.getPosition(fb.Image_Scale));
         spinner1.setMinimumWidth((screenWidth - padding) / 100 * 50);
         linLayout_photo_size.addView(spinner1);
 
@@ -228,4 +235,42 @@ public class Tab_Scheduler_Activity  extends Activity {
 
     }
 */
+
+    protected void onResume(SurfaceHolder holder) {
+        final FotoBot fb = (FotoBot) getApplicationContext();
+        fb.LoadData();
+        editText_JPEG_Compression.setText(Integer.toString(fb.JPEG_Compression));
+        spinner1.setSelection(spinnerArrayAdapter1.getPosition(fb.Image_Scale));
+        Log.d(LOG_TAG, "Tab3: onResume");
+    }
+
+
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        Log.d(LOG_TAG, "Tab3: onRestoreInstanceState");
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(LOG_TAG, "Tab3: onDestroy");
+    }
+
+    protected void onPause() {
+        super.onPause();
+        final FotoBot fb = (FotoBot) getApplicationContext();
+        fb.LoadData();
+       // editText_JPEG_Compression.setText(Integer.toString(fb.JPEG_Compression));
+        editText_JPEG_Compression.setText(Integer.toString(fb.JPEG_Compression));
+     //   spinner1.setSelection(spinnerArrayAdapter1.getPosition(fb.Image_Scale));
+        spinner1.setSelection(0);
+
+        // releaseCamera();
+        Log.d(LOG_TAG, "Tab3: onPause");
+    }
+
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(LOG_TAG, "Tab3: onRestart");
+    }
+
 }

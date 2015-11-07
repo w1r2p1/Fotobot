@@ -44,12 +44,12 @@ public class FotoBot extends Application {
     /**
      * Степень JPEG сжатия
      */
-    public int JPEG_Compression;
+    public int JPEG_Compression = 90;
 
     /**
      * Коэффициент масштабирования фото (1/4,1/2,1)
      */
-    public String Image_Scale;
+    public String Image_Scale = "1/4";
 
     public int Photo_Frequency;
 
