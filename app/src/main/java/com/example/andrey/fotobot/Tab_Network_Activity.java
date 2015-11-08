@@ -169,6 +169,7 @@ public class Tab_Network_Activity extends Activity {
 // EditText
         editText_email_sender = new EditText(this);
         editText_email_sender.setLayoutParams(lpView_et);
+        editText_email_sender.setSingleLine(true);
         editText_email_sender.setText(fb.EMail_Sender);
         ViewGroup.LayoutParams lp = editText_email_sender.getLayoutParams();
         editText_email_sender.setWidth((screenWidth - padding) - ((screenWidth - padding) / 100 * 50));
@@ -190,6 +191,7 @@ public class Tab_Network_Activity extends Activity {
 // Password
         editText_email_password = new EditText(this);
         editText_email_password.setLayoutParams(lpView_et);
+        editText_email_password.setSingleLine(true);
         editText_email_password.setText(fb.EMail_Sender_Password);
         ViewGroup.LayoutParams lp_password = editText_email_password.getLayoutParams();
       //  lp_password.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 50);
@@ -211,6 +213,7 @@ public class Tab_Network_Activity extends Activity {
 // EditText
         editText_email_recepient = new EditText(this);
         editText_email_recepient.setLayoutParams(lpView_et);
+        editText_email_recepient.setSingleLine(true);
         editText_email_recepient.setText(fb.EMail_Recepient);
         ViewGroup.LayoutParams lp_recepient = editText_email_recepient.getLayoutParams();
         editText_email_recepient.setWidth((screenWidth - padding) - ((screenWidth - padding) / 100 * 50));
