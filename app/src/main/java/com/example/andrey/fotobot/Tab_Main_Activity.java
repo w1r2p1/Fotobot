@@ -6,8 +6,10 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
+import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -26,11 +28,13 @@ public class Tab_Main_Activity extends Activity {
     private int screenWidth, screenHeight;
     private int padding = 15;
     CheckBox checkBox_Flash;
-    EditText editText_JPEG_Compression;
+    EditText Photo_Frequency;
+    final String LOG_TAG = "Logs";
 
     protected void onCreate(Bundle savedInstanceState) {
+        final FotoBot fb = (FotoBot) getApplicationContext();
         super.onCreate(savedInstanceState);
-
+        fb.LoadData();
         Display display = getWindowManager().getDefaultDisplay();
         screenWidth = display.getWidth();
         screenHeight = display.getHeight();
@@ -79,30 +83,20 @@ public class Tab_Main_Activity extends Activity {
       //  tv.setTextColor(Color.WHITE);
         linLayout1.addView(tv);
 
-// Flash TextView
-        TextView tv_Flash = new TextView(this);
-        tv_Flash.setText("Использовать вспышку");
-        tv_Flash.setWidth((screenWidth - padding) / 100 * 90);
-        tv_Flash.setLayoutParams(lpView_Flash);
-        tv_Flash.setTypeface(Typeface.DEFAULT_BOLD);
-        tv_Flash.setTextSize(14);
-        tv_Flash.setTextColor(Color.WHITE);
-      //  linLayout_Flash.addView(tv_Flash);
 
-// CheckBox
-        checkBox_Flash = new CheckBox(this);
-      //  linLayout_Flash.addView(checkBox_Flash);
+
+
 
 // EditText
-        editText_JPEG_Compression = new EditText(this);
-        editText_JPEG_Compression.setLayoutParams(lpView_et);
-        editText_JPEG_Compression.setText("90");
-        ViewGroup.LayoutParams lp = editText_JPEG_Compression.getLayoutParams();
+        Photo_Frequency = new EditText(this);
+        Photo_Frequency.setLayoutParams(lpView_et);
+        Photo_Frequency.setText(Integer.toString(fb.Photo_Frequency));
+        ViewGroup.LayoutParams lp = Photo_Frequency.getLayoutParams();
         lp.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 80);
-        editText_JPEG_Compression.setLayoutParams(lp);
-        editText_JPEG_Compression.setGravity(Gravity.RIGHT);
+        Photo_Frequency.setLayoutParams(lp);
+        Photo_Frequency.setGravity(Gravity.RIGHT);
      //   editText_JPEG_Compression.setBackgroundColor(Color.parseColor("#92adb1"));
-        linLayout1.addView(editText_JPEG_Compression);
+        linLayout1.addView(Photo_Frequency);
 
 // Apply Button
         Button btn = new Button(this);
@@ -114,15 +108,11 @@ public class Tab_Main_Activity extends Activity {
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
 
-                if (checkBox_Flash.isChecked()) {
-                    editor.putBoolean("Use_Flash", true);
-                } else {
-                    editor.putBoolean("Use_Flash", false);
-                }
 
-                String input = editText_JPEG_Compression.getText().toString();
 
-                editor.putInt("Update", Integer.parseInt(editText_JPEG_Compression.getText().toString()));
+
+
+                editor.putInt("Photo_Frequency", Integer.parseInt(Photo_Frequency.getText().toString()));
 
 
 
@@ -167,5 +157,28 @@ public class Tab_Main_Activity extends Activity {
         setContentView(m_Scroll);
 
     }
+    protected void onPause() {
+        super.onPause();
+        final FotoBot fb = (FotoBot) getApplicationContext();
+        fb.LoadData();
+        Photo_Frequency.setText(Integer.toString(fb.Photo_Frequency));
+    }
 
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(LOG_TAG, "Tab1: onRestart");
+    }
+    protected void onResume(SurfaceHolder holder) {
+        final FotoBot fb = (FotoBot) getApplicationContext();
+        fb.LoadData();
+        Photo_Frequency.setText(Integer.toString(fb.Photo_Frequency));
+        //  spinner1.setSelection(spinnerArrayAdapter1.getPosition(fb.Image_Scale));
+        Log.d(LOG_TAG, "Tab1: onResume");
+    }
+
+
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        Log.d(LOG_TAG, "Tab1: onRestoreInstanceState");
+    }
 }
