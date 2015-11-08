@@ -95,7 +95,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     /**
      * Печатает в консоль общее число памяти, доступная память, занятую память
-      * @return используемая память
+     *
+     * @return используемая память
      */
     public static long getUsedMemorySize() {
         final String LOG_USED_MEMORY = "UsedMem";
@@ -118,8 +119,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     }
 
-    /** sets what code should be executed after the picture is taken
-     *
+    /**
+     * sets what code should be executed after the picture is taken
      */
     Camera.PictureCallback mCall = new Camera.PictureCallback() {
         @Override
@@ -155,6 +156,27 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             // Calculate inSampleSize
 
             options.inSampleSize = 8;
+
+            /*
+            switch (fb.Image_Scale) {
+                case "1/16":
+                    options.inSampleSize = 16;
+                    break;
+                case "1/8":
+                    options.inSampleSize = 8;
+                    break;
+                case "1/4":
+                    options.inSampleSize = 4;
+                    break;
+                case "1/2":
+                    options.inSampleSize = 2;
+                    break;
+                default:
+                    options.inSampleSize = 1;
+                    break;
+            }
+
+*/
             options.inPreferredConfig = Bitmap.Config.RGB_565;
 
             Log.d(LOG_TAG, "***** Options are defined: " + getUsedMemorySize());
@@ -521,6 +543,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     /**
      * Запускаем Fotobot
+     *
      * @param v
      */
     public void startFotobot(View v) {
@@ -585,38 +608,38 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             mgr.setStreamMute(AudioManager.STREAM_SYSTEM, true);
 
 
-if (fb.Use_Flash) {
-    mCamera.stopPreview();
-    Camera.Parameters parameters = mCamera.getParameters();
-    try {
-        parameters.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
-    } catch (Exception e) {
-        fb.SendMessage(h, "Camera.Parameters.FLASH_MODE_ON error");
-    }
-    mCamera.setParameters(parameters);
-    mCamera.startPreview();
+                            if (fb.Use_Flash) {
+                                mCamera.stopPreview();
+                                Camera.Parameters parameters = mCamera.getParameters();
+                                try {
+                                    parameters.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
+                                } catch (Exception e) {
+                                    fb.SendMessage(h, "Camera.Parameters.FLASH_MODE_ON error");
+                                }
+                                mCamera.setParameters(parameters);
+                                mCamera.startPreview();
 
-    fb.fbpause(h, 5);
-}
+                                fb.fbpause(h, fb.process_delay);
+                            }
 
                             mCamera.takePicture(null, null, mCall);
                             fb.SendMessage(h, "Picture has been taken");
 
 
-                            fb.fbpause(h, 5);
+                            fb.fbpause(h, fb.process_delay);
 
 
                             if (fb.Use_Flash) {
                                 mCamera.stopPreview();
 
 
-                                fb.fbpause(h, 5);
+                                fb.fbpause(h, fb.process_delay);
 
                                 fb.SendMessage(h, "Preview has been stopped");
 
                                 parameters = mCamera.getParameters();
                                 fb.SendMessage(h, "getParameters");
-                                fb.fbpause(h, 1);
+                                fb.fbpause(h, fb.process_delay);
 
                                 try {
                                     parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
@@ -625,7 +648,7 @@ if (fb.Use_Flash) {
                                 }
 
                                 fb.SendMessage(h, "FLASH_MODE_OFF");
-                                fb.fbpause(h, 1);
+                                fb.fbpause(h, fb.process_delay);
                                 try {
                                     mCamera.setParameters(parameters);
                                 } catch (Exception e) {
@@ -636,21 +659,17 @@ if (fb.Use_Flash) {
                             }
 
 
-
-
-
-
                             mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                             fb.SendMessage(h, "Context.AUDIO_SERVICE");
                             mgr.setStreamMute(AudioManager.STREAM_SYSTEM, false);
                             fb.SendMessage(h, "AudioManager.STREAM_SYSTEM");
 
-                            fb.fbpause(h, 5);
+                            fb.fbpause(h, fb.process_delay);
                             fb.SendMail(h, "fotobot.jpg");
                             fb.SendMessage(h, "fb.SendMail: mail sent");
 //                        fb.CloseInternetConnection(getApplicationContext(), h);
 
-                            fb.fbpause(h, fb.Update);
+                            fb.fbpause(h, fb.Photo_Frequency);
 
                         }
                     }

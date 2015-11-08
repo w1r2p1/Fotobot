@@ -29,6 +29,7 @@ public class Tab_Main_Activity extends Activity {
     private int padding = 15;
     CheckBox checkBox_Flash;
     EditText Photo_Frequency;
+    EditText process_delay;
     final String LOG_TAG = "Logs";
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,17 @@ public class Tab_Main_Activity extends Activity {
         LinearLayout.LayoutParams lpView_Flash = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         LinearLayout.LayoutParams lpView_et_Flash = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
+// Flash Container
+        LinearLayout linLayout_process_delay = new LinearLayout(this);
+        linLayout_process_delay.setOrientation(LinearLayout.HORIZONTAL);
+//        linLayout_Flash.setBackgroundColor(Color.parseColor("#00ff00"));
+        LinearLayout.LayoutParams lpView_process_delay = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams lpView_process_delay_m = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+
+
+
+
 
 // Second Container (Horizontal LinearLayout)
         LinearLayout linLayout2 = new LinearLayout(this);
@@ -83,10 +95,6 @@ public class Tab_Main_Activity extends Activity {
       //  tv.setTextColor(Color.WHITE);
         linLayout1.addView(tv);
 
-
-
-
-
 // EditText
         Photo_Frequency = new EditText(this);
         Photo_Frequency.setLayoutParams(lpView_et);
@@ -98,6 +106,47 @@ public class Tab_Main_Activity extends Activity {
      //   editText_JPEG_Compression.setBackgroundColor(Color.parseColor("#92adb1"));
         linLayout1.addView(Photo_Frequency);
 
+
+
+
+
+
+        // process delay
+        TextView tv_process_delay = new TextView(this);
+        tv_process_delay.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_process_delay.setTextSize(14);
+        tv_process_delay.setTextColor(Color.BLACK);
+        tv_process_delay.setText("Интервал между процессами(сек)");
+        tv_process_delay.setWidth((screenWidth - padding) / 100 * 80);
+        tv_process_delay.setLayoutParams(lpView);
+        tv_process_delay.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_process_delay.setTextSize(14);
+        //  tv.setTextColor(Color.WHITE);
+        linLayout_process_delay.addView(tv_process_delay);
+
+// EditText
+        process_delay = new EditText(this);
+        process_delay.setLayoutParams(lpView_et);
+        process_delay.setText(Integer.toString(fb.process_delay));
+        ViewGroup.LayoutParams lp_process_delay = process_delay.getLayoutParams();
+        lp_process_delay.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 80);
+        process_delay.setLayoutParams(lp);
+        process_delay.setGravity(Gravity.RIGHT);
+        //   editText_JPEG_Compression.setBackgroundColor(Color.parseColor("#92adb1"));
+        linLayout_process_delay.addView(process_delay);
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Apply Button
         Button btn = new Button(this);
         btn.setText("Применить");
@@ -108,15 +157,8 @@ public class Tab_Main_Activity extends Activity {
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
 
-
-
-
-
                 editor.putInt("Photo_Frequency", Integer.parseInt(Photo_Frequency.getText().toString()));
-
-
-
-
+                editor.putInt("process_delay", Integer.parseInt(process_delay.getText().toString()));
 
 // Save the changes in SharedPreferences
                 editor.commit(); // commit changes
@@ -141,6 +183,7 @@ public class Tab_Main_Activity extends Activity {
         linLayout2.addView(btn_mp, lpViewbutton);
 
         FullFrame.addView(linLayout1);
+        FullFrame.addView(linLayout_process_delay);
         FullFrame.addView(linLayout_Flash);
         FullFrame.addView(linLayout2);
 
@@ -162,6 +205,7 @@ public class Tab_Main_Activity extends Activity {
         final FotoBot fb = (FotoBot) getApplicationContext();
         fb.LoadData();
         Photo_Frequency.setText(Integer.toString(fb.Photo_Frequency));
+        process_delay.setText(Integer.toString(fb.process_delay));
     }
 
     protected void onRestart() {

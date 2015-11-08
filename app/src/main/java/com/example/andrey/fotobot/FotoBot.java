@@ -28,7 +28,8 @@ public class FotoBot extends Application {
     /**
      * Интервал фотографирования (в секундах)
      */
-    public int Update;
+    public int Photo_Frequency;
+  //  public int Update;
     /**
      * Нужно ли использовать Wi-Fi для выхода в Internet
      */
@@ -51,7 +52,7 @@ public class FotoBot extends Application {
      */
     public String Image_Scale = "1/4";
 
-    public int Photo_Frequency;
+
 
     /**
      * вспомогательная почта для отправки писем
@@ -72,6 +73,8 @@ public class FotoBot extends Application {
      * Соединятся с Internet один раз или на каждом шаге
      */
     public String Network_Connection_Method;
+
+    public int process_delay = 3;
 
     public int status = 1;
 
@@ -283,11 +286,12 @@ public class FotoBot extends Application {
      * @param str
      */
     public void SendMail(Handler h, String str) {
-        Mail m = new Mail("fotobotmail@gmail.com", "fotobotmailpasswd");
+        final FotoBot fb = (FotoBot) getApplicationContext();
+        Mail m = new Mail(fb.EMail_Sender, fb.EMail_Sender_Password);
 
-        String[] toArr = {"digibolt@mail.ru"};
+        String[] toArr = {fb.EMail_Recepient};
         m.setTo(toArr);
-        m.setFrom("voran.mail@gmail.com");
+        m.setFrom(fb.EMail_Sender);
         m.setSubject("This is an email sent using my Mail JavaMail wrapper from an Android device.");
         m.setBody("Email body.");
         SendMessage(h, "SendMail" + str);
@@ -312,7 +316,7 @@ public class FotoBot extends Application {
             m.addAttachment(str);
 
             try {
-                TimeUnit.SECONDS.sleep(9);
+                TimeUnit.SECONDS.sleep(3);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -370,6 +374,8 @@ public class FotoBot extends Application {
         JPEG_Compression = pref.getInt("JPEG_Compression", 50);
 
         Photo_Frequency = pref.getInt("Photo_Frequency", 60);
+
+        process_delay = pref.getInt("process_delay", 60);
 
         Image_Scale = pref.getString("Image_Scale","1/4");
 
