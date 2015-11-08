@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
+import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -38,6 +39,8 @@ public class Tab_Network_Activity extends Activity {
     Spinner spinner1;
     Spinner spinner2;
     EditText editText_email_sender;
+    EditText editText_email_password;
+    EditText editText_email_recepient;
     private CheckBox check_box_flash;
     private EditText edit_text_jpeg_compression;
     private int screenWidth, screenHeight;
@@ -52,7 +55,7 @@ public class Tab_Network_Activity extends Activity {
         super.onCreate(savedInstanceState);
 
         final FotoBot fb = (FotoBot) getApplicationContext();
-
+        fb.LoadData();
         Display display = getWindowManager().getDefaultDisplay();
         screenWidth = display.getWidth();
         screenHeight = display.getHeight();
@@ -125,7 +128,8 @@ public class Tab_Network_Activity extends Activity {
         spinner1 = new Spinner(this);
         ArrayAdapter<String> spinnerArrayAdapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
         spinner1.setAdapter(spinnerArrayAdapter1);
-        spinner1.setSelection(spinnerArrayAdapter1.getPosition("Both"));
+       // spinner1.setSelection(spinnerArrayAdapter1.getPosition("Both"));
+        spinner1.setSelection(getIndex(spinner1, fb.Network_Channel));
         spinner1.setMinimumWidth((screenWidth - padding) / 100 * 50);
         linLayout1.addView(spinner1);
 
@@ -147,7 +151,8 @@ public class Tab_Network_Activity extends Activity {
         spinner2 = new Spinner(this);
         ArrayAdapter<String> spinnerArrayAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray2);
         spinner2.setAdapter(spinnerArrayAdapter2);
-        spinner2.setSelection(spinnerArrayAdapter2.getPosition("На каждом шаге"));
+      //  spinner2.setSelection(spinnerArrayAdapter2.getPosition("На каждом шаге"));
+        spinner2.setSelection(getIndex(spinner2, fb.Network_Connection_Method));
         spinner2.setMinimumWidth((screenWidth - padding) / 100 * 50);
         linLayout_Flash.addView(spinner2);
 
@@ -183,7 +188,7 @@ public class Tab_Network_Activity extends Activity {
         linLayout_email_password.addView(tv_email_password);
 
 // Password
-        final EditText editText_email_password = new EditText(this);
+        editText_email_password = new EditText(this);
         editText_email_password.setLayoutParams(lpView_et);
         editText_email_password.setText(fb.EMail_Sender_Password);
         ViewGroup.LayoutParams lp_password = editText_email_password.getLayoutParams();
@@ -204,7 +209,7 @@ public class Tab_Network_Activity extends Activity {
         linLayout_email_recepient.addView(tv_email_recepient);
 
 // EditText
-        final EditText editText_email_recepient = new EditText(this);
+        editText_email_recepient = new EditText(this);
         editText_email_recepient.setLayoutParams(lpView_et);
         editText_email_recepient.setText(fb.EMail_Recepient);
         ViewGroup.LayoutParams lp_recepient = editText_email_recepient.getLayoutParams();
@@ -368,4 +373,50 @@ public class Tab_Network_Activity extends Activity {
 
     }
 
+    protected void onPause() {
+        super.onPause();
+        final FotoBot fb = (FotoBot) getApplicationContext();
+        fb.LoadData();
+        spinner1.setSelection(getIndex(spinner1, fb.Network_Channel));
+        spinner2.setSelection(getIndex(spinner2, fb.Network_Connection_Method));
+        editText_email_sender.setText(fb.EMail_Sender);
+        editText_email_password.setText(fb.EMail_Sender_Password);
+        editText_email_recepient.setText(fb.EMail_Recepient);
+
+    }
+
+    protected void onRestart() {
+        super.onRestart();
+
+    }
+ /*   protected void onResume(SurfaceHolder holder) {
+        final FotoBot fb = (FotoBot) getApplicationContext();
+        fb.LoadData();
+        spinner1.setSelection(getIndex(spinner1, fb.Network_Channel));
+        spinner2.setSelection(getIndex(spinner1, fb.Network_Connection_Method));
+        editText_email_sender.setText(fb.EMail_Sender);
+        editText_email_password.setText(fb.EMail_Sender_Password);
+        editText_email_recepient.setText(fb.EMail_Recepient);
+    }
+*/
+
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+    }
+
+
+    //private method of your class
+    private int getIndex(Spinner spinner, String myString)
+    {
+        int index = 0;
+
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
 }

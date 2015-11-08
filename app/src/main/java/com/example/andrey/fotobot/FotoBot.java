@@ -357,6 +357,10 @@ public class FotoBot extends Application {
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
 
+        Network_Channel = pref.getString("Network_Channel", "Both");
+
+        Network_Connection_Method = pref.getString("Network_Connection_Method", "На каждом шаге");
+
         Use_WiFi = pref.getBoolean("Use_WiFi", true);         // getting boolean
 
         Use_Mobile_Data = pref.getBoolean("Use_Mobile_Data", true);         // getting boolean
