@@ -294,15 +294,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             Log.d(LOG_TAG, "***** fOut.flush();  + getUsedMemorySize()");
 
-            try {
-                FileOutputStream fstream = openFileOutput("mytextfile.txt", MODE_PRIVATE | MODE_APPEND);
-                OutputStreamWriter outputWriter = new OutputStreamWriter(fstream);
-                outputWriter.write("flushstream");
-                outputWriter.flush();
-                outputWriter.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+          //  try {
+          //      FileOutputStream fstream = openFileOutput("mytextfile.txt", MODE_PRIVATE | MODE_APPEND);
+          //      OutputStreamWriter outputWriter = new OutputStreamWriter(fstream);
+          //      outputWriter.write("flushstream");
+          //      outputWriter.flush();
+          //      outputWriter.close();
+          //  } catch (Exception e) {
+          //      e.printStackTrace();
+           // }
 
           //  fb.fbpause(h,5);
 
@@ -337,11 +337,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             String reportDate = dateformat.format(today);
 
             String message = (String) msg.obj; //Extract the string from the Message
-            log = reportDate + ":    " + message + "\n" + log;
+            log = reportDate + ": " + message + "\n" + log;
 
             tvInfo.setTextSize(14);
             tvInfo.setTypeface(Typeface.MONOSPACE);
-            tvInfo.setTextColor(Color.rgb(90, 90, 90));
+            tvInfo.setTextColor(Color.rgb(150, 150, 150));
 
             tvInfo.setText(log);
 
@@ -613,6 +613,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             fb.LoadData();
 
                             if (fb.getstatus() == 3) {
+                                releaseCamera();
                                 fb.SendMessage(h, "Фотобот остановлен");
                                 return;
                             }
