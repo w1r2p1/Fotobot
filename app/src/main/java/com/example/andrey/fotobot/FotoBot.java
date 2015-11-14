@@ -171,7 +171,7 @@ public class FotoBot extends Application {
      * @return
      */
     public boolean MakeInternetConnection(Context context, Handler h) {
-        fbpause(h, 1);
+        //fbpause(h, 1);
 
         WiFi wf;
         wf = new WiFi();
@@ -234,23 +234,41 @@ public class FotoBot extends Application {
      * @param h
      * @param delay
      */
-        public void fbpause(Handler h, int delay) {
-        String message;
+        public void fbpause(final Handler h, final int delay) {
+        final String message;
 
-        for (int i = 1; i <= delay; i++) {
-            Message msg = Message.obtain(); // Creates an new Message instance
-            message = ". . . . . " + Integer.toString(i);
+          //  SendMessage("Pause for " + delay + " seconds");
 
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            Thread thread = new Thread() {
+                public void run() {
+                    for (int i = 1; i <= delay; i++) {
+                        Message msg = Message.obtain(); // Creates an new Message instance
+                      //  message = ". . . . . " + Integer.toString(i);
 
-            msg.obj = message; // Put the string into Message, into "obj" field.
-            msg.setTarget(h); // Set the Handler
-            //   msg.sendToTarget(); //Send the message
-        }
+                        try {
+                            TimeUnit.SECONDS.sleep(1);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                      //  msg.obj = message; // Put the string into Message, into "obj" field.
+                      //  msg.setTarget(h); // Set the Handler
+                        //   msg.sendToTarget(); //Send the message
+                    }
+                }
+
+            };
+            thread.start();
+
+
+try {
+thread.join();
+} catch (InterruptedException e) {
+    e.printStackTrace();
+}
+
+
+
     }
 
     /**
@@ -298,7 +316,7 @@ public class FotoBot extends Application {
         str = getApplicationContext().getFilesDir().toString() + "/" + str;
         //  str = Environment.getExternalStorageDirectory().getAbsolutePath().toString() + "/fotobot.jpg";;
 
-        SendMessage(h, "SendMail with file path:" + str);
+        //SendMessage(h, "SendMail with file path:" + str);
 
         File attach_file;
         attach_file = new File(str);
@@ -306,7 +324,7 @@ public class FotoBot extends Application {
 
         if (fileExists) {
 
-            SendMessage(h, "SendMail: файл с фото есть: " + attach_file.length());
+            SendMessage(h, "Файл с фото есть: " + attach_file.length());
         } else {
             SendMessage(h, "SendMail: файла с фото нет");
         }
@@ -315,12 +333,13 @@ public class FotoBot extends Application {
 
             m.addAttachment(str);
 
-            try {
-                TimeUnit.SECONDS.sleep(3);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+         //   try {
+         //       TimeUnit.SECONDS.sleep(3);
+         //   } catch (InterruptedException e) {
+         //       e.printStackTrace();
+         //   }
 
+            fbpause(h,process_delay);
 
             if (m.send()) {
                 //  Toast.makeText(MailApp.this, "Email was sent successfully.", Toast.LENGTH_LONG).show();
@@ -386,27 +405,7 @@ public class FotoBot extends Application {
         EMail_Recepient = pref.getString("EMail_Recepient", "user@mail.ru");
     }
 
-    /**
-     * Инициализируем глобальные переменные значениями из SharedPreferences и выводим отладочную информацию на экран
-     */
-    public void LoadData(Handler h) {
-        /******* Create SharedPreferences *******/
 
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-
-        Use_WiFi = pref.getBoolean("Use_WiFi", true);         // getting boolean
-        SendMessage(h, "LoadData: Use_WiFi " + Use_WiFi);
-        Use_Mobile_Data = pref.getBoolean("Use_Mobile_Data", true);         // getting boolean
-        SendMessage(h, "LoadData: Use_Mobile_Data " + Use_Mobile_Data);
-        Use_Flash = pref.getBoolean("Use_Flash", true);
-        SendMessage(h, "LoadData: Use_Flash " + Use_Flash);
-        JPEG_Compression = pref.getInt("JPEG_Compression", 50);
-        SendMessage(h, "LoadData: JPEG_Compression " + JPEG_Compression);
-        Photo_Frequency = pref.getInt("Photo_Frequency", 60);
-        SendMessage(h, "LoadData: Photo_Frequency " + Photo_Frequency);
-
-    }
 }
 
 

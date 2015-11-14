@@ -120,13 +120,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     }
 
     /**
-     * sets what code should be executed after the picture is taken
+     * постобработка фото
      */
     Camera.PictureCallback mCall = new Camera.PictureCallback() {
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
             final FotoBot fb = (FotoBot) getApplicationContext();
-            fb.LoadData(h);
+//            fb.SendMessage("Camera.PictureCallback is started");
+            fb.LoadData();
 
             PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
             PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
@@ -157,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             options.inSampleSize = 8;
 
-            /*
+
             switch (fb.Image_Scale) {
                 case "1/16":
                     options.inSampleSize = 16;
@@ -176,21 +177,27 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                     break;
             }
 
-*/
+            //fb.SendMessage("options.inSampleSize = " + options.inSampleSize);
+
             options.inPreferredConfig = Bitmap.Config.RGB_565;
 
             Log.d(LOG_TAG, "***** Options are defined: " + getUsedMemorySize());
 
+            //fb.SendMessage("BitmapFactory.decodeByteArray is started");
 
             bmp = BitmapFactory.decodeByteArray(data, 0, data.length, options);
 
+            //fb.SendMessage("BitmapFactory.decodeByteArray finished");
+
             Log.d(LOG_TAG, "***** BitmapFactory.decodeByteArray(data,0,data.length,options) done " + getUsedMemorySize());
 
-            try {
-                TimeUnit.SECONDS.sleep(5);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+           // fb.fbpause(h,5);
+
+          //  try {
+          //      TimeUnit.SECONDS.sleep(5);
+          //  } catch (InterruptedException e) {
+          //      e.printStackTrace();
+          //  }
 
 
             // String fullPath = Environment.getExternalStorageDirectory().getAbsolutePath();
@@ -203,7 +210,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             //         dir.mkdirs();
             //     }
 
-            OutputStream fOut = null;
+            FileOutputStream fOut = null;
             File file = new File(getApplicationContext().getFilesDir(), "fotobot.jpg");
 
             try {
@@ -216,31 +223,47 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
             //     Bitmap bmp_m = bmp.createScaledBitmap(bmp, 320,
             //           240, false);
 
-            try {
-                TimeUnit.SECONDS.sleep(5);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+          //  fb.fbpause(h,5);
+
+         //   try {
+         //       TimeUnit.SECONDS.sleep(5);
+         //   } catch (InterruptedException e) {
+         //       e.printStackTrace();
+         //   }
 
             Log.d(LOG_TAG, "***** fotobot.jpg is created) done " + getUsedMemorySize());
 
 // 100 means no compression, the lower you go, the stronger the compression
+
+           // fb.SendMessage("Bitmap.CompressFormat started");
+
             bmp.compress(Bitmap.CompressFormat.JPEG, fb.JPEG_Compression, fOut);
+
+          //  fb.SendMessage("Bitmap.CompressFormat finished");
 
             Log.d(LOG_TAG, "***** bmp.compress(Bitmap.CompressFormat.JPEG, 50, fOut); " + getUsedMemorySize());
 
-            try {
-                TimeUnit.SECONDS.sleep(3);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+           // fb.fbpause(h,3);
+
+           // try {
+           //     TimeUnit.SECONDS.sleep(3);
+           // } catch (InterruptedException e) {
+           //     e.printStackTrace();
+           // }
 
             try {
                 fOut.flush();
 
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            try {
+                fOut.getFD().sync();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -259,11 +282,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
 
 
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+          //  try {
+          //      TimeUnit.SECONDS.sleep(1);
+          //  } catch (InterruptedException e) {
+         //       e.printStackTrace();
+          //  }
 
             bmp.recycle();
 
@@ -281,11 +304,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 e.printStackTrace();
             }
 
-            try {
-                TimeUnit.SECONDS.sleep(5);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+          //  fb.fbpause(h,5);
+
+         //   try {
+         //       TimeUnit.SECONDS.sleep(5);
+         //   } catch (InterruptedException e) {
+         //       e.printStackTrace();
+         //   }
 
             //  } catch (Exception e) {
             //    Log.e("saveToExternalStorage()", e.getMessage());
@@ -314,9 +339,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             String message = (String) msg.obj; //Extract the string from the Message
             log = reportDate + ":    " + message + "\n" + log;
 
-            tvInfo.setTextSize(12);
-            tvInfo.setTypeface(Typeface.SANS_SERIF);
-            tvInfo.setTextColor(Color.rgb(5, 5, 5));
+            tvInfo.setTextSize(14);
+            tvInfo.setTypeface(Typeface.MONOSPACE);
+            tvInfo.setTextColor(Color.rgb(90, 90, 90));
 
             tvInfo.setText(log);
 
@@ -409,15 +434,17 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
          */
         fb.h = h;
 
-        if (fb.isExternalStorageWritable()) {
-            fb.SendMessage("Внешняя SD карта доступна для чтения и записи");
-        } else {
-            fb.SendMessage(h, "Внешняя SD карта не доступна для записи");
-        }
-        //    context.getFilesDir()
-        fb.SendMessage(h, "getFilesDir" + getApplicationContext().getFilesDir().toString());
-        fb.SendMessage(h, "getExternalStorageDirectory()" + Environment.getExternalStorageDirectory().toString());
+    //    if (fb.isExternalStorageWritable()) {
+    //        fb.SendMessage("Внешняя SD карта доступна для чтения и записи");
+    //    } else {
+    //        fb.SendMessage(h, "Внешняя SD карта не доступна для записи");
+    //    }
 
+        //    context.getFilesDir()
+
+    //    fb.SendMessage(h, "getFilesDir" + getApplicationContext().getFilesDir().toString());
+    //    fb.SendMessage(h, "getExternalStorageDirectory()" + Environment.getExternalStorageDirectory().toString());
+    //
         //  fb.SendMessage(h, "EXTERNAL_STORAGE" + System.getenv("EXTERNAL_STORAGE"));
         //  fb.SendMessage(h, "SECONDARY_STORAGE" + System.getenv("SECONDARY_STORAGE"));
     }
@@ -583,7 +610,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                         fb.MakeInternetConnection(getApplicationContext(), h);
 
                         for (int i = 1; i <= 1000; i++) {
-                            fb.LoadData(h);
+                            fb.LoadData();
 
                             if (fb.getstatus() == 3) {
                                 fb.SendMessage(h, "Фотобот остановлен");
@@ -623,7 +650,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             }
 
                             mCamera.takePicture(null, null, mCall);
-                            fb.SendMessage(h, "Picture has been taken");
+                            fb.SendMessage("Фото сделано");
 
 
                             fb.fbpause(h, fb.process_delay);
@@ -633,12 +660,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 mCamera.stopPreview();
 
 
-                                fb.fbpause(h, fb.process_delay);
+                            //    fb.fbpause(h, fb.process_delay);
 
-                                fb.SendMessage(h, "Preview has been stopped");
+                              //  fb.SendMessage(h, "Preview has been stopped");
 
                                 parameters = mCamera.getParameters();
-                                fb.SendMessage(h, "getParameters");
+                             //   fb.SendMessage(h, "getParameters");
                                 fb.fbpause(h, fb.process_delay);
 
                                 try {
@@ -647,26 +674,26 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     fb.SendMessage(h, "Camera.Parameters.FLASH_MODE_OFF error");
                                 }
 
-                                fb.SendMessage(h, "FLASH_MODE_OFF");
-                                fb.fbpause(h, fb.process_delay);
+                             //   fb.SendMessage(h, "FLASH_MODE_OFF");
+                             //   fb.fbpause(h, fb.process_delay);
                                 try {
                                     mCamera.setParameters(parameters);
                                 } catch (Exception e) {
                                     fb.SendMessage(h, "setParameters error");
                                 }
 
-                                fb.SendMessage(h, "setParameters");
+                          //      fb.SendMessage(h, "setParameters");
                             }
 
 
                             mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-                            fb.SendMessage(h, "Context.AUDIO_SERVICE");
+                           // fb.SendMessage(h, "Context.AUDIO_SERVICE");
                             mgr.setStreamMute(AudioManager.STREAM_SYSTEM, false);
-                            fb.SendMessage(h, "AudioManager.STREAM_SYSTEM");
+                           // fb.SendMessage(h, "AudioManager.STREAM_SYSTEM");
 
-                            fb.fbpause(h, fb.process_delay);
+                         //   fb.fbpause(h, fb.process_delay);
                             fb.SendMail(h, "fotobot.jpg");
-                            fb.SendMessage(h, "fb.SendMail: mail sent");
+                           // fb.SendMessage(h, "fb.SendMail: mail sent");
 //                        fb.CloseInternetConnection(getApplicationContext(), h);
 
                             fb.fbpause(h, fb.Photo_Frequency);
@@ -703,7 +730,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     }
 
-    public void fbpause(int delay) {
+/*    public void fbpause(int delay) {
         String message;
 
         for (int i = 1; i <= delay; i++) {
@@ -721,7 +748,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             //   msg.sendToTarget(); //Send the message
         }
     }
-
+*/
     @Override
     public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
 
