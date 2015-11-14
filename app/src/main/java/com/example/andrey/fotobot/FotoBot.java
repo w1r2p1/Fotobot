@@ -312,7 +312,7 @@ thread.join();
         m.setFrom(fb.EMail_Sender);
         m.setSubject("This is an email sent using my Mail JavaMail wrapper from an Android device.");
         m.setBody("Email body.");
-        SendMessage(h, "SendMail" + str);
+      //  SendMessage(h, "SendMail" + str);
         str = getApplicationContext().getFilesDir().toString() + "/" + str;
         //  str = Environment.getExternalStorageDirectory().getAbsolutePath().toString() + "/fotobot.jpg";;
 
@@ -324,7 +324,7 @@ thread.join();
 
         if (fileExists) {
 
-            SendMessage(h, "Файл с фото есть: " + attach_file.length());
+            SendMessage(h, "Фото на диске: " + attach_file.length() + "байт");
         } else {
             SendMessage(h, "SendMail: файла с фото нет");
         }
@@ -343,7 +343,7 @@ thread.join();
 
             if (m.send()) {
                 //  Toast.makeText(MailApp.this, "Email was sent successfully.", Toast.LENGTH_LONG).show();
-                SendMessage(h, "Email was sent successfully.");
+                SendMessage(h, "Фото выслано на почту");
             } else {
                 // Toast.makeText(MailApp.this, "Email was not sent.", Toast.LENGTH_LONG).show();
                 SendMessage(h, "Email was not sent.");

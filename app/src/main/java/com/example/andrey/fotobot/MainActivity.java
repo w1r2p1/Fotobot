@@ -9,7 +9,6 @@ import android.graphics.Typeface;
 import android.hardware.Camera;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
@@ -27,13 +26,10 @@ import android.widget.TextView;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
@@ -98,7 +94,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
      *
      * @return используемая память
      */
-    public static long getUsedMemorySize() {
+    public long getUsedMemorySize() {
+        final FotoBot fb = (FotoBot) getApplicationContext();
         final String LOG_USED_MEMORY = "UsedMem";
 
         long freeSize = 0L;
@@ -109,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             freeSize = info.freeMemory();
             totalSize = info.totalMemory();
             usedSize = totalSize - freeSize;
-
+            fb.SendMessage("MEMORY (TOTAL/FREE/USED MB)" + totalSize + "/" + freeSize + "/" + usedSize );
             Log.d(LOG_USED_MEMORY, "***** totalSize, freeSize, usedSize  " + totalSize + ";" + freeSize + ";" + usedSize);
 
         } catch (Exception e) {
@@ -191,13 +188,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             Log.d(LOG_TAG, "***** BitmapFactory.decodeByteArray(data,0,data.length,options) done " + getUsedMemorySize());
 
-           // fb.fbpause(h,5);
+            // fb.fbpause(h,5);
 
-          //  try {
-          //      TimeUnit.SECONDS.sleep(5);
-          //  } catch (InterruptedException e) {
-          //      e.printStackTrace();
-          //  }
+            //  try {
+            //      TimeUnit.SECONDS.sleep(5);
+            //  } catch (InterruptedException e) {
+            //      e.printStackTrace();
+            //  }
 
 
             // String fullPath = Environment.getExternalStorageDirectory().getAbsolutePath();
@@ -227,33 +224,33 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             //     Bitmap bmp_m = bmp.createScaledBitmap(bmp, 320,
             //           240, false);
 
-          //  fb.fbpause(h,5);
+            //  fb.fbpause(h,5);
 
-         //   try {
-         //       TimeUnit.SECONDS.sleep(5);
-         //   } catch (InterruptedException e) {
-         //       e.printStackTrace();
-         //   }
+            //   try {
+            //       TimeUnit.SECONDS.sleep(5);
+            //   } catch (InterruptedException e) {
+            //       e.printStackTrace();
+            //   }
 
             Log.d(LOG_TAG, "***** fotobot.jpg is created) done " + getUsedMemorySize());
 
 // 100 means no compression, the lower you go, the stronger the compression
 
-           // fb.SendMessage("Bitmap.CompressFormat started");
+            // fb.SendMessage("Bitmap.CompressFormat started");
 
             bmp.compress(Bitmap.CompressFormat.JPEG, fb.JPEG_Compression, fOut);
 
-          //  fb.SendMessage("Bitmap.CompressFormat finished");
+            //  fb.SendMessage("Bitmap.CompressFormat finished");
 
             Log.d(LOG_TAG, "***** bmp.compress(Bitmap.CompressFormat.JPEG, 50, fOut); " + getUsedMemorySize());
 
-           // fb.fbpause(h,3);
+            // fb.fbpause(h,3);
 
-           // try {
-           //     TimeUnit.SECONDS.sleep(3);
-           // } catch (InterruptedException e) {
-           //     e.printStackTrace();
-           // }
+            // try {
+            //     TimeUnit.SECONDS.sleep(3);
+            // } catch (InterruptedException e) {
+            //     e.printStackTrace();
+            // }
 
             try {
                 fOut.flush();
@@ -282,11 +279,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
 
 
-          //  try {
-          //      TimeUnit.SECONDS.sleep(1);
-          //  } catch (InterruptedException e) {
-         //       e.printStackTrace();
-          //  }
+            //  try {
+            //      TimeUnit.SECONDS.sleep(1);
+            //  } catch (InterruptedException e) {
+            //       e.printStackTrace();
+            //  }
 
             bmp.recycle();
 
@@ -294,23 +291,23 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             Log.d(LOG_TAG, "***** fOut.flush();  + getUsedMemorySize()");
 
-          //  try {
-          //      FileOutputStream fstream = openFileOutput("mytextfile.txt", MODE_PRIVATE | MODE_APPEND);
-          //      OutputStreamWriter outputWriter = new OutputStreamWriter(fstream);
-          //      outputWriter.write("flushstream");
-          //      outputWriter.flush();
-          //      outputWriter.close();
-          //  } catch (Exception e) {
-          //      e.printStackTrace();
-           // }
+            //  try {
+            //      FileOutputStream fstream = openFileOutput("mytextfile.txt", MODE_PRIVATE | MODE_APPEND);
+            //      OutputStreamWriter outputWriter = new OutputStreamWriter(fstream);
+            //      outputWriter.write("flushstream");
+            //      outputWriter.flush();
+            //      outputWriter.close();
+            //  } catch (Exception e) {
+            //      e.printStackTrace();
+            // }
 
-          //  fb.fbpause(h,5);
+            //  fb.fbpause(h,5);
 
-         //   try {
-         //       TimeUnit.SECONDS.sleep(5);
-         //   } catch (InterruptedException e) {
-         //       e.printStackTrace();
-         //   }
+            //   try {
+            //       TimeUnit.SECONDS.sleep(5);
+            //   } catch (InterruptedException e) {
+            //       e.printStackTrace();
+            //   }
 
             //  } catch (Exception e) {
             //    Log.e("saveToExternalStorage()", e.getMessage());
@@ -434,17 +431,17 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
          */
         fb.h = h;
 
-    //    if (fb.isExternalStorageWritable()) {
-    //        fb.SendMessage("Внешняя SD карта доступна для чтения и записи");
-    //    } else {
-    //        fb.SendMessage(h, "Внешняя SD карта не доступна для записи");
-    //    }
+        //    if (fb.isExternalStorageWritable()) {
+        //        fb.SendMessage("Внешняя SD карта доступна для чтения и записи");
+        //    } else {
+        //        fb.SendMessage(h, "Внешняя SD карта не доступна для записи");
+        //    }
 
         //    context.getFilesDir()
 
-    //    fb.SendMessage(h, "getFilesDir" + getApplicationContext().getFilesDir().toString());
-    //    fb.SendMessage(h, "getExternalStorageDirectory()" + Environment.getExternalStorageDirectory().toString());
-    //
+        //    fb.SendMessage(h, "getFilesDir" + getApplicationContext().getFilesDir().toString());
+        //    fb.SendMessage(h, "getExternalStorageDirectory()" + Environment.getExternalStorageDirectory().toString());
+        //
         //  fb.SendMessage(h, "EXTERNAL_STORAGE" + System.getenv("EXTERNAL_STORAGE"));
         //  fb.SendMessage(h, "SECONDARY_STORAGE" + System.getenv("SECONDARY_STORAGE"));
     }
@@ -606,10 +603,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                         wakeLock.acquire();
 
                         fb.SendMessage("Фотобот начинает свою работу");
-
+                        getUsedMemorySize();
                         fb.MakeInternetConnection(getApplicationContext(), h);
 
-                        for (int i = 1; i <= 1000; i++) {
+                        for (int i = 1; i <= 1000000000; i++) {
                             fb.LoadData();
 
                             if (fb.getstatus() == 3) {
@@ -661,12 +658,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 mCamera.stopPreview();
 
 
-                            //    fb.fbpause(h, fb.process_delay);
+                                //    fb.fbpause(h, fb.process_delay);
 
-                              //  fb.SendMessage(h, "Preview has been stopped");
+                                //  fb.SendMessage(h, "Preview has been stopped");
 
                                 parameters = mCamera.getParameters();
-                             //   fb.SendMessage(h, "getParameters");
+                                //   fb.SendMessage(h, "getParameters");
                                 fb.fbpause(h, fb.process_delay);
 
                                 try {
@@ -675,29 +672,31 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     fb.SendMessage(h, "Camera.Parameters.FLASH_MODE_OFF error");
                                 }
 
-                             //   fb.SendMessage(h, "FLASH_MODE_OFF");
-                             //   fb.fbpause(h, fb.process_delay);
+                                //   fb.SendMessage(h, "FLASH_MODE_OFF");
+                                //   fb.fbpause(h, fb.process_delay);
                                 try {
                                     mCamera.setParameters(parameters);
                                 } catch (Exception e) {
                                     fb.SendMessage(h, "setParameters error");
                                 }
 
-                          //      fb.SendMessage(h, "setParameters");
+                                //      fb.SendMessage(h, "setParameters");
                             }
 
 
                             mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-                           // fb.SendMessage(h, "Context.AUDIO_SERVICE");
+                            // fb.SendMessage(h, "Context.AUDIO_SERVICE");
                             mgr.setStreamMute(AudioManager.STREAM_SYSTEM, false);
-                           // fb.SendMessage(h, "AudioManager.STREAM_SYSTEM");
+                            // fb.SendMessage(h, "AudioManager.STREAM_SYSTEM");
 
-                         //   fb.fbpause(h, fb.process_delay);
+                            //   fb.fbpause(h, fb.process_delay);
                             fb.SendMail(h, "fotobot.jpg");
-                           // fb.SendMessage(h, "fb.SendMail: mail sent");
+                            // fb.SendMessage(h, "fb.SendMail: mail sent");
 //                        fb.CloseInternetConnection(getApplicationContext(), h);
-
+                           // getUsedMemorySize();
+                            fb.SendMessage("\n");
                             fb.fbpause(h, fb.Photo_Frequency);
+
 
                         }
                     }
@@ -731,25 +730,25 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     }
 
-/*    public void fbpause(int delay) {
-        String message;
+    /*    public void fbpause(int delay) {
+            String message;
 
-        for (int i = 1; i <= delay; i++) {
-            Message msg = Message.obtain(); // Creates an new Message instance
-            message = ". . . . . " + Integer.toString(i);
+            for (int i = 1; i <= delay; i++) {
+                Message msg = Message.obtain(); // Creates an new Message instance
+                message = ". . . . . " + Integer.toString(i);
 
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                msg.obj = message; // Put the string into Message, into "obj" field.
+                msg.setTarget(h); // Set the Handler
+                //   msg.sendToTarget(); //Send the message
             }
-
-            msg.obj = message; // Put the string into Message, into "obj" field.
-            msg.setTarget(h); // Set the Handler
-            //   msg.sendToTarget(); //Send the message
         }
-    }
-*/
+    */
     @Override
     public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
 
