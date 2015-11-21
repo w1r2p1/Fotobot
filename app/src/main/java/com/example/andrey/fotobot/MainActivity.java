@@ -14,6 +14,7 @@ import android.os.Message;
 import android.os.PowerManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+//import android.util.Size;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SurfaceHolder;
@@ -30,6 +31,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
@@ -106,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             freeSize = info.freeMemory();
             totalSize = info.totalMemory();
             usedSize = totalSize - freeSize;
-            fb.SendMessage("MEMORY (TOTAL/FREE/USED MB)" + totalSize + "/" + freeSize + "/" + usedSize );
+        //    fb.SendMessage("MEMORY (TOTAL/FREE/USED MB)" + totalSize + "/" + freeSize + "/" + usedSize );
             Log.d(LOG_USED_MEMORY, "***** totalSize, freeSize, usedSize  " + totalSize + ";" + freeSize + ";" + usedSize);
 
         } catch (Exception e) {
@@ -603,11 +605,18 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                         wakeLock.acquire();
 
                         fb.SendMessage("Фотобот начинает свою работу");
-                        getUsedMemorySize();
-                        fb.MakeInternetConnection(getApplicationContext(), h);
+                      //  getUsedMemorySize();
+
+                       // if (fb.Network_Connection_Method == "В самом начале") {
+                            fb.MakeInternetConnection(getApplicationContext(), h);
+                       // }
 
                         for (int i = 1; i <= 1000000000; i++) {
                             fb.LoadData();
+
+                         //   if (fb.Network_Connection_Method == "На каждом шаге") {
+                         //       fb.MakeInternetConnection(getApplicationContext(), h);
+                         //   }
 
                             if (fb.getstatus() == 3) {
                                 releaseCamera();
@@ -646,6 +655,44 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                                 fb.fbpause(h, fb.process_delay);
                             }
+
+
+
+
+
+
+//
+                           // mCamera = Camera.open();
+                            Camera.Parameters params = mCamera.getParameters();
+// Check what resolutions are supported by your camera
+                            List<Camera.Size> sizes = params.getSupportedPictureSizes();
+
+// Iterate through all available resolutions and choose one.
+// The chosen resolution will be stored in mSize.
+                           Camera.Size mSize = null;
+                            for (Camera.Size size : sizes) {
+                                Log.i(LOG_TAG, "Available resolution: "+size.width+" "+size.height);
+                             //   if (wantToUseThisResolution(size)) {
+                                   mSize = size;
+                             //       break;
+                              //  }
+                            }
+
+                          //  Log.i(TAG, "Chosen resolution: "+mSize.width+" "+mSize.height);
+                            params.setPictureSize(mSize.width, mSize.height);
+                            mCamera.setParameters(params);
+fb.SendMessage("Chosen resolution: "+mSize.width+" "+mSize.height);
+
+
+//
+
+
+
+
+
+
+
+
 
                             mCamera.takePicture(null, null, mCall);
                             fb.SendMessage("Фото сделано");
@@ -698,6 +745,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             fb.fbpause(h, fb.Photo_Frequency);
 
 
+                        }
+                        if (fb.Network_Connection_Method == "На каждом шаге") {
+                            fb.CloseInternetConnection(getApplicationContext(), h);
                         }
                     }
 

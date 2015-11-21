@@ -181,37 +181,81 @@ public class FotoBot extends Application {
         MobileData md;
         md = new MobileData();
 
-        if (!(isOnline(h) && getData(h))) {
-            SendMessage(h, "Для начала включим Wi-Fi");
-            wf.setWiFiEnabled(getApplicationContext(), true);
-            fbpause(h, 5);
-            SendMessage(h, "Wi-Fi включается долго,\nнужно подождать");
-            fbpause(h, 5);
+        if (Network_Channel == "Wi-Fi") {
+            SendMessage(h, "Метод подключения Wi-Fi");
+            if (!(isOnline(h) && getData(h))) {
+                SendMessage(h, "Включаем Wi-Fi");
+                wf.setWiFiEnabled(getApplicationContext(), true);
+                fbpause(h, 5);
+                SendMessage(h, "Wi-Fi включается долго,\nнужно подождать");
+                fbpause(h, 5);
 
+
+                if ((isOnline(h) && getData(h))) {
+                    SendMessage(h, "Ура! Связь с Internet появилась!");
+                    return true;
+                }
+
+            }
+
+        }
+
+        if (Network_Channel == "Mobile Data") {
+            SendMessage(h, "Метод подключения MobileData");
+            if (!(isOnline(h) && getData(h)) ) {
+                SendMessage(h, "По Wi-Fi нет связи,\nвключаем Mobile Data");
+                wf.setWiFiEnabled(getApplicationContext(), false);
+                fbpause(h, 5);
+                md.setMobileDataEnabled(getApplicationContext(), true);
+                fbpause(h, 5);
+            }
 
             if ((isOnline(h) && getData(h))) {
                 SendMessage(h, "Ура! Связь с Internet появилась!");
                 return true;
             } else {
-                wf_connect_attempt = true;
+                return false;
             }
 
         }
 
-        if (!(isOnline(h) && getData(h)) && wf_connect_attempt) {
-            SendMessage(h, "По Wi-Fi нет связи,\nвключаем Mobile Data");
-            wf.setWiFiEnabled(getApplicationContext(), false);
-            fbpause(h, 5);
-            md.setMobileDataEnabled(getApplicationContext(), true);
-            fbpause(h, 5);
-        }
 
-        if ((isOnline(h) && getData(h))) {
-            SendMessage(h, "Ура! Связь с Internet появилась!");
-            return true;
-        } else {
-            return false;
+        if (Network_Channel == "Both") {
+            SendMessage(h, "Метод подключения Both");
+            if (!(isOnline(h) && getData(h))) {
+                SendMessage(h, "Включаем Wi-Fi");
+                wf.setWiFiEnabled(getApplicationContext(), true);
+                fbpause(h, 5);
+                SendMessage(h, "Wi-Fi включается долго,\nнужно подождать");
+                fbpause(h, 5);
+
+
+                if ((isOnline(h) && getData(h))) {
+                    SendMessage(h, "Ура! Связь с Internet появилась!");
+                    return true;
+                } else {
+                    wf_connect_attempt = true;
+                }
+
+            }
+
+            if (!(isOnline(h) && getData(h)) && wf_connect_attempt) {
+                SendMessage(h, "По Wi-Fi нет связи,\nвключаем Mobile Data");
+                wf.setWiFiEnabled(getApplicationContext(), false);
+                fbpause(h, 5);
+                md.setMobileDataEnabled(getApplicationContext(), true);
+                fbpause(h, 5);
+            }
+
+            if ((isOnline(h) && getData(h))) {
+                SendMessage(h, "Ура! Связь с Internet появилась!");
+                return true;
+            } else {
+                return false;
+            }
+
         }
+        return false;
     }
 
     /** FotoBot может самостоятельно отключаться от Internet
