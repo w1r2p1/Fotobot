@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
@@ -132,11 +133,24 @@ public class Tab_Foto_Activity  extends Activity {
 
 //Spinner1
         ArrayList<String> spinnerArray = new ArrayList<String>();
-        spinnerArray.add("1/16");
-        spinnerArray.add("1/8");
-        spinnerArray.add("1/4");
-        spinnerArray.add("1/2");
-        spinnerArray.add("1");
+
+        Camera.Size mSize = null;
+        for (Camera.Size size : fb.camera_resolutions) {
+            spinnerArray.add(size.width+"x"+size.height);
+          //  Log.i(LOG_TAG, "Available resolution: " +size.width+" "+size.height);
+            //   if (wantToUseThisResolution(size)) {
+          //  mSize = size;
+            //       break;
+            //  }
+        }
+
+
+
+ //       spinnerArray.add("1/16");
+ //       spinnerArray.add("1/8");
+ //       spinnerArray.add("1/4");
+ //       spinnerArray.add("1/2");
+ //       spinnerArray.add("1");
 
         spinner1 = new Spinner(this);
         spinnerArrayAdapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);

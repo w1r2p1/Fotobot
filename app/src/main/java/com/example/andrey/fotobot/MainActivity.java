@@ -607,16 +607,16 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                         fb.SendMessage("Фотобот начинает свою работу");
                       //  getUsedMemorySize();
 
-                       // if (fb.Network_Connection_Method == "В самом начале") {
+                       if (fb.Network_Connection_Method == "Method1") {
                             fb.MakeInternetConnection(getApplicationContext(), h);
-                       // }
+                        }
 
                         for (int i = 1; i <= 1000000000; i++) {
                             fb.LoadData();
 
-                         //   if (fb.Network_Connection_Method == "На каждом шаге") {
-                         //       fb.MakeInternetConnection(getApplicationContext(), h);
-                         //   }
+                            if (fb.Network_Connection_Method == "Method2") {
+                                fb.MakeInternetConnection(getApplicationContext(), h);
+                            }
 
                             if (fb.getstatus() == 3) {
                                 releaseCamera();
@@ -665,12 +665,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                            // mCamera = Camera.open();
                             Camera.Parameters params = mCamera.getParameters();
 // Check what resolutions are supported by your camera
-                            List<Camera.Size> sizes = params.getSupportedPictureSizes();
+                            fb.camera_resolutions = params.getSupportedPictureSizes();
 
 // Iterate through all available resolutions and choose one.
 // The chosen resolution will be stored in mSize.
                            Camera.Size mSize = null;
-                            for (Camera.Size size : sizes) {
+                            for (Camera.Size size : fb.camera_resolutions) {
                                 Log.i(LOG_TAG, "Available resolution: "+size.width+" "+size.height);
                              //   if (wantToUseThisResolution(size)) {
                                    mSize = size;
@@ -828,6 +828,9 @@ fb.SendMessage("Chosen resolution: "+mSize.width+" "+mSize.height);
             mCamera = null;
         }
 
+        Camera.Parameters params = mCamera.getParameters();
+// Check what resolutions are supported by your camera
+        fb.camera_resolutions = params.getSupportedPictureSizes();
 
         //get camera parameters
         //parameters = mCamera.getParameters();

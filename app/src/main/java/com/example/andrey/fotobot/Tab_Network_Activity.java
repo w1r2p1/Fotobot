@@ -145,8 +145,8 @@ public class Tab_Network_Activity extends Activity {
 
 //Spinner2
         ArrayList<String> spinnerArray2 = new ArrayList<String>();
-        spinnerArray2.add("В самом начале");
-        spinnerArray2.add("На каждом шаге");
+        spinnerArray2.add("Method1");
+        spinnerArray2.add("Method2");
 
         spinner2 = new Spinner(this);
         ArrayAdapter<String> spinnerArrayAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray2);

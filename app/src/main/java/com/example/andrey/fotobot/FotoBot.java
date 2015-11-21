@@ -3,6 +3,7 @@ package com.example.andrey.fotobot;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.hardware.Camera;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
@@ -15,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
@@ -70,9 +72,11 @@ public class FotoBot extends Application {
     public String Network_Channel;
 
     /**
-     * Соединятся с Internet один раз или на каждом шаге
+     * Соединятся с Internet один раз (Method1) или на каждом шаге (Method2)
      */
     public String Network_Connection_Method;
+
+    List<Camera.Size> camera_resolutions;
 
     public int process_delay = 3;
 
