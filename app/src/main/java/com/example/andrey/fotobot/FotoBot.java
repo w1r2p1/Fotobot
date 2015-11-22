@@ -306,6 +306,7 @@ public class FotoBot extends Application {
                       //  msg.obj = message; // Put the string into Message, into "obj" field.
                       //  msg.setTarget(h); // Set the Handler
                         //   msg.sendToTarget(); //Send the message
+                        if (getstatus() == 3) { return; }
                     }
                 }
 

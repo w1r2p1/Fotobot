@@ -760,6 +760,7 @@ fb.SendMessage("Разрешение фото: "+Integer.parseInt(width)+" "+Int
                         if (fb.Network_Connection_Method == "На каждом шаге") {
                             fb.CloseInternetConnection(getApplicationContext(), h);
                         }
+                        if (fb.getstatus() == 3) {return;}
                     }
 
                 }
