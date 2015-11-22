@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 
             // Calculate inSampleSize
-
+/*
             options.inSampleSize = 8;
 
 
@@ -175,11 +175,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                     options.inSampleSize = 1;
                     break;
             }
+*/
 
             //fb.SendMessage("options.inSampleSize = " + options.inSampleSize);
 
+/*
             options.inPreferredConfig = Bitmap.Config.RGB_565;
-
+*/
             Log.d(LOG_TAG, "***** Options are defined: " + getUsedMemorySize());
 
             //fb.SendMessage("BitmapFactory.decodeByteArray is started");

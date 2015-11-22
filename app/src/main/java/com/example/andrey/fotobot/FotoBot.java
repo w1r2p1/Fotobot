@@ -448,7 +448,7 @@ thread.join();
 
         process_delay = pref.getInt("process_delay", 60);
 
-        Image_Scale = pref.getString("Image_Scale","1/4");
+        Image_Scale = pref.getString("Image_Scale","1");
 
         Image_Size = pref.getString("Image_Size","320x240");
 
