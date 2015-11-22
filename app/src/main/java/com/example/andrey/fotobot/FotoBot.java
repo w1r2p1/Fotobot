@@ -54,6 +54,10 @@ public class FotoBot extends Application {
      */
     public String Image_Scale = "1/4";
 
+    /**
+     * Размер изображения в пикселях
+     */
+    public String Image_Size = "320x240";
 
 
     /**
@@ -445,6 +449,8 @@ thread.join();
         process_delay = pref.getInt("process_delay", 60);
 
         Image_Scale = pref.getString("Image_Scale","1/4");
+
+        Image_Size = pref.getString("Image_Size","320x240");
 
         EMail_Sender = pref.getString("EMail_Sender", "user@gmail.com");
 

@@ -679,9 +679,18 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             }
 
                           //  Log.i(TAG, "Chosen resolution: "+mSize.width+" "+mSize.height);
-                            params.setPictureSize(mSize.width, mSize.height);
+
+
+                            String string = fb.Image_Size;
+                            String[] parts = string.split("x");
+                            String width = parts[0];
+                            String height = parts[1];
+
+
+
+                            params.setPictureSize(Integer.parseInt(width), Integer.parseInt(height));
                             mCamera.setParameters(params);
-fb.SendMessage("Chosen resolution: "+mSize.width+" "+mSize.height);
+fb.SendMessage("Разрешение фото: "+Integer.parseInt(width)+" "+Integer.parseInt(height));
 
 
 //

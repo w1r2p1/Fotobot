@@ -155,8 +155,9 @@ public class Tab_Foto_Activity  extends Activity {
         spinner1 = new Spinner(this);
         spinnerArrayAdapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
         spinner1.setAdapter(spinnerArrayAdapter1);
-      //  spinner1.setSelection(spinnerArrayAdapter1.getPosition(fb.Image_Scale));
-        spinner1.setSelection(getIndex(spinner1, fb.Image_Scale));
+
+      //  spinner1.setSelection(getIndex(spinner1, fb.Image_Scale));
+        spinner1.setSelection(getIndex(spinner1, fb.Image_Size));
         spinner1.setMinimumWidth((screenWidth - padding) / 100 * 50);
         linLayout_photo_size.addView(spinner1);
 
@@ -189,7 +190,8 @@ public class Tab_Foto_Activity  extends Activity {
                 String input = editText_JPEG_Compression.getText().toString();
 
                 editor.putInt("JPEG_Compression", Integer.parseInt(editText_JPEG_Compression.getText().toString()));
-                editor.putString("Image_Scale", spinner1.getSelectedItem().toString());
+               // editor.putString("Image_Scale", spinner1.getSelectedItem().toString());
+                editor.putString("Image_Size", spinner1.getSelectedItem().toString());
 
 // Save the changes in SharedPreferences
                 editor.commit(); // commit changes
@@ -289,7 +291,8 @@ public class Tab_Foto_Activity  extends Activity {
         fb.LoadData();
         // editText_JPEG_Compression.setText(Integer.toString(fb.JPEG_Compression));
         editText_JPEG_Compression.setText(Integer.toString(fb.JPEG_Compression));
-        spinner1.setSelection(getIndex(spinner1, fb.Image_Scale));
+       // spinner1.setSelection(getIndex(spinner1, fb.Image_Scale));
+        spinner1.setSelection(getIndex(spinner1, fb.Image_Size));
         checkBox_Flash.setChecked(fb.Use_Flash);
         //   spinner1.setSelection(spinnerArrayAdapter1.getPosition(fb.Image_Scale));
       //  spinner1.setSelection(0);
