@@ -7,9 +7,9 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Display;
 import android.view.Gravity;
-import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -112,7 +112,7 @@ public class Tab_Network_Activity extends Activity {
 // TextView1
         TextView tv = new TextView(this);
         tv.setTypeface(Typeface.DEFAULT_BOLD);
-        tv.setTextSize(14);
+        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv.setTextColor(Color.BLACK);
         tv.setText("Каналы связи");
         tv.setWidth((screenWidth - padding) / 100 * 50);
@@ -131,12 +131,13 @@ public class Tab_Network_Activity extends Activity {
        // spinner1.setSelection(spinnerArrayAdapter1.getPosition("Both"));
         spinner1.setSelection(getIndex(spinner1, fb.Network_Channel));
         spinner1.setMinimumWidth((screenWidth - padding) / 100 * 50);
+       // spinner1.setBackgroundColor(Color.WHITE);
         linLayout1.addView(spinner1);
 
 // TextView2
         TextView tv_Flash = new TextView(this);
         tv_Flash.setTypeface(Typeface.DEFAULT_BOLD);
-        tv_Flash.setTextSize(14);
+        tv_Flash.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Flash.setTextColor(Color.BLACK);
         tv_Flash.setText("Метод подключения");
         tv_Flash.setWidth((screenWidth - padding) / 100 * 50);
@@ -226,7 +227,7 @@ public class Tab_Network_Activity extends Activity {
 // Apply Button
         Button btn = new Button(this);
         btn.setText("Применить");
-        btn.setGravity(Gravity.BOTTOM);
+        btn.setGravity(Gravity.CENTER);
 
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -248,7 +249,7 @@ public class Tab_Network_Activity extends Activity {
 // GoTo Main Page Button
         Button btn_mp = new Button(this);
         btn_mp.setText("На главную");
-        btn_mp.setGravity(Gravity.BOTTOM);
+        btn_mp.setGravity(Gravity.CENTER);
 
         btn_mp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

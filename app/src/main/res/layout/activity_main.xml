@@ -16,7 +16,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Start"
+            android:text="Пуск"
             android:id="@+id/play"
             android:layout_weight="1"
             android:layout_alignParentBottom="true"
@@ -30,7 +30,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Stop"
+            android:text="Стоп"
             android:id="@+id/stop"
             android:layout_weight="1"
             android:layout_alignParentBottom="true"
@@ -44,7 +44,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Config"
+            android:text="Настройки"
             android:id="@+id/config"
             android:layout_weight="1"
             android:layout_alignParentBottom="true"

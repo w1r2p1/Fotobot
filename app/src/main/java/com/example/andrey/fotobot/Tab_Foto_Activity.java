@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.SurfaceHolder;
@@ -91,7 +92,7 @@ public class Tab_Foto_Activity  extends Activity {
         tv.setWidth((screenWidth - padding) / 100 * 80);
         tv.setLayoutParams(lpView);
         tv.setTypeface(Typeface.DEFAULT_BOLD);
-        tv.setTextSize(14);
+        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv.setTextColor(Color.BLACK);
         linLayout1.addView(tv);
 
@@ -101,7 +102,7 @@ public class Tab_Foto_Activity  extends Activity {
         tv_Flash.setWidth((screenWidth - padding) / 100 * 90);
         tv_Flash.setLayoutParams(lpView_Flash);
         tv_Flash.setTypeface(Typeface.DEFAULT_BOLD);
-        tv_Flash.setTextSize(14);
+        tv_Flash.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Flash.setTextColor(Color.BLACK);
         linLayout_Flash.addView(tv_Flash);
 
@@ -124,7 +125,7 @@ public class Tab_Foto_Activity  extends Activity {
         // TextView1
         TextView tv_photo_size = new TextView(this);
         tv_photo_size.setTypeface(Typeface.DEFAULT_BOLD);
-        tv_photo_size.setTextSize(14);
+        tv_photo_size.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_photo_size.setTextColor(Color.BLACK);
         tv_photo_size.setText("Размер фото");
         tv_photo_size.setWidth((screenWidth - padding) / 100 * 50);
@@ -174,7 +175,7 @@ public class Tab_Foto_Activity  extends Activity {
 // Apply Button
         Button btn = new Button(this);
         btn.setText("Применить");
-        btn.setGravity(Gravity.BOTTOM);
+        btn.setGravity(Gravity.CENTER);
 
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -201,7 +202,7 @@ public class Tab_Foto_Activity  extends Activity {
 // GoTo Main Page Button
         Button btn_mp = new Button(this);
         btn_mp.setText("На главную");
-        btn_mp.setGravity(Gravity.BOTTOM);
+        btn_mp.setGravity(Gravity.CENTER);
 
         btn_mp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

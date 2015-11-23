@@ -91,6 +91,17 @@ public class FotoBot extends Application {
 
     public Handler h;
 
+
+    /**
+     * Размер шрифта в настройках (sp)
+     */
+    public int Config_Font_Size = 20;
+
+    /**
+     * Размер шрифта в логе (sp)
+     */
+    public int Log_Font_Size = 14;
+
     /**
      * Возвращает текущее состояние FotoBot'а, сейчас не пользуюсь этим
      * @return
@@ -449,7 +460,7 @@ thread.join();
 
         process_delay = pref.getInt("process_delay", 60);
 
-        Image_Scale = pref.getString("Image_Scale","1");
+        Image_Scale = pref.getString("Image_Scale", "1");
 
         Image_Size = pref.getString("Image_Size","320x240");
 
@@ -458,6 +469,11 @@ thread.join();
         EMail_Sender_Password = pref.getString("EMail_Sender_Password", "passwd");
 
         EMail_Recepient = pref.getString("EMail_Recepient", "user@mail.ru");
+
+        Log_Font_Size = pref.getInt("Log_Font_Size", 14);
+
+        Config_Font_Size = pref.getInt("Config_Font_Size", 20);
+
     }
 
 

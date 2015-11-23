@@ -14,7 +14,7 @@ import android.os.Message;
 import android.os.PowerManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-//import android.util.Size;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SurfaceHolder;
@@ -31,7 +31,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
+
+//import android.util.Size;
 
 public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
@@ -340,7 +341,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             String message = (String) msg.obj; //Extract the string from the Message
             log = reportDate + ": " + message + "\n" + log;
 
-            tvInfo.setTextSize(14);
+            tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
             tvInfo.setTypeface(Typeface.MONOSPACE);
             tvInfo.setTextColor(Color.rgb(150, 150, 150));
 
