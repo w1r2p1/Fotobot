@@ -52,6 +52,7 @@ public class Tab_Network_Activity extends Activity {
 
 
     protected void onCreate(Bundle savedInstanceState) {
+        //setTheme(android.R.style.Theme_DeviceDefault_Light);
         super.onCreate(savedInstanceState);
 
         final FotoBot fb = (FotoBot) getApplicationContext();
@@ -131,6 +132,7 @@ public class Tab_Network_Activity extends Activity {
        // spinner1.setSelection(spinnerArrayAdapter1.getPosition("Both"));
         spinner1.setSelection(getIndex(spinner1, fb.Network_Channel));
         spinner1.setMinimumWidth((screenWidth - padding) / 100 * 50);
+     //   spinner1.setBackgroundResource(android.R.drawable.spinner_bg);
        // spinner1.setBackgroundColor(Color.WHITE);
         linLayout1.addView(spinner1);
 

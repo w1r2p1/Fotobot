@@ -70,12 +70,20 @@ public class Tab_Main_Activity extends Activity {
         LinearLayout.LayoutParams lpView_divider = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         LinearLayout.LayoutParams lpView_et_divider = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-// Flash Container
+// Интервал между процессами
         LinearLayout linLayout_Flash = new LinearLayout(this);
-        linLayout1.setOrientation(LinearLayout.HORIZONTAL);
-//        linLayout_Flash.setBackgroundColor(Color.parseColor("#00ff00"));
+        linLayout_Flash.setOrientation(LinearLayout.HORIZONTAL);
         LinearLayout.LayoutParams lpView_Flash = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         LinearLayout.LayoutParams lpView_et_Flash = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+// Интервал между процессами (divider)
+        LinearLayout linLayout_Flash_divider = new LinearLayout(this);
+        linLayout_Flash_divider.setOrientation(LinearLayout.HORIZONTAL);
+
+// Интервал между фото (пояснение)
+        LinearLayout linLayout_Flash_notes = new LinearLayout(this);
+        linLayout_Flash_notes.setOrientation(LinearLayout.HORIZONTAL);
+
 
 // Flash Container
         LinearLayout linLayout_process_delay = new LinearLayout(this);
@@ -159,8 +167,8 @@ public class Tab_Main_Activity extends Activity {
         lp.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 80);
         Photo_Frequency.setLayoutParams(lp);
         Photo_Frequency.setGravity(Gravity.RIGHT);
-        Photo_Frequency.setTextColor(Color.BLACK);
-        Photo_Frequency.setBackgroundResource(android.R.drawable.edit_text);
+        //Photo_Frequency.setTextColor(Color.BLACK);
+        //Photo_Frequency.setBackgroundResource(android.R.drawable.edit_text);
      //   editText_JPEG_Compression.setBackgroundColor(Color.parseColor("#92adb1"));
         linLayout1.addView(Photo_Frequency);
 
@@ -193,7 +201,25 @@ public class Tab_Main_Activity extends Activity {
         //   editText_JPEG_Compression.setBackgroundColor(Color.parseColor("#92adb1"));
         linLayout_process_delay.addView(process_delay);
 
+        // Интервал между процесссами (notes)
+        TextView tv_process_notes = new TextView(this);
+        tv_process_notes.setTypeface(null, Typeface.ITALIC);
+        tv_process_notes.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_process_notes.setTextColor(Color.BLACK);
+        tv_process_notes.setText("Необходим для того, чтобы слабый процессор телефона успел обработать данные.");
+        tv_process_notes.setWidth((screenWidth - padding) / 100 * 99);
+        tv_process_notes.setLayoutParams(lpView);
+        //tv_notes.setTypeface(Typeface.DEFAULT_BOLD);
+        //    tv.setTextSize(14);
+        tv_process_notes.setTextColor(Color.GRAY);
+        linLayout_Flash_notes.addView(tv_process_notes);
 
+// Интервал между процессами (divider)
+        View line1 = new View(this);
+        line1.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 1));
+        line1.setBackgroundColor(Color.rgb(210, 210, 210));
+        line1.getLayoutParams().height = 3;
+        linLayout_Flash_divider.addView(line1);
 
 
 
@@ -314,6 +340,8 @@ public class Tab_Main_Activity extends Activity {
         FullFrame.addView(linLayout1_divider);
         FullFrame.addView(linLayout_process_delay);
         FullFrame.addView(linLayout_Flash);
+        FullFrame.addView(linLayout_Flash_notes);
+        FullFrame.addView(linLayout_Flash_divider);
         FullFrame.addView(linLayout_config_font_size);
         FullFrame.addView(linLayout_log_font_size);
         FullFrame.addView(linLayout2);
