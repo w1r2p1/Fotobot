@@ -327,7 +327,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
      */
     Handler.Callback hc = new Handler.Callback() {
         public boolean handleMessage(Message msg) {
-
+            final FotoBot fb = (FotoBot) getApplicationContext();
             PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
             PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                     "MyWakelockTag");
@@ -347,7 +347,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             tvInfo.setText(log);
 
-            final FotoBot fb = (FotoBot) getApplicationContext();
+            //final FotoBot fb = (FotoBot) getApplicationContext();
             Log.d(LOG_TAG, "Handler.Callback(): fb.getstatus()" + fb.getstatus());
             n = msg.what;
             if (msg.what == STATUS_STOPPED) btnStart.setText("Play");
