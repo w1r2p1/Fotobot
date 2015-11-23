@@ -158,7 +158,6 @@ public class Tab_Main_Activity extends Activity {
         linLayout1_divider.addView(line);
 
 
-
 // EditText
         Photo_Frequency = new EditText(this);
         Photo_Frequency.setLayoutParams(lpView_et);
@@ -171,10 +170,6 @@ public class Tab_Main_Activity extends Activity {
         //Photo_Frequency.setBackgroundResource(android.R.drawable.edit_text);
      //   editText_JPEG_Compression.setBackgroundColor(Color.parseColor("#92adb1"));
         linLayout1.addView(Photo_Frequency);
-
-
-
-
 
 
         // process delay
