@@ -73,12 +73,12 @@ public class FotoBot extends Application {
     /** кому отправлять письма с фотками */
     public String EMail_Recepient = "user@mail.ru";
 
-    public String Network_Channel;
+    public String Network_Channel = "Both";
 
     /**
      * Соединятся с Internet один раз (Method1) или на каждом шаге (Method2)
      */
-    public String Network_Connection_Method;
+    public String Network_Connection_Method = "Method1";
 
     List<Camera.Size> camera_resolutions;
 
@@ -195,12 +195,14 @@ public class FotoBot extends Application {
         WiFi wf;
         wf = new WiFi();
 
+        LoadData();
+
         boolean wf_connect_attempt = false;
 
         MobileData md;
         md = new MobileData();
 
-        if (Network_Channel == "Wi-Fi") {
+        if (Network_Channel.contains("Wi-Fi")) {
             SendMessage(h, "Метод подключения Wi-Fi");
             if (!(isOnline(h) && getData(h))) {
                 SendMessage(h, "Включаем Wi-Fi");
@@ -219,7 +221,7 @@ public class FotoBot extends Application {
 
         }
 
-        if (Network_Channel == "Mobile Data") {
+        if (Network_Channel.contains("Mobile Data")) {
             SendMessage(h, "Метод подключения MobileData");
             if (!(isOnline(h) && getData(h)) ) {
                 SendMessage(h, "По Wi-Fi нет связи,\nвключаем Mobile Data");
@@ -239,7 +241,7 @@ public class FotoBot extends Application {
         }
 
 
-        if (Network_Channel == "Both") {
+        if (Network_Channel.contains("Both")) {
             SendMessage(h, "Метод подключения Both");
             if (!(isOnline(h) && getData(h))) {
                 SendMessage(h, "Включаем Wi-Fi");
@@ -446,7 +448,7 @@ thread.join();
 
         Network_Channel = pref.getString("Network_Channel", "Both");
 
-        Network_Connection_Method = pref.getString("Network_Connection_Method", "На каждом шаге");
+        Network_Connection_Method = pref.getString("Network_Connection_Method", "Method1");
 
         Use_WiFi = pref.getBoolean("Use_WiFi", true);         // getting boolean
 
