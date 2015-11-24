@@ -779,6 +779,7 @@ fb.SendMessage("Разрешение фото: "+Integer.parseInt(width)+" "+Int
 
                             fb.SendMessage("\n");
 
+                            mCamera.stopPreview();
                             mCamera.release();
 
                             fb.fbpause(h, fb.Photo_Frequency);
