@@ -78,7 +78,7 @@ public class FotoBot extends Application {
     /**
      * Соединятся с Internet один раз (Method1) или на каждом шаге (Method2)
      */
-    public String Network_Connection_Method = "Method1";
+    public String Network_Connection_Method = "В начале работы";
 
     List<Camera.Size> camera_resolutions;
 
@@ -90,6 +90,8 @@ public class FotoBot extends Application {
     public String str = "";
 
     public Handler h;
+
+    public SurfaceHolder sHolder = null;
 
 
     /**
@@ -292,6 +294,8 @@ public class FotoBot extends Application {
         WiFi wf;
         wf = new WiFi();
         wf.setWiFiEnabled(getApplicationContext(), false);
+
+        SendMessage("Соединение с Internet завершено.");
     }
 
     /**
@@ -448,7 +452,7 @@ thread.join();
 
         Network_Channel = pref.getString("Network_Channel", "Both");
 
-        Network_Connection_Method = pref.getString("Network_Connection_Method", "Method1");
+        Network_Connection_Method = pref.getString("Network_Connection_Method", "В начале работы");
 
         Use_WiFi = pref.getBoolean("Use_WiFi", true);         // getting boolean
 

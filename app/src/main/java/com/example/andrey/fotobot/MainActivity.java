@@ -422,6 +422,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         //tells Android that this surface will have its data constantly replaced
         sHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
+
+        fb.sHolder = sHolder;
+
+
         intent = new Intent(MainActivity.this, Status.class);
         log = "\n\n\n\n\nФотобот приветствует Вас!";
         //    tvInfo.setTextSize(20);
@@ -483,6 +487,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         wakeLock.acquire();
 
         Log.d(LOG_TAG, "MainActivity: onResume");
+/* Camera
         mCamera = Camera.open();
         try {
             mCamera.setPreviewDisplay(holder);
@@ -491,7 +496,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             mCamera.release();
             mCamera = null;
         }
-
+*/
 
         final FotoBot fb = (FotoBot) getApplicationContext();
         Log.d(LOG_TAG, "MainActivity: onResume");
@@ -592,7 +597,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         switch (v.getId()) {
             case R.id.play:
                 btnStart.setEnabled(false);
-                btnStart.setText("Start");
+                btnStart.setText("Пуск");
                 btnStop = (Button) findViewById(R.id.stop);
                 btnStop.setEnabled(true);
                 btnConfig.setEnabled(false);
@@ -610,14 +615,28 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                         fb.SendMessage("Фотобот начинает свою работу");
                       //  getUsedMemorySize();
 
-                       if (fb.Network_Connection_Method == "Method1") {
+                       if (fb.Network_Connection_Method.contains("В начале работы")) {
                             fb.MakeInternetConnection(getApplicationContext(), h);
                         }
 
                         for (int i = 1; i <= 1000000000; i++) {
+
+                            mCamera = Camera.open();
+                            try {
+                                mCamera.setPreviewDisplay(fb.sHolder);
+
+                            } catch (IOException exception) {
+                                mCamera.release();
+                                mCamera = null;
+                            }
+
+                            mCamera.startPreview();
+
+
+
                             fb.LoadData();
 
-                            if (fb.Network_Connection_Method == "Method2") {
+                            if (fb.Network_Connection_Method.contains("На каждом шаге")) {
                                 fb.MakeInternetConnection(getApplicationContext(), h);
                             }
 
@@ -753,14 +772,20 @@ fb.SendMessage("Разрешение фото: "+Integer.parseInt(width)+" "+Int
                             // fb.SendMessage(h, "fb.SendMail: mail sent");
 //                        fb.CloseInternetConnection(getApplicationContext(), h);
                            // getUsedMemorySize();
+
+                            if (fb.Network_Connection_Method.contains("На каждом шаге")) {
+                                fb.CloseInternetConnection(getApplicationContext(), h);
+                            }
+
                             fb.SendMessage("\n");
+
+                            mCamera.release();
+
                             fb.fbpause(h, fb.Photo_Frequency);
 
 
                         }
-                        if (fb.Network_Connection_Method == "На каждом шаге") {
-                            fb.CloseInternetConnection(getApplicationContext(), h);
-                        }
+
                         if (fb.getstatus() == 3) {return;}
                     }
 
@@ -815,13 +840,14 @@ fb.SendMessage("Разрешение фото: "+Integer.parseInt(width)+" "+Int
     @Override
     public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
 
+/* Camera
         //get camera parameters
         parameters = mCamera.getParameters();
 
         //set camera parameters
         mCamera.setParameters(parameters);
         mCamera.startPreview();
-
+*/
     }
 
     @Override
@@ -832,6 +858,7 @@ fb.SendMessage("Разрешение фото: "+Integer.parseInt(width)+" "+Int
         // to draw the preview.
         mUnexpectedTerminationHelper.init();
 
+
         mCamera = Camera.open();
         try {
             mCamera.setPreviewDisplay(holder);
@@ -841,9 +868,14 @@ fb.SendMessage("Разрешение фото: "+Integer.parseInt(width)+" "+Int
             mCamera = null;
         }
 
+
         Camera.Parameters params = mCamera.getParameters();
 // Check what resolutions are supported by your camera
         fb.camera_resolutions = params.getSupportedPictureSizes();
+
+        mCamera.release();
+        mCamera = null;
+
 
         //get camera parameters
         //parameters = mCamera.getParameters();
