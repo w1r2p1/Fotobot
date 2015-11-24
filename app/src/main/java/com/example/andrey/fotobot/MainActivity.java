@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             freeSize = info.freeMemory();
             totalSize = info.totalMemory();
             usedSize = totalSize - freeSize;
-        //    fb.SendMessage("MEMORY (TOTAL/FREE/USED MB)" + totalSize + "/" + freeSize + "/" + usedSize );
+            //    fb.SendMessage("MEMORY (TOTAL/FREE/USED MB)" + totalSize + "/" + freeSize + "/" + usedSize );
             Log.d(LOG_USED_MEMORY, "***** totalSize, freeSize, usedSize  " + totalSize + ";" + freeSize + ";" + usedSize);
 
         } catch (Exception e) {
@@ -296,28 +296,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             Log.d(LOG_TAG, "***** fOut.flush();  + getUsedMemorySize()");
 
-            //  try {
-            //      FileOutputStream fstream = openFileOutput("mytextfile.txt", MODE_PRIVATE | MODE_APPEND);
-            //      OutputStreamWriter outputWriter = new OutputStreamWriter(fstream);
-            //      outputWriter.write("flushstream");
-            //      outputWriter.flush();
-            //      outputWriter.close();
-            //  } catch (Exception e) {
-            //      e.printStackTrace();
-            // }
-
-            //  fb.fbpause(h,5);
-
-            //   try {
-            //       TimeUnit.SECONDS.sleep(5);
-            //   } catch (InterruptedException e) {
-            //       e.printStackTrace();
-            //   }
-
-            //  } catch (Exception e) {
-            //    Log.e("saveToExternalStorage()", e.getMessage());
-            //}
-
         }
 
     };
@@ -359,7 +337,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 btnStart = (Button) findViewById(R.id.play);
                 btnStop = (Button) findViewById(R.id.stop);
                 //     Log.d(LOG_TAG, "Handler.Callback() if: fb.getstatus()" + fb.getstatus());
-                btnStart.setText("Start");
+                btnStart.setText("Пуск");
                 btnStart.setEnabled(true);
                 btnStop.setEnabled(false);
                 btnConfig.setEnabled(true);
@@ -428,9 +406,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         intent = new Intent(MainActivity.this, Status.class);
         log = "\n\n\n\n\nФотобот приветствует Вас!";
-        //    tvInfo.setTextSize(20);
-        //    tvInfo.setTypeface(Typeface.SANS_SERIF);
-        //    tvInfo.setTextColor(Color.BLUE);
+
         tvInfo.setText(log);
 
         h = new Handler(hc);
@@ -440,19 +416,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
          */
         fb.h = h;
 
-        //    if (fb.isExternalStorageWritable()) {
-        //        fb.SendMessage("Внешняя SD карта доступна для чтения и записи");
-        //    } else {
-        //        fb.SendMessage(h, "Внешняя SD карта не доступна для записи");
-        //    }
-
-        //    context.getFilesDir()
-
-        //    fb.SendMessage(h, "getFilesDir" + getApplicationContext().getFilesDir().toString());
-        //    fb.SendMessage(h, "getExternalStorageDirectory()" + Environment.getExternalStorageDirectory().toString());
-        //
-        //  fb.SendMessage(h, "EXTERNAL_STORAGE" + System.getenv("EXTERNAL_STORAGE"));
-        //  fb.SendMessage(h, "SECONDARY_STORAGE" + System.getenv("SECONDARY_STORAGE"));
     }
 
     protected void onDestroy() {
@@ -487,7 +450,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         wakeLock.acquire();
 
         Log.d(LOG_TAG, "MainActivity: onResume");
-/* Camera
+// Camera
         mCamera = Camera.open();
         try {
             mCamera.setPreviewDisplay(holder);
@@ -496,7 +459,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             mCamera.release();
             mCamera = null;
         }
-*/
+
 
         final FotoBot fb = (FotoBot) getApplicationContext();
         Log.d(LOG_TAG, "MainActivity: onResume");
@@ -509,13 +472,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         btnStop = (Button) findViewById(R.id.stop);
 
         if (fb.getstatus() == 1) {
-            btnStart.setText("Start");
+            btnStart.setText("Пуск");
             btnStart.setEnabled(true);
             btnStop.setEnabled(false);
         }
 
         if (fb.getstatus() == 2) {
-            btnStart.setText("Start");
+            btnStart.setText("Пуск");
             btnStart.setEnabled(false);
             btnStop.setEnabled(true);
         }
@@ -613,15 +576,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                         wakeLock.acquire();
 
                         fb.SendMessage("Фотобот начинает свою работу");
-                      //  getUsedMemorySize();
 
-                       if (fb.Network_Connection_Method.contains("В начале работы")) {
+                        if (fb.Network_Connection_Method.contains("В начале работы")) {
                             fb.MakeInternetConnection(getApplicationContext(), h);
                         }
 
                         for (int i = 1; i <= 1000000000; i++) {
-
+/*
                             mCamera = Camera.open();
+
                             try {
                                 mCamera.setPreviewDisplay(fb.sHolder);
 
@@ -631,9 +594,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             }
 
                             mCamera.startPreview();
-
-
-
+*/
                             fb.LoadData();
 
                             if (fb.Network_Connection_Method.contains("На каждом шаге")) {
@@ -645,20 +606,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 fb.SendMessage(h, "Фотобот остановлен");
                                 return;
                             }
-
-                            //  fb.fbpause(h, 5);
-                            /*
-                            try {
-                                FileOutputStream fileout = openFileOutput("mytextfile.txt", MODE_PRIVATE | MODE_APPEND);
-                                OutputStreamWriter outputWriter = new OutputStreamWriter(fileout);
-                                outputWriter.write("Закачан файл:" + Integer.toString(i) + "\n");
-                                outputWriter.close();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            */
-// Mail
-
 
                             AudioManager mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                             mgr.setStreamMute(AudioManager.STREAM_SYSTEM, true);
@@ -678,70 +625,28 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 fb.fbpause(h, fb.process_delay);
                             }
 
-
-
-
-
-
-//
-                           // mCamera = Camera.open();
                             Camera.Parameters params = mCamera.getParameters();
-// Check what resolutions are supported by your camera
-                            fb.camera_resolutions = params.getSupportedPictureSizes();
-
-// Iterate through all available resolutions and choose one.
-// The chosen resolution will be stored in mSize.
-                           Camera.Size mSize = null;
-                            for (Camera.Size size : fb.camera_resolutions) {
-                                Log.i(LOG_TAG, "Available resolution: "+size.width+" "+size.height);
-                             //   if (wantToUseThisResolution(size)) {
-                                   mSize = size;
-                             //       break;
-                              //  }
-                            }
-
-                          //  Log.i(TAG, "Chosen resolution: "+mSize.width+" "+mSize.height);
-
 
                             String string = fb.Image_Size;
                             String[] parts = string.split("x");
                             String width = parts[0];
                             String height = parts[1];
 
-
-
                             params.setPictureSize(Integer.parseInt(width), Integer.parseInt(height));
                             mCamera.setParameters(params);
-fb.SendMessage("Разрешение фото: "+Integer.parseInt(width)+" "+Integer.parseInt(height));
 
-
-//
-
-
-
-
-
-
-
-
+                            fb.SendMessage("Разрешение фото: " + Integer.parseInt(width) + " " + Integer.parseInt(height));
 
                             mCamera.takePicture(null, null, mCall);
                             fb.SendMessage("Фото сделано");
 
-
                             fb.fbpause(h, fb.process_delay);
-
 
                             if (fb.Use_Flash) {
                                 mCamera.stopPreview();
 
-
-                                //    fb.fbpause(h, fb.process_delay);
-
-                                //  fb.SendMessage(h, "Preview has been stopped");
-
                                 parameters = mCamera.getParameters();
-                                //   fb.SendMessage(h, "getParameters");
+
                                 fb.fbpause(h, fb.process_delay);
 
                                 try {
@@ -750,44 +655,39 @@ fb.SendMessage("Разрешение фото: "+Integer.parseInt(width)+" "+Int
                                     fb.SendMessage(h, "Camera.Parameters.FLASH_MODE_OFF error");
                                 }
 
-                                //   fb.SendMessage(h, "FLASH_MODE_OFF");
-                                //   fb.fbpause(h, fb.process_delay);
                                 try {
                                     mCamera.setParameters(parameters);
                                 } catch (Exception e) {
                                     fb.SendMessage(h, "setParameters error");
                                 }
 
-                                //      fb.SendMessage(h, "setParameters");
                             }
 
-
                             mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-                            // fb.SendMessage(h, "Context.AUDIO_SERVICE");
-                            mgr.setStreamMute(AudioManager.STREAM_SYSTEM, false);
-                            // fb.SendMessage(h, "AudioManager.STREAM_SYSTEM");
 
-                            //   fb.fbpause(h, fb.process_delay);
+                            mgr.setStreamMute(AudioManager.STREAM_SYSTEM, false);
+
+
                             fb.SendMail(h, "fotobot.jpg");
-                            // fb.SendMessage(h, "fb.SendMail: mail sent");
-//                        fb.CloseInternetConnection(getApplicationContext(), h);
-                           // getUsedMemorySize();
 
                             if (fb.Network_Connection_Method.contains("На каждом шаге")) {
                                 fb.CloseInternetConnection(getApplicationContext(), h);
                             }
 
                             fb.SendMessage("\n");
-
+/*
                             mCamera.stopPreview();
                             mCamera.release();
-
+                            mCamera = null;
+*/
                             fb.fbpause(h, fb.Photo_Frequency);
 
 
                         }
 
-                        if (fb.getstatus() == 3) {return;}
+                        if (fb.getstatus() == 3) {
+                            return;
+                        }
                     }
 
                 }
@@ -812,43 +712,25 @@ fb.SendMessage("Разрешение фото: "+Integer.parseInt(width)+" "+Int
         fb.setstatus(3);
         Log.d(LOG_TAG, "stopFotobot: STOP_FOTOBOT" + STOP_FOTOBOT);
 
-        btnStart.setText("Play");
+        btnStart.setText("Пуск");
         btnStart.setEnabled(true);
         btnStop.setEnabled(false);
         btnConfig.setEnabled(true);
 
     }
 
-    /*    public void fbpause(int delay) {
-            String message;
-
-            for (int i = 1; i <= delay; i++) {
-                Message msg = Message.obtain(); // Creates an new Message instance
-                message = ". . . . . " + Integer.toString(i);
-
-                try {
-                    TimeUnit.SECONDS.sleep(1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                msg.obj = message; // Put the string into Message, into "obj" field.
-                msg.setTarget(h); // Set the Handler
-                //   msg.sendToTarget(); //Send the message
-            }
-        }
-    */
     @Override
     public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
 
-/* Camera
+// Camera
+
         //get camera parameters
         parameters = mCamera.getParameters();
 
         //set camera parameters
         mCamera.setParameters(parameters);
         mCamera.startPreview();
-*/
+
     }
 
     @Override
@@ -871,19 +753,9 @@ fb.SendMessage("Разрешение фото: "+Integer.parseInt(width)+" "+Int
 
 
         Camera.Parameters params = mCamera.getParameters();
-// Check what resolutions are supported by your camera
         fb.camera_resolutions = params.getSupportedPictureSizes();
-
-        mCamera.release();
-        mCamera = null;
-
-
-        //get camera parameters
-        //parameters = mCamera.getParameters();
-
-        //set camera parameters
-        //mCamera.setParameters(parameters);
-        //mCamera.startPreview();
+//        mCamera.release();
+//        mCamera = null;
 
     }
 
