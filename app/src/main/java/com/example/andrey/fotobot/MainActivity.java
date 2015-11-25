@@ -575,7 +575,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                         PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                                 "MyWakelockTag");
 
-
                         wakeLock.acquire();
 
                         fb.SendMessage("Фотобот начинает свою работу");
@@ -597,9 +596,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 fb.SendMessage(h, "Фотобот остановлен");
                                 return;
                             }
-
-
-
 
                           /*  mCamera = Camera.open();
 
