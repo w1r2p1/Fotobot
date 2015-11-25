@@ -332,7 +332,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             if (fb.getstatus() == 3) {
 
-                releaseCamera();
+               // mCamera.stopPreview();
+             //   mCamera.release();
+               // mCamera = null;
 
                 btnStart = (Button) findViewById(R.id.play);
                 btnStop = (Button) findViewById(R.id.stop);
@@ -420,13 +422,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     protected void onDestroy() {
         super.onDestroy();
-        releaseCamera();
+  //      releaseCamera();
         Log.d(LOG_TAG, "MainActivity: onDestroy");
     }
 
     protected void onPause() {
         super.onPause();
-        // releaseCamera();
+//        releaseCamera();
         Log.d(LOG_TAG, "MainActivity: onPause");
     }
 
@@ -451,6 +453,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         Log.d(LOG_TAG, "MainActivity: onResume");
 // Camera
+
         mCamera = Camera.open();
         try {
             mCamera.setPreviewDisplay(holder);
@@ -582,8 +585,23 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                         }
 
                         for (int i = 1; i <= 1000000000; i++) {
-/*
-                            mCamera = Camera.open();
+
+                            if (fb.getstatus() == 3) {
+                                //if (mCamera != null) {
+                                    mCamera.stopPreview();
+                                    mCamera.setPreviewCallback(null);
+                                    mCamera.release();
+                                    mCamera = null;
+                                  //  mUnexpectedTerminationHelper.fini();
+                                //}
+                                fb.SendMessage(h, "Фотобот остановлен");
+                                return;
+                            }
+
+
+
+
+                          /*  mCamera = Camera.open();
 
                             try {
                                 mCamera.setPreviewDisplay(fb.sHolder);
@@ -601,11 +619,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 fb.MakeInternetConnection(getApplicationContext(), h);
                             }
 
-                            if (fb.getstatus() == 3) {
-                                releaseCamera();
-                                fb.SendMessage(h, "Фотобот остановлен");
-                                return;
-                            }
+
 
                             AudioManager mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                             mgr.setStreamMute(AudioManager.STREAM_SYSTEM, true);
@@ -625,6 +639,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 fb.fbpause(h, fb.process_delay);
                             }
 
+                          // Camera.Parameters params;
                             Camera.Parameters params = mCamera.getParameters();
 
                             String string = fb.Image_Size;
@@ -685,9 +700,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                         }
 
-                        if (fb.getstatus() == 3) {
+                     /*   if (fb.getstatus() == 3) {
+                            mCamera.stopPreview();
+                            mCamera.release();
+                            mCamera = null;
                             return;
-                        }
+                        } */
                     }
 
                 }
@@ -769,6 +787,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     private void releaseCamera() {
         if (mCamera != null) {
             mCamera.stopPreview();
+            mCamera.setPreviewCallback(null);
             mCamera.release();
             mCamera = null;
             mUnexpectedTerminationHelper.fini();

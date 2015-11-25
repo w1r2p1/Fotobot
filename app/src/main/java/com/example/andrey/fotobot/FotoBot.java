@@ -470,11 +470,11 @@ thread.join();
 
         Image_Size = pref.getString("Image_Size","320x240");
 
-        EMail_Sender = pref.getString("EMail_Sender", "user@gmail.com");
+        EMail_Sender = pref.getString("EMail_Sender", "fotobotmail@gmail.com");
 
-        EMail_Sender_Password = pref.getString("EMail_Sender_Password", "passwd");
+        EMail_Sender_Password = pref.getString("EMail_Sender_Password", "fotobotmailpasswd");
 
-        EMail_Recepient = pref.getString("EMail_Recepient", "user@mail.ru");
+        EMail_Recepient = pref.getString("EMail_Recepient", "voran@inbox.ru");
 
         Log_Font_Size = pref.getInt("Log_Font_Size", 14);
 
