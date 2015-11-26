@@ -155,10 +155,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 
             // Calculate inSampleSize
-/*
+
             options.inSampleSize = 8;
 
-
+/*
             switch (fb.Image_Scale) {
                 case "1/16":
                     options.inSampleSize = 16;
@@ -180,9 +180,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             //fb.SendMessage("options.inSampleSize = " + options.inSampleSize);
 
-/*
+
             options.inPreferredConfig = Bitmap.Config.RGB_565;
-*/
+
             Log.d(LOG_TAG, "***** Options are defined: " + getUsedMemorySize());
 
             //fb.SendMessage("BitmapFactory.decodeByteArray is started");
@@ -636,6 +636,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             }
 
                           // Camera.Parameters params;
+/*
                             Camera.Parameters params = mCamera.getParameters();
 
                             String string = fb.Image_Size;
@@ -647,6 +648,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             mCamera.setParameters(params);
 
                             fb.SendMessage("Разрешение фото: " + Integer.parseInt(width) + " " + Integer.parseInt(height));
+*/
 
                             mCamera.takePicture(null, null, mCall);
                             fb.SendMessage("Фото сделано");
