@@ -94,6 +94,7 @@ public class FotoBot extends Application {
      */
     public String Photo_Post_Processing_Method = "Hardware";
 
+public int GSM_Signal = 0;
 
     List<Camera.Size> camera_resolutions;
 
@@ -397,7 +398,8 @@ thread.join();
         m.setTo(toArr);
         m.setFrom(fb.EMail_Sender);
         m.setSubject("Fotobot");
-        m.setBody("Уровень зарядки аккумулятора: " + fb.battery_level + "%");
+        m.setBody("Уровень зарядки аккумулятора: " + fb.battery_level + "%" + "\n" +
+        "Сила GSM сигнала: " + fb.GSM_Signal + " ASU");
       //  SendMessage(h, "SendMail" + str);
         str = getApplicationContext().getFilesDir().toString() + "/" + str;
         //  str = Environment.getExternalStorageDirectory().getAbsolutePath().toString() + "/fotobot.jpg";;
@@ -521,6 +523,9 @@ thread.join();
         registerReceiver(batteryLevelReceiver, batteryLevelFilter);
 
     }
+
+
+
 
 }
 

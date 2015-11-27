@@ -13,6 +13,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.PhoneStateListener;
+import android.telephony.SignalStrength;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
@@ -37,6 +40,9 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
     private final static String FILE_DIR = "/MySampleFolder/";
+
+    public static final int UNKNOW_CODE = 99;
+    int MAX_SIGNAL_DBM_VALUE = 31;
 
     int n;
     FotoBot fb;
@@ -368,8 +374,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     Intent intent;
     String str1 = "Fotobot str to file";
 
+    TelephonyManager tel;
+    MyPhoneStateListener myPhoneStateListener;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
 
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
         PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
@@ -378,6 +391,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         super.onCreate(savedInstanceState);
         wakeLock.acquire();
+
+
+        myPhoneStateListener = new MyPhoneStateListener();
+        tel = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        tel.listen(myPhoneStateListener, PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
+
 
         //    super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -589,6 +608,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             fb.batteryLevel();
 
+
+
                             if (fb.getstatus() == 3) {
                                 //if (mCamera != null) {
                                     mCamera.stopPreview();
@@ -797,6 +818,27 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             mUnexpectedTerminationHelper.fini();
         }
     }
+
+    private class MyPhoneStateListener extends PhoneStateListener {
+        /* Get the Signal strength from the provider, each tiome there is an update */
+        @Override
+        public void onSignalStrengthsChanged(SignalStrength signalStrength) {
+            final FotoBot fb = (FotoBot) getApplicationContext();
+            super.onSignalStrengthsChanged(signalStrength);
+
+            if (null != signalStrength && signalStrength.getGsmSignalStrength() != UNKNOW_CODE) {
+                int signalStrengthPercent = calculateSignalStrengthInPercent(signalStrength.getGsmSignalStrength());
+                fb.GSM_Signal = calculateSignalStrengthInPercent(signalStrength.getGsmSignalStrength());
+               // viewModel.setSignalStrengthString(IntegerHelper.getString(signalStrengthPercent));
+            }
+        }
+    }
+
+    private int calculateSignalStrengthInPercent(int signalStrength) {
+        //return (int) ((float) signalStrength / MAX_SIGNAL_DBM_VALUE * 100);
+        return (int) ((float) signalStrength);
+    }
+
 
 
 }
