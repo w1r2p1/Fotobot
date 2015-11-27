@@ -36,7 +36,7 @@ public class Tab_Foto_Activity  extends Activity {
     private int padding = 15;
     CheckBox checkBox_Flash;
     EditText editText_JPEG_Compression;
-    Spinner spinner1;
+    Spinner spinner1, spinner_ppm;
     ArrayAdapter<String> spinnerArrayAdapter1;
     final String LOG_TAG = "Logs";
 
@@ -61,6 +61,13 @@ public class Tab_Foto_Activity  extends Activity {
         linLayout1.setOrientation(LinearLayout.HORIZONTAL);
         LinearLayout.LayoutParams lpView = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         LinearLayout.LayoutParams lpView_et = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+// Foto postprocessing method (Horizontal LinearLayout)
+        LinearLayout linLayout_ppm = new LinearLayout(this);
+        linLayout_ppm.setOrientation(LinearLayout.HORIZONTAL);
+        LinearLayout.LayoutParams lpView_ppm = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams lpView_et_ppm = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
 
         // First Container (Horizontal LinearLayout)
         LinearLayout linLayout_photo_size = new LinearLayout(this);
@@ -96,6 +103,16 @@ public class Tab_Foto_Activity  extends Activity {
         tv.setTextColor(Color.BLACK);
         linLayout1.addView(tv);
 
+// Photo PostProcessing Method
+        TextView tv_ppm = new TextView(this);
+        tv_ppm.setText("Метод обработки фото");
+        tv_ppm.setWidth((screenWidth - padding) / 100 * 80);
+        tv_ppm.setLayoutParams(lpView_ppm);
+        tv_ppm.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_ppm.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_ppm.setTextColor(Color.BLACK);
+        linLayout_ppm.addView(tv_ppm);
+
 // Flash TextView
         TextView tv_Flash = new TextView(this);
         tv_Flash.setText("Использовать вспышку");
@@ -121,6 +138,24 @@ public class Tab_Foto_Activity  extends Activity {
         editText_JPEG_Compression.setLayoutParams(lp);
         editText_JPEG_Compression.setGravity(Gravity.RIGHT);
         linLayout1.addView(editText_JPEG_Compression);
+
+//Photo PostProcessing Method
+        ArrayList<String> spinnerArray_ppm = new ArrayList<String>();
+        spinnerArray_ppm.add("Hardware");
+        spinnerArray_ppm.add("Software");
+
+        spinner_ppm = new Spinner(this);
+        ArrayAdapter<String> spinnerArrayAdapter_ppm = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray_ppm);
+        spinner_ppm.setAdapter(spinnerArrayAdapter_ppm);
+        // spinner1.setSelection(spinnerArrayAdapter1.getPosition("Both"));
+        spinner_ppm.setSelection(getIndex(spinner_ppm, fb.Photo_Post_processing_Method));
+        spinner_ppm.setMinimumWidth((screenWidth - padding) / 100 * 50);
+        //   spinner1.setBackgroundResource(android.R.drawable.spinner_bg);
+        // spinner1.setBackgroundColor(Color.WHITE);
+        linLayout_ppm.addView(spinner_ppm);
+
+
+
 
         // TextView1
         TextView tv_photo_size = new TextView(this);
@@ -189,7 +224,7 @@ public class Tab_Foto_Activity  extends Activity {
                 }
 
                 String input = editText_JPEG_Compression.getText().toString();
-
+                editor.putString("Photo_Post_processing_Method", spinner_ppm.getSelectedItem().toString());
                 editor.putInt("JPEG_Compression", Integer.parseInt(editText_JPEG_Compression.getText().toString()));
                // editor.putString("Image_Scale", spinner1.getSelectedItem().toString());
                 editor.putString("Image_Size", spinner1.getSelectedItem().toString());
@@ -216,6 +251,7 @@ public class Tab_Foto_Activity  extends Activity {
         linLayout2.addView(btn_mp, lpViewbutton);
 
         FullFrame.addView(linLayout1);
+        FullFrame.addView(linLayout_ppm);
         FullFrame.addView(linLayout_photo_size);
         FullFrame.addView(linLayout_Flash);
         FullFrame.addView(linLayout2);

@@ -80,6 +80,12 @@ public class FotoBot extends Application {
      */
     public String Network_Connection_Method = "В начале работы";
 
+    /**
+     * Метод обработки фото (Hardaware или Software)
+     */
+    public String Photo_Post_processing_Method = "Hardware";
+
+
     List<Camera.Size> camera_resolutions;
 
     public int process_delay = 3;
@@ -479,6 +485,8 @@ thread.join();
         Log_Font_Size = pref.getInt("Log_Font_Size", 14);
 
         Config_Font_Size = pref.getInt("Config_Font_Size", 20);
+
+        Photo_Post_processing_Method = pref.getString("Photo_Post_processing_Method", "Hardware");
 
     }
 
