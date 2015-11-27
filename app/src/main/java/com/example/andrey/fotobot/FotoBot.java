@@ -399,7 +399,7 @@ thread.join();
         m.setFrom(fb.EMail_Sender);
         m.setSubject("Fotobot");
         m.setBody("Уровень зарядки аккумулятора: " + fb.battery_level + "%" + "\n" +
-        "Сила GSM сигнала: " + fb.GSM_Signal + " ASU");
+                "Сила GSM сигнала: " + fb.GSM_Signal + "ASU    " + (2.0*fb.GSM_Signal-113) + "dBm");
       //  SendMessage(h, "SendMail" + str);
         str = getApplicationContext().getFilesDir().toString() + "/" + str;
         //  str = Environment.getExternalStorageDirectory().getAbsolutePath().toString() + "/fotobot.jpg";;
@@ -412,7 +412,7 @@ thread.join();
 
         if (fileExists) {
 
-            SendMessage(h, "Фото на диске: " + attach_file.length() + "байт");
+            SendMessage(h, "Фото на диске: " + attach_file.length() + " байт");
         } else {
             SendMessage(h, "SendMail: файла с фото нет");
         }
