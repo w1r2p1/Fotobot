@@ -1,11 +1,15 @@
 package com.example.andrey.fotobot;
 
 import android.app.Application;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.hardware.Camera;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.BatteryManager;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
@@ -44,6 +48,11 @@ public class FotoBot extends Application {
      * Делать фото со вспышкой
      */
     public boolean Use_Flash;
+
+
+    public int battery_level;
+
+
     /**
      * Степень JPEG сжатия
      */
@@ -98,6 +107,7 @@ public class FotoBot extends Application {
     public Handler h;
 
     public SurfaceHolder sHolder = null;
+
 
 
     /**
@@ -386,8 +396,8 @@ thread.join();
         String[] toArr = {fb.EMail_Recepient};
         m.setTo(toArr);
         m.setFrom(fb.EMail_Sender);
-        m.setSubject("This is an email sent using my Mail JavaMail wrapper from an Android device.");
-        m.setBody("Email body.");
+        m.setSubject("Fotobot");
+        m.setBody("Уровень зарядки аккумулятора: " + fb.battery_level + "%");
       //  SendMessage(h, "SendMail" + str);
         str = getApplicationContext().getFilesDir().toString() + "/" + str;
         //  str = Environment.getExternalStorageDirectory().getAbsolutePath().toString() + "/fotobot.jpg";;
@@ -489,7 +499,28 @@ thread.join();
         Photo_Post_Processing_Method = pref.getString("Photo_Post_Processing_Method", "Hardware");
 
     }
+    /**
+     * Уровень заряда аккумулятора
+     */
+    public void batteryLevel() {
 
+        BroadcastReceiver batteryLevelReceiver = new BroadcastReceiver() {
+            public void onReceive(Context context, Intent intent) {
+                //context.unregisterReceiver(this);
+                int rawlevel = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+                int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+                battery_level = -1;
+                if (rawlevel >= 0 && scale > 0) {
+                    battery_level = (rawlevel * 100) / scale;
+                }
+
+
+            }
+        };
+        IntentFilter batteryLevelFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        registerReceiver(batteryLevelReceiver, batteryLevelFilter);
+
+    }
 
 }
 
