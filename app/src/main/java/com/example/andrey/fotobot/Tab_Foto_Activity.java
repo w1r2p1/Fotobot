@@ -37,11 +37,11 @@ public class Tab_Foto_Activity  extends Activity {
     private int padding = 15;
     CheckBox checkBox_Flash;
     EditText editText_JPEG_Compression;
-    Spinner spinner1, spinner_ppm;
-    ArrayAdapter<String> spinnerArrayAdapter1;
+    Spinner spinner_Hardware, spinner_ppm, spinner1;
+    ArrayAdapter<String> spinnerArrayAdapter1, spinnerArrayAdapter_Hardware;
     ArrayList<String> spinnerArray_ppm;
     final String LOG_TAG = "Logs";
-    TextView tv_photo_size;
+    TextView tv_photo_size, tv_photo_size_h;
 
     protected void onCreate(Bundle savedInstanceState) {
         final FotoBot fb = (FotoBot) getApplicationContext();
@@ -167,9 +167,14 @@ public class Tab_Foto_Activity  extends Activity {
                 if (spinnerArray_ppm.get(i) == "Hardware") {
                     tv_photo_size.setVisibility(View.GONE);
                     spinner1.setVisibility(View.GONE);
+                    tv_photo_size_h.setVisibility(View.VISIBLE);
+                    spinner_Hardware.setVisibility(View.VISIBLE);
+
                 } else {
                     tv_photo_size.setVisibility(View.VISIBLE);
                     spinner1.setVisibility(View.VISIBLE);
+                    tv_photo_size_h.setVisibility(View.GONE);
+                    spinner_Hardware.setVisibility(View.GONE);
                 }
 
 //                Toast.makeText(Tab_Foto_Activity.this, "You Selected : "
@@ -187,6 +192,55 @@ public class Tab_Foto_Activity  extends Activity {
 
 
         linLayout_ppm.addView(spinner_ppm);
+
+
+
+
+        // TextView1
+        tv_photo_size_h = new TextView(this);
+        tv_photo_size_h.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_photo_size_h.setTextSize(14);
+        tv_photo_size_h.setTextColor(Color.BLACK);
+        tv_photo_size_h.setText("Масштаб фото");
+        tv_photo_size_h.setWidth((screenWidth - padding) / 100 * 50);
+        tv_photo_size_h.setLayoutParams(lpView_photo_size);
+        linLayout_photo_size.addView(tv_photo_size_h);
+
+//Spinner1
+        ArrayList<String> spinnerArray_Hardware = new ArrayList<String>();
+        spinnerArray_Hardware.add("1/16");
+        spinnerArray_Hardware.add("1/8");
+        spinnerArray_Hardware.add("1/4");
+        spinnerArray_Hardware.add("1/2");
+        spinnerArray_Hardware.add("1");
+
+        spinner_Hardware = new Spinner(this);
+        spinnerArrayAdapter_Hardware = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray_Hardware);
+        spinner_Hardware.setAdapter(spinnerArrayAdapter_Hardware);
+        //  spinner1.setSelection(spinnerArrayAdapter1.getPosition(fb.Image_Scale));
+        spinner_Hardware.setSelection(getIndex(spinner_Hardware, fb.Image_Scale));
+        spinner_Hardware.setMinimumWidth((screenWidth - padding) / 100 * 50);
+        linLayout_photo_size.addView(spinner_Hardware);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -260,7 +314,7 @@ public class Tab_Foto_Activity  extends Activity {
                 String input = editText_JPEG_Compression.getText().toString();
                 editor.putString("Photo_Post_processing_Method", spinner_ppm.getSelectedItem().toString());
                 editor.putInt("JPEG_Compression", Integer.parseInt(editText_JPEG_Compression.getText().toString()));
-               // editor.putString("Image_Scale", spinner1.getSelectedItem().toString());
+                editor.putString("Image_Scale", spinner_Hardware.getSelectedItem().toString());
                 editor.putString("Image_Size", spinner1.getSelectedItem().toString());
 
 // Save the changes in SharedPreferences
