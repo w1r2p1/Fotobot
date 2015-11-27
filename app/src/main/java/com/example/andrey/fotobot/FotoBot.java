@@ -83,7 +83,7 @@ public class FotoBot extends Application {
     /**
      * Метод обработки фото (Hardaware или Software)
      */
-    public String Photo_Post_processing_Method = "Hardware";
+    public String Photo_Post_Processing_Method = "Hardware";
 
 
     List<Camera.Size> camera_resolutions;
@@ -486,7 +486,7 @@ thread.join();
 
         Config_Font_Size = pref.getInt("Config_Font_Size", 20);
 
-        Photo_Post_processing_Method = pref.getString("Photo_Post_processing_Method", "Hardware");
+        Photo_Post_Processing_Method = pref.getString("Photo_Post_Processing_Method", "Hardware");
 
     }
 

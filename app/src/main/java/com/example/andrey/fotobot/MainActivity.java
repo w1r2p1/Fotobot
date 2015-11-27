@@ -156,27 +156,29 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             // Calculate inSampleSize
 
-            options.inSampleSize = 8;
+            if (fb.Photo_Post_Processing_Method.contains("Hardware")) {
 
-/*
-            switch (fb.Image_Scale) {
-                case "1/16":
-                    options.inSampleSize = 16;
-                    break;
-                case "1/8":
-                    options.inSampleSize = 8;
-                    break;
-                case "1/4":
-                    options.inSampleSize = 4;
-                    break;
-                case "1/2":
-                    options.inSampleSize = 2;
-                    break;
-                default:
-                    options.inSampleSize = 1;
-                    break;
+                options.inSampleSize = 8;
+
+                switch (fb.Image_Scale) {
+                    case "1/16":
+                        options.inSampleSize = 16;
+                        break;
+                    case "1/8":
+                        options.inSampleSize = 8;
+                        break;
+                    case "1/4":
+                        options.inSampleSize = 4;
+                        break;
+                    case "1/2":
+                        options.inSampleSize = 2;
+                        break;
+                    default:
+                        options.inSampleSize = 1;
+                        break;
+                }
+
             }
-*/
 
             //fb.SendMessage("options.inSampleSize = " + options.inSampleSize);
 
@@ -636,19 +638,21 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             }
 
                           // Camera.Parameters params;
-/*
-                            Camera.Parameters params = mCamera.getParameters();
 
-                            String string = fb.Image_Size;
-                            String[] parts = string.split("x");
-                            String width = parts[0];
-                            String height = parts[1];
+                            if (fb.Photo_Post_Processing_Method.contains("Software")) {
 
-                            params.setPictureSize(Integer.parseInt(width), Integer.parseInt(height));
-                            mCamera.setParameters(params);
+                                Camera.Parameters params = mCamera.getParameters();
 
-                            fb.SendMessage("Разрешение фото: " + Integer.parseInt(width) + " " + Integer.parseInt(height));
-*/
+                                String string = fb.Image_Size;
+                                String[] parts = string.split("x");
+                                String width = parts[0];
+                                String height = parts[1];
+
+                                params.setPictureSize(Integer.parseInt(width), Integer.parseInt(height));
+                                mCamera.setParameters(params);
+
+                                fb.SendMessage("Разрешение фото: " + Integer.parseInt(width) + " " + Integer.parseInt(height));
+                            }
 
                             mCamera.takePicture(null, null, mCall);
                             fb.SendMessage("Фото сделано");

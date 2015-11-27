@@ -152,7 +152,7 @@ public class Tab_Foto_Activity  extends Activity {
         ArrayAdapter<String> spinnerArrayAdapter_ppm = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray_ppm);
         spinner_ppm.setAdapter(spinnerArrayAdapter_ppm);
         // spinner1.setSelection(spinnerArrayAdapter1.getPosition("Both"));
-        spinner_ppm.setSelection(getIndex(spinner_ppm, fb.Photo_Post_processing_Method));
+        spinner_ppm.setSelection(getIndex(spinner_ppm, fb.Photo_Post_Processing_Method));
         spinner_ppm.setMinimumWidth((screenWidth - padding) / 100 * 50);
         //   spinner1.setBackgroundResource(android.R.drawable.spinner_bg);
         // spinner1.setBackgroundColor(Color.WHITE);
@@ -312,7 +312,7 @@ public class Tab_Foto_Activity  extends Activity {
                 }
 
                 String input = editText_JPEG_Compression.getText().toString();
-                editor.putString("Photo_Post_processing_Method", spinner_ppm.getSelectedItem().toString());
+                editor.putString("Photo_Post_Processing_Method", spinner_ppm.getSelectedItem().toString());
                 editor.putInt("JPEG_Compression", Integer.parseInt(editText_JPEG_Compression.getText().toString()));
                 editor.putString("Image_Scale", spinner_Hardware.getSelectedItem().toString());
                 editor.putString("Image_Size", spinner1.getSelectedItem().toString());
