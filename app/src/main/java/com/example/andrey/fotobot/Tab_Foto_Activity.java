@@ -14,6 +14,7 @@ import android.view.Gravity;
 import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -38,7 +39,9 @@ public class Tab_Foto_Activity  extends Activity {
     EditText editText_JPEG_Compression;
     Spinner spinner1, spinner_ppm;
     ArrayAdapter<String> spinnerArrayAdapter1;
+    ArrayList<String> spinnerArray_ppm;
     final String LOG_TAG = "Logs";
+    TextView tv_photo_size;
 
     protected void onCreate(Bundle savedInstanceState) {
         final FotoBot fb = (FotoBot) getApplicationContext();
@@ -111,6 +114,7 @@ public class Tab_Foto_Activity  extends Activity {
         tv_ppm.setTypeface(Typeface.DEFAULT_BOLD);
         tv_ppm.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_ppm.setTextColor(Color.BLACK);
+//        tv_ppm.setVisibility(View.GONE);
         linLayout_ppm.addView(tv_ppm);
 
 // Flash TextView
@@ -140,7 +144,7 @@ public class Tab_Foto_Activity  extends Activity {
         linLayout1.addView(editText_JPEG_Compression);
 
 //Photo PostProcessing Method
-        ArrayList<String> spinnerArray_ppm = new ArrayList<String>();
+        spinnerArray_ppm = new ArrayList<String>();
         spinnerArray_ppm.add("Hardware");
         spinnerArray_ppm.add("Software");
 
@@ -152,13 +156,43 @@ public class Tab_Foto_Activity  extends Activity {
         spinner_ppm.setMinimumWidth((screenWidth - padding) / 100 * 50);
         //   spinner1.setBackgroundResource(android.R.drawable.spinner_bg);
         // spinner1.setBackgroundColor(Color.WHITE);
+//        spinner_ppm.setVisibility(View.GONE);
+
+        // Set the ClickListener for Spinner
+        spinner_ppm.setOnItemSelectedListener(new  AdapterView.OnItemSelectedListener() {
+
+            public void onItemSelected(AdapterView<?> adapterView,
+                                       View view, int i, long l) {
+
+                if (spinnerArray_ppm.get(i) == "Hardware") {
+                    tv_photo_size.setVisibility(View.GONE);
+                    spinner1.setVisibility(View.GONE);
+                } else {
+                    tv_photo_size.setVisibility(View.VISIBLE);
+                    spinner1.setVisibility(View.VISIBLE);
+                }
+
+//                Toast.makeText(Tab_Foto_Activity.this, "You Selected : "
+
+//                        + spinnerArray_ppm.get(i) + " Level ", Toast.LENGTH_SHORT).show();
+
+            }
+            // If no option selected
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+
+        });
+
+
         linLayout_ppm.addView(spinner_ppm);
 
 
 
 
         // TextView1
-        TextView tv_photo_size = new TextView(this);
+        tv_photo_size = new TextView(this);
         tv_photo_size.setTypeface(Typeface.DEFAULT_BOLD);
         tv_photo_size.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_photo_size.setTextColor(Color.BLACK);
