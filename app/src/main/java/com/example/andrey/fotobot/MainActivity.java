@@ -39,280 +39,28 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
-    private final static String FILE_DIR = "/MySampleFolder/";
-
     public static final int UNKNOW_CODE = 99;
+    private final static String FILE_DIR = "/MySampleFolder/";
+    final String LOG_TAG = "Logs";
+    final int STATUS_STARTED = 111;
+    final int STATUS_WORKING = 222;
+    final int STATUS_STOPPED = 333;
     int MAX_SIGNAL_DBM_VALUE = 31;
-
     int n;
     FotoBot fb;
     String log;
-
-    //a variable to store a reference to the Image View at the main.xml file
-    private ImageView iv_image;
-
-    //a variable to store a reference to the Surface View at the main.xml file
-    private SurfaceView sv;
-
-    //a bitmap to display the captured image
-    private Bitmap bmp;
-
-    //Camera variables
-    //a surface holder
-    private SurfaceHolder sHolder;
-    //a variable to control the camera
-    private Camera mCamera;
-    //the camera parameters
-    private Camera.Parameters parameters;
-    final String LOG_TAG = "Logs";
-
-    private UnexpectedTerminationHelper mUnexpectedTerminationHelper = new UnexpectedTerminationHelper();
-
-    private class UnexpectedTerminationHelper {
-        private Thread mThread;
-        private Thread.UncaughtExceptionHandler mOldUncaughtExceptionHandler = null;
-        private Thread.UncaughtExceptionHandler mUncaughtExceptionHandler = new Thread.UncaughtExceptionHandler() {
-            @Override
-            public void uncaughtException(Thread thread, Throwable ex) { // gets called on the same (main) thread
-
-                releaseCamera();
-
-
-                if (mOldUncaughtExceptionHandler != null) {
-                    // it displays the "force close" dialog
-                    mOldUncaughtExceptionHandler.uncaughtException(thread, ex);
-                }
-            }
-        };
-
-        void init() {
-            mThread = Thread.currentThread();
-            mOldUncaughtExceptionHandler = mThread.getUncaughtExceptionHandler();
-            mThread.setUncaughtExceptionHandler(mUncaughtExceptionHandler);
-        }
-
-        void fini() {
-            mThread.setUncaughtExceptionHandler(mOldUncaughtExceptionHandler);
-            mOldUncaughtExceptionHandler = null;
-            mThread = null;
-        }
-    }
-
-    /**
-     * Печатает в консоль общее число памяти, доступная память, занятую память
-     *
-     * @return используемая память
-     */
-    public long getUsedMemorySize() {
-        final FotoBot fb = (FotoBot) getApplicationContext();
-        final String LOG_USED_MEMORY = "UsedMem";
-
-        long freeSize = 0L;
-        long totalSize = 0L;
-        long usedSize = -1L;
-        try {
-            Runtime info = Runtime.getRuntime();
-            freeSize = info.freeMemory();
-            totalSize = info.totalMemory();
-            usedSize = totalSize - freeSize;
-            //    fb.SendMessage("MEMORY (TOTAL/FREE/USED MB)" + totalSize + "/" + freeSize + "/" + usedSize );
-            Log.d(LOG_USED_MEMORY, "***** totalSize, freeSize, usedSize  " + totalSize + ";" + freeSize + ";" + usedSize);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return usedSize;
-
-    }
-
-    /**
-     * постобработка фото
-     */
-    Camera.PictureCallback mCall = new Camera.PictureCallback() {
-        @Override
-        public void onPictureTaken(byte[] data, Camera camera) {
-            final FotoBot fb = (FotoBot) getApplicationContext();
-//            fb.SendMessage("Camera.PictureCallback is started");
-            fb.LoadData();
-
-            PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
-            PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
-                    "MyWakelockTag");
-
-
-            wakeLock.acquire();
-
-
-            Log.d(LOG_TAG, "***** mCall started: " + getUsedMemorySize());
-
-            //decode the data obtained by the camera into a Bitmap
-            // bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
-            //set the iv_image
-            //iv_image.setImageBitmap(bmp);
-
-
-            //decode the data obtained by the camera into a Bitmap
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inPurgeable = true;
-
-
-            // options.inJustDecodeBounds = true;
-            //       bmp = BitmapFactory.decodeByteArray(data, 0, data.length,options);
-
-
-            // Calculate inSampleSize
-
-            if (fb.Photo_Post_Processing_Method.contains("Hardware")) {
-
-                options.inSampleSize = 8;
-
-                switch (fb.Image_Scale) {
-                    case "1/16":
-                        options.inSampleSize = 16;
-                        break;
-                    case "1/8":
-                        options.inSampleSize = 8;
-                        break;
-                    case "1/4":
-                        options.inSampleSize = 4;
-                        break;
-                    case "1/2":
-                        options.inSampleSize = 2;
-                        break;
-                    default:
-                        options.inSampleSize = 1;
-                        break;
-                }
-
-            }
-
-            //fb.SendMessage("options.inSampleSize = " + options.inSampleSize);
-
-
-            options.inPreferredConfig = Bitmap.Config.RGB_565;
-
-            Log.d(LOG_TAG, "***** Options are defined: " + getUsedMemorySize());
-
-            //fb.SendMessage("BitmapFactory.decodeByteArray is started");
-
-            bmp = BitmapFactory.decodeByteArray(data, 0, data.length, options);
-
-            //fb.SendMessage("BitmapFactory.decodeByteArray finished");
-
-            Log.d(LOG_TAG, "***** BitmapFactory.decodeByteArray(data,0,data.length,options) done " + getUsedMemorySize());
-
-            // fb.fbpause(h,5);
-
-            //  try {
-            //      TimeUnit.SECONDS.sleep(5);
-            //  } catch (InterruptedException e) {
-            //      e.printStackTrace();
-            //  }
-
-
-            // String fullPath = Environment.getExternalStorageDirectory().getAbsolutePath();
-
-
-            // Log.d(LOG_TAG, "fullPath: " + fullPath);
-            // try {
-            //     File dir = new File(fullPath);
-            //     if (!dir.exists()) {
-            //         dir.mkdirs();
-            //     }
-
-            FileOutputStream fOut = null;
-            File file = new File(getApplicationContext().getFilesDir(), "fotobot.jpg");
-
-            try {
-                file.createNewFile();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-                fOut = new FileOutputStream(file);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            //     Bitmap bmp_m = bmp.createScaledBitmap(bmp, 320,
-            //           240, false);
-
-            //  fb.fbpause(h,5);
-
-            //   try {
-            //       TimeUnit.SECONDS.sleep(5);
-            //   } catch (InterruptedException e) {
-            //       e.printStackTrace();
-            //   }
-
-            Log.d(LOG_TAG, "***** fotobot.jpg is created) done " + getUsedMemorySize());
-
-// 100 means no compression, the lower you go, the stronger the compression
-
-            // fb.SendMessage("Bitmap.CompressFormat started");
-
-            bmp.compress(Bitmap.CompressFormat.JPEG, fb.JPEG_Compression, fOut);
-
-            //  fb.SendMessage("Bitmap.CompressFormat finished");
-
-            Log.d(LOG_TAG, "***** bmp.compress(Bitmap.CompressFormat.JPEG, 50, fOut); " + getUsedMemorySize());
-
-            // fb.fbpause(h,3);
-
-            // try {
-            //     TimeUnit.SECONDS.sleep(3);
-            // } catch (InterruptedException e) {
-            //     e.printStackTrace();
-            // }
-
-            try {
-                fOut.flush();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            try {
-                fOut.getFD().sync();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            //    try {
-            //    fOut.getFD().sync();
-            //    } catch (Exception e) {
-            //        e.printStackTrace();
-            //    }
-
-
-            try {
-                fOut.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-
-            //  try {
-            //      TimeUnit.SECONDS.sleep(1);
-            //  } catch (InterruptedException e) {
-            //       e.printStackTrace();
-            //  }
-
-            bmp.recycle();
-
-            bmp = null;
-
-            Log.d(LOG_TAG, "***** fOut.flush();  + getUsedMemorySize()");
-
-        }
-
-    };
-
+    boolean STOP_FOTOBOT = false;
+    Button btnStart;
+    Button btnStop;
+    Button btnConfig;
+    Handler h = null;
+    TextView tvInfo;
     /**
      * Печатает сообщения на экран телефона, нужен для того чтобы получать данные из потока в котором работает FotoBot
      */
     Handler.Callback hc = new Handler.Callback() {
         public boolean handleMessage(Message msg) {
+
             final FotoBot fb = (FotoBot) getApplicationContext();
             PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
             PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
@@ -340,13 +88,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             if (fb.getstatus() == 3) {
 
-               // mCamera.stopPreview();
-             //   mCamera.release();
-               // mCamera = null;
-
                 btnStart = (Button) findViewById(R.id.play);
                 btnStop = (Button) findViewById(R.id.stop);
-                //     Log.d(LOG_TAG, "Handler.Callback() if: fb.getstatus()" + fb.getstatus());
                 btnStart.setText("Пуск");
                 btnStart.setEnabled(true);
                 btnStop.setEnabled(false);
@@ -356,49 +99,170 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
 
             return false;
+
         }
     };
-
-    final int STATUS_STARTED = 111;
-    final int STATUS_WORKING = 222;
-    final int STATUS_STOPPED = 333;
-    boolean STOP_FOTOBOT = false;
-
-
-    Button btnStart;
-    Button btnStop;
-    Button btnConfig;
-    Handler h = null;
-    TextView tvInfo;
     TextView text;
     Intent intent;
     String str1 = "Fotobot str to file";
-
     TelephonyManager tel;
     MyPhoneStateListener myPhoneStateListener;
+    //a variable to store a reference to the Image View at the main.xml file
+    private ImageView iv_image;
+    //a variable to store a reference to the Surface View at the main.xml file
+    private SurfaceView sv;
+    //a bitmap to display the captured image
+    private Bitmap bmp;
+    /**
+     * постобработка фото
+     */
+    Camera.PictureCallback mCall = new Camera.PictureCallback() {
+        @Override
+        public void onPictureTaken(byte[] data, Camera camera) {
+            final FotoBot fb = (FotoBot) getApplicationContext();
 
+            fb.LoadData();
+
+            PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+            PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+                    "MyWakelockTag");
+
+            wakeLock.acquire();
+
+            Log.d(LOG_TAG, "***** mCall started: " + getUsedMemorySize());
+
+            //decode the data obtained by the camera into a Bitmap
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inPurgeable = true;
+
+
+            if (fb.Photo_Post_Processing_Method.contains("Hardware")) {
+
+                options.inSampleSize = 8;
+
+                switch (fb.Image_Scale) {
+                    case "1/16":
+                        options.inSampleSize = 16;
+                        break;
+                    case "1/8":
+                        options.inSampleSize = 8;
+                        break;
+                    case "1/4":
+                        options.inSampleSize = 4;
+                        break;
+                    case "1/2":
+                        options.inSampleSize = 2;
+                        break;
+                    default:
+                        options.inSampleSize = 1;
+                        break;
+                }
+
+            }
+
+            options.inPreferredConfig = Bitmap.Config.RGB_565;
+
+            bmp = BitmapFactory.decodeByteArray(data, 0, data.length, options);
+
+            FileOutputStream fOut = null;
+            File file = new File(getApplicationContext().getFilesDir(), "fotobot.jpg");
+
+            try {
+                file.createNewFile();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                fOut = new FileOutputStream(file);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            bmp.compress(Bitmap.CompressFormat.JPEG, fb.JPEG_Compression, fOut);
+
+            try {
+                fOut.flush();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            try {
+                fOut.getFD().sync();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            try {
+                fOut.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            bmp.recycle();
+
+            bmp = null;
+
+        }
+
+    };
+    //Camera variables
+    //a surface holder
+    private SurfaceHolder sHolder;
+    //a variable to control the camera
+    private Camera mCamera;
+    //the camera parameters
+    private Camera.Parameters parameters;
+    private UnexpectedTerminationHelper mUnexpectedTerminationHelper = new UnexpectedTerminationHelper();
+
+    /**
+     * Печатает в консоль общее число памяти, доступная память, занятую память
+     *
+     * @return используемая память
+     */
+    public long getUsedMemorySize() {
+
+        final FotoBot fb = (FotoBot) getApplicationContext();
+
+        final String LOG_USED_MEMORY = "UsedMem";
+
+        long freeSize = 0L;
+        long totalSize = 0L;
+        long usedSize = -1L;
+
+        try {
+
+            Runtime info = Runtime.getRuntime();
+            freeSize = info.freeMemory();
+            totalSize = info.totalMemory();
+            usedSize = totalSize - freeSize;
+            // fb.SendMessage("MEMORY (TOTAL/FREE/USED MB)" + totalSize + "/" + freeSize + "/" + usedSize );
+            // Log.d(LOG_USED_MEMORY, "***** totalSize, freeSize, usedSize  " + totalSize + ";" + freeSize + ";" + usedSize);
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
+
+        return usedSize;
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
-
 
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
         PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                 "MyWakelockTag");
 
-
         super.onCreate(savedInstanceState);
         wakeLock.acquire();
-
 
         myPhoneStateListener = new MyPhoneStateListener();
         tel = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         tel.listen(myPhoneStateListener, PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
 
-
-        //    super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         final FotoBot fb = (FotoBot) getApplicationContext();
@@ -423,9 +287,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         //tells Android that this surface will have its data constantly replaced
         sHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
-
         fb.sHolder = sHolder;
-
 
         intent = new Intent(MainActivity.this, Status.class);
         log = "\n\n\n\n\nФотобот приветствует Вас!";
@@ -443,13 +305,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     protected void onDestroy() {
         super.onDestroy();
-  //      releaseCamera();
         Log.d(LOG_TAG, "MainActivity: onDestroy");
     }
 
     protected void onPause() {
         super.onPause();
-//        releaseCamera();
         Log.d(LOG_TAG, "MainActivity: onPause");
     }
 
@@ -572,14 +432,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                 "MyWakelockTag");
 
-
         wakeLock.acquire();
 
         final FotoBot fb = (FotoBot) getApplicationContext();
-
-
-        // h = new Handler(hc);
-
 
         switch (v.getId()) {
             case R.id.play:
@@ -608,43 +463,23 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             fb.batteryLevel();
 
-
-
                             if (fb.getstatus() == 3) {
-                                //if (mCamera != null) {
-                                    mCamera.stopPreview();
-                                    mCamera.setPreviewCallback(null);
-                                    mCamera.release();
-                                    mCamera = null;
-                                  //  mUnexpectedTerminationHelper.fini();
-                                //}
+                                mCamera.stopPreview();
+                                mCamera.setPreviewCallback(null);
+                                mCamera.release();
+                                mCamera = null;
                                 fb.SendMessage(h, "Фотобот остановлен");
                                 return;
                             }
 
-                          /*  mCamera = Camera.open();
-
-                            try {
-                                mCamera.setPreviewDisplay(fb.sHolder);
-
-                            } catch (IOException exception) {
-                                mCamera.release();
-                                mCamera = null;
-                            }
-
-                            mCamera.startPreview();
-*/
                             fb.LoadData();
 
                             if (fb.Network_Connection_Method.contains("На каждом шаге")) {
                                 fb.MakeInternetConnection(getApplicationContext(), h);
                             }
 
-
-
                             AudioManager mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                             mgr.setStreamMute(AudioManager.STREAM_SYSTEM, true);
-
 
                             if (fb.Use_Flash) {
                                 mCamera.stopPreview();
@@ -660,7 +495,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 fb.fbpause(h, fb.process_delay);
                             }
 
-                          // Camera.Parameters params;
+                            // Camera.Parameters params;
 
                             if (fb.Photo_Post_Processing_Method.contains("Software")) {
 
@@ -715,22 +550,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             }
 
                             fb.SendMessage("\n");
-/*
-                            mCamera.stopPreview();
-                            mCamera.release();
-                            mCamera = null;
-*/
-                            fb.fbpause(h, fb.Photo_Frequency);
 
+                            fb.fbpause(h, fb.Photo_Frequency);
 
                         }
 
-                     /*   if (fb.getstatus() == 3) {
-                            mCamera.stopPreview();
-                            mCamera.release();
-                            mCamera = null;
-                            return;
-                        } */
                     }
 
                 }
@@ -797,17 +621,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         Camera.Parameters params = mCamera.getParameters();
         fb.camera_resolutions = params.getSupportedPictureSizes();
-//        mCamera.release();
-//        mCamera = null;
 
     }
-
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         releaseCamera();
     }
-
 
     private void releaseCamera() {
         if (mCamera != null) {
@@ -817,6 +637,46 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             mCamera = null;
             mUnexpectedTerminationHelper.fini();
         }
+    }
+
+    private int calculateSignalStrengthInPercent(int signalStrength) {
+        //return (int) ((float) signalStrength / MAX_SIGNAL_DBM_VALUE * 100);
+        return (int) ((float) signalStrength);
+    }
+
+    private class UnexpectedTerminationHelper {
+
+        private Thread mThread;
+        private Thread.UncaughtExceptionHandler mOldUncaughtExceptionHandler = null;
+        private Thread.UncaughtExceptionHandler mUncaughtExceptionHandler = new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(Thread thread, Throwable ex) { // gets called on the same (main) thread
+
+                releaseCamera();
+
+                if (mOldUncaughtExceptionHandler != null) {
+                    // it displays the "force close" dialog
+                    mOldUncaughtExceptionHandler.uncaughtException(thread, ex);
+                }
+            }
+        };
+
+        void init() {
+
+            mThread = Thread.currentThread();
+            mOldUncaughtExceptionHandler = mThread.getUncaughtExceptionHandler();
+            mThread.setUncaughtExceptionHandler(mUncaughtExceptionHandler);
+
+        }
+
+        void fini() {
+
+            mThread.setUncaughtExceptionHandler(mOldUncaughtExceptionHandler);
+            mOldUncaughtExceptionHandler = null;
+            mThread = null;
+
+        }
+
     }
 
     private class MyPhoneStateListener extends PhoneStateListener {
@@ -829,16 +689,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             if (null != signalStrength && signalStrength.getGsmSignalStrength() != UNKNOW_CODE) {
                 int signalStrengthPercent = calculateSignalStrengthInPercent(signalStrength.getGsmSignalStrength());
                 fb.GSM_Signal = calculateSignalStrengthInPercent(signalStrength.getGsmSignalStrength());
-               // viewModel.setSignalStrengthString(IntegerHelper.getString(signalStrengthPercent));
+                // viewModel.setSignalStrengthString(IntegerHelper.getString(signalStrengthPercent));
             }
         }
     }
-
-    private int calculateSignalStrengthInPercent(int signalStrength) {
-        //return (int) ((float) signalStrength / MAX_SIGNAL_DBM_VALUE * 100);
-        return (int) ((float) signalStrength);
-    }
-
-
 
 }
