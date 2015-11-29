@@ -31,19 +31,22 @@ import static android.os.Environment.getExternalStoragePublicDirectory;
  * Это глобальный класс, объект данного класса будет виден во всех активити. Инициализируется через Manifest.
  */
 public class FotoBot extends Application {
+
     /**
      * Интервал фотографирования (в секундах)
      */
     public int Photo_Frequency;
-  //  public int Update;
+
     /**
      * Нужно ли использовать Wi-Fi для выхода в Internet
      */
     public boolean Use_WiFi;
+
     /**
      * Нужно ли использовать 3G (2G) для выхода в Internet
      */
     public boolean Use_Mobile_Data;
+
     /**
      * Делать фото со вспышкой
      */
@@ -79,7 +82,9 @@ public class FotoBot extends Application {
      */
     public String EMail_Sender_Password = "passwd";
 
-    /** кому отправлять письма с фотками */
+    /**
+     * кому отправлять письма с фотками
+     */
     public String EMail_Recepient = "user@mail.ru";
 
     public String Network_Channel = "Both";
@@ -94,7 +99,7 @@ public class FotoBot extends Application {
      */
     public String Photo_Post_Processing_Method = "Hardware";
 
-public int GSM_Signal = 0;
+    public int GSM_Signal = 0;
 
     List<Camera.Size> camera_resolutions;
 
@@ -103,13 +108,12 @@ public int GSM_Signal = 0;
     public int status = 1;
 
     public SurfaceHolder holder;
+
     public String str = "";
 
     public Handler h;
 
     public SurfaceHolder sHolder = null;
-
-
 
     /**
      * Размер шрифта в настройках (sp)
@@ -123,6 +127,7 @@ public int GSM_Signal = 0;
 
     /**
      * Возвращает текущее состояние FotoBot'а, сейчас не пользуюсь этим
+     *
      * @return
      */
     public int getstatus() {
@@ -132,6 +137,7 @@ public int GSM_Signal = 0;
 
     /**
      * Устанавливает статус
+     *
      * @param fb_status
      */
     public void setstatus(int fb_status) {
@@ -166,11 +172,15 @@ public int GSM_Signal = 0;
 
     /**
      * isOnline - Check if there is a NetworkConnection
+     *
      * @return boolean
      */
     public boolean isOnline(Handler h) {
+
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
+
         if (netInfo != null && netInfo.isConnected()) {
             SendMessage(h, "есть соединение с Internet");
             return true;
@@ -178,14 +188,17 @@ public int GSM_Signal = 0;
             SendMessage(h, "нет соединения с Internet");
             return false;
         }
+
     }
 
     /**
      * Для проверки соединения выкачивает страницу из Internet
+     *
      * @param h
      * @return
      */
     public boolean getData(Handler h) {
+
         try {
             HttpURLConnection urlc = (HttpURLConnection) (new URL("http://www.google.com").openConnection());
             urlc.setRequestProperty("User-Agent", "Test");
@@ -193,25 +206,26 @@ public int GSM_Signal = 0;
             urlc.setConnectTimeout(3000); //choose your own timeframe
             urlc.setReadTimeout(4000); //choose your own timeframe
             urlc.connect();
-            //  networkcode2 = urlc.getResponseCode();
             SendMessage(h, "удалось скачать файл из Internet");
             return (urlc.getResponseCode() == 200);
         } catch (IOException e) {
             SendMessage(h, "не удалось скачать файл из Internet");
             return (false);  //connectivity exists, but no internet.
         }
+
     }
 
     /**
      * FotoBot умеет самостоятельно подключаться к Internet для отправки фото на почту
+     *
      * @param context
      * @param h
      * @return
      */
     public boolean MakeInternetConnection(Context context, Handler h) {
-        //fbpause(h, 1);
 
         WiFi wf;
+
         wf = new WiFi();
 
         LoadData();
@@ -230,7 +244,6 @@ public int GSM_Signal = 0;
                 SendMessage(h, "Wi-Fi включается долго,\nнужно подождать");
                 fbpause(h, 5);
 
-
                 if ((isOnline(h) && getData(h))) {
                     SendMessage(h, "Ура! Связь с Internet появилась!");
                     return true;
@@ -242,8 +255,8 @@ public int GSM_Signal = 0;
 
         if (Network_Channel.contains("Mobile Data")) {
             SendMessage(h, "Метод подключения MobileData");
-            if (!(isOnline(h) && getData(h)) ) {
-                SendMessage(h, "По Wi-Fi нет связи,\nвключаем Mobile Data");
+            if (!(isOnline(h) && getData(h))) {
+                SendMessage(h, "включаем Mobile Data");
                 wf.setWiFiEnabled(getApplicationContext(), false);
                 fbpause(h, 5);
                 md.setMobileDataEnabled(getApplicationContext(), true);
@@ -268,7 +281,6 @@ public int GSM_Signal = 0;
                 fbpause(h, 5);
                 SendMessage(h, "Wi-Fi включается долго,\nнужно подождать");
                 fbpause(h, 5);
-
 
                 if ((isOnline(h) && getData(h))) {
                     SendMessage(h, "Ура! Связь с Internet появилась!");
@@ -298,12 +310,14 @@ public int GSM_Signal = 0;
         return false;
     }
 
-    /** FotoBot может самостоятельно отключаться от Internet
+    /**
+     * FotoBot может самостоятельно отключаться от Internet
      *
      * @param context
      * @param h
      */
     public void CloseInternetConnection(Context context, Handler h) {
+
         MobileData md;
         md = new MobileData();
         md.setMobileDataEnabled(getApplicationContext(), false);
@@ -317,44 +331,39 @@ public int GSM_Signal = 0;
 
     /**
      * Делаем паузу и печатаем на экран точки, чтобы было понятно, что программа не зависла
+     *
      * @param h
      * @param delay
      */
-        public void fbpause(final Handler h, final int delay) {
+    public void fbpause(final Handler h, final int delay) {
+
         final String message;
 
-          //  SendMessage("Pause for " + delay + " seconds");
+        Thread thread = new Thread() {
+            public void run() {
+                for (int i = 1; i <= delay; i++) {
+                    Message msg = Message.obtain(); // Creates an new Message instance
+                    try {
+                        TimeUnit.SECONDS.sleep(1);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
 
-            Thread thread = new Thread() {
-                public void run() {
-                    for (int i = 1; i <= delay; i++) {
-                        Message msg = Message.obtain(); // Creates an new Message instance
-                      //  message = ". . . . . " + Integer.toString(i);
 
-                        try {
-                            TimeUnit.SECONDS.sleep(1);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-
-                      //  msg.obj = message; // Put the string into Message, into "obj" field.
-                      //  msg.setTarget(h); // Set the Handler
-                        //   msg.sendToTarget(); //Send the message
-                        if (getstatus() == 3) { return; }
+                    if (getstatus() == 3) {
+                        return;
                     }
                 }
+            }
 
-            };
-            thread.start();
+        };
+        thread.start();
 
-
-try {
-thread.join();
-} catch (InterruptedException e) {
-    e.printStackTrace();
-}
-
-
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -365,10 +374,12 @@ thread.join();
      * @param str текст сообщения
      */
     public void SendMessage(Handler h, String str) {
+
         Message msg = Message.obtain(); // Creates an new Message instance
         msg.obj = str; // Put the string into Message, into "obj" field.
         msg.setTarget(h); // Set the Handler
         msg.sendToTarget(); //Send the message
+
     }
 
     /**
@@ -377,78 +388,72 @@ thread.join();
      * @param str текст сообщения
      */
     public void SendMessage(String str) {
+
         Message msg = Message.obtain(); // Creates an new Message instance
         msg.obj = str; // Put the string into Message, into "obj" field.
         msg.setTarget(h); // Set the Handler
         msg.sendToTarget(); //Send the message
-    }
 
+    }
 
 
     /**
      * Данный метод позволяет отправить письма с аттачем
+     *
      * @param h
      * @param str
      */
     public void SendMail(Handler h, String str) {
+
         final FotoBot fb = (FotoBot) getApplicationContext();
+
         Mail m = new Mail(fb.EMail_Sender, fb.EMail_Sender_Password);
 
         String[] toArr = {fb.EMail_Recepient};
+
         m.setTo(toArr);
         m.setFrom(fb.EMail_Sender);
         m.setSubject("Fotobot");
         m.setBody("Уровень зарядки аккумулятора: " + fb.battery_level + "%" + "\n" +
-                "Сила GSM сигнала: " + fb.GSM_Signal + "ASU    " + (2.0*fb.GSM_Signal-113) + "dBm");
-      //  SendMessage(h, "SendMail" + str);
-        str = getApplicationContext().getFilesDir().toString() + "/" + str;
-        //  str = Environment.getExternalStorageDirectory().getAbsolutePath().toString() + "/fotobot.jpg";;
+                "Сила GSM сигнала: " + fb.GSM_Signal + "ASU    " + (2.0 * fb.GSM_Signal - 113) + "dBm");
 
-        //SendMessage(h, "SendMail with file path:" + str);
+        str = getApplicationContext().getFilesDir().toString() + "/" + str;
 
         File attach_file;
         attach_file = new File(str);
         boolean fileExists = attach_file.isFile();
 
         if (fileExists) {
-
             SendMessage(h, "Фото на диске: " + attach_file.length() + " байт");
         } else {
             SendMessage(h, "SendMail: файла с фото нет");
         }
 
         try {
-
             m.addAttachment(str);
-
-         //   try {
-         //       TimeUnit.SECONDS.sleep(3);
-         //   } catch (InterruptedException e) {
-         //       e.printStackTrace();
-         //   }
-
-            fbpause(h,process_delay);
+            fbpause(h, process_delay);
 
             if (m.send()) {
-                //  Toast.makeText(MailApp.this, "Email was sent successfully.", Toast.LENGTH_LONG).show();
                 SendMessage(h, "Фото выслано на почту");
             } else {
-                // Toast.makeText(MailApp.this, "Email was not sent.", Toast.LENGTH_LONG).show();
                 SendMessage(h, "Email was not sent.");
             }
         } catch (Exception e) {
-            //Toast.makeText(MailApp.this, "There was a problem sending the email.", Toast.LENGTH_LONG).show();
             SendMessage(h, "Could not send email");
             Log.e("MailApp", "Could not send email", e);
         }
+
     }
 
     /**
      * На внешнюю карту можно записывать файлы?
+     *
      * @return
      */
     public boolean isExternalStorageWritable() {
+
         String state = Environment.getExternalStorageState();
+
         if (Environment.MEDIA_MOUNTED.equals(state)) {
             return true;
         }
@@ -486,7 +491,7 @@ thread.join();
 
         Image_Scale = pref.getString("Image_Scale", "1");
 
-        Image_Size = pref.getString("Image_Size","320x240");
+        Image_Size = pref.getString("Image_Size", "320x240");
 
         EMail_Sender = pref.getString("EMail_Sender", "fotobotmail@gmail.com");
 
@@ -501,6 +506,7 @@ thread.join();
         Photo_Post_Processing_Method = pref.getString("Photo_Post_Processing_Method", "Hardware");
 
     }
+
     /**
      * Уровень заряда аккумулятора
      */
@@ -515,18 +521,12 @@ thread.join();
                 if (rawlevel >= 0 && scale > 0) {
                     battery_level = (rawlevel * 100) / scale;
                 }
-
-
             }
         };
+
         IntentFilter batteryLevelFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
         registerReceiver(batteryLevelReceiver, batteryLevelFilter);
 
     }
 
-
-
-
 }
-
-
