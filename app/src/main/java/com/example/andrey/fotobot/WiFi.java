@@ -19,33 +19,3 @@ public class WiFi {
     }
 
 }
-
-
-
-
-
-
-
-/*
-ConnectivityManager conMan = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-
-//mobile
-State mobile = conMan.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState();
-
-//wifi
-State wifi = conMan.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState();
-//  and then use it like that:
-
-if (mobile == NetworkInfo.State.CONNECTED || mobile == NetworkInfo.State.CONNECTING)
-        {
-        Toast.makeText(Wifi_Gprs.this,"Mobile is Enabled :) ....",Toast.LENGTH_LONG).show();
-        }
-        else if (wifi == NetworkInfo.State.CONNECTED || wifi == NetworkInfo.State.CONNECTING)
-        {
-        Toast.makeText(Wifi_Gprs.this,"Wifi is Enabled  :) ....",Toast.LENGTH_LONG).show();
-        }
-        else
-        {
-        Toast.makeText(Wifi_Gprs.this,"No Wifi or Gprs Enabled :( ....",Toast.LENGTH_LONG).show();
-        }
-        */
