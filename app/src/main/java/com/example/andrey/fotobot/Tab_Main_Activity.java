@@ -117,6 +117,7 @@ public class Tab_Main_Activity extends Activity {
 // 2.1 Интервал между процессами (divider контейнер)
         LinearLayout linLayout_Flash_divider = new LinearLayout(this);
         linLayout_Flash_divider.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_Flash_divider.setPadding(5, 15, 5, 15);
 
 // 2.2 Интервал между процессами (название поля)
         TextView tv_process_delay = new TextView(this);
