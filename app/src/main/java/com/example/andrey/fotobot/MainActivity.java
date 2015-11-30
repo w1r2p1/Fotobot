@@ -164,8 +164,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             bmp = BitmapFactory.decodeByteArray(data, 0, data.length, options);
 
+
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd_hh-mm-ss-SSS");
+            //df.setTimeZone(TimeZone.getTimeZone("PST"));
+            fb.Image_Name = df.format(new Date()) + ".jpg";
+            fb.Image_Name_Full_Path = getApplicationContext().getFilesDir().toString() + "/" + fb.Image_Name;
+
             FileOutputStream fOut = null;
-            File file = new File(getApplicationContext().getFilesDir(), "fotobot.jpg");
+            File file = new File(getApplicationContext().getFilesDir(), fb.Image_Name);
 
             try {
                 file.createNewFile();
@@ -543,13 +549,24 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             mgr.setStreamMute(AudioManager.STREAM_SYSTEM, false);
 
 
-                            fb.SendMail(h, "fotobot.jpg");
+                            fb.SendMail(h, fb.Image_Name_Full_Path);
 
                             if (fb.Network_Connection_Method.contains("На каждом шаге")) {
                                 fb.CloseInternetConnection(getApplicationContext(), h);
                             }
 
                             fb.SendMessage("\n");
+
+
+
+                           // File dir = getFilesDir();
+                            File imgfile = new File(fb.Image_Name_Full_Path);
+                         //   boolean deleted = imgfile.delete();
+                            if ( imgfile.delete() ) {
+                                fb.SendMessage(fb.Image_Name + "was deleted");
+                            } else {
+                                fb.SendMessage(fb.Image_Name + "wasn't deleted");
+                            }
 
                             fb.fbpause(h, fb.Photo_Frequency);
 

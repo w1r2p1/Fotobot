@@ -125,6 +125,11 @@ public class FotoBot extends Application {
      */
     public int Log_Font_Size = 14;
 
+    public String Image_Name;
+
+    public String Image_Name_Full_Path;
+
+
     /**
      * Возвращает текущее состояние FotoBot'а, сейчас не пользуюсь этим
      *
@@ -417,14 +422,14 @@ public class FotoBot extends Application {
         m.setBody("Уровень зарядки аккумулятора: " + fb.battery_level + "%" + "\n" +
                 "Сила GSM сигнала: " + fb.GSM_Signal + "ASU    " + (2.0 * fb.GSM_Signal - 113) + "dBm");
 
-        str = getApplicationContext().getFilesDir().toString() + "/" + str;
+       // str = getApplicationContext().getFilesDir().toString() + "/" + str;
 
         File attach_file;
         attach_file = new File(str);
         boolean fileExists = attach_file.isFile();
 
         if (fileExists) {
-            SendMessage(h, "Фото на диске: " + attach_file.length() + " байт");
+            SendMessage(h, fb.Image_Name + attach_file.length() + " байт");
         } else {
             SendMessage(h, "SendMail: файла с фото нет");
         }
