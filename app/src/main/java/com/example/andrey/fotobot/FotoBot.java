@@ -508,7 +508,7 @@ public class FotoBot extends Application {
     }
 
     /**
-     * Уровень заряда аккумулятора
+     * Уровень заряда аккумулятора. Ничего не возвращает, а инициализирует глобальную переменную battery_level.
      */
     public void batteryLevel() {
 
