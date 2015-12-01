@@ -164,14 +164,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             bmp = BitmapFactory.decodeByteArray(data, 0, data.length, options);
 
-
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss-SSS");
-            //df.setTimeZone(TimeZone.getTimeZone("PST"));
-            fb.Image_Name = df.format(new Date()) + ".jpg";
-            fb.Image_Name_Full_Path = getApplicationContext().getFilesDir().toString() + "/" + fb.Image_Name;
-
             FileOutputStream fOut = null;
             // File file = new File(getApplicationContext().getFilesDir(), fb.Image_Name);
+            String fdir = getFilesDir().toString();
             File file = new File(getFilesDir(), fb.Image_Name);
 
             try {
@@ -209,6 +204,18 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             bmp.recycle();
 
             bmp = null;
+
+            File attach_file;
+            attach_file = new File(fb.Image_Name_Full_Path);
+
+            boolean fileExists = attach_file.isFile();
+
+            if (fileExists) {
+                fb.SendMessage(h, "handler " + fb.Image_Name + ": " + attach_file.length() + " байт");
+            } else {
+                fb.SendMessage(h, "handler: файла с фото нет");
+            }
+
 
         }
 
@@ -341,6 +348,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         Log.d(LOG_TAG, "MainActivity: onResume");
 // Camera
+
+        // -----------------------
 
         mCamera = Camera.open();
         try {
@@ -479,6 +488,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 return;
                             }
 
+                            DateFormat df = new SimpleDateFormat("MM-dd-yy_HH-mm-ss-SSS");
+                            fb.Image_Name = df.format(new Date()) + ".jpg";
+                            fb.Image_Name_Full_Path = getFilesDir().toString() + "/" + fb.Image_Name;
+
                             fb.LoadData();
 
                             if (fb.Network_Connection_Method.contains("На каждом шаге")) {
@@ -548,7 +561,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
                             mgr.setStreamMute(AudioManager.STREAM_SYSTEM, false);
-
 
                             fb.SendMail(h, fb.Image_Name_Full_Path);
 

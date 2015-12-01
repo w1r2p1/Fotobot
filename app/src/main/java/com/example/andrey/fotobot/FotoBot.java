@@ -412,6 +412,8 @@ public class FotoBot extends Application {
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
+        SendMessage("Аттачим" + str);
+
         Mail m = new Mail(fb.EMail_Sender, fb.EMail_Sender_Password);
 
         String[] toArr = {fb.EMail_Recepient};
