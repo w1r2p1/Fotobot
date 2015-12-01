@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             bmp = BitmapFactory.decodeByteArray(data, 0, data.length, options);
 
 
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd_hh-mm-ss-SSS");
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss-SSS");
             //df.setTimeZone(TimeZone.getTimeZone("PST"));
             fb.Image_Name = df.format(new Date()) + ".jpg";
             fb.Image_Name_Full_Path = getApplicationContext().getFilesDir().toString() + "/" + fb.Image_Name;
@@ -557,18 +557,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             fb.SendMessage("\n");
 
-
-
-                           // File dir = getFilesDir();
-                            File imgfile = new File(fb.Image_Name_Full_Path);
-                         //   boolean deleted = imgfile.delete();
-                            if ( imgfile.delete() ) {
-                                fb.SendMessage(fb.Image_Name + "was deleted");
-                            } else {
-                                fb.SendMessage(fb.Image_Name + "wasn't deleted");
-                            }
-
                             fb.fbpause(h, fb.Photo_Frequency);
+
+                            File imgfile = new File(fb.Image_Name_Full_Path);
+
+                            if ( imgfile.delete() ) {
+                                fb.SendMessage(fb.Image_Name + " was deleted");
+                            } else {
+                                fb.SendMessage(fb.Image_Name + " wasn't deleted");
+                            }
 
                         }
 

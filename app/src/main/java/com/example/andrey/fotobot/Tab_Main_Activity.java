@@ -160,17 +160,15 @@ public class Tab_Main_Activity extends Activity {
 
 // ------------------------------------------------------------------------------------------------
 
-
-
-// Config_Font_Size Container
+// 3. Шрифты (Config_Font_Size Container)
         LinearLayout linLayout_config_font_size = new LinearLayout(this);
         linLayout_config_font_size.setOrientation(LinearLayout.HORIZONTAL);
 
-// Log_Font_Size Container
+// 3.1 Шрифты (Log_Font_Size Container)
         LinearLayout linLayout_log_font_size = new LinearLayout(this);
         linLayout_config_font_size.setOrientation(LinearLayout.HORIZONTAL);
 
-// Second Container (Horizontal LinearLayout)
+// 3.2 Шрифты (Horizontal LinearLayout)
         LinearLayout linLayout2 = new LinearLayout(this);
         linLayout2.setOrientation(LinearLayout.HORIZONTAL);
         LinearLayout.LayoutParams lpView2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
@@ -178,13 +176,7 @@ public class Tab_Main_Activity extends Activity {
         linLayout2.setGravity(Gravity.BOTTOM | Gravity.CENTER);
         linLayout2.setLayoutParams(lpView2);
 
-
-
-
-
-
-
-// Config_Font_Size
+// Шрифты (Config_Font_Size)
         TextView cfs = new TextView(this);
         cfs.setTypeface(Typeface.DEFAULT_BOLD);
         cfs.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
@@ -195,7 +187,7 @@ public class Tab_Main_Activity extends Activity {
         cfs.setTypeface(Typeface.DEFAULT_BOLD);
         linLayout_config_font_size.addView(cfs);
 
-// Config_Font_Size
+// Шрифты (ввод данных)
         Config_Font_Size = new EditText(this);
         Config_Font_Size.setLayoutParams(lpView_et);
         Config_Font_Size.setText(Integer.toString(fb.Config_Font_Size));
@@ -225,6 +217,8 @@ public class Tab_Main_Activity extends Activity {
         Log_Font_Size.setLayoutParams(lp_lfs);
         Log_Font_Size.setGravity(Gravity.RIGHT);
         linLayout_log_font_size.addView(Log_Font_Size);
+
+// ------------------------------------------------------------------------------------------------
 
 // Apply Button
         Button btn = new Button(this);
@@ -263,11 +257,13 @@ public class Tab_Main_Activity extends Activity {
         linLayout2.addView(btn, lpViewbutton);
         linLayout2.addView(btn_mp, lpViewbutton);
 
+// ------------------------------------------------------------------------------------------------
+
+// Расставляем контейнеры (порядок важен)
         FullFrame.addView(linLayout1);
         FullFrame.addView(linLayout1_notes);
         FullFrame.addView(linLayout1_divider);
         FullFrame.addView(linLayout_process_delay);
-       // FullFrame.addView(linLayout_Flash);
         FullFrame.addView(linLayout_Flash_notes);
         FullFrame.addView(linLayout_Flash_divider);
         FullFrame.addView(linLayout_config_font_size);

@@ -490,9 +490,9 @@ public class FotoBot extends Application {
 
         JPEG_Compression = pref.getInt("JPEG_Compression", 50);
 
-        Photo_Frequency = pref.getInt("Photo_Frequency", 60);
+        Photo_Frequency = pref.getInt("Photo_Frequency", 15);
 
-        process_delay = pref.getInt("process_delay", 60);
+        process_delay = pref.getInt("process_delay", 5);
 
         Image_Scale = pref.getString("Image_Scale", "1");
 
@@ -504,9 +504,9 @@ public class FotoBot extends Application {
 
         EMail_Recepient = pref.getString("EMail_Recepient", "voran@inbox.ru");
 
-        Log_Font_Size = pref.getInt("Log_Font_Size", 14);
+        Log_Font_Size = pref.getInt("Log_Font_Size", 12);
 
-        Config_Font_Size = pref.getInt("Config_Font_Size", 20);
+        Config_Font_Size = pref.getInt("Config_Font_Size", 14);
 
         Photo_Post_Processing_Method = pref.getString("Photo_Post_Processing_Method", "Hardware");
 
