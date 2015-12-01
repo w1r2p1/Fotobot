@@ -171,7 +171,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             fb.Image_Name_Full_Path = getApplicationContext().getFilesDir().toString() + "/" + fb.Image_Name;
 
             FileOutputStream fOut = null;
-            File file = new File(getApplicationContext().getFilesDir(), fb.Image_Name);
+            // File file = new File(getApplicationContext().getFilesDir(), fb.Image_Name);
+            File file = new File(getFilesDir(), fb.Image_Name);
 
             try {
                 file.createNewFile();
@@ -555,8 +556,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 fb.CloseInternetConnection(getApplicationContext(), h);
                             }
 
-                            fb.SendMessage("\n");
-
                             fb.fbpause(h, fb.Photo_Frequency);
 
                             File imgfile = new File(fb.Image_Name_Full_Path);
@@ -566,6 +565,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             } else {
                                 fb.SendMessage(fb.Image_Name + " wasn't deleted");
                             }
+
+                            fb.SendMessage("\n");
 
                         }
 

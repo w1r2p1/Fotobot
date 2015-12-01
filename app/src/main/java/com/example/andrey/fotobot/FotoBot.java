@@ -429,7 +429,7 @@ public class FotoBot extends Application {
         boolean fileExists = attach_file.isFile();
 
         if (fileExists) {
-            SendMessage(h, fb.Image_Name + attach_file.length() + " байт");
+            SendMessage(h, fb.Image_Name + ": " + attach_file.length() + " байт");
         } else {
             SendMessage(h, "SendMail: файла с фото нет");
         }
