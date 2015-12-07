@@ -310,6 +310,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         tvInfo.setText(log);
 
+
+
+
+
         h = new Handler(hc);
 
         /**
