@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         }
     };
+
     TextView text;
     Intent intent;
     String str1 = "Fotobot str to file";
