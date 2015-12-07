@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     Button btnConfig;
     Handler h = null;
     TextView tvInfo;
+    boolean preview_stopped = false;
     /**
      * Печатает сообщения на экран телефона, нужен для того чтобы получать данные из потока в котором работает FotoBot
      */
@@ -476,6 +477,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                         }
 
                         for (int i = 1; i <= 1000000000; i++) {
+                            if (preview_stopped) {
+                                mCamera.startPreview();
+                            }
 // https://sohabr.net/habr/post/215693/
                             fb.batteryLevel();
 
@@ -536,7 +540,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             mCamera.takePicture(null, null, mCall);
                             fb.SendMessage("Фото сделано");
 
-                            fb.fbpause(h, fb.process_delay);
+                            fb.fbpause(h, fb.process_delay + 5);
 
                             if (fb.Use_Flash) {
                                 mCamera.stopPreview();
@@ -582,6 +586,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             fb.SendMessage("\n");
                             // @
                             mCamera.stopPreview();
+                            preview_stopped = true;
 
                         }
 
