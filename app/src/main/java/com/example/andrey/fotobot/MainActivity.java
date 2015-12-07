@@ -360,7 +360,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             mCamera = null;
         }
 
-
         final FotoBot fb = (FotoBot) getApplicationContext();
         Log.d(LOG_TAG, "MainActivity: onResume");
         Log.d(LOG_TAG, "MainActivity: fb.getstatus()" + fb.getstatus());
