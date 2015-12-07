@@ -476,7 +476,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                         }
 
                         for (int i = 1; i <= 1000000000; i++) {
-
+// https://sohabr.net/habr/post/215693/
                             fb.batteryLevel();
 
                             if (fb.getstatus() == 3) {
@@ -527,6 +527,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 String height = parts[1];
 
                                 params.setPictureSize(Integer.parseInt(width), Integer.parseInt(height));
+
                                 mCamera.setParameters(params);
 
                                 fb.SendMessage("Разрешение фото: " + Integer.parseInt(width) + " " + Integer.parseInt(height));
@@ -579,6 +580,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             }
 
                             fb.SendMessage("\n");
+                            // @
+                            mCamera.stopPreview();
 
                         }
 
