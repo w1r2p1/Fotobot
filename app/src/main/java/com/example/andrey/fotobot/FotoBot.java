@@ -325,6 +325,7 @@ public class FotoBot extends Application {
 
         MobileData md;
         md = new MobileData();
+//Sony Xperia error
         md.setMobileDataEnabled(getApplicationContext(), false);
 
         WiFi wf;
