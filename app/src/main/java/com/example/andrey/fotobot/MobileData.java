@@ -35,7 +35,7 @@ public class MobileData {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else {
+        } else if ( (Build.VERSION.SDK_INT > 10) && (Build.VERSION.SDK_INT <= 21)) {
             Log.d(LOG_TAG, "Build.VERSION.SDK_INT" + Build.VERSION.SDK_INT);
             ConnectivityManager dataManager;
             dataManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -60,6 +60,8 @@ public class MobileData {
                 e.printStackTrace();
             }
 
+        } else {
+            Log.d(LOG_TAG, "Build.VERSION.SDK_INT" + Build.VERSION.SDK_INT);
         }
     }
 

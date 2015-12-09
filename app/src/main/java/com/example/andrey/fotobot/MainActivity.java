@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.hardware.Camera;
 import android.media.AudioManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -480,7 +481,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                         fb.SendMessage(mCamera.getParameters().flatten());
 
-                        if (fb.Network_Connection_Method.contains("В начале работы")) {
+                        if (fb.Network_Connection_Method.contains("В начале работы")  && (Build.VERSION.SDK_INT <= 21)) {
                             fb.MakeInternetConnection(getApplicationContext(), h);
                         }
 
@@ -506,7 +507,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             fb.LoadData();
 
-                            if (fb.Network_Connection_Method.contains("На каждом шаге")) {
+                            if ( (fb.Network_Connection_Method.contains("На каждом шаге")) && (Build.VERSION.SDK_INT <= 21)) {
                                 fb.MakeInternetConnection(getApplicationContext(), h);
                             }
 
@@ -577,7 +578,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             fb.SendMail(h, fb.Image_Name_Full_Path);
 
-                            if (fb.Network_Connection_Method.contains("На каждом шаге")) {
+                            if ( (fb.Network_Connection_Method.contains("На каждом шаге") && (Build.VERSION.SDK_INT <= 21))) {
                                 fb.CloseInternetConnection(getApplicationContext(), h);
                             }
 
@@ -616,7 +617,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     public void stopFotobot(View v) {
         h = new Handler(hc);
         final FotoBot fb = (FotoBot) getApplicationContext();
-        fb.CloseInternetConnection(getApplicationContext(), h);
+
+        if (Build.VERSION.SDK_INT < 21 ) {
+            fb.CloseInternetConnection(getApplicationContext(), h);
+        }
 
         Log.d(LOG_TAG, "stopFotobot: fb.getstatus()" + fb.getstatus());
         fb.setstatus(3);

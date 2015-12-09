@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
@@ -264,8 +265,11 @@ public class Tab_Network_Activity extends Activity {
         linLayout2.addView(btn, lpViewbutton);
         linLayout2.addView(btn_mp, lpViewbutton);
 
-        FullFrame.addView(linLayout1);
-        FullFrame.addView(linLayout_Flash);
+        if ( Build.VERSION.SDK_INT <= 21 ) {
+            FullFrame.addView(linLayout1);
+            FullFrame.addView(linLayout_Flash);
+        }
+
         FullFrame.addView(linLayout_email);
         FullFrame.addView(linLayout_email_password);
         FullFrame.addView(linLayout_email_recepient);
