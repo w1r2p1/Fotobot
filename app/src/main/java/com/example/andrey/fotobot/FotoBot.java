@@ -10,6 +10,7 @@ import android.hardware.Camera;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.BatteryManager;
+import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
@@ -128,6 +129,11 @@ public class FotoBot extends Application {
     public String Image_Name;
 
     public String Image_Name_Full_Path;
+
+    /**
+     * Camera properties
+     */
+    public String Camera_Properties;
 
 
     /**
@@ -277,7 +283,6 @@ public class FotoBot extends Application {
 
         }
 
-
         if (Network_Channel.contains("Both")) {
             SendMessage(h, "Метод подключения Both");
             if (!(isOnline(h) && getData(h))) {
@@ -419,11 +424,35 @@ public class FotoBot extends Application {
 
         String[] toArr = {fb.EMail_Recepient};
 
+        String s = "Debug-infos:";
+        s += "\n OS Version: "      + System.getProperty("os.version")      + "(" + android.os.Build.VERSION.INCREMENTAL + ")";
+        s += "\n OS API Level: "    + android.os.Build.VERSION.SDK_INT;
+        s += "\n Device: "          + android.os.Build.DEVICE;
+        s += "\n Model (and Product): " + android.os.Build.MODEL            + " ("+ android.os.Build.PRODUCT + ")";
+
+        s += "\n RELEASE: "         + android.os.Build.VERSION.RELEASE;
+        s += "\n BRAND: "           + android.os.Build.BRAND;
+        s += "\n DISPLAY: "         + android.os.Build.DISPLAY;
+        s += "\n CPU_ABI: "         + android.os.Build.CPU_ABI;
+        s += "\n CPU_ABI2: "        + android.os.Build.CPU_ABI2;
+        s += "\n UNKNOWN: "         + android.os.Build.UNKNOWN;
+        s += "\n HARDWARE: "        + android.os.Build.HARDWARE;
+        s += "\n Build ID: "        + android.os.Build.ID;
+        s += "\n MANUFACTURER: "    + android.os.Build.MANUFACTURER;
+        s += "\n SERIAL: "          + android.os.Build.SERIAL;
+        s += "\n USER: "            + android.os.Build.USER;
+        s += "\n HOST: "            + android.os.Build.HOST;
+
+
+
         m.setTo(toArr);
         m.setFrom(fb.EMail_Sender);
         m.setSubject("Fotobot");
         m.setBody("Уровень зарядки аккумулятора: " + fb.battery_level + "%" + "\n" +
-                "Сила GSM сигнала: " + fb.GSM_Signal + "ASU    " + (2.0 * fb.GSM_Signal - 113) + "dBm");
+                "Сила GSM сигнала: " + fb.GSM_Signal + "ASU    " + (2.0 * fb.GSM_Signal - 113) + "dBm" + "\n" +
+                "Android: " + Build.VERSION.SDK_INT + "\n" +
+                "Camera: " + fb.Camera_Properties + "\n" +
+                s + "\n");
 
        // str = getApplicationContext().getFilesDir().toString() + "/" + str;
 

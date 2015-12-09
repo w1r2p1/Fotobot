@@ -477,9 +477,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                         fb.SendMessage("Фотобот начинает свою работу");
 
-                        Log.d(LOG_TAG, mCamera.getParameters().flatten());
+                        fb.Camera_Properties = mCamera.getParameters().flatten();
 
-                        fb.SendMessage(mCamera.getParameters().flatten());
+                        Log.d(LOG_TAG, fb.Camera_Properties);
+
+                        fb.SendMessage(fb.Camera_Properties);
+
 
                         if (fb.Network_Connection_Method.contains("В начале работы")  && (Build.VERSION.SDK_INT <= 21)) {
                             fb.MakeInternetConnection(getApplicationContext(), h);
