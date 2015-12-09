@@ -477,6 +477,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                         fb.SendMessage("Фотобот начинает свою работу");
 
+// Добавлено в Andorid 5. Без этого не работает. Не понятно, как раньше работало.
+                        if ( mCamera == null ) {
+                            mCamera = Camera.open();
+                        }
+
                         fb.Camera_Properties = mCamera.getParameters().flatten();
 
                         Log.d(LOG_TAG, fb.Camera_Properties);
