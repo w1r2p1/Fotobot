@@ -31,7 +31,7 @@ public class Settings extends TabActivity {
 // Главная
         View view = LayoutInflater.from(mTabHost.getContext()).inflate(R.layout.tabs_bg, null);
         TextView tv = (TextView) view.findViewById(R.id.tabsText);
-        tv.setText("Главная");
+        tv.setText("Поведение");
         Intent intent = new Intent(this, Tab_Main_Activity.class);
         TabHost.TabSpec spec = mTabHost.newTabSpec("Tab1").setIndicator(view).setContent(intent);
         mTabHost.addTab(spec);

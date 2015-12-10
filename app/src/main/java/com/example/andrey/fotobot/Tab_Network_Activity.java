@@ -251,7 +251,7 @@ public class Tab_Network_Activity extends Activity {
 
 // GoTo Main Page Button
         Button btn_mp = new Button(this);
-        btn_mp.setText("На главную");
+        btn_mp.setText("Выйти из настроек");
         btn_mp.setGravity(Gravity.CENTER);
 
         btn_mp.setOnClickListener(new View.OnClickListener() {

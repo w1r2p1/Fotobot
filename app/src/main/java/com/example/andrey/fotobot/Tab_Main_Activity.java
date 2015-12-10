@@ -43,7 +43,7 @@ public class Tab_Main_Activity extends Activity {
         screenHeight = display.getHeight();
 
 // Main Container (Vertical LinearLayout)
-// Главный контейнер внутри которого вя раскладка
+// Главный контейнер внутри которого вся раскладка
         LinearLayout FullFrame = new LinearLayout(this);
         FullFrame.setOrientation(LinearLayout.VERTICAL);
         FullFrame.setPadding(5, padding, 0, 0);
@@ -145,7 +145,7 @@ public class Tab_Main_Activity extends Activity {
         tv_process_notes.setTypeface(null, Typeface.ITALIC);
         tv_process_notes.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_process_notes.setTextColor(Color.BLACK);
-        tv_process_notes.setText("Необходим для того, чтобы слабый процессор телефона успел обработать данные.");
+        tv_process_notes.setText("Необходим для того, чтобы слабый процессор телефона успел обработать данные. Подбирается экспериментальным путем, примерно > 5 секунд.");
         tv_process_notes.setWidth((screenWidth - padding) / 100 * 99);
         tv_process_notes.setLayoutParams(lpView);
         tv_process_notes.setTextColor(Color.GRAY);
@@ -243,7 +243,7 @@ public class Tab_Main_Activity extends Activity {
 
 // GoTo Main Page Button
         Button btn_mp = new Button(this);
-        btn_mp.setText("На главную");
+        btn_mp.setText("Выйти из настроек");
         btn_mp.setGravity(Gravity.CENTER);
 
         btn_mp.setOnClickListener(new View.OnClickListener() {
