@@ -135,6 +135,11 @@ public class FotoBot extends Application {
      */
     public String Camera_Properties;
 
+    /**
+     * Документация
+     */
+    public String Main_Help = "<h1><font color=blue>Фотобот приветствует Вас!</font></h1>" +
+            "";
 
     /**
      * Возвращает текущее состояние FotoBot'а, сейчас не пользуюсь этим

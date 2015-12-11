@@ -17,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.telephony.PhoneStateListener;
 import android.telephony.SignalStrength;
 import android.telephony.TelephonyManager;
+import android.text.Html;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
@@ -309,7 +310,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         intent = new Intent(MainActivity.this, Status.class);
         log = "\n\n\n\n\nФотобот приветствует Вас!";
 
-        tvInfo.setText(log);
+        tvInfo.setText(Html.fromHtml("<b><i><font color=blue>Фотобот приветствует Вас!</font></i><b>" +
+                ""));
+
+
+      //  tvInfo.setText(log);
 
 
 
