@@ -37,7 +37,7 @@ import java.util.ArrayList;
  *
  */
 public class Tab_Network_Activity extends Activity {
-    Spinner spinner1;
+    Spinner spinner_Channels;
     Spinner spinner2;
     EditText editText_email_sender;
     EditText editText_email_password;
@@ -63,23 +63,80 @@ public class Tab_Network_Activity extends Activity {
         screenHeight = display.getHeight();
 
 // Main Container (Vertical LinearLayout)
+// Главный контейнер внутри которого вся раскладка
         LinearLayout FullFrame = new LinearLayout(this);
         FullFrame.setOrientation(LinearLayout.VERTICAL);
         FullFrame.setPadding(5, padding, 0, 0);
-//        setContentView(FullFrame);
 
-// First Container (Horizontal LinearLayout)
-        LinearLayout linLayout1 = new LinearLayout(this);
-        linLayout1.setOrientation(LinearLayout.HORIZONTAL);
+// ------------------------------------------------------------------------------------------------
+
+// Каналы связи
+
+// Контейнер для каналов связи
+        LinearLayout linLayout_Channels = new LinearLayout(this);
+        linLayout_Channels.setOrientation(LinearLayout.HORIZONTAL);
         LinearLayout.LayoutParams lpView = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         LinearLayout.LayoutParams lpView_et = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-// Flash Container
+// Пояснение контейнер
+        LinearLayout linLayout_Channels_notes = new LinearLayout(this);
+        linLayout_Channels_notes.setOrientation(LinearLayout.HORIZONTAL);
+
+// Контейнер для разделителя
+        LinearLayout linLayout_Channels_divider = new LinearLayout(this);
+        linLayout_Channels_divider.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_Channels_divider.setPadding(5, 15, 5, 15);
+
+// Название
+        TextView tv_Channels = new TextView(this);
+        tv_Channels.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Channels.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Channels.setTextColor(Color.BLACK);
+        tv_Channels.setText("Каналы связи");
+        tv_Channels.setWidth((screenWidth - padding) / 100 * 50);
+        tv_Channels.setLayoutParams(lpView);
+        linLayout_Channels.addView(tv_Channels);
+
+// Список
+        ArrayList<String> spinnerArray_Channels = new ArrayList<String>();
+        spinnerArray_Channels.add("Mobile Data");
+        spinnerArray_Channels.add("Wi-Fi");
+        spinnerArray_Channels.add("Both");
+
+        spinner_Channels = new Spinner(this);
+        ArrayAdapter<String> spinnerArrayAdapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray_Channels);
+        spinner_Channels.setAdapter(spinnerArrayAdapter1);
+        spinner_Channels.setSelection(getIndex(spinner_Channels, fb.Network_Channel));
+        spinner_Channels.setMinimumWidth((screenWidth - padding) / 100 * 50);
+        linLayout_Channels.addView(spinner_Channels);
+
+// Заметка для каналов связи
+        TextView tv_Channels_notes = new TextView(this);
+        tv_Channels_notes.setTypeface(null, Typeface.ITALIC);
+        tv_Channels_notes.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_Channels_notes.setTextColor(Color.BLACK);
+        tv_Channels_notes.setText("Выберите способ подключения к Internet (мобильные данные, wi-fi или оба).");
+        tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
+        tv_Channels_notes.setLayoutParams(lpView);
+        tv_Channels_notes.setTextColor(Color.GRAY);
+        tv_Channels_notes.setPadding(5, 15, 5, 15);
+        linLayout_Channels_notes.addView(tv_Channels_notes);
+
+// Разделитель
+        View line = new View(this);
+        line.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 1));
+        line.setBackgroundColor(Color.rgb(210, 210, 210));
+        line.getLayoutParams().height = 3;
+        linLayout_Channels_divider.addView(line);
+
+// ------------------------------------------------------------------------------------------------
+
+// Контейнер для метода подключения
         LinearLayout linLayout_Flash = new LinearLayout(this);
-        linLayout1.setOrientation(LinearLayout.HORIZONTAL);
-//        linLayout_Flash.setBackgroundColor(Color.parseColor("#00ff00"));
+        linLayout_Flash.setOrientation(LinearLayout.HORIZONTAL);
         LinearLayout.LayoutParams lpView_Flash = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         LinearLayout.LayoutParams lpView_et_Flash = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
 
 
 // Second Container (Horizontal LinearLayout)
@@ -111,31 +168,6 @@ public class Tab_Network_Activity extends Activity {
         LinearLayout.LayoutParams lpView_email_recepient = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
 
-// TextView1
-        TextView tv = new TextView(this);
-        tv.setTypeface(Typeface.DEFAULT_BOLD);
-        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
-        tv.setTextColor(Color.BLACK);
-        tv.setText("Каналы связи");
-        tv.setWidth((screenWidth - padding) / 100 * 50);
-        tv.setLayoutParams(lpView);
-        linLayout1.addView(tv);
-
-//Spinner1
-        ArrayList<String> spinnerArray = new ArrayList<String>();
-        spinnerArray.add("Mobile Data");
-        spinnerArray.add("Wi-Fi");
-        spinnerArray.add("Both");
-
-        spinner1 = new Spinner(this);
-        ArrayAdapter<String> spinnerArrayAdapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
-        spinner1.setAdapter(spinnerArrayAdapter1);
-       // spinner1.setSelection(spinnerArrayAdapter1.getPosition("Both"));
-        spinner1.setSelection(getIndex(spinner1, fb.Network_Channel));
-        spinner1.setMinimumWidth((screenWidth - padding) / 100 * 50);
-     //   spinner1.setBackgroundResource(android.R.drawable.spinner_bg);
-       // spinner1.setBackgroundColor(Color.WHITE);
-        linLayout1.addView(spinner1);
 
 // TextView2
         TextView tv_Flash = new TextView(this);
@@ -237,7 +269,7 @@ public class Tab_Network_Activity extends Activity {
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
 
-                editor.putString("Network_Channel", spinner1.getSelectedItem().toString());
+                editor.putString("Network_Channel", spinner_Channels.getSelectedItem().toString());
                 editor.putString("Network_Connection_Method", spinner2.getSelectedItem().toString());
 
                 editor.putString("EMail_Sender", editText_email_sender.getText().toString());
@@ -266,7 +298,10 @@ public class Tab_Network_Activity extends Activity {
         linLayout2.addView(btn_mp, lpViewbutton);
 
         if ( Build.VERSION.SDK_INT <= 21 ) {
-            FullFrame.addView(linLayout1);
+            FullFrame.addView(linLayout_Channels);
+            FullFrame.addView(linLayout_Channels_notes);
+            FullFrame.addView(linLayout_Channels_divider);
+
             FullFrame.addView(linLayout_Flash);
         }
 
@@ -387,7 +422,7 @@ public class Tab_Network_Activity extends Activity {
         super.onPause();
         final FotoBot fb = (FotoBot) getApplicationContext();
         fb.LoadData();
-        spinner1.setSelection(getIndex(spinner1, fb.Network_Channel));
+        spinner_Channels.setSelection(getIndex(spinner_Channels, fb.Network_Channel));
         spinner2.setSelection(getIndex(spinner2, fb.Network_Connection_Method));
         editText_email_sender.setText(fb.EMail_Sender);
         editText_email_password.setText(fb.EMail_Sender_Password);

@@ -85,6 +85,7 @@ public class Tab_Main_Activity extends Activity {
         tv_notes.setWidth((screenWidth - padding) / 100 * 99);
         tv_notes.setLayoutParams(lpView);
         tv_notes.setTextColor(Color.GRAY);
+        tv_notes.setPadding(5, 15, 5, 15);
         linLayout1_notes.addView(tv_notes);
 
 // 1.5 Интервал между фото (ввод данных)
@@ -128,6 +129,7 @@ public class Tab_Main_Activity extends Activity {
         tv_process_delay.setWidth((screenWidth - padding) / 100 * 80);
         tv_process_delay.setLayoutParams(lpView);
         tv_process_delay.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_process_delay.setPadding(5, 15, 5, 15);
         linLayout_process_delay.addView(tv_process_delay);
 
 // 2.3 Интервал между процессами (ввод данных)
