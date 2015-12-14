@@ -41,7 +41,7 @@ public class Tab_Network_Activity extends Activity {
     Spinner spinner_Connection_Method;
     EditText editText_Fotobot_Email;
     EditText editText_Fotobot_Password;
-    EditText editText_email_recepient;
+    EditText editText_Fotobot_Recipient;
     private CheckBox check_box_flash;
     private EditText edit_text_jpeg_compression;
     private int screenWidth, screenHeight;
@@ -293,7 +293,7 @@ public class Tab_Network_Activity extends Activity {
         editText_Fotobot_Password.setGravity(Gravity.RIGHT);
         linLayout_Fotobot_Password.addView(editText_Fotobot_Password);
 
-// Заметка для почты Фотобота
+// Заметка для пароля
         TextView tv_Fotobot_Password_note = new TextView(this);
         tv_Fotobot_Password_note.setTypeface(null, Typeface.ITALIC);
         tv_Fotobot_Password_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
@@ -305,7 +305,91 @@ public class Tab_Network_Activity extends Activity {
         tv_Fotobot_Password_note.setPadding(5, 15, 5, 15);
         linLayout_Fotobot_Password_note.addView(tv_Fotobot_Password_note);
 
+// Разделитель
+        View line_Fotobot_Password = new View(this);
+        line_Fotobot_Password.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 1));
+        line_Fotobot_Password.setBackgroundColor(Color.rgb(210, 210, 210));
+        line_Fotobot_Password.getLayoutParams().height = 3;
+        linLayout_Fotobot_Password_divider.addView(line_Fotobot_Password);
+
 // ------------------------------------------------------------------------------------------------
+
+
+
+// Fotobot's recipient
+
+// Recipient Container
+        LinearLayout linLayout_Fotobot_Recipient = new LinearLayout(this);
+        linLayout_Fotobot_Recipient.setOrientation(LinearLayout.HORIZONTAL);
+//        LinearLayout.LayoutParams lpView_email = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        linLayout_Fotobot_Recipient.setPadding(5, 15, 5, 15);
+
+// Пояснение контейнер
+        LinearLayout linLayout_Fotobot_Recipient_note = new LinearLayout(this);
+        linLayout_Fotobot_Recipient_note.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_Fotobot_Recipient_note.setPadding(5, 15, 5, 15);
+
+// Контейнер для разделителя
+        LinearLayout linLayout_Fotobot_Recipient_divider = new LinearLayout(this);
+        linLayout_Fotobot_Recipient_divider.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_Fotobot_Recipient_divider.setPadding(5, 15, 5, 15);
+
+// Название
+        TextView tv_Fotobot_Recipient = new TextView(this);
+        tv_Fotobot_Recipient.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Fotobot_Recipient.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Fotobot_Recipient.setTextColor(Color.BLACK);
+        tv_Fotobot_Recipient.setText("Почтовый адрес\n получателя\n");
+        tv_Fotobot_Recipient.setMinimumWidth((screenWidth - padding) / 100 * 50);
+        tv_Fotobot_Recipient.setLayoutParams(lpView_email);
+        linLayout_Fotobot_Recipient.addView(tv_Fotobot_Recipient);
+
+// Почтовый адрес получателя
+        editText_Fotobot_Recipient = new EditText(this);
+        editText_Fotobot_Recipient.setLayoutParams(lpView_et);
+        editText_Fotobot_Recipient.setSingleLine(true);
+        editText_Fotobot_Recipient.setText(fb.EMail_Sender);
+        //ViewGroup.LayoutParams lp = editText_Fotobot_Email.getLayoutParams();
+        editText_Fotobot_Recipient.setWidth((screenWidth - padding) - ((screenWidth - padding) / 100 * 50));
+        // lp.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 50);
+        editText_Fotobot_Recipient.setLayoutParams(lpView_email);
+        editText_Fotobot_Recipient.setGravity(Gravity.RIGHT);
+        linLayout_Fotobot_Recipient.addView(editText_Fotobot_Recipient);
+
+// Заметка для почты Фотобота
+        TextView tv_Fotobot_Recipient_note = new TextView(this);
+        tv_Fotobot_Recipient_note.setTypeface(null, Typeface.ITALIC);
+        tv_Fotobot_Recipient_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_Fotobot_Recipient_note.setTextColor(Color.BLACK);
+        tv_Fotobot_Recipient_note.setText("Получатель писем с фото");
+        // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
+        tv_Fotobot_Recipient_note.setLayoutParams(lpView);
+        tv_Fotobot_Recipient_note.setTextColor(Color.GRAY);
+        tv_Fotobot_Recipient_note.setPadding(5, 15, 5, 15);
+        linLayout_Fotobot_Recipient_note.addView(tv_Fotobot_Recipient_note);
+
+// Разделитель
+        View line_Fotobot_Recipient = new View(this);
+        line_Fotobot_Recipient.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 1));
+        line_Fotobot_Recipient.setBackgroundColor(Color.rgb(210, 210, 210));
+        line_Fotobot_Recipient.getLayoutParams().height = 3;
+        linLayout_Fotobot_Recipient_divider.addView(line_Fotobot_Recipient);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -341,14 +425,14 @@ public class Tab_Network_Activity extends Activity {
 
 
 // TextView4
-        TextView tv_email_password = new TextView(this);
-        tv_email_password.setTypeface(Typeface.DEFAULT_BOLD);
-        tv_email_password.setTextSize(14);
-        tv_email_password.setTextColor(Color.BLACK);
-        tv_email_password.setText("e-mail passswd");
-        tv_email_password.setMinimumWidth((screenWidth - padding) / 100 * 50);
-        tv_email_password.setLayoutParams(lpView_email);
-        linLayout_email_password.addView(tv_email_password);
+   //     TextView tv_email_password = new TextView(this);
+   //     tv_email_password.setTypeface(Typeface.DEFAULT_BOLD);
+   //     tv_email_password.setTextSize(14);
+   //     tv_email_password.setTextColor(Color.BLACK);
+   //     tv_email_password.setText("e-mail passswd");
+   //     tv_email_password.setMinimumWidth((screenWidth - padding) / 100 * 50);
+   //     tv_email_password.setLayoutParams(lpView_email);
+   //     linLayout_email_password.addView(tv_email_password);
 
 // Password
      //   editText_email_password = new EditText(this);
@@ -362,26 +446,26 @@ public class Tab_Network_Activity extends Activity {
       //  linLayout_email_password.addView(editText_email_password);
 
         // TextView4
-        TextView tv_email_recepient = new TextView(this);
-        tv_email_recepient.setTypeface(Typeface.DEFAULT_BOLD);
-        tv_email_recepient.setTextSize(14);
-        tv_email_recepient.setTextColor(Color.BLACK);
-        tv_email_recepient.setText("e-mail получателя");
-        tv_email_recepient.setMinimumWidth((screenWidth - padding) / 100 * 50);
-        tv_email_recepient.setLayoutParams(lpView_email);
-        linLayout_email_recepient.addView(tv_email_recepient);
+ //       TextView tv_email_recepient = new TextView(this);
+ //       tv_email_recepient.setTypeface(Typeface.DEFAULT_BOLD);
+ //       tv_email_recepient.setTextSize(14);
+ //       tv_email_recepient.setTextColor(Color.BLACK);
+ //       tv_email_recepient.setText("e-mail получателя");
+ //       tv_email_recepient.setMinimumWidth((screenWidth - padding) / 100 * 50);
+ //       tv_email_recepient.setLayoutParams(lpView_email);
+ //       linLayout_email_recepient.addView(tv_email_recepient);
 
 // EditText
-        editText_email_recepient = new EditText(this);
-        editText_email_recepient.setLayoutParams(lpView_et);
-        editText_email_recepient.setSingleLine(true);
-        editText_email_recepient.setText(fb.EMail_Recepient);
-        ViewGroup.LayoutParams lp_recepient = editText_email_recepient.getLayoutParams();
-        editText_email_recepient.setWidth((screenWidth - padding) - ((screenWidth - padding) / 100 * 50));
-    //    lp_recepient.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 50);
-        editText_email_recepient.setLayoutParams(lpView_email_recepient);
-        editText_email_recepient.setGravity(Gravity.RIGHT);
-        linLayout_email_recepient.addView(editText_email_recepient);
+     //   editText_email_recepient = new EditText(this);
+     //   editText_email_recepient.setLayoutParams(lpView_et);
+     //   editText_email_recepient.setSingleLine(true);
+     //   editText_email_recepient.setText(fb.EMail_Recepient);
+     //   ViewGroup.LayoutParams lp_recepient = editText_email_recepient.getLayoutParams();
+     //   editText_email_recepient.setWidth((screenWidth - padding) - ((screenWidth - padding) / 100 * 50));
+    // //   lp_recepient.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 50);
+       // editText_email_recepient.setLayoutParams(lpView_email_recepient);
+       // editText_email_recepient.setGravity(Gravity.RIGHT);
+       // linLayout_email_recepient.addView(editText_email_recepient);
 
 
 // Apply Button
@@ -399,7 +483,7 @@ public class Tab_Network_Activity extends Activity {
 
                 editor.putString("EMail_Sender", editText_Fotobot_Email.getText().toString());
                 editor.putString("EMail_Sender_Password", editText_Fotobot_Password.getText().toString());
-                editor.putString("EMail_Recepient", editText_email_recepient.getText().toString());
+                editor.putString("EMail_Recepient", editText_Fotobot_Recipient.getText().toString());
 
 // Save the changes in SharedPreferences
                 editor.commit(); // commit changes
@@ -436,14 +520,15 @@ public class Tab_Network_Activity extends Activity {
 
         FullFrame.addView(linLayout_Fotobot_Email);
         FullFrame.addView(linLayout_Fotobot_Email_note);
-
-
-        FullFrame.addView(linLayout_Fotobot_Password);
-//        FullFrame.addView(linLayout_Fotobot_Password_note);
-
         FullFrame.addView(linLayout_Fotobot_Email_divider);
 
-        FullFrame.addView(linLayout_email_recepient);
+        FullFrame.addView(linLayout_Fotobot_Password);
+        FullFrame.addView(linLayout_Fotobot_Password_note);
+        FullFrame.addView(linLayout_Fotobot_Password_divider);
+
+        FullFrame.addView(linLayout_Fotobot_Recipient);
+        FullFrame.addView(linLayout_Fotobot_Recipient_divider);
+
         FullFrame.addView(linLayout2);
 
         ScrollView m_Scroll = new ScrollView(this);
@@ -562,7 +647,7 @@ public class Tab_Network_Activity extends Activity {
         spinner_Connection_Method.setSelection(getIndex(spinner_Connection_Method, fb.Network_Connection_Method));
         editText_Fotobot_Email.setText(fb.EMail_Sender);
         editText_Fotobot_Password.setText(fb.EMail_Sender_Password);
-        editText_email_recepient.setText(fb.EMail_Recepient);
+        editText_Fotobot_Recipient.setText(fb.EMail_Recepient);
 
     }
 
