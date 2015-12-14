@@ -38,7 +38,7 @@ import java.util.ArrayList;
  */
 public class Tab_Network_Activity extends Activity {
     Spinner spinner_Channels;
-    Spinner spinner2;
+    Spinner spinner_Connection_Method;
     EditText editText_email_sender;
     EditText editText_email_password;
     EditText editText_email_recepient;
@@ -79,8 +79,8 @@ public class Tab_Network_Activity extends Activity {
         LinearLayout.LayoutParams lpView_et = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
 // Пояснение контейнер
-        LinearLayout linLayout_Channels_notes = new LinearLayout(this);
-        linLayout_Channels_notes.setOrientation(LinearLayout.HORIZONTAL);
+        LinearLayout linLayout_Channels_note = new LinearLayout(this);
+        linLayout_Channels_note.setOrientation(LinearLayout.HORIZONTAL);
 
 // Контейнер для разделителя
         LinearLayout linLayout_Channels_divider = new LinearLayout(this);
@@ -111,16 +111,16 @@ public class Tab_Network_Activity extends Activity {
         linLayout_Channels.addView(spinner_Channels);
 
 // Заметка для каналов связи
-        TextView tv_Channels_notes = new TextView(this);
-        tv_Channels_notes.setTypeface(null, Typeface.ITALIC);
-        tv_Channels_notes.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
-        tv_Channels_notes.setTextColor(Color.BLACK);
-        tv_Channels_notes.setText("Выберите способ подключения к Internet (мобильные данные, wi-fi или оба).");
+        TextView tv_Channels_note = new TextView(this);
+        tv_Channels_note.setTypeface(null, Typeface.ITALIC);
+        tv_Channels_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_Channels_note.setTextColor(Color.BLACK);
+        tv_Channels_note.setText("Выберите способ подключения к Internet (мобильные данные, wi-fi или оба).");
         // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
-        tv_Channels_notes.setLayoutParams(lpView);
-        tv_Channels_notes.setTextColor(Color.GRAY);
-        tv_Channels_notes.setPadding(5, 15, 5, 15);
-        linLayout_Channels_notes.addView(tv_Channels_notes);
+        tv_Channels_note.setLayoutParams(lpView);
+        tv_Channels_note.setTextColor(Color.GRAY);
+        tv_Channels_note.setPadding(5, 15, 5, 15);
+        linLayout_Channels_note.addView(tv_Channels_note);
 
 // Разделитель
         View line = new View(this);
@@ -131,11 +131,68 @@ public class Tab_Network_Activity extends Activity {
 
 // ------------------------------------------------------------------------------------------------
 
+// Метод подключения
+
 // Контейнер для метода подключения
-        LinearLayout linLayout_Flash = new LinearLayout(this);
-        linLayout_Flash.setOrientation(LinearLayout.HORIZONTAL);
+        LinearLayout linLayout_Connection_Method = new LinearLayout(this);
+        linLayout_Connection_Method.setOrientation(LinearLayout.HORIZONTAL);
         LinearLayout.LayoutParams lpView_Flash = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         LinearLayout.LayoutParams lpView_et_Flash = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+// Пояснение контейнер
+        LinearLayout linLayout_Connection_Method_note = new LinearLayout(this);
+        linLayout_Connection_Method_note.setOrientation(LinearLayout.HORIZONTAL);
+
+// Контейнер для разделителя
+        LinearLayout linLayout_Connection_Method_divider = new LinearLayout(this);
+        linLayout_Connection_Method_divider.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_Connection_Method_divider.setPadding(5, 15, 5, 15);
+
+// Название
+        TextView tv_Connection_Method = new TextView(this);
+        tv_Connection_Method.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Connection_Method.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Connection_Method.setTextColor(Color.BLACK);
+        tv_Connection_Method.setText("Метод подключения");
+        tv_Connection_Method.setWidth((screenWidth - padding) / 100 * 70);
+        tv_Connection_Method.setLayoutParams(lpView_Flash);
+        linLayout_Connection_Method.addView(tv_Connection_Method);
+
+// Список
+        ArrayList<String> spinnerArray_Connection_Method = new ArrayList<String>();
+        spinnerArray_Connection_Method.add("В начале работы");
+        spinnerArray_Connection_Method.add("На каждом шаге");
+
+        spinner_Connection_Method = new Spinner(this);
+        ArrayAdapter<String> spinnerArrayAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray_Connection_Method);
+        spinner_Connection_Method.setAdapter(spinnerArrayAdapter2);
+        spinner_Connection_Method.setSelection(getIndex(spinner_Connection_Method, fb.Network_Connection_Method));
+        spinner_Connection_Method.setMinimumWidth((screenWidth - padding) / 100 * 30);
+        linLayout_Connection_Method.addView(spinner_Connection_Method);
+
+// Заметка для каналов связи
+        TextView tv_Connection_Method_note = new TextView(this);
+        tv_Connection_Method_note.setTypeface(null, Typeface.ITALIC);
+        tv_Connection_Method_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_Connection_Method_note.setTextColor(Color.BLACK);
+        tv_Connection_Method_note.setText("Выберите способ подключения к Internet (мобильные данные, wi-fi или оба).");
+        // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
+        tv_Connection_Method_note.setLayoutParams(lpView);
+        tv_Connection_Method_note.setTextColor(Color.GRAY);
+        tv_Connection_Method_note.setPadding(5, 15, 5, 15);
+        linLayout_Connection_Method_note.addView(tv_Connection_Method_note);
+
+// Разделитель
+        View line_Connection_Method = new View(this);
+        line_Connection_Method.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 1));
+        line_Connection_Method.setBackgroundColor(Color.rgb(210, 210, 210));
+        line_Connection_Method.getLayoutParams().height = 3;
+        linLayout_Connection_Method_divider.addView(line_Connection_Method);
+
+// ------------------------------------------------------------------------------------------------
+
+
+
 
 
 
@@ -169,28 +226,7 @@ public class Tab_Network_Activity extends Activity {
 
 
 
-// TextView2
-        TextView tv_Flash = new TextView(this);
-        tv_Flash.setTypeface(Typeface.DEFAULT_BOLD);
-        tv_Flash.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
-        tv_Flash.setTextColor(Color.BLACK);
-        tv_Flash.setText("Метод подключения");
-        tv_Flash.setWidth((screenWidth - padding) / 100 * 50);
-        tv_Flash.setLayoutParams(lpView_Flash);
-        linLayout_Flash.addView(tv_Flash);
 
-//Spinner2
-        ArrayList<String> spinnerArray2 = new ArrayList<String>();
-        spinnerArray2.add("В начале работы");
-        spinnerArray2.add("На каждом шаге");
-
-        spinner2 = new Spinner(this);
-        ArrayAdapter<String> spinnerArrayAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray2);
-        spinner2.setAdapter(spinnerArrayAdapter2);
-      //  spinner2.setSelection(spinnerArrayAdapter2.getPosition("На каждом шаге"));
-        spinner2.setSelection(getIndex(spinner2, fb.Network_Connection_Method));
-        spinner2.setMinimumWidth((screenWidth - padding) / 100 * 50);
-        linLayout_Flash.addView(spinner2);
 
 // TextView3
         TextView tv_email_sender = new TextView(this);
@@ -270,7 +306,7 @@ public class Tab_Network_Activity extends Activity {
                 SharedPreferences.Editor editor = pref.edit();
 
                 editor.putString("Network_Channel", spinner_Channels.getSelectedItem().toString());
-                editor.putString("Network_Connection_Method", spinner2.getSelectedItem().toString());
+                editor.putString("Network_Connection_Method", spinner_Connection_Method.getSelectedItem().toString());
 
                 editor.putString("EMail_Sender", editText_email_sender.getText().toString());
                 editor.putString("EMail_Sender_Password", editText_email_password.getText().toString());
@@ -298,11 +334,15 @@ public class Tab_Network_Activity extends Activity {
         linLayout2.addView(btn_mp, lpViewbutton);
 
         if ( Build.VERSION.SDK_INT <= 21 ) {
+
             FullFrame.addView(linLayout_Channels);
-            FullFrame.addView(linLayout_Channels_notes);
+            FullFrame.addView(linLayout_Channels_note);
             FullFrame.addView(linLayout_Channels_divider);
 
-            FullFrame.addView(linLayout_Flash);
+            FullFrame.addView(linLayout_Connection_Method);
+            FullFrame.addView(linLayout_Connection_Method_note);
+            FullFrame.addView(linLayout_Connection_Method_divider);
+
         }
 
         FullFrame.addView(linLayout_email);
@@ -423,7 +463,7 @@ public class Tab_Network_Activity extends Activity {
         final FotoBot fb = (FotoBot) getApplicationContext();
         fb.LoadData();
         spinner_Channels.setSelection(getIndex(spinner_Channels, fb.Network_Channel));
-        spinner2.setSelection(getIndex(spinner2, fb.Network_Connection_Method));
+        spinner_Connection_Method.setSelection(getIndex(spinner_Connection_Method, fb.Network_Connection_Method));
         editText_email_sender.setText(fb.EMail_Sender);
         editText_email_password.setText(fb.EMail_Sender_Password);
         editText_email_recepient.setText(fb.EMail_Recepient);
