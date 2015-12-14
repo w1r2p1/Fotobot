@@ -42,6 +42,7 @@ public class Tab_Network_Activity extends Activity {
     EditText editText_Fotobot_Email;
     EditText editText_Fotobot_Password;
     EditText editText_Fotobot_Recipient;
+    EditText editText_SMTP_Host;
     private CheckBox check_box_flash;
     private EditText edit_text_jpeg_compression;
     private int screenWidth, screenHeight;
@@ -314,8 +315,6 @@ public class Tab_Network_Activity extends Activity {
 
 // ------------------------------------------------------------------------------------------------
 
-
-
 // Fotobot's recipient
 
 // Recipient Container
@@ -375,6 +374,66 @@ public class Tab_Network_Activity extends Activity {
         line_Fotobot_Recipient.getLayoutParams().height = 3;
         linLayout_Fotobot_Recipient_divider.addView(line_Fotobot_Recipient);
 
+// ------------------------------------------------------------------------------------------------
+
+// SMTP Host
+
+// SMTPHost Container
+        LinearLayout linLayout_SMTP_Host = new LinearLayout(this);
+        linLayout_SMTP_Host.setOrientation(LinearLayout.HORIZONTAL);
+//        LinearLayout.LayoutParams lpView_email = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        linLayout_SMTP_Host.setPadding(5, 15, 5, 15);
+
+// Пояснение контейнер
+        LinearLayout linLayout_SMTP_Host_note = new LinearLayout(this);
+        linLayout_SMTP_Host_note.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_SMTP_Host_note.setPadding(5, 15, 5, 15);
+
+// Контейнер для разделителя
+        LinearLayout linLayout_SMTP_Host_divider = new LinearLayout(this);
+        linLayout_SMTP_Host_divider.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_SMTP_Host_divider.setPadding(5, 15, 5, 15);
+
+// Название
+        TextView tv_SMTP_Host = new TextView(this);
+        tv_SMTP_Host.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_SMTP_Host.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_SMTP_Host.setTextColor(Color.BLACK);
+        tv_SMTP_Host.setText("Адрес почтового\n сервера\n");
+        tv_SMTP_Host.setMinimumWidth((screenWidth - padding) / 100 * 50);
+        tv_SMTP_Host.setLayoutParams(lpView_email);
+        linLayout_SMTP_Host.addView(tv_SMTP_Host);
+
+// Адрес почтового сервера
+        editText_SMTP_Host = new EditText(this);
+        editText_SMTP_Host.setLayoutParams(lpView_et);
+        editText_SMTP_Host.setSingleLine(true);
+        editText_SMTP_Host.setText(fb.EMail_Sender);
+        //ViewGroup.LayoutParams lp = editText_Fotobot_Email.getLayoutParams();
+        editText_SMTP_Host.setWidth((screenWidth - padding) - ((screenWidth - padding) / 100 * 50));
+        // lp.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 50);
+        editText_SMTP_Host.setLayoutParams(lpView_email);
+        editText_SMTP_Host.setGravity(Gravity.RIGHT);
+        linLayout_SMTP_Host.addView(editText_SMTP_Host);
+
+// Заметка для SMTP Host
+        TextView tv_SMTP_Host_note = new TextView(this);
+        tv_SMTP_Host_note.setTypeface(null, Typeface.ITALIC);
+        tv_SMTP_Host_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_SMTP_Host_note.setTextColor(Color.BLACK);
+        tv_SMTP_Host_note.setText("Получатель писем с фото");
+        // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
+        tv_SMTP_Host_note.setLayoutParams(lpView);
+        tv_SMTP_Host_note.setTextColor(Color.GRAY);
+        tv_SMTP_Host_note.setPadding(5, 15, 5, 15);
+        linLayout_SMTP_Host_note.addView(tv_SMTP_Host_note);
+
+// Разделитель
+        View line_SMTP_Host = new View(this);
+        line_SMTP_Host.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 1));
+        line_SMTP_Host.setBackgroundColor(Color.rgb(210, 210, 210));
+        line_SMTP_Host.getLayoutParams().height = 3;
+        linLayout_SMTP_Host_divider.addView(line_SMTP_Host);
 
 
 
@@ -484,7 +543,7 @@ public class Tab_Network_Activity extends Activity {
                 editor.putString("EMail_Sender", editText_Fotobot_Email.getText().toString());
                 editor.putString("EMail_Sender_Password", editText_Fotobot_Password.getText().toString());
                 editor.putString("EMail_Recepient", editText_Fotobot_Recipient.getText().toString());
-
+                editor.putString("SMTP_Host", editText_Fotobot_Recipient.getText().toString());
 // Save the changes in SharedPreferences
                 editor.commit(); // commit changes
             }
@@ -528,6 +587,10 @@ public class Tab_Network_Activity extends Activity {
 
         FullFrame.addView(linLayout_Fotobot_Recipient);
         FullFrame.addView(linLayout_Fotobot_Recipient_divider);
+
+        FullFrame.addView(linLayout_SMTP_Host);
+        FullFrame.addView(linLayout_SMTP_Host_note);
+        FullFrame.addView(linLayout_SMTP_Host_divider);
 
         FullFrame.addView(linLayout2);
 

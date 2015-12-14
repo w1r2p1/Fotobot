@@ -88,6 +88,9 @@ public class FotoBot extends Application {
      */
     public String EMail_Recepient = "user@mail.ru";
 
+    public String SMTP_Host = "smtp.gmail.com";
+    public String SMTP_Port = "465";
+
     public String Network_Channel = "Both";
 
     /**
@@ -336,6 +339,7 @@ public class FotoBot extends Application {
         MobileData md;
         md = new MobileData();
 //Sony Xperia error
+// http://stackoverflow.com/questions/29340150/android-l-5-x-turn-on-off-mobile-data-programmatically
         md.setMobileDataEnabled(getApplicationContext(), false);
 
         WiFi wf;
@@ -425,7 +429,7 @@ public class FotoBot extends Application {
 
         SendMessage("Аттачим" + str);
 
-        Mail m = new Mail(fb.EMail_Sender, fb.EMail_Sender_Password);
+        Mail m = new Mail(fb.EMail_Sender, fb.EMail_Sender_Password, fb.SMTP_Port, fb.SMTP_Port);
 
         String[] toArr = {fb.EMail_Recepient};
 
@@ -546,6 +550,10 @@ public class FotoBot extends Application {
         Config_Font_Size = pref.getInt("Config_Font_Size", 14);
 
         Photo_Post_Processing_Method = pref.getString("Photo_Post_Processing_Method", "Hardware");
+
+        SMTP_Host = pref.getString("SMTP_Host", "smtp.gmail.com");
+
+        SMTP_Port = pref.getString("SMTP_Port", "465");
 
     }
 
