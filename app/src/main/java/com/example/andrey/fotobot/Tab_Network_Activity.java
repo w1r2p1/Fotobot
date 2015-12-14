@@ -43,6 +43,7 @@ public class Tab_Network_Activity extends Activity {
     EditText editText_Fotobot_Password;
     EditText editText_Fotobot_Recipient;
     EditText editText_SMTP_Host;
+    EditText editText_SMTP_Port;
     private CheckBox check_box_flash;
     private EditText edit_text_jpeg_compression;
     private int screenWidth, screenHeight;
@@ -408,7 +409,7 @@ public class Tab_Network_Activity extends Activity {
         editText_SMTP_Host = new EditText(this);
         editText_SMTP_Host.setLayoutParams(lpView_et);
         editText_SMTP_Host.setSingleLine(true);
-        editText_SMTP_Host.setText(fb.EMail_Sender);
+        editText_SMTP_Host.setText(fb.SMTP_Host);
         //ViewGroup.LayoutParams lp = editText_Fotobot_Email.getLayoutParams();
         editText_SMTP_Host.setWidth((screenWidth - padding) - ((screenWidth - padding) / 100 * 50));
         // lp.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 50);
@@ -421,7 +422,8 @@ public class Tab_Network_Activity extends Activity {
         tv_SMTP_Host_note.setTypeface(null, Typeface.ITALIC);
         tv_SMTP_Host_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_SMTP_Host_note.setTextColor(Color.BLACK);
-        tv_SMTP_Host_note.setText("Получатель писем с фото");
+        tv_SMTP_Host_note.setText("Адрес почтового сервера для Фотобота, например можно использовать" +
+                "smtp.gmail.com или smtp.mail.ru");
         // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
         tv_SMTP_Host_note.setLayoutParams(lpView);
         tv_SMTP_Host_note.setTextColor(Color.GRAY);
@@ -435,6 +437,66 @@ public class Tab_Network_Activity extends Activity {
         line_SMTP_Host.getLayoutParams().height = 3;
         linLayout_SMTP_Host_divider.addView(line_SMTP_Host);
 
+// ------------------------------------------------------------------------------------------------
+
+// SMTP Port
+
+// SMTP Port Container
+        LinearLayout linLayout_SMTP_Port = new LinearLayout(this);
+        linLayout_SMTP_Port.setOrientation(LinearLayout.HORIZONTAL);
+//        LinearLayout.LayoutParams lpView_email = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        linLayout_SMTP_Port.setPadding(5, 15, 5, 15);
+
+// Пояснение контейнер
+        LinearLayout linLayout_SMTP_Port_note = new LinearLayout(this);
+        linLayout_SMTP_Port_note.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_SMTP_Port_note.setPadding(5, 15, 5, 15);
+
+// Контейнер для разделителя
+        LinearLayout linLayout_SMTP_Port_divider = new LinearLayout(this);
+        linLayout_SMTP_Port_divider.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_SMTP_Port_divider.setPadding(5, 15, 5, 15);
+
+// Название
+        TextView tv_SMTP_Port = new TextView(this);
+        tv_SMTP_Port.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_SMTP_Port.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_SMTP_Port.setTextColor(Color.BLACK);
+        tv_SMTP_Port.setText("Номер порта почтового\n сервера\n");
+        tv_SMTP_Port.setMinimumWidth((screenWidth - padding) / 100 * 50);
+        tv_SMTP_Port.setLayoutParams(lpView_email);
+        linLayout_SMTP_Port.addView(tv_SMTP_Port);
+
+// Порт почтового сервера
+        editText_SMTP_Port = new EditText(this);
+        editText_SMTP_Port.setLayoutParams(lpView_et);
+        editText_SMTP_Port.setSingleLine(true);
+        editText_SMTP_Port.setText(fb.SMTP_Port);
+        //ViewGroup.LayoutParams lp = editText_Fotobot_Email.getLayoutParams();
+        editText_SMTP_Port.setWidth((screenWidth - padding) - ((screenWidth - padding) / 100 * 50));
+        // lp.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 50);
+        editText_SMTP_Port.setLayoutParams(lpView_email);
+        editText_SMTP_Port.setGravity(Gravity.RIGHT);
+        linLayout_SMTP_Port.addView(editText_SMTP_Port);
+
+// Заметка для SMTP Port
+        TextView tv_SMTP_Port_note = new TextView(this);
+        tv_SMTP_Port_note.setTypeface(null, Typeface.ITALIC);
+        tv_SMTP_Port_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_SMTP_Port_note.setTextColor(Color.BLACK);
+        tv_SMTP_Port_note.setText("Номер порта почтового сервера, для почты Google и Mail.ru номер порта 465");
+        // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
+        tv_SMTP_Port_note.setLayoutParams(lpView);
+        tv_SMTP_Port_note.setTextColor(Color.GRAY);
+        tv_SMTP_Port_note.setPadding(5, 15, 5, 15);
+        linLayout_SMTP_Port_note.addView(tv_SMTP_Port_note);
+
+// Разделитель
+        View line_SMTP_Port = new View(this);
+        line_SMTP_Port.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 1));
+        line_SMTP_Port.setBackgroundColor(Color.rgb(210, 210, 210));
+        line_SMTP_Port.getLayoutParams().height = 3;
+        linLayout_SMTP_Port_divider.addView(line_SMTP_Port);
 
 
 
@@ -543,7 +605,8 @@ public class Tab_Network_Activity extends Activity {
                 editor.putString("EMail_Sender", editText_Fotobot_Email.getText().toString());
                 editor.putString("EMail_Sender_Password", editText_Fotobot_Password.getText().toString());
                 editor.putString("EMail_Recepient", editText_Fotobot_Recipient.getText().toString());
-                editor.putString("SMTP_Host", editText_Fotobot_Recipient.getText().toString());
+                editor.putString("SMTP_Host", editText_SMTP_Host.getText().toString());
+                editor.putString("SMTP_Port", editText_SMTP_Port.getText().toString());
 // Save the changes in SharedPreferences
                 editor.commit(); // commit changes
             }
@@ -591,6 +654,9 @@ public class Tab_Network_Activity extends Activity {
         FullFrame.addView(linLayout_SMTP_Host);
         FullFrame.addView(linLayout_SMTP_Host_note);
         FullFrame.addView(linLayout_SMTP_Host_divider);
+
+        FullFrame.addView(linLayout_SMTP_Port);
+        FullFrame.addView(linLayout_SMTP_Port_note);
 
         FullFrame.addView(linLayout2);
 
@@ -711,7 +777,8 @@ public class Tab_Network_Activity extends Activity {
         editText_Fotobot_Email.setText(fb.EMail_Sender);
         editText_Fotobot_Password.setText(fb.EMail_Sender_Password);
         editText_Fotobot_Recipient.setText(fb.EMail_Recepient);
-
+        editText_SMTP_Port.setText(fb.SMTP_Port);
+        editText_SMTP_Host.setText(fb.SMTP_Host);
     }
 
     protected void onRestart() {
