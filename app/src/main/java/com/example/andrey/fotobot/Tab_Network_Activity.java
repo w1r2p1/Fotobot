@@ -45,7 +45,7 @@ public class Tab_Network_Activity extends Activity {
     private CheckBox check_box_flash;
     private EditText edit_text_jpeg_compression;
     private int screenWidth, screenHeight;
-    private int padding = 15;
+    private int padding = 5;
     final String LOG_NETWORK_ACTIVITY = "Logs";
 
     String[] connect_methods = {"Wi-Fi", "Mobile Data", "Both"};
@@ -93,7 +93,7 @@ public class Tab_Network_Activity extends Activity {
         tv_Channels.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Channels.setTextColor(Color.BLACK);
         tv_Channels.setText("Каналы связи");
-        tv_Channels.setWidth((screenWidth - padding) / 100 * 50);
+        tv_Channels.setWidth((screenWidth - padding) / 100 * 70);
         tv_Channels.setLayoutParams(lpView);
         linLayout_Channels.addView(tv_Channels);
 
@@ -107,7 +107,7 @@ public class Tab_Network_Activity extends Activity {
         ArrayAdapter<String> spinnerArrayAdapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray_Channels);
         spinner_Channels.setAdapter(spinnerArrayAdapter1);
         spinner_Channels.setSelection(getIndex(spinner_Channels, fb.Network_Channel));
-        spinner_Channels.setMinimumWidth((screenWidth - padding) / 100 * 50);
+        spinner_Channels.setMinimumWidth((screenWidth - padding) / 100 * 30);
         linLayout_Channels.addView(spinner_Channels);
 
 // Заметка для каналов связи
@@ -116,7 +116,7 @@ public class Tab_Network_Activity extends Activity {
         tv_Channels_notes.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Channels_notes.setTextColor(Color.BLACK);
         tv_Channels_notes.setText("Выберите способ подключения к Internet (мобильные данные, wi-fi или оба).");
-        tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
+        // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
         tv_Channels_notes.setLayoutParams(lpView);
         tv_Channels_notes.setTextColor(Color.GRAY);
         tv_Channels_notes.setPadding(5, 15, 5, 15);
