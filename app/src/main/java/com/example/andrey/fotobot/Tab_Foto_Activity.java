@@ -34,11 +34,12 @@ public class Tab_Foto_Activity  extends Activity {
     private int padding = 15;
     CheckBox checkBox_Flash;
     EditText editText_JPEG_Compression, editText_Photo_Processing_Method;
-    Spinner spinner_Hardware, spinner_ppm, spinner1;
+    Spinner spinner_Hardware, spinner_ppm, spinner_Software;
     ArrayAdapter<String> spinnerArrayAdapter1, spinnerArrayAdapter_Hardware;
     ArrayList<String> spinnerArray_ppm;
     final String LOG_TAG = "Logs";
     TextView tv_Photo_Size_h, tv_Photo_Size_s;
+    LinearLayout linLayout_Photo_Size_h_notes, linLayout_Photo_Size_s_notes;
 
     protected void onCreate(Bundle savedInstanceState) {
         final FotoBot fb = (FotoBot) getApplicationContext();
@@ -164,18 +165,19 @@ public class Tab_Foto_Activity  extends Activity {
 
                 if (spinnerArray_ppm.get(i) == "Hardware") {
                     tv_Photo_Size_s.setVisibility(View.GONE);
-                    spinner1.setVisibility(View.GONE);
+                    spinner_Software.setVisibility(View.GONE);
                     tv_Photo_Size_h.setVisibility(View.VISIBLE);
                     spinner_Hardware.setVisibility(View.VISIBLE);
-
+                 //   linLayout_Photo_Size_h_notes.setVisibility(View.VISIBLE);
+                 //   linLayout_Photo_Size_s_notes.setVisibility(View.GONE);
                 } else {
                     tv_Photo_Size_s.setVisibility(View.VISIBLE);
-                    spinner1.setVisibility(View.VISIBLE);
+                    spinner_Software.setVisibility(View.VISIBLE);
                     tv_Photo_Size_h.setVisibility(View.GONE);
                     spinner_Hardware.setVisibility(View.GONE);
+               //     linLayout_Photo_Size_h_notes.setVisibility(View.GONE);
+               //     linLayout_Photo_Size_s_notes.setVisibility(View.VISIBLE);
                 }
-
-
 
             }
             // If no option selected
@@ -186,9 +188,7 @@ public class Tab_Foto_Activity  extends Activity {
 
         });
 
-
         linLayout_Photo_Processing_Method.addView(spinner_ppm);
-
 
 // Заметка для метода
         TextView tv_Photo_Processing_Method_note = new TextView(this);
@@ -213,8 +213,12 @@ public class Tab_Foto_Activity  extends Activity {
         LinearLayout.LayoutParams lpView_photo_size_et = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
 // Контейнер для пояснение
-        LinearLayout linLayout_Photo_Size_notes = new LinearLayout(this);
-        linLayout_Photo_Processing_Method_notes.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_Photo_Size_h_notes = new LinearLayout(this);
+        linLayout_Photo_Size_h_notes.setOrientation(LinearLayout.HORIZONTAL);
+
+// Контейнер для пояснение
+        linLayout_Photo_Size_s_notes = new LinearLayout(this);
+        linLayout_Photo_Size_s_notes.setOrientation(LinearLayout.HORIZONTAL);
 
 // Контейнер для разделителя
         LinearLayout linLayout_Photo_Size_divider = new LinearLayout(this);
@@ -242,7 +246,6 @@ public class Tab_Foto_Activity  extends Activity {
         spinner_Hardware = new Spinner(this);
         spinnerArrayAdapter_Hardware = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray_Hardware);
         spinner_Hardware.setAdapter(spinnerArrayAdapter_Hardware);
-        //  spinner1.setSelection(spinnerArrayAdapter1.getPosition(fb.Image_Scale));
         spinner_Hardware.setSelection(getIndex(spinner_Hardware, fb.Image_Scale));
         spinner_Hardware.setMinimumWidth((screenWidth - padding) / 100 * 50);
         linLayout_Photo_Size.addView(spinner_Hardware);
@@ -266,14 +269,37 @@ public class Tab_Foto_Activity  extends Activity {
 
         }
 
-        spinner1 = new Spinner(this);
+        spinner_Software = new Spinner(this);
         spinnerArrayAdapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
-        spinner1.setAdapter(spinnerArrayAdapter1);
+        spinner_Software.setAdapter(spinnerArrayAdapter1);
 
-        spinner1.setSelection(getIndex(spinner1, fb.Image_Size));
-        spinner1.setMinimumWidth((screenWidth - padding) / 100 * 50);
-        linLayout_Photo_Size.addView(spinner1);
+        spinner_Software.setSelection(getIndex(spinner_Software, fb.Image_Size));
+        spinner_Software.setMinimumWidth((screenWidth - padding) / 100 * 50);
+        linLayout_Photo_Size.addView(spinner_Software);
 
+// Заметка для Hardware
+        TextView tv_Photo_Size_h_note = new TextView(this);
+        tv_Photo_Size_h_note.setTypeface(null, Typeface.ITALIC);
+        tv_Photo_Size_h_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_Photo_Size_h_note.setTextColor(Color.BLACK);
+        tv_Photo_Size_h_note.setText("Hardware");
+        // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
+        tv_Photo_Size_h_note.setLayoutParams(lpView);
+        tv_Photo_Size_h_note.setTextColor(Color.GRAY);
+        tv_Photo_Size_h_note.setPadding(5, 15, 5, 15);
+        linLayout_Photo_Size_h_notes.addView(tv_Photo_Size_h_note);
+
+// Заметка для Software
+        TextView tv_Photo_Size_s_note = new TextView(this);
+        tv_Photo_Size_s_note.setTypeface(null, Typeface.ITALIC);
+        tv_Photo_Size_s_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_Photo_Size_s_note.setTextColor(Color.BLACK);
+        tv_Photo_Size_s_note.setText("Software");
+        // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
+        tv_Photo_Size_s_note.setLayoutParams(lpView);
+        tv_Photo_Size_s_note.setTextColor(Color.GRAY);
+        tv_Photo_Size_s_note.setPadding(5, 15, 5, 15);
+        linLayout_Photo_Size_s_notes.addView(tv_Photo_Size_s_note);
 
 // Разделитель
         View line_Photo_Size = new View(this);
@@ -282,30 +308,15 @@ public class Tab_Foto_Activity  extends Activity {
         line_Photo_Size.getLayoutParams().height = 3;
         linLayout_Photo_Size_divider.addView(line_Photo_Size);
 
+// ------------------------------------------------------------------------------------------------
 
-
-
-
-
+// Вспышка
 
 // Flash Container
         LinearLayout linLayout_Flash = new LinearLayout(this);
         linLayout_Flash.setOrientation(LinearLayout.HORIZONTAL);
-//        linLayout_Flash.setBackgroundColor(Color.parseColor("#00ff00"));
         LinearLayout.LayoutParams lpView_Flash = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         LinearLayout.LayoutParams lpView_et_Flash = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
-
-// Second Container (Horizontal LinearLayout)
-        LinearLayout linLayout2 = new LinearLayout(this);
-        linLayout2.setOrientation(LinearLayout.HORIZONTAL);
-        LinearLayout.LayoutParams lpView2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        LinearLayout.LayoutParams lpViewbutton = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
-//        linLayout2.setBackgroundColor(Color.parseColor("#0000ff"));
-        linLayout2.setGravity(Gravity.BOTTOM | Gravity.CENTER);
-        linLayout2.setLayoutParams(lpView2);
-
 
 // Flash TextView
         TextView tv_Flash = new TextView(this);
@@ -322,13 +333,14 @@ public class Tab_Foto_Activity  extends Activity {
         checkBox_Flash.setChecked(fb.Use_Flash);
         linLayout_Flash.addView(checkBox_Flash);
 
+// Second Container (Horizontal LinearLayout)
+        LinearLayout linLayout2 = new LinearLayout(this);
+        linLayout2.setOrientation(LinearLayout.HORIZONTAL);
+        LinearLayout.LayoutParams lpView2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        LinearLayout.LayoutParams lpViewbutton = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-
-
-
-
-
-
+        linLayout2.setGravity(Gravity.BOTTOM | Gravity.CENTER);
+        linLayout2.setLayoutParams(lpView2);
 
 // Apply Button
         Button btn = new Button(this);
@@ -350,7 +362,7 @@ public class Tab_Foto_Activity  extends Activity {
                 editor.putString("Photo_Post_Processing_Method", spinner_ppm.getSelectedItem().toString());
                 editor.putInt("JPEG_Compression", Integer.parseInt(editText_JPEG_Compression.getText().toString()));
                 editor.putString("Image_Scale", spinner_Hardware.getSelectedItem().toString());
-                editor.putString("Image_Size", spinner1.getSelectedItem().toString());
+                editor.putString("Image_Size", spinner_Software.getSelectedItem().toString());
 
 // Save the changes in SharedPreferences
                 editor.commit(); // commit changes
@@ -381,6 +393,8 @@ public class Tab_Foto_Activity  extends Activity {
         FullFrame.addView(linLayout_Photo_Processing_Method_notes);
 
         FullFrame.addView(linLayout_Photo_Size);
+        FullFrame.addView(linLayout_Photo_Size_h_notes);
+        FullFrame.addView(linLayout_Photo_Size_s_notes);
         FullFrame.addView(linLayout_Photo_Size_divider);
 
         FullFrame.addView(linLayout_Flash);
@@ -399,9 +413,6 @@ public class Tab_Foto_Activity  extends Activity {
 
     }
 
-
-
-
     protected void onResume(SurfaceHolder holder) {
         final FotoBot fb = (FotoBot) getApplicationContext();
         fb.LoadData();
@@ -409,7 +420,6 @@ public class Tab_Foto_Activity  extends Activity {
       //  spinner1.setSelection(spinnerArrayAdapter1.getPosition(fb.Image_Scale));
         Log.d(LOG_TAG, "Tab3: onResume");
     }
-
 
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
@@ -428,7 +438,7 @@ public class Tab_Foto_Activity  extends Activity {
         // editText_JPEG_Compression.setText(Integer.toString(fb.JPEG_Compression));
         editText_JPEG_Compression.setText(Integer.toString(fb.JPEG_Compression));
        // spinner1.setSelection(getIndex(spinner1, fb.Image_Scale));
-        spinner1.setSelection(getIndex(spinner1, fb.Image_Size));
+        spinner_Software.setSelection(getIndex(spinner_Software, fb.Image_Size));
         checkBox_Flash.setChecked(fb.Use_Flash);
         //   spinner1.setSelection(spinnerArrayAdapter1.getPosition(fb.Image_Scale));
       //  spinner1.setSelection(0);
