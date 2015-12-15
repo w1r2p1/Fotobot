@@ -190,7 +190,17 @@ public class Tab_Foto_Activity  extends Activity {
         linLayout_Photo_Processing_Method.addView(spinner_ppm);
 
 
-
+// Заметка для метода
+        TextView tv_Photo_Processing_Method_note = new TextView(this);
+        tv_Photo_Processing_Method_note.setTypeface(null, Typeface.ITALIC);
+        tv_Photo_Processing_Method_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_Photo_Processing_Method_note.setTextColor(Color.BLACK);
+        tv_Photo_Processing_Method_note.setText("Камера обрабатывает изображение или софт.");
+        // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
+        tv_Photo_Processing_Method_note.setLayoutParams(lpView);
+        tv_Photo_Processing_Method_note.setTextColor(Color.GRAY);
+        tv_Photo_Processing_Method_note.setPadding(5, 15, 5, 15);
+        linLayout_Photo_Processing_Method_notes.addView(tv_Photo_Processing_Method_note);
 
 
 
@@ -451,9 +461,12 @@ public class Tab_Foto_Activity  extends Activity {
         FullFrame.addView(linLayout_JPEG_Compression_divider);
 
         FullFrame.addView(linLayout_Photo_Processing_Method);
+        FullFrame.addView(linLayout_Photo_Processing_Method_notes);
 
         FullFrame.addView(linLayout_photo_size);
+
         FullFrame.addView(linLayout_Flash);
+
         FullFrame.addView(linLayout2);
 
 
