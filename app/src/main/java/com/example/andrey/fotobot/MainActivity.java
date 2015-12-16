@@ -20,12 +20,14 @@ import android.telephony.TelephonyManager;
 import android.text.Html;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -41,6 +43,7 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
+    private int screenWidth, screenHeight;
     public static final int UNKNOW_CODE = 99;
     private final static String FILE_DIR = "/MySampleFolder/";
     final String LOG_TAG = "Logs";
@@ -51,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     int n;
     FotoBot fb;
     String log;
+    HorizontalScrollView LogWidget;
     boolean STOP_FOTOBOT = false;
     Button btnStart;
     Button btnStop;
@@ -270,6 +274,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        Display display = getWindowManager().getDefaultDisplay();
+        screenWidth = display.getWidth();
+        screenHeight = display.getHeight();
+
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
         PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                 "MyWakelockTag");
@@ -289,6 +297,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         btnConfig = (Button) findViewById(R.id.config);
         tvInfo = (TextView) findViewById(R.id.tvInfo);
         text = (TextView) findViewById(R.id.textView);
+        LogWidget = (HorizontalScrollView) findViewById(R.id.horizontalScrollView);
+        LogWidget.setBackgroundColor(Color.rgb(0, 0, 228));
+        LogWidget.setMinimumHeight(screenHeight - 500);
+        LogWidget.setMinimumWidth(screenWidth - 5);
 
         //get the Image View at the main.xml file
         iv_image = (ImageView) findViewById(R.id.imageView);
