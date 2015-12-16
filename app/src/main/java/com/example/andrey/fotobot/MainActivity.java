@@ -313,6 +313,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         screenHeight = screenHeight - ((int) pxFromDp(getApplicationContext(), statusBarHeight));
         Log.d(LOG_TAG, "pxFromDp: " + (int) pxFromDp(getApplicationContext(), statusBarHeight));
         Log.d(LOG_TAG, "screenHeight: " + screenHeight);
+
 // http://stackoverflow.com/questions/20264268/how-to-get-height-and-width-of-navigation-bar-programmatically
 
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
