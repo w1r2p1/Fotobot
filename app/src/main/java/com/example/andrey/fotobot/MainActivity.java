@@ -280,6 +280,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         screenWidth = display.getWidth();
         screenHeight = display.getHeight();
 
+// http://stackoverflow.com/questions/20264268/how-to-get-height-and-width-of-navigation-bar-programmatically
+
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
         PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                 "MyWakelockTag");
