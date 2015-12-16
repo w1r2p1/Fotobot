@@ -29,6 +29,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.File;
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     FotoBot fb;
     String log;
     HorizontalScrollView LogWidget;
+    LinearLayout Buttons1, Buttons2;
     boolean STOP_FOTOBOT = false;
     Button btnStart;
     Button btnStop;
@@ -297,10 +299,21 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         btnConfig = (Button) findViewById(R.id.config);
         tvInfo = (TextView) findViewById(R.id.tvInfo);
         text = (TextView) findViewById(R.id.textView);
+
+        Buttons1 = (LinearLayout) findViewById(R.id.buttons1);
+        Buttons1.setBackgroundColor(Color.rgb(0, 228, 0));
+        Buttons1.setMinimumHeight(screenHeight / 100 * 5);
+        Buttons1.setMinimumWidth(screenWidth);
+
         LogWidget = (HorizontalScrollView) findViewById(R.id.horizontalScrollView);
-        LogWidget.setBackgroundColor(Color.rgb(0, 0, 228));
-        LogWidget.setMinimumHeight(screenHeight - 500);
-        LogWidget.setMinimumWidth(screenWidth - 5);
+        LogWidget.setBackgroundColor(Color.rgb(0, 0, 150));
+        LogWidget.setMinimumHeight(screenHeight / 100 * 80);
+        LogWidget.setMinimumWidth(screenWidth);
+
+        Buttons2 = (LinearLayout) findViewById(R.id.buttons2);
+        Buttons2.setBackgroundColor(Color.rgb(0, 228, 0));
+        Buttons2.setMinimumHeight(screenHeight / 100 * 5);
+        Buttons2.setMinimumWidth(screenWidth);
 
         //get the Image View at the main.xml file
         iv_image = (ImageView) findViewById(R.id.imageView);
