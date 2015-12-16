@@ -87,7 +87,7 @@ public class Tab_Network_Activity extends Activity {
 // Контейнер для разделителя
         LinearLayout linLayout_Channels_divider = new LinearLayout(this);
         linLayout_Channels_divider.setOrientation(LinearLayout.HORIZONTAL);
-        linLayout_Channels_divider.setPadding(5, 15, 5, 15);
+        linLayout_Channels_divider.setPadding(5, 9, 5, 9);
 
 // Название
         TextView tv_Channels = new TextView(this);
@@ -121,7 +121,7 @@ public class Tab_Network_Activity extends Activity {
         // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
         tv_Channels_note.setLayoutParams(lpView);
         tv_Channels_note.setTextColor(Color.GRAY);
-        tv_Channels_note.setPadding(5, 15, 5, 15);
+        tv_Channels_note.setPadding(5, 9, 5, 9);
         linLayout_Channels_note.addView(tv_Channels_note);
 
 // Разделитель
@@ -148,7 +148,7 @@ public class Tab_Network_Activity extends Activity {
 // Контейнер для разделителя
         LinearLayout linLayout_Connection_Method_divider = new LinearLayout(this);
         linLayout_Connection_Method_divider.setOrientation(LinearLayout.HORIZONTAL);
-        linLayout_Connection_Method_divider.setPadding(5, 15, 5, 15);
+        linLayout_Connection_Method_divider.setPadding(5, 9, 5, 9);
 
 // Название
         TextView tv_Connection_Method = new TextView(this);
@@ -182,7 +182,7 @@ public class Tab_Network_Activity extends Activity {
         // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
         tv_Connection_Method_note.setLayoutParams(lpView);
         tv_Connection_Method_note.setTextColor(Color.GRAY);
-        tv_Connection_Method_note.setPadding(5, 15, 5, 15);
+        tv_Connection_Method_note.setPadding(5, 9, 5, 9);
         linLayout_Connection_Method_note.addView(tv_Connection_Method_note);
 
 // Разделитель
@@ -200,17 +200,17 @@ public class Tab_Network_Activity extends Activity {
         LinearLayout linLayout_Fotobot_Email = new LinearLayout(this);
         linLayout_Fotobot_Email.setOrientation(LinearLayout.HORIZONTAL);
         LinearLayout.LayoutParams lpView_email = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        linLayout_Fotobot_Email.setPadding(5, 15, 5, 15);
+        linLayout_Fotobot_Email.setPadding(5, 9, 5, 9);
 
 // Пояснение контейнер
         LinearLayout linLayout_Fotobot_Email_note = new LinearLayout(this);
         linLayout_Fotobot_Email_note.setOrientation(LinearLayout.HORIZONTAL);
-        linLayout_Fotobot_Email_note.setPadding(5, 15, 5, 15);
+        linLayout_Fotobot_Email_note.setPadding(5, 9, 5, 9);
 
 // Контейнер для разделителя
         LinearLayout linLayout_Fotobot_Email_divider = new LinearLayout(this);
         linLayout_Fotobot_Email_divider.setOrientation(LinearLayout.HORIZONTAL);
-        linLayout_Fotobot_Email_divider.setPadding(5, 15, 5, 15);
+        linLayout_Fotobot_Email_divider.setPadding(5, 9, 5, 9);
 
 // Название
         TextView tv_Fotobot_Email = new TextView(this);
@@ -243,7 +243,7 @@ public class Tab_Network_Activity extends Activity {
         // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
         tv_Fotobot_Email_note.setLayoutParams(lpView);
         tv_Fotobot_Email_note.setTextColor(Color.GRAY);
-        tv_Fotobot_Email_note.setPadding(5, 15, 5, 15);
+        tv_Fotobot_Email_note.setPadding(5, 9, 5, 9);
         linLayout_Fotobot_Email_note.addView(tv_Fotobot_Email_note);
 
 // Разделитель
@@ -261,17 +261,17 @@ public class Tab_Network_Activity extends Activity {
         LinearLayout linLayout_Fotobot_Password = new LinearLayout(this);
         linLayout_Fotobot_Email.setOrientation(LinearLayout.HORIZONTAL);
 //        LinearLayout.LayoutParams lpView_email = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        linLayout_Fotobot_Password.setPadding(5, 15, 5, 15);
+        linLayout_Fotobot_Password.setPadding(5, 9, 5, 9);
 
 // Пояснение контейнер
         LinearLayout linLayout_Fotobot_Password_note = new LinearLayout(this);
         linLayout_Fotobot_Password_note.setOrientation(LinearLayout.HORIZONTAL);
-        linLayout_Fotobot_Password_note.setPadding(5, 15, 5, 15);
+        linLayout_Fotobot_Password_note.setPadding(5, 9, 5, 9);
 
 // Контейнер для разделителя
         LinearLayout linLayout_Fotobot_Password_divider = new LinearLayout(this);
         linLayout_Fotobot_Password_divider.setOrientation(LinearLayout.HORIZONTAL);
-        linLayout_Fotobot_Password_divider.setPadding(5, 15, 5, 15);
+        linLayout_Fotobot_Password_divider.setPadding(5, 9, 5, 9);
 
 // Название
         TextView tv_Fotobot_Password = new TextView(this);
@@ -304,7 +304,7 @@ public class Tab_Network_Activity extends Activity {
         // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
         tv_Fotobot_Password_note.setLayoutParams(lpView);
         tv_Fotobot_Password_note.setTextColor(Color.GRAY);
-        tv_Fotobot_Password_note.setPadding(5, 15, 5, 15);
+        tv_Fotobot_Password_note.setPadding(5, 9, 5, 9);
         linLayout_Fotobot_Password_note.addView(tv_Fotobot_Password_note);
 
 // Разделитель
@@ -322,17 +322,17 @@ public class Tab_Network_Activity extends Activity {
         LinearLayout linLayout_Fotobot_Recipient = new LinearLayout(this);
         linLayout_Fotobot_Recipient.setOrientation(LinearLayout.HORIZONTAL);
 //        LinearLayout.LayoutParams lpView_email = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        linLayout_Fotobot_Recipient.setPadding(5, 15, 5, 15);
+        linLayout_Fotobot_Recipient.setPadding(5, 9, 5, 9);
 
 // Пояснение контейнер
         LinearLayout linLayout_Fotobot_Recipient_note = new LinearLayout(this);
         linLayout_Fotobot_Recipient_note.setOrientation(LinearLayout.HORIZONTAL);
-        linLayout_Fotobot_Recipient_note.setPadding(5, 15, 5, 15);
+        linLayout_Fotobot_Recipient_note.setPadding(5, 9, 5, 9);
 
 // Контейнер для разделителя
         LinearLayout linLayout_Fotobot_Recipient_divider = new LinearLayout(this);
         linLayout_Fotobot_Recipient_divider.setOrientation(LinearLayout.HORIZONTAL);
-        linLayout_Fotobot_Recipient_divider.setPadding(5, 15, 5, 15);
+        linLayout_Fotobot_Recipient_divider.setPadding(5, 9, 5, 9);
 
 // Название
         TextView tv_Fotobot_Recipient = new TextView(this);
@@ -365,7 +365,7 @@ public class Tab_Network_Activity extends Activity {
         // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
         tv_Fotobot_Recipient_note.setLayoutParams(lpView);
         tv_Fotobot_Recipient_note.setTextColor(Color.GRAY);
-        tv_Fotobot_Recipient_note.setPadding(5, 15, 5, 15);
+        tv_Fotobot_Recipient_note.setPadding(5, 9, 5, 9);
         linLayout_Fotobot_Recipient_note.addView(tv_Fotobot_Recipient_note);
 
 // Разделитель
@@ -383,17 +383,17 @@ public class Tab_Network_Activity extends Activity {
         LinearLayout linLayout_SMTP_Host = new LinearLayout(this);
         linLayout_SMTP_Host.setOrientation(LinearLayout.HORIZONTAL);
 //        LinearLayout.LayoutParams lpView_email = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        linLayout_SMTP_Host.setPadding(5, 15, 5, 15);
+        linLayout_SMTP_Host.setPadding(5, 9, 5, 9);
 
 // Пояснение контейнер
         LinearLayout linLayout_SMTP_Host_note = new LinearLayout(this);
         linLayout_SMTP_Host_note.setOrientation(LinearLayout.HORIZONTAL);
-        linLayout_SMTP_Host_note.setPadding(5, 15, 5, 15);
+        linLayout_SMTP_Host_note.setPadding(5, 9, 5, 9);
 
 // Контейнер для разделителя
         LinearLayout linLayout_SMTP_Host_divider = new LinearLayout(this);
         linLayout_SMTP_Host_divider.setOrientation(LinearLayout.HORIZONTAL);
-        linLayout_SMTP_Host_divider.setPadding(5, 15, 5, 15);
+        linLayout_SMTP_Host_divider.setPadding(5, 9, 5, 9);
 
 // Название
         TextView tv_SMTP_Host = new TextView(this);
@@ -427,7 +427,7 @@ public class Tab_Network_Activity extends Activity {
         // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
         tv_SMTP_Host_note.setLayoutParams(lpView);
         tv_SMTP_Host_note.setTextColor(Color.GRAY);
-        tv_SMTP_Host_note.setPadding(5, 15, 5, 15);
+        tv_SMTP_Host_note.setPadding(5, 9, 5, 9);
         linLayout_SMTP_Host_note.addView(tv_SMTP_Host_note);
 
 // Разделитель
@@ -445,17 +445,17 @@ public class Tab_Network_Activity extends Activity {
         LinearLayout linLayout_SMTP_Port = new LinearLayout(this);
         linLayout_SMTP_Port.setOrientation(LinearLayout.HORIZONTAL);
 //        LinearLayout.LayoutParams lpView_email = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        linLayout_SMTP_Port.setPadding(5, 15, 5, 15);
+        linLayout_SMTP_Port.setPadding(5, 9, 5, 9);
 
 // Пояснение контейнер
         LinearLayout linLayout_SMTP_Port_note = new LinearLayout(this);
         linLayout_SMTP_Port_note.setOrientation(LinearLayout.HORIZONTAL);
-        linLayout_SMTP_Port_note.setPadding(5, 15, 5, 15);
+        linLayout_SMTP_Port_note.setPadding(5, 9, 5, 9);
 
 // Контейнер для разделителя
         LinearLayout linLayout_SMTP_Port_divider = new LinearLayout(this);
         linLayout_SMTP_Port_divider.setOrientation(LinearLayout.HORIZONTAL);
-        linLayout_SMTP_Port_divider.setPadding(5, 15, 5, 15);
+        linLayout_SMTP_Port_divider.setPadding(5, 9, 5, 9);
 
 // Название
         TextView tv_SMTP_Port = new TextView(this);
@@ -488,7 +488,7 @@ public class Tab_Network_Activity extends Activity {
         // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
         tv_SMTP_Port_note.setLayoutParams(lpView);
         tv_SMTP_Port_note.setTextColor(Color.GRAY);
-        tv_SMTP_Port_note.setPadding(5, 15, 5, 15);
+        tv_SMTP_Port_note.setPadding(5, 9, 5, 9);
         linLayout_SMTP_Port_note.addView(tv_SMTP_Port_note);
 
 // Разделитель

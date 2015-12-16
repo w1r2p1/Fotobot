@@ -231,7 +231,7 @@ public class Tab_Foto_Activity  extends Activity {
         tv_Photo_Size_h.setTextSize(14);
         tv_Photo_Size_h.setTextColor(Color.BLACK);
         tv_Photo_Size_h.setText("Масштаб фото");
-        tv_Photo_Size_h.setWidth((screenWidth - padding) / 100 * 50);
+        tv_Photo_Size_h.setWidth((screenWidth - padding) / 100 * 80);
         tv_Photo_Size_h.setLayoutParams(lpView_photo_size);
         linLayout_Photo_Size.addView(tv_Photo_Size_h);
 
@@ -247,7 +247,8 @@ public class Tab_Foto_Activity  extends Activity {
         spinnerArrayAdapter_Hardware = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray_Hardware);
         spinner_Hardware.setAdapter(spinnerArrayAdapter_Hardware);
         spinner_Hardware.setSelection(getIndex(spinner_Hardware, fb.Image_Scale));
-        spinner_Hardware.setMinimumWidth((screenWidth - padding) / 100 * 50);
+        spinner_Hardware.setMinimumWidth((screenWidth - padding) / 100 * 20);
+       // spinner_Hardware.setGravity(Gravity.RIGHT);
         linLayout_Photo_Size.addView(spinner_Hardware);
 
 // Размер фото
@@ -256,7 +257,7 @@ public class Tab_Foto_Activity  extends Activity {
         tv_Photo_Size_s.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Photo_Size_s.setTextColor(Color.BLACK);
         tv_Photo_Size_s.setText("Размер фото");
-        tv_Photo_Size_s.setWidth((screenWidth - padding) / 100 * 70);
+        tv_Photo_Size_s.setWidth((screenWidth - padding) / 100 * 80);
         tv_Photo_Size_s.setLayoutParams(lpView_photo_size);
         linLayout_Photo_Size.addView(tv_Photo_Size_s);
 
@@ -274,7 +275,8 @@ public class Tab_Foto_Activity  extends Activity {
         spinner_Software.setAdapter(spinnerArrayAdapter1);
 
         spinner_Software.setSelection(getIndex(spinner_Software, fb.Image_Size));
-        spinner_Software.setMinimumWidth((screenWidth - padding) / 100 * 30);
+        spinner_Software.setMinimumWidth((screenWidth - padding) / 100 * 20);
+      //  spinner_Software.setGravity(Gravity.RIGHT);
         linLayout_Photo_Size.addView(spinner_Software);
 
 // Заметка для Hardware
