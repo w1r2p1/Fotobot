@@ -59,15 +59,11 @@
         <ImageView android:layout_width="1dip" android:layout_height="1dip" android:id="@+id/imageView"></ImageView>
 
     </LinearLayout>
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrollView" >
 
-    <HorizontalScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/horizontalScrollView" >
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/tvInfo"
@@ -75,6 +71,42 @@
         android:layout_height="fill_parent"
         android:text="">
     </TextView>
-    </HorizontalScrollView>
-    </ScrollView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Лог"
+            android:id="@+id/log"
+            android:layout_weight="1"
+            android:layout_alignParentBottom="true"
+            android:layout_alignLeft="@+id/button"
+            android:layout_alignStart="@+id/button"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:onClick="startFotobot"
+            android:nestedScrollingEnabled="false" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Help"
+            android:id="@+id/help"
+            android:layout_weight="1"
+            android:layout_alignParentBottom="true"
+            android:layout_alignLeft="@+id/button"
+            android:layout_alignStart="@+id/button"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:onClick="stopFotobot"
+            android:enabled="false"
+            android:nestedScrollingEnabled="false" />
+    </LinearLayout>
+
 </LinearLayout>
