@@ -348,7 +348,7 @@ public class Tab_Network_Activity extends Activity {
         editText_Fotobot_Recipient = new EditText(this);
         editText_Fotobot_Recipient.setLayoutParams(lpView_et);
         editText_Fotobot_Recipient.setSingleLine(true);
-        editText_Fotobot_Recipient.setText(fb.EMail_Sender);
+        editText_Fotobot_Recipient.setText(fb.EMail_Recepient);
         //ViewGroup.LayoutParams lp = editText_Fotobot_Email.getLayoutParams();
         editText_Fotobot_Recipient.setWidth((screenWidth - padding) - ((screenWidth - padding) / 100 * 50));
         // lp.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 50);

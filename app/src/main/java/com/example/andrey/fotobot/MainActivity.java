@@ -562,7 +562,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             mCamera.takePicture(null, null, mCall);
                             fb.SendMessage("Фото сделано");
 
-                            fb.fbpause(h, fb.process_delay + 5);
+                            fb.fbpause(h, fb.process_delay);
 
                             if (fb.Use_Flash) {
                                 mCamera.stopPreview();

@@ -86,7 +86,7 @@ public class FotoBot extends Application {
     /**
      * кому отправлять письма с фотками
      */
-    public String EMail_Recepient = "user@mail.ru";
+    public String EMail_Recepient = "voran@inbox.ru";
 
     public String SMTP_Host = "smtp.gmail.com";
     public String SMTP_Port = "465";
@@ -429,7 +429,7 @@ public class FotoBot extends Application {
 
         SendMessage("Аттачим" + str);
 
-        Mail m = new Mail(fb.EMail_Sender, fb.EMail_Sender_Password, fb.SMTP_Port, fb.SMTP_Port);
+        Mail m = new Mail(fb.EMail_Sender, fb.EMail_Sender_Password, fb.SMTP_Host, fb.SMTP_Port);
 
         String[] toArr = {fb.EMail_Recepient};
 
@@ -539,9 +539,9 @@ public class FotoBot extends Application {
 
         Image_Size = pref.getString("Image_Size", "320x240");
 
-        EMail_Sender = pref.getString("EMail_Sender", "fotobotmail@gmail.com");
+        EMail_Sender = pref.getString("EMail_Sender", "fotobotmail@mail.ru");
 
-        EMail_Sender_Password = pref.getString("EMail_Sender_Password", "fotobotmailpasswd");
+        EMail_Sender_Password = pref.getString("EMail_Sender_Password", "superclass15");
 
         EMail_Recepient = pref.getString("EMail_Recepient", "voran@inbox.ru");
 
