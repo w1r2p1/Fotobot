@@ -18,6 +18,7 @@ import android.telephony.PhoneStateListener;
 import android.telephony.SignalStrength;
 import android.telephony.TelephonyManager;
 import android.text.Html;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
@@ -26,6 +27,7 @@ import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
@@ -52,6 +54,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     final int STATUS_WORKING = 222;
     final int STATUS_STOPPED = 333;
     int MAX_SIGNAL_DBM_VALUE = 31;
+
+    private static final int LOW_DPI_STATUS_BAR_HEIGHT = 19;
+
+    private static final int MEDIUM_DPI_STATUS_BAR_HEIGHT = 25;
+
+    private static final int HIGH_DPI_STATUS_BAR_HEIGHT = 38;
+
     int n;
     FotoBot fb;
     String log;
@@ -280,6 +289,29 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         screenWidth = display.getWidth();
         screenHeight = display.getHeight();
 
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(displayMetrics);
+
+        int statusBarHeight;
+
+        switch (displayMetrics.densityDpi) {
+            case DisplayMetrics.DENSITY_HIGH:
+                statusBarHeight = HIGH_DPI_STATUS_BAR_HEIGHT;
+                break;
+            case DisplayMetrics.DENSITY_MEDIUM:
+                statusBarHeight = MEDIUM_DPI_STATUS_BAR_HEIGHT;
+                break;
+            case DisplayMetrics.DENSITY_LOW:
+                statusBarHeight = LOW_DPI_STATUS_BAR_HEIGHT;
+                break;
+            default:
+                statusBarHeight = MEDIUM_DPI_STATUS_BAR_HEIGHT;
+        }
+        Log.d(LOG_TAG, "screenHeight: " + screenHeight);
+        Log.d(LOG_TAG, "statusBarHeight: " + statusBarHeight);
+
+        screenHeight = screenHeight - statusBarHeight * 2;
+        Log.d(LOG_TAG, "screenHeight: " + screenHeight);
 // http://stackoverflow.com/questions/20264268/how-to-get-height-and-width-of-navigation-bar-programmatically
 
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
@@ -309,7 +341,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         LogWidget = (HorizontalScrollView) findViewById(R.id.horizontalScrollView);
         LogWidget.setBackgroundColor(Color.rgb(0, 0, 150));
-        LogWidget.setMinimumHeight(screenHeight / 100 * 80);
+        LogWidget.setMinimumHeight(screenHeight / 100 * 90);
         LogWidget.setMinimumWidth(screenWidth);
 
         Buttons2 = (LinearLayout) findViewById(R.id.buttons2);
