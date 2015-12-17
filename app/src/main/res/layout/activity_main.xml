@@ -29,7 +29,8 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:onClick="startFotobot"
-            android:nestedScrollingEnabled="false" />
+            android:nestedScrollingEnabled="false"
+            />
 
         <Button
             android:layout_width="wrap_content"
@@ -57,7 +58,8 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:onClick="showSettings"
-            android:nestedScrollingEnabled="false" />
+            android:nestedScrollingEnabled="false"
+            />
 
         <SurfaceView android:id="@+id/surfaceView" android:layout_height="1dip" android:layout_width="1dip"></SurfaceView>
         <ImageView android:layout_width="1dip" android:layout_height="1dip" android:id="@+id/imageView"></ImageView>

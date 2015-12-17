@@ -340,24 +340,24 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 
         WorkSpace = (RelativeLayout) findViewById(R.id.workspace);
-        WorkSpace.setBackgroundColor(Color.rgb(0,150,150));
+        WorkSpace.setBackgroundColor(Color.rgb(0,0,128));
         WorkSpace.setMinimumHeight(screenHeight);
         WorkSpace.setMinimumWidth(screenWidth);
 
         Buttons1 = (LinearLayout) findViewById(R.id.buttons1);
-        Buttons1.setBackgroundColor(Color.rgb(0, 228, 0));
+        Buttons1.setBackgroundColor(Color.rgb(192, 192, 192));
         //Buttons1.setMinimumHeight(screenHeight / 100 * 5);
         //Buttons1.setMinimumHeight(50);
         Buttons1.setMinimumWidth(screenWidth);
 
         LogWidget = (HorizontalScrollView) findViewById(R.id.horizontalScrollView);
-        LogWidget.setBackgroundColor(Color.rgb(0, 0, 150));
+        LogWidget.setBackgroundColor(Color.rgb(0, 0, 128));
         //LogWidget.setMinimumHeight(screenHeight / 100 * 80);
         //LogWidget.setMinimumHeight(803);
         LogWidget.setMinimumWidth(screenWidth);
 
         Buttons2 = (LinearLayout) findViewById(R.id.buttons2);
-        Buttons2.setBackgroundColor(Color.rgb(0, 228, 0));
+        Buttons2.setBackgroundColor(Color.rgb(192, 192, 192));
         //Buttons2.setMinimumHeight(screenHeight / 100 * 5);
         //Buttons2.setMinimumHeight(50);
         Buttons2.setMinimumWidth(screenWidth);
