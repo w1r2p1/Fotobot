@@ -47,7 +47,9 @@ public class Tab_Main_Activity extends Activity {
         LinearLayout FullFrame = new LinearLayout(this);
         FullFrame.setOrientation(LinearLayout.VERTICAL);
         FullFrame.setPadding(5, padding, 0, 0);
-       // FullFrame.setBackgroundColor(Color.WHITE);
+        FullFrame.setBackgroundColor(Color.rgb(192,192,192));
+        LinearLayout.LayoutParams lpFull_Frame = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT);
+        FullFrame.setLayoutParams(lpFull_Frame);
 
 // ------------------------------------------------------------------------------------------------
 
@@ -56,15 +58,18 @@ public class Tab_Main_Activity extends Activity {
         linLayout1.setOrientation(LinearLayout.HORIZONTAL);
         LinearLayout.LayoutParams lpView = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         LinearLayout.LayoutParams lpView_et = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        linLayout1.setBackgroundColor(Color.rgb(192,192,192));
 
 // 1.1 Интервал между фото (пояснение контейнер)
         LinearLayout linLayout1_notes = new LinearLayout(this);
         linLayout1_notes.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout1_notes.setBackgroundColor(Color.rgb(192,192,192));
 
 // 1.2 Интервал между фото (divider контейнер)
         LinearLayout linLayout1_divider = new LinearLayout(this);
         linLayout1_divider.setOrientation(LinearLayout.HORIZONTAL);
         linLayout1_divider.setPadding(5, 15, 5, 15);
+        linLayout1_divider.setBackgroundColor(Color.rgb(192,192,192));
 
 // 1.3 Интервал между фото
         TextView tv = new TextView(this);
@@ -111,15 +116,18 @@ public class Tab_Main_Activity extends Activity {
 // 2. Интервал между процессами (основной контейнер)
         LinearLayout linLayout_process_delay = new LinearLayout(this);
         linLayout_process_delay.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_process_delay.setBackgroundColor(Color.rgb(192,192,192));
 
 // 2. Интервал между процессами (пояснение контейнер)
         LinearLayout linLayout_Flash_notes = new LinearLayout(this);
         linLayout_Flash_notes.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_Flash_notes.setBackgroundColor(Color.rgb(192,192,192));
 
 // 2.1 Интервал между процессами (divider контейнер)
         LinearLayout linLayout_Flash_divider = new LinearLayout(this);
         linLayout_Flash_divider.setOrientation(LinearLayout.HORIZONTAL);
         linLayout_Flash_divider.setPadding(5, 15, 5, 15);
+        linLayout_Flash_divider.setBackgroundColor(Color.rgb(192,192,192));
 
 // 2.2 Интервал между процессами (название поля)
         TextView tv_process_delay = new TextView(this);
@@ -166,10 +174,12 @@ public class Tab_Main_Activity extends Activity {
 // 3. Шрифты (Config_Font_Size Container)
         LinearLayout linLayout_config_font_size = new LinearLayout(this);
         linLayout_config_font_size.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_config_font_size.setBackgroundColor(Color.rgb(192,192,192));
 
 // 3.1 Шрифты (Log_Font_Size Container)
         LinearLayout linLayout_log_font_size = new LinearLayout(this);
         linLayout_config_font_size.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_log_font_size.setBackgroundColor(Color.rgb(192,192,192));
 
 // 3.2 Шрифты (Horizontal LinearLayout)
         LinearLayout linLayout2 = new LinearLayout(this);
@@ -178,6 +188,7 @@ public class Tab_Main_Activity extends Activity {
         LinearLayout.LayoutParams lpViewbutton = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         linLayout2.setGravity(Gravity.BOTTOM | Gravity.CENTER);
         linLayout2.setLayoutParams(lpView2);
+        linLayout2.setBackgroundColor(Color.rgb(192,192,192));
 
 // Шрифты (Config_Font_Size)
         TextView cfs = new TextView(this);
