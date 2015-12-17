@@ -51,7 +51,7 @@ public class Tab_Main_Activity extends Activity {
         FullFrame.setBackgroundColor(Color.rgb(192,192,0));
         LinearLayout.LayoutParams lpFull_Frame = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT);
         FullFrame.setLayoutParams(lpFull_Frame);
-        FullFrame.setMinimumHeight(fb.Working_Area_Height - 50);
+        FullFrame.setMinimumHeight(fb.Working_Area_Height - fb.menuheight);
 
 // ------------------------------------------------------------------------------------------------
 

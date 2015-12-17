@@ -1,18 +1,24 @@
 package com.example.andrey.fotobot;
 
 import android.app.TabActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TabHost;
 import android.widget.TextView;
 
 public class Settings extends TabActivity {
-
+    final String LOG_TAG = "Logs";
     private TabHost mTabHost;
 
     private void setupTabHost() {
@@ -25,7 +31,7 @@ public class Settings extends TabActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        final FotoBot fb = (FotoBot) getApplicationContext();
 // construct the tabhost
         setContentView(R.layout.main);
 
@@ -40,6 +46,10 @@ public class Settings extends TabActivity {
         tv.setTextColor(Color.WHITE);
 
         tv.setText("Поведение");
+
+        fb.menuheight = (int) pxFromDp(getApplicationContext(), getTextViewHeight(tv));
+
+        Log.d(LOG_TAG, "menuheight: " + fb.menuheight);
         Intent intent = new Intent(this, Tab_Main_Activity.class);
         TabHost.TabSpec spec = mTabHost.newTabSpec("Tab1").setIndicator(view).setContent(intent);
 
@@ -71,4 +81,32 @@ public class Settings extends TabActivity {
 
     }
 
+    /**
+     * Get the TextView height before the TextView will render
+     * @param textView the TextView to measure
+     * @return the height of the textView
+     */
+    public static int getTextViewHeight(TextView textView) {
+        WindowManager wm =
+                (WindowManager) textView.getContext().getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+
+        int deviceWidth;
+
+        if(android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2){
+            Point size = new Point();
+            display.getSize(size);
+            deviceWidth = size.x;
+        } else {
+            deviceWidth = display.getWidth();
+        }
+
+        int widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(deviceWidth, View.MeasureSpec.AT_MOST);
+        int heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        textView.measure(widthMeasureSpec, heightMeasureSpec);
+        return textView.getMeasuredHeight();
+    }
+    public static float pxFromDp(final Context context, final float dp) {
+        return dp * context.getResources().getDisplayMetrics().density;
+    }
 }

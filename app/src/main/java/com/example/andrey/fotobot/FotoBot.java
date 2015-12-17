@@ -131,6 +131,8 @@ public class FotoBot extends Application {
 
     public int Working_Area_Height = 240;
 
+    public int menuheight;
+
     public String Image_Name;
 
     public String Image_Name_Full_Path;
