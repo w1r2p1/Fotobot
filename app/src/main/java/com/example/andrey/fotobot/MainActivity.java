@@ -32,6 +32,7 @@ import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.io.File;
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     String log;
     HorizontalScrollView LogWidget;
     LinearLayout Buttons1, Buttons2;
+    RelativeLayout WorkSpace;
     boolean STOP_FOTOBOT = false;
     Button btnStart;
     Button btnStop;
@@ -336,19 +338,28 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         tvInfo = (TextView) findViewById(R.id.tvInfo);
         text = (TextView) findViewById(R.id.textView);
 
+
+        WorkSpace = (RelativeLayout) findViewById(R.id.workspace);
+        WorkSpace.setBackgroundColor(Color.rgb(0,150,150));
+        WorkSpace.setMinimumHeight(screenHeight);
+        WorkSpace.setMinimumWidth(screenWidth);
+
         Buttons1 = (LinearLayout) findViewById(R.id.buttons1);
         Buttons1.setBackgroundColor(Color.rgb(0, 228, 0));
-        Buttons1.setMinimumHeight(screenHeight / 100 * 5);
+        //Buttons1.setMinimumHeight(screenHeight / 100 * 5);
+        //Buttons1.setMinimumHeight(50);
         Buttons1.setMinimumWidth(screenWidth);
 
         LogWidget = (HorizontalScrollView) findViewById(R.id.horizontalScrollView);
         LogWidget.setBackgroundColor(Color.rgb(0, 0, 150));
-        LogWidget.setMinimumHeight(screenHeight / 100 * 90);
+        //LogWidget.setMinimumHeight(screenHeight / 100 * 80);
+        //LogWidget.setMinimumHeight(803);
         LogWidget.setMinimumWidth(screenWidth);
 
         Buttons2 = (LinearLayout) findViewById(R.id.buttons2);
         Buttons2.setBackgroundColor(Color.rgb(0, 228, 0));
-        Buttons2.setMinimumHeight(screenHeight / 100 * 5);
+        //Buttons2.setMinimumHeight(screenHeight / 100 * 5);
+        //Buttons2.setMinimumHeight(50);
         Buttons2.setMinimumWidth(screenWidth);
 
         //get the Image View at the main.xml file
