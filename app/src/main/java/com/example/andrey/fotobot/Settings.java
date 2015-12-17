@@ -42,6 +42,7 @@ public class Settings extends TabActivity {
         tv.setText("Поведение");
         Intent intent = new Intent(this, Tab_Main_Activity.class);
         TabHost.TabSpec spec = mTabHost.newTabSpec("Tab1").setIndicator(view).setContent(intent);
+
         mTabHost.addTab(spec);
 // Сеть
         View view2 = LayoutInflater.from(mTabHost.getContext()).inflate(R.layout.tabs_bg, null);

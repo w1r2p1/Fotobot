@@ -286,7 +286,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        final FotoBot fb = (FotoBot) getApplicationContext();
         Display display = getWindowManager().getDefaultDisplay();
         screenWidth = display.getWidth();
         screenHeight = display.getHeight();
@@ -316,6 +316,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         Log.d(LOG_TAG, "pxFromDp: " + (int) pxFromDp(getApplicationContext(), statusBarHeight));
         Log.d(LOG_TAG, "screenHeight: " + screenHeight);
 
+        fb.Working_Area_Height = screenHeight;
+
 // http://stackoverflow.com/questions/20264268/how-to-get-height-and-width-of-navigation-bar-programmatically
 
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
@@ -331,7 +333,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         setContentView(R.layout.activity_main);
 
-        final FotoBot fb = (FotoBot) getApplicationContext();
+     //   final FotoBot fb = (FotoBot) getApplicationContext();
 
         btnStart = (Button) findViewById(R.id.play);
         btnConfig = (Button) findViewById(R.id.config);
