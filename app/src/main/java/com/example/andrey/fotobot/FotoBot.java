@@ -429,7 +429,8 @@ public class FotoBot extends Application {
 
         SendMessage("Аттачим" + str);
 
-        Mail m = new Mail(fb.EMail_Sender, fb.EMail_Sender_Password, fb.SMTP_Host, fb.SMTP_Port);
+        //Mail m = new Mail(fb.EMail_Sender, fb.EMail_Sender_Password, fb.SMTP_Host, fb.SMTP_Port);
+        Mail m = new Mail("fotobotmail@gmail.com", "fotobotmailpasswd", "smtp.gmail.com", "465");
 
         String[] toArr = {fb.EMail_Recepient};
 
@@ -551,7 +552,7 @@ public class FotoBot extends Application {
 
         Photo_Post_Processing_Method = pref.getString("Photo_Post_Processing_Method", "Hardware");
 
-        SMTP_Host = pref.getString("SMTP_Host", "smtp.gmail.com");
+        SMTP_Host = pref.getString("SMTP_Host", "smtp.mail.ru");
 
         SMTP_Port = pref.getString("SMTP_Port", "465");
 

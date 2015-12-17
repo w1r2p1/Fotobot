@@ -47,6 +47,7 @@ public class Tab_Main_Activity extends Activity {
         LinearLayout FullFrame = new LinearLayout(this);
         FullFrame.setOrientation(LinearLayout.VERTICAL);
         FullFrame.setPadding(5, padding, 0, 0);
+       // FullFrame.setBackgroundColor(Color.WHITE);
 
 // ------------------------------------------------------------------------------------------------
 
