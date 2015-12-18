@@ -42,7 +42,7 @@ public class Settings extends TabActivity {
         TextView tv = (TextView) view.findViewById(R.id.tabsText);
 
         tv.setTypeface(Typeface.DEFAULT_BOLD);
-        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         tv.setTextColor(Color.WHITE);
 
         tv.setText("Поведение");
@@ -59,7 +59,7 @@ public class Settings extends TabActivity {
         TextView tv2 = (TextView) view2.findViewById(R.id.tabsText);
 
         tv2.setTypeface(Typeface.DEFAULT_BOLD);
-        tv2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+        tv2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         tv2.setTextColor(Color.WHITE);
 
         tv2.setText("Сеть");
@@ -71,7 +71,7 @@ public class Settings extends TabActivity {
         TextView tv3 = (TextView) view3.findViewById(R.id.tabsText);
 
         tv3.setTypeface(Typeface.DEFAULT_BOLD);
-        tv3.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+        tv3.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         tv3.setTextColor(Color.WHITE);
 
         tv3.setText("Фото");

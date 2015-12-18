@@ -17,7 +17,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -48,10 +47,14 @@ public class Tab_Main_Activity extends Activity {
         LinearLayout FullFrame = new LinearLayout(this);
         FullFrame.setOrientation(LinearLayout.VERTICAL);
         FullFrame.setPadding(5, padding, 0, 0);
-        FullFrame.setBackgroundColor(Color.rgb(192,192,0));
+        FullFrame.setBackgroundColor(Color.rgb(192,192,192));
         LinearLayout.LayoutParams lpFull_Frame = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT);
         FullFrame.setLayoutParams(lpFull_Frame);
         FullFrame.setMinimumHeight(fb.Working_Area_Height - fb.menuheight);
+
+        // Find the root view
+      //  View baseView = FullFrame.getRootView();
+      //  baseView.setBackgroundColor(Color.rgb(0,0,90));
 
 // ------------------------------------------------------------------------------------------------
 
@@ -161,7 +164,7 @@ public class Tab_Main_Activity extends Activity {
         tv_process_notes.setText("Необходим для того, чтобы слабый процессор телефона успел обработать данные. Подбирается экспериментальным путем, примерно > 5 секунд.");
         tv_process_notes.setWidth((screenWidth - padding) / 100 * 99);
         tv_process_notes.setLayoutParams(lpView);
-        tv_process_notes.setTextColor(Color.GRAY);
+      //  tv_process_notes.setTextColor(Color.GRAY);
         linLayout_Flash_notes.addView(tv_process_notes);
 
 // 2.5 Интервал между процессами (divider)
@@ -236,10 +239,24 @@ public class Tab_Main_Activity extends Activity {
 
 // ------------------------------------------------------------------------------------------------
 
+// Buttons
+
+// Container
+        LinearLayout linLayout_Buttons = new LinearLayout(this);
+        linLayout_Buttons.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_Buttons.setGravity(Gravity.BOTTOM | Gravity.CENTER);
+        lpView2.setMargins(5,5,5,5);
+        linLayout_Buttons.setLayoutParams(lpView2);
+        linLayout_Buttons.setBackgroundColor(Color.rgb(192,192,192));
+        linLayout_Buttons.setPadding(5, 15, 5, 15);
+
+
 // Apply Button
         Button btn = new Button(this);
         btn.setText("Применить");
         btn.setGravity(Gravity.CENTER);
+        btn.setBackgroundColor(Color.rgb(90,89,91));
+        btn.setTextColor(Color.rgb(250,250,250));
 
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -261,6 +278,8 @@ public class Tab_Main_Activity extends Activity {
         Button btn_mp = new Button(this);
         btn_mp.setText("Выйти из настроек");
         btn_mp.setGravity(Gravity.CENTER);
+        btn_mp.setBackgroundColor(Color.rgb(90,89,91));
+        btn_mp.setTextColor(Color.rgb(250,250,250));
 
         btn_mp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -270,8 +289,8 @@ public class Tab_Main_Activity extends Activity {
             }
         });
 
-        linLayout2.addView(btn, lpViewbutton);
-        linLayout2.addView(btn_mp, lpViewbutton);
+        linLayout_Buttons.addView(btn, lpViewbutton);
+        linLayout_Buttons.addView(btn_mp, lpViewbutton);
 
 // ------------------------------------------------------------------------------------------------
 
@@ -285,6 +304,7 @@ public class Tab_Main_Activity extends Activity {
         FullFrame.addView(linLayout_config_font_size);
         FullFrame.addView(linLayout_log_font_size);
         FullFrame.addView(linLayout2);
+        FullFrame.addView(linLayout_Buttons);
 
         ScrollView m_Scroll = new ScrollView(this);
         m_Scroll.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,

@@ -97,20 +97,6 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Log"
-            android:id="@+id/log"
-            android:layout_weight="1"
-            android:layout_alignParentBottom="true"
-            android:layout_alignLeft="@+id/button"
-            android:layout_alignStart="@+id/button"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:onClick="startFotobot"
-            android:nestedScrollingEnabled="false" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="Help"
             android:id="@+id/help"
             android:layout_weight="1"
