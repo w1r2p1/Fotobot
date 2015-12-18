@@ -73,7 +73,7 @@ public class Tab_Main_Activity extends Activity {
 // 1.2 Интервал между фото (divider контейнер)
         LinearLayout linLayout1_divider = new LinearLayout(this);
         linLayout1_divider.setOrientation(LinearLayout.HORIZONTAL);
-        linLayout1_divider.setPadding(5, 15, 5, 15);
+        linLayout1_divider.setPadding(1,5,5,5);
         linLayout1_divider.setBackgroundColor(Color.rgb(192,192,192));
 
 // 1.3 Интервал между фото
@@ -89,14 +89,14 @@ public class Tab_Main_Activity extends Activity {
 
 // 1.4 Интервал между фото (notes)
         TextView tv_notes = new TextView(this);
-        tv_notes.setTypeface(null, Typeface.ITALIC);
+        tv_notes.setTypeface(null, Typeface.NORMAL);
         tv_notes.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_notes.setTextColor(Color.BLACK);
         tv_notes.setText("Временной интервал между фото в секундах, рекомендуется > 300 секунд, но можно и чаще.");
         tv_notes.setWidth((screenWidth - padding) / 100 * 99);
         tv_notes.setLayoutParams(lpView);
         tv_notes.setTextColor(Color.GRAY);
-        tv_notes.setPadding(5, 15, 5, 15);
+        tv_notes.setPadding(1,5,5,5);
         linLayout1_notes.addView(tv_notes);
 
 // 1.5 Интервал между фото (ввод данных)
@@ -131,7 +131,7 @@ public class Tab_Main_Activity extends Activity {
 // 2.1 Интервал между процессами (divider контейнер)
         LinearLayout linLayout_Flash_divider = new LinearLayout(this);
         linLayout_Flash_divider.setOrientation(LinearLayout.HORIZONTAL);
-        linLayout_Flash_divider.setPadding(5, 15, 5, 15);
+        linLayout_Flash_divider.setPadding(1,5,5,5);
         linLayout_Flash_divider.setBackgroundColor(Color.rgb(192,192,192));
 
 // 2.2 Интервал между процессами (название поля)
@@ -143,7 +143,7 @@ public class Tab_Main_Activity extends Activity {
         tv_process_delay.setWidth((screenWidth - padding) / 100 * 80);
         tv_process_delay.setLayoutParams(lpView);
         tv_process_delay.setTypeface(Typeface.DEFAULT_BOLD);
-        tv_process_delay.setPadding(5, 15, 5, 15);
+        tv_process_delay.setPadding(1,5,5,5);
         linLayout_process_delay.addView(tv_process_delay);
 
 // 2.3 Интервал между процессами (ввод данных)
@@ -158,7 +158,7 @@ public class Tab_Main_Activity extends Activity {
 
 // 2.4 Интервал между процессами (ввод notes)
         TextView tv_process_notes = new TextView(this);
-        tv_process_notes.setTypeface(null, Typeface.ITALIC);
+        tv_process_notes.setTypeface(null, Typeface.NORMAL);
         tv_process_notes.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_process_notes.setTextColor(Color.BLACK);
         tv_process_notes.setText("Необходим для того, чтобы слабый процессор телефона успел обработать данные. Подбирается экспериментальным путем, примерно > 5 секунд.");
@@ -190,7 +190,8 @@ public class Tab_Main_Activity extends Activity {
         LinearLayout linLayout2 = new LinearLayout(this);
         linLayout2.setOrientation(LinearLayout.HORIZONTAL);
         LinearLayout.LayoutParams lpView2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        LinearLayout.LayoutParams lpViewbutton = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams lpViewbutton1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT,1.0f);
+        LinearLayout.LayoutParams lpViewbutton2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT,1.0f);
         linLayout2.setGravity(Gravity.BOTTOM | Gravity.CENTER);
         linLayout2.setLayoutParams(lpView2);
         linLayout2.setBackgroundColor(Color.rgb(192,192,192));
@@ -245,23 +246,21 @@ public class Tab_Main_Activity extends Activity {
         LinearLayout linLayout_Buttons = new LinearLayout(this);
         linLayout_Buttons.setOrientation(LinearLayout.HORIZONTAL);
         linLayout_Buttons.setGravity(Gravity.BOTTOM | Gravity.CENTER);
-        lpViewbutton.setMargins(5,5,5,5);
-        linLayout_Buttons.setLayoutParams(lpView2);
+        lpViewbutton1.setMargins(0,0,5,0);
+        LinearLayout.LayoutParams lpView3 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT);
+        linLayout_Buttons.setLayoutParams(lpView3);
         linLayout_Buttons.setBackgroundColor(Color.rgb(192,192,192));
-        linLayout_Buttons.setPadding(5, 15, 5, 15);
+        linLayout_Buttons.setPadding(15, 15, 15, 15);
 
 
 
 // Apply Button
         Button btn = new Button(this);
-        btn.setText("Применить");
+        btn.setText("ПРИМЕНИТЬ");
         btn.setGravity(Gravity.CENTER);
         btn.setBackgroundColor(Color.rgb(90,89,91));
         btn.setTextColor(Color.rgb(250,250,250));
         btn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-
-
-
 
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -278,13 +277,13 @@ public class Tab_Main_Activity extends Activity {
             }
         });
 
-
 // GoTo Main Page Button
         Button btn_mp = new Button(this);
-        btn_mp.setText("Выйти из настроек");
+        btn_mp.setText("ВЕРНУТЬСЯ");
         btn_mp.setGravity(Gravity.CENTER);
         btn_mp.setBackgroundColor(Color.rgb(90,89,91));
         btn_mp.setTextColor(Color.rgb(250,250,250));
+       // lpViewbutton2.setMargins(5,5,5,5);
         btn_mp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
 
         btn_mp.setOnClickListener(new View.OnClickListener() {
@@ -295,22 +294,22 @@ public class Tab_Main_Activity extends Activity {
             }
         });
 
-        linLayout_Buttons.addView(btn, lpViewbutton);
-        linLayout_Buttons.addView(btn_mp, lpViewbutton);
+        linLayout_Buttons.addView(btn, lpViewbutton1);
+        linLayout_Buttons.addView(btn_mp, lpViewbutton2);
 
 // ------------------------------------------------------------------------------------------------
 
 // Расставляем контейнеры (порядок важен)
         FullFrame.addView(linLayout1);
         FullFrame.addView(linLayout1_notes);
-        FullFrame.addView(linLayout1_divider);
+    //    FullFrame.addView(linLayout1_divider);
         FullFrame.addView(linLayout_process_delay);
         FullFrame.addView(linLayout_Flash_notes);
-        FullFrame.addView(linLayout_Flash_divider);
+    //    FullFrame.addView(linLayout_Flash_divider);
         FullFrame.addView(linLayout_config_font_size);
         FullFrame.addView(linLayout_log_font_size);
         FullFrame.addView(linLayout2);
-        FullFrame.addView(linLayout_Buttons,lpViewbutton);
+        FullFrame.addView(linLayout_Buttons);
 
         ScrollView m_Scroll = new ScrollView(this);
         m_Scroll.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
