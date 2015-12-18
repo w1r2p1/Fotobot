@@ -10,6 +10,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import android.widget.TextView;
 public class Tab_Main_Activity extends Activity {
 
     final String LOG_NETWORK_ACTIVITY = "Logs";
+    Button btn;
     private CheckBox check_box_flash;
     private EditText edit_text_jpeg_compression;
     private int screenWidth, screenHeight;
@@ -256,15 +258,35 @@ public class Tab_Main_Activity extends Activity {
 
 
 // Apply Button
-        Button btn = new Button(this);
+        btn = new Button(this);
         btn.setText("ПРИМЕНИТЬ");
         btn.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
         btn.setBackgroundColor(Color.rgb(90,89,91));
         btn.setTextColor(Color.rgb(250,250,250));
         btn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
 
+
+        btn.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    btn.setBackgroundColor(Color.rgb(90,90,90));
+                } else if(event.getAction() == MotionEvent.ACTION_DOWN) {
+                    btn.setBackgroundColor(Color.rgb(228,228,228));
+                }
+                return false;
+            }
+
+        });
+
+
+
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+               // btn.setBackgroundColor(Color.rgb(228,228,228));
+
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
 
