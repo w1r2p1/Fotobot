@@ -30,7 +30,7 @@
             android:layout_alignParentEnd="true"
             android:onClick="startFotobot"
             android:nestedScrollingEnabled="false"
-            />
+             />
 
         <Button
             android:layout_width="wrap_content"

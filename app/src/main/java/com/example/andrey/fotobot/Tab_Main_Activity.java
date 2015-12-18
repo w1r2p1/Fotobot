@@ -245,10 +245,11 @@ public class Tab_Main_Activity extends Activity {
         LinearLayout linLayout_Buttons = new LinearLayout(this);
         linLayout_Buttons.setOrientation(LinearLayout.HORIZONTAL);
         linLayout_Buttons.setGravity(Gravity.BOTTOM | Gravity.CENTER);
-        lpView2.setMargins(5,5,5,5);
+        lpViewbutton.setMargins(5,5,5,5);
         linLayout_Buttons.setLayoutParams(lpView2);
         linLayout_Buttons.setBackgroundColor(Color.rgb(192,192,192));
         linLayout_Buttons.setPadding(5, 15, 5, 15);
+
 
 
 // Apply Button
@@ -257,6 +258,10 @@ public class Tab_Main_Activity extends Activity {
         btn.setGravity(Gravity.CENTER);
         btn.setBackgroundColor(Color.rgb(90,89,91));
         btn.setTextColor(Color.rgb(250,250,250));
+        btn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+
+
+
 
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -280,6 +285,7 @@ public class Tab_Main_Activity extends Activity {
         btn_mp.setGravity(Gravity.CENTER);
         btn_mp.setBackgroundColor(Color.rgb(90,89,91));
         btn_mp.setTextColor(Color.rgb(250,250,250));
+        btn_mp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
 
         btn_mp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -304,7 +310,7 @@ public class Tab_Main_Activity extends Activity {
         FullFrame.addView(linLayout_config_font_size);
         FullFrame.addView(linLayout_log_font_size);
         FullFrame.addView(linLayout2);
-        FullFrame.addView(linLayout_Buttons);
+        FullFrame.addView(linLayout_Buttons,lpViewbutton);
 
         ScrollView m_Scroll = new ScrollView(this);
         m_Scroll.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
