@@ -69,6 +69,7 @@ public class Tab_Main_Activity extends Activity {
         LinearLayout linLayout1_notes = new LinearLayout(this);
         linLayout1_notes.setOrientation(LinearLayout.HORIZONTAL);
         linLayout1_notes.setBackgroundColor(Color.rgb(192,192,192));
+        linLayout1_notes.setPadding(0,0,0,9);
 
 // 1.2 Интервал между фото (divider контейнер)
         LinearLayout linLayout1_divider = new LinearLayout(this);
@@ -95,7 +96,6 @@ public class Tab_Main_Activity extends Activity {
         tv_notes.setText("Временной интервал между фото в секундах, рекомендуется > 300 секунд, но можно и чаще.");
         tv_notes.setWidth((screenWidth - padding) / 100 * 99);
         tv_notes.setLayoutParams(lpView);
-        tv_notes.setTextColor(Color.GRAY);
         tv_notes.setPadding(1,5,5,5);
         linLayout1_notes.addView(tv_notes);
 
@@ -127,6 +127,7 @@ public class Tab_Main_Activity extends Activity {
         LinearLayout linLayout_Flash_notes = new LinearLayout(this);
         linLayout_Flash_notes.setOrientation(LinearLayout.HORIZONTAL);
         linLayout_Flash_notes.setBackgroundColor(Color.rgb(192,192,192));
+        linLayout_Flash_notes.setPadding(0,0,0,9);
 
 // 2.1 Интервал между процессами (divider контейнер)
         LinearLayout linLayout_Flash_divider = new LinearLayout(this);
@@ -257,7 +258,7 @@ public class Tab_Main_Activity extends Activity {
 // Apply Button
         Button btn = new Button(this);
         btn.setText("ПРИМЕНИТЬ");
-        btn.setGravity(Gravity.CENTER);
+        btn.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
         btn.setBackgroundColor(Color.rgb(90,89,91));
         btn.setTextColor(Color.rgb(250,250,250));
         btn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
@@ -280,7 +281,7 @@ public class Tab_Main_Activity extends Activity {
 // GoTo Main Page Button
         Button btn_mp = new Button(this);
         btn_mp.setText("ВЕРНУТЬСЯ");
-        btn_mp.setGravity(Gravity.CENTER);
+        btn_mp.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
         btn_mp.setBackgroundColor(Color.rgb(90,89,91));
         btn_mp.setTextColor(Color.rgb(250,250,250));
        // lpViewbutton2.setMargins(5,5,5,5);
