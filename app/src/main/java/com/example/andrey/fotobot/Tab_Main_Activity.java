@@ -104,6 +104,7 @@ public class Tab_Main_Activity extends Activity {
 // 1.5 Интервал между фото (ввод данных)
         Photo_Frequency = new EditText(this);
         Photo_Frequency.setLayoutParams(lpView_et);
+        Photo_Frequency.setTextColor(Color.rgb(50,100,150));
         Photo_Frequency.setText(Integer.toString(fb.Photo_Frequency));
         ViewGroup.LayoutParams lp = Photo_Frequency.getLayoutParams();
         lp.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 80);
@@ -254,6 +255,9 @@ public class Tab_Main_Activity extends Activity {
         linLayout_Buttons.setLayoutParams(lpView3);
         linLayout_Buttons.setBackgroundColor(Color.rgb(192,192,192));
         linLayout_Buttons.setPadding(15, 15, 15, 15);
+
+        linLayout_Buttons.setBaselineAligned(false);
+        linLayout_Buttons.setGravity(Gravity.BOTTOM);
 
 
 
