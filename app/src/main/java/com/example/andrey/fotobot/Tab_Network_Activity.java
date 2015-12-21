@@ -69,6 +69,8 @@ public class Tab_Network_Activity extends Activity {
         LinearLayout FullFrame = new LinearLayout(this);
         FullFrame.setOrientation(LinearLayout.VERTICAL);
         FullFrame.setPadding(5, padding, 0, 0);
+        FullFrame.setBackgroundColor(Color.rgb(192, 192, 192));
+        FullFrame.setMinimumHeight(fb.Working_Area_Height - fb.menuheight);
        // FullFrame.setBackgroundColor(Color.WHITE);
 
 // ------------------------------------------------------------------------------------------------
@@ -80,10 +82,12 @@ public class Tab_Network_Activity extends Activity {
         linLayout_Channels.setOrientation(LinearLayout.HORIZONTAL);
         LinearLayout.LayoutParams lpView = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         LinearLayout.LayoutParams lpView_et = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        linLayout_Channels.setBackgroundColor(Color.rgb(192,192,192));
 
 // Пояснение контейнер
         LinearLayout linLayout_Channels_note = new LinearLayout(this);
         linLayout_Channels_note.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_Channels_note.setBackgroundColor(Color.rgb(192,192,192));
 
 // Контейнер для разделителя
         LinearLayout linLayout_Channels_divider = new LinearLayout(this);
@@ -115,7 +119,7 @@ public class Tab_Network_Activity extends Activity {
 
 // Заметка для каналов связи
         TextView tv_Channels_note = new TextView(this);
-        tv_Channels_note.setTypeface(null, Typeface.ITALIC);
+        tv_Channels_note.setTypeface(null, Typeface.NORMAL);
         tv_Channels_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Channels_note.setTextColor(Color.BLACK);
         tv_Channels_note.setText("Выберите способ подключения к Internet (мобильные данные, wi-fi или оба).");
@@ -141,10 +145,12 @@ public class Tab_Network_Activity extends Activity {
         linLayout_Connection_Method.setOrientation(LinearLayout.HORIZONTAL);
         LinearLayout.LayoutParams lpView_Flash = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         LinearLayout.LayoutParams lpView_et_Flash = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        linLayout_Connection_Method.setBackgroundColor(Color.rgb(192,192,192));
 
 // Пояснение контейнер
         LinearLayout linLayout_Connection_Method_note = new LinearLayout(this);
         linLayout_Connection_Method_note.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_Connection_Method_note.setBackgroundColor(Color.rgb(192,192,192));
 
 // Контейнер для разделителя
         LinearLayout linLayout_Connection_Method_divider = new LinearLayout(this);
@@ -175,7 +181,7 @@ public class Tab_Network_Activity extends Activity {
 
 // Заметка для каналов связи
         TextView tv_Connection_Method_note = new TextView(this);
-        tv_Connection_Method_note.setTypeface(null, Typeface.ITALIC);
+        tv_Connection_Method_note.setTypeface(null, Typeface.NORMAL);
         tv_Connection_Method_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Connection_Method_note.setTextColor(Color.BLACK);
         tv_Connection_Method_note.setText("Выберите режим установки связи с Internet. В начале работы - связь будет установлена сразу и не будет отключаться от сети." +
@@ -202,11 +208,13 @@ public class Tab_Network_Activity extends Activity {
         linLayout_Fotobot_Email.setOrientation(LinearLayout.HORIZONTAL);
         LinearLayout.LayoutParams lpView_email = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         linLayout_Fotobot_Email.setPadding(5, 9, 5, 9);
+        linLayout_Fotobot_Email.setBackgroundColor(Color.rgb(192,192,192));
 
 // Пояснение контейнер
         LinearLayout linLayout_Fotobot_Email_note = new LinearLayout(this);
         linLayout_Fotobot_Email_note.setOrientation(LinearLayout.HORIZONTAL);
         linLayout_Fotobot_Email_note.setPadding(5, 9, 5, 9);
+        linLayout_Fotobot_Email_note.setBackgroundColor(Color.rgb(192,192,192));
 
 // Контейнер для разделителя
         LinearLayout linLayout_Fotobot_Email_divider = new LinearLayout(this);
@@ -237,7 +245,7 @@ public class Tab_Network_Activity extends Activity {
 
 // Заметка для почты Фотобота
         TextView tv_Fotobot_Email_note = new TextView(this);
-        tv_Fotobot_Email_note.setTypeface(null, Typeface.ITALIC);
+        tv_Fotobot_Email_note.setTypeface(null, Typeface.NORMAL);
         tv_Fotobot_Email_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Fotobot_Email_note.setTextColor(Color.BLACK);
         tv_Fotobot_Email_note.setText("Почтовый адрес с которого Фотобот будет рассылать письма с фото.");
@@ -263,11 +271,13 @@ public class Tab_Network_Activity extends Activity {
         linLayout_Fotobot_Email.setOrientation(LinearLayout.HORIZONTAL);
 //        LinearLayout.LayoutParams lpView_email = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         linLayout_Fotobot_Password.setPadding(5, 9, 5, 9);
+        linLayout_Fotobot_Password.setBackgroundColor(Color.rgb(192,192,192));
 
 // Пояснение контейнер
         LinearLayout linLayout_Fotobot_Password_note = new LinearLayout(this);
         linLayout_Fotobot_Password_note.setOrientation(LinearLayout.HORIZONTAL);
         linLayout_Fotobot_Password_note.setPadding(5, 9, 5, 9);
+        linLayout_Fotobot_Password_note.setBackgroundColor(Color.rgb(192,192,192));
 
 // Контейнер для разделителя
         LinearLayout linLayout_Fotobot_Password_divider = new LinearLayout(this);
@@ -298,7 +308,7 @@ public class Tab_Network_Activity extends Activity {
 
 // Заметка для пароля
         TextView tv_Fotobot_Password_note = new TextView(this);
-        tv_Fotobot_Password_note.setTypeface(null, Typeface.ITALIC);
+        tv_Fotobot_Password_note.setTypeface(null, Typeface.NORMAL);
         tv_Fotobot_Password_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Fotobot_Password_note.setTextColor(Color.BLACK);
         tv_Fotobot_Password_note.setText("Пароль.");
@@ -324,11 +334,13 @@ public class Tab_Network_Activity extends Activity {
         linLayout_Fotobot_Recipient.setOrientation(LinearLayout.HORIZONTAL);
 //        LinearLayout.LayoutParams lpView_email = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         linLayout_Fotobot_Recipient.setPadding(5, 9, 5, 9);
+        linLayout_Fotobot_Recipient.setBackgroundColor(Color.rgb(192,192,192));
 
 // Пояснение контейнер
         LinearLayout linLayout_Fotobot_Recipient_note = new LinearLayout(this);
         linLayout_Fotobot_Recipient_note.setOrientation(LinearLayout.HORIZONTAL);
         linLayout_Fotobot_Recipient_note.setPadding(5, 9, 5, 9);
+        linLayout_Fotobot_Recipient_note.setBackgroundColor(Color.rgb(192,192,192));
 
 // Контейнер для разделителя
         LinearLayout linLayout_Fotobot_Recipient_divider = new LinearLayout(this);
@@ -359,7 +371,7 @@ public class Tab_Network_Activity extends Activity {
 
 // Заметка для почты Фотобота
         TextView tv_Fotobot_Recipient_note = new TextView(this);
-        tv_Fotobot_Recipient_note.setTypeface(null, Typeface.ITALIC);
+        tv_Fotobot_Recipient_note.setTypeface(null, Typeface.NORMAL);
         tv_Fotobot_Recipient_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Fotobot_Recipient_note.setTextColor(Color.BLACK);
         tv_Fotobot_Recipient_note.setText("Получатель писем с фото");
@@ -385,11 +397,13 @@ public class Tab_Network_Activity extends Activity {
         linLayout_SMTP_Host.setOrientation(LinearLayout.HORIZONTAL);
 //        LinearLayout.LayoutParams lpView_email = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         linLayout_SMTP_Host.setPadding(5, 9, 5, 9);
+        linLayout_SMTP_Host.setBackgroundColor(Color.rgb(192,192,192));
 
 // Пояснение контейнер
         LinearLayout linLayout_SMTP_Host_note = new LinearLayout(this);
         linLayout_SMTP_Host_note.setOrientation(LinearLayout.HORIZONTAL);
         linLayout_SMTP_Host_note.setPadding(5, 9, 5, 9);
+        linLayout_SMTP_Host_note.setBackgroundColor(Color.rgb(192,192,192));
 
 // Контейнер для разделителя
         LinearLayout linLayout_SMTP_Host_divider = new LinearLayout(this);
@@ -420,7 +434,7 @@ public class Tab_Network_Activity extends Activity {
 
 // Заметка для SMTP Host
         TextView tv_SMTP_Host_note = new TextView(this);
-        tv_SMTP_Host_note.setTypeface(null, Typeface.ITALIC);
+        tv_SMTP_Host_note.setTypeface(null, Typeface.NORMAL);
         tv_SMTP_Host_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_SMTP_Host_note.setTextColor(Color.BLACK);
         tv_SMTP_Host_note.setText("Адрес почтового сервера для Фотобота, например можно использовать" +
@@ -447,11 +461,13 @@ public class Tab_Network_Activity extends Activity {
         linLayout_SMTP_Port.setOrientation(LinearLayout.HORIZONTAL);
 //        LinearLayout.LayoutParams lpView_email = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         linLayout_SMTP_Port.setPadding(5, 9, 5, 9);
+        linLayout_SMTP_Port.setBackgroundColor(Color.rgb(192,192,192));
 
 // Пояснение контейнер
         LinearLayout linLayout_SMTP_Port_note = new LinearLayout(this);
         linLayout_SMTP_Port_note.setOrientation(LinearLayout.HORIZONTAL);
         linLayout_SMTP_Port_note.setPadding(5, 9, 5, 9);
+        linLayout_SMTP_Port_note.setBackgroundColor(Color.rgb(192,192,192));
 
 // Контейнер для разделителя
         LinearLayout linLayout_SMTP_Port_divider = new LinearLayout(this);
@@ -482,7 +498,7 @@ public class Tab_Network_Activity extends Activity {
 
 // Заметка для SMTP Port
         TextView tv_SMTP_Port_note = new TextView(this);
-        tv_SMTP_Port_note.setTypeface(null, Typeface.ITALIC);
+        tv_SMTP_Port_note.setTypeface(null, Typeface.NORMAL);
         tv_SMTP_Port_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_SMTP_Port_note.setTextColor(Color.BLACK);
         tv_SMTP_Port_note.setText("Номер порта почтового сервера, для почты Google и Mail.ru номер порта 465");
