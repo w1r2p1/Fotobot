@@ -269,7 +269,6 @@ public class Tab_Main_Activity extends Activity {
         btn.setTextColor(Color.rgb(250,250,250));
         btn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 
-
         btn.setOnTouchListener(new View.OnTouchListener() {
 
             @Override
@@ -283,8 +282,6 @@ public class Tab_Main_Activity extends Activity {
             }
 
         });
-
-
 
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
