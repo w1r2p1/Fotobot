@@ -154,6 +154,7 @@ public class Tab_Main_Activity extends Activity {
         process_delay = new EditText(this);
         process_delay.setLayoutParams(lpView_et);
         process_delay.setText(Integer.toString(fb.process_delay));
+        process_delay.setTextColor(Color.rgb(50,100,150));
         ViewGroup.LayoutParams lp_process_delay = process_delay.getLayoutParams();
         lp_process_delay.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 80);
         process_delay.setLayoutParams(lp);
@@ -215,6 +216,7 @@ public class Tab_Main_Activity extends Activity {
         Config_Font_Size = new EditText(this);
         Config_Font_Size.setLayoutParams(lpView_et);
         Config_Font_Size.setText(Integer.toString(fb.Config_Font_Size));
+        Config_Font_Size.setTextColor(Color.rgb(50,100,150));
         ViewGroup.LayoutParams lp_cfs = Config_Font_Size.getLayoutParams();
         lp_cfs.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 80);
         Config_Font_Size.setLayoutParams(lp_cfs);
@@ -236,6 +238,7 @@ public class Tab_Main_Activity extends Activity {
         Log_Font_Size = new EditText(this);
         Log_Font_Size.setLayoutParams(lpView_et);
         Log_Font_Size.setText(Integer.toString(fb.Log_Font_Size));
+        Log_Font_Size.setTextColor(Color.rgb(50,100,150));
         ViewGroup.LayoutParams lp_lfs = Log_Font_Size.getLayoutParams();
         lp_lfs.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 80);
         Log_Font_Size.setLayoutParams(lp_lfs);

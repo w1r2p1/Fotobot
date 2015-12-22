@@ -117,6 +117,9 @@ public class Tab_Network_Activity extends Activity {
         spinner_Channels.setAdapter(spinnerArrayAdapter1);
         spinner_Channels.setSelection(getIndex(spinner_Channels, fb.Network_Channel));
         spinner_Channels.setMinimumWidth((screenWidth - padding) / 100 * 30);
+
+
+
         linLayout_Channels.addView(spinner_Channels);
 
 // Заметка для каналов связи
@@ -673,7 +676,7 @@ public class Tab_Network_Activity extends Activity {
 
 // GoTo Main Page Button
         btn_mp = new Button(this);
-        btn_mp.setText("Выйти из настроек");
+        btn_mp.setText("Вернуться");
         btn_mp.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
         btn_mp.setBackgroundColor(Color.rgb(90,89,91));
         btn_mp.setTextColor(Color.rgb(250,250,250));
