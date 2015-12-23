@@ -120,6 +120,9 @@ public class Tab_Network_Activity extends Activity {
         spinner_Channels.setSelection(getIndex(spinner_Channels, fb.Network_Channel));
         spinner_Channels.setMinimumWidth((screenWidth - padding) / 100 * 30);
 
+
+
+
 // http://android--code.blogspot.ru/2015/08/android-spinner-text-color.html
 
         linLayout_Channels.addView(spinner_Channels);

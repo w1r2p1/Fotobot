@@ -286,7 +286,7 @@ public class Tab_Foto_Activity  extends Activity {
         }
 
         spinner_Software = new Spinner(this);
-        spinnerArrayAdapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
+        spinnerArrayAdapter1 = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray);
         spinner_Software.setAdapter(spinnerArrayAdapter1);
 
         spinner_Software.setSelection(getIndex(spinner_Software, fb.Image_Size));
