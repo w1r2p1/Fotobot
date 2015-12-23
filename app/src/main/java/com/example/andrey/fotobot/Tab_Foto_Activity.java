@@ -166,7 +166,7 @@ public class Tab_Foto_Activity  extends Activity {
         spinnerArray_ppm.add("Software");
 
         spinner_ppm = new Spinner(this);
-        ArrayAdapter<String> spinnerArrayAdapter_ppm = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray_ppm);
+        ArrayAdapter<String> spinnerArrayAdapter_ppm = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray_ppm);
         spinner_ppm.setAdapter(spinnerArrayAdapter_ppm);
         spinner_ppm.setSelection(getIndex(spinner_ppm, fb.Photo_Post_Processing_Method));
         spinner_ppm.setMinimumWidth((screenWidth - padding) / 100 * 50);
@@ -259,7 +259,7 @@ public class Tab_Foto_Activity  extends Activity {
         spinnerArray_Hardware.add("1");
 
         spinner_Hardware = new Spinner(this);
-        spinnerArrayAdapter_Hardware = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray_Hardware);
+        spinnerArrayAdapter_Hardware = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray_Hardware);
         spinner_Hardware.setAdapter(spinnerArrayAdapter_Hardware);
         spinner_Hardware.setSelection(getIndex(spinner_Hardware, fb.Image_Scale));
         spinner_Hardware.setMinimumWidth((screenWidth - padding) / 100 * 20);

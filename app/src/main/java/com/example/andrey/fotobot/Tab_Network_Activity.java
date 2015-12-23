@@ -113,7 +113,9 @@ public class Tab_Network_Activity extends Activity {
         spinnerArray_Channels.add("Both");
 
         spinner_Channels = new Spinner(this);
-        ArrayAdapter<String> spinnerArrayAdapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray_Channels);
+        //ArrayAdapter<String> spinnerArrayAdapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray_Channels);
+       // ArrayAdapter<String> spinnerArrayAdapter1 = new ArrayAdapter<String>(this, android.R.layout., spinnerArray_Channels);
+        ArrayAdapter<String> spinnerArrayAdapter1= new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray_Channels);
         spinner_Channels.setAdapter(spinnerArrayAdapter1);
         spinner_Channels.setSelection(getIndex(spinner_Channels, fb.Network_Channel));
         spinner_Channels.setMinimumWidth((screenWidth - padding) / 100 * 30);
@@ -178,7 +180,7 @@ public class Tab_Network_Activity extends Activity {
         spinnerArray_Connection_Method.add("На каждом шаге");
 
         spinner_Connection_Method = new Spinner(this);
-        ArrayAdapter<String> spinnerArrayAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray_Connection_Method);
+        ArrayAdapter<String> spinnerArrayAdapter2 = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray_Connection_Method);
         spinner_Connection_Method.setAdapter(spinnerArrayAdapter2);
         spinner_Connection_Method.setSelection(getIndex(spinner_Connection_Method, fb.Network_Connection_Method));
         spinner_Connection_Method.setMinimumWidth((screenWidth - padding) / 100 * 30);
