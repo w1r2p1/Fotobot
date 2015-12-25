@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -61,11 +62,15 @@ public class Tab_Main_Activity extends Activity {
 // ------------------------------------------------------------------------------------------------
 
 // 1. Интервал между фото (Horizontal LinearLayout контейнер)
-        LinearLayout linLayout1 = new LinearLayout(this);
-        linLayout1.setOrientation(LinearLayout.HORIZONTAL);
-        LinearLayout.LayoutParams lpView = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+       // LinearLayout linLayout1 = new LinearLayout(this);
+        RelativeLayout linLayout1 = new RelativeLayout(this);
+     //   linLayout1.setOrientation(LinearLayout.HORIZONTAL);
+        //LinearLayout.LayoutParams lpView = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams lpView = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams lpView_m = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         LinearLayout.LayoutParams lpView_et = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        linLayout1.setBackgroundColor(Color.rgb(192,192,192));
+        linLayout1.setBackgroundColor(Color.rgb(192, 192, 192));
+
 
 // 1.1 Интервал между фото (пояснение контейнер)
         LinearLayout linLayout1_notes = new LinearLayout(this);
@@ -88,6 +93,8 @@ public class Tab_Main_Activity extends Activity {
         tv.setWidth((screenWidth - padding) / 100 * 80);
         tv.setLayoutParams(lpView);
         tv.setTypeface(Typeface.DEFAULT_BOLD);
+        lpView.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv.getId());
+        tv.setLayoutParams(lpView);
         linLayout1.addView(tv);
 
 // 1.4 Интервал между фото (notes)
@@ -98,7 +105,7 @@ public class Tab_Main_Activity extends Activity {
         tv_notes.setText("Временной интервал между фото в секундах, рекомендуется > 300 секунд, но можно и чаще.");
         tv_notes.setWidth((screenWidth - padding) / 100 * 99);
         tv_notes.setLayoutParams(lpView);
-        tv_notes.setPadding(1,5,5,5);
+        tv_notes.setPadding(1, 5, 5, 5);
         linLayout1_notes.addView(tv_notes);
 
 // 1.5 Интервал между фото (ввод данных)
@@ -110,6 +117,8 @@ public class Tab_Main_Activity extends Activity {
         lp.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 80);
         Photo_Frequency.setLayoutParams(lp);
         Photo_Frequency.setGravity(Gravity.RIGHT);
+        lpView_m.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, Photo_Frequency.getId());
+        Photo_Frequency.setLayoutParams(lpView_m);
         linLayout1.addView(Photo_Frequency);
 
 // 1.6 Интервал между фото (divider)
