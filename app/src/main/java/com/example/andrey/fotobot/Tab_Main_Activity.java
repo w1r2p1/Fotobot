@@ -49,7 +49,7 @@ public class Tab_Main_Activity extends Activity {
 // Главный контейнер внутри которого вся раскладка
         LinearLayout FullFrame = new LinearLayout(this);
         FullFrame.setOrientation(LinearLayout.VERTICAL);
-        FullFrame.setPadding(5, padding, 0, 0);
+        FullFrame.setPadding(5, 5, 5, 5);
         FullFrame.setBackgroundColor(Color.rgb(192,192,192));
         LinearLayout.LayoutParams lpFull_Frame = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT);
         FullFrame.setLayoutParams(lpFull_Frame);
@@ -216,6 +216,8 @@ public class Tab_Main_Activity extends Activity {
 
         RelativeLayout.LayoutParams lpView_m3 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         RelativeLayout.LayoutParams lpView_m4 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams lpView_m5 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams lpView_m6 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 
 // 3.2 Шрифты (Horizontal LinearLayout)
         LinearLayout linLayout2 = new LinearLayout(this);
@@ -259,9 +261,6 @@ public class Tab_Main_Activity extends Activity {
 
         lpView_m4.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, Config_Font_Size.getId());
         Config_Font_Size.setLayoutParams(lpView_m4);
-     //   Config_Font_Size.setLayoutParams(lpView_m4);
-      //  linLayout_process_delay.addView(Config_Font_Size);
-
         linLayout_config_font_size.addView(Config_Font_Size);
 
 // Log_Font_Size
@@ -273,7 +272,12 @@ public class Tab_Main_Activity extends Activity {
         lfs.setWidth((screenWidth - padding) / 100 * 80);
         lfs.setLayoutParams(lpView);
         lfs.setTypeface(Typeface.DEFAULT_BOLD);
-        linLayout_config_font_size.addView(lfs);
+
+        lpView_m5.addRule(RelativeLayout.ALIGN_PARENT_LEFT, lfs.getId());
+        lfs.setLayoutParams(lpView_m5);
+        //linLayout_config_font_size.addView(Config_Font_Size);
+
+        linLayout_log_font_size.addView(lfs);
 
 // Log_Font_Size
         Log_Font_Size = new EditText(this);
@@ -284,6 +288,13 @@ public class Tab_Main_Activity extends Activity {
         lp_lfs.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 80);
         Log_Font_Size.setLayoutParams(lp_lfs);
         Log_Font_Size.setGravity(Gravity.RIGHT);
+
+        lpView_m6.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, Log_Font_Size.getId());
+        Log_Font_Size.setLayoutParams(lpView_m6);
+        //linLayout_config_font_size.addView(Config_Font_Size);
+
+    //    linLayout_config_font_size.addView(Log_Font_Size);
+
         linLayout_log_font_size.addView(Log_Font_Size);
 
 // ------------------------------------------------------------------------------------------------

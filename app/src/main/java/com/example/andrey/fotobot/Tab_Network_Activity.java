@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -80,9 +81,11 @@ public class Tab_Network_Activity extends Activity {
 // Каналы связи
 
 // Контейнер для каналов связи
-        LinearLayout linLayout_Channels = new LinearLayout(this);
-        linLayout_Channels.setOrientation(LinearLayout.HORIZONTAL);
-        LinearLayout.LayoutParams lpView = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout linLayout_Channels = new RelativeLayout(this);
+    //    linLayout_Channels.setOrientation(LinearLayout.HORIZONTAL);
+        RelativeLayout.LayoutParams lpView = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams lpView1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+
         LinearLayout.LayoutParams lpView_et = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         linLayout_Channels.setBackgroundColor(Color.rgb(192,192,192));
 
@@ -104,6 +107,9 @@ public class Tab_Network_Activity extends Activity {
         tv_Channels.setText("Каналы связи");
         tv_Channels.setWidth((screenWidth - padding) / 100 * 70);
         tv_Channels.setLayoutParams(lpView);
+
+        lpView.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Channels.getId());
+        tv_Channels.setLayoutParams(lpView);
         linLayout_Channels.addView(tv_Channels);
 
 // Список
@@ -124,6 +130,9 @@ public class Tab_Network_Activity extends Activity {
 
 
 // http://android--code.blogspot.ru/2015/08/android-spinner-text-color.html
+
+        lpView1.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, spinner_Channels.getId());
+        spinner_Channels.setLayoutParams(lpView1);
 
         linLayout_Channels.addView(spinner_Channels);
 
@@ -151,10 +160,14 @@ public class Tab_Network_Activity extends Activity {
 // Метод подключения
 
 // Контейнер для метода подключения
-        LinearLayout linLayout_Connection_Method = new LinearLayout(this);
-        linLayout_Connection_Method.setOrientation(LinearLayout.HORIZONTAL);
+        RelativeLayout linLayout_Connection_Method = new RelativeLayout(this);
+      //  linLayout_Connection_Method.setOrientation(LinearLayout.HORIZONTAL);
         LinearLayout.LayoutParams lpView_Flash = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         LinearLayout.LayoutParams lpView_et_Flash = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        RelativeLayout.LayoutParams lpView_m1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams lpView_m2 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+
         linLayout_Connection_Method.setBackgroundColor(Color.rgb(192,192,192));
 
 // Пояснение контейнер
@@ -175,6 +188,11 @@ public class Tab_Network_Activity extends Activity {
         tv_Connection_Method.setText("Метод подключения");
         tv_Connection_Method.setWidth((screenWidth - padding) / 100 * 70);
         tv_Connection_Method.setLayoutParams(lpView_Flash);
+
+        lpView_m1.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Connection_Method.getId());
+        tv_Connection_Method.setLayoutParams(lpView_m1);
+     //   linLayout_Channels.addView(tv_Channels);
+
         linLayout_Connection_Method.addView(tv_Connection_Method);
 
 // Список
@@ -187,6 +205,13 @@ public class Tab_Network_Activity extends Activity {
         spinner_Connection_Method.setAdapter(spinnerArrayAdapter2);
         spinner_Connection_Method.setSelection(getIndex(spinner_Connection_Method, fb.Network_Connection_Method));
         spinner_Connection_Method.setMinimumWidth((screenWidth - padding) / 100 * 30);
+
+        lpView_m2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, spinner_Connection_Method.getId());
+        spinner_Connection_Method.setLayoutParams(lpView_m2);
+        //   linLayout_Channels.addView(tv_Channels);
+
+      //  linLayout_Connection_Method.addView(tv_Connection_Method);
+
         linLayout_Connection_Method.addView(spinner_Connection_Method);
 
 // Заметка для каналов связи
