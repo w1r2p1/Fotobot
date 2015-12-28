@@ -5,7 +5,7 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        applicationId "com.example.andrey.fotobot"
+        applicationId "com.droid.app.fotobot"
         minSdkVersion 8
         targetSdkVersion 10
         versionCode 1

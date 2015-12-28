@@ -1,4 +1,4 @@
-package com.example.andrey.fotobot;
+package com.droid.app.fotobot;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -305,10 +305,10 @@ public class Tab_Main_Activity extends Activity {
         LinearLayout linLayout_Buttons = new LinearLayout(this);
         linLayout_Buttons.setOrientation(LinearLayout.HORIZONTAL);
         linLayout_Buttons.setGravity(Gravity.BOTTOM | Gravity.CENTER);
-        lpViewbutton1.setMargins(0,0,5,0);
+        lpViewbutton1.setMargins(0, 0, 5, 0);
         LinearLayout.LayoutParams lpView3 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT);
         linLayout_Buttons.setLayoutParams(lpView3);
-        linLayout_Buttons.setBackgroundColor(Color.rgb(192,192,192));
+        linLayout_Buttons.setBackgroundColor(Color.rgb(192, 192, 192));
         linLayout_Buttons.setPadding(15, 15, 15, 15);
 
         linLayout_Buttons.setBaselineAligned(false);
@@ -320,18 +320,18 @@ public class Tab_Main_Activity extends Activity {
         btn = new Button(this);
         btn.setText("ПРИМЕНИТЬ");
         btn.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-        btn.setBackgroundColor(Color.rgb(90,89,91));
-        btn.setTextColor(Color.rgb(250,250,250));
+        btn.setBackgroundColor(Color.rgb(90, 89, 91));
+        btn.setTextColor(Color.rgb(250, 250, 250));
         btn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 
         btn.setOnTouchListener(new View.OnTouchListener() {
 
             @Override
             public boolean onTouch(View view, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_UP) {
-                    btn.setBackgroundColor(Color.rgb(90,90,90));
-                } else if(event.getAction() == MotionEvent.ACTION_DOWN) {
-                    btn.setBackgroundColor(Color.rgb(128,128,128));
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    btn.setBackgroundColor(Color.rgb(90, 90, 90));
+                } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    btn.setBackgroundColor(Color.rgb(128, 128, 128));
                 }
                 return false;
             }
@@ -360,8 +360,8 @@ public class Tab_Main_Activity extends Activity {
         btn_mp = new Button(this);
         btn_mp.setText("ВЕРНУТЬСЯ");
         btn_mp.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-        btn_mp.setBackgroundColor(Color.rgb(90,89,91));
-        btn_mp.setTextColor(Color.rgb(250,250,250));
+        btn_mp.setBackgroundColor(Color.rgb(90, 89, 91));
+        btn_mp.setTextColor(Color.rgb(250, 250, 250));
        // lpViewbutton2.setMargins(5,5,5,5);
         btn_mp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 
@@ -369,10 +369,10 @@ public class Tab_Main_Activity extends Activity {
 
             @Override
             public boolean onTouch(View view, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_UP) {
-                    btn_mp.setBackgroundColor(Color.rgb(90,90,90));
-                } else if(event.getAction() == MotionEvent.ACTION_DOWN) {
-                    btn_mp.setBackgroundColor(Color.rgb(128,128,128));
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    btn_mp.setBackgroundColor(Color.rgb(90, 90, 90));
+                } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    btn_mp.setBackgroundColor(Color.rgb(128, 128, 128));
                 }
                 return false;
             }

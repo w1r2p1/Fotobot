@@ -82,8 +82,8 @@
         android:id="@+id/tvInfo"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:text=""
-        android:padding="5dp">
+        android:padding="5dp"
+        >
     </TextView>
 <!--    </HorizontalScrollView> -->
     </ScrollView>

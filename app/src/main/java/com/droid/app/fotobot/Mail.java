@@ -1,4 +1,4 @@
-package com.example.andrey.fotobot;
+package com.droid.app.fotobot;
 import java.util.Date;
 import java.util.Properties;
 import javax.activation.CommandMap;

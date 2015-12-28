@@ -1,4 +1,4 @@
-package com.example.andrey.fotobot;
+package com.droid.app.fotobot;
 
 import android.app.Activity;
 import android.content.Intent;

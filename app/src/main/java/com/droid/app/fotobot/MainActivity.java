@@ -1,4 +1,4 @@
-package com.example.andrey.fotobot;
+package com.droid.app.fotobot;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,9 +18,6 @@ import android.telephony.PhoneStateListener;
 import android.telephony.SignalStrength;
 import android.telephony.TelephonyManager;
 import android.text.Html;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.style.ImageSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
@@ -32,8 +29,8 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.WebView;
 import android.widget.Button;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -359,7 +356,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         btnStart = (Button) findViewById(R.id.play);
         btnConfig = (Button) findViewById(R.id.config);
+
         tvInfo = (TextView) findViewById(R.id.tvInfo);
+      //  tvInfo = (WebView) findViewById(R.id.tvInfo);
+
         text = (TextView) findViewById(R.id.textView);
 
 
