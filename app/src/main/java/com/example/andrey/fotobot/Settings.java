@@ -47,7 +47,7 @@ public class Settings extends TabActivity {
 
         tv.setText("Поведение");
 
-        tv.setPadding(15,15,15,15);
+        tv.setPadding(5,15,5,15);
 
         fb.menuheight = (int) pxFromDp(getApplicationContext(), getTextViewHeight(tv));
 
