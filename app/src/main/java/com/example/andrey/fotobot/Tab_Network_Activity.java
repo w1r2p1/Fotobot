@@ -195,7 +195,7 @@ public class Tab_Network_Activity extends Activity {
         ArrayAdapter<String> spinnerArrayAdapter2 = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray_Connection_Method);
         spinner_Connection_Method.setAdapter(spinnerArrayAdapter2);
         spinner_Connection_Method.setSelection(getIndex(spinner_Connection_Method, fb.Network_Connection_Method));
-        spinner_Connection_Method.setMinimumWidth((screenWidth - padding) / 100 * 30);
+     //   spinner_Connection_Method.setMinimumWidth((screenWidth - padding) / 100 * 30);
 
         lpView1.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, spinner_Connection_Method.getId());
         lpView1.width = (screenWidth - padding) / 100 * 40;
@@ -249,7 +249,7 @@ public class Tab_Network_Activity extends Activity {
         tv_Fotobot_Email.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Fotobot_Email.setTextColor(Color.BLACK);
         tv_Fotobot_Email.setText("Почтовый адрес\n Фотобота\n");
-        tv_Fotobot_Email.setMinimumWidth((screenWidth - padding) / 100 * 50);
+        tv_Fotobot_Email.setMinimumWidth((screenWidth - padding) / 100 * 60);
         tv_Fotobot_Email.setLayoutParams(lpView_email);
 
         lpView_email.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Fotobot_Email.getId());
@@ -263,7 +263,7 @@ public class Tab_Network_Activity extends Activity {
         editText_Fotobot_Email.setText(fb.EMail_Sender);
         editText_Fotobot_Email.setTextColor(Color.rgb(50, 100, 150));
         ViewGroup.LayoutParams lp = editText_Fotobot_Email.getLayoutParams();
-        editText_Fotobot_Email.setWidth((screenWidth - padding) - ((screenWidth - padding) / 100 * 50));
+        editText_Fotobot_Email.setWidth((screenWidth - padding)/100*40);
         editText_Fotobot_Email.setLayoutParams(lpView_email);
         editText_Fotobot_Email.setGravity(Gravity.RIGHT);
 
@@ -317,7 +317,7 @@ public class Tab_Network_Activity extends Activity {
         tv_Fotobot_Password.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Fotobot_Password.setTextColor(Color.BLACK);
         tv_Fotobot_Password.setText("Пароль к почтовому\n ящику Фотобота\n");
-        tv_Fotobot_Password.setMinimumWidth((screenWidth - padding) / 100 * 50);
+        tv_Fotobot_Password.setMinimumWidth((screenWidth - padding) / 100 * 60);
         tv_Fotobot_Password.setLayoutParams(lpView_email);
 
         lpView_email_passwd.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Fotobot_Password.getId());
@@ -331,7 +331,7 @@ public class Tab_Network_Activity extends Activity {
         editText_Fotobot_Password.setText(fb.EMail_Sender_Password);
         editText_Fotobot_Password.setTextColor(Color.rgb(50, 100, 150));
         ViewGroup.LayoutParams lp1 = editText_Fotobot_Email.getLayoutParams();
-        editText_Fotobot_Password.setWidth((screenWidth - padding) - ((screenWidth - padding) / 100 * 50));
+        editText_Fotobot_Password.setWidth((screenWidth - padding)/100*40);
         editText_Fotobot_Password.setLayoutParams(lpView_email);
         editText_Fotobot_Password.setGravity(Gravity.RIGHT);
 
@@ -385,7 +385,7 @@ public class Tab_Network_Activity extends Activity {
         tv_Fotobot_Recipient.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Fotobot_Recipient.setTextColor(Color.BLACK);
         tv_Fotobot_Recipient.setText("Почтовый адрес\n получателя\n");
-        tv_Fotobot_Recipient.setMinimumWidth((screenWidth - padding) / 100 * 50);
+        tv_Fotobot_Recipient.setMinimumWidth((screenWidth - padding) / 100 * 60);
         tv_Fotobot_Recipient.setLayoutParams(lpView_email);
 
         lpView_recipient.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Fotobot_Recipient.getId());
@@ -398,7 +398,7 @@ public class Tab_Network_Activity extends Activity {
         editText_Fotobot_Recipient.setSingleLine(true);
         editText_Fotobot_Recipient.setText(fb.EMail_Recepient);
         editText_Fotobot_Recipient.setTextColor(Color.rgb(50, 100, 150));
-        editText_Fotobot_Recipient.setWidth((screenWidth - padding) - ((screenWidth - padding) / 100 * 50));
+        editText_Fotobot_Recipient.setWidth((screenWidth - padding)/100*40);
         editText_Fotobot_Recipient.setLayoutParams(lpView_email);
         editText_Fotobot_Recipient.setGravity(Gravity.RIGHT);
 
@@ -452,7 +452,7 @@ public class Tab_Network_Activity extends Activity {
         tv_SMTP_Host.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_SMTP_Host.setTextColor(Color.BLACK);
         tv_SMTP_Host.setText("Адрес почтового\n сервера\n");
-        tv_SMTP_Host.setMinimumWidth((screenWidth - padding) / 100 * 50);
+        tv_SMTP_Host.setMinimumWidth((screenWidth - padding) / 100 * 60);
         tv_SMTP_Host.setLayoutParams(lpView_email);
 
         lpView_smtp_host.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_SMTP_Host.getId());
@@ -465,7 +465,7 @@ public class Tab_Network_Activity extends Activity {
         editText_SMTP_Host.setSingleLine(true);
         editText_SMTP_Host.setText(fb.SMTP_Host);
         editText_SMTP_Host.setTextColor(Color.rgb(50, 100, 150));
-        editText_SMTP_Host.setWidth((screenWidth - padding) - ((screenWidth - padding) / 100 * 50));
+        editText_SMTP_Host.setWidth((screenWidth - padding)/100*40);
         editText_SMTP_Host.setLayoutParams(lpView_email);
         editText_SMTP_Host.setGravity(Gravity.RIGHT);
 
@@ -520,7 +520,7 @@ public class Tab_Network_Activity extends Activity {
         tv_SMTP_Port.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_SMTP_Port.setTextColor(Color.BLACK);
         tv_SMTP_Port.setText("Номер порта почтового\n сервера\n");
-        tv_SMTP_Port.setMinimumWidth((screenWidth - padding) / 100 * 50);
+        tv_SMTP_Port.setMinimumWidth((screenWidth - padding) / 100 * 80);
         tv_SMTP_Port.setLayoutParams(lpView_email);
 
         lpView_smtp_port.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_SMTP_Port.getId());
@@ -533,7 +533,7 @@ public class Tab_Network_Activity extends Activity {
         editText_SMTP_Port.setSingleLine(true);
         editText_SMTP_Port.setText(fb.SMTP_Port);
         editText_SMTP_Port.setTextColor(Color.rgb(50, 100, 150));
-        editText_SMTP_Port.setWidth((screenWidth - padding) - ((screenWidth - padding) / 100 * 50));
+        editText_SMTP_Port.setWidth((screenWidth - padding)/100*20);
         editText_SMTP_Port.setLayoutParams(lpView_email);
         editText_SMTP_Port.setGravity(Gravity.RIGHT);
 

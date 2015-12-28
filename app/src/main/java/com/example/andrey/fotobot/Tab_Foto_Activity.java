@@ -109,9 +109,9 @@ public class Tab_Foto_Activity  extends Activity {
         editText_JPEG_Compression.setText(jpg);
         editText_JPEG_Compression.setTextColor(Color.rgb(50, 100, 150));
         ViewGroup.LayoutParams lp = editText_JPEG_Compression.getLayoutParams();
-        lp.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 80);
+        lp.width = (screenWidth - padding)/100*20;
         editText_JPEG_Compression.setLayoutParams(lp);
-        editText_JPEG_Compression.setGravity(Gravity.RIGHT);
+     //   editText_JPEG_Compression.setGravity(Gravity.RIGHT);
 
         lpView_m.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, editText_JPEG_Compression.getId());
         editText_JPEG_Compression.setLayoutParams(lpView_m);
@@ -168,11 +168,12 @@ public class Tab_Foto_Activity  extends Activity {
         tv_Photo_Processing_Method.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Photo_Processing_Method.setTextColor(Color.BLACK);
         tv_Photo_Processing_Method.setText("Метод обработки фото");
-        tv_Photo_Processing_Method.setWidth((screenWidth - padding) / 100 * 80);
-        tv_Photo_Processing_Method.setLayoutParams(lpView);
+     //   tv_Photo_Processing_Method.setWidth((screenWidth - padding) / 100 * 80);
+     //   tv_Photo_Processing_Method.setLayoutParams(lpView);
         tv_Photo_Processing_Method.setTypeface(Typeface.DEFAULT_BOLD);
 
         lpView_m1.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Photo_Processing_Method.getId());
+        lpView_m1.width = (screenWidth - padding) / 100 * 60;
         tv_Photo_Processing_Method.setLayoutParams(lpView_m1);
         linLayout_Photo_Processing_Method.addView(tv_Photo_Processing_Method);
 
@@ -218,6 +219,7 @@ public class Tab_Foto_Activity  extends Activity {
         });
 
         lpView_m2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, spinner_ppm.getId());
+        lpView_m2.width = (screenWidth - padding) / 100 * 40;
         spinner_ppm.setLayoutParams(lpView_m2);
         linLayout_Photo_Processing_Method.addView(spinner_ppm);
 
@@ -272,10 +274,11 @@ public class Tab_Foto_Activity  extends Activity {
         tv_Photo_Size_h.setTextSize(14);
         tv_Photo_Size_h.setTextColor(Color.BLACK);
         tv_Photo_Size_h.setText("Масштаб фото");
-        tv_Photo_Size_h.setWidth((screenWidth - padding) / 100 * 80);
+       // tv_Photo_Size_h.setWidth((screenWidth - padding) / 100 * 80);
         tv_Photo_Size_h.setLayoutParams(lpView_photo_size);
 
-        lpView_m3.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, tv_Photo_Size_h.getId());
+        lpView_m3.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Photo_Size_h.getId());
+        lpView_m3.width = (screenWidth - padding) / 100 * 60;
         tv_Photo_Size_h.setLayoutParams(lpView_m3);
         linLayout_Photo_Size.addView(tv_Photo_Size_h);
 
@@ -291,10 +294,11 @@ public class Tab_Foto_Activity  extends Activity {
         spinnerArrayAdapter_Hardware = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray_Hardware);
         spinner_Hardware.setAdapter(spinnerArrayAdapter_Hardware);
         spinner_Hardware.setSelection(getIndex(spinner_Hardware, fb.Image_Scale));
-        spinner_Hardware.setMinimumWidth((screenWidth - padding) / 100 * 20);
+      //  spinner_Hardware.setMinimumWidth((screenWidth - padding) / 100 * 20);
        // spinner_Hardware.setGravity(Gravity.RIGHT);
 
         lpView_m4.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, spinner_Hardware.getId());
+        lpView_m4.width = (screenWidth - padding) / 100 * 40;
         spinner_Hardware.setLayoutParams(lpView_m4);
         linLayout_Photo_Size.addView(spinner_Hardware);
 
@@ -304,10 +308,11 @@ public class Tab_Foto_Activity  extends Activity {
         tv_Photo_Size_s.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Photo_Size_s.setTextColor(Color.BLACK);
         tv_Photo_Size_s.setText("Размер фото");
-        tv_Photo_Size_s.setWidth((screenWidth - padding) / 100 * 80);
+      //  tv_Photo_Size_s.setWidth((screenWidth - padding) / 100 * 80);
         tv_Photo_Size_s.setLayoutParams(lpView_photo_size);
 
-        lpView_m5.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, tv_Photo_Size_s.getId());
+        lpView_m5.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Photo_Size_s.getId());
+        lpView_m5.width = (screenWidth - padding) / 100 * 60;
         tv_Photo_Size_s.setLayoutParams(lpView_m5);
         linLayout_Photo_Size.addView(tv_Photo_Size_s);
 
@@ -325,11 +330,13 @@ public class Tab_Foto_Activity  extends Activity {
         spinner_Software.setAdapter(spinnerArrayAdapter1);
 
         spinner_Software.setSelection(getIndex(spinner_Software, fb.Image_Size));
-        spinner_Software.setMinimumWidth((screenWidth - padding) / 100 * 20);
+     //   spinner_Software.setMinimumWidth((screenWidth - padding) / 100 * 20);
       //  spinner_Software.setGravity(Gravity.RIGHT);
 
         lpView_m6.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, spinner_Software.getId());
+        lpView_m6.width = (screenWidth - padding) / 100 * 40;
         spinner_Software.setLayoutParams(lpView_m6);
+
         linLayout_Photo_Size.addView(spinner_Software);
 
 // Заметка для Hardware
