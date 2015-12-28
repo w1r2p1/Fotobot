@@ -18,12 +18,16 @@ import android.telephony.PhoneStateListener;
 import android.telephony.SignalStrength;
 import android.telephony.TelephonyManager;
 import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ImageSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -33,6 +37,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.io.File;
@@ -65,7 +70,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     int n;
     FotoBot fb;
     String log;
-    HorizontalScrollView LogWidget;
+   // HorizontalScrollView LogWidget;
+    ScrollView LogWidget;
     LinearLayout Buttons1, Buttons2;
     RelativeLayout WorkSpace;
     boolean STOP_FOTOBOT = false;
@@ -99,6 +105,18 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             tvInfo.setTypeface(Typeface.MONOSPACE);
             tvInfo.setTextColor(Color.rgb(150, 150, 150));
 
+            if (fb.Show_Help) {
+                tvInfo.setText(Html.fromHtml(fb.Main_Help));
+
+             //   SpannableStringBuilder ssb = new SpannableStringBuilder( "Here's a smiley  " );
+             //   Bitmap smiley = BitmapFactory.decodeResource( getResources(), R.mipmap.ic_fotobot );
+             //  ssb.setSpan( new ImageSpan( smiley ), 16, 17, Spannable.SPAN_INCLUSIVE_INCLUSIVE );
+             //   tvInfo.setText(ssb, TextView.BufferType.SPANNABLE);
+
+                fb.Show_Help = false;
+                return false;
+            }
+
             tvInfo.setText(log);
 
             //final FotoBot fb = (FotoBot) getApplicationContext();
@@ -114,6 +132,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 btnStart.setEnabled(true);
                 btnStop.setEnabled(false);
                 btnConfig.setEnabled(true);
+
+                Button btnHelp = (Button) findViewById(R.id.help);
+                btnHelp.setEnabled(true);
+
                 btnStart.postInvalidate();
                 btnStop.postInvalidate();
             }
@@ -352,7 +374,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         //Buttons1.setMinimumHeight(50);
         Buttons1.setMinimumWidth(screenWidth);
 
-        LogWidget = (HorizontalScrollView) findViewById(R.id.horizontalScrollView);
+      //  LogWidget = (HorizontalScrollView) findViewById(R.id.horizontalScrollView);
+        LogWidget = (ScrollView) findViewById(R.id.scrollView);
         LogWidget.setBackgroundColor(Color.rgb(0, 0, 128));
         //LogWidget.setMinimumHeight(screenHeight / 100 * 80);
         //LogWidget.setMinimumHeight(803);
@@ -363,6 +386,22 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         //Buttons2.setMinimumHeight(screenHeight / 100 * 5);
         //Buttons2.setMinimumHeight(50);
         Buttons2.setMinimumWidth(screenWidth);
+
+        final Button btnHelp = (Button) findViewById(R.id.help);
+        btnHelp.setBackgroundColor(Color.rgb(90,89,90));
+        btnHelp.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
+                } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    btnHelp.setBackgroundColor(Color.rgb(128, 128, 128));
+                }
+                return false;
+            }
+
+        });
 
         //get the Image View at the main.xml file
         iv_image = (ImageView) findViewById(R.id.imageView);
@@ -384,8 +423,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         intent = new Intent(MainActivity.this, Status.class);
         log = "\n\n\n\n\nФотобот приветствует Вас!";
 
-        tvInfo.setText(Html.fromHtml("<b><i><font color=blue>Фотобот приветствует Вас!</font></i><b>" +
-                ""));
+        tvInfo.setText(Html.fromHtml("<br><br><br><center><font color=white>Фотобот приветствует Вас!</font></center><br>" +
+                "Если Вы здесь впервые, то ознакомьтесь пожалуйста с документацией (кнопка Помощь внизу экрана)."));
 
 
       //  tvInfo.setText(log);
@@ -460,12 +499,20 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             btnStart.setText("Пуск");
             btnStart.setEnabled(true);
             btnStop.setEnabled(false);
+
+            Button btnHelp = (Button) findViewById(R.id.help);
+            btnHelp.setEnabled(true);
+
         }
 
         if (fb.getstatus() == 2) {
             btnStart.setText("Пуск");
             btnStart.setEnabled(false);
             btnStop.setEnabled(true);
+
+            Button btnHelp = (Button) findViewById(R.id.help);
+            btnHelp.setEnabled(false);
+
         }
 
     }
@@ -544,6 +591,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 btnStop = (Button) findViewById(R.id.stop);
                 btnStop.setEnabled(true);
                 btnConfig.setEnabled(false);
+
+                Button btnHelp = (Button) findViewById(R.id.help);
+                btnHelp.setEnabled(false);
 
                 Thread t = new Thread(new Runnable() {
                     public void run() {
@@ -718,6 +768,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         btnStop.setEnabled(false);
         btnConfig.setEnabled(true);
 
+        Button btnHelp = (Button) findViewById(R.id.help);
+        btnHelp.setEnabled(true);
+
     }
 
     @Override
@@ -836,6 +889,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         return dp * context.getResources().getDisplayMetrics().density;
     }
 
-
-
+    /**
+     * FotoBots help window
+     *
+     * @param v
+     */
+    public void help(View v) {
+        final FotoBot fb = (FotoBot) getApplicationContext();
+        fb.Show_Help = true;
+        fb.SendMessage(fb.Main_Help);
+    }
 }

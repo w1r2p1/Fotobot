@@ -72,19 +72,20 @@
         android:layout_below="@id/buttons1"
         >
 
-    <HorizontalScrollView
+<!--    <HorizontalScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/horizontalScrollView"
-        >
+        > -->
 
     <TextView
         android:id="@+id/tvInfo"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:text="">
+        android:text=""
+        android:padding="5dp">
     </TextView>
-    </HorizontalScrollView>
+<!--    </HorizontalScrollView> -->
     </ScrollView>
 
     <LinearLayout
@@ -92,7 +93,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttons2"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:padding="8dp">
 
         <Button
             android:layout_width="wrap_content"
@@ -105,7 +107,7 @@
             android:layout_alignStart="@+id/button"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:onClick="startFotobot"
+            android:onClick="help"
             android:nestedScrollingEnabled="false" />
 
         </LinearLayout>
