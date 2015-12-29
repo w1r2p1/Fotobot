@@ -82,6 +82,8 @@
         android:id="@+id/tvInfo"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:linksClickable="true"
+        android:autoLink="web"
         android:padding="5dp"
         >
     </TextView>

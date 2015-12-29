@@ -150,7 +150,7 @@ public class FotoBot extends Application {
             "через заданные промежутки времени." +
             "Все что нужно сделать - это завести почтовый ящик для Fotobot с которого он будет присылать фото." +
             "Подробную инструкцию по установке и настройке " +
-            "этого приложения вы найдете на <a href=http://v-and-f.ru/fotobot>http://v-and-f.ru/fotobot</a>.";
+            "этого приложения вы найдете на <a href=http://v-and-f.ru/fotobot>http://v-and-f.ru/fotobot</a>";
 
     /**
      * Если  Show_Help = false, то выводится timestamp для логов,
@@ -554,11 +554,11 @@ public class FotoBot extends Application {
 
         Image_Size = pref.getString("Image_Size", "320x240");
 
-        EMail_Sender = pref.getString("EMail_Sender", "fotobotmail@gmail.com");
+        EMail_Sender = pref.getString("EMail_Sender", "fotobot@gmail.com");
 
-        EMail_Sender_Password = pref.getString("EMail_Sender_Password", "fotobotmailpasswd");
+        EMail_Sender_Password = pref.getString("EMail_Sender_Password", "passwd");
 
-        EMail_Recepient = pref.getString("EMail_Recepient", "voran@inbox.ru");
+        EMail_Recepient = pref.getString("EMail_Recepient", "recipient@mail.ru");
 
         Log_Font_Size = pref.getInt("Log_Font_Size", 12);
 
@@ -566,7 +566,7 @@ public class FotoBot extends Application {
 
         Photo_Post_Processing_Method = pref.getString("Photo_Post_Processing_Method", "Hardware");
 
-        SMTP_Host = pref.getString("SMTP_Host", "smtp.gmail.ru");
+        SMTP_Host = pref.getString("SMTP_Host", "smtp.gmail.com");
 
         SMTP_Port = pref.getString("SMTP_Port", "465");
 

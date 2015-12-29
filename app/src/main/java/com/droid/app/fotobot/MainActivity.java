@@ -18,6 +18,7 @@ import android.telephony.PhoneStateListener;
 import android.telephony.SignalStrength;
 import android.telephony.TelephonyManager;
 import android.text.Html;
+import android.text.util.Linkify;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
@@ -104,8 +105,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             if (fb.Show_Help) {
                 tvInfo.setText(Html.fromHtml(fb.Main_Help));
+             //   Linkify.addLinks(tvInfo, Linkify.ALL);
 
-             //   SpannableStringBuilder ssb = new SpannableStringBuilder( "Here's a smiley  " );
+                //   SpannableStringBuilder ssb = new SpannableStringBuilder( "Here's a smiley  " );
              //   Bitmap smiley = BitmapFactory.decodeResource( getResources(), R.mipmap.ic_fotobot );
              //  ssb.setSpan( new ImageSpan( smiley ), 16, 17, Spannable.SPAN_INCLUSIVE_INCLUSIVE );
              //   tvInfo.setText(ssb, TextView.BufferType.SPANNABLE);
