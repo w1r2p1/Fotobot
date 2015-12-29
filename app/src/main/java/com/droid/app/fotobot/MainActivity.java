@@ -131,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 btnConfig.setEnabled(true);
 
                 Button btnHelp = (Button) findViewById(R.id.help);
+                btnHelp.setBackgroundColor(Color.rgb(90,90,90));
                 btnHelp.setEnabled(true);
 
                 btnStart.postInvalidate();
@@ -251,9 +252,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             boolean fileExists = attach_file.isFile();
 
             if (fileExists) {
-                fb.SendMessage(h, "handler " + fb.Image_Name + ": " + attach_file.length() + " байт");
+            //    fb.SendMessage(h, "handler " + fb.Image_Name + ": " + attach_file.length() + " байт");
             } else {
-                fb.SendMessage(h, "handler: файла с фото нет");
+            //    fb.SendMessage(h, "handler: файла с фото нет");
             }
 
 
@@ -388,7 +389,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         Buttons2.setMinimumWidth(screenWidth);
 
         final Button btnHelp = (Button) findViewById(R.id.help);
-        btnHelp.setBackgroundColor(Color.rgb(90,89,90));
+        btnHelp.setBackgroundColor(Color.rgb(90,90,90));
         btnHelp.setOnTouchListener(new View.OnTouchListener() {
 
             @Override
@@ -501,6 +502,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             btnStop.setEnabled(false);
 
             Button btnHelp = (Button) findViewById(R.id.help);
+            btnHelp.setBackgroundColor(Color.rgb(90,90,90));
             btnHelp.setEnabled(true);
 
         }
@@ -511,6 +513,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             btnStop.setEnabled(true);
 
             Button btnHelp = (Button) findViewById(R.id.help);
+            btnHelp.setBackgroundColor(Color.rgb(90,90,90));
             btnHelp.setEnabled(false);
 
         }
@@ -593,6 +596,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 btnConfig.setEnabled(false);
 
                 Button btnHelp = (Button) findViewById(R.id.help);
+                btnHelp.setBackgroundColor(Color.rgb(165,165,165));
                 btnHelp.setEnabled(false);
 
                 Thread t = new Thread(new Runnable() {
@@ -615,7 +619,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                         Log.d(LOG_TAG, fb.Camera_Properties);
 
-                        fb.SendMessage(fb.Camera_Properties);
+                      //  fb.SendMessage(fb.Camera_Properties);
 
 
                         if (fb.Network_Connection_Method.contains("В начале работы")  && (Build.VERSION.SDK_INT <= 21)) {
@@ -680,7 +684,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                                 mCamera.setParameters(params);
 
-                                fb.SendMessage("Разрешение фото: " + Integer.parseInt(width) + " " + Integer.parseInt(height));
+                            //    fb.SendMessage("Разрешение фото: " + Integer.parseInt(width) + " " + Integer.parseInt(height));
                             }
 
                             mCamera.takePicture(null, null, mCall);
@@ -724,12 +728,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             File imgfile = new File(fb.Image_Name_Full_Path);
 
                             if ( imgfile.delete() ) {
-                                fb.SendMessage(fb.Image_Name + " was deleted");
+                           //     fb.SendMessage(fb.Image_Name + " was deleted");
                             } else {
-                                fb.SendMessage(fb.Image_Name + " wasn't deleted");
+                           //     fb.SendMessage(fb.Image_Name + " wasn't deleted");
                             }
 
-                            fb.SendMessage("\n");
+                         //   fb.SendMessage("\n");
                             // @
                             mCamera.stopPreview();
                             preview_stopped = true;
@@ -769,6 +773,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         btnConfig.setEnabled(true);
 
         Button btnHelp = (Button) findViewById(R.id.help);
+        btnHelp.setBackgroundColor(Color.rgb(90,90,90));
         btnHelp.setEnabled(true);
 
     }

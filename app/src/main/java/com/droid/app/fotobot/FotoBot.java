@@ -86,7 +86,7 @@ public class FotoBot extends Application {
     /**
      * кому отправлять письма с фотками
      */
-    public String EMail_Recepient = "voran@inbox.ru";
+    public String EMail_Recepient = "recipient@mail.ru";
 
     public String SMTP_Host = "smtp.gmail.com";
     public String SMTP_Port = "465";
@@ -146,7 +146,7 @@ public class FotoBot extends Application {
      * Документация
      */
     public String Main_Help = "<h1><font color=white>Фотобот<br>Руководство пользователя</font></h1>" +
-            "Это простое Android пиложение предназначено для фотографирования и отправки фото по электронной почте " +
+            "Это простое Android приложение предназначено для фотографирования и отправки фото по электронной почте " +
             "через заданные промежутки времени." +
             "Все что нужно сделать - это завести почтовый ящик для Fotobot с которого он будет присылать фото." +
             "Подробную инструкцию по установке и настройке " +
@@ -306,7 +306,7 @@ public class FotoBot extends Application {
         }
 
         if (Network_Channel.contains("Both")) {
-            SendMessage(h, "Метод подключения Both");
+            SendMessage(h, "Метод подключения Wi-Fi и Mobile Data");
             if (!(isOnline(h) && getData(h))) {
                 SendMessage(h, "Включаем Wi-Fi");
                 wf.setWiFiEnabled(getApplicationContext(), true);
@@ -441,10 +441,10 @@ public class FotoBot extends Application {
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
-        SendMessage("Аттачим" + str);
+       // SendMessage("Аттачим" + str);
 
         Mail m = new Mail(fb.EMail_Sender, fb.EMail_Sender_Password, fb.SMTP_Host, fb.SMTP_Port);
-       // Mail m = new Mail("fotobotmail@gmail.com", "fotobotmailpasswd", "smtp.gmail.com", "465");
+       //Mail m = new Mail("fotobotmail@gmail.com", "fotobotmailpasswd", "smtp.gmail.com", "465");
 
         String[] toArr = {fb.EMail_Recepient};
 
@@ -484,11 +484,11 @@ public class FotoBot extends Application {
         attach_file = new File(str);
         boolean fileExists = attach_file.isFile();
 
-        if (fileExists) {
-            SendMessage(h, fb.Image_Name + ": " + attach_file.length() + " байт");
-        } else {
-            SendMessage(h, "SendMail: файла с фото нет");
-        }
+     //   if (fileExists) {
+     //       SendMessage(h, fb.Image_Name + ": " + attach_file.length() + " байт");
+     //   } else {
+     //       SendMessage(h, "SendMail: файла с фото нет");
+     //   }
 
         try {
             m.addAttachment(str);
@@ -554,9 +554,9 @@ public class FotoBot extends Application {
 
         Image_Size = pref.getString("Image_Size", "320x240");
 
-        EMail_Sender = pref.getString("EMail_Sender", "fotobotmail@mail.ru");
+        EMail_Sender = pref.getString("EMail_Sender", "fotobotmail@gmail.com");
 
-        EMail_Sender_Password = pref.getString("EMail_Sender_Password", "superclass15");
+        EMail_Sender_Password = pref.getString("EMail_Sender_Password", "fotobotmailpasswd");
 
         EMail_Recepient = pref.getString("EMail_Recepient", "voran@inbox.ru");
 
@@ -566,7 +566,7 @@ public class FotoBot extends Application {
 
         Photo_Post_Processing_Method = pref.getString("Photo_Post_Processing_Method", "Hardware");
 
-        SMTP_Host = pref.getString("SMTP_Host", "smtp.mail.ru");
+        SMTP_Host = pref.getString("SMTP_Host", "smtp.gmail.ru");
 
         SMTP_Port = pref.getString("SMTP_Port", "465");
 
