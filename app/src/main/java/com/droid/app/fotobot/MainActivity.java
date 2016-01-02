@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             tvInfo.setTextColor(Color.rgb(150, 150, 150));
 
             if (fb.Show_Help) {
-                tvInfo.setText(Html.fromHtml(fb.Main_Help));
+                tvInfo.setText(Html.fromHtml((getResources().getString(R.string.main_help))));
              //   Linkify.addLinks(tvInfo, Linkify.ALL);
 
                 //   SpannableStringBuilder ssb = new SpannableStringBuilder( "Here's a smiley  " );
@@ -904,6 +904,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     public void help(View v) {
         final FotoBot fb = (FotoBot) getApplicationContext();
         fb.Show_Help = true;
-        fb.SendMessage(fb.Main_Help);
+        fb.SendMessage(getResources().getString(R.string.main_help));
     }
 }

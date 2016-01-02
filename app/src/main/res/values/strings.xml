@@ -5,12 +5,10 @@
     <string name="settings_button">Settings</string>
     <string name="help_button">Help</string>
 
-    <string name="main_help">&lt;h1&gt;&lt;font color=white&gt;Фотобот&lt;br&gt;Руководство пользователя&lt;/font&gt;&lt;/h1&gt;
-            Это простое Android приложение предназначено для фотографирования и отправки фото по электронной почте
-            через заданные промежутки времени.
-            Все что нужно сделать - это завести почтовый ящик для Fotobot с которого он будет присылать фото.
-            Подробную инструкцию по установке и настройке
-            этого приложения вы найдете на &lt;a href=http://v-and-f.ru/fotobot&gt;http://v-and-f.ru/fotobot&lt;/a&gt;</string>
+    <string name="main_help">&lt;h1&gt;&lt;font color=white&gt;Fotobot&lt;br&gt;User Manual&lt;/font&gt;&lt;/h1&gt;
+            This is simple Android application designed for taking and sending of pictures to user e-mail. Simple scheduler is used for this.
+            Detailed instructions can be found there:
+            &lt;a href=http://v-and-f.ru/fotobot&gt;http://v-and-f.ru/fotobot&lt;/a&gt;</string>
 
     <string name="start_message">Fotobot started</string>
 
