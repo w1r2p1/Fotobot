@@ -610,7 +610,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                         wakeLock.acquire();
 
-                        fb.SendMessage("Фотобот начинает свою работу");
+                        fb.SendMessage(getResources().getString(R.string.start_message));
 
 // Добавлено в Andorid 5. Без этого не работает. Не понятно, как раньше работало.
                         if ( mCamera == null ) {
