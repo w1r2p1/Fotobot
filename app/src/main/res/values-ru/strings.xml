@@ -12,6 +12,9 @@
             Подробную инструкцию по установке и настройке
             этого приложения вы найдете на &lt;a href=http://v-and-f.ru/fotobot&gt;http://v-and-f.ru/fotobot&lt;/a&gt;</string>
 
+    <string name="welcome_to_fotobot">&lt;br&gt;&lt;center&gt;&lt;font color=white&gt;Фотобот приветствует Вас!&lt;/font&gt;&lt;/center&gt;&lt;br&gt;
+                Если Вы здесь впервые, то ознакомьтесь пожалуйста с документацией (кнопка Помощь внизу экрана).</string>
+
     <string name="start_message">Фотобот начал свою работу</string>
 
 

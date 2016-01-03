@@ -391,7 +391,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         Buttons2.setMinimumWidth(screenWidth);
 
         final Button btnHelp = (Button) findViewById(R.id.help);
-        btnHelp.setBackgroundColor(Color.rgb(90,90,90));
+        btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
         btnHelp.setOnTouchListener(new View.OnTouchListener() {
 
             @Override
@@ -426,8 +426,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         intent = new Intent(MainActivity.this, Status.class);
         log = "\n\n\n\n\nФотобот приветствует Вас!";
 
-        tvInfo.setText(Html.fromHtml("<br><br><br><center><font color=white>Фотобот приветствует Вас!</font></center><br>" +
-                "Если Вы здесь впервые, то ознакомьтесь пожалуйста с документацией (кнопка Помощь внизу экрана)."));
+        tvInfo.setText(Html.fromHtml(getResources().getString(R.string.welcome_to_fotobot)));
 
 
       //  tvInfo.setText(log);
