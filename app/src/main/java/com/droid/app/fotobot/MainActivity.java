@@ -428,12 +428,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         tvInfo.setText(Html.fromHtml(getResources().getString(R.string.welcome_to_fotobot)));
 
-
       //  tvInfo.setText(log);
-
-
-
-
 
         h = new Handler(hc);
 

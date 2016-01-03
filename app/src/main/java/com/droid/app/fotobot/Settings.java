@@ -45,9 +45,9 @@ public class Settings extends TabActivity {
         tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         tv.setTextColor(Color.WHITE);
 
-        tv.setText("Поведение");
+        tv.setText(getResources().getString(R.string.settings_tab_1));
 
-        tv.setPadding(5,15,5,15);
+        tv.setPadding(5, 15, 5, 15);
 
         fb.menuheight = (int) pxFromDp(getApplicationContext(), getTextViewHeight(tv));
 
@@ -64,7 +64,7 @@ public class Settings extends TabActivity {
         tv2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         tv2.setTextColor(Color.WHITE);
 
-        tv2.setText("Сеть");
+        tv2.setText(getResources().getString(R.string.settings_tab_2));
         intent = new Intent(this, Tab_Network_Activity.class);
         TabHost.TabSpec spec2 = mTabHost.newTabSpec("Tab2").setIndicator(view2).setContent(intent);
         mTabHost.addTab(spec2);
@@ -76,7 +76,7 @@ public class Settings extends TabActivity {
         tv3.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         tv3.setTextColor(Color.WHITE);
 
-        tv3.setText("Фото");
+        tv3.setText(getResources().getString(R.string.settings_tab_3));
         intent = new Intent(this, Tab_Foto_Activity.class);
         TabHost.TabSpec spec3 = mTabHost.newTabSpec("Tab3").setIndicator(view3).setContent(intent);
         mTabHost.addTab(spec3);

@@ -90,7 +90,7 @@ public class Tab_Main_Activity extends Activity {
         tv.setTypeface(Typeface.DEFAULT_BOLD);
         tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv.setTextColor(Color.BLACK);
-        tv.setText("Интервал между фото(сек)");
+        tv.setText(getResources().getString(R.string.pause_between_frames));
         tv.setWidth((screenWidth - padding) / 100 * 80);
         tv.setLayoutParams(lpView);
         tv.setTypeface(Typeface.DEFAULT_BOLD);
@@ -104,7 +104,7 @@ public class Tab_Main_Activity extends Activity {
         tv_notes.setTypeface(null, Typeface.NORMAL);
         tv_notes.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_notes.setTextColor(Color.BLACK);
-        tv_notes.setText("Временной интервал между фото в секундах, рекомендуется > 300 секунд, но можно и чаще.");
+        tv_notes.setText(getResources().getString(R.string.pause_between_frames_description));
         tv_notes.setWidth((screenWidth - padding) / 100 * 99);
         tv_notes.setLayoutParams(lpView);
         tv_notes.setPadding(1, 5, 5, 5);
@@ -158,7 +158,7 @@ public class Tab_Main_Activity extends Activity {
         tv_process_delay.setTypeface(Typeface.DEFAULT_BOLD);
         tv_process_delay.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_process_delay.setTextColor(Color.BLACK);
-        tv_process_delay.setText("Интервал между процессами(сек)");
+        tv_process_delay.setText(getResources().getString(R.string.pause_between_processes));
         tv_process_delay.setWidth((screenWidth - padding) / 100 * 80);
         tv_process_delay.setLayoutParams(lpView);
         tv_process_delay.setTypeface(Typeface.DEFAULT_BOLD);
@@ -189,8 +189,8 @@ public class Tab_Main_Activity extends Activity {
         tv_process_notes.setTypeface(null, Typeface.NORMAL);
         tv_process_notes.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_process_notes.setTextColor(Color.BLACK);
-        tv_process_notes.setText("Необходим для того, чтобы слабый процессор телефона успел обработать данные. Подбирается экспериментальным путем, примерно > 5 секунд.");
-        tv_process_notes.setWidth((screenWidth - padding) / 100 * 99);
+        tv_process_notes.setText(getResources().getString(R.string.pause_between_processes_description));
+                tv_process_notes.setWidth((screenWidth - padding) / 100 * 99);
         tv_process_notes.setLayoutParams(lpView);
       //  tv_process_notes.setTextColor(Color.GRAY);
         linLayout_Flash_notes.addView(tv_process_notes);
@@ -238,7 +238,7 @@ public class Tab_Main_Activity extends Activity {
         cfs.setTypeface(Typeface.DEFAULT_BOLD);
         cfs.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         cfs.setTextColor(Color.BLACK);
-        cfs.setText("Размер шрифта в настройках");
+        cfs.setText(getResources().getString(R.string.settings_font));
         cfs.setWidth((screenWidth - padding) / 100 * 80);
         cfs.setLayoutParams(lpView);
         cfs.setTypeface(Typeface.DEFAULT_BOLD);
@@ -268,7 +268,7 @@ public class Tab_Main_Activity extends Activity {
         lfs.setTypeface(Typeface.DEFAULT_BOLD);
         lfs.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         lfs.setTextColor(Color.BLACK);
-        lfs.setText("Размер шрифта в логах");
+        lfs.setText(getResources().getString(R.string.log_font));
         lfs.setWidth((screenWidth - padding) / 100 * 80);
         lfs.setLayoutParams(lpView);
         lfs.setTypeface(Typeface.DEFAULT_BOLD);
@@ -318,7 +318,7 @@ public class Tab_Main_Activity extends Activity {
 
 // Apply Button
         btn = new Button(this);
-        btn.setText("ПРИМЕНИТЬ");
+        btn.setText(getResources().getString(R.string.apply_button));
         btn.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
         btn.setBackgroundColor(Color.rgb(90, 89, 91));
         btn.setTextColor(Color.rgb(250, 250, 250));
@@ -358,7 +358,7 @@ public class Tab_Main_Activity extends Activity {
 
 // GoTo Main Page Button
         btn_mp = new Button(this);
-        btn_mp.setText("ВЕРНУТЬСЯ");
+        btn_mp.setText(getResources().getString(R.string.back_button));
         btn_mp.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
         btn_mp.setBackgroundColor(Color.rgb(90, 89, 91));
         btn_mp.setTextColor(Color.rgb(250, 250, 250));

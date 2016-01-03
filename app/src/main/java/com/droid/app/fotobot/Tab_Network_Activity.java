@@ -596,7 +596,7 @@ public class Tab_Network_Activity extends Activity {
 
 // Apply Button
         btn = new Button(this);
-        btn.setText("Применить");
+        btn.setText(getResources().getString(R.string.apply_button));
         btn.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
         btn.setBackgroundColor(Color.rgb(90, 89, 91));
         btn.setTextColor(Color.rgb(250, 250, 250));
@@ -636,7 +636,7 @@ public class Tab_Network_Activity extends Activity {
 
 // GoTo Main Page Button
         btn_mp = new Button(this);
-        btn_mp.setText("Вернуться");
+        btn_mp.setText(getResources().getString(R.string.back_button));
         btn_mp.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
         btn_mp.setBackgroundColor(Color.rgb(90, 89, 91));
         btn_mp.setTextColor(Color.rgb(250, 250, 250));

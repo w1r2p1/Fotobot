@@ -4,6 +4,12 @@
     <string name="stop_button">Stop</string>
     <string name="settings_button">Settings</string>
     <string name="help_button">Help</string>
+    <string name="apply_button">APPLY</string>
+    <string name="back_button">MAIN WINDOW</string>
+
+    <string name="settings_tab_1">Behavior</string>
+    <string name="settings_tab_2">Network</string>
+    <string name="settings_tab_3">Foto</string>
 
     <string name="main_help">&lt;h1&gt;&lt;font color=white&gt;Fotobot&lt;br&gt;User Manual&lt;/font&gt;&lt;/h1&gt;
             This is simple Android application designed for taking and sending of pictures to user e-mail. Simple scheduler is used for this.
@@ -14,6 +20,20 @@
                 Please review documentation if you first time here (press Help button at the bottom of the screen).</string>
 
     <string name="start_message">Fotobot started</string>
+
+    <string name="pause_between_frames">Pause between frames(sec)</string>
+    <string name="pause_between_frames_description">Time delay between frames, do not use small values cause it can leeds to
+    inactive application. Values less then 30sec can produce problems on old phones (Android 2). Make some experiments to find out
+    suitable value. Default is 30.</string>
+
+    <string name="pause_between_processes">Pause between processes(sec)</string>
+    <string name="pause_between_processes_description">Time delay between processes. Very important for old devices. Default
+        values are 5-15sec.</string>
+
+    <string name="settings_font">Font size for settings window</string>
+    <string name="log_font">Font size for log</string>
+
+
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>

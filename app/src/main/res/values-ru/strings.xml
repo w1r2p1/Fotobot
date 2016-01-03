@@ -4,6 +4,12 @@
     <string name="stop_button">Стоп</string>
     <string name="settings_button">Настройки</string>
     <string name="help_button">Помощь</string>
+    <string name="apply_button">ПРИМЕНИТЬ</string>
+    <string name="back_button">НА ГЛАВНУЮ</string>
+
+    <string name="settings_tab_1">Поведение</string>
+    <string name="settings_tab_2">Сеть</string>
+    <string name="settings_tab_3">Фото</string>
 
     <string name="main_help">&lt;h1&gt;&lt;font color=white&gt;Фотобот&lt;br&gt;Руководство пользователя&lt;/font&gt;&lt;/h1&gt;
             Fotobot предназначен для фотографирования и отправки фото по электронной почте
@@ -17,6 +23,16 @@
 
     <string name="start_message">Фотобот начал свою работу</string>
 
+    <string name="pause_between_frames">Интервал между фото(сек)</string>
+    <string name="pause_between_frames_description">Не используйте слишком малые значения этого параметра - это может
+    привести к зависанию телефона. Для моделей телефона с Android 2 значения этого параметра меньше 30сек могут
+    привести к зависанию телефона.</string>
+
+    <string name="pause_between_processes">Интервал между процессами(сек)</string>
+    <string name="pause_between_processes_description">Необходим для того, чтобы слабый процессор телефона успел обработать данные. Подбирается экспериментальным путем, примерно > 5 секунд.</string>
+
+    <string name="settings_font">Размер шрифта в настройках</string>
+    <string name="log_font">Размер шрифта в логах</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
