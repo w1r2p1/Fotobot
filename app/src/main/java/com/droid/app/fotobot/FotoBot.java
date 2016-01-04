@@ -536,7 +536,7 @@ public class FotoBot extends Application {
 
         Network_Channel = pref.getString("Network_Channel", "Both");
 
-        Network_Connection_Method = pref.getString("Network_Connection_Method", "В начале работы");
+        Network_Connection_Method = pref.getString("Network_Connection_Method", "Method 1");
 
         Use_WiFi = pref.getBoolean("Use_WiFi", true);         // getting boolean
 

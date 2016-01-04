@@ -177,7 +177,7 @@ public class Tab_Network_Activity extends Activity {
         tv_Connection_Method.setTypeface(Typeface.DEFAULT_BOLD);
         tv_Connection_Method.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Connection_Method.setTextColor(Color.BLACK);
-        tv_Connection_Method.setText("Метод подключения");
+        tv_Connection_Method.setText(getResources().getString(R.string.connection_method));
       //  tv_Connection_Method.setWidth((screenWidth - padding) / 100 * 70);
       //  tv_Connection_Method.setLayoutParams(lpView_Flash);
 
@@ -188,8 +188,8 @@ public class Tab_Network_Activity extends Activity {
 
 // Список
         ArrayList<String> spinnerArray_Connection_Method = new ArrayList<String>();
-        spinnerArray_Connection_Method.add("В начале работы");
-        spinnerArray_Connection_Method.add("На каждом шаге");
+        spinnerArray_Connection_Method.add("Method 1");
+        spinnerArray_Connection_Method.add("Method 2");
 
         spinner_Connection_Method = new Spinner(this);
         ArrayAdapter<String> spinnerArrayAdapter2 = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray_Connection_Method);
@@ -207,8 +207,7 @@ public class Tab_Network_Activity extends Activity {
         tv_Connection_Method_note.setTypeface(null, Typeface.NORMAL);
         tv_Connection_Method_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Connection_Method_note.setTextColor(Color.BLACK);
-        tv_Connection_Method_note.setText("Выберите режим установки связи с Internet. В начале работы - связь будет установлена сразу и не будет отключаться от сети." +
-                "На кажом шаге - соедение с Internet будет устонавливаться перед тем, как сделать фото, затем фотобот отключится от Internet.");
+        tv_Connection_Method_note.setText(getResources().getString(R.string.connection_method_description));
         tv_Connection_Method_note.setLayoutParams(lpView);
         tv_Connection_Method_note.setPadding(5, 9, 5, 9);
         linLayout_Connection_Method_note.addView(tv_Connection_Method_note);

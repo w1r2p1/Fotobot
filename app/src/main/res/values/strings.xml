@@ -35,6 +35,9 @@
 
     <string name="Internet_connection_channel">Internet connection</string>
     <string name="Internet_connection_channel_description">Select Internet connection (Mobile Data, Wi-Fi or Both)</string>
+    <string name="connection_method">Connection method</string>
+    <string name="connection_method_description">Select method for Internet connection. Method 1 - connection will be opened before Fotobot starts.
+                "Method 2 - connection will be opened before taking of picture and Fotobot disconnects from Internet after sending of picture.</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>

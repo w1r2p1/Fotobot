@@ -36,6 +36,9 @@
 
     <string name="Internet_connection_channel">Связь с Internet</string>
     <string name="Internet_connection_channel_description">Выберите способ подключения к Internet (мобильные данные, wi-fi или оба).</string>
+    <string name="connection_method">Метод подключения</string>
+    <string name="connection_method_description">Выберите режим установки связи с Internet. В начале работы - связь будет установлена сразу и не будет отключаться от сети.
+                На кажом шаге - соедение с Internet будет устонавливаться перед тем, как сделать фото, затем фотобот отключится от Internet.</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>

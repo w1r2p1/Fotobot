@@ -618,7 +618,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                       //  fb.SendMessage(fb.Camera_Properties);
 
 
-                        if (fb.Network_Connection_Method.contains("В начале работы")  && (Build.VERSION.SDK_INT <= 21)) {
+                        if (fb.Network_Connection_Method.contains("Method 1")  && (Build.VERSION.SDK_INT <= 21)) {
                             fb.MakeInternetConnection(getApplicationContext(), h);
                         }
 
@@ -644,7 +644,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             fb.LoadData();
 
-                            if ( (fb.Network_Connection_Method.contains("На каждом шаге")) && (Build.VERSION.SDK_INT <= 21)) {
+                            if ( (fb.Network_Connection_Method.contains("Method 2")) && (Build.VERSION.SDK_INT <= 21)) {
                                 fb.MakeInternetConnection(getApplicationContext(), h);
                             }
 
@@ -715,7 +715,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             fb.SendMail(h, fb.Image_Name_Full_Path);
 
-                            if ( (fb.Network_Connection_Method.contains("На каждом шаге") && (Build.VERSION.SDK_INT <= 21))) {
+                            if ( (fb.Network_Connection_Method.contains("Method 2") && (Build.VERSION.SDK_INT <= 21))) {
                                 fb.CloseInternetConnection(getApplicationContext(), h);
                             }
 
