@@ -33,7 +33,8 @@
     <string name="settings_font">Font size for settings window</string>
     <string name="log_font">Font size for log</string>
 
-
+    <string name="Internet_connection_channel">Internet connection</string>
+    <string name="Internet_connection_channel_description">Select Internet connection (Mobile Data, Wi-Fi or Both)</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>

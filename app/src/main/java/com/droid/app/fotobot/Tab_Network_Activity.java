@@ -101,7 +101,7 @@ public class Tab_Network_Activity extends Activity {
         tv_Channels.setTypeface(Typeface.DEFAULT_BOLD);
         tv_Channels.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Channels.setTextColor(Color.BLACK);
-        tv_Channels.setText("Каналы связи");
+        tv_Channels.setText(getResources().getString(R.string.Internet_connection_channel));
        // tv_Channels.setWidth((screenWidth - padding) / 100 * 80);
     //    tv_Channels.setLayoutParams(lpView);
 
@@ -134,7 +134,7 @@ public class Tab_Network_Activity extends Activity {
         tv_Channels_note.setTypeface(null, Typeface.NORMAL);
         tv_Channels_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Channels_note.setTextColor(Color.BLACK);
-        tv_Channels_note.setText("Выберите способ подключения к Internet (мобильные данные, wi-fi или оба).");
+        tv_Channels_note.setText(getResources().getString(R.string.Internet_connection_channel_description));
         // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
         tv_Channels_note.setLayoutParams(lpView);
         tv_Channels_note.setPadding(5, 9, 5, 9);
