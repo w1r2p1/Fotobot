@@ -39,6 +39,9 @@
     <string name="connection_method_description">Select method for Internet connection. Method 1 - connection will be opened before Fotobot starts.
                 "Method 2 - connection will be opened before taking of picture and Fotobot disconnects from Internet after sending of picture.</string>
 
+    <string name="Fotobot_email">Fotobots email address</string>
+    <string name="Fotobot_email_description">This is aux email address for mail sending.</string>
+
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_settings">Settings</string>

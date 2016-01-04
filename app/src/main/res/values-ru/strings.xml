@@ -40,6 +40,11 @@
     <string name="connection_method_description">Выберите режим установки связи с Internet. В начале работы - связь будет установлена сразу и не будет отключаться от сети.
                 На кажом шаге - соедение с Internet будет устонавливаться перед тем, как сделать фото, затем фотобот отключится от Internet.</string>
 
+    <string name="Fotobot_email">Почтовый адрес Фотобота</string>
+    <string name="Fotobot_email_description">С этого адреса Фотобот будет рассылать письма.</string>
+
+
+
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_settings">Settings</string>

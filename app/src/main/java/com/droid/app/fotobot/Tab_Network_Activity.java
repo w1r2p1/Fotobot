@@ -247,7 +247,7 @@ public class Tab_Network_Activity extends Activity {
         tv_Fotobot_Email.setTypeface(Typeface.DEFAULT_BOLD);
         tv_Fotobot_Email.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Fotobot_Email.setTextColor(Color.BLACK);
-        tv_Fotobot_Email.setText("Почтовый адрес\n Фотобота\n");
+        tv_Fotobot_Email.setText(getResources().getString(R.string.Fotobot_email));
         tv_Fotobot_Email.setMinimumWidth((screenWidth - padding) / 100 * 60);
         tv_Fotobot_Email.setLayoutParams(lpView_email);
 
@@ -275,7 +275,7 @@ public class Tab_Network_Activity extends Activity {
         tv_Fotobot_Email_note.setTypeface(null, Typeface.NORMAL);
         tv_Fotobot_Email_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Fotobot_Email_note.setTextColor(Color.BLACK);
-        tv_Fotobot_Email_note.setText("Почтовый адрес с которого Фотобот будет рассылать письма с фото.");
+        tv_Fotobot_Email_note.setText(getResources().getString(R.string.Fotobot_email_description));
         tv_Fotobot_Email_note.setLayoutParams(lpView);
         tv_Fotobot_Email_note.setPadding(5, 9, 5, 9);
         linLayout_Fotobot_Email_note.addView(tv_Fotobot_Email_note);
