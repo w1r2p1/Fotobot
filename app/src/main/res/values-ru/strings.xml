@@ -54,6 +54,14 @@
     <string name="email_server_port">Номер порта почтового сервера</string>
     <string name="email_server_port_description">Номер порта почтового сервера, для почты Google и Mail.ru номер порта 465</string>
 
+    <string name="jpeg_compression">JPEG сжатие</string>
+    <string name="jpeg_compression_description">Степень сжатия изображения, чем ближе к 100 тем выше качество изображения.</string>
+
+    <string name="photo_processing_method">Метод обработки фото.</string>
+    <string name="photo_processing_method_dscription">Выберите метод дляпостобработки фото:
+    Method1 - получаем от камеры RAW массив и конвертирем его в JPEG.
+    Method2 - получаем с камеры готовый JPEG.</string>
+
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_settings">Settings</string>

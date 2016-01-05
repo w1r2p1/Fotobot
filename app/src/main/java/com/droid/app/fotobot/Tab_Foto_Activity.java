@@ -92,7 +92,7 @@ public class Tab_Foto_Activity  extends Activity {
         tv_JPEG_Compression.setTypeface(Typeface.DEFAULT_BOLD);
         tv_JPEG_Compression.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_JPEG_Compression.setTextColor(Color.BLACK);
-        tv_JPEG_Compression.setText("Степень сжатия JPEG");
+        tv_JPEG_Compression.setText(getResources().getString(R.string.jpeg_compression));
         tv_JPEG_Compression.setWidth((screenWidth - padding) / 100 * 80);
         tv_JPEG_Compression.setLayoutParams(lpView);
         tv_JPEG_Compression.setTypeface(Typeface.DEFAULT_BOLD);
@@ -122,7 +122,7 @@ public class Tab_Foto_Activity  extends Activity {
         tv_JPEG_Compression_note.setTypeface(null, Typeface.NORMAL);
         tv_JPEG_Compression_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_JPEG_Compression_note.setTextColor(Color.BLACK);
-        tv_JPEG_Compression_note.setText("Степень сжатия изображения, чем ближе к 100 тем выше качество изображения.");
+        tv_JPEG_Compression_note.setText(getResources().getString(R.string.jpeg_compression_description));
         // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
         tv_JPEG_Compression_note.setLayoutParams(lpView);
       //  tv_JPEG_Compression_note.setTextColor(Color.GRAY);
@@ -167,7 +167,7 @@ public class Tab_Foto_Activity  extends Activity {
         tv_Photo_Processing_Method.setTypeface(Typeface.DEFAULT_BOLD);
         tv_Photo_Processing_Method.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Photo_Processing_Method.setTextColor(Color.BLACK);
-        tv_Photo_Processing_Method.setText("Метод обработки фото");
+        tv_Photo_Processing_Method.setText(getResources().getString(R.string.photo_processing_method));
      //   tv_Photo_Processing_Method.setWidth((screenWidth - padding) / 100 * 80);
      //   tv_Photo_Processing_Method.setLayoutParams(lpView);
         tv_Photo_Processing_Method.setTypeface(Typeface.DEFAULT_BOLD);
@@ -228,7 +228,7 @@ public class Tab_Foto_Activity  extends Activity {
         tv_Photo_Processing_Method_note.setTypeface(null, Typeface.NORMAL);
         tv_Photo_Processing_Method_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Photo_Processing_Method_note.setTextColor(Color.BLACK);
-        tv_Photo_Processing_Method_note.setText("Камера обрабатывает изображение или софт.");
+        tv_Photo_Processing_Method_note.setText(getResources().getString(R.string.photo_processing_method_dscription));
         // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
         tv_Photo_Processing_Method_note.setLayoutParams(lpView);
      //   tv_Photo_Processing_Method_note.setTextColor(Color.GRAY);
