@@ -43,7 +43,16 @@
     <string name="Fotobot_email">Почтовый адрес Фотобота</string>
     <string name="Fotobot_email_description">С этого адреса Фотобот будет рассылать письма.</string>
 
+    <string name="Fotobot_email_password">Пароль к почтовому ящику Фотобота</string>
 
+    <string name="Recipient_email">Почтовый адрес получателя</string>
+
+    <string name="email_server">Почтовый сервер</string>
+    <string name="email_server_description">Адрес почтового сервера для Фотобота, например можно использовать
+                smtp.gmail.com или smtp.mail.ru</string>
+
+    <string name="email_server_port">Номер порта почтового сервера</string>
+    <string name="email_server_port_description">Номер порта почтового сервера, для почты Google и Mail.ru номер порта 465</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>

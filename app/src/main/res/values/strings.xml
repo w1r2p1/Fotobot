@@ -39,8 +39,20 @@
     <string name="connection_method_description">Select method for Internet connection. Method 1 - connection will be opened before Fotobot starts.
                 "Method 2 - connection will be opened before taking of picture and Fotobot disconnects from Internet after sending of picture.</string>
 
-    <string name="Fotobot_email">Fotobots email address</string>
+    <string name="Fotobot_email">Fotobots email</string>
     <string name="Fotobot_email_description">This is aux email address for mail sending.</string>
+
+    <string name="Fotobot_email_password">Fotobots email password</string>
+
+    <string name="Recipient_email">Recipients email address</string>
+
+    <string name="email_server">Fotobots SMTP server</string>
+    <string name="email_server_description">SMTP server address (f.e. smtp.google.com)</string>
+
+    <string name="email_server_port">Fotobots SMTP server port</string>
+    <string name="email_server_port_description">SMTP server port number, usually equal 465</string>
+
+
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>

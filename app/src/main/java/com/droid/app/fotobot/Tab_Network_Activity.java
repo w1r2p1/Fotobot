@@ -315,7 +315,7 @@ public class Tab_Network_Activity extends Activity {
         tv_Fotobot_Password.setTypeface(Typeface.DEFAULT_BOLD);
         tv_Fotobot_Password.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Fotobot_Password.setTextColor(Color.BLACK);
-        tv_Fotobot_Password.setText("Пароль к почтовому\n ящику Фотобота\n");
+        tv_Fotobot_Password.setText(getResources().getString(R.string.Fotobot_email_password));
         tv_Fotobot_Password.setMinimumWidth((screenWidth - padding) / 100 * 60);
         tv_Fotobot_Password.setLayoutParams(lpView_email);
 
@@ -383,7 +383,7 @@ public class Tab_Network_Activity extends Activity {
         tv_Fotobot_Recipient.setTypeface(Typeface.DEFAULT_BOLD);
         tv_Fotobot_Recipient.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Fotobot_Recipient.setTextColor(Color.BLACK);
-        tv_Fotobot_Recipient.setText("Почтовый адрес\n получателя\n");
+        tv_Fotobot_Recipient.setText(getResources().getString(R.string.Recipient_email));
         tv_Fotobot_Recipient.setMinimumWidth((screenWidth - padding) / 100 * 60);
         tv_Fotobot_Recipient.setLayoutParams(lpView_email);
 
@@ -450,7 +450,7 @@ public class Tab_Network_Activity extends Activity {
         tv_SMTP_Host.setTypeface(Typeface.DEFAULT_BOLD);
         tv_SMTP_Host.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_SMTP_Host.setTextColor(Color.BLACK);
-        tv_SMTP_Host.setText("Адрес почтового\n сервера\n");
+        tv_SMTP_Host.setText(getResources().getString(R.string.Fotobot_email));
         tv_SMTP_Host.setMinimumWidth((screenWidth - padding) / 100 * 60);
         tv_SMTP_Host.setLayoutParams(lpView_email);
 
@@ -477,8 +477,7 @@ public class Tab_Network_Activity extends Activity {
         tv_SMTP_Host_note.setTypeface(null, Typeface.NORMAL);
         tv_SMTP_Host_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_SMTP_Host_note.setTextColor(Color.BLACK);
-        tv_SMTP_Host_note.setText("Адрес почтового сервера для Фотобота, например можно использовать" +
-                "smtp.gmail.com или smtp.mail.ru");
+        tv_SMTP_Host_note.setText(getResources().getString(R.string.email_server_description));
         tv_SMTP_Host_note.setLayoutParams(lpView);
         tv_SMTP_Host_note.setPadding(5, 9, 5, 9);
         linLayout_SMTP_Host_note.addView(tv_SMTP_Host_note);
@@ -518,7 +517,7 @@ public class Tab_Network_Activity extends Activity {
         tv_SMTP_Port.setTypeface(Typeface.DEFAULT_BOLD);
         tv_SMTP_Port.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_SMTP_Port.setTextColor(Color.BLACK);
-        tv_SMTP_Port.setText("Номер порта почтового\n сервера\n");
+        tv_SMTP_Port.setText(getResources().getString(R.string.email_server_port));
         tv_SMTP_Port.setMinimumWidth((screenWidth - padding) / 100 * 80);
         tv_SMTP_Port.setLayoutParams(lpView_email);
 
@@ -545,7 +544,7 @@ public class Tab_Network_Activity extends Activity {
         tv_SMTP_Port_note.setTypeface(null, Typeface.NORMAL);
         tv_SMTP_Port_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_SMTP_Port_note.setTextColor(Color.BLACK);
-        tv_SMTP_Port_note.setText("Номер порта почтового сервера, для почты Google и Mail.ru номер порта 465");
+        tv_SMTP_Port_note.setText(getResources().getString(R.string.email_server_port_description));
         tv_SMTP_Port_note.setLayoutParams(lpView);
         tv_SMTP_Port_note.setPadding(5, 9, 5, 9);
         linLayout_SMTP_Port_note.addView(tv_SMTP_Port_note);
@@ -683,7 +682,7 @@ public class Tab_Network_Activity extends Activity {
         //  FullFrame.addView(linLayout_Fotobot_Email_divider);
 
         FullFrame.addView(linLayout_Fotobot_Password);
-        FullFrame.addView(linLayout_Fotobot_Password_note);
+       // FullFrame.addView(linLayout_Fotobot_Password_note);
         //  FullFrame.addView(linLayout_Fotobot_Password_divider);
 
         FullFrame.addView(linLayout_Fotobot_Recipient);
