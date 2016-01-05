@@ -20,6 +20,9 @@
                 Please review documentation if you first time here (press Help button at the bottom of the screen).</string>
 
     <string name="start_message">Fotobot started</string>
+    <string name="stop_message">Fotobot has been stopped</string>
+
+    <string name="photo_has_been_taken">Foto has been taken</string>
 
     <string name="pause_between_frames">Pause between frames(sec)</string>
     <string name="pause_between_frames_description">Time delay between frames, do not use small values cause it can leeds to

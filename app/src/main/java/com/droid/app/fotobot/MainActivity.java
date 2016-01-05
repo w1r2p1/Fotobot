@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                 btnStart = (Button) findViewById(R.id.play);
                 btnStop = (Button) findViewById(R.id.stop);
-                btnStart.setText("Пуск");
+                btnStart.setText(getResources().getString(R.string.start_button));
                 btnStart.setEnabled(true);
                 btnStop.setEnabled(false);
                 btnConfig.setEnabled(true);
@@ -504,7 +504,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         }
 
         if (fb.getstatus() == 2) {
-            btnStart.setText("Пуск");
+            btnStart.setText(getResources().getString(R.string.start_button));
             btnStart.setEnabled(false);
             btnStop.setEnabled(true);
 
@@ -634,7 +634,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 mCamera.setPreviewCallback(null);
                                 mCamera.release();
                                 mCamera = null;
-                                fb.SendMessage(h, "Фотобот остановлен");
+                                fb.SendMessage(h, getResources().getString(R.string.stop_message));
                                 return;
                             }
 
@@ -684,7 +684,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             }
 
                             mCamera.takePicture(null, null, mCall);
-                            fb.SendMessage("Фото сделано");
+                            fb.SendMessage(getResources().getString(R.string.photo_has_been_taken));
 
                             fb.fbpause(h, fb.process_delay);
 
@@ -763,7 +763,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         fb.setstatus(3);
         Log.d(LOG_TAG, "stopFotobot: STOP_FOTOBOT" + STOP_FOTOBOT);
 
-        btnStart.setText("Пуск");
+        btnStart.setText(getResources().getString(R.string.start_button));
         btnStart.setEnabled(true);
         btnStop.setEnabled(false);
         btnConfig.setEnabled(true);
@@ -805,7 +805,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             mCamera.release();
             mCamera = null;
         }
-
 
         Camera.Parameters params = mCamera.getParameters();
         fb.camera_resolutions = params.getSupportedPictureSizes();

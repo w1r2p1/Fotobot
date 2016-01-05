@@ -22,6 +22,9 @@
                 Если Вы здесь впервые, то ознакомьтесь пожалуйста с документацией (кнопка Помощь внизу экрана).</string>
 
     <string name="start_message">Фотобот начал свою работу</string>
+    <string name="stop_message">Фотобот остановлен</string>
+
+    <string name="photo_has_been_taken">Фото сделано</string>
 
     <string name="pause_between_frames">Интервал между фото(сек)</string>
     <string name="pause_between_frames_description">Не используйте слишком малые значения этого параметра - это может
