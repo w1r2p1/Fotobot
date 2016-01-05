@@ -60,6 +60,12 @@
     Method1 - get RAW from sensor and convert it to JPEG.
     Method2 - get JPEG from camera.</string>
 
+    <string name="photo_scale">Foto scale</string>
+
+    <string name="photo_resolution">Foto resolution</string>
+
+    <string name="flash">Use flash</string>
+
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_settings">Settings</string>

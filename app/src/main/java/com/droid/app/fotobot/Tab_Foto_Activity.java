@@ -273,7 +273,7 @@ public class Tab_Foto_Activity  extends Activity {
         tv_Photo_Size_h.setTypeface(Typeface.DEFAULT_BOLD);
         tv_Photo_Size_h.setTextSize(14);
         tv_Photo_Size_h.setTextColor(Color.BLACK);
-        tv_Photo_Size_h.setText("Масштаб фото");
+        tv_Photo_Size_h.setText(getResources().getString(R.string.photo_scale));
        // tv_Photo_Size_h.setWidth((screenWidth - padding) / 100 * 80);
         tv_Photo_Size_h.setLayoutParams(lpView_photo_size);
 
@@ -307,7 +307,7 @@ public class Tab_Foto_Activity  extends Activity {
         tv_Photo_Size_s.setTypeface(Typeface.DEFAULT_BOLD);
         tv_Photo_Size_s.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Photo_Size_s.setTextColor(Color.BLACK);
-        tv_Photo_Size_s.setText("Размер фото");
+        tv_Photo_Size_s.setText(getResources().getString(R.string.photo_resolution));
       //  tv_Photo_Size_s.setWidth((screenWidth - padding) / 100 * 80);
         tv_Photo_Size_s.setLayoutParams(lpView_photo_size);
 
@@ -384,7 +384,7 @@ public class Tab_Foto_Activity  extends Activity {
 
 // Flash TextView
         TextView tv_Flash = new TextView(this);
-        tv_Flash.setText("Использовать вспышку");
+        tv_Flash.setText(getResources().getString(R.string.flash));
         tv_Flash.setWidth((screenWidth - padding) / 100 * 90);
         tv_Flash.setLayoutParams(lpView_Flash);
         tv_Flash.setTypeface(Typeface.DEFAULT_BOLD);

@@ -62,6 +62,12 @@
     Method1 - получаем от камеры RAW массив и конвертирем его в JPEG.
     Method2 - получаем с камеры готовый JPEG.</string>
 
+    <string name="photo_scale">Масштаб фото</string>
+
+    <string name="photo_resolution">Разрешение в пикселях</string>
+
+    <string name="flash">Использовать вспышку</string>
+
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_settings">Settings</string>
