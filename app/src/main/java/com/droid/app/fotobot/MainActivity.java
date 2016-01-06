@@ -156,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     private SurfaceView sv;
     //a bitmap to display the captured image
     private Bitmap bmp;
+
     /**
      * постобработка фото
      */
@@ -177,7 +178,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             //decode the data obtained by the camera into a Bitmap
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPurgeable = true;
-
 
             if (fb.Photo_Post_Processing_Method.contains("Hardware")) {
 
@@ -258,7 +258,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             } else {
             //    fb.SendMessage(h, "handler: файла с фото нет");
             }
-
 
         }
 
@@ -364,7 +363,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
       //  tvInfo = (WebView) findViewById(R.id.tvInfo);
 
         text = (TextView) findViewById(R.id.textView);
-
 
         WorkSpace = (RelativeLayout) findViewById(R.id.workspace);
         WorkSpace.setBackgroundColor(Color.rgb(0,0,128));
@@ -795,7 +793,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         // The Surface has been created, acquire the camera and tell it where
         // to draw the preview.
         mUnexpectedTerminationHelper.init();
-
 
         mCamera = Camera.open();
         try {
