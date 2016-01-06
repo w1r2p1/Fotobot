@@ -7,6 +7,24 @@
     <string name="apply_button">APPLY</string>
     <string name="back_button">MAIN WINDOW</string>
 
+    <string name="Fotobot">Welcome to Fotobot!</string>
+
+    <string name="foto_sent">Foto has been sent</string>
+
+    <string name="connection_channel_wifi">Connection channel is Wi-Fi</string>
+    <string name="turning_on_wifi">Wi-Fi activating</string>
+    <string name="turning_on_wifi_message">Need time to activate Wi-Fi, please wait</string>
+    <string name="Internet_connection">Internet connection has been created</string>
+    <string name="Internet_connection_is_already_created">Internet connection is already created</string>
+    <string name="no_Internet_connection">There is no Internet connection</string>
+
+    <string name="connection_channel_mobiledata">Connection channel is Mobile Data</string>
+    <string name="turning_on_mobiledata">Mobile Data activating</string>
+    <string name="connection_channel_wifimobiledata">Connection channel is Wi-Fi and Mobile Data</string>
+    <string name="connection_channel_wifimobiledata_message">No connection via Wi-Fi, is switching to Mobile Data</string>
+
+    <string name="Internet_connection_is_closed">Internet connection has been closed</string>
+
     <string name="settings_tab_1">Behavior</string>
     <string name="settings_tab_2">Network</string>
     <string name="settings_tab_3">Foto</string>

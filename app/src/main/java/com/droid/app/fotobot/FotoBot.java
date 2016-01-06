@@ -215,10 +215,10 @@ public class FotoBot extends Application {
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
 
         if (netInfo != null && netInfo.isConnected()) {
-            SendMessage(h, "есть соединение с Internet");
+            SendMessage(h, getResources().getString(R.string.Internet_connection_is_already_created));
             return true;
         } else {
-            SendMessage(h, "нет соединения с Internet");
+            SendMessage(h, getResources().getString(R.string.no_Internet_connection));
             return false;
         }
 
@@ -239,10 +239,10 @@ public class FotoBot extends Application {
             urlc.setConnectTimeout(3000); //choose your own timeframe
             urlc.setReadTimeout(4000); //choose your own timeframe
             urlc.connect();
-            SendMessage(h, "удалось скачать файл из Internet");
+           // SendMessage(h, "удалось скачать файл из Internet");
             return (urlc.getResponseCode() == 200);
         } catch (IOException e) {
-            SendMessage(h, "не удалось скачать файл из Internet");
+           // SendMessage(h, "не удалось скачать файл из Internet");
             return (false);  //connectivity exists, but no internet.
         }
 
@@ -269,16 +269,16 @@ public class FotoBot extends Application {
         md = new MobileData();
 
         if (Network_Channel.contains("Wi-Fi")) {
-            SendMessage(h, "Метод подключения Wi-Fi");
+            SendMessage(h, getResources().getString(R.string.connection_channel_wifi));
             if (!(isOnline(h) && getData(h))) {
-                SendMessage(h, "Включаем Wi-Fi");
+                SendMessage(h, getResources().getString(R.string.turning_on_wifi));
                 wf.setWiFiEnabled(getApplicationContext(), true);
                 fbpause(h, 5);
-                SendMessage(h, "Wi-Fi включается долго,\nнужно подождать");
+                SendMessage(h, getResources().getString(R.string.turning_on_wifi_message));
                 fbpause(h, 5);
 
                 if ((isOnline(h) && getData(h))) {
-                    SendMessage(h, "Ура! Связь с Internet появилась!");
+                    SendMessage(h, getResources().getString(R.string.Internet_connection));
                     return true;
                 }
 
@@ -287,9 +287,9 @@ public class FotoBot extends Application {
         }
 
         if (Network_Channel.contains("Mobile Data")) {
-            SendMessage(h, "Метод подключения MobileData");
+            SendMessage(h, getResources().getString(R.string.connection_channel_mobiledata));
             if (!(isOnline(h) && getData(h))) {
-                SendMessage(h, "включаем Mobile Data");
+                SendMessage(h, getResources().getString(R.string.turning_on_mobiledata));
                 wf.setWiFiEnabled(getApplicationContext(), false);
                 fbpause(h, 5);
                 md.setMobileDataEnabled(getApplicationContext(), true);
@@ -297,7 +297,7 @@ public class FotoBot extends Application {
             }
 
             if ((isOnline(h) && getData(h))) {
-                SendMessage(h, "Ура! Связь с Internet появилась!");
+                SendMessage(h, getResources().getString(R.string.Internet_connection));
                 return true;
             } else {
                 return false;
@@ -306,16 +306,16 @@ public class FotoBot extends Application {
         }
 
         if (Network_Channel.contains("Both")) {
-            SendMessage(h, "Метод подключения Wi-Fi и Mobile Data");
+            SendMessage(h, getResources().getString(R.string.connection_channel_wifimobiledata));
             if (!(isOnline(h) && getData(h))) {
-                SendMessage(h, "Включаем Wi-Fi");
+                SendMessage(h, getResources().getString(R.string.turning_on_wifi));
                 wf.setWiFiEnabled(getApplicationContext(), true);
                 fbpause(h, 5);
-                SendMessage(h, "Wi-Fi включается долго,\nнужно подождать");
+                SendMessage(h, getResources().getString(R.string.turning_on_wifi_message));
                 fbpause(h, 5);
 
                 if ((isOnline(h) && getData(h))) {
-                    SendMessage(h, "Ура! Связь с Internet появилась!");
+                    SendMessage(h, getResources().getString(R.string.Internet_connection));
                     return true;
                 } else {
                     wf_connect_attempt = true;
@@ -324,7 +324,7 @@ public class FotoBot extends Application {
             }
 
             if (!(isOnline(h) && getData(h)) && wf_connect_attempt) {
-                SendMessage(h, "По Wi-Fi нет связи,\nвключаем Mobile Data");
+                SendMessage(h, getResources().getString(R.string.connection_channel_wifimobiledata_message));
                 wf.setWiFiEnabled(getApplicationContext(), false);
                 fbpause(h, 5);
                 md.setMobileDataEnabled(getApplicationContext(), true);
@@ -332,7 +332,7 @@ public class FotoBot extends Application {
             }
 
             if ((isOnline(h) && getData(h))) {
-                SendMessage(h, "Ура! Связь с Internet появилась!");
+                SendMessage(h, getResources().getString(R.string.Internet_connection));
                 return true;
             } else {
                 return false;
@@ -360,7 +360,7 @@ public class FotoBot extends Application {
         wf = new WiFi();
         wf.setWiFiEnabled(getApplicationContext(), false);
 
-        SendMessage("Соединение с Internet завершено.");
+        SendMessage(getResources().getString(R.string.Internet_connection_is_closed));
     }
 
     /**
@@ -472,8 +472,8 @@ public class FotoBot extends Application {
         m.setTo(toArr);
         m.setFrom(fb.EMail_Sender);
         m.setSubject("Fotobot");
-        m.setBody("Уровень зарядки аккумулятора: " + fb.battery_level + "%" + "\n" +
-                "Сила GSM сигнала: " + fb.GSM_Signal + "ASU    " + (2.0 * fb.GSM_Signal - 113) + "dBm" + "\n" +
+        m.setBody("Battery charge: " + fb.battery_level + "%" + "\n" +
+                "GSM: " + fb.GSM_Signal + "ASU    " + (2.0 * fb.GSM_Signal - 113) + "dBm" + "\n" +
                 "Android: " + Build.VERSION.SDK_INT + "\n" +
                 "Camera: " + fb.Camera_Properties + "\n" +
                 s + "\n");
@@ -495,7 +495,7 @@ public class FotoBot extends Application {
             fbpause(h, process_delay);
 
             if (m.send()) {
-                SendMessage(h, "Фото выслано на почту");
+                SendMessage(h, getResources().getString(R.string.foto_sent));
             } else {
                 SendMessage(h, "Email was not sent.");
             }

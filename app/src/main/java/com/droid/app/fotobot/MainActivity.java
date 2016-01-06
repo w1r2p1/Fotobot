@@ -424,7 +424,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         fb.sHolder = sHolder;
 
         intent = new Intent(MainActivity.this, Status.class);
-        log = "\n\n\n\n\nФотобот приветствует Вас!";
+        log = "\n" + getResources().getString(R.string.Fotobot);
 
         tvInfo.setText(Html.fromHtml(getResources().getString(R.string.welcome_to_fotobot)));
 
@@ -493,7 +493,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         btnStop = (Button) findViewById(R.id.stop);
 
         if (fb.getstatus() == 1) {
-            btnStart.setText("Пуск");
+            btnStart.setText(getResources().getString(R.string.start_button));
             btnStart.setEnabled(true);
             btnStop.setEnabled(false);
 
@@ -586,7 +586,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         switch (v.getId()) {
             case R.id.play:
                 btnStart.setEnabled(false);
-                btnStart.setText("Пуск");
+                btnStart.setText(getResources().getString(R.string.start_button));
                 btnStop = (Button) findViewById(R.id.stop);
                 btnStop.setEnabled(true);
                 btnConfig.setEnabled(false);
