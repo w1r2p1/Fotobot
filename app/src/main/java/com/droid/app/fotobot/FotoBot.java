@@ -430,7 +430,6 @@ public class FotoBot extends Application {
 
     }
 
-
     /**
      * Данный метод позволяет отправить письма с аттачем
      *
@@ -466,8 +465,6 @@ public class FotoBot extends Application {
         s += "\n SERIAL: "          + android.os.Build.SERIAL;
         s += "\n USER: "            + android.os.Build.USER;
         s += "\n HOST: "            + android.os.Build.HOST;
-
-
 
         m.setTo(toArr);
         m.setFrom(fb.EMail_Sender);
