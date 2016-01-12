@@ -383,7 +383,6 @@ public class FotoBot extends Application {
                         e.printStackTrace();
                     }
 
-
                     if (getstatus() == 3) {
                         return;
                     }
