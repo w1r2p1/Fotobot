@@ -92,6 +92,7 @@
 
     <string name="battery_charge">Заряд батареи</string>
     <string name="gsm">Уровень сигнала GSM сети</string>
+    <string name="phone_memory">Память телефона</string>
     <string name="Fotobot_settings">Установки Fotobotа</string>
     <string name="hardware_info">Информация о телефоне</string>
 

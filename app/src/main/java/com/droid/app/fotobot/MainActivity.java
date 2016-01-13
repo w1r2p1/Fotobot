@@ -223,6 +223,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             bmp.compress(Bitmap.CompressFormat.JPEG, fb.JPEG_Compression, fOut);
 
+            fb.fbpause(h,1);
+
+            getUsedMemorySize();
+
             try {
                 fOut.flush();
 
@@ -282,18 +286,20 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         final String LOG_USED_MEMORY = "UsedMem";
 
-        long freeSize = 0L;
-        long totalSize = 0L;
-        long usedSize = -1L;
+        long freeMemory = 0L;
+        long totalMemory = 0L;
+        long usedMemory = -1L;
 
         try {
 
             Runtime info = Runtime.getRuntime();
-            freeSize = info.freeMemory();
-            totalSize = info.totalMemory();
-            usedSize = totalSize - freeSize;
-            // fb.SendMessage("MEMORY (TOTAL/FREE/USED MB)" + totalSize + "/" + freeSize + "/" + usedSize );
-            // Log.d(LOG_USED_MEMORY, "***** totalSize, freeSize, usedSize  " + totalSize + ";" + freeSize + ";" + usedSize);
+            freeMemory = info.freeMemory();
+            totalMemory = info.totalMemory();
+            usedMemory = totalMemory - freeMemory;
+
+            fb.freeMemory = freeMemory;
+            fb.totalMemory = totalMemory;
+            fb.usedMemory = usedMemory;
 
         } catch (Exception e) {
 
@@ -301,7 +307,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         }
 
-        return usedSize;
+        return usedMemory;
 
     }
 
@@ -621,6 +627,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                         }
 
                         for (int i = 1; i <= 1000000000; i++) {
+
+                            fb.Image_Index = i;
+
                             if (preview_stopped) {
                                 mCamera.startPreview();
                             }
@@ -673,8 +682,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                                 Camera.Parameters params = mCamera.getParameters();
 
-
-
                                 params.setPictureSize(Integer.parseInt(width), Integer.parseInt(height));
 
                                 mCamera.setParameters(params);
@@ -685,7 +692,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             mCamera.takePicture(null, null, mCall);
                             fb.SendMessage(getResources().getString(R.string.photo_has_been_taken));
 
-
                             fb.fbpause(h,3);
 
                             if (fb.Photo_Post_Processing_Method.contains("Software")) {
@@ -693,6 +699,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             } else {
                                 fb.SendMessage(fb.Image_Scale);
                             }
+
+                            fb.SendMessage("n: " + fb.Image_Index);
+                            fb.SendMessage("Total Memory:" + fb.totalMemory);
+                            fb.SendMessage("Free Memory:" + fb.freeMemory);
+                            fb.SendMessage("Used Memory:" + fb.usedMemory);
 
                           //  fb.SendMessage(fb.File_Size + "Kb");
 

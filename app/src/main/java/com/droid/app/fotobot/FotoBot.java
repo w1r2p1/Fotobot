@@ -68,6 +68,11 @@ public class FotoBot extends Application {
     public String Image_Scale = "1/4";
 
     /**
+     * Номер изображения в текущей сессии
+     */
+    public int Image_Index = 0;
+
+    /**
      * Размер изображения в пикселях
      */
     public String Image_Size = "320x240";
@@ -161,6 +166,14 @@ public class FotoBot extends Application {
      * если  Show_Help = true, ты выводится документация.
      */
     public Boolean Show_Help = false;
+
+    /**
+     * Память в телефоне
+     */
+    Long freeMemory;
+    Long totalMemory;
+    Long usedMemory;
+
 
     /**
      * Возвращает текущее состояние FotoBot'а, сейчас не пользуюсь этим
@@ -474,6 +487,13 @@ public class FotoBot extends Application {
         m.setSubject("Fotobot");
         m.setBody(getResources().getString(R.string.battery_charge) + ": " + fb.battery_level + "%" + "\n" +
                 getResources().getString(R.string.gsm) + ": " + fb.GSM_Signal + "ASU    " + (2.0 * fb.GSM_Signal - 113) + "dBm" + "\n" +
+                "---------------------------------------------\n" +
+                "Image Index:" + fb.Image_Index + "\n" +
+                "---------------------------------------------\n" +
+                getResources().getString(R.string.phone_memory) + ":" + "\n" +
+                "totalMemory: " + fb.totalMemory + "\n" +
+                "freeMemory: " + fb.freeMemory + "\n" +
+                "usedMemory: " + fb.usedMemory + "\n" +
                 "---------------------------------------------\n" +
                 getResources().getString(R.string.Fotobot_settings) + ":\n" +
                 "Network_Channel: "+ Network_Channel + "\n" +
