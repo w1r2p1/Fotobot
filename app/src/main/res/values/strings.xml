@@ -92,7 +92,7 @@
     <string name="battery_charge">Battery charge</string>
     <string name="gsm">GSM network</string>
     <string name="phone_memory">Phone memory</string>
-    <string name="used_memory">Used memory</string>
+    <string name="used_memory">Used memory (RAM)</string>
     <string name="Fotobot_settings">Fotobot settings</string>
     <string name="hardware_info">Hardware information</string>
 
