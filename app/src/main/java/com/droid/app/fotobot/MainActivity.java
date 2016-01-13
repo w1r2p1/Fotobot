@@ -297,9 +297,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             totalMemory = info.totalMemory();
             usedMemory = totalMemory - freeMemory;
 
-            fb.freeMemory = freeMemory;
-            fb.totalMemory = totalMemory;
-            fb.usedMemory = usedMemory;
+            fb.freeMemory = String.format("%.2f",(float)freeMemory/1000000) + "MB";
+            fb.totalMemory = String.format("%.2f",(float)totalMemory/1000000) + "MB";
+            fb.usedMemory = String.format("%.2f",(float)usedMemory/1000000) + "MB";
 
         } catch (Exception e) {
 
@@ -630,6 +630,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             fb.Image_Index = i;
 
+                            fb.SendMessage("n: " + fb.Image_Index);
+
                             if (preview_stopped) {
                                 mCamera.startPreview();
                             }
@@ -700,10 +702,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 fb.SendMessage(fb.Image_Scale);
                             }
 
-                            fb.SendMessage("n: " + fb.Image_Index);
-                            fb.SendMessage("Total Memory:" + fb.totalMemory);
-                            fb.SendMessage("Free Memory:" + fb.freeMemory);
-                            fb.SendMessage("Used Memory:" + fb.usedMemory);
+
+                          //  fb.SendMessage("Total Memory:" + fb.totalMemory);
+                          //  fb.SendMessage("Free Memory:" + fb.freeMemory);
+                            fb.SendMessage(getResources().getString(R.string.used_memory) + ": " + fb.usedMemory);
 
                           //  fb.SendMessage(fb.File_Size + "Kb");
 

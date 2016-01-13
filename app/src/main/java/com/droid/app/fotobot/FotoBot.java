@@ -170,9 +170,9 @@ public class FotoBot extends Application {
     /**
      * Память в телефоне
      */
-    Long freeMemory;
-    Long totalMemory;
-    Long usedMemory;
+    String freeMemory;
+    String totalMemory;
+    String usedMemory;
 
 
     /**
