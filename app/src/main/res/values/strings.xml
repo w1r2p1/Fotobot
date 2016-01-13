@@ -87,6 +87,8 @@
 
     <string name="flash">Use flash</string>
 
+    <string name="pause_between_photos">"Pause for"</string>
+
     <string name="battery_charge">Battery charge</string>
     <string name="gsm">GSM network</string>
     <string name="Fotobot_settings">Fotobot settings</string>

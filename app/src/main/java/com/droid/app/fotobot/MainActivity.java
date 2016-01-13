@@ -251,10 +251,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             boolean fileExists = attach_file.isFile();
 
+            //fb.File_Size = (int)attach_file.length()/1000;
+
             if (fileExists) {
-            //    fb.SendMessage(h, "handler " + fb.Image_Name + ": " + attach_file.length() + " байт");
+             fb.SendMessage(h, attach_file.length()/1000 + "Kb");
             } else {
-            //    fb.SendMessage(h, "handler: файла с фото нет");
+                fb.SendMessage(h, "Image doesn't exist.");
             }
 
         }
@@ -662,25 +664,37 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             }
 
                             // Camera.Parameters params;
+                            String string = fb.Image_Size;
+                            String[] parts = string.split("x");
+                            String width = parts[0];
+                            String height = parts[1];
 
                             if (fb.Photo_Post_Processing_Method.contains("Software")) {
 
                                 Camera.Parameters params = mCamera.getParameters();
 
-                                String string = fb.Image_Size;
-                                String[] parts = string.split("x");
-                                String width = parts[0];
-                                String height = parts[1];
+
 
                                 params.setPictureSize(Integer.parseInt(width), Integer.parseInt(height));
 
                                 mCamera.setParameters(params);
 
-                            //    fb.SendMessage("Разрешение фото: " + Integer.parseInt(width) + " " + Integer.parseInt(height));
+                                //fb.SendMessage(Integer.parseInt(width) + "x" + Integer.parseInt(height));
                             }
 
                             mCamera.takePicture(null, null, mCall);
                             fb.SendMessage(getResources().getString(R.string.photo_has_been_taken));
+
+
+                            fb.fbpause(h,3);
+
+                            if (fb.Photo_Post_Processing_Method.contains("Software")) {
+                                fb.SendMessage(Integer.parseInt(width) + "x" + Integer.parseInt(height));
+                            } else {
+                                fb.SendMessage(fb.Image_Scale);
+                            }
+
+                          //  fb.SendMessage(fb.File_Size + "Kb");
 
                             fb.fbpause(h, fb.process_delay);
 
@@ -715,6 +729,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 fb.CloseInternetConnection(getApplicationContext(), h);
                             }
 
+                            fb.SendMessage("-------------------------------");
+                            fb.SendMessage(getResources().getString(R.string.pause_between_photos) + " " + fb.Photo_Frequency + "sec");
+                            fb.SendMessage("-------------------------------");
                             fb.fbpause(h, fb.Photo_Frequency);
 
                             File imgfile = new File(fb.Image_Name_Full_Path);

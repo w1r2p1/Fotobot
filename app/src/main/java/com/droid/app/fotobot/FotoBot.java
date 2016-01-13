@@ -72,6 +72,10 @@ public class FotoBot extends Application {
      */
     public String Image_Size = "320x240";
 
+    /**
+     * Размер изображения в килобайтах
+     */
+    public int File_Size;
 
     /**
      * вспомогательная почта для отправки писем
@@ -502,9 +506,9 @@ public class FotoBot extends Application {
         boolean fileExists = attach_file.isFile();
 
      //   if (fileExists) {
-     //       SendMessage(h, fb.Image_Name + ": " + attach_file.length() + " байт");
+     //       SendMessage(h, attach_file.length()/1000 + "Kb");
      //   } else {
-     //       SendMessage(h, "SendMail: файла с фото нет");
+     //       SendMessage(h, "Image doesn't exist.");
      //   }
 
         try {

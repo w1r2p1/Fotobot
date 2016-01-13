@@ -88,6 +88,7 @@
     <string name="photo_resolution">Разрешение в пикселях</string>
 
     <string name="flash">Использовать вспышку</string>
+    <string name="pause_between_photos">"Пауза"</string>
 
     <string name="battery_charge">Заряд батареи</string>
     <string name="gsm">Уровень сигнала GSM сети</string>
