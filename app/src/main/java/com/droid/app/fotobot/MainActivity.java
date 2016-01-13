@@ -266,6 +266,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         }
 
     };
+
     //Camera variables
     //a surface holder
     private SurfaceHolder sHolder;
@@ -702,12 +703,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 fb.SendMessage(fb.Image_Scale);
                             }
 
-
                           //  fb.SendMessage("Total Memory:" + fb.totalMemory);
                           //  fb.SendMessage("Free Memory:" + fb.freeMemory);
                             fb.SendMessage(getResources().getString(R.string.used_memory) + ": " + fb.usedMemory);
-
-                          //  fb.SendMessage(fb.File_Size + "Kb");
 
                             fb.fbpause(h, fb.process_delay);
 
