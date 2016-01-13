@@ -87,6 +87,11 @@
 
     <string name="flash">Use flash</string>
 
+    <string name="battery_charge">Battery charge</string>
+    <string name="gsm">GSM network</string>
+    <string name="Fotobot_settings">Fotobot settings</string>
+    <string name="hardware_info">Hardware information</string>
+
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_settings">Settings</string>

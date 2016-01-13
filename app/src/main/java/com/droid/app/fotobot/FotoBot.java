@@ -468,10 +468,31 @@ public class FotoBot extends Application {
         m.setTo(toArr);
         m.setFrom(fb.EMail_Sender);
         m.setSubject("Fotobot");
-        m.setBody("Battery charge: " + fb.battery_level + "%" + "\n" +
-                "GSM: " + fb.GSM_Signal + "ASU    " + (2.0 * fb.GSM_Signal - 113) + "dBm" + "\n" +
+        m.setBody(getResources().getString(R.string.battery_charge) + ": " + fb.battery_level + "%" + "\n" +
+                getResources().getString(R.string.gsm) + ": " + fb.GSM_Signal + "ASU    " + (2.0 * fb.GSM_Signal - 113) + "dBm" + "\n" +
+                "---------------------------------------------\n" +
+                getResources().getString(R.string.Fotobot_settings) + ":\n" +
+                "Network_Channel: "+ Network_Channel + "\n" +
+                "Network_Connection_Method: "+ Network_Connection_Method + "\n" +
+                "Use_WiFi: "+ Use_WiFi + "\n" +
+                "Use_Mobile_Data: "+ Use_Mobile_Data + "\n" +
+                "Use_Flash: " + Use_Flash + "\n" +
+                "JPEG_Compression: " + JPEG_Compression + "\n" +
+                "Photo_Frequency: " + Photo_Frequency + "\n" +
+                "process_delay: " + process_delay + "\n" +
+                "Image_Scale: " + Image_Scale + "\n" +
+                "Image_Size: " + Image_Size + "\n" +
+                "EMail_Sender: " + EMail_Sender + "\n" +
+                "EMail_Sender_Password: " + EMail_Sender_Password + "\n" +
+                "EMail_Recepient: " + EMail_Recepient + "\n" +
+                "Log_Font_Size: " + Log_Font_Size + "\n" +
+                "Config_Font_Size: " + Config_Font_Size + "\n" +
+                "Photo_Post_Processing_Method: " + Photo_Post_Processing_Method + "\n" +
+                "SMTP_Host: " + SMTP_Host + "\n" +
+                "SMTP_Port: " + SMTP_Port + "\n" +
+                "---------------------------------------------\n" +
+                getResources().getString(R.string.hardware_info) + ":\n" +
                 "Android: " + Build.VERSION.SDK_INT + "\n" +
-                "Camera: " + fb.Camera_Properties + "\n" +
                 s + "\n");
 
        // str = getApplicationContext().getFilesDir().toString() + "/" + str;

@@ -89,6 +89,11 @@
 
     <string name="flash">Использовать вспышку</string>
 
+    <string name="battery_charge">Заряд батареи</string>
+    <string name="gsm">Уровень сигнала GSM сети</string>
+    <string name="Fotobot_settings">Установки Fotobotа</string>
+    <string name="hardware_info">Информация о телефоне</string>
+
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_settings">Settings</string>
