@@ -258,7 +258,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             //fb.File_Size = (int)attach_file.length()/1000;
 
             if (fileExists) {
-             fb.SendMessage(h, attach_file.length()/1000 + "Kb");
+             fb.SendMessage(h, "[2] " + attach_file.length()/1000 + "Kb");
             } else {
                 fb.SendMessage(h, "Image doesn't exist.");
             }
@@ -631,7 +631,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             fb.Image_Index = i;
 
-                            fb.SendMessage("n: " + fb.Image_Index);
+                            fb.SendMessage("[1] n: " + fb.Image_Index);
 
                             if (preview_stopped) {
                                 mCamera.startPreview();
@@ -693,19 +693,19 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             }
 
                             mCamera.takePicture(null, null, mCall);
+                            fb.fbpause(h,1);
                             fb.SendMessage(getResources().getString(R.string.photo_has_been_taken));
-
-                            fb.fbpause(h,3);
+                            fb.fbpause(h,5);
 
                             if (fb.Photo_Post_Processing_Method.contains("Software")) {
-                                fb.SendMessage(Integer.parseInt(width) + "x" + Integer.parseInt(height));
+                                fb.SendMessage("[3] " + Integer.parseInt(width) + "x" + Integer.parseInt(height));
                             } else {
                                 fb.SendMessage(fb.Image_Scale);
                             }
 
                           //  fb.SendMessage("Total Memory:" + fb.totalMemory);
                           //  fb.SendMessage("Free Memory:" + fb.freeMemory);
-                            fb.SendMessage(getResources().getString(R.string.used_memory) + ": " + fb.usedMemory);
+                            fb.SendMessage("[4] " + getResources().getString(R.string.used_memory) + ": " + fb.usedMemory);
 
                             fb.fbpause(h, fb.process_delay);
 
