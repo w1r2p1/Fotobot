@@ -755,7 +755,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                          //   fb.SendMessage("\n");
                             // @
-                            mCamera.stopPreview();
+
+                            if (!preview_stopped) {
+                                mCamera.stopPreview();
+                            }
                             preview_stopped = true;
 
                         }
