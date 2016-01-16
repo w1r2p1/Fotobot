@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 return false;
             }
 
-            tvInfo.setText(log);
+            tvInfo.setText(log.substring(0,1024));
 
             //final FotoBot fb = (FotoBot) getApplicationContext();
             Log.d(LOG_TAG, "Handler.Callback(): fb.getstatus()" + fb.getstatus());
@@ -705,7 +705,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                           //  fb.SendMessage("Total Memory:" + fb.totalMemory);
                           //  fb.SendMessage("Free Memory:" + fb.freeMemory);
-                            fb.SendMessage(getResources().getString(R.string.used_memory) + ": " + fb.usedMemory);
+                            fb.SendMessage(getResources().getString(R.string.free_memory) + ": " + fb.freeMemory);
 
                             fb.fbpause(h, fb.process_delay);
 
@@ -734,7 +734,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             mgr.setStreamMute(AudioManager.STREAM_SYSTEM, false);
 
+                            long start = System.currentTimeMillis();
+
                             fb.SendMail(h, fb.Image_Name_Full_Path);
+
+                            long durationInMilliseconds = System.currentTimeMillis()-start;
+
+                            fb.email_sending_time = durationInMilliseconds * 1000;
 
                             if ( (fb.Network_Connection_Method.contains("Method 2") && (Build.VERSION.SDK_INT <= 21))) {
                                 fb.CloseInternetConnection(getApplicationContext(), h);

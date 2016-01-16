@@ -170,10 +170,14 @@ public class FotoBot extends Application {
     /**
      * Память в телефоне
      */
-    String freeMemory;
-    String totalMemory;
-    String usedMemory;
+    public String freeMemory;
+    public String totalMemory;
+    public String usedMemory;
 
+    /**
+     * Длительность отправки предыдущего письма
+     */
+    public long email_sending_time;
 
     /**
      * Возвращает текущее состояние FotoBot'а, сейчас не пользуюсь этим
@@ -494,6 +498,8 @@ public class FotoBot extends Application {
                 "totalMemory: " + fb.totalMemory + "\n" +
                 "freeMemory: " + fb.freeMemory + "\n" +
                 "usedMemory: " + fb.usedMemory + "\n" +
+                "---------------------------------------------\n" +
+                 getResources().getString(R.string.email_sending_time) + ":" +
                 "---------------------------------------------\n" +
                 getResources().getString(R.string.Fotobot_settings) + ":\n" +
                 "Network_Channel: "+ Network_Channel + "\n" +
