@@ -114,7 +114,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 return false;
             }
 
-            tvInfo.setText(log.substring(0,1024));
+           // tvInfo.setText(log.substring(0,1024));
+            tvInfo.setText(log);
 
             //final FotoBot fb = (FotoBot) getApplicationContext();
             Log.d(LOG_TAG, "Handler.Callback(): fb.getstatus()" + fb.getstatus());
