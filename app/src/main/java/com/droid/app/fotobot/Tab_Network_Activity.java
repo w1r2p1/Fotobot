@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
@@ -327,7 +328,10 @@ public class Tab_Network_Activity extends Activity {
         editText_Fotobot_Password = new EditText(this);
         editText_Fotobot_Password.setLayoutParams(lpView_et);
         editText_Fotobot_Password.setSingleLine(true);
+
+        editText_Fotobot_Password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         editText_Fotobot_Password.setText(fb.EMail_Sender_Password);
+
         editText_Fotobot_Password.setTextColor(Color.rgb(50, 100, 150));
         ViewGroup.LayoutParams lp1 = editText_Fotobot_Email.getLayoutParams();
         editText_Fotobot_Password.setWidth((screenWidth - padding)/100*40);

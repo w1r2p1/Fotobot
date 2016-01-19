@@ -513,7 +513,7 @@ public class FotoBot extends Application {
                 "Image_Scale: " + Image_Scale + "\n" +
                 "Image_Size: " + Image_Size + "\n" +
                 "EMail_Sender: " + EMail_Sender + "\n" +
-                "EMail_Sender_Password: " + EMail_Sender_Password + "\n" +
+                "EMail_Sender_Password: *********" + "\n" +
                 "EMail_Recepient: " + EMail_Recepient + "\n" +
                 "Log_Font_Size: " + Log_Font_Size + "\n" +
                 "Config_Font_Size: " + Config_Font_Size + "\n" +
