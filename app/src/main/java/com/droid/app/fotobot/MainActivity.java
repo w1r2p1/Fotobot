@@ -741,7 +741,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             long durationInMilliseconds = System.currentTimeMillis()-start;
 
-                            fb.email_sending_time = durationInMilliseconds * 1000;
+                            fb.email_sending_time = durationInMilliseconds / 1000;
 
                             if ( (fb.Network_Connection_Method.contains("Method 2") && (Build.VERSION.SDK_INT <= 21))) {
                                 fb.CloseInternetConnection(getApplicationContext(), h);

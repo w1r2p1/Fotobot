@@ -496,10 +496,10 @@ public class FotoBot extends Application {
                 "---------------------------------------------\n" +
                 getResources().getString(R.string.phone_memory) + ":" + "\n" +
                 "totalMemory: " + fb.totalMemory + "\n" +
-                "freeMemory: " + fb.freeMemory + "\n" +
                 "usedMemory: " + fb.usedMemory + "\n" +
+                "freeMemory: " + fb.freeMemory + "\n" +
                 "---------------------------------------------\n" +
-                 getResources().getString(R.string.email_sending_time) + ":" +
+                 getResources().getString(R.string.email_sending_time) + ": " + fb.email_sending_time + "\n" +
                 "---------------------------------------------\n" +
                 getResources().getString(R.string.Fotobot_settings) + ":\n" +
                 "Network_Channel: "+ Network_Channel + "\n" +
