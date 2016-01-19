@@ -2,6 +2,7 @@ package com.droid.app.fotobot;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -927,6 +928,16 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     public void help(View v) {
         final FotoBot fb = (FotoBot) getApplicationContext();
         fb.Show_Help = true;
+
+        String versionName = "";
+
+        try {
+            versionName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        fb.SendMessage("Fotobot " + versionName);
         fb.SendMessage(getResources().getString(R.string.main_help));
     }
 }
