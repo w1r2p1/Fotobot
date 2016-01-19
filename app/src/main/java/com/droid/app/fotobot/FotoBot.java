@@ -596,7 +596,7 @@ public class FotoBot extends Application {
 
         Image_Scale = pref.getString("Image_Scale", "1");
 
-        Image_Size = pref.getString("Image_Size", "320x240");
+        Image_Size = pref.getString("Image_Size", "1024x768");
 
         EMail_Sender = pref.getString("EMail_Sender", "fotobot@gmail.com");
 
@@ -608,7 +608,7 @@ public class FotoBot extends Application {
 
         Config_Font_Size = pref.getInt("Config_Font_Size", 14);
 
-        Photo_Post_Processing_Method = pref.getString("Photo_Post_Processing_Method", "Hardware");
+        Photo_Post_Processing_Method = pref.getString("Photo_Post_Processing_Method", "Software");
 
         SMTP_Host = pref.getString("SMTP_Host", "smtp.gmail.com");
 
