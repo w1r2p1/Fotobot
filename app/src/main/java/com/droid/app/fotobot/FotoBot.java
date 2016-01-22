@@ -177,6 +177,17 @@ public class FotoBot extends Application {
     /**
      * Длительность отправки предыдущего письма
      */
+
+    /**
+     * Логфайл
+     */
+    public String logfile = "Fotobot.txt";
+
+    /**
+     * Строка на экран
+     */
+    public String log = "";
+
     public long email_sending_time;
 
     /**

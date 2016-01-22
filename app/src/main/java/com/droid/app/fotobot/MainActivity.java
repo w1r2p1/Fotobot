@@ -44,8 +44,29 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 //import android.util.Size;
+
+class FotobotLogger {
+    private final static Logger logger = Logger.getLogger(FotobotLogger.class.getName());
+    private static FileHandler fh = null;
+
+    public static void init() {
+        try {
+            fh = new FileHandler("Fotobot.log", false);
+        } catch (SecurityException | IOException e) {
+            e.printStackTrace();
+        }
+        Logger l = Logger.getLogger("");
+        fh.setFormatter(new SimpleFormatter());
+        l.addHandler(fh);
+        l.setLevel(Level.CONFIG);
+    }
+}
 
 public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
@@ -66,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     int n;
     FotoBot fb;
-    String log;
+  //  String log;
    // HorizontalScrollView LogWidget;
     ScrollView LogWidget;
     LinearLayout Buttons1, Buttons2;
@@ -96,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             String reportDate = dateformat.format(today);
 
             String message = (String) msg.obj; //Extract the string from the Message
-            log = reportDate + ": " + message + "\n" + log;
+            fb.log = reportDate + ": " + message + "\n" + fb.log;
 
             tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
             tvInfo.setTypeface(Typeface.MONOSPACE);
@@ -116,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
 
            // tvInfo.setText(log.substring(0,1024));
-            tvInfo.setText(log);
+            tvInfo.setText(fb.log);
 
             //final FotoBot fb = (FotoBot) getApplicationContext();
             Log.d(LOG_TAG, "Handler.Callback(): fb.getstatus()" + fb.getstatus());
@@ -431,7 +452,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         fb.sHolder = sHolder;
 
         intent = new Intent(MainActivity.this, Status.class);
-        log = "\n" + getResources().getString(R.string.Fotobot);
+        fb.log = "\n" + getResources().getString(R.string.Fotobot);
 
         tvInfo.setText(Html.fromHtml(getResources().getString(R.string.welcome_to_fotobot)));
 
@@ -610,6 +631,16 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 "MyWakelockTag");
 
                         wakeLock.acquire();
+
+                        FotobotLogger flogger = new FotobotLogger();
+
+                        flogger.init();
+                        flogger.log(Level.INFO, "message 1");
+                        logger.log(Level.SEVERE, "message 2");
+                        logger.log(Level.FINE, "message 3");
+
+
+
 
                         fb.SendMessage(getResources().getString(R.string.start_message));
 
@@ -941,3 +972,4 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         fb.SendMessage(getResources().getString(R.string.main_help));
     }
 }
+
