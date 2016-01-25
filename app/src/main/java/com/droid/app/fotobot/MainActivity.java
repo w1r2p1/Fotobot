@@ -330,29 +330,27 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
         Logger fblogger = Logger.getLogger(FotoBot.class.getName());
-        FileHandler fh=null;
-        try {
 
+      //  FileHandler fh=null;
 
+      //  try {
+      //      fh = new FileHandler("fblog.txt", true);
 
-            fh = new FileHandler("fblog.txt", true);
+     //   } catch (Exception e) {
+     //       e.printStackTrace();
+    //    }
 
-        } catch (Exception e) {
-            //   e.printStackTrace();
-        }
-
-        fblogger.addHandler(fh);
+       // fblogger.addHandler(fh);
 
 
         //Setting levels to handlers and LOGGER
 
 
-        fh.setLevel(Level.ALL);
-                fblogger.setLevel(Level.ALL);
+//        fh.setLevel(Level.ALL);
+          //      fblogger.setLevel(Level.ALL);
 
-        fblogger.finer("This is a finer-level message");
+        fblogger.finer("MainActivity");
 
 
         final FotoBot fb = (FotoBot) getApplicationContext();

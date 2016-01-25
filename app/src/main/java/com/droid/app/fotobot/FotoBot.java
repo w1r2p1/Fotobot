@@ -24,6 +24,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.FileHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
@@ -37,7 +38,7 @@ public class FotoBot extends Application {
 
     private final static Logger fblogger = Logger.getLogger(FotoBot.class.getName());
 
-
+    final String LOG_TAG = "Logs";
 
     /**
      * Интервал фотографирования (в секундах)
@@ -230,6 +231,29 @@ public class FotoBot extends Application {
      * В конструкторе проводим инициализацию объекта посредством считывания всех свойств из SharedPreferences.
      */
     public void FotoBot() {
+        FileHandler fh=null;
+
+        String logpath = Environment.getDataDirectory().getAbsolutePath();
+
+        Log.d(LOG_TAG, "\n\n\n\n\nlogpath: " + logpath + "\n\n\n\n\n");
+        try {
+            fh = new FileHandler(logpath + "fblog.txt", true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+         fblogger.addHandler(fh);
+
+
+        //Setting levels to handlers and LOGGER
+
+
+        fh.setLevel(Level.ALL);
+              fblogger.setLevel(Level.ALL);
+
+        fblogger.finer("Fotobot");
+
         LoadData();
     }
 
