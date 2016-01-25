@@ -23,6 +23,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
 
@@ -32,6 +34,10 @@ import static android.os.Environment.getExternalStoragePublicDirectory;
  * Это глобальный класс, объект данного класса будет виден во всех активити. Инициализируется через Manifest.
  */
 public class FotoBot extends Application {
+
+    private final static Logger fblogger = Logger.getLogger(FotoBot.class.getName());
+
+
 
     /**
      * Интервал фотографирования (в секундах)

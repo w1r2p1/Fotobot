@@ -38,6 +38,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -46,27 +47,15 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 //import android.util.Size;
 
-class FotobotLogger {
-    private final static Logger logger = Logger.getLogger(FotobotLogger.class.getName());
-    private static FileHandler fh = null;
-
-    public static void init() {
-        try {
-            fh = new FileHandler("Fotobot.log", false);
-        } catch (SecurityException | IOException e) {
-            e.printStackTrace();
-        }
-        Logger l = Logger.getLogger("");
-        fh.setFormatter(new SimpleFormatter());
-        l.addHandler(fh);
-        l.setLevel(Level.CONFIG);
-    }
-}
+//class FotobotLogger {
+//    private final static Logger logger = Logger.getLogger(FotobotLogger.class.getName());
+//    }
 
 public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
@@ -99,6 +88,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     Handler h = null;
     TextView tvInfo;
     boolean preview_stopped = false;
+
+
+
     /**
      * Печатает сообщения на экран телефона, нужен для того чтобы получать данные из потока в котором работает FotoBot
      */
@@ -337,6 +329,32 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+        Logger fblogger = Logger.getLogger(FotoBot.class.getName());
+        FileHandler fh=null;
+        try {
+
+
+
+            fh = new FileHandler("fblog.txt", true);
+
+        } catch (Exception e) {
+            //   e.printStackTrace();
+        }
+
+        fblogger.addHandler(fh);
+
+
+        //Setting levels to handlers and LOGGER
+
+
+        fh.setLevel(Level.ALL);
+                fblogger.setLevel(Level.ALL);
+
+        fblogger.finer("This is a finer-level message");
+
+
         final FotoBot fb = (FotoBot) getApplicationContext();
         Display display = getWindowManager().getDefaultDisplay();
         screenWidth = display.getWidth();
@@ -345,7 +363,29 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(displayMetrics);
 
+
+
+
+
+
+
         int statusBarHeight;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         switch (displayMetrics.densityDpi) {
             case DisplayMetrics.DENSITY_HIGH:
@@ -360,6 +400,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             default:
                 statusBarHeight = MEDIUM_DPI_STATUS_BAR_HEIGHT;
         }
+
+
+
+
         Log.d(LOG_TAG, "screenHeight: " + screenHeight);
         Log.d(LOG_TAG, "statusBarHeight: " + statusBarHeight);
 
@@ -632,12 +676,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                         wakeLock.acquire();
 
-                        FotobotLogger flogger = new FotobotLogger();
+                       // FotobotLogger flogger = new FotobotLogger();
 
-                        flogger.init();
-                        flogger.log(Level.INFO, "message 1");
-                        logger.log(Level.SEVERE, "message 2");
-                        logger.log(Level.FINE, "message 3");
+                       // flogger.init();
+                       // flogger.log(Level.INFO, "message 1");
+                       // logger.log(Level.SEVERE, "message 2");
+                       // logger.log(Level.FINE, "message 3");
 
 
 

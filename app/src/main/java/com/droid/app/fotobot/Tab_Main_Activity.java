@@ -22,6 +22,8 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import java.util.logging.Logger;
+
 public class Tab_Main_Activity extends Activity {
 
     final String LOG_NETWORK_ACTIVITY = "Logs";
@@ -36,6 +38,8 @@ public class Tab_Main_Activity extends Activity {
     EditText Log_Font_Size;
     EditText process_delay;
     final String LOG_TAG = "Logs";
+
+    Logger fblogger = Logger.getLogger(FotoBot.class.getName());
 
     protected void onCreate(Bundle savedInstanceState) {
         final FotoBot fb = (FotoBot) getApplicationContext();
