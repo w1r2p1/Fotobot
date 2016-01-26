@@ -45,6 +45,13 @@ public class Tab_Main_Activity extends Activity {
         final FotoBot fb = (FotoBot) getApplicationContext();
         super.onCreate(savedInstanceState);
         fb.LoadData();
+
+
+        Logger fblogger = Logger.getLogger(FotoBot.class.getName());
+        fblogger.fine("Tab_Main_Activity");
+
+
+
         Display display = getWindowManager().getDefaultDisplay();
         screenWidth = display.getWidth();
         screenHeight = display.getHeight();

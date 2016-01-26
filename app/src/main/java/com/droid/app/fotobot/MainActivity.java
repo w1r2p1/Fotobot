@@ -51,8 +51,11 @@ import java.util.logging.Logger;
 //import android.util.Size;
 
 //class FotobotLogger {
+  //  final FotoBot fb = (FotoBot) getApplicationContext();
 //    private final static Logger logger = Logger.getLogger(FotobotLogger.class.getName());
-//    }
+
+
+  //  }
 
 public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
@@ -327,30 +330,48 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        final FotoBot fb = (FotoBot) getApplicationContext();
+
         Logger fblogger = Logger.getLogger(FotoBot.class.getName());
 
-      //  FileHandler fh=null;
+      //  fb.logpath = getFilesDir().toString();
 
-      //  try {
-      //      fh = new FileHandler("fblog.txt", true);
+       // fb.SendMessage("logpath: " + fb.logpath);
 
-     //   } catch (Exception e) {
-     //       e.printStackTrace();
-    //    }
+        FileHandler fh=null;
 
-       // fblogger.addHandler(fh);
+        fb.logpath = "/storage/external_SD/";
+
+        try {
+            fh = new FileHandler(fb.logpath + "fblog.txt", true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        fblogger.addHandler(fh);
 
 
         //Setting levels to handlers and LOGGER
 
 
-//        fh.setLevel(Level.ALL);
-          //      fblogger.setLevel(Level.ALL);
+        fh.setLevel(Level.ALL);
+        fblogger.setLevel(Level.ALL);
 
-        fblogger.finer("MainActivity");
+        fblogger.finer("startFotobot");
+
+      //  fh.close();
 
 
-        final FotoBot fb = (FotoBot) getApplicationContext();
+
+
+
+
+
+
+
+
+
         Display display = getWindowManager().getDefaultDisplay();
         screenWidth = display.getWidth();
         screenHeight = display.getHeight();
@@ -662,34 +683,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 
                         fb.SendMessage(getResources().getString(R.string.start_message));
-                        fb.logpath = getFilesDir().toString();
-                        fb.SendMessage("logpath: " + fb.logpath);
 
-                        Logger fblogger = Logger.getLogger(FotoBot.class.getName());
-
-                        FileHandler fh=null;
-
-                        fb.logpath = "/storage/external_SD/";
-
-                        try {
-                            fh = new FileHandler(fb.logpath + "fblog.txt", true);
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                        fblogger.addHandler(fh);
-
-
-                        //Setting levels to handlers and LOGGER
-
-
-                        fh.setLevel(Level.ALL);
-                        fblogger.setLevel(Level.ALL);
-
-                        fblogger.finer("startFotobot");
-
-                        fh.close();
 
 
 
