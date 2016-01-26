@@ -192,7 +192,7 @@ public class FotoBot extends Application {
 
     Logger logger;
 
-    FileHandler fh=null;
+    FileHandler fh = null;
 
     boolean init_logger = false;
 
@@ -237,9 +237,6 @@ public class FotoBot extends Application {
      * В конструкторе проводим инициализацию объекта посредством считывания всех свойств из SharedPreferences.
      */
     public void FotoBot() {
-
-
-
 
         LoadData();
     }

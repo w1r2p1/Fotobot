@@ -47,6 +47,7 @@ import java.util.Date;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 //import android.util.Size;
 
@@ -333,23 +334,32 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         final FotoBot fb = (FotoBot) getApplicationContext();
 
         if (!fb.init_logger) {
+
+            Log.d(LOG_TAG, "fb.init_logger");
+
             fb.logger = Logger.getLogger(FotoBot.class.getName());
 
             fb.logpath = "/storage/external_SD/";
 
             try {
-                fb.fh = new FileHandler(fb.logpath + "fblog.txt", 10485, 1, true);
+                fb.fh = new FileHandler(fb.logpath + "fblog.txt", true);
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
+            fb.fh.setFormatter(new SimpleFormatter());
+
             fb.logger.addHandler(fb.fh);
+
+            fb.logger.setLevel(Level.FINE);
+
+            fb.logger.finer("Logger has been initialised.");
 
             fb.init_logger = true;
         }
 
-        fb.logger.finer("startFotobot");
+
 
 
 
