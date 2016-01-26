@@ -48,6 +48,9 @@ public class Tab_Foto_Activity  extends Activity {
         final FotoBot fb = (FotoBot) getApplicationContext();
         super.onCreate(savedInstanceState);
         fb.LoadData();
+
+        fb.fh.close();
+
         Log.d(LOG_TAG, "Tab3: onCreate");
         //      final FotoBot fb = (FotoBot) getApplicationContext();
         Display display = getWindowManager().getDefaultDisplay();

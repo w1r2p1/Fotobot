@@ -190,6 +190,12 @@ public class FotoBot extends Application {
     public String logpath = "";
     public String logfile = "Fotobot.txt";
 
+    Logger logger;
+
+    FileHandler fh=null;
+
+    boolean init_logger = false;
+
     /**
      * Строка на экран
      */
@@ -231,12 +237,7 @@ public class FotoBot extends Application {
      * В конструкторе проводим инициализацию объекта посредством считывания всех свойств из SharedPreferences.
      */
     public void FotoBot() {
-        FileHandler fh=null;
 
-        File path = Environment.getDataDirectory();
-        logpath = getFilesDir().toString();
-
-        Log.d(LOG_TAG, "\n\n\n\n\nlogpath: " + logpath + "\n\n\n\n\n");
 
 
 

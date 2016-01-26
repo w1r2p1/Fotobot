@@ -332,35 +332,25 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
-        Logger fblogger = Logger.getLogger(FotoBot.class.getName());
+        if (!fb.init_logger) {
+            fb.logger = Logger.getLogger(FotoBot.class.getName());
 
-      //  fb.logpath = getFilesDir().toString();
+            fb.logpath = "/storage/external_SD/";
 
-       // fb.SendMessage("logpath: " + fb.logpath);
+            try {
+                fb.fh = new FileHandler(fb.logpath + "fblog.txt", 10485, 1, true);
 
-        FileHandler fh=null;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-        fb.logpath = "/storage/external_SD/";
+            fb.logger.addHandler(fb.fh);
 
-        try {
-            fh = new FileHandler(fb.logpath + "fblog.txt", true);
-
-        } catch (Exception e) {
-            e.printStackTrace();
+            fb.init_logger = true;
         }
 
-        fblogger.addHandler(fh);
+        fb.logger.finer("startFotobot");
 
-
-        //Setting levels to handlers and LOGGER
-
-
-        fh.setLevel(Level.ALL);
-        fblogger.setLevel(Level.ALL);
-
-        fblogger.finer("startFotobot");
-
-      //  fh.close();
 
 
 

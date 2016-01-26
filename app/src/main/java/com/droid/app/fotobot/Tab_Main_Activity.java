@@ -47,8 +47,8 @@ public class Tab_Main_Activity extends Activity {
         fb.LoadData();
 
 
-        Logger fblogger = Logger.getLogger(FotoBot.class.getName());
-        fblogger.fine("Tab_Main_Activity");
+     //   Logger fblogger = Logger.getLogger(FotoBot.class.getName());
+        fb.logger.fine("Tab_Main_Activity");
 
 
 
