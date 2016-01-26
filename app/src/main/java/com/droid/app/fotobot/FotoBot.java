@@ -24,7 +24,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.FileHandler;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
@@ -234,26 +233,12 @@ public class FotoBot extends Application {
     public void FotoBot() {
         FileHandler fh=null;
 
-        logpath = Environment.getDataDirectory().getAbsolutePath();
+        File path = Environment.getDataDirectory();
+        logpath = getFilesDir().toString();
 
         Log.d(LOG_TAG, "\n\n\n\n\nlogpath: " + logpath + "\n\n\n\n\n");
-        try {
-            fh = new FileHandler(logpath + "fblog.txt", true);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-         fblogger.addHandler(fh);
 
 
-        //Setting levels to handlers and LOGGER
-
-
-        fh.setLevel(Level.ALL);
-              fblogger.setLevel(Level.ALL);
-
-        fblogger.finer("Fotobot");
 
         LoadData();
     }

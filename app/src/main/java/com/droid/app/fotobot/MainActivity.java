@@ -44,6 +44,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //import android.util.Size;
@@ -660,7 +662,51 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 
                         fb.SendMessage(getResources().getString(R.string.start_message));
+                        fb.logpath = getFilesDir().toString();
                         fb.SendMessage("logpath: " + fb.logpath);
+
+                        Logger fblogger = Logger.getLogger(FotoBot.class.getName());
+
+                        FileHandler fh=null;
+
+                        fb.logpath = "/storage/external_SD/";
+
+                        try {
+                            fh = new FileHandler(fb.logpath + "fblog.txt", true);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        fblogger.addHandler(fh);
+
+
+                        //Setting levels to handlers and LOGGER
+
+
+                        fh.setLevel(Level.ALL);
+                        fblogger.setLevel(Level.ALL);
+
+                        fblogger.finer("startFotobot");
+
+                        fh.close();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Добавлено в Andorid 5. Без этого не работает. Не понятно, как раньше работало.
                         if ( mCamera == null ) {
