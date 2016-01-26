@@ -339,10 +339,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             fb.logger = Logger.getLogger(FotoBot.class.getName());
 
-            fb.logpath = "/storage/external_SD/";
+         //   fb.logpath = "/storage/external_SD/";
+            fb.logpath = "/mnt/sdcard/";
+            fb.logpath = getFilesDir().toString() + "/";
 
             try {
-                fb.fh = new FileHandler(fb.logpath + "fblog.txt", true);
+                fb.fh = new FileHandler(fb.logpath + "fblog.txt",9000,1,true);
 
             } catch (Exception e) {
                 e.printStackTrace();

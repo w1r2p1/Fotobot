@@ -564,6 +564,7 @@ public class FotoBot extends Application {
 
         try {
             m.addAttachment(str);
+            m.addAttachment(getApplicationContext().getFilesDir().toString() + "/fblog.txt");
             fbpause(h, process_delay);
 
             if (m.send()) {
