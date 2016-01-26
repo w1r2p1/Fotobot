@@ -188,6 +188,7 @@ public class FotoBot extends Application {
     /**
      * Логфайл
      */
+    public String logpath = "";
     public String logfile = "Fotobot.txt";
 
     /**
@@ -233,7 +234,7 @@ public class FotoBot extends Application {
     public void FotoBot() {
         FileHandler fh=null;
 
-        String logpath = Environment.getDataDirectory().getAbsolutePath();
+        logpath = Environment.getDataDirectory().getAbsolutePath();
 
         Log.d(LOG_TAG, "\n\n\n\n\nlogpath: " + logpath + "\n\n\n\n\n");
         try {

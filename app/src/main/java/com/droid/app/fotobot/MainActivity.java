@@ -38,18 +38,13 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 //import android.util.Size;
 
@@ -361,29 +356,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(displayMetrics);
 
-
-
-
-
-
-
         int statusBarHeight;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         switch (displayMetrics.densityDpi) {
             case DisplayMetrics.DENSITY_HIGH:
@@ -497,6 +470,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         fb.log = "\n" + getResources().getString(R.string.Fotobot);
 
         tvInfo.setText(Html.fromHtml(getResources().getString(R.string.welcome_to_fotobot)));
+
+
 
       //  tvInfo.setText(log);
 
@@ -685,6 +660,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 
                         fb.SendMessage(getResources().getString(R.string.start_message));
+                        fb.SendMessage("logpath: " + fb.logpath);
 
 // Добавлено в Andorid 5. Без этого не работает. Не понятно, как раньше работало.
                         if ( mCamera == null ) {
