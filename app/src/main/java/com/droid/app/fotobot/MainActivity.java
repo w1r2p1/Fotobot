@@ -116,6 +116,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             tvInfo.setTypeface(Typeface.MONOSPACE);
             tvInfo.setTextColor(Color.rgb(150, 150, 150));
 
+
+            fb.logger.fine(message);
+
+
             if (fb.Show_Help) {
                 tvInfo.setText(Html.fromHtml((getResources().getString(R.string.main_help))));
              //   Linkify.addLinks(tvInfo, Linkify.ALL);
@@ -339,9 +343,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             fb.logger = Logger.getLogger(FotoBot.class.getName());
 
-         //   fb.logpath = "/storage/external_SD/";
-            fb.logpath = "/mnt/sdcard/";
-            fb.logpath = getFilesDir().toString() + "/";
+            fb.logpath = "/storage/external_SD/";
+         //   fb.logpath = "/mnt/sdcard/";
+         //   fb.logpath = getFilesDir().toString() + "/";
 
             try {
                 fb.fh = new FileHandler(fb.logpath + "fblog.txt",9000,1,true);
@@ -356,7 +360,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             fb.logger.setLevel(Level.FINE);
 
-            fb.logger.finer("Logger has been initialised.");
+            fb.logger.finest("Logger has been initialised.");
 
             fb.init_logger = true;
         }
@@ -725,6 +729,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             fb.Image_Index = i;
 
                             fb.SendMessage("n: " + fb.Image_Index);
+
+                            fb.logger.fine("n: " + fb.Image_Index);
 
                             if (preview_stopped) {
                                 mCamera.startPreview();
