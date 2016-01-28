@@ -3,6 +3,7 @@
     <string name="start_button">Пуск</string>
     <string name="stop_button">Стоп</string>
     <string name="settings_button">Настройки</string>
+    <string name="log_button">Журнал</string>
     <string name="help_button">Помощь</string>
     <string name="apply_button">ПРИМЕНИТЬ</string>
     <string name="back_button">НА ГЛАВНУЮ</string>
