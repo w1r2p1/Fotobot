@@ -368,38 +368,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        Log.d(LOG_TAG, "\n\n\n\n\nMainActivity: onCreate\n\n\n\n\n");
+
         final FotoBot fb = (FotoBot) getApplicationContext();
 
-        if (!fb.init_logger) {
-
-            Log.d(LOG_TAG, "fb.init_logger");
-
-            fb.logger = Logger.getLogger(FotoBot.class.getName());
-
-           // fb.logpath = "/storage/external_SD/";
-         //   fb.logpath = "/mnt/sdcard/";
-            fb.logpath = getFilesDir().toString() + "/";
-
-            try {
-                fb.fh = new FileHandler(fb.logpath + "fblog.txt",9000,1,true);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            fb.fh.setFormatter(new MyCustomFormatter());
-
-        //    fb.fh.setFormatter(new SimpleFormatter());
-
-            fb.logger.addHandler(fb.fh);
-
-            fb.logger.setLevel(Level.FINE);
-
-
-            fb.logger.finest("Logger has been initialised.");
-
-            fb.init_logger = true;
-        }
 
 
 
@@ -632,8 +604,50 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     }
 
     protected void onStart() {
+
         super.onStart();
-        Log.d(LOG_TAG, "MainActivity: onStart");
+        Log.d(LOG_TAG, "\n\n\n\n\nMainActivity: onStart\n\n\n\n\n");
+
+        final FotoBot fb = (FotoBot) getApplicationContext();
+
+        if (!fb.init_logger) {
+
+            //  fb.SendMessage("Logger init");
+
+            Log.d(LOG_TAG, "fb.init_logger");
+
+            fb.logger = Logger.getLogger(FotoBot.class.getName());
+
+            // fb.logpath = "/storage/external_SD/";
+            //   fb.logpath = "/mnt/sdcard/";
+            fb.logpath = getFilesDir().toString() + "/";
+
+            try {
+                fb.fh = new FileHandler(fb.logpath + "fblog.txt",3000,1,true);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            fb.fh.setFormatter(new MyCustomFormatter());
+
+            //    fb.fh.setFormatter(new SimpleFormatter());
+
+            fb.logger.addHandler(fb.fh);
+
+            fb.logger.setLevel(Level.FINE);
+
+
+            fb.logger.finest("Logger has been initialised.");
+
+            fb.init_logger = true;
+        }
+
+
+
+
+
+
     }
 
     protected void onStop() {
@@ -692,6 +706,46 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         wakeLock.acquire();
 
         final FotoBot fb = (FotoBot) getApplicationContext();
+
+        if (!fb.init_logger) {
+
+            //  fb.SendMessage("Logger init");
+
+            Log.d(LOG_TAG, "fb.init_logger");
+
+            fb.logger = Logger.getLogger(FotoBot.class.getName());
+
+            // fb.logpath = "/storage/external_SD/";
+            //   fb.logpath = "/mnt/sdcard/";
+            fb.logpath = getFilesDir().toString() + "/";
+
+            try {
+                fb.fh = new FileHandler(fb.logpath + "fblog.txt",3000,1,true);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            fb.fh.setFormatter(new MyCustomFormatter());
+
+            //    fb.fh.setFormatter(new SimpleFormatter());
+
+            fb.logger.addHandler(fb.fh);
+
+            fb.logger.setLevel(Level.FINE);
+
+
+            fb.logger.finest("Logger has been initialised.");
+
+            fb.init_logger = true;
+        }
+
+
+
+
+
+
+
 
         switch (v.getId()) {
             case R.id.play:
@@ -940,9 +994,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         btnHelp.setBackgroundColor(Color.rgb(90,90,90));
         btnHelp.setEnabled(true);
 
-        fb.fh.flush();
-        fb.fh.close();
-
+        if (fb.init_logger) {
+            fb.fh.flush();
+            fb.fh.close();
+            fb.init_logger = false;
+        }
     }
 
     @Override
@@ -984,6 +1040,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         releaseCamera();
+        final FotoBot fb = (FotoBot) getApplicationContext();
+        if (fb.init_logger) {
+            fb.fh.flush();
+            fb.fh.close();
+            fb.init_logger = false;
+        }
     }
 
     private void releaseCamera() {
