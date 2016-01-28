@@ -45,9 +45,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.FileHandler;
+import java.util.logging.Formatter;
 import java.util.logging.Level;
+import java.util.logging.LogRecord;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 //import android.util.Size;
 
@@ -58,7 +59,39 @@ import java.util.logging.SimpleFormatter;
 
   //  }
 
+
+
+
 public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback {
+
+
+    private static class MyCustomFormatter extends Formatter {
+
+
+
+        @Override
+
+        public String format(LogRecord record) {
+
+            StringBuffer sb = new StringBuffer();
+
+       //     sb.append("Prefixn");
+
+            sb.append(record.getMessage());
+
+       //     sb.append("Suffixn");
+
+            sb.append("\n");
+
+            return sb.toString();
+
+        }
+
+
+
+    }
+
+
 
     private int screenWidth, screenHeight;
     public static final int UNKNOW_CODE = 99;
@@ -343,9 +376,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             fb.logger = Logger.getLogger(FotoBot.class.getName());
 
-            fb.logpath = "/storage/external_SD/";
+           // fb.logpath = "/storage/external_SD/";
          //   fb.logpath = "/mnt/sdcard/";
-         //   fb.logpath = getFilesDir().toString() + "/";
+            fb.logpath = getFilesDir().toString() + "/";
 
             try {
                 fb.fh = new FileHandler(fb.logpath + "fblog.txt",9000,1,true);
@@ -354,11 +387,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 e.printStackTrace();
             }
 
-            fb.fh.setFormatter(new SimpleFormatter());
+            fb.fh.setFormatter(new MyCustomFormatter());
+
+        //    fb.fh.setFormatter(new SimpleFormatter());
 
             fb.logger.addHandler(fb.fh);
 
             fb.logger.setLevel(Level.FINE);
+
 
             fb.logger.finest("Logger has been initialised.");
 
@@ -846,8 +882,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             }
 
                             fb.SendMessage("-------------------------------");
+                           // fb.logger.fine("-------------------------------");
                             fb.SendMessage(getResources().getString(R.string.pause_between_photos) + " " + fb.Photo_Frequency + "sec");
+                           // fb.logger.fine(getResources().getString(R.string.pause_between_photos) + " " + fb.Photo_Frequency + "sec");
                             fb.SendMessage("-------------------------------");
+                           // fb.logger.fine("-------------------------------");
                             fb.fbpause(h, fb.Photo_Frequency);
 
                             File imgfile = new File(fb.Image_Name_Full_Path);
@@ -900,6 +939,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         Button btnHelp = (Button) findViewById(R.id.help);
         btnHelp.setBackgroundColor(Color.rgb(90,90,90));
         btnHelp.setEnabled(true);
+
+        fb.fh.flush();
+        fb.fh.close();
 
     }
 
