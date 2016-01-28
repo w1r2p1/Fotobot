@@ -1182,6 +1182,20 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     }
 
     /**
+     * FotoBots main window
+     *
+     * @param v
+     */
+    public void mainw(View v) {
+        final FotoBot fb = (FotoBot) getApplicationContext();
+
+        tvInfo.setText(fb.log);
+
+
+    }
+
+
+    /**
      * FotoBots log window
      *
      * @param v
