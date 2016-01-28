@@ -917,12 +917,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 //fb.SendMessage(Integer.parseInt(width) + "x" + Integer.parseInt(height));
                             }
 
-                            if ( mCamera != null && !(preview_stopped) ) {
+                        //    if ( mCamera != null && !(preview_stopped) ) {
                                 mCamera.takePicture(null, null, mCall);
-                            } else {
-                                fb.SendMessage("Camera is not initialized.");
-                                stopFotobot(findViewById(R.id.tvInfo));
-                            }
+                        //    } else {
+                          //      fb.SendMessage("Camera is not initialized.");
+                          //      stopFotobot(findViewById(R.id.tvInfo));
+                        //    }
 
                             fb.SendMessage(getResources().getString(R.string.photo_has_been_taken));
 
