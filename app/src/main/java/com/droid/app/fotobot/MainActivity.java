@@ -37,8 +37,11 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -914,7 +917,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 //fb.SendMessage(Integer.parseInt(width) + "x" + Integer.parseInt(height));
                             }
 
-                            mCamera.takePicture(null, null, mCall);
+                            if ( mCamera != null && !(preview_stopped) ) {
+                                mCamera.takePicture(null, null, mCall);
+                            } else {
+                                fb.SendMessage("Camera is not initialized.");
+                                stopFotobot(findViewById(R.id.tvInfo));
+                            }
+
                             fb.SendMessage(getResources().getString(R.string.photo_has_been_taken));
 
                             fb.fbpause(h,3);
@@ -1165,18 +1174,43 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
      */
     public void log(View v) {
         final FotoBot fb = (FotoBot) getApplicationContext();
-        fb.Show_Help = true;
 
-        String versionName = "";
 
+        BufferedReader fileReader = null;
         try {
-            versionName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
-        } catch (PackageManager.NameNotFoundException e) {
+            fileReader = new BufferedReader(new FileReader(getFilesDir().toString() + "/fblog.txt"));
+           // fileReader = new BufferedReader(new FileReader("/storage/external_SD/str.txt"));
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        fb.SendMessage("Fotobot " + versionName);
-        fb.SendMessage(getResources().getString(R.string.main_help));
+        StringBuilder strBuilder = new StringBuilder();
+
+        String line;
+        try {
+            while((line = fileReader.readLine()) != null)
+            {
+                strBuilder.insert(0,line);
+                strBuilder.insert(0,"\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            fileReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+      //  strBuilder.trimToSize();
+
+        String contentsOfFile = strBuilder.toString();
+
+        tvInfo.setText(contentsOfFile);
+
+        Log.d(LOG_TAG, "reverse: " + contentsOfFile);
+
     }
 
     /**
