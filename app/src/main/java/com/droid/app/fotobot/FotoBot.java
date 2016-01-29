@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -36,6 +37,8 @@ import static android.os.Environment.getExternalStoragePublicDirectory;
 public class FotoBot extends Application {
 
     private final static Logger fblogger = Logger.getLogger(FotoBot.class.getName());
+
+    public String versionName = "";
 
     final String LOG_TAG = "Logs";
 
@@ -237,6 +240,8 @@ public class FotoBot extends Application {
      * В конструкторе проводим инициализацию объекта посредством считывания всех свойств из SharedPreferences.
      */
     public void FotoBot() {
+
+
 
         LoadData();
     }
@@ -513,8 +518,9 @@ public class FotoBot extends Application {
 
         m.setTo(toArr);
         m.setFrom(fb.EMail_Sender);
-        m.setSubject("Fotobot");
-        m.setBody(getResources().getString(R.string.battery_charge) + ": " + fb.battery_level + "%" + "\n" +
+        m.setSubject("Fotobot v" + versionName);
+        m.setBody("Fotobot v" + versionName + "\n" +
+                getResources().getString(R.string.battery_charge) + ": " + fb.battery_level + "%" + "\n" +
                 getResources().getString(R.string.gsm) + ": " + fb.GSM_Signal + "ASU    " + (2.0 * fb.GSM_Signal - 113) + "dBm" + "\n" +
                 "---------------------------------------------\n" +
                 "Image Index:" + fb.Image_Index + "\n" +

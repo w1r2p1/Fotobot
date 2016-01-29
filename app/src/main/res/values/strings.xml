@@ -31,7 +31,7 @@
     <string name="settings_tab_2">Network</string>
     <string name="settings_tab_3">Foto</string>
 
-    <string name="main_help">&lt;h1&gt;&lt;font color=white&gt;User Manual&lt;/font&gt;&lt;/h1&gt;
+    <string name="main_help">&lt;h2&gt;&lt;font color=white&gt;User Manual&lt;/font&gt;&lt;/h2&gt;
             This is simple Android application designed for taking and sending of pictures to user e-mail. Simple scheduler is used for this.
             Detailed instructions can be found there:
             &lt;a href=http://v-and-f.ru/fotobot&gt;http://v-and-f.ru/fotobot&lt;/a&gt;</string>

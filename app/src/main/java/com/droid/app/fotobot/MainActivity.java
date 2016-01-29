@@ -379,6 +379,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+
+
         Log.d(LOG_TAG, "\n\n\n\n\nMainActivity: onCreate\n\n\n\n\n");
 
         final FotoBot fb = (FotoBot) getApplicationContext();
@@ -549,9 +551,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         fb.sHolder = sHolder;
 
         intent = new Intent(MainActivity.this, Status.class);
-        fb.log = "\n" + getResources().getString(R.string.Fotobot);
 
-        tvInfo.setText(getResources().getString(R.string.welcome_to_fotobot));
+        tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
+        tvInfo.setTypeface(Typeface.MONOSPACE);
+        tvInfo.setTextColor(Color.rgb(190, 190, 190));
+
+        fb.log = getResources().getString(R.string.Fotobot);
+
+        tvInfo.setText(fb.log);
 
 
 
@@ -670,6 +677,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         Log.d(LOG_TAG, "\n\n\n\n\nMainActivity: onStart\n\n\n\n\n");
 
         final FotoBot fb = (FotoBot) getApplicationContext();
+
+        try {
+            fb.versionName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
 
         if (!fb.init_logger) {
 
@@ -1301,13 +1314,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         final FotoBot fb = (FotoBot) getApplicationContext();
         fb.Show_Help = true;
 
-        String versionName = "";
 
-        try {
-            versionName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
 
      //   fb.SendMessage("Fotobot " + versionName);
      //   fb.SendMessage(getResources().getString(R.string.main_help));
@@ -1315,8 +1322,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
         LogWidget.setBackgroundColor(Color.rgb(36, 64, 78));
 
-        tvInfo.setText("Fotobot " + versionName);
-        tvInfo.setText(Html.fromHtml((getResources().getString(R.string.main_help) )) );
+      //  tvInfo.setText(Html.fromHtml(("<h1>Fotobot " + fb.versionName + "</h1>")));
+        tvInfo.setText(Html.fromHtml(("<h1>Fotobot " + fb.versionName + "</h1>" + getResources().getString(R.string.main_help) )) );
 
     }
 }
