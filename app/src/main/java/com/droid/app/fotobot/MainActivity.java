@@ -1226,6 +1226,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     public void mainw(View v) {
         final FotoBot fb = (FotoBot) getApplicationContext();
 
+        LogWidget = (ScrollView) findViewById(R.id.scrollView);
+        LogWidget.setBackgroundColor(Color.rgb(0, 0, 128));
+
         tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
         tvInfo.setTypeface(Typeface.MONOSPACE);
         tvInfo.setTextColor(Color.rgb(150, 150, 150));
@@ -1274,7 +1277,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
       //  strBuilder.trimToSize();
 
-        String contentsOfFile = strBuilder.toString();
+        String contentsOfFile = "Fotobot's log" + strBuilder.toString();
+
+        LogWidget = (ScrollView) findViewById(R.id.scrollView);
+        LogWidget.setBackgroundColor(Color.rgb(64, 64, 64));
 
         tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
         tvInfo.setTypeface(Typeface.MONOSPACE);
@@ -1305,6 +1311,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
      //   fb.SendMessage("Fotobot " + versionName);
      //   fb.SendMessage(getResources().getString(R.string.main_help));
+
+        LogWidget = (ScrollView) findViewById(R.id.scrollView);
+        LogWidget.setBackgroundColor(Color.rgb(36, 64, 78));
 
         tvInfo.setText("Fotobot " + versionName);
         tvInfo.setText(getResources().getString(R.string.main_help));
