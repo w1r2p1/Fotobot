@@ -36,7 +36,7 @@
             Detailed instructions can be found there:
             &lt;a href=http://v-and-f.ru/fotobot&gt;http://v-and-f.ru/fotobot&lt;/a&gt;</string>
 
-    <string name="welcome_to_fotobot">&lt;br&gt;&lt;center&gt;&lt;font color=white&gt;Welcome to Fotobot!&lt;/font&gt;&lt;/center&gt;&lt;br&gt;
+    <string name="welcome_to_fotobot">Welcome to Fotobot!
                 Please review documentation if you first time here (press Help button at the bottom of the screen).</string>
 
     <string name="start_message">Fotobot started</string>

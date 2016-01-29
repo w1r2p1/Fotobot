@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             tvInfo.setTextColor(Color.rgb(190, 190, 190));
 
 
-            fb.logger.fine(message);
+            fb.logger.fine(reportDate + ": " + message);
 
 
             if (fb.Show_Help) {
@@ -551,7 +551,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         intent = new Intent(MainActivity.this, Status.class);
         fb.log = "\n" + getResources().getString(R.string.Fotobot);
 
-        tvInfo.setText(Html.fromHtml(getResources().getString(R.string.welcome_to_fotobot)));
+        tvInfo.setText(getResources().getString(R.string.welcome_to_fotobot));
 
 
 
@@ -1284,7 +1284,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
         tvInfo.setTypeface(Typeface.MONOSPACE);
-        tvInfo.setTextColor(Color.rgb(150, 150, 150));
+        tvInfo.setTextColor(Color.rgb(190, 190, 190));
 
         tvInfo.setText(contentsOfFile);
 
@@ -1316,7 +1316,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         LogWidget.setBackgroundColor(Color.rgb(36, 64, 78));
 
         tvInfo.setText("Fotobot " + versionName);
-        tvInfo.setText(getResources().getString(R.string.main_help));
+        tvInfo.setText(Html.fromHtml((getResources().getString(R.string.main_help) )) );
 
     }
 }
