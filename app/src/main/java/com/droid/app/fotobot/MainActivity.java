@@ -194,6 +194,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 btnLog.setBackgroundColor(Color.rgb(90,90,90));
                 btnLog.setEnabled(true);
 
+                Button btnMainw = (Button) findViewById(R.id.mainw);
+                btnMainw.setBackgroundColor(Color.rgb(90,90,90));
+                btnMainw.setEnabled(true);
+
                 btnStart.postInvalidate();
                 btnStop.postInvalidate();
             }
@@ -509,6 +513,23 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         });
 
+        final Button btnMainw = (Button) findViewById(R.id.mainw);
+        btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
+        btnMainw.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
+                } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    btnMainw.setBackgroundColor(Color.rgb(128, 128, 128));
+                }
+                return false;
+            }
+
+        });
+
+
 
         //get the Image View at the main.xml file
         iv_image = (ImageView) findViewById(R.id.imageView);
@@ -611,6 +632,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             btnLog.setBackgroundColor(Color.rgb(90,90,90));
             btnLog.setEnabled(true);
 
+            Button btnMainw = (Button) findViewById(R.id.mainw);
+            btnMainw.setBackgroundColor(Color.rgb(90,90,90));
+            btnMainw.setEnabled(true);
+
         }
 
         if (fb.getstatus() == 2) {
@@ -625,6 +650,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             Button btnLog = (Button) findViewById(R.id.log);
             btnLog.setBackgroundColor(Color.rgb(90,90,90));
             btnLog.setEnabled(false);
+
+            Button btnMainw = (Button) findViewById(R.id.mainw);
+            btnMainw.setBackgroundColor(Color.rgb(90,90,90));
+            btnMainw.setEnabled(true);
 
         }
 
@@ -790,6 +819,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 Button btnHelp = (Button) findViewById(R.id.help);
                 btnHelp.setBackgroundColor(Color.rgb(165, 165, 165));
                 btnHelp.setEnabled(false);
+
+                Button btnMainw = (Button) findViewById(R.id.mainw);
+                btnMainw.setBackgroundColor(Color.rgb(165, 165, 165));
+                btnMainw.setEnabled(true);
 
                 Button btnLog = (Button) findViewById(R.id.log);
                 btnLog.setBackgroundColor(Color.rgb(165,165,165));
@@ -1054,6 +1087,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
         btnLog.setEnabled(true);
 
+        Button btnMainw = (Button) findViewById(R.id.log);
+        btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
+        btnMainw.setEnabled(true);
+
         if (fb.init_logger) {
             fb.fh.flush();
             fb.fh.close();
@@ -1189,6 +1226,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     public void mainw(View v) {
         final FotoBot fb = (FotoBot) getApplicationContext();
 
+        tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
+        tvInfo.setTypeface(Typeface.MONOSPACE);
+        tvInfo.setTextColor(Color.rgb(150, 150, 150));
+
         tvInfo.setText(fb.log);
 
 
@@ -1235,6 +1276,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         String contentsOfFile = strBuilder.toString();
 
+        tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
+        tvInfo.setTypeface(Typeface.MONOSPACE);
+        tvInfo.setTextColor(Color.rgb(150, 150, 150));
+
         tvInfo.setText(contentsOfFile);
 
         Log.d(LOG_TAG, "reverse: " + contentsOfFile);
@@ -1258,8 +1303,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             e.printStackTrace();
         }
 
-        fb.SendMessage("Fotobot " + versionName);
-        fb.SendMessage(getResources().getString(R.string.main_help));
+     //   fb.SendMessage("Fotobot " + versionName);
+     //   fb.SendMessage(getResources().getString(R.string.main_help));
+
+        tvInfo.setText("Fotobot " + versionName);
+        tvInfo.setText(getResources().getString(R.string.main_help));
+
     }
 }
 

@@ -100,8 +100,8 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/main_button"
-            android:id="@+id/main"
+            android:text="@string/mainw_button"
+            android:id="@+id/mainw"
             android:layout_marginRight="4dp"
             android:layout_weight="0.5"
             android:layout_alignParentBottom="true"
