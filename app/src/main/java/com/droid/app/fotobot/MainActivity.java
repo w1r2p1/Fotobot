@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
             tvInfo.setTypeface(Typeface.MONOSPACE);
-            tvInfo.setTextColor(Color.rgb(150, 150, 150));
+            tvInfo.setTextColor(Color.rgb(190, 190, 190));
 
 
             fb.logger.fine(message);
@@ -458,7 +458,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         text = (TextView) findViewById(R.id.textView);
 
         WorkSpace = (RelativeLayout) findViewById(R.id.workspace);
-        WorkSpace.setBackgroundColor(Color.rgb(0,0,128));
+        WorkSpace.setBackgroundColor(Color.rgb(64,98,125));
         WorkSpace.setMinimumHeight(screenHeight);
         WorkSpace.setMinimumWidth(screenWidth);
 
@@ -470,7 +470,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
       //  LogWidget = (HorizontalScrollView) findViewById(R.id.horizontalScrollView);
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
-        LogWidget.setBackgroundColor(Color.rgb(0, 0, 128));
+        LogWidget.setBackgroundColor(Color.rgb(54, 88, 115));
         //LogWidget.setMinimumHeight(screenHeight / 100 * 80);
         //LogWidget.setMinimumHeight(803);
         LogWidget.setMinimumWidth(screenWidth);
@@ -1227,11 +1227,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         final FotoBot fb = (FotoBot) getApplicationContext();
 
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
-        LogWidget.setBackgroundColor(Color.rgb(0, 0, 128));
+        LogWidget.setBackgroundColor(Color.rgb(54, 88, 115));
 
         tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
         tvInfo.setTypeface(Typeface.MONOSPACE);
-        tvInfo.setTextColor(Color.rgb(150, 150, 150));
+        tvInfo.setTextColor(Color.rgb(190, 190, 190));
 
         tvInfo.setText(fb.log);
 
