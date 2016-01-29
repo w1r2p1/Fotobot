@@ -27,7 +27,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Tab_Foto_Activity  extends Activity {
     final String LOG_NETWORK_ACTIVITY = "Logs";
@@ -327,9 +326,18 @@ public class Tab_Foto_Activity  extends Activity {
 
         int fe_w = (int)fb.camera_resolutions.get(0).width;
         int fe_h = (int)fb.camera_resolutions.get(0).height;
+        float fe_s, fe_z;
+
+        fe_z = (float)fe_w / (float)fe_h;
 
         for (Camera.Size size : fb.camera_resolutions) {
-            spinnerArray.add(size.width+"x"+size.height);
+            fe_w = (int)size.width;
+            fe_h = (int)size.height;
+            fe_s =  (float)fe_w / (float)fe_h;
+
+            if (  Math.abs( fe_s - fe_z ) < 0.01f ) {
+                spinnerArray.add(size.width + "x" + size.height);
+            }
 
         }
 
