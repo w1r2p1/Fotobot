@@ -1,4 +1,4 @@
-<h2><font color=white>User Manual</font></h2>
-            This is simple Android application designed for taking and sending of pictures to user e-mail. Simple scheduler is used for this.
-            Detailed instructions can be found there:
-            <a href=http://v-and-f.ru/fotobot&gt;http://v-and-f.ru/fotobot</a>
+<h2>User Manual</h2>
+This is simple Android application designed for taking and sending of pictures to user e-mail. Simple scheduler is used for this.
+Detailed instructions can be found there:
+<a href=http://v-and-f.ru/fotobot>http://v-and-f.ru/fotobot</a>

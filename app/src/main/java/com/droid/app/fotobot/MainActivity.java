@@ -381,25 +381,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
-
         Log.d(LOG_TAG, "\n\n\n\n\nMainActivity: onCreate\n\n\n\n\n");
 
         final FotoBot fb = (FotoBot) getApplicationContext();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         Display display = getWindowManager().getDefaultDisplay();
         screenWidth = display.getWidth();
@@ -423,9 +407,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             default:
                 statusBarHeight = MEDIUM_DPI_STATUS_BAR_HEIGHT;
         }
-
-
-
 
         Log.d(LOG_TAG, "screenHeight: " + screenHeight);
         Log.d(LOG_TAG, "statusBarHeight: " + statusBarHeight);
@@ -533,8 +514,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         });
 
-
-
         //get the Image View at the main.xml file
         iv_image = (ImageView) findViewById(R.id.imageView);
 
@@ -558,11 +537,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         tvInfo.setTypeface(Typeface.MONOSPACE);
         tvInfo.setTextColor(Color.rgb(190, 190, 190));
 
-        fb.log = getResources().getString(R.string.Fotobot);
+      //  fb.SendMessage(getResources().getString(R.string.Fotobot));
 
         tvInfo.setText(fb.log);
-
-
 
       //  tvInfo.setText(log);
 
@@ -662,7 +639,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             Button btnMainw = (Button) findViewById(R.id.mainw);
             btnMainw.setBackgroundColor(Color.rgb(90,90,90));
-            btnMainw.setEnabled(true);
+            btnMainw.setEnabled(false);
 
         }
 
@@ -699,7 +676,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             fb.logpath = getFilesDir().toString() + "/";
 
             try {
-                fb.fh = new FileHandler(fb.logpath + "fblog.txt",3000,1,true);
+                fb.fh = new FileHandler(fb.logpath + "fblog.txt",9000,1,true);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -837,7 +814,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                 Button btnMainw = (Button) findViewById(R.id.mainw);
                 btnMainw.setBackgroundColor(Color.rgb(165, 165, 165));
-                btnMainw.setEnabled(true);
+                btnMainw.setEnabled(false);
 
                 Button btnLog = (Button) findViewById(R.id.log);
                 btnLog.setBackgroundColor(Color.rgb(165,165,165));

@@ -520,6 +520,7 @@ public class FotoBot extends Application {
         m.setFrom(fb.EMail_Sender);
         m.setSubject("Fotobot v" + versionName);
         m.setBody("Fotobot v" + versionName + "\n" +
+                "---------------------------------------------\n" +
                 getResources().getString(R.string.battery_charge) + ": " + fb.battery_level + "%" + "\n" +
                 getResources().getString(R.string.gsm) + ": " + fb.GSM_Signal + "ASU    " + (2.0 * fb.GSM_Signal - 113) + "dBm" + "\n" +
                 "---------------------------------------------\n" +
