@@ -474,7 +474,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
       //  LogWidget = (HorizontalScrollView) findViewById(R.id.horizontalScrollView);
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
-        LogWidget.setBackgroundColor(Color.rgb(54, 88, 115));
+        LogWidget.setBackgroundColor(Color.rgb(34, 58, 95));
         //LogWidget.setMinimumHeight(screenHeight / 100 * 80);
         //LogWidget.setMinimumHeight(803);
         LogWidget.setMinimumWidth(screenWidth);
@@ -550,7 +550,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         //tells Android that this surface will have its data constantly replaced
         sHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
-        fb.sHolder = sHolder;
+      //  fb.sHolder = sHolder;
 
         intent = new Intent(MainActivity.this, Status.class);
 
@@ -907,16 +907,42 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                        //     fb.logger.fine("n: " + fb.Image_Index);
 
                             if (preview_stopped) {
-                                mCamera.startPreview();
+
+                                try {
+                                    mCamera.setPreviewDisplay(fb.holder);
+                                    mCamera.startPreview();
+                                } catch (Exception e) {
+                                    fb.SendMessage("Problem with preview starting 1.");
+                                }
+
+                               // mCamera.startPreview();
                             }
 // https://sohabr.net/habr/post/215693/
                             fb.batteryLevel();
 
+
+                          //  if (mCamera != null) {
+                                //  sPreviewing = false;
+                                // first stop preview
+                           //     mCamera.stopPreview();
+                                // then cancel its preview callback
+                           //     mCamera.setPreviewCallback(null);
+                                // and finally release it
+                           //     mCamera.release();
+                                // sanitize you Camera object holder
+                          //      mCamera = null;
+                         //   }
+
+
+
+
                             if (fb.getstatus() == 3) {
-                                mCamera.stopPreview();
-                                mCamera.setPreviewCallback(null);
-                                mCamera.release();
-                                mCamera = null;
+                                if (mCamera != null) {
+                                    mCamera.stopPreview();
+                                    mCamera.setPreviewCallback(null);
+                                    mCamera.release();
+                                    mCamera = null;
+                                }
                                 fb.SendMessage(h, getResources().getString(R.string.stop_message));
                                 return;
                             }
@@ -954,17 +980,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             String width = parts[0];
                             String height = parts[1];
 
-                            if (fb.Photo_Post_Processing_Method.contains("Software")) {
-
-                                Camera.Parameters params = mCamera.getParameters();
-
-                                params.setPictureSize(Integer.parseInt(width), Integer.parseInt(height));
-
-                                mCamera.setParameters(params);
-
-                                //fb.SendMessage(Integer.parseInt(width) + "x" + Integer.parseInt(height));
-                            }
-
                             if ( mCamera == null ) {
                                 fb.SendMessage("Camera is not initialized.");
                                 try {
@@ -979,9 +994,22 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     mCamera.setPreviewDisplay(fb.holder);
                                     mCamera.startPreview();
                                 } catch (Exception e) {
-                                    fb.SendMessage("Problem with preview starting.");
+                                    fb.SendMessage("Problem with preview starting 2.");
                                 }
                             }
+
+                            if (fb.Photo_Post_Processing_Method.contains("Software")) {
+
+                                Camera.Parameters params = mCamera.getParameters();
+
+                                params.setPictureSize(Integer.parseInt(width), Integer.parseInt(height));
+
+                                mCamera.setParameters(params);
+
+                                //fb.SendMessage(Integer.parseInt(width) + "x" + Integer.parseInt(height));
+                            }
+
+
 
 
                                 mCamera.takePicture(null, null, mCall);
@@ -1057,7 +1085,26 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                          //   fb.SendMessage("\n");
                             // @
-                            mCamera.stopPreview();
+
+
+                          /*  mCamera.stopPreview(); */
+
+                            if (mCamera != null) {
+                              //  sPreviewing = false;
+                                // first stop preview
+                                mCamera.stopPreview();
+                                // then cancel its preview callback
+                                mCamera.setPreviewCallback(null);
+                                // and finally release it
+                                mCamera.release();
+                                // sanitize you Camera object holder
+                                mCamera = null;
+                            }
+
+
+
+
+
                             preview_stopped = true;
 
                         }
@@ -1295,7 +1342,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         String contentsOfFile = "Fotobot's log" + strBuilder.toString();
 
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
-        LogWidget.setBackgroundColor(Color.rgb(64, 64, 64));
+        LogWidget.setBackgroundColor(Color.rgb(54, 54, 54));
 
         tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
         tvInfo.setTypeface(Typeface.MONOSPACE);
@@ -1338,10 +1385,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
      //   fb.SendMessage(getResources().getString(R.string.main_help));
 
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
-        LogWidget.setBackgroundColor(Color.rgb(36, 64, 78));
+        LogWidget.setBackgroundColor(Color.rgb(26, 54, 60));
 
-        tvInfo.setText(Html.fromHtml((str)));
-      //  tvInfo.setText(Html.fromHtml(("<h1>Fotobot " + fb.versionName + "</h1>" + getResources().getString(R.string.main_help) )) );
+        tvInfo.setText(Html.fromHtml("<h1>Fotobot " + fb.versionName + "</h1>" + str));
+        //tvInfo.setText(Html.fromHtml(("<h1>Fotobot " + fb.versionName + "</h1>" + getResources().getString(R.string.main_help) )) );
 
     }
 }
