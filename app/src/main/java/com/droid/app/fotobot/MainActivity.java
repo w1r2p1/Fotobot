@@ -45,6 +45,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -675,24 +676,46 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             //   fb.logpath = "/mnt/sdcard/";
             fb.logpath = getFilesDir().toString() + "/";
 
+
+            File file = new File(fb.logpath + "fblog.txt");
+
+            if(!file.exists()) {
+                Log.d(LOG_TAG, "fblog.txt doesn't exist");
+                try {
+                    file.createNewFile();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Log.d(LOG_TAG, "fblog.txt created");
+            }
+
+
+
+
+
+
             try {
                 fb.fh = new FileHandler(fb.logpath + "fblog.txt",9000,1,true);
+                Log.d(LOG_TAG, "handler created");
 
             } catch (Exception e) {
                 e.printStackTrace();
+                Log.d(LOG_TAG, "handler is not created");
             }
 
-            fb.fh.setFormatter(new MyCustomFormatter());
 
+            fb.fh.setFormatter(new MyCustomFormatter());
+            Log.d(LOG_TAG, "formatter created");
             //    fb.fh.setFormatter(new SimpleFormatter());
 
             fb.logger.addHandler(fb.fh);
-
+            Log.d(LOG_TAG, "handler added");
             fb.logger.setLevel(Level.FINE);
 
 
             fb.logger.finest("Logger has been initialised.");
-
+            Log.d(LOG_TAG, "Logger has been initialised.");
             fb.init_logger = true;
         }
 
@@ -889,7 +912,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     mCamera.setPreviewDisplay(fb.holder);
                                     mCamera.startPreview();
                                 } catch (Exception e) {
-                                    fb.SendMessage("Problem with preview starting 1.");
+                                   // fb.SendMessage("Problem with preview starting 1.");
                                 }
 
                                // mCamera.startPreview();
@@ -962,7 +985,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 try {
                                     mCamera = Camera.open();
                                 } catch (Exception e) {
-                                    fb.SendMessage("Problem with camera initialisation.");
+                                  //  fb.SendMessage("Problem with camera initialisation.");
                                 }
                             }
                             if (preview_stopped) {
@@ -1105,9 +1128,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         h = new Handler(hc);
         final FotoBot fb = (FotoBot) getApplicationContext();
 
-        if (Build.VERSION.SDK_INT < 21 ) {
-            fb.CloseInternetConnection(getApplicationContext(), h);
-        }
+   //     if (Build.VERSION.SDK_INT < 21 ) {
+   //         fb.CloseInternetConnection(getApplicationContext(), h);
+   //     }
 
         Log.d(LOG_TAG, "stopFotobot: fb.getstatus()" + fb.getstatus());
         fb.setstatus(3);

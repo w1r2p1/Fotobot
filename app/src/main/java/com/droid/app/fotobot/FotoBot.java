@@ -84,7 +84,7 @@ public class FotoBot extends Application {
     /**
      * Размер изображения в пикселях
      */
-    public String Image_Size = "320x240";
+    public String Image_Size = "1024x768";
 
     /**
      * Размер изображения в килобайтах
