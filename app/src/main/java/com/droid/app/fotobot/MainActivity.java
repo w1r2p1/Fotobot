@@ -1289,7 +1289,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         final FotoBot fb = (FotoBot) getApplicationContext();
 
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
-        LogWidget.setBackgroundColor(Color.rgb(54, 88, 115));
+        LogWidget.setBackgroundColor(Color.rgb(34, 58, 95));
 
         tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
         tvInfo.setTypeface(Typeface.MONOSPACE);
