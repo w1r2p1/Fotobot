@@ -8,7 +8,7 @@ android {
         applicationId "com.droid.app.fotobot"
         minSdkVersion 8
         targetSdkVersion 10
-        versionCode 6
+        versionCode 7
         versionName "2.1.4"
     }
     buildTypes {
