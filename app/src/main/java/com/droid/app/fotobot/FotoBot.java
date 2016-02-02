@@ -518,7 +518,7 @@ public class FotoBot extends Application {
 
         m.setTo(toArr);
         m.setFrom(fb.EMail_Sender);
-        m.setSubject("Fotobot v" + versionName + " " + Camera_Name);
+        m.setSubject("Fotobot v" + versionName + " " + fb.Camera_Name);
         m.setBody("Fotobot v" + versionName + "\n" +
                 "---------------------------------------------\n" +
                 "Camera Name" + ": " + fb.Camera_Name + "\n" +
