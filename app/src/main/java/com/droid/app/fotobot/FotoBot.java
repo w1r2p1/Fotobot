@@ -241,8 +241,6 @@ public class FotoBot extends Application {
      */
     public void FotoBot() {
 
-
-
         LoadData();
     }
 
@@ -290,10 +288,10 @@ public class FotoBot extends Application {
             urlc.setConnectTimeout(3000); //choose your own timeframe
             urlc.setReadTimeout(4000); //choose your own timeframe
             urlc.connect();
-           // SendMessage(h, "удалось скачать файл из Internet");
+            // SendMessage(h, "удалось скачать файл из Internet");
             return (urlc.getResponseCode() == 200);
         } catch (IOException e) {
-           // SendMessage(h, "не удалось скачать файл из Internet");
+            // SendMessage(h, "не удалось скачать файл из Internet");
             return (false);  //connectivity exists, but no internet.
         }
 
@@ -490,31 +488,31 @@ public class FotoBot extends Application {
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
-       // SendMessage("Аттачим" + str);
+        // SendMessage("Аттачим" + str);
 
         Mail m = new Mail(fb.EMail_Sender, fb.EMail_Sender_Password, fb.SMTP_Host, fb.SMTP_Port);
-       //Mail m = new Mail("fotobotmail@gmail.com", "fotobotmailpasswd", "smtp.gmail.com", "465");
+        //Mail m = new Mail("fotobotmail@gmail.com", "fotobotmailpasswd", "smtp.gmail.com", "465");
 
         String[] toArr = {fb.EMail_Recepient};
 
         String s = "Debug-infos:";
-        s += "\n OS Version: "      + System.getProperty("os.version")      + "(" + android.os.Build.VERSION.INCREMENTAL + ")";
-        s += "\n OS API Level: "    + android.os.Build.VERSION.SDK_INT;
-        s += "\n Device: "          + android.os.Build.DEVICE;
-        s += "\n Model (and Product): " + android.os.Build.MODEL            + " ("+ android.os.Build.PRODUCT + ")";
+        s += "\n OS Version: " + System.getProperty("os.version") + "(" + android.os.Build.VERSION.INCREMENTAL + ")";
+        s += "\n OS API Level: " + android.os.Build.VERSION.SDK_INT;
+        s += "\n Device: " + android.os.Build.DEVICE;
+        s += "\n Model (and Product): " + android.os.Build.MODEL + " (" + android.os.Build.PRODUCT + ")";
 
-        s += "\n RELEASE: "         + android.os.Build.VERSION.RELEASE;
-        s += "\n BRAND: "           + android.os.Build.BRAND;
-        s += "\n DISPLAY: "         + android.os.Build.DISPLAY;
-        s += "\n CPU_ABI: "         + android.os.Build.CPU_ABI;
-        s += "\n CPU_ABI2: "        + android.os.Build.CPU_ABI2;
-        s += "\n UNKNOWN: "         + android.os.Build.UNKNOWN;
-        s += "\n HARDWARE: "        + android.os.Build.HARDWARE;
-        s += "\n Build ID: "        + android.os.Build.ID;
-        s += "\n MANUFACTURER: "    + android.os.Build.MANUFACTURER;
-        s += "\n SERIAL: "          + android.os.Build.SERIAL;
-        s += "\n USER: "            + android.os.Build.USER;
-        s += "\n HOST: "            + android.os.Build.HOST;
+        s += "\n RELEASE: " + android.os.Build.VERSION.RELEASE;
+        s += "\n BRAND: " + android.os.Build.BRAND;
+        s += "\n DISPLAY: " + android.os.Build.DISPLAY;
+        s += "\n CPU_ABI: " + android.os.Build.CPU_ABI;
+        s += "\n CPU_ABI2: " + android.os.Build.CPU_ABI2;
+        s += "\n UNKNOWN: " + android.os.Build.UNKNOWN;
+        s += "\n HARDWARE: " + android.os.Build.HARDWARE;
+        s += "\n Build ID: " + android.os.Build.ID;
+        s += "\n MANUFACTURER: " + android.os.Build.MANUFACTURER;
+        s += "\n SERIAL: " + android.os.Build.SERIAL;
+        s += "\n USER: " + android.os.Build.USER;
+        s += "\n HOST: " + android.os.Build.HOST;
 
         m.setTo(toArr);
         m.setFrom(fb.EMail_Sender);
@@ -531,13 +529,13 @@ public class FotoBot extends Application {
                 "usedMemory: " + fb.usedMemory + "\n" +
                 "freeMemory: " + fb.freeMemory + "\n" +
                 "---------------------------------------------\n" +
-                 getResources().getString(R.string.email_sending_time) + ": " + fb.email_sending_time + "\n" +
+                getResources().getString(R.string.email_sending_time) + ": " + fb.email_sending_time + "\n" +
                 "---------------------------------------------\n" +
                 getResources().getString(R.string.Fotobot_settings) + ":\n" +
-                "Network_Channel: "+ Network_Channel + "\n" +
-                "Network_Connection_Method: "+ Network_Connection_Method + "\n" +
-                "Use_WiFi: "+ Use_WiFi + "\n" +
-                "Use_Mobile_Data: "+ Use_Mobile_Data + "\n" +
+                "Network_Channel: " + Network_Channel + "\n" +
+                "Network_Connection_Method: " + Network_Connection_Method + "\n" +
+                "Use_WiFi: " + Use_WiFi + "\n" +
+                "Use_Mobile_Data: " + Use_Mobile_Data + "\n" +
                 "Use_Flash: " + Use_Flash + "\n" +
                 "JPEG_Compression: " + JPEG_Compression + "\n" +
                 "Photo_Frequency: " + Photo_Frequency + "\n" +
@@ -557,17 +555,15 @@ public class FotoBot extends Application {
                 "Android: " + Build.VERSION.SDK_INT + "\n" +
                 s + "\n");
 
-       // str = getApplicationContext().getFilesDir().toString() + "/" + str;
-
         File attach_file;
         attach_file = new File(str);
         boolean fileExists = attach_file.isFile();
 
-     //   if (fileExists) {
-     //       SendMessage(h, attach_file.length()/1000 + "Kb");
-     //   } else {
-     //       SendMessage(h, "Image doesn't exist.");
-     //   }
+        //   if (fileExists) {
+        //       SendMessage(h, attach_file.length()/1000 + "Kb");
+        //   } else {
+        //       SendMessage(h, "Image doesn't exist.");
+        //   }
 
         try {
             m.addAttachment(str);
