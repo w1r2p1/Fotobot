@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     }
 
-
     private int screenWidth, screenHeight;
     public static final int UNKNOW_CODE = 99;
     final String LOG_TAG = "Logs";
@@ -120,9 +119,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             tvInfo.setTypeface(Typeface.MONOSPACE);
             tvInfo.setTextColor(Color.rgb(190, 190, 190));
 
-
             fb.logger.fine(reportDate + ": " + message);
-
 
             if (fb.Show_Help) {
                 tvInfo.setText(Html.fromHtml((getResources().getString(R.string.main_help))));
@@ -191,9 +188,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             wakeLock.acquire();
 
-            //    Log.d(LOG_TAG, "***** mCall started: " + getUsedMemorySize());
-
-            //decode the data obtained by the camera into a Bitmap
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPurgeable = true;
 
@@ -611,7 +605,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 Log.d(LOG_TAG, "handler is not created");
             }
 
-
             fb.fh.setFormatter(new MyCustomFormatter());
             Log.d(LOG_TAG, "formatter created");
 
@@ -681,24 +674,18 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         if (!fb.init_logger) {
 
             Log.d(LOG_TAG, "fb.init_logger");
-
             fb.logger = Logger.getLogger(FotoBot.class.getName());
-
             fb.logpath = getFilesDir().toString() + "/";
 
             try {
                 fb.fh = new FileHandler(fb.logpath + "fblog.txt", 3000, 1, true);
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
             fb.fh.setFormatter(new MyCustomFormatter());
-
             fb.logger.addHandler(fb.fh);
-
             fb.logger.setLevel(Level.FINE);
-
 
             fb.logger.finest("Logger has been initialised.");
 
@@ -752,7 +739,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                         for (int i = 1; i <= 1000000000; i++) {
 
                             fb.Image_Index = i;
-
                             fb.SendMessage("n: " + fb.Image_Index);
 
                             if (preview_stopped) {
@@ -813,7 +799,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             String height = parts[1];
 
                             if (mCamera == null) {
-                                fb.SendMessage("Camera is not initialized.");
+                                //     fb.SendMessage("Camera is not initialized.");
                                 try {
                                     mCamera = Camera.open();
                                 } catch (Exception e) {
@@ -821,7 +807,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 }
                             }
                             if (preview_stopped) {
-                                fb.SendMessage("Preview is not started.");
+                                //    fb.SendMessage("Preview is not started.");
                                 try {
                                     mCamera.setPreviewDisplay(fb.holder);
                                     mCamera.startPreview();
@@ -833,9 +819,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             if (fb.Photo_Post_Processing_Method.contains("Software")) {
 
                                 Camera.Parameters params = mCamera.getParameters();
-
                                 params.setPictureSize(Integer.parseInt(width), Integer.parseInt(height));
-
                                 mCamera.setParameters(params);
 
                             }
@@ -894,11 +878,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 fb.CloseInternetConnection(getApplicationContext(), h);
                             }
 
-                            fb.SendMessage("-------------------------------");
+                            fb.SendMessage("------------------------------------");
 
                             fb.SendMessage(getResources().getString(R.string.pause_between_photos) + " " + fb.Photo_Frequency + "sec");
 
-                            fb.SendMessage("-------------------------------");
+                            fb.SendMessage("------------------------------------");
 
                             fb.fbpause(h, fb.Photo_Frequency);
 
@@ -910,24 +894,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 //     fb.SendMessage(fb.Image_Name + " wasn't deleted");
                             }
 
-                            //   fb.SendMessage("\n");
-                            // @
-
-
-                          /*  mCamera.stopPreview(); */
-
                             if (mCamera != null) {
-                                //  sPreviewing = false;
-                                // first stop preview
-                                mCamera.stopPreview();
-                                // then cancel its preview callback
-                                mCamera.setPreviewCallback(null);
-                                // and finally release it
-                                mCamera.release();
-                                // sanitize you Camera object holder
-                                mCamera = null;
-                            }
 
+                                mCamera.stopPreview();
+                                mCamera.setPreviewCallback(null);
+                                mCamera.release();
+                                mCamera = null;
+
+                            }
 
                             preview_stopped = true;
 

@@ -40,6 +40,8 @@ public class FotoBot extends Application {
 
     public String versionName = "";
 
+    public String Camera_Name = "";
+
     final String LOG_TAG = "Logs";
 
     /**
@@ -516,9 +518,10 @@ public class FotoBot extends Application {
 
         m.setTo(toArr);
         m.setFrom(fb.EMail_Sender);
-        m.setSubject("Fotobot v" + versionName);
+        m.setSubject("Fotobot v" + versionName + " " + Camera_Name);
         m.setBody("Fotobot v" + versionName + "\n" +
                 "---------------------------------------------\n" +
+                "Camera Name" + ": " + fb.Camera_Name + "\n" +
                 getResources().getString(R.string.battery_charge) + ": " + fb.battery_level + "%" + "\n" +
                 getResources().getString(R.string.gsm) + ": " + fb.GSM_Signal + "ASU    " + (2.0 * fb.GSM_Signal - 113) + "dBm" + "\n" +
                 "---------------------------------------------\n" +
@@ -618,6 +621,8 @@ public class FotoBot extends Application {
         Use_Flash = pref.getBoolean("Use_Flash", false);
 
         JPEG_Compression = pref.getInt("JPEG_Compression", 50);
+
+        Camera_Name = pref.getString("Camera_Name", "default");
 
         Photo_Frequency = pref.getInt("Photo_Frequency", 15);
 

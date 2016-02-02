@@ -37,6 +37,7 @@ public class Tab_Main_Activity extends Activity {
     EditText Config_Font_Size;
     EditText Log_Font_Size;
     EditText process_delay;
+    EditText editText_Fotobot_Camera_Name;
     final String LOG_TAG = "Logs";
 
     Logger fblogger = Logger.getLogger(FotoBot.class.getName());
@@ -46,11 +47,8 @@ public class Tab_Main_Activity extends Activity {
         super.onCreate(savedInstanceState);
         fb.LoadData();
 
-
-     //   Logger fblogger = Logger.getLogger(FotoBot.class.getName());
+            //   Logger fblogger = Logger.getLogger(FotoBot.class.getName());
         fb.logger.fine("Tab_Main_Activity");
-
-
 
         Display display = getWindowManager().getDefaultDisplay();
         screenWidth = display.getWidth();
@@ -71,6 +69,70 @@ public class Tab_Main_Activity extends Activity {
       //  baseView.setBackgroundColor(Color.rgb(0,0,90));
 
 // ------------------------------------------------------------------------------------------------
+// Camera name
+
+// camera name Container
+        RelativeLayout linLayout_Fotobot_Camera_Name = new RelativeLayout(this);
+        RelativeLayout.LayoutParams lpView_camera_name = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams lpView_camera_name_m1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        linLayout_Fotobot_Camera_Name.setPadding(5, 9, 5, 9);
+        linLayout_Fotobot_Camera_Name.setBackgroundColor(Color.rgb(192, 192, 192));
+
+// Пояснение контейнер
+        LinearLayout linLayout_Fotobot_Camera_Name_note = new LinearLayout(this);
+        linLayout_Fotobot_Camera_Name_note.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_Fotobot_Camera_Name_note.setPadding(5, 9, 5, 9);
+        linLayout_Fotobot_Camera_Name_note.setBackgroundColor(Color.rgb(192, 192, 192));
+
+// Контейнер для разделителя
+        LinearLayout linLayout_Fotobot_Camera_Name_divider = new LinearLayout(this);
+        linLayout_Fotobot_Camera_Name_divider.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_Fotobot_Camera_Name_divider.setPadding(5, 9, 5, 9);
+
+// Название
+        TextView tv_Fotobot_Camera_Name = new TextView(this);
+        tv_Fotobot_Camera_Name.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Fotobot_Camera_Name.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Fotobot_Camera_Name.setTextColor(Color.BLACK);
+        tv_Fotobot_Camera_Name.setText(getResources().getString(R.string.Camera_Name));
+        tv_Fotobot_Camera_Name.setMinimumWidth((screenWidth - padding) / 100 * 60);
+        tv_Fotobot_Camera_Name.setLayoutParams(lpView_camera_name);
+
+        lpView_camera_name.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Fotobot_Camera_Name.getId());
+        tv_Fotobot_Camera_Name.setLayoutParams(lpView_camera_name);
+        linLayout_Fotobot_Camera_Name.addView(tv_Fotobot_Camera_Name);
+
+// Camera Name
+        editText_Fotobot_Camera_Name = new EditText(this);
+        editText_Fotobot_Camera_Name.setLayoutParams(lpView_camera_name);
+        editText_Fotobot_Camera_Name.setSingleLine(true);
+        editText_Fotobot_Camera_Name.setText(fb.Camera_Name);
+        editText_Fotobot_Camera_Name.setTextColor(Color.rgb(50, 100, 150));
+        editText_Fotobot_Camera_Name.setWidth((screenWidth - padding) / 100 * 40);
+        editText_Fotobot_Camera_Name.setLayoutParams(lpView_camera_name);
+        editText_Fotobot_Camera_Name.setGravity(Gravity.RIGHT);
+
+        lpView_camera_name_m1.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, editText_Fotobot_Camera_Name.getId());
+        editText_Fotobot_Camera_Name.setLayoutParams(lpView_camera_name_m1);
+        linLayout_Fotobot_Camera_Name.addView(editText_Fotobot_Camera_Name);
+
+// Заметка для названия камеры
+        TextView tv_Fotobot_Camera_Name_note = new TextView(this);
+        tv_Fotobot_Camera_Name_note.setTypeface(null, Typeface.NORMAL);
+        tv_Fotobot_Camera_Name_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_Fotobot_Camera_Name_note.setTextColor(Color.BLACK);
+        tv_Fotobot_Camera_Name_note.setText(getResources().getString(R.string.Camera_Name_description));
+        tv_Fotobot_Camera_Name_note.setLayoutParams(lpView_camera_name);
+        tv_Fotobot_Camera_Name_note.setPadding(5, 9, 5, 9);
+        linLayout_Fotobot_Camera_Name_note.addView(tv_Fotobot_Camera_Name_note);
+
+// Разделитель
+        View line_Fotobot_Camera_Name = new View(this);
+        line_Fotobot_Camera_Name.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 1));
+        line_Fotobot_Camera_Name.setBackgroundColor(Color.rgb(210, 210, 210));
+        line_Fotobot_Camera_Name.getLayoutParams().height = 3;
+        linLayout_Fotobot_Camera_Name_divider.addView(line_Fotobot_Camera_Name);
+
 
 // 1. Интервал между фото (Horizontal LinearLayout контейнер)
        // LinearLayout linLayout1 = new LinearLayout(this);
@@ -239,9 +301,6 @@ public class Tab_Main_Activity extends Activity {
         linLayout2.setGravity(Gravity.BOTTOM | Gravity.CENTER);
         linLayout2.setLayoutParams(lpView2);
 
-
-
-
         linLayout2.setBackgroundColor(Color.rgb(192,192,192));
 
 // Шрифты (Config_Font_Size)
@@ -357,6 +416,7 @@ public class Tab_Main_Activity extends Activity {
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
 
+                editor.putString("Camera_Name", editText_Fotobot_Camera_Name.getText().toString());
                 editor.putInt("Photo_Frequency", Integer.parseInt(Photo_Frequency.getText().toString()));
                 editor.putInt("process_delay", Integer.parseInt(process_delay.getText().toString()));
                 editor.putInt("Config_Font_Size", Integer.parseInt(Config_Font_Size.getText().toString()));
@@ -404,6 +464,9 @@ public class Tab_Main_Activity extends Activity {
 // ------------------------------------------------------------------------------------------------
 
 // Расставляем контейнеры (порядок важен)
+        FullFrame.addView(linLayout_Fotobot_Camera_Name);
+        FullFrame.addView(linLayout_Fotobot_Camera_Name_note);
+    //    FullFrame.addView(linLayout_Fotobot_Camera_Name_divider);
         FullFrame.addView(linLayout1);
         FullFrame.addView(linLayout1_notes);
     //    FullFrame.addView(linLayout1_divider);

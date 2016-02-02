@@ -11,6 +11,9 @@
 
     <string name="Fotobot">Фотобот приветствует Вас!</string>
 
+    <string name="Camera_Name">Название камеры</string>
+    <string name="Camera_Name_description">Дайте название камере, чтобы потом было проще искать письма</string>
+
     <string name="foto_sent">Фото выслано на почту</string>
 
     <string name="connection_channel_wifi">Метод подключения Wi-Fi</string>

@@ -233,7 +233,6 @@ public class Tab_Network_Activity extends Activity {
 
 // E-Mail Container
         RelativeLayout linLayout_Fotobot_Email = new RelativeLayout(this);
-        //   linLayout_Fotobot_Email.setOrientation(LinearLayout.HORIZONTAL);
         RelativeLayout.LayoutParams lpView_email = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         RelativeLayout.LayoutParams lpView_email_m1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         linLayout_Fotobot_Email.setPadding(5, 9, 5, 9);
