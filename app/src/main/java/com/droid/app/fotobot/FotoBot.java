@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -33,6 +32,7 @@ import static android.os.Environment.getExternalStoragePublicDirectory;
  * <h1>FotoBot</h1>
  * Умеет делать фото и отправлять на почту.
  * Это глобальный класс, объект данного класса будет виден во всех активити. Инициализируется через Manifest.
+ * Все переменные с которыми работают методы других классов собраны здесь.
  */
 public class FotoBot extends Application {
 
