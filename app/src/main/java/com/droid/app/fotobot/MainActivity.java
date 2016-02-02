@@ -583,8 +583,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         if (!fb.init_logger) {
 
-            //  fb.SendMessage("Logger init");
-
             Log.d(LOG_TAG, "fb.init_logger");
 
             fb.logger = Logger.getLogger(FotoBot.class.getName());
@@ -757,8 +755,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             fb.SendMessage("n: " + fb.Image_Index);
 
-                            //     fb.logger.fine("n: " + fb.Image_Index);
-
                             if (preview_stopped) {
 
                                 try {
@@ -768,24 +764,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     // fb.SendMessage("Problem with preview starting 1.");
                                 }
 
-                                // mCamera.startPreview();
                             }
 // https://sohabr.net/habr/post/215693/
                             fb.batteryLevel();
-
-
-                            //  if (mCamera != null) {
-                            //  sPreviewing = false;
-                            // first stop preview
-                            //     mCamera.stopPreview();
-                            // then cancel its preview callback
-                            //     mCamera.setPreviewCallback(null);
-                            // and finally release it
-                            //     mCamera.release();
-                            // sanitize you Camera object holder
-                            //      mCamera = null;
-                            //   }
-
 
                             if (fb.getstatus() == 3) {
                                 if (mCamera != null) {
@@ -857,7 +838,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                                 mCamera.setParameters(params);
 
-                                //fb.SendMessage(Integer.parseInt(width) + "x" + Integer.parseInt(height));
                             }
 
 
@@ -873,8 +853,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 fb.SendMessage(fb.Image_Scale);
                             }
 
-                            //  fb.SendMessage("Total Memory:" + fb.totalMemory);
-                            //  fb.SendMessage("Free Memory:" + fb.freeMemory);
                             fb.SendMessage(getResources().getString(R.string.free_memory) + ": " + fb.freeMemory);
 
                             fb.fbpause(h, fb.process_delay);
@@ -917,11 +895,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             }
 
                             fb.SendMessage("-------------------------------");
-                            // fb.logger.fine("-------------------------------");
+
                             fb.SendMessage(getResources().getString(R.string.pause_between_photos) + " " + fb.Photo_Frequency + "sec");
-                            // fb.logger.fine(getResources().getString(R.string.pause_between_photos) + " " + fb.Photo_Frequency + "sec");
+
                             fb.SendMessage("-------------------------------");
-                            // fb.logger.fine("-------------------------------");
+
                             fb.fbpause(h, fb.Photo_Frequency);
 
                             File imgfile = new File(fb.Image_Name_Full_Path);
@@ -1104,7 +1082,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     }
 
     private class MyPhoneStateListener extends PhoneStateListener {
-        /* Get the Signal strength from the provider, each tiome there is an update */
         @Override
         public void onSignalStrengthsChanged(SignalStrength signalStrength) {
             final FotoBot fb = (FotoBot) getApplicationContext();
@@ -1113,7 +1090,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             if (null != signalStrength && signalStrength.getGsmSignalStrength() != UNKNOW_CODE) {
                 int signalStrengthPercent = calculateSignalStrengthInPercent(signalStrength.getGsmSignalStrength());
                 fb.GSM_Signal = calculateSignalStrengthInPercent(signalStrength.getGsmSignalStrength());
-                // viewModel.setSignalStrengthString(IntegerHelper.getString(signalStrengthPercent));
+
             }
         }
     }
@@ -1143,9 +1120,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         tvInfo.setText(fb.log);
 
-
     }
-
 
     /**
      * FotoBots log window
@@ -1155,11 +1130,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     public void log(View v) {
         final FotoBot fb = (FotoBot) getApplicationContext();
 
-
         BufferedReader fileReader = null;
         try {
             fileReader = new BufferedReader(new FileReader(getFilesDir().toString() + "/fblog.txt"));
-            // fileReader = new BufferedReader(new FileReader("/storage/external_SD/str.txt"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -1181,8 +1154,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        //  strBuilder.trimToSize();
 
         String contentsOfFile = "Fotobot's log" + strBuilder.toString();
 
@@ -1223,16 +1194,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             e.printStackTrace();
         }
 
-
-        //   fb.SendMessage("Fotobot " + versionName);
-        //   fb.SendMessage(getResources().getString(R.string.main_help));
-
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
         LogWidget.setBackgroundColor(Color.rgb(26, 54, 60));
 
         tvInfo.setText(Html.fromHtml("<h1>Fotobot " + fb.versionName + "</h1>" + str));
-        //tvInfo.setText(Html.fromHtml(("<h1>Fotobot " + fb.versionName + "</h1>" + getResources().getString(R.string.main_help) )) );
 
     }
 }
-
