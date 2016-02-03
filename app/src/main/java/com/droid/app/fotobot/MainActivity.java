@@ -115,6 +115,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             String message = (String) msg.obj; //Extract the string from the Message
             fb.log = reportDate + ": " + message + "\n" + fb.log;
 
+// string length
+
+            if (fb.log.length() > 1024) {
+                fb.log = fb.log.substring(0, 1024);
+            }
+
             tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
             tvInfo.setTypeface(Typeface.MONOSPACE);
             tvInfo.setTextColor(Color.rgb(190, 190, 190));
