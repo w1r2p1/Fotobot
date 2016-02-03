@@ -472,14 +472,14 @@ public class Tab_Main_Activity extends Activity {
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
 
-                FileWriter fileOut;
+                FileWriter log;
 
                 if (checkBox_Clean_Log.isChecked()) {
 
                     try {
-                        fileOut = new FileWriter(fb.logpath + "fblog.txt");
-                        fileOut.write("");
-                        fileOut.close();
+                        log = new FileWriter(fb.logpath + "fblog.txt");
+                        log.write("");
+                        log.close();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

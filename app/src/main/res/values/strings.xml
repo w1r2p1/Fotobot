@@ -95,7 +95,7 @@
     <string name="pause_between_photos">"Pause for"</string>
 
     <string name="clean_log">Clean Log</string>
-    <string name="clean_log_note">Check this and press MAIN WINDOW button, after that log will be cleaned</string>
+    <string name="clean_log_note">Check this and press APPLY button, after that log will be cleaned</string>
 
     <string name="battery_charge">Battery charge</string>
     <string name="gsm">GSM network</string>
