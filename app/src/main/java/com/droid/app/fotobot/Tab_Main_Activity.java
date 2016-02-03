@@ -22,6 +22,8 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.logging.Logger;
 
 public class Tab_Main_Activity extends Activity {
@@ -32,7 +34,7 @@ public class Tab_Main_Activity extends Activity {
     private EditText edit_text_jpeg_compression;
     private int screenWidth, screenHeight;
     private int padding = 15;
-    CheckBox checkBox_Flash;
+    CheckBox checkBox_Clean_Log;
     EditText Photo_Frequency;
     EditText Config_Font_Size;
     EditText Log_Font_Size;
@@ -369,6 +371,60 @@ public class Tab_Main_Activity extends Activity {
 
 // ------------------------------------------------------------------------------------------------
 
+// Почистить лог
+
+// Clean Log Container
+        RelativeLayout linLayout_Clean_Log = new RelativeLayout(this);
+        RelativeLayout.LayoutParams lpView_Clean_Log = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams lpView_Clean_Log_m = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams lpView_et_Clean_Log = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        linLayout_Clean_Log.setBackgroundColor(Color.rgb(192,192,192));
+
+// Clean Log TextView
+        TextView tv_Clean_Log = new TextView(this);
+        tv_Clean_Log.setText(getResources().getString(R.string.clean_log));
+        tv_Clean_Log.setWidth((screenWidth - padding) / 100 * 90);
+        tv_Clean_Log.setLayoutParams(lpView_Clean_Log);
+        tv_Clean_Log.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Clean_Log.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Clean_Log.setTextColor(Color.BLACK);
+
+        lpView_Clean_Log.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Clean_Log.getId());
+        tv_Clean_Log.setLayoutParams(lpView_Clean_Log);
+        linLayout_Clean_Log.addView(tv_Clean_Log);
+
+// CheckBox
+        checkBox_Clean_Log = new CheckBox(this);
+        checkBox_Clean_Log.setChecked(false);
+
+        lpView_Clean_Log_m.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, checkBox_Clean_Log.getId());
+        checkBox_Clean_Log.setLayoutParams(lpView_Clean_Log_m);
+        linLayout_Clean_Log.addView(checkBox_Clean_Log);
+
+// Second Container (Horizontal LinearLayout)
+        LinearLayout linLayout_Clean_Log_m = new LinearLayout(this);
+        linLayout_Clean_Log_m.setOrientation(LinearLayout.HORIZONTAL);
+     //   LinearLayout.LayoutParams lpView_Clean_Log_m = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+     //   LinearLayout.LayoutParams lpViewbutton = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        linLayout_Clean_Log_m.setGravity(Gravity.BOTTOM | Gravity.CENTER);
+
+
+// Заметка для метода
+        TextView tv_Clean_Log_note = new TextView(this);
+        tv_Clean_Log_note.setTypeface(null, Typeface.NORMAL);
+        tv_Clean_Log_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_Clean_Log_note.setTextColor(Color.BLACK);
+        tv_Clean_Log_note.setText(getResources().getString(R.string.clean_log_note));
+        // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
+        tv_Clean_Log_note.setLayoutParams(lpView);
+        //   tv_Photo_Processing_Method_note.setTextColor(Color.GRAY);
+        tv_Clean_Log_note.setPadding(5, 9, 5, 9);
+        linLayout_Clean_Log_m.addView(tv_Clean_Log_note);
+
+
+// ------------------------------------------------------------------------------------------------
+
 // Buttons
 
 // Container
@@ -415,6 +471,20 @@ public class Tab_Main_Activity extends Activity {
 
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
+
+                FileWriter fileOut;
+
+                if (checkBox_Clean_Log.isChecked()) {
+
+                    try {
+                        fileOut = new FileWriter(fb.logpath + "fblog.txt");
+                        fileOut.write("");
+                        fileOut.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
 
                 editor.putString("Camera_Name", editText_Fotobot_Camera_Name.getText().toString());
                 editor.putInt("Photo_Frequency", Integer.parseInt(Photo_Frequency.getText().toString()));
@@ -476,6 +546,8 @@ public class Tab_Main_Activity extends Activity {
         FullFrame.addView(linLayout_config_font_size);
         FullFrame.addView(linLayout_log_font_size);
         FullFrame.addView(linLayout2);
+        FullFrame.addView(linLayout_Clean_Log);
+        FullFrame.addView(linLayout_Clean_Log_m);
         FullFrame.addView(linLayout_Buttons);
 
         ScrollView m_Scroll = new ScrollView(this);
