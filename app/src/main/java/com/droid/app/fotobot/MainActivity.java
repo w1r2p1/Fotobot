@@ -603,7 +603,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
 
             try {
-                fb.fh = new FileHandler(fb.logpath + "fblog.txt", 9000, 1, true);
+                fb.fh = new FileHandler(fb.logpath + "fblog.txt", 1024, 1, true);
                 Log.d(LOG_TAG, "handler created");
 
             } catch (Exception e) {
