@@ -98,6 +98,7 @@
     <string name="clean_log_note">Поставьте галочку в квадратике и нажмите ПРИМЕНИТЬ после этого журнал будет очищен</string>
 
     <string name="battery_charge">Заряд батареи</string>
+    <string name="battery_temperature">Температура батареи</string>
     <string name="gsm">Уровень сигнала GSM сети</string>
     <string name="phone_memory">Используемая память (RAM)</string>
     <string name="free_memory">Свободная память (RAM)</string>

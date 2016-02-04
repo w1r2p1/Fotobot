@@ -186,8 +186,18 @@ public class FotoBot extends Application {
     public String usedMemory;
 
     /**
-     * Длительность отправки предыдущего письма
+     * Батарейка
      */
+    int  battery_health;
+    int  battery_icon_small;
+    int  battery_charge;
+    int  battery_plugged;
+    boolean  battery_present;
+    int  battery_scale;
+    int  battery_status;
+    String  battery_technology;
+    float  battery_temperature;
+    int  battery_voltage;
 
     /**
      * Логфайл
@@ -206,6 +216,9 @@ public class FotoBot extends Application {
      */
     public String log = "";
 
+    /**
+     * Длительность отправки предыдущего письма
+     */
     public long email_sending_time;
 
     /**
@@ -523,6 +536,7 @@ public class FotoBot extends Application {
                 "---------------------------------------------\n" +
                 "Camera Name" + ": " + fb.Camera_Name + "\n" +
                 getResources().getString(R.string.battery_charge) + ": " + fb.battery_level + "%" + "\n" +
+                getResources().getString(R.string.battery_temperature) + ": " + fb.battery_temperature + "C" + "\n" +
                 getResources().getString(R.string.gsm) + ": " + fb.GSM_Signal + "ASU    " + (2.0 * fb.GSM_Signal - 113) + "dBm" + "\n" +
                 "---------------------------------------------\n" +
                 "Image Index:" + fb.Image_Index + "\n" +
@@ -660,6 +674,7 @@ public class FotoBot extends Application {
                 //context.unregisterReceiver(this);
                 int rawlevel = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
                 int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+                battery_temperature = ((float)intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, -1))/10.0f;
                 battery_level = -1;
                 if (rawlevel >= 0 && scale > 0) {
                     battery_level = (rawlevel * 100) / scale;

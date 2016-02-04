@@ -2,6 +2,7 @@ package com.droid.app.fotobot;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.hardware.Camera;
 import android.media.AudioManager;
+import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -53,6 +55,8 @@ import java.util.logging.Formatter;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
+
+import android.content.BroadcastReceiver;
 
 public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
@@ -367,6 +371,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         fb.Working_Area_Height = screenHeight;
 
 // http://stackoverflow.com/questions/20264268/how-to-get-height-and-width-of-navigation-bar-programmatically
+
+     //   this.registerReceiver(this.batteryInfoReceiver,	new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
         PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
@@ -1180,4 +1186,23 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         tvInfo.setText(Html.fromHtml("<h1>Fotobot " + fb.versionName + "</h1>" + str));
 
     }
+
+   /* private BroadcastReceiver batteryInfoReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            int  health= intent.getIntExtra(BatteryManager.EXTRA_HEALTH,0);
+            int  icon_small= intent.getIntExtra(BatteryManager.EXTRA_ICON_SMALL,0);
+            int  level= intent.getIntExtra(BatteryManager.EXTRA_LEVEL,0);
+            int  plugged= intent.getIntExtra(BatteryManager.EXTRA_PLUGGED,0);
+            boolean  present= intent.getExtras().getBoolean(BatteryManager.EXTRA_PRESENT);
+            int  scale= intent.getIntExtra(BatteryManager.EXTRA_SCALE,0);
+            int  status= intent.getIntExtra(BatteryManager.EXTRA_STATUS,0);
+            String  technology= intent.getExtras().getString(BatteryManager.EXTRA_TECHNOLOGY);
+            int  temperature= intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE,0);
+            int  voltage= intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE,0);
+
+        }
+    }; */
+
 }
