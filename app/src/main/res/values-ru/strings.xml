@@ -14,6 +14,11 @@
     <string name="Camera_Name">Название камеры</string>
     <string name="Camera_Name_description">Дайте название камере, чтобы потом было проще искать письма</string>
 
+    <string name="fbloglength">Длина лога в главном окне (в байтах)</string>
+    <string name="fbloglength_description">Задайте ограничитель на количество выводимых символов</string>
+    <string name="fbfloglength">Длина лога на флэшке (bytes)</string>
+    <string name="fbfloglength_description">Максимальная длина логфайла</string>
+
     <string name="foto_sent">Фото выслано на почту</string>
 
     <string name="connection_channel_wifi">Метод подключения Wi-Fi</string>

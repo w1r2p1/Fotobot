@@ -40,6 +40,8 @@ public class Tab_Main_Activity extends Activity {
     EditText Log_Font_Size;
     EditText process_delay;
     EditText editText_Fotobot_Camera_Name;
+    EditText editText_fbloglength;
+    EditText editText_fbfloglength;
     final String LOG_TAG = "Logs";
 
     Logger fblogger = Logger.getLogger(FotoBot.class.getName());
@@ -425,6 +427,122 @@ public class Tab_Main_Activity extends Activity {
 
 // ------------------------------------------------------------------------------------------------
 
+// fb.log length
+
+// fb.log length Container
+        RelativeLayout linLayout_fbloglength = new RelativeLayout(this);
+        RelativeLayout.LayoutParams lpView_fbloglength = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams lpView_fbloglength_m1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        linLayout_fbloglength.setPadding(5, 9, 5, 9);
+        linLayout_fbloglength.setBackgroundColor(Color.rgb(192, 192, 192));
+
+// Пояснение контейнер
+        LinearLayout linLayout_fbloglength_note = new LinearLayout(this);
+        linLayout_fbloglength_note.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_fbloglength_note.setPadding(5, 9, 5, 9);
+        linLayout_fbloglength_note.setBackgroundColor(Color.rgb(192, 192, 192));
+
+// Контейнер для разделителя
+        LinearLayout linLayout_fbloglength_divider = new LinearLayout(this);
+        linLayout_fbloglength_divider.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_fbloglength_divider.setPadding(5, 9, 5, 9);
+
+// Название
+        TextView tv_fbloglength = new TextView(this);
+        tv_fbloglength.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_fbloglength.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_fbloglength.setTextColor(Color.BLACK);
+        tv_fbloglength.setText(getResources().getString(R.string.fbloglength));
+        tv_fbloglength.setMinimumWidth((screenWidth - padding) / 100 * 60);
+        tv_fbloglength.setLayoutParams(lpView_camera_name);
+
+        lpView_fbloglength.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_fbloglength.getId());
+        tv_fbloglength.setLayoutParams(lpView_fbloglength);
+        linLayout_fbloglength.addView(tv_fbloglength);
+
+// fb.log length
+        editText_fbloglength = new EditText(this);
+        editText_fbloglength.setLayoutParams(lpView_fbloglength);
+        editText_fbloglength.setSingleLine(true);
+        editText_fbloglength.setText(Integer.toString(fb.loglength));
+        editText_fbloglength.setTextColor(Color.rgb(50, 100, 150));
+        editText_fbloglength.setWidth((screenWidth - padding) / 100 * 40);
+        editText_fbloglength.setLayoutParams(lpView_fbloglength);
+        editText_fbloglength.setGravity(Gravity.RIGHT);
+
+        lpView_fbloglength_m1.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, editText_fbloglength.getId());
+        editText_fbloglength.setLayoutParams(lpView_fbloglength_m1);
+        linLayout_fbloglength.addView(editText_fbloglength);
+
+// Заметка для названия камеры
+        TextView tv_fbloglength_note = new TextView(this);
+        tv_fbloglength_note.setTypeface(null, Typeface.NORMAL);
+        tv_fbloglength_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_fbloglength_note.setTextColor(Color.BLACK);
+        tv_fbloglength_note.setText(getResources().getString(R.string.fbloglength_description));
+        tv_fbloglength_note.setLayoutParams(lpView_fbloglength);
+        tv_fbloglength_note.setPadding(5, 9, 5, 9);
+        linLayout_fbloglength_note.addView(tv_fbloglength_note);
+
+// ------------------------------------------------------------------------------------------------
+
+// fbf.log length
+
+// fbf.log length Container
+        RelativeLayout linLayout_fbfloglength = new RelativeLayout(this);
+        RelativeLayout.LayoutParams lpView_fbfloglength = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams lpView_fbfloglength_m1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        linLayout_fbfloglength.setPadding(5, 9, 5, 9);
+        linLayout_fbfloglength.setBackgroundColor(Color.rgb(192, 192, 192));
+
+// Пояснение контейнер
+        LinearLayout linLayout_fbfloglength_note = new LinearLayout(this);
+        linLayout_fbfloglength_note.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_fbfloglength_note.setPadding(5, 9, 5, 9);
+        linLayout_fbfloglength_note.setBackgroundColor(Color.rgb(192, 192, 192));
+
+// Контейнер для разделителя
+        LinearLayout linLayout_fbfloglength_divider = new LinearLayout(this);
+        linLayout_fbfloglength_divider.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_fbfloglength_divider.setPadding(5, 9, 5, 9);
+
+// Название
+        TextView tv_fbfloglength = new TextView(this);
+        tv_fbfloglength.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_fbfloglength.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_fbfloglength.setTextColor(Color.BLACK);
+        tv_fbfloglength.setText(getResources().getString(R.string.fbfloglength));
+        tv_fbfloglength.setMinimumWidth((screenWidth - padding) / 100 * 60);
+        tv_fbfloglength.setLayoutParams(lpView_camera_name);
+
+        lpView_fbfloglength.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_fbfloglength.getId());
+        tv_fbloglength.setLayoutParams(lpView_fbloglength);
+        linLayout_fbfloglength.addView(tv_fbfloglength);
+
+// fb.log length
+        editText_fbfloglength = new EditText(this);
+        editText_fbfloglength.setLayoutParams(lpView_fbfloglength);
+        editText_fbfloglength.setSingleLine(true);
+        editText_fbfloglength.setText(Integer.toString(fb.floglength));
+        editText_fbfloglength.setTextColor(Color.rgb(50, 100, 150));
+        editText_fbfloglength.setWidth((screenWidth - padding) / 100 * 40);
+        editText_fbfloglength.setLayoutParams(lpView_fbfloglength);
+        editText_fbfloglength.setGravity(Gravity.RIGHT);
+
+        lpView_fbfloglength_m1.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, editText_fbfloglength.getId());
+        editText_fbfloglength.setLayoutParams(lpView_fbfloglength_m1);
+        linLayout_fbfloglength.addView(editText_fbfloglength);
+
+// Заметка для названия камеры
+        TextView tv_fbfloglength_note = new TextView(this);
+        tv_fbfloglength_note.setTypeface(null, Typeface.NORMAL);
+        tv_fbfloglength_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_fbfloglength_note.setTextColor(Color.BLACK);
+        tv_fbfloglength_note.setText(getResources().getString(R.string.fbfloglength_description));
+        tv_fbfloglength_note.setLayoutParams(lpView_fbfloglength);
+        tv_fbfloglength_note.setPadding(5, 9, 5, 9);
+        linLayout_fbfloglength_note.addView(tv_fbfloglength_note);
+
 // Buttons
 
 // Container
@@ -467,7 +585,7 @@ public class Tab_Main_Activity extends Activity {
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-               // btn.setBackgroundColor(Color.rgb(228,228,228));
+                // btn.setBackgroundColor(Color.rgb(228,228,228));
 
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
@@ -491,6 +609,8 @@ public class Tab_Main_Activity extends Activity {
                 editor.putInt("process_delay", Integer.parseInt(process_delay.getText().toString()));
                 editor.putInt("Config_Font_Size", Integer.parseInt(Config_Font_Size.getText().toString()));
                 editor.putInt("Log_Font_Size", Integer.parseInt(Log_Font_Size.getText().toString()));
+                editor.putInt("Log_Length", Integer.parseInt(editText_fbloglength.getText().toString()));
+                editor.putInt("FLog_Length", Integer.parseInt(editText_fbfloglength.getText().toString()));
 
 // Save the changes in SharedPreferences
                 editor.commit();
@@ -543,13 +663,16 @@ public class Tab_Main_Activity extends Activity {
         FullFrame.addView(linLayout_process_delay);
         FullFrame.addView(linLayout_Flash_notes);
     //    FullFrame.addView(linLayout_Flash_divider);
+        FullFrame.addView(linLayout_fbloglength);
+        FullFrame.addView(linLayout_fbloglength_note);
+        FullFrame.addView(linLayout_fbfloglength);
+        FullFrame.addView(linLayout_fbfloglength_note);
+        FullFrame.addView(linLayout_Clean_Log);
+        FullFrame.addView(linLayout_Clean_Log_m);
         FullFrame.addView(linLayout_config_font_size);
         FullFrame.addView(linLayout_log_font_size);
         FullFrame.addView(linLayout2);
-        FullFrame.addView(linLayout_Clean_Log);
-        FullFrame.addView(linLayout_Clean_Log_m);
         FullFrame.addView(linLayout_Buttons);
-
         ScrollView m_Scroll = new ScrollView(this);
         m_Scroll.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
                 ViewGroup.LayoutParams.FILL_PARENT));

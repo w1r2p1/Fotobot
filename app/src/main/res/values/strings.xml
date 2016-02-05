@@ -14,6 +14,11 @@
     <string name="Camera_Name">Camera Name</string>
     <string name="Camera_Name_description">Give name for you device</string>
 
+    <string name="fbloglength">Log Length in main screen (bytes)</string>
+    <string name="fbloglength_description">Define the length of the log</string>
+    <string name="fbfloglength">Log Length in file (bytes)</string>
+    <string name="fbfloglength_description">Log file size</string>
+
     <string name="foto_sent">Foto has been sent</string>
 
     <string name="connection_channel_wifi">Connection channel is Wi-Fi</string>

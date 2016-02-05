@@ -157,6 +157,9 @@ public class FotoBot extends Application {
 
     public String Image_Name_Full_Path;
 
+    public int loglength = 1024;
+    public int floglength = 1024;
+
     /**
      * Camera properties
      */
@@ -572,6 +575,8 @@ public class FotoBot extends Application {
                 "Photo_Post_Processing_Method: " + Photo_Post_Processing_Method + "\n" +
                 "SMTP_Host: " + SMTP_Host + "\n" +
                 "SMTP_Port: " + SMTP_Port + "\n" +
+                "Log length: " + loglength + "\n" +
+                "FLog length: " + floglength + "\n" +
                 "---------------------------------------------\n" +
                 getResources().getString(R.string.hardware_info) + ":\n" +
                 "Android: " + Build.VERSION.SDK_INT + "\n" +
@@ -581,11 +586,21 @@ public class FotoBot extends Application {
         attach_file = new File(str);
         boolean fileExists = attach_file.isFile();
 
-        //   if (fileExists) {
-        //       SendMessage(h, attach_file.length()/1000 + "Kb");
-        //   } else {
-        //       SendMessage(h, "Image doesn't exist.");
-        //   }
+           if (fileExists) {
+            //   SendMessage(h, attach_file.length()/1000 + "Kb");
+           } else {
+               SendMessage(h, "Image doesn't exist.");
+           }
+
+        attach_file = new File((getApplicationContext().getFilesDir().toString() + "/fblog.txt"));
+        fileExists = attach_file.isFile();
+
+        if (fileExists) {
+            //   SendMessage(h, "FLog: " + attach_file.length()/1000 + "Kb");
+        } else {
+            SendMessage(h, "Log doesn't exist.");
+        }
+
 
         try {
             m.addAttachment(str);
@@ -667,6 +682,9 @@ public class FotoBot extends Application {
 
         SMTP_Port = pref.getString("SMTP_Port", "465");
 
+        loglength = pref.getInt("Log_Length", 1024);
+
+        floglength = pref.getInt("FLog_Length", 1024);
     }
 
     /**

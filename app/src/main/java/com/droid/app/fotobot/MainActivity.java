@@ -2,7 +2,6 @@ package com.droid.app.fotobot;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,7 +9,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.hardware.Camera;
 import android.media.AudioManager;
-import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -55,8 +53,6 @@ import java.util.logging.Formatter;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
-
-import android.content.BroadcastReceiver;
 
 public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
@@ -121,8 +117,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 // string length
 
-            if (fb.log.length() > 1024) {
-                fb.log = fb.log.substring(0, 1024);
+            if (fb.log.length() > fb.loglength) {
+                fb.log = fb.log.substring(0, fb.loglength);
             }
 
             tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
@@ -609,7 +605,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
 
             try {
-                fb.fh = new FileHandler(fb.logpath + "fblog.txt", 1024, 1, true);
+                fb.fh = new FileHandler(fb.logpath + "fblog.txt", fb.floglength, 1, true);
                 Log.d(LOG_TAG, "handler created");
 
             } catch (Exception e) {
@@ -690,7 +686,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             fb.logpath = getFilesDir().toString() + "/";
 
             try {
-                fb.fh = new FileHandler(fb.logpath + "fblog.txt", 3000, 1, true);
+                fb.fh = new FileHandler(fb.logpath + "fblog.txt", fb.floglength, 1, true);
             } catch (Exception e) {
                 e.printStackTrace();
             }
