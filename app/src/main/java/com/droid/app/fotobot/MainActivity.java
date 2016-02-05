@@ -102,11 +102,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         public boolean handleMessage(Message msg) {
 
             final FotoBot fb = (FotoBot) getApplicationContext();
-            PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+
+// Wakelock 1
+/*            PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
             PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                     "MyWakelockTag");
 
             wakeLock.acquire();
+*/
 
             DateFormat dateformat = new SimpleDateFormat("HH:mm:ss");
             Date today = Calendar.getInstance().getTime();
@@ -188,11 +191,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             fb.LoadData();
 
-            PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+// Wakelock 2
+/*            PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
             PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                     "MyWakelockTag");
 
             wakeLock.acquire();
+*/
 
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPurgeable = true;
@@ -370,6 +375,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
      //   this.registerReceiver(this.batteryInfoReceiver,	new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
+// Wakelock 3
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
         PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                 "MyWakelockTag");
@@ -498,6 +504,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     protected void onResume(SurfaceHolder holder) {
 
+// Wakelock 4
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
         PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                 "MyWakelockTag");
@@ -671,12 +678,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
      * @param v
      */
     public void startFotobot(View v) {
-        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+
+// Wakelock 5
+/*        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
         PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                 "MyWakelockTag");
 
         wakeLock.acquire();
-
+*/
         final FotoBot fb = (FotoBot) getApplicationContext();
 
         if (!fb.init_logger) {
@@ -723,11 +732,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 Thread t = new Thread(new Runnable() {
                     public void run() {
 
-                        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+// Wakelock 6
+/*                        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
                         PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                                 "MyWakelockTag");
 
                         wakeLock.acquire();
+*/
 
                         fb.SendMessage(getResources().getString(R.string.start_message));
 
