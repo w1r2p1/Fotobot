@@ -538,6 +538,11 @@ public class FotoBot extends Application {
                 getResources().getString(R.string.battery_charge) + ": " + fb.battery_level + "%" + "\n" +
                 getResources().getString(R.string.battery_temperature) + ": " + fb.battery_temperature + "C" + "\n" +
                 getResources().getString(R.string.gsm) + ": " + fb.GSM_Signal + "ASU    " + (2.0 * fb.GSM_Signal - 113) + "dBm" + "\n" +
+                "-50 -82 dbm   -   very good" + "\n" +
+                "-83 -86 dbm   -   good" + "\n" +
+                "-87 -91 dbm   -   normal" + "\n" +
+                "-92 -95 dbm   -   bad" + "\n" +
+                "-96 -100 dbm   -  almost no signal" + "\n" +
                 "---------------------------------------------\n" +
                 "Image Index:" + fb.Image_Index + "\n" +
                 "---------------------------------------------\n" +
