@@ -157,7 +157,14 @@ public class FotoBot extends Application {
 
     public String Image_Name_Full_Path;
 
+    /**
+     * Длина лога в главном окне
+     */
     public int loglength = 1024;
+
+    /**
+     * Длина лога в файле
+     */
     public int floglength = 1024;
 
     /**
@@ -600,7 +607,6 @@ public class FotoBot extends Application {
         } else {
             SendMessage(h, "Log doesn't exist.");
         }
-
 
         try {
             m.addAttachment(str);
