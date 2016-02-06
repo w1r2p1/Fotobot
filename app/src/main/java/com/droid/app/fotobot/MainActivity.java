@@ -733,12 +733,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                     public void run() {
 
 // Wakelock 6
-/*                        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+                        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
                         PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                                 "MyWakelockTag");
 
                         wakeLock.acquire();
-*/
+
 
                         fb.SendMessage(getResources().getString(R.string.start_message));
 
@@ -822,7 +822,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 try {
                                     mCamera = Camera.open();
                                 } catch (Exception e) {
-                                    //  fb.SendMessage("Problem with camera initialisation.");
+                                      fb.SendMessage("Problem with camera initialisation.");
                                 }
                             }
                             if (preview_stopped) {
