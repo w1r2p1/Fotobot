@@ -114,6 +114,8 @@ public class Mail extends javax.mail.Authenticator {
             // send email
             try {
                 Transport.send(msg);
+                Log.d("DEBUG", "Transport passed");
+                return true;
             } catch (SMTPAddressFailedException e) {
                 Log.d("DEBUG", "Mail host failed ");
                 return false;
@@ -125,7 +127,6 @@ public class Mail extends javax.mail.Authenticator {
                 return false;
             }
 
-            return true;
         } else {
             return false;
         }
@@ -160,12 +161,11 @@ public class Mail extends javax.mail.Authenticator {
 
         props.put("mail.smtp.port", _port);
         props.put("mail.smtp.socketFactory.port", _sport);
-        props.put("mail.smtp.connectiontimeout", "500");
-        props.put("mail.smtp.timeout", "500");
+        props.put("mail.smtp.connectiontimeout", "50");
+        props.put("mail.smtp.timeout", "50");
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.socketFactory.fallback", "false");
         props.put("mail.smtp.ssl.enable", "true");
-
 
         return props;
     }
