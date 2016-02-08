@@ -18,7 +18,6 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
@@ -305,7 +304,7 @@ public class FotoBot extends Application {
      * @return
      */
     public boolean getData(Handler h) {
-
+/*
         try {
             HttpURLConnection urlc = (HttpURLConnection) (new URL("http://www.google.com").openConnection());
             urlc.setRequestProperty("User-Agent", "Test");
@@ -319,6 +318,30 @@ public class FotoBot extends Application {
             // SendMessage(h, "не удалось скачать файл из Internet");
             return (false);  //connectivity exists, but no internet.
         }
+*/
+
+
+        try {
+
+            HttpURLConnection urlc = (HttpURLConnection) (new URL("http://www.google.com").openConnection());
+            urlc.setRequestMethod("HEAD");
+
+            urlc.setConnectTimeout(5000); //set timeout to 5 seconds
+            urlc.setReadTimeout(5000);
+            return (urlc.getResponseCode() == HttpURLConnection.HTTP_OK);
+        } catch (java.net.SocketTimeoutException e) {
+            SendMessage("SocketTimeoutException");
+            e.printStackTrace();
+            return(false);
+        } catch (java.io.IOException e) {
+            SendMessage("Problem with file downloading");
+            e.printStackTrace();
+            return(false);
+        }
+
+
+
+
 
     }
 
