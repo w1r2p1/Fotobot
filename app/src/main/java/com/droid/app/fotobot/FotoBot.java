@@ -17,7 +17,10 @@ import android.os.Message;
 import android.util.Log;
 import android.view.SurfaceHolder;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
@@ -304,24 +307,45 @@ public class FotoBot extends Application {
      * @return
      */
     public boolean getData(Handler h) {
-/*
+
+        BufferedReader rd  = null;
+        StringBuilder sb = null;
+        String line = null;
+
+
+
         try {
-            HttpURLConnection urlc = (HttpURLConnection) (new URL("http://www.google.com").openConnection());
+            HttpURLConnection urlc = (HttpURLConnection) (new URL("http://www.javatalks.ru").openConnection());
             urlc.setRequestProperty("User-Agent", "Test");
             urlc.setRequestProperty("Connection", "close");
             urlc.setConnectTimeout(3000); //choose your own timeframe
-            urlc.setReadTimeout(4000); //choose your own timeframe
+            urlc.setReadTimeout(1500); //choose your own timeframe
             urlc.connect();
-            // SendMessage(h, "удалось скачать файл из Internet");
-            return (urlc.getResponseCode() == 200);
+
+            rd  = new BufferedReader(new InputStreamReader(urlc.getInputStream()));
+            sb = new StringBuilder();
+
+            while ((line = rd.readLine()) != null)
+            {
+                sb.append(line + '\n');
+            }
+
+            //Log.d("debug",line);
+
+            SendMessage(h, "удалось скачать файл из Internet");
+
+        } catch (java.net.SocketTimeoutException e) {
+            SendMessage("SocketTimeoutException");
+            e.printStackTrace();
+            return(false);
         } catch (IOException e) {
-            // SendMessage(h, "не удалось скачать файл из Internet");
+             SendMessage(h, "IOException");
             return (false);  //connectivity exists, but no internet.
         }
-*/
+        return (true);
 
 
-        try {
+/*        try {
 
             HttpURLConnection urlc = (HttpURLConnection) (new URL("http://www.google.com").openConnection());
             urlc.setRequestMethod("HEAD");
@@ -339,10 +363,45 @@ public class FotoBot extends Application {
             return(false);
         }
 
+*/
+/*        int TIMEOUT_VALUE = 1000;
+        try {
+            URL testUrl = new URL("http://google.com");
+            StringBuilder answer = new StringBuilder(100000);
 
+            long start = System.nanoTime();
 
+            URLConnection testConnection = testUrl.openConnection();
+            testConnection.setConnectTimeout(TIMEOUT_VALUE);
+            testConnection.setReadTimeout(TIMEOUT_VALUE);
+            BufferedReader in = new BufferedReader(new InputStreamReader(testConnection.getInputStream()));
+            String inputLine;
 
+            while ((inputLine = in.readLine()) != null) {
+                answer.append(inputLine);
+                answer.append("\n");
+            }
+            in.close();
 
+            long elapsed = System.nanoTime() - start;
+            System.out.println("Elapsed (ms): " + elapsed / 1000000);
+            System.out.println("Answer:");
+            System.out.println(answer);
+            return true;
+
+        } catch (SocketTimeoutException e) {
+            System.out.println("More than " + TIMEOUT_VALUE + " elapsed.");
+            return false;
+        } catch (MalformedURLException e) {
+            System.out.println("Wrong URL");
+            e.printStackTrace();
+            return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+*/
+//return true;
     }
 
     /**
@@ -361,6 +420,7 @@ public class FotoBot extends Application {
         LoadData();
 
         boolean wf_connect_attempt = false;
+        boolean var1, var2;
 
         MobileData md;
         md = new MobileData();
@@ -383,9 +443,12 @@ public class FotoBot extends Application {
 
         }
 
+        var1 = isOnline(h);
+        var2 = getData(h);
+
         if (Network_Channel.contains("Mobile Data")) {
             SendMessage(h, getResources().getString(R.string.connection_channel_mobiledata));
-            if (!(isOnline(h) && getData(h))) {
+            if (!(var1 && var2)) {
                 SendMessage(h, getResources().getString(R.string.turning_on_mobiledata));
                 wf.setWiFiEnabled(getApplicationContext(), false);
                 fbpause(h, 5);
@@ -753,5 +816,16 @@ git pull origin master
 git fetch downloads the latest from remote without trying to merge or rebase anything.
 
 Then the git reset resets the master branch to what you just fetched. The --hard option changes all the files in your working tree to match the files in origin/master
+
+Все ветки на локальном сервере
+git branch
+
+Посмотреть все ветки на удаленном сервере
+git remote show origin
+git branch -r
+
+История коммитов
+git log
+git log --pretty=format:"%h %s" --graph
 
 */
