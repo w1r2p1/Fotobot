@@ -312,8 +312,6 @@ public class FotoBot extends Application {
         StringBuilder sb = null;
         String line = null;
 
-
-
         try {
             HttpURLConnection urlc = (HttpURLConnection) (new URL("http://www.javatalks.ru").openConnection());
             urlc.setRequestProperty("User-Agent", "Test");
