@@ -330,7 +330,14 @@ public class FotoBot extends Application {
 
             //Log.d("debug",line);
 
-            SendMessage(h, "удалось скачать файл из Internet");
+            String str = sb.toString();
+
+            if (str.length() > 1024) {
+                str = str.substring(0, 1024);
+            }
+
+            SendMessage("удалось скачать файл из Internet");
+            SendMessage(str);
 
         } catch (java.net.SocketTimeoutException e) {
             SendMessage("SocketTimeoutException");
