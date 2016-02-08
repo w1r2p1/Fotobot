@@ -1,6 +1,13 @@
 package com.droid.app.fotobot;
+
+import android.util.Log;
+
+import com.sun.mail.smtp.SMTPAddressFailedException;
+import com.sun.mail.smtp.SMTPSendFailedException;
+
 import java.util.Date;
 import java.util.Properties;
+
 import javax.activation.CommandMap;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -18,6 +25,7 @@ import javax.mail.internet.MimeMultipart;
 
 
 public class Mail extends javax.mail.Authenticator {
+
     private String _user;
     private String _pass;
 
@@ -104,7 +112,13 @@ public class Mail extends javax.mail.Authenticator {
             msg.setContent(_multipart);
 
             // send email
-            Transport.send(msg);
+            try {
+                Transport.send(msg);
+            } catch (SMTPAddressFailedException e) {
+                Log.d("DEBUG", "Mail host failed ");
+            } catch (SMTPSendFailedException e) {
+                Log.d("DEBUG", "SMTP timeout");
+            }
 
             return true;
         } else {
@@ -141,9 +155,12 @@ public class Mail extends javax.mail.Authenticator {
 
         props.put("mail.smtp.port", _port);
         props.put("mail.smtp.socketFactory.port", _sport);
+        props.put("mail.smtp.connectiontimeout", 500);
+        props.put("mail.smtp.timeout", 50);
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.socketFactory.fallback", "false");
         props.put("mail.smtp.ssl.enable", "true");
+
 
         return props;
     }

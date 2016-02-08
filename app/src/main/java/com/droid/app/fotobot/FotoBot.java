@@ -318,8 +318,8 @@ public class FotoBot extends Application {
             HttpURLConnection urlc = (HttpURLConnection) (new URL("http://www.javatalks.ru").openConnection());
             urlc.setRequestProperty("User-Agent", "Test");
             urlc.setRequestProperty("Connection", "close");
-            urlc.setConnectTimeout(3000); //choose your own timeframe
-            urlc.setReadTimeout(1500); //choose your own timeframe
+            urlc.setConnectTimeout(15000); //choose your own timeframe
+            urlc.setReadTimeout(15000); //choose your own timeframe
             urlc.connect();
 
             rd  = new BufferedReader(new InputStreamReader(urlc.getInputStream()));
