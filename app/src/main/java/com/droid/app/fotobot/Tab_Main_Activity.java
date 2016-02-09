@@ -702,7 +702,9 @@ public class Tab_Main_Activity extends Activity {
             public void onClick(View v) {
                 Intent intent;
                 intent = new Intent(v.getContext(), MainActivity.class);
+               // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
+
             }
         });
 
