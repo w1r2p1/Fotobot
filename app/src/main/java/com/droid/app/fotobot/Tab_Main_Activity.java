@@ -729,8 +729,8 @@ public class Tab_Main_Activity extends Activity {
         FullFrame.addView(linLayout_fbfloglength_note);
         FullFrame.addView(linLayout_Clean_Log);
         FullFrame.addView(linLayout_Clean_Log_m);
-        FullFrame.addView(linLayout_Clean_Text);
-        FullFrame.addView(linLayout_Clean_Text_m);
+      //  FullFrame.addView(linLayout_Clean_Text);
+      //  FullFrame.addView(linLayout_Clean_Text_m);
         FullFrame.addView(linLayout_config_font_size);
         FullFrame.addView(linLayout_log_font_size);
         FullFrame.addView(linLayout2);

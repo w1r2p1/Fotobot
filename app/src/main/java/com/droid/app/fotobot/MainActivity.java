@@ -381,6 +381,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 "MyWakelockTag");
 
         super.onCreate(savedInstanceState);
+       // super.onCreate(null);
 
         wakeLock.acquire();
 
@@ -575,7 +576,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        // outState.clear();
+        //outState.clear();
         Log.d(LOG_TAG, "MainActivity: onSaveInstanceState");
     }
 
