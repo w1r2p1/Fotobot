@@ -49,7 +49,7 @@ public class Tab_Foto_Activity  extends Activity {
         super.onCreate(savedInstanceState);
         fb.LoadData();
 
-        fb.logger.fine("Tab_Foto_Activity");
+       // fb.logger.fine("Tab_Foto_Activity");
 
         Log.d(LOG_TAG, "Tab3: onCreate");
         //      final FotoBot fb = (FotoBot) getApplicationContext();

@@ -99,8 +99,12 @@
 
     <string name="flash">Использовать вспышку</string>
     <string name="pause_between_photos">"Пауза"</string>
+
     <string name="clean_log">Почистить журнал</string>
     <string name="clean_log_note">Поставьте галочку в квадратике и нажмите ПРИМЕНИТЬ после этого журнал будет очищен</string>
+
+    <string name="clean_text">Почистить вывод информации</string>
+    <string name="clean_text_note">Поставьте галочку в квадратике и нажмите ПРИМЕНИТЬ после этого весь текст будет очищен</string>
 
     <string name="battery_charge">Заряд батареи</string>
     <string name="battery_temperature">Температура батареи</string>

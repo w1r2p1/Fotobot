@@ -26,8 +26,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Сетевые настройки для FotoBot
@@ -64,7 +62,7 @@ public class Tab_Network_Activity extends Activity {
         fb.LoadData();
 
        // Logger fblogger = Logger.getLogger(FotoBot.class.getName());
-        fb.logger.fine("Tab_Network_Activity");
+      //  fb.logger.fine("Tab_Network_Activity");
 
 
         Display display = getWindowManager().getDefaultDisplay();

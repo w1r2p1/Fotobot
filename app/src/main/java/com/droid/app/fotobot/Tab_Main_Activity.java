@@ -35,6 +35,7 @@ public class Tab_Main_Activity extends Activity {
     private int screenWidth, screenHeight;
     private int padding = 15;
     CheckBox checkBox_Clean_Log;
+    CheckBox checkBox_Clean_Text;
     EditText Photo_Frequency;
     EditText Config_Font_Size;
     EditText Log_Font_Size;
@@ -52,7 +53,7 @@ public class Tab_Main_Activity extends Activity {
         fb.LoadData();
 
             //   Logger fblogger = Logger.getLogger(FotoBot.class.getName());
-        fb.logger.fine("Tab_Main_Activity");
+      //  fb.logger.fine("Tab_Main_Activity");
 
         Display display = getWindowManager().getDefaultDisplay();
         screenWidth = display.getWidth();
@@ -424,6 +425,59 @@ public class Tab_Main_Activity extends Activity {
         tv_Clean_Log_note.setPadding(5, 9, 5, 9);
         linLayout_Clean_Log_m.addView(tv_Clean_Log_note);
 
+// ------------------------------------------------------------------------------------------------
+
+// Почистить вывод на экран
+
+// Clean Log Container
+        RelativeLayout linLayout_Clean_Text = new RelativeLayout(this);
+        RelativeLayout.LayoutParams lpView_Clean_Text = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams lpView_Clean_Text_m = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams lpView_et_Clean_Text = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        linLayout_Clean_Text.setBackgroundColor(Color.rgb(192,192,192));
+
+// Clean Log TextView
+        TextView tv_Clean_Text = new TextView(this);
+        tv_Clean_Text.setText(getResources().getString(R.string.clean_text));
+        tv_Clean_Text.setWidth((screenWidth - padding) / 100 * 90);
+        tv_Clean_Text.setLayoutParams(lpView_Clean_Log);
+        tv_Clean_Text.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Clean_Text.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Clean_Text.setTextColor(Color.BLACK);
+
+        lpView_Clean_Text.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Clean_Log.getId());
+        tv_Clean_Text.setLayoutParams(lpView_Clean_Text);
+        linLayout_Clean_Text.addView(tv_Clean_Text);
+
+// CheckBox
+        checkBox_Clean_Text = new CheckBox(this);
+        checkBox_Clean_Text.setChecked(false);
+
+        lpView_Clean_Text_m.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, checkBox_Clean_Text.getId());
+        checkBox_Clean_Text.setLayoutParams(lpView_Clean_Text_m);
+        linLayout_Clean_Text.addView(checkBox_Clean_Text);
+
+// Second Container (Horizontal LinearLayout)
+        LinearLayout linLayout_Clean_Text_m = new LinearLayout(this);
+        linLayout_Clean_Text_m.setOrientation(LinearLayout.HORIZONTAL);
+        //   LinearLayout.LayoutParams lpView_Clean_Log_m = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        //   LinearLayout.LayoutParams lpViewbutton = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        linLayout_Clean_Text_m.setGravity(Gravity.BOTTOM | Gravity.CENTER);
+
+
+// Заметка для метода
+        TextView tv_Clean_Text_note = new TextView(this);
+        tv_Clean_Text_note.setTypeface(null, Typeface.NORMAL);
+        tv_Clean_Text_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_Clean_Text_note.setTextColor(Color.BLACK);
+        tv_Clean_Text_note.setText(getResources().getString(R.string.clean_text_note));
+        // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
+        tv_Clean_Text_note.setLayoutParams(lpView);
+        //   tv_Photo_Processing_Method_note.setTextColor(Color.GRAY);
+        tv_Clean_Text_note.setPadding(5, 9, 5, 9);
+        linLayout_Clean_Text_m.addView(tv_Clean_Text_note);
+
 
 // ------------------------------------------------------------------------------------------------
 
@@ -604,6 +658,10 @@ public class Tab_Main_Activity extends Activity {
 
                 }
 
+                if (checkBox_Clean_Log.isChecked()) {
+                    fb.log = "";
+                }
+
                 editor.putString("Camera_Name", editText_Fotobot_Camera_Name.getText().toString());
                 editor.putInt("Photo_Frequency", Integer.parseInt(Photo_Frequency.getText().toString()));
                 editor.putInt("process_delay", Integer.parseInt(process_delay.getText().toString()));
@@ -669,6 +727,8 @@ public class Tab_Main_Activity extends Activity {
         FullFrame.addView(linLayout_fbfloglength_note);
         FullFrame.addView(linLayout_Clean_Log);
         FullFrame.addView(linLayout_Clean_Log_m);
+        FullFrame.addView(linLayout_Clean_Text);
+        FullFrame.addView(linLayout_Clean_Text_m);
         FullFrame.addView(linLayout_config_font_size);
         FullFrame.addView(linLayout_log_font_size);
         FullFrame.addView(linLayout2);

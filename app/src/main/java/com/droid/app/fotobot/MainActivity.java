@@ -104,12 +104,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             final FotoBot fb = (FotoBot) getApplicationContext();
 
 // Wakelock 1
-            PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+/*            PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
             PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                     "MyWakelockTag");
 
             wakeLock.acquire();
-
+*/
 
             DateFormat dateformat = new SimpleDateFormat("HH:mm:ss");
             Date today = Calendar.getInstance().getTime();
@@ -192,12 +192,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             fb.LoadData();
 
 // Wakelock 2
-            PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+/*            PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
             PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                     "MyWakelockTag");
 
             wakeLock.acquire();
-
+*/
 
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPurgeable = true;
@@ -1148,7 +1148,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             e.printStackTrace();
         }
 
-        String contentsOfFile = "Fotobot's log" + strBuilder.toString();
+        String contentsOfFile = strBuilder.toString();
 
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
         LogWidget.setBackgroundColor(Color.rgb(54, 54, 54));
