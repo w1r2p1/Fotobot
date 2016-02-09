@@ -376,14 +376,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
      //   this.registerReceiver(this.batteryInfoReceiver,	new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
 // Wakelock 3
-        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+/*        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
         PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                 "MyWakelockTag");
-
+        wakeLock.acquire();
+ */
         super.onCreate(savedInstanceState);
        // super.onCreate(null);
 
-        wakeLock.acquire();
+
 
         myPhoneStateListener = new MyPhoneStateListener();
         tel = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
