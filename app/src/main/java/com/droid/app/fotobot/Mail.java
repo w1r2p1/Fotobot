@@ -1,5 +1,6 @@
 package com.droid.app.fotobot;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.sun.mail.smtp.SMTPAddressFailedException;
@@ -25,6 +26,8 @@ import javax.mail.internet.MimeMultipart;
 
 
 public class Mail extends javax.mail.Authenticator {
+
+    private Context context;
 
     private String _user;
     private String _pass;
@@ -74,8 +77,10 @@ public class Mail extends javax.mail.Authenticator {
         CommandMap.setDefaultCommandMap(mc);
     }
 
-    public Mail(String user, String pass, String SMTP_Host, String SMTP_Port) {
+    public Mail(Context appcontext, String user, String pass, String SMTP_Host, String SMTP_Port) {
         this();
+
+        this.context = appcontext;
 
         _user = user;
         _pass = pass;
@@ -85,6 +90,11 @@ public class Mail extends javax.mail.Authenticator {
     }
 
     public boolean send() throws Exception {
+
+        final FotoBot fb = (FotoBot) this.context;
+
+        fb.SendMessage("send");
+
         Properties props = _setProperties();
 
         if(!_user.equals("") && !_pass.equals("") && _to.length > 0 && !_from.equals("") && !_subject.equals("") && !_body.equals("")) {
