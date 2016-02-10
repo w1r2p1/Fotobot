@@ -228,6 +228,8 @@ public class FotoBot extends Application {
      */
     public String log = "";
 
+    public boolean clean_log = false;
+
     /**
      * Длительность отправки предыдущего письма
      */

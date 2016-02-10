@@ -171,8 +171,8 @@ public class Mail extends javax.mail.Authenticator {
 
         props.put("mail.smtp.port", _port);
         props.put("mail.smtp.socketFactory.port", _sport);
-        props.put("mail.smtp.connectiontimeout", "15000");
-        props.put("mail.smtp.timeout", "15000");
+        props.put("mail.smtp.connectiontimeout", "60000");
+        props.put("mail.smtp.timeout", "60000");
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.socketFactory.fallback", "false");
         props.put("mail.smtp.ssl.enable", "true");

@@ -335,9 +335,29 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        //   Log.d(LOG_TAG, "\n\n\n\n\nMainActivity: onCreate\n\n\n\n\n");
+        super.onCreate(savedInstanceState);
+
+        Log.d(LOG_TAG, "MainActivity: onCreate");
 
         final FotoBot fb = (FotoBot) getApplicationContext();
+
+        if ( savedInstanceState == null )   // приложение запущено впервые
+        {
+            Log.d(LOG_TAG, "MainActivity: onCreate started first time");
+
+            if (fb.clean_log) {
+                fb.log = "";
+                fb.clean_log = false;
+            }
+        }
+        else // приложение восстановлено из памяти
+        {
+            Log.d(LOG_TAG, "MainActivity: onCreate restored");
+            if (fb.clean_log) {
+                fb.log = "";
+                fb.clean_log = false;
+            }
+        }
 
         Display display = getWindowManager().getDefaultDisplay();
         screenWidth = display.getWidth();
@@ -381,7 +401,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 "MyWakelockTag");
         wakeLock.acquire();
  */
-        super.onCreate(savedInstanceState);
+       // super.onCreate(savedInstanceState);
        // super.onCreate(null);
 
 
@@ -577,14 +597,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        //outState.clear();
+        outState.clear();
         Log.d(LOG_TAG, "MainActivity: onSaveInstanceState");
     }
 
     protected void onStart() {
 
         super.onStart();
-        //  Log.d(LOG_TAG, "\n\n\n\n\nMainActivity: onStart\n\n\n\n\n");
+          Log.d(LOG_TAG, "MainActivity: onStart");
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
