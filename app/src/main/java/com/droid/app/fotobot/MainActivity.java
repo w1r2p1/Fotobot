@@ -104,12 +104,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             final FotoBot fb = (FotoBot) getApplicationContext();
 
 // Wakelock 1
-/*            PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+            PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
             PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                     "MyWakelockTag");
 
             wakeLock.acquire();
-*/
+
 
             DateFormat dateformat = new SimpleDateFormat("HH:mm:ss");
             Date today = Calendar.getInstance().getTime();
@@ -192,12 +192,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             fb.LoadData();
 
 // Wakelock 2
-/*            PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+            PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
             PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                     "MyWakelockTag");
 
             wakeLock.acquire();
-*/
+
 
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPurgeable = true;
@@ -842,18 +842,20 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             String height = parts[1];
 
                             if (mCamera == null) {
-                                //     fb.SendMessage("Camera is not initialized.");
+                                  fb.SendMessage("Camera is not initialized.");
                                 try {
                                     mCamera = Camera.open();
+                                    fb.SendMessage("Camera has been initialized.");
                                 } catch (Exception e) {
                                       fb.SendMessage("Problem with camera initialisation.");
                                 }
                             }
                             if (preview_stopped) {
-                                //    fb.SendMessage("Preview is not started.");
+                                    fb.SendMessage("Preview is not started.");
                                 try {
                                     mCamera.setPreviewDisplay(fb.holder);
                                     mCamera.startPreview();
+                                    fb.SendMessage("Preview has been started.");
                                 } catch (Exception e) {
                                     fb.SendMessage("Problem with preview starting 2.");
                                 }
@@ -867,10 +869,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             }
 
+                            fb.fbpause(h, 3);
 
-                            mCamera.takePicture(null, null, mCall);
-
-                            fb.SendMessage(getResources().getString(R.string.photo_has_been_taken));
+                            try {
+                                mCamera.takePicture(null, null, mCall);
+                                fb.SendMessage(getResources().getString(R.string.photo_has_been_taken));
+                            } catch (Exception e) {
+                                fb.SendMessage("Problem with picture taking.");
+                            }
 
                             fb.fbpause(h, 3);
 
