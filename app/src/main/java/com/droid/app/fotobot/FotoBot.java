@@ -20,7 +20,10 @@ import android.view.SurfaceHolder;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
@@ -305,24 +308,66 @@ public class FotoBot extends Application {
     /**
      * Для проверки соединения выкачивает страницу из Internet
      *
-     * @param h
-     * @return
+     *
      */
-    public boolean getData(Handler h) {
+    public boolean getData() {
+
+ /*       HttpClient client = new DefaultHttpClient();
+
+        HttpGet request = new HttpGet("javatalaks.ru");
+        ResponseHandler<String> handler = new BasicResponseHandler();
+        String response = "";
+        try {
+            response = client.execute(request, handler);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+*/
+
+
+
 
         BufferedReader rd  = null;
         StringBuilder sb = null;
         String line = null;
 
+        InputStream is = null;
+
+
         try {
+            // http://developer.android.com/reference/java/net/HttpURLConnection.html
             HttpURLConnection urlc = (HttpURLConnection) (new URL("http://www.javatalks.ru").openConnection());
             urlc.setRequestProperty("User-Agent", "Test");
             urlc.setRequestProperty("Connection", "close");
             urlc.setConnectTimeout(15000); //choose your own timeframe
             urlc.setReadTimeout(15000); //choose your own timeframe
-            urlc.connect();
+            urlc.setRequestMethod("GET");
+            urlc.setDoInput(true);
 
-            rd  = new BufferedReader(new InputStreamReader(urlc.getInputStream()));
+            try {
+                urlc.connect();
+                int response = urlc.getResponseCode();
+                Log.d(LOG_TAG, "The response is: " + response);
+                // Convert the InputStream into a string
+                is = urlc.getInputStream();
+                String contentAsString = readIt(is, 500);
+
+            } catch (Exception e) {
+                SendMessage("Problem with connecting to site");
+            }
+// Makes sure that the InputStream is closed after the app is
+            // finished using it.
+        } finally {
+            if (is != null) {
+                is.close();
+            }
+        }
+
+
+
+
+/*            rd  = new BufferedReader(new InputStreamReader(urlc.getInputStream()));
             sb = new StringBuilder();
 
             while ((line = rd.readLine()) != null)
@@ -350,7 +395,7 @@ public class FotoBot extends Application {
             return (false);  //connectivity exists, but no internet.
         }
         return (true);
-
+*/
 
 /*        try {
 
@@ -411,6 +456,15 @@ public class FotoBot extends Application {
 //return true;
     }
 
+    // Reads an InputStream and converts it to a String.
+    public String readIt(InputStream stream, int len) throws IOException, UnsupportedEncodingException {
+        Reader reader = null;
+        reader = new InputStreamReader(stream, "UTF-8");
+        char[] buffer = new char[len];
+        reader.read(buffer);
+        return new String(buffer);
+    }
+
     /**
      * FotoBot умеет самостоятельно подключаться к Internet для отправки фото на почту
      *
@@ -434,14 +488,14 @@ public class FotoBot extends Application {
 
         if (Network_Channel.contains("Wi-Fi")) {
             SendMessage(h, getResources().getString(R.string.connection_channel_wifi));
-            if (!(isOnline(h) && getData(h))) {
+            if (!(isOnline(h) && getData())) {
                 SendMessage(h, getResources().getString(R.string.turning_on_wifi));
                 wf.setWiFiEnabled(getApplicationContext(), true);
                 fbpause(h, 5);
                 SendMessage(h, getResources().getString(R.string.turning_on_wifi_message));
                 fbpause(h, 5);
 
-                if ((isOnline(h) && getData(h))) {
+                if ((isOnline(h) && getData())) {
                     SendMessage(h, getResources().getString(R.string.Internet_connection));
                     return true;
                 }
@@ -451,7 +505,7 @@ public class FotoBot extends Application {
         }
 
         var1 = isOnline(h);
-        var2 = getData(h);
+        var2 = getData();
 
         if (Network_Channel.contains("Mobile Data")) {
             SendMessage(h, getResources().getString(R.string.connection_channel_mobiledata));
@@ -463,7 +517,7 @@ public class FotoBot extends Application {
                 fbpause(h, 5);
             }
 
-            if ((isOnline(h) && getData(h))) {
+            if ((isOnline(h) && getData())) {
                 SendMessage(h, getResources().getString(R.string.Internet_connection));
                 return true;
             } else {
@@ -474,14 +528,14 @@ public class FotoBot extends Application {
 
         if (Network_Channel.contains("Both")) {
             SendMessage(h, getResources().getString(R.string.connection_channel_wifimobiledata));
-            if (!(isOnline(h) && getData(h))) {
+            if (!(isOnline(h) && getData())) {
                 SendMessage(h, getResources().getString(R.string.turning_on_wifi));
                 wf.setWiFiEnabled(getApplicationContext(), true);
                 fbpause(h, 5);
                 SendMessage(h, getResources().getString(R.string.turning_on_wifi_message));
                 fbpause(h, 5);
 
-                if ((isOnline(h) && getData(h))) {
+                if ((isOnline(h) && getData())) {
                     SendMessage(h, getResources().getString(R.string.Internet_connection));
                     return true;
                 } else {
@@ -490,7 +544,7 @@ public class FotoBot extends Application {
 
             }
 
-            if (!(isOnline(h) && getData(h)) && wf_connect_attempt) {
+            if (!(isOnline(h) && getData()) && wf_connect_attempt) {
                 SendMessage(h, getResources().getString(R.string.connection_channel_wifimobiledata_message));
                 wf.setWiFiEnabled(getApplicationContext(), false);
                 fbpause(h, 5);
@@ -498,7 +552,7 @@ public class FotoBot extends Application {
                 fbpause(h, 5);
             }
 
-            if ((isOnline(h) && getData(h))) {
+            if ((isOnline(h) && getData())) {
                 SendMessage(h, getResources().getString(R.string.Internet_connection));
                 return true;
             } else {

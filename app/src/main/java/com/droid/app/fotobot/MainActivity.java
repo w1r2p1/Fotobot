@@ -712,6 +712,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
+        fb.getData();
+
         if (!fb.init_logger) {
 
             Log.d(LOG_TAG, "fb.init_logger");
