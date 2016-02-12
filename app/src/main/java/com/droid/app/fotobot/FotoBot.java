@@ -342,7 +342,7 @@ public class FotoBot extends Application {
         URL serverAddress = null;
 
         try {
-            serverAddress = new URL("www.google.com"); // http:// required
+            serverAddress = new URL("http://www.google.com"); // http:// required
             //set up out communications stuff
             urlc = null;
 
@@ -366,23 +366,40 @@ public class FotoBot extends Application {
 
             SendMessage("WEB page downloaded.");
 
+            urlc.disconnect();
+
         } catch (MalformedURLException e) {
+            e.printStackTrace();
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            String str = sw.toString();
+            SendMessage(str);
+            return false;
+        } catch (ProtocolException e) {
+            e.printStackTrace();
             e.printStackTrace();
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
             SendMessage(sw.toString().toUpperCase());
             return false;
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-            return false;
         } catch (IOException e) {
             e.printStackTrace();
+            e.printStackTrace();
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            SendMessage(sw.toString().toUpperCase());
             return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            SendMessage(sw.toString().toUpperCase());
         }
         finally
         {
             //close the connection, set all objects to null
-            urlc.disconnect();
+        //    urlc.disconnect();
             rd = null;
             sb = null;
          //   wr = null;
