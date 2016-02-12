@@ -22,9 +22,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.io.Reader;
+import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -334,15 +338,70 @@ public class FotoBot extends Application {
 
         InputStream is = null;
 
+        HttpURLConnection urlc = null;
+        URL serverAddress = null;
 
         try {
+            serverAddress = new URL("www.google.com"); // http:// required
+            //set up out communications stuff
+            urlc = null;
+
+            //Set up the initial connection
+            urlc = (HttpURLConnection)serverAddress.openConnection();
+            urlc.setRequestMethod("GET");
+            urlc.setDoOutput(true);
+            urlc.setReadTimeout(15000);
+
+            urlc.connect();
+//read the result from the server
+            rd  = new BufferedReader(new InputStreamReader(urlc.getInputStream()));
+            sb = new StringBuilder();
+
+            while ((line = rd.readLine()) != null)
+            {
+                sb.append(line + '\n');
+            }
+
+        //    System.out.println(sb.toString());
+
+            SendMessage("WEB page downloaded.");
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            SendMessage(sw.toString().toUpperCase());
+            return false;
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+            return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        finally
+        {
+            //close the connection, set all objects to null
+            urlc.disconnect();
+            rd = null;
+            sb = null;
+         //   wr = null;
+            urlc = null;
+        }
+
+
+
             // http://developer.android.com/reference/java/net/HttpURLConnection.html
-            HttpURLConnection urlc = (HttpURLConnection) (new URL("http://www.javatalks.ru").openConnection());
+/*            try {
+                urlc = (HttpURLConnection) (new URL("http://www.javatalks.ru").openConnection());
+            } catch (Exception e){
+
+            }
             urlc.setRequestProperty("User-Agent", "Test");
             urlc.setRequestProperty("Connection", "close");
             urlc.setConnectTimeout(15000); //choose your own timeframe
             urlc.setReadTimeout(15000); //choose your own timeframe
-            urlc.setRequestMethod("GET");
+          //  urlc.setRequestMethod("GET");
             urlc.setDoInput(true);
 
             try {
@@ -354,17 +413,27 @@ public class FotoBot extends Application {
                 String contentAsString = readIt(is, 500);
 
             } catch (Exception e) {
-                SendMessage("Problem with connecting to site");
-            }
+               SendMessage("Problem with connecting to site");
+           }
+
+
+
+
 // Makes sure that the InputStream is closed after the app is
             // finished using it.
         } finally {
             if (is != null) {
-                is.close();
+                try {
+                    is.close();
+                    return true;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return false;
+                }
             }
         }
 
-
+*/
 
 
 /*            rd  = new BufferedReader(new InputStreamReader(urlc.getInputStream()));
@@ -453,7 +522,7 @@ public class FotoBot extends Application {
             return false;
         }
 */
-//return true;
+return true;
     }
 
     // Reads an InputStream and converts it to a String.
