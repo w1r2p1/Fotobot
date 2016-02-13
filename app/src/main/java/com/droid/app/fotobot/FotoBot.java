@@ -45,6 +45,8 @@ import static android.os.Environment.getExternalStoragePublicDirectory;
  */
 public class FotoBot extends Application {
 
+    Camera camera = null;
+
     private final static Logger fblogger = Logger.getLogger(FotoBot.class.getName());
 
     public String versionName = "";
@@ -147,6 +149,8 @@ public class FotoBot extends Application {
     public Handler h;
 
     public SurfaceHolder sHolder = null;
+
+    public boolean frame_delay = false;
 
     /**
      * Размер шрифта в настройках (sp)
@@ -693,6 +697,57 @@ return true;
                     if (getstatus() == 3) {
                         return;
                     }
+
+                    if (  i % 60  == 0 && frame_delay ) {
+
+                        SendMessage("wake up: " + i);
+
+                        if (camera == null) {
+                            SendMessage("fb.apuse: Camera is not initialized.");
+                            try {
+                                camera = Camera.open();
+                                SendMessage("fb.pause: Camera has been initialized.");
+                            } catch (Exception e) {
+                                SendMessage("fb pause: Problem with camera initialisation.");
+                                e.printStackTrace();
+                            }
+                        }
+
+                        try {
+                            camera.setPreviewDisplay(holder);
+                            camera.startPreview();
+                            SendMessage("fb.pause: startPreview");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            SendMessage("fb.pause: problem with starting of preview");
+                        }
+
+                        try {
+                            TimeUnit.SECONDS.sleep(5);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+
+                        if (camera != null) {
+try {
+    camera.stopPreview();
+    camera.release();
+    camera = null;
+} catch (Exception e) {
+    SendMessage("fb.pause: camera released");
+}
+
+                        }
+
+                        try {
+                            TimeUnit.SECONDS.sleep(5);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
                 }
             }
 
