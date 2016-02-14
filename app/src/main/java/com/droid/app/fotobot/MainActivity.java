@@ -791,6 +791,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 try {
                                     mCamera.setPreviewDisplay(fb.holder);
                                     mCamera.startPreview();
+                                    preview_stopped = false;
                                 } catch (Exception e) {
                                     // fb.SendMessage("Problem with preview starting 1.");
                                 }
@@ -823,19 +824,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             AudioManager mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                             mgr.setStreamMute(AudioManager.STREAM_SYSTEM, true);
 
-                            if (fb.Use_Flash) {
-                                mCamera.stopPreview();
-                                Camera.Parameters parameters = mCamera.getParameters();
-                                try {
-                                    parameters.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
-                                } catch (Exception e) {
-                                    fb.SendMessage(h, "Camera.Parameters.FLASH_MODE_ON error");
-                                }
-                                mCamera.setParameters(parameters);
-                                mCamera.startPreview();
 
-                                fb.fbpause(h, fb.process_delay);
-                            }
 
                             // Camera.Parameters params;
                             String string = fb.Image_Size;
@@ -848,6 +837,28 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 try {
                                     mCamera = Camera.open();
                                     fb.SendMessage("Camera has been initialized.");
+
+
+                                    if (fb.Use_Flash) {
+                                        if (!preview_stopped) {
+                                            mCamera.stopPreview();
+                                            preview_stopped = true;
+                                        }
+                                        Camera.Parameters parameters = mCamera.getParameters();
+                                        try {
+                                            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
+                                        } catch (Exception e) {
+                                            fb.SendMessage(h, "Camera.Parameters.FLASH_MODE_ON error");
+                                        }
+                                        mCamera.setParameters(parameters);
+                                        // mCamera.startPreview();
+
+                                        fb.fbpause(h, fb.process_delay);
+                                    }
+
+
+
+
                                 } catch (Exception e) {
                                       fb.SendMessage("Problem with camera initialisation.");
                                 }
@@ -870,6 +881,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 try {
                                     mCamera.setPreviewDisplay(fb.holder);
                                     mCamera.startPreview();
+                                    preview_stopped = false;
                                     fb.SendMessage("Preview has been started.");
                                 } catch (Exception e) {
                                     fb.SendMessage("Problem with preview starting 2.");
@@ -901,7 +913,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             if (fb.Use_Flash) {
                                 mCamera.stopPreview();
-
+                                preview_stopped = true;
                                 parameters = mCamera.getParameters();
 
                                 fb.fbpause(h, fb.process_delay);
@@ -945,13 +957,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             if (mCamera != null) {
 
                                 mCamera.stopPreview();
+                                preview_stopped = true;
                                 mCamera.setPreviewCallback(null);
                                 mCamera.release();
                                 mCamera = null;
 
                             }
 
-                            preview_stopped = true;
+                          //  preview_stopped = true;
 
                             fb.camera = mCamera;
                             fb.frame_delay = true;
