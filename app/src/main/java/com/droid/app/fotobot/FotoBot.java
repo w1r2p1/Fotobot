@@ -211,16 +211,16 @@ public class FotoBot extends Application {
     /**
      * Батарейка
      */
-    int  battery_health;
-    int  battery_icon_small;
-    int  battery_charge;
-    int  battery_plugged;
-    boolean  battery_present;
-    int  battery_scale;
-    int  battery_status;
-    String  battery_technology;
-    float  battery_temperature;
-    int  battery_voltage;
+    int battery_health;
+    int battery_icon_small;
+    int battery_charge;
+    int battery_plugged;
+    boolean battery_present;
+    int battery_scale;
+    int battery_status;
+    String battery_technology;
+    float battery_temperature;
+    int battery_voltage;
 
     /**
      * Логфайл
@@ -315,8 +315,6 @@ public class FotoBot extends Application {
 
     /**
      * Для проверки соединения выкачивает страницу из Internet
-     *
-     *
      */
     public boolean getData() {
 
@@ -334,9 +332,7 @@ public class FotoBot extends Application {
 */
 
 
-
-
-        BufferedReader rd  = null;
+        BufferedReader rd = null;
         StringBuilder sb = null;
         String line = null;
 
@@ -351,22 +347,21 @@ public class FotoBot extends Application {
             urlc = null;
 
             //Set up the initial connection
-            urlc = (HttpURLConnection)serverAddress.openConnection();
+            urlc = (HttpURLConnection) serverAddress.openConnection();
             urlc.setRequestMethod("GET");
             urlc.setDoOutput(true);
             urlc.setReadTimeout(15000);
 
             urlc.connect();
 //read the result from the server
-            rd  = new BufferedReader(new InputStreamReader(urlc.getInputStream()));
+            rd = new BufferedReader(new InputStreamReader(urlc.getInputStream()));
             sb = new StringBuilder();
 
-            while ((line = rd.readLine()) != null)
-            {
+            while ((line = rd.readLine()) != null) {
                 sb.append(line + '\n');
             }
 
-        //    System.out.println(sb.toString());
+            //    System.out.println(sb.toString());
 
             SendMessage("WEB page downloaded.");
 
@@ -399,20 +394,17 @@ public class FotoBot extends Application {
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
             SendMessage(sw.toString().toUpperCase());
-        }
-        finally
-        {
+        } finally {
             //close the connection, set all objects to null
-        //    urlc.disconnect();
+            //    urlc.disconnect();
             rd = null;
             sb = null;
-         //   wr = null;
+            //   wr = null;
             urlc = null;
         }
 
 
-
-            // http://developer.android.com/reference/java/net/HttpURLConnection.html
+        // http://developer.android.com/reference/java/net/HttpURLConnection.html
 /*            try {
                 urlc = (HttpURLConnection) (new URL("http://www.javatalks.ru").openConnection());
             } catch (Exception e){
@@ -543,7 +535,7 @@ public class FotoBot extends Application {
             return false;
         }
 */
-return true;
+        return true;
     }
 
     // Reads an InputStream and converts it to a String.
@@ -698,17 +690,21 @@ return true;
                         return;
                     }
 
-                    if (  i % 60  == 0 && frame_delay ) {
+                    if (i % 60 == 0 && frame_delay) {
 
-                        SendMessage("wake up: " + i);
+                        // SendMessage("wake up: " + i);
+                        SendMessage(".");
 
                         if (camera == null) {
-                            SendMessage("fb.apuse: Camera is not initialized.");
+                            //SendMessage("fb.apuse: Camera is not initialized.");
+                            SendMessage("..");
                             try {
                                 camera = Camera.open();
-                                SendMessage("fb.pause: Camera has been initialized.");
+                                //SendMessage("fb.pause: Camera has been initialized.");
+                                SendMessage(".");
                             } catch (Exception e) {
-                                SendMessage("fb pause: Problem with camera initialisation.");
+                                //SendMessage("fb pause: Problem with camera initialisation.");
+                                SendMessage("...");
                                 e.printStackTrace();
                             }
                         }
@@ -716,10 +712,12 @@ return true;
                         try {
                             camera.setPreviewDisplay(holder);
                             camera.startPreview();
-                            SendMessage("fb.pause: startPreview");
+                            //SendMessage("fb.pause: startPreview");
+                            SendMessage(".");
                         } catch (Exception e) {
                             e.printStackTrace();
-                            SendMessage("fb.pause: problem with starting of preview");
+                            //SendMessage("fb.pause: problem with starting of preview");
+                            SendMessage("...");
                         }
 
                         try {
@@ -728,15 +726,14 @@ return true;
                             e.printStackTrace();
                         }
 
-
                         if (camera != null) {
-try {
-    camera.stopPreview();
-    camera.release();
-    camera = null;
-} catch (Exception e) {
-    SendMessage("fb.pause: camera released");
-}
+                            try {
+                                camera.stopPreview();
+                                camera.release();
+                                camera = null;
+                            } catch (Exception e) {
+                                SendMessage("...");
+                            }
 
                         }
 
@@ -881,11 +878,11 @@ try {
         attach_file = new File(str);
         boolean fileExists = attach_file.isFile();
 
-           if (fileExists) {
+        if (fileExists) {
             //   SendMessage(h, attach_file.length()/1000 + "Kb");
-           } else {
-               SendMessage(h, "Image doesn't exist.");
-           }
+        } else {
+            SendMessage(h, "Image doesn't exist.");
+        }
 
         attach_file = new File((getApplicationContext().getFilesDir().toString() + "/fblog.txt"));
         fileExists = attach_file.isFile();
@@ -991,7 +988,7 @@ try {
                 //context.unregisterReceiver(this);
                 int rawlevel = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
                 int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
-                battery_temperature = ((float)intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, -1))/10.0f;
+                battery_temperature = ((float) intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, -1)) / 10.0f;
                 battery_level = -1;
                 if (rawlevel >= 0 && scale > 0) {
                     battery_level = (rawlevel * 100) / scale;

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.droid.app.fotobot"
     android:versionCode="10"
-    android:versionName="2.1.6"
+    android:versionName="2.1.5.2"
     android:installLocation="auto"
     >
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>

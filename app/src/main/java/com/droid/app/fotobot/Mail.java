@@ -93,7 +93,8 @@ public class Mail extends javax.mail.Authenticator {
 
         final FotoBot fb = (FotoBot) this.context;
 
-        fb.SendMessage("send");
+        //fb.SendMessage("send");
+        fb.SendMessage(".");
 
         Properties props = _setProperties();
 
