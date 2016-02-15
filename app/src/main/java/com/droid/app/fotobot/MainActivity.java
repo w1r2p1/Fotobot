@@ -341,7 +341,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
-        if ( savedInstanceState == null )   // приложение запущено впервые
+        if (savedInstanceState == null)   // приложение запущено впервые
         {
             Log.d(LOG_TAG, "MainActivity: onCreate started first time");
 
@@ -349,8 +349,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 fb.log = "";
                 fb.clean_log = false;
             }
-        }
-        else // приложение восстановлено из памяти
+        } else // приложение восстановлено из памяти
         {
             Log.d(LOG_TAG, "MainActivity: onCreate restored");
             if (fb.clean_log) {
@@ -393,7 +392,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 // http://stackoverflow.com/questions/20264268/how-to-get-height-and-width-of-navigation-bar-programmatically
 
-     //   this.registerReceiver(this.batteryInfoReceiver,	new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        //   this.registerReceiver(this.batteryInfoReceiver,	new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
 // Wakelock 3
 /*        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
@@ -401,9 +400,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 "MyWakelockTag");
         wakeLock.acquire();
  */
-       // super.onCreate(savedInstanceState);
-       // super.onCreate(null);
-
+        // super.onCreate(savedInstanceState);
+        // super.onCreate(null);
 
 
         myPhoneStateListener = new MyPhoneStateListener();
@@ -604,7 +602,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     protected void onStart() {
 
         super.onStart();
-          Log.d(LOG_TAG, "MainActivity: onStart");
+        Log.d(LOG_TAG, "MainActivity: onStart");
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
@@ -712,7 +710,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
-  //      fb.getData();
+        //      fb.getData();
 
         if (!fb.init_logger) {
 
@@ -825,59 +823,68 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             mgr.setStreamMute(AudioManager.STREAM_SYSTEM, true);
 
 
-
                             // Camera.Parameters params;
                             String string = fb.Image_Size;
                             String[] parts = string.split("x");
                             String width = parts[0];
                             String height = parts[1];
 
+// start and set camera parameters
+
                             if (mCamera == null) {
-                                  fb.SendMessage("Camera is not initialized.");
+
+                                fb.SendMessage("Camera is not initialized.");
+
+                                try {
+                                    mCamera = Camera.open();
+                                    fb.SendMessage("Camera has been initialized for parameters setting.");
+                                } catch (Exception e) {
+                                    fb.SendMessage("Camera has not been initialized.");
+                                }
+                            }
+
+                            if (!preview_stopped) {
+                                try {
+                                    mCamera.stopPreview();
+                                } catch (Exception e) {
+                                    fb.SendMessage("Preview has been stopped for parameters setting.");
+                                }
+                                preview_stopped = true;
+                            }
+
+                            Camera.Parameters parameters = mCamera.getParameters();
+
+                            if (fb.Use_Flash) {
+                                parameters.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
+                            }
+
+                            if (fb.Photo_Post_Processing_Method.contains("Software")) {
+                                parameters.setPictureSize(Integer.parseInt(width), Integer.parseInt(height));
+                            }
+
+                            try {
+                                mCamera.setParameters(parameters);
+                            } catch (Exception e) {
+                                fb.SendMessage("Camera parameters have not been changed.");
+                                e.printStackTrace();
+                            }
+
+
+                     /*       if (mCamera == null) {
+                                fb.SendMessage("Camera is not initialized.");
                                 try {
                                     mCamera = Camera.open();
                                     fb.SendMessage("Camera has been initialized.");
 
-
-                                    if (fb.Use_Flash) {
-                                        if (!preview_stopped) {
-                                            mCamera.stopPreview();
-                                            preview_stopped = true;
-                                        }
-                                        Camera.Parameters parameters = mCamera.getParameters();
-                                        try {
-                                            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
-                                        } catch (Exception e) {
-                                            fb.SendMessage(h, "Camera.Parameters.FLASH_MODE_ON error");
-                                        }
-                                        mCamera.setParameters(parameters);
-                                        // mCamera.startPreview();
-
-                                        fb.fbpause(h, fb.process_delay);
-                                    }
-
-
-
-
                                 } catch (Exception e) {
-                                      fb.SendMessage("Problem with camera initialisation.");
+                                    fb.SendMessage("Problem with camera initialisation.");
                                 }
-                            }
+                            } */
 
-                            if (fb.Photo_Post_Processing_Method.contains("Software")) {
-
-                                Camera.Parameters params = mCamera.getParameters();
-                                params.setPictureSize(Integer.parseInt(width), Integer.parseInt(height));
-                                try {
-                                    mCamera.setParameters(params);
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-
-                            }
+                            fb.fbpause(h, 3);
 
                             if (preview_stopped) {
-                                    fb.SendMessage("Preview is not started.");
+                                fb.SendMessage("Preview is not started.");
                                 try {
                                     mCamera.setPreviewDisplay(fb.holder);
                                     mCamera.startPreview();
@@ -887,8 +894,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     fb.SendMessage("Problem with preview starting 2.");
                                 }
                             }
-
-
 
                             fb.fbpause(h, 3);
 
@@ -918,11 +923,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                                 fb.fbpause(h, fb.process_delay);
 
-                                try {
-                                    parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-                                } catch (Exception e) {
-                                    fb.SendMessage(h, "Camera.Parameters.FLASH_MODE_OFF error");
-                                }
+                                //   try {
+                                parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+                                //   } catch (Exception e) {
+                                //       fb.SendMessage(h, "Camera.Parameters.FLASH_MODE_OFF error");
+                                //    }
 
                                 try {
                                     mCamera.setParameters(parameters);
@@ -964,7 +969,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             }
 
-                          //  preview_stopped = true;
+                            //  preview_stopped = true;
 
                             fb.camera = mCamera;
                             fb.frame_delay = true;
@@ -978,7 +983,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             } else {
                                 //     fb.SendMessage(fb.Image_Name + " wasn't deleted");
                             }
-
 
 
                         }
