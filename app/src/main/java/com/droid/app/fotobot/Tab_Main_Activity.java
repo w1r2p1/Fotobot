@@ -790,6 +790,8 @@ public class Tab_Main_Activity extends Activity {
         FullFrame.addView(linLayout_Clean_Text_m);
         FullFrame.addView(linLayout_config_font_size);
         FullFrame.addView(linLayout_log_font_size);
+        FullFrame.addView(linLayout_Wake_Up);
+        FullFrame.addView(linLayout_Wake_Up_notes);
         FullFrame.addView(linLayout2);
         FullFrame.addView(linLayout_Buttons);
         ScrollView m_Scroll = new ScrollView(this);
