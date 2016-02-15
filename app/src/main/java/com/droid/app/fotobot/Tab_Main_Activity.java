@@ -43,6 +43,7 @@ public class Tab_Main_Activity extends Activity {
     EditText editText_Fotobot_Camera_Name;
     EditText editText_fbloglength;
     EditText editText_fbfloglength;
+    EditText Wake_Up;
     final String LOG_TAG = "Logs";
 
     Logger fblogger = Logger.getLogger(FotoBot.class.getName());
@@ -600,72 +601,57 @@ public class Tab_Main_Activity extends Activity {
 // ------------------------------------------------------------------------------------------------
 
 // Wake Up (Horizontal LinearLayout контейнер)
-        RelativeLayout linLayout1 = new RelativeLayout(this);
-        RelativeLayout.LayoutParams lpView = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        RelativeLayout.LayoutParams lpView_m = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        LinearLayout.LayoutParams lpView_et = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout linLayout_Wake_Up = new RelativeLayout(this);
+        RelativeLayout.LayoutParams lpView_Wake_Up = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams lpView_Wake_Up_m = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams lpView_Wake_Up_et = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         linLayout1.setBackgroundColor(Color.rgb(192, 192, 192));
 
 
-// 1.1 Интервал между фото (пояснение контейнер)
-        LinearLayout linLayout1_notes = new LinearLayout(this);
-        //RelativeLayout linLayout1_notes = new RelativeLayout(this);
-        linLayout1_notes.setOrientation(LinearLayout.HORIZONTAL);
-        linLayout1_notes.setBackgroundColor(Color.rgb(192,192,192));
-        linLayout1_notes.setPadding(0,0,0,9);
+// Wake Up (пояснение контейнер)
+        LinearLayout linLayout_Wake_Up_notes = new LinearLayout(this);
+        linLayout_Wake_Up_notes.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_Wake_Up_notes.setBackgroundColor(Color.rgb(192, 192, 192));
+        linLayout_Wake_Up_notes.setPadding(0, 0, 0, 9);
 
-// 1.2 Интервал между фото (divider контейнер)
-        LinearLayout linLayout1_divider = new LinearLayout(this);
-        linLayout1_divider.setOrientation(LinearLayout.HORIZONTAL);
-        linLayout1_divider.setPadding(1,5,5,5);
-        linLayout1_divider.setBackgroundColor(Color.rgb(192,192,192));
+// Wake Up
+        TextView tv_Wake_Up = new TextView(this);
+        tv_Wake_Up.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Wake_Up.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Wake_Up.setTextColor(Color.BLACK);
+        tv_Wake_Up.setText(getResources().getString(R.string.wake_up));
+        tv_Wake_Up.setWidth((screenWidth - padding) / 100 * 80);
+        tv_Wake_Up.setLayoutParams(lpView);
+        tv_Wake_Up.setTypeface(Typeface.DEFAULT_BOLD);
 
-// 1.3 Интервал между фото
-        TextView tv = new TextView(this);
-        tv.setTypeface(Typeface.DEFAULT_BOLD);
-        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
-        tv.setTextColor(Color.BLACK);
-        tv.setText(getResources().getString(R.string.pause_between_frames));
-        tv.setWidth((screenWidth - padding) / 100 * 80);
-        tv.setLayoutParams(lpView);
-        tv.setTypeface(Typeface.DEFAULT_BOLD);
+        lpView_Wake_Up.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Wake_Up.getId());
+        tv_Wake_Up.setLayoutParams(lpView_Wake_Up);
+        linLayout_Wake_Up.addView(tv_Wake_Up);
 
-        lpView.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv.getId());
-        tv.setLayoutParams(lpView);
-        linLayout1.addView(tv);
+// Wake Up (notes)
+        TextView tv_Wake_Up_notes = new TextView(this);
+        tv_Wake_Up_notes.setTypeface(null, Typeface.NORMAL);
+        tv_Wake_Up_notes.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_Wake_Up_notes.setTextColor(Color.BLACK);
+        tv_Wake_Up_notes.setText(getResources().getString(R.string.wake_up_description));
+        tv_Wake_Up_notes.setWidth((screenWidth - padding) / 100 * 99);
+        tv_Wake_Up_notes.setLayoutParams(lpView);
+        tv_Wake_Up_notes.setPadding(1, 5, 5, 5);
+        linLayout_Wake_Up_notes.addView(tv_Wake_Up_notes);
 
-// 1.4 Интервал между фото (notes)
-        TextView tv_notes = new TextView(this);
-        tv_notes.setTypeface(null, Typeface.NORMAL);
-        tv_notes.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
-        tv_notes.setTextColor(Color.BLACK);
-        tv_notes.setText(getResources().getString(R.string.pause_between_frames_description));
-        tv_notes.setWidth((screenWidth - padding) / 100 * 99);
-        tv_notes.setLayoutParams(lpView);
-        tv_notes.setPadding(1, 5, 5, 5);
-        linLayout1_notes.addView(tv_notes);
+// Wake Up (ввод данных)
+        Wake_Up = new EditText(this);
+        Wake_Up.setLayoutParams(lpView_Wake_Up_et);
+        Wake_Up.setTextColor(Color.rgb(50, 100, 150));
+        Wake_Up.setText(Integer.toString(fb.wake_up_interval));
+        ViewGroup.LayoutParams lp_Wake_Up = Wake_Up.getLayoutParams();
+        lp_Wake_Up.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 80);
+        Wake_Up.setLayoutParams(lp);
+        Wake_Up.setGravity(Gravity.RIGHT);
 
-// 1.5 Интервал между фото (ввод данных)
-        Photo_Frequency = new EditText(this);
-        Photo_Frequency.setLayoutParams(lpView_et);
-        Photo_Frequency.setTextColor(Color.rgb(50,100,150));
-        Photo_Frequency.setText(Integer.toString(fb.Photo_Frequency));
-        ViewGroup.LayoutParams lp = Photo_Frequency.getLayoutParams();
-        lp.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 80);
-        Photo_Frequency.setLayoutParams(lp);
-        Photo_Frequency.setGravity(Gravity.RIGHT);
-
-        lpView_m.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, Photo_Frequency.getId());
-        Photo_Frequency.setLayoutParams(lpView_m);
-        linLayout1.addView(Photo_Frequency);
-
-// 1.6 Интервал между фото (divider)
-        View line = new View(this);
-        line.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 1));
-        line.setBackgroundColor(Color.rgb(210, 210, 210));
-        line.getLayoutParams().height = 3;
-        linLayout1_divider.addView(line);
-
+        lpView_Wake_Up_m.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, Wake_Up.getId());
+        Wake_Up.setLayoutParams(lpView_Wake_Up_m);
+        linLayout_Wake_Up.addView(Wake_Up);
 
 // Buttons
 
@@ -734,6 +720,7 @@ public class Tab_Main_Activity extends Activity {
 
                 editor.putString("Camera_Name", editText_Fotobot_Camera_Name.getText().toString());
                 editor.putInt("Photo_Frequency", Integer.parseInt(Photo_Frequency.getText().toString()));
+                editor.putInt("Wake_Up", Integer.parseInt(Wake_Up.getText().toString()));
                 editor.putInt("process_delay", Integer.parseInt(process_delay.getText().toString()));
                 editor.putInt("Config_Font_Size", Integer.parseInt(Config_Font_Size.getText().toString()));
                 editor.putInt("Log_Font_Size", Integer.parseInt(Log_Font_Size.getText().toString()));

@@ -19,6 +19,9 @@
     <string name="fbfloglength">Длина лога на флэшке (bytes)</string>
     <string name="fbfloglength_description">Максимальная длина логфайла</string>
 
+    <string name="wake_up">Защита от засыпания</string>
+    <string name="wake_up_description">Необходим, чтобы приложение было активно. По умолчанию, каждые 60 секунд делается обращение к камере (фото при этом не делается).</string>
+
     <string name="foto_sent">Фото выслано на почту</string>
 
     <string name="connection_channel_wifi">Метод подключения Wi-Fi</string>

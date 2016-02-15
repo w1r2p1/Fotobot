@@ -61,6 +61,9 @@
     <string name="pause_between_processes_description">Time delay between processes. Very important for old devices. Default
         values are 5-15sec.</string>
 
+    <string name="wake_up">Wake Up frequency</string>
+
+    <string name="wake_up_description">Need to keep Fotobot in memory (to avoid kicking by Android)</string>
     <string name="settings_font">Font size for settings window</string>
     <string name="log_font">Font size for log</string>
 
