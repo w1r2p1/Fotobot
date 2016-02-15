@@ -181,6 +181,12 @@ public class FotoBot extends Application {
     public int floglength = 1024;
 
     /**
+     * Частота с которой Fotobot обращается к камере и стартует preview,
+     * необходима для того, чтобы приложение не было выброшено из памяти
+     */
+    public int wake_up_interval = 60;
+
+    /**
      * Camera properties
      */
     public String Camera_Properties;
@@ -690,7 +696,7 @@ public class FotoBot extends Application {
                         return;
                     }
 
-                    if (i % 60 == 0 && frame_delay) {
+                    if (i % wake_up_interval == 0 && frame_delay) {
 
                         // SendMessage("wake up: " + i);
                         SendMessage(".");
@@ -869,6 +875,7 @@ public class FotoBot extends Application {
                 "SMTP_Port: " + SMTP_Port + "\n" +
                 "Log length: " + loglength + "\n" +
                 "FLog length: " + floglength + "\n" +
+                "wake_up_interval: " + wake_up_interval + "\n" +
                 "---------------------------------------------\n" +
                 getResources().getString(R.string.hardware_info) + ":\n" +
                 "Android: " + Build.VERSION.SDK_INT + "\n" +
@@ -976,6 +983,8 @@ public class FotoBot extends Application {
         loglength = pref.getInt("Log_Length", 1024);
 
         floglength = pref.getInt("FLog_Length", 1024);
+
+        wake_up_interval = pref.getInt("Wake_Up_Interval", 60);
     }
 
     /**

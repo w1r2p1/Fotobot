@@ -597,6 +597,76 @@ public class Tab_Main_Activity extends Activity {
         tv_fbfloglength_note.setPadding(5, 9, 5, 9);
         linLayout_fbfloglength_note.addView(tv_fbfloglength_note);
 
+// ------------------------------------------------------------------------------------------------
+
+// Wake Up (Horizontal LinearLayout контейнер)
+        RelativeLayout linLayout1 = new RelativeLayout(this);
+        RelativeLayout.LayoutParams lpView = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams lpView_m = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams lpView_et = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        linLayout1.setBackgroundColor(Color.rgb(192, 192, 192));
+
+
+// 1.1 Интервал между фото (пояснение контейнер)
+        LinearLayout linLayout1_notes = new LinearLayout(this);
+        //RelativeLayout linLayout1_notes = new RelativeLayout(this);
+        linLayout1_notes.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout1_notes.setBackgroundColor(Color.rgb(192,192,192));
+        linLayout1_notes.setPadding(0,0,0,9);
+
+// 1.2 Интервал между фото (divider контейнер)
+        LinearLayout linLayout1_divider = new LinearLayout(this);
+        linLayout1_divider.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout1_divider.setPadding(1,5,5,5);
+        linLayout1_divider.setBackgroundColor(Color.rgb(192,192,192));
+
+// 1.3 Интервал между фото
+        TextView tv = new TextView(this);
+        tv.setTypeface(Typeface.DEFAULT_BOLD);
+        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv.setTextColor(Color.BLACK);
+        tv.setText(getResources().getString(R.string.pause_between_frames));
+        tv.setWidth((screenWidth - padding) / 100 * 80);
+        tv.setLayoutParams(lpView);
+        tv.setTypeface(Typeface.DEFAULT_BOLD);
+
+        lpView.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv.getId());
+        tv.setLayoutParams(lpView);
+        linLayout1.addView(tv);
+
+// 1.4 Интервал между фото (notes)
+        TextView tv_notes = new TextView(this);
+        tv_notes.setTypeface(null, Typeface.NORMAL);
+        tv_notes.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_notes.setTextColor(Color.BLACK);
+        tv_notes.setText(getResources().getString(R.string.pause_between_frames_description));
+        tv_notes.setWidth((screenWidth - padding) / 100 * 99);
+        tv_notes.setLayoutParams(lpView);
+        tv_notes.setPadding(1, 5, 5, 5);
+        linLayout1_notes.addView(tv_notes);
+
+// 1.5 Интервал между фото (ввод данных)
+        Photo_Frequency = new EditText(this);
+        Photo_Frequency.setLayoutParams(lpView_et);
+        Photo_Frequency.setTextColor(Color.rgb(50,100,150));
+        Photo_Frequency.setText(Integer.toString(fb.Photo_Frequency));
+        ViewGroup.LayoutParams lp = Photo_Frequency.getLayoutParams();
+        lp.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 80);
+        Photo_Frequency.setLayoutParams(lp);
+        Photo_Frequency.setGravity(Gravity.RIGHT);
+
+        lpView_m.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, Photo_Frequency.getId());
+        Photo_Frequency.setLayoutParams(lpView_m);
+        linLayout1.addView(Photo_Frequency);
+
+// 1.6 Интервал между фото (divider)
+        View line = new View(this);
+        line.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 1));
+        line.setBackgroundColor(Color.rgb(210, 210, 210));
+        line.getLayoutParams().height = 3;
+        linLayout1_divider.addView(line);
+
+
 // Buttons
 
 // Container
