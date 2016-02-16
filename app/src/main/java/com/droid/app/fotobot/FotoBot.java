@@ -127,7 +127,7 @@ public class FotoBot extends Application {
     /**
      * Соединятся с Internet один раз (Method1) или на каждом шаге (Method2)
      */
-    public String Network_Connection_Method = "В начале работы";
+    public String Network_Connection_Method = "Method 1";
 
     /**
      * Метод обработки фото (Hardaware или Software)
@@ -335,7 +335,7 @@ public class FotoBot extends Application {
         URL serverAddress = null;
 
         try {
-            serverAddress = new URL("http://www.google.com"); // http:// required
+            serverAddress = new URL("http://www.javatalks.ru"); // http:// required
             //set up out communications stuff
             urlc = null;
 
@@ -506,19 +506,25 @@ public class FotoBot extends Application {
      * @param context
      * @param h
      */
-    public void CloseInternetConnection(Context context, Handler h) {
+    public void CloseInternetConnection() {
 
-        MobileData md;
-        md = new MobileData();
+        try
+        {
+            MobileData md = new MobileData();
 //Sony Xperia error
 // http://stackoverflow.com/questions/29340150/android-l-5-x-turn-on-off-mobile-data-programmatically
-        md.setMobileDataEnabled(getApplicationContext(), false);
+            md.setMobileDataEnabled(getApplicationContext(), false);
+        } catch (Exception e) {
+            SendMessage("Couldn't turn off Mobile Data.");
+        }
 
-        WiFi wf;
-        wf = new WiFi();
-        wf.setWiFiEnabled(getApplicationContext(), false);
-
-        SendMessage(getResources().getString(R.string.Internet_connection_is_closed));
+        try {
+            WiFi wf = new WiFi();
+            wf.setWiFiEnabled(getApplicationContext(), false);
+            SendMessage(getResources().getString(R.string.Internet_connection_is_closed));
+        } catch (Exception e) {
+            SendMessage("Couldn't turn off WiFi.");
+        }
     }
 
     /**

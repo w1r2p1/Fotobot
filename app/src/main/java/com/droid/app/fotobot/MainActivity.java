@@ -773,16 +773,21 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                         fb.Camera_Properties = mCamera.getParameters().flatten();
 
-                        Log.d(LOG_TAG, fb.Camera_Properties);
+                        // Log.d(LOG_TAG, fb.Camera_Properties);
 
-                        if (fb.Network_Connection_Method.contains("Method 1") && (Build.VERSION.SDK_INT <= 21)) {
+                        fb.CloseInternetConnection();
+
+                        if (fb.Network_Connection_Method.contains("Method 1")) {
+                            if (android.os.Build.VERSION.SDK_INT <= 21) {
+
                             fb.MakeInternetConnection();
+                        }
                         }
 
                         for (int i = 1; i <= 1000000000; i++) {
 
                             fb.Image_Index = i;
-                            fb.SendMessage("n: " + fb.Image_Index);
+                            fb.SendMessage("Начинаем делать фото: " + fb.Image_Index);
 
                             if (preview_stopped) {
 
@@ -791,7 +796,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     mCamera.startPreview();
                                     preview_stopped = false;
                                 } catch (Exception e) {
-                                    // fb.SendMessage("Problem with preview starting 1.");
+                                    fb.SendMessage("Problem with preview starting at the beginning of the cycle.");
                                 }
 
                             }
@@ -833,13 +838,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             if (mCamera == null) {
 
-                                fb.SendMessage("Camera is not initialized.");
+                             //   fb.SendMessage("Camera is not initialized.");
 
                                 try {
                                     mCamera = Camera.open();
-                                    fb.SendMessage("Camera has been initialized for parameters setting.");
+                              //      fb.SendMessage("Camera has been initialized for parameters setting.");
                                 } catch (Exception e) {
-                                    fb.SendMessage("Camera has not been initialized.");
+                                    fb.SendMessage("Problem with camera itialization in main cycle.");
                                 }
                             }
 
@@ -847,7 +852,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 try {
                                     mCamera.stopPreview();
                                 } catch (Exception e) {
-                                    fb.SendMessage("Preview has been stopped for parameters setting.");
+                                    fb.SendMessage("Preview couldn't be stopped in the main cycle.");
                                 }
                                 preview_stopped = true;
                             }
@@ -865,33 +870,20 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             try {
                                 mCamera.setParameters(parameters);
                             } catch (Exception e) {
-                                fb.SendMessage("Camera parameters have not been changed.");
+                                fb.SendMessage("Camera parameters have not been changed in the main cycle.");
                                 e.printStackTrace();
                             }
-
-
-                     /*       if (mCamera == null) {
-                                fb.SendMessage("Camera is not initialized.");
-                                try {
-                                    mCamera = Camera.open();
-                                    fb.SendMessage("Camera has been initialized.");
-
-                                } catch (Exception e) {
-                                    fb.SendMessage("Problem with camera initialisation.");
-                                }
-                            } */
 
                             fb.fbpause(h, 3);
 
                             if (preview_stopped) {
-                                fb.SendMessage("Preview is not started.");
+
                                 try {
                                     mCamera.setPreviewDisplay(fb.holder);
                                     mCamera.startPreview();
                                     preview_stopped = false;
-                                    fb.SendMessage("Preview has been started.");
                                 } catch (Exception e) {
-                                    fb.SendMessage("Problem with preview starting 2.");
+                                    fb.SendMessage("Problem with preview starting after camera initialization in the main cycle.");
                                 }
                             }
 
@@ -923,11 +915,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                                 fb.fbpause(h, fb.process_delay);
 
-                                //   try {
                                 parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-                                //   } catch (Exception e) {
-                                //       fb.SendMessage(h, "Camera.Parameters.FLASH_MODE_OFF error");
-                                //    }
 
                                 try {
                                     mCamera.setParameters(parameters);
@@ -950,7 +938,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             fb.email_sending_time = durationInMilliseconds / 1000;
 
                             if ((fb.Network_Connection_Method.contains("Method 2") && (Build.VERSION.SDK_INT <= 21))) {
-                                fb.CloseInternetConnection(getApplicationContext(), h);
+                                fb.CloseInternetConnection();
                             }
 
                             fb.SendMessage("-----------------------------");
@@ -979,11 +967,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             File imgfile = new File(fb.Image_Name_Full_Path);
 
                             if (imgfile.delete()) {
-                                //     fb.SendMessage(fb.Image_Name + " was deleted");
+                                fb.SendMessage(fb.Image_Name + " has been deleted");
                             } else {
-                                //     fb.SendMessage(fb.Image_Name + " wasn't deleted");
+                                fb.SendMessage("Problem with deleting " + fb.Image_Name);
                             }
-
 
                         }
 
