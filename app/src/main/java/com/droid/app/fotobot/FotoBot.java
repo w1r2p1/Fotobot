@@ -560,94 +560,79 @@ public class FotoBot extends Application {
      * @param h
      * @return
      */
+
+    private boolean enable_WiFi() {
+
+        try {
+
+            WiFi wf = new WiFi();
+            SendMessage(h, getResources().getString(R.string.turning_on_wifi));
+            wf.setWiFiEnabled(getApplicationContext(), true);
+            fbpause(h, 5);
+            SendMessage(h, getResources().getString(R.string.turning_on_wifi_message));
+            fbpause(h, 5);
+
+            return true;
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            return false;
+
+        }
+
+    }
+
+    private boolean enable_MobileData() {
+
+        try {
+
+            MobileData md = new MobileData();
+            SendMessage(h, getResources().getString(R.string.turning_on_mobiledata));
+            md.setMobileDataEnabled(getApplicationContext(), true);
+            fbpause(h, 5);
+
+            return true;
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            return false;
+
+        }
+
+    }
+
     public boolean MakeInternetConnection(Context context, Handler h) {
-
-        WiFi wf;
-
-        wf = new WiFi();
 
         LoadData();
 
-        boolean wf_connect_attempt = false;
-        boolean var1, var2;
-
-        MobileData md;
-        md = new MobileData();
-
         if (Network_Channel.contains("Wi-Fi")) {
-            SendMessage(h, getResources().getString(R.string.connection_channel_wifi));
-            if (!(isOnline(h) && getData())) {
-                SendMessage(h, getResources().getString(R.string.turning_on_wifi));
-                wf.setWiFiEnabled(getApplicationContext(), true);
-                fbpause(h, 5);
-                SendMessage(h, getResources().getString(R.string.turning_on_wifi_message));
-                fbpause(h, 5);
-
-                if ((isOnline(h) && getData())) {
-                    SendMessage(h, getResources().getString(R.string.Internet_connection));
-                    return true;
-                }
-
-            }
-
+            SendMessage(getResources().getString(R.string.connection_channel_wifi));
+            enable_WiFi();
         }
 
-        var1 = isOnline(h);
-        var2 = getData();
-
         if (Network_Channel.contains("Mobile Data")) {
-            SendMessage(h, getResources().getString(R.string.connection_channel_mobiledata));
-            if (!(var1 && var2)) {
-                SendMessage(h, getResources().getString(R.string.turning_on_mobiledata));
-                wf.setWiFiEnabled(getApplicationContext(), false);
-                fbpause(h, 5);
-                md.setMobileDataEnabled(getApplicationContext(), true);
-                fbpause(h, 5);
-            }
-
-            if ((isOnline(h) && getData())) {
-                SendMessage(h, getResources().getString(R.string.Internet_connection));
-                return true;
-            } else {
-                return false;
-            }
-
+            SendMessage(getResources().getString(R.string.connection_channel_mobiledata));
+            enable_MobileData();
         }
 
         if (Network_Channel.contains("Both")) {
-            SendMessage(h, getResources().getString(R.string.connection_channel_wifimobiledata));
-            if (!(isOnline(h) && getData())) {
-                SendMessage(h, getResources().getString(R.string.turning_on_wifi));
-                wf.setWiFiEnabled(getApplicationContext(), true);
-                fbpause(h, 5);
-                SendMessage(h, getResources().getString(R.string.turning_on_wifi_message));
-                fbpause(h, 5);
+            SendMessage(getResources().getString(R.string.connection_channel_wifimobiledata));
 
-                if ((isOnline(h) && getData())) {
-                    SendMessage(h, getResources().getString(R.string.Internet_connection));
-                    return true;
-                } else {
-                    wf_connect_attempt = true;
-                }
-
-            }
-
-            if (!(isOnline(h) && getData()) && wf_connect_attempt) {
-                SendMessage(h, getResources().getString(R.string.connection_channel_wifimobiledata_message));
-                wf.setWiFiEnabled(getApplicationContext(), false);
-                fbpause(h, 5);
-                md.setMobileDataEnabled(getApplicationContext(), true);
-                fbpause(h, 5);
-            }
-
-            if ((isOnline(h) && getData())) {
-                SendMessage(h, getResources().getString(R.string.Internet_connection));
-                return true;
-            } else {
-                return false;
+            if (enable_WiFi()) {
+                SendMessage("Wi-Fi is up in both metod");
+            } else if (enable_MobileData()) {
+                SendMessage("MobileData is up in both metod");
             }
 
         }
+
+        if ((isOnline(h) && getData())) {
+            SendMessage(h, getResources().getString(R.string.Internet_connection));
+            return true;
+        }
+
         return false;
     }
 
