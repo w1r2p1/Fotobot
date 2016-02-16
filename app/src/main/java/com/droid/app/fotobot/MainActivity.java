@@ -776,7 +776,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                         Log.d(LOG_TAG, fb.Camera_Properties);
 
                         if (fb.Network_Connection_Method.contains("Method 1") && (Build.VERSION.SDK_INT <= 21)) {
-                            fb.MakeInternetConnection(getApplicationContext(), h);
+                            fb.MakeInternetConnection();
                         }
 
                         for (int i = 1; i <= 1000000000; i++) {
@@ -816,7 +816,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             fb.LoadData();
 
                             if ((fb.Network_Connection_Method.contains("Method 2")) && (Build.VERSION.SDK_INT <= 21)) {
-                                fb.MakeInternetConnection(getApplicationContext(), h);
+                                fb.MakeInternetConnection();
                             }
 
                             AudioManager mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);

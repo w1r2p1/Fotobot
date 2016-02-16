@@ -303,17 +303,17 @@ public class FotoBot extends Application {
      *
      * @return boolean
      */
-    public boolean isOnline(Handler h) {
+    public boolean isOnline() {
 
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
 
         if (netInfo != null && netInfo.isConnected()) {
-            SendMessage(h, getResources().getString(R.string.Internet_connection_is_already_created));
+            SendMessage(getResources().getString(R.string.Internet_connection_is_already_created));
             return true;
         } else {
-            SendMessage(h, getResources().getString(R.string.no_Internet_connection));
+            SendMessage(getResources().getString(R.string.no_Internet_connection));
             return false;
         }
 
@@ -322,21 +322,8 @@ public class FotoBot extends Application {
     /**
      * Для проверки соединения выкачивает страницу из Internet
      */
+
     public boolean getData() {
-
- /*       HttpClient client = new DefaultHttpClient();
-
-        HttpGet request = new HttpGet("javatalaks.ru");
-        ResponseHandler<String> handler = new BasicResponseHandler();
-        String response = "";
-        try {
-            response = client.execute(request, handler);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-*/
-
 
         BufferedReader rd = null;
         StringBuilder sb = null;
@@ -356,7 +343,7 @@ public class FotoBot extends Application {
             urlc = (HttpURLConnection) serverAddress.openConnection();
             urlc.setRequestMethod("GET");
             urlc.setDoOutput(true);
-            urlc.setReadTimeout(15000);
+            urlc.setReadTimeout(60000);
 
             urlc.connect();
 //read the result from the server
@@ -366,8 +353,6 @@ public class FotoBot extends Application {
             while ((line = rd.readLine()) != null) {
                 sb.append(line + '\n');
             }
-
-            //    System.out.println(sb.toString());
 
             SendMessage("WEB page downloaded.");
 
@@ -405,142 +390,9 @@ public class FotoBot extends Application {
             //    urlc.disconnect();
             rd = null;
             sb = null;
-            //   wr = null;
             urlc = null;
         }
 
-
-        // http://developer.android.com/reference/java/net/HttpURLConnection.html
-/*            try {
-                urlc = (HttpURLConnection) (new URL("http://www.javatalks.ru").openConnection());
-            } catch (Exception e){
-
-            }
-            urlc.setRequestProperty("User-Agent", "Test");
-            urlc.setRequestProperty("Connection", "close");
-            urlc.setConnectTimeout(15000); //choose your own timeframe
-            urlc.setReadTimeout(15000); //choose your own timeframe
-          //  urlc.setRequestMethod("GET");
-            urlc.setDoInput(true);
-
-            try {
-                urlc.connect();
-                int response = urlc.getResponseCode();
-                Log.d(LOG_TAG, "The response is: " + response);
-                // Convert the InputStream into a string
-                is = urlc.getInputStream();
-                String contentAsString = readIt(is, 500);
-
-            } catch (Exception e) {
-               SendMessage("Problem with connecting to site");
-           }
-
-
-
-
-// Makes sure that the InputStream is closed after the app is
-            // finished using it.
-        } finally {
-            if (is != null) {
-                try {
-                    is.close();
-                    return true;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return false;
-                }
-            }
-        }
-
-*/
-
-
-/*            rd  = new BufferedReader(new InputStreamReader(urlc.getInputStream()));
-            sb = new StringBuilder();
-
-            while ((line = rd.readLine()) != null)
-            {
-                sb.append(line + '\n');
-            }
-
-            //Log.d("debug",line);
-
-            String str = sb.toString();
-
-            if (str.length() > 1024) {
-                str = str.substring(0, 1024);
-            }
-
-            SendMessage("удалось скачать файл из Internet");
-            SendMessage(str);
-
-        } catch (java.net.SocketTimeoutException e) {
-            SendMessage("SocketTimeoutException");
-            e.printStackTrace();
-            return(false);
-        } catch (IOException e) {
-             SendMessage(h, "IOException");
-            return (false);  //connectivity exists, but no internet.
-        }
-        return (true);
-*/
-
-/*        try {
-
-            HttpURLConnection urlc = (HttpURLConnection) (new URL("http://www.google.com").openConnection());
-            urlc.setRequestMethod("HEAD");
-
-            urlc.setConnectTimeout(5000); //set timeout to 5 seconds
-            urlc.setReadTimeout(5000);
-            return (urlc.getResponseCode() == HttpURLConnection.HTTP_OK);
-        } catch (java.net.SocketTimeoutException e) {
-            SendMessage("SocketTimeoutException");
-            e.printStackTrace();
-            return(false);
-        } catch (java.io.IOException e) {
-            SendMessage("Problem with file downloading");
-            e.printStackTrace();
-            return(false);
-        }
-
-*/
-/*        int TIMEOUT_VALUE = 1000;
-        try {
-            URL testUrl = new URL("http://google.com");
-            StringBuilder answer = new StringBuilder(100000);
-
-            long start = System.nanoTime();
-
-            URLConnection testConnection = testUrl.openConnection();
-            testConnection.setConnectTimeout(TIMEOUT_VALUE);
-            testConnection.setReadTimeout(TIMEOUT_VALUE);
-            BufferedReader in = new BufferedReader(new InputStreamReader(testConnection.getInputStream()));
-            String inputLine;
-
-            while ((inputLine = in.readLine()) != null) {
-                answer.append(inputLine);
-                answer.append("\n");
-            }
-            in.close();
-
-            long elapsed = System.nanoTime() - start;
-            System.out.println("Elapsed (ms): " + elapsed / 1000000);
-            System.out.println("Answer:");
-            System.out.println(answer);
-            return true;
-
-        } catch (SocketTimeoutException e) {
-            System.out.println("More than " + TIMEOUT_VALUE + " elapsed.");
-            return false;
-        } catch (MalformedURLException e) {
-            System.out.println("Wrong URL");
-            e.printStackTrace();
-            return false;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-*/
         return true;
     }
 
@@ -577,9 +429,10 @@ public class FotoBot extends Application {
         } catch (Exception e) {
 
             e.printStackTrace();
-            return false;
 
         }
+
+        return false;
 
     }
 
@@ -603,14 +456,18 @@ public class FotoBot extends Application {
 
     }
 
-    public boolean MakeInternetConnection(Context context, Handler h) {
+    public boolean MakeInternetConnection() {
 
-        LoadData();
+        int connect_attempt;
 
-        if (Network_Channel.contains("Wi-Fi")) {
-            SendMessage(getResources().getString(R.string.connection_channel_wifi));
-            enable_WiFi();
-        }
+        for (connect_attempt = 0; connect_attempt < 3; connect_attempt++) {
+
+            SendMessage("MakeInternetConnection attempt: " + (connect_attempt + 1));
+
+            if (Network_Channel.contains("Wi-Fi")) {
+                SendMessage(getResources().getString(R.string.connection_channel_wifi));
+                enable_WiFi();
+            }
 
         if (Network_Channel.contains("Mobile Data")) {
             SendMessage(getResources().getString(R.string.connection_channel_mobiledata));
@@ -628,12 +485,19 @@ public class FotoBot extends Application {
 
         }
 
-        if ((isOnline(h) && getData())) {
-            SendMessage(h, getResources().getString(R.string.Internet_connection));
+        if (isOnline() && getData()) {
+            SendMessage(getResources().getString(R.string.Internet_connection));
             return true;
         }
 
+    }
+
+        if ( connect_attempt == 2 ) {
+            SendMessage("Exiting without connecting to Internet, photo will be taken in offline mode.");
+        }
+
         return false;
+
     }
 
     /**
