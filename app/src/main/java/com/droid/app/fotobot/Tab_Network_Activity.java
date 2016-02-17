@@ -48,6 +48,7 @@ public class Tab_Network_Activity extends Activity {
     EditText editText_SMTP_Host;
     EditText editText_SMTP_Port;
     EditText editText_Check_Web_Page;
+    EditText editText_Network_Up_Delay;
     Button btn, btn_mp;
     String[] connect_methods = {"Wi-Fi", "Mobile Data", "Both"};
     private CheckBox check_box_flash;
@@ -628,7 +629,7 @@ public class Tab_Network_Activity extends Activity {
         editText_Check_Web_Page.setLayoutParams(lpView_Check_Web_Page_m);
         linLayout_Check_Web_Page.addView(editText_Check_Web_Page);
 
-// Заметка для Check Web PAge
+// Заметка для Check Web Page
         TextView tv_Check_Web_Page_note = new TextView(this);
         tv_Check_Web_Page_note.setTypeface(null, Typeface.NORMAL);
         tv_Check_Web_Page_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
@@ -637,6 +638,59 @@ public class Tab_Network_Activity extends Activity {
         tv_Check_Web_Page_note.setLayoutParams(lpView);
         tv_Check_Web_Page_note.setPadding(5, 9, 5, 9);
         linLayout_Check_Web_Page_note.addView(tv_Check_Web_Page_note);
+// ------------------------------------------------------------------------------------------------
+
+// Network Up Delay
+
+// Network Up Delay Container
+        RelativeLayout linLayout_Network_Up_Delay = new RelativeLayout(this);
+        RelativeLayout.LayoutParams lpView_Network_Up_Delay = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams lpView_Network_Up_Delay_m = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        linLayout_Network_Up_Delay.setPadding(5, 9, 5, 9);
+        linLayout_Network_Up_Delay.setBackgroundColor(Color.rgb(192, 192, 192));
+
+// Пояснение контейнер
+        LinearLayout linLayout_Network_Up_Delay_note = new LinearLayout(this);
+        linLayout_Network_Up_Delay_note.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_Network_Up_Delay_note.setPadding(5, 9, 5, 9);
+        linLayout_Network_Up_Delay_note.setBackgroundColor(Color.rgb(192, 192, 192));
+
+// Название
+        TextView tv_Network_Up_Delay = new TextView(this);
+        tv_Network_Up_Delay.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Network_Up_Delay.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Network_Up_Delay.setTextColor(Color.BLACK);
+        tv_Network_Up_Delay.setText(getResources().getString(R.string.network_up_delay));
+        tv_Network_Up_Delay.setMinimumWidth((screenWidth - padding) / 100 * 80);
+        tv_Network_Up_Delay.setLayoutParams(lpView_email);
+
+        lpView_Network_Up_Delay.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Network_Up_Delay.getId());
+        tv_Network_Up_Delay.setLayoutParams(lpView_Network_Up_Delay);
+        linLayout_Network_Up_Delay.addView(tv_Network_Up_Delay);
+
+// Network Up Delay
+        editText_Network_Up_Delay = new EditText(this);
+        editText_Network_Up_Delay.setLayoutParams(lpView_et);
+        editText_Network_Up_Delay.setSingleLine(true);
+        editText_Network_Up_Delay.setText(Integer.toString(fb.network_up_delay));
+        editText_Network_Up_Delay.setTextColor(Color.rgb(50, 100, 150));
+        editText_Network_Up_Delay.setWidth((screenWidth - padding)/100*20);
+        editText_Network_Up_Delay.setLayoutParams(lpView_Network_Up_Delay);
+        editText_Network_Up_Delay.setGravity(Gravity.RIGHT);
+
+        lpView_Network_Up_Delay_m.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, editText_Network_Up_Delay.getId());
+        editText_Network_Up_Delay.setLayoutParams(lpView_Network_Up_Delay_m);
+        linLayout_Network_Up_Delay.addView(editText_Network_Up_Delay);
+
+// Заметка для Network Up Delay
+        TextView tv_Network_Up_Delay_note = new TextView(this);
+        tv_Network_Up_Delay_note.setTypeface(null, Typeface.NORMAL);
+        tv_Network_Up_Delay_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_Network_Up_Delay_note.setTextColor(Color.BLACK);
+        tv_Network_Up_Delay_note.setText(getResources().getString(R.string.network_up_delay_description));
+        tv_Network_Up_Delay_note.setLayoutParams(lpView);
+        tv_Network_Up_Delay_note.setPadding(5, 9, 5, 9);
+        linLayout_Network_Up_Delay_note.addView(tv_Network_Up_Delay_note);
 
 // ------------------------------------------------------------------------------------------------
 
@@ -693,6 +747,7 @@ public class Tab_Network_Activity extends Activity {
                 editor.putString("SMTP_Host", editText_SMTP_Host.getText().toString());
                 editor.putString("SMTP_Port", editText_SMTP_Port.getText().toString());
                 editor.putString("Check_Web_Page", editText_Check_Web_Page.getText().toString());
+                editor.putInt("Network_Up_Delay", Integer.parseInt(editText_Network_Up_Delay.getText().toString()));
 // Save the changes in SharedPreferences
                 editor.commit(); // commit changes
             }

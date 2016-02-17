@@ -89,6 +89,9 @@
     <string name="Check_Web_Page">Web page for connection checking</string>
     <string name="Check_Web_Page_description">Please use non-https servers (http://www.server.com)</string>
 
+    <string name="network_up_delay">Network up delay</string>
+    <string name="network_up_delay_description">Time (sec) required to bring up network interface (Wi-Fi or Mobile Data)</string>
+
     <string name="jpeg_compression">JPEG compression</string>
     <string name="jpeg_compression_description">100 - highest qualty</string>
 

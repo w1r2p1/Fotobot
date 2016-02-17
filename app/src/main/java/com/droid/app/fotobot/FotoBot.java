@@ -183,6 +183,11 @@ public class FotoBot extends Application {
     public String check_web_page = "http://www.javatalks.ru";
 
     /**
+     * Время (сек) необходимое на поднятие сетевого интерфейса
+     */
+    public int network_up_delay = 15;
+
+    /**
      * Частота с которой Fotobot обращается к камере и стартует preview,
      * необходима для того, чтобы приложение не было выброшено из памяти
      */
@@ -422,9 +427,9 @@ public class FotoBot extends Application {
             WiFi wf = new WiFi();
             SendMessage(h, getResources().getString(R.string.turning_on_wifi));
             wf.setWiFiEnabled(getApplicationContext(), true);
-            fbpause(h, 5);
-            SendMessage(h, getResources().getString(R.string.turning_on_wifi_message));
-            fbpause(h, 5);
+            fbpause(h, network_up_delay);
+           // SendMessage(h, getResources().getString(R.string.turning_on_wifi_message));
+           // fbpause(h, 5);
 
             return true;
 
@@ -445,7 +450,7 @@ public class FotoBot extends Application {
             MobileData md = new MobileData();
             SendMessage(h, getResources().getString(R.string.turning_on_mobiledata));
             md.setMobileDataEnabled(getApplicationContext(), true);
-            fbpause(h, 5);
+            fbpause(h, network_up_delay);
 
             return true;
 
@@ -845,6 +850,8 @@ public class FotoBot extends Application {
         wake_up_interval = pref.getInt("Wake_Up_Interval", 60);
 
         check_web_page = pref.getString("Check_Web_Page", "http://www.javatalks.ru");
+
+        network_up_delay = pref.getInt("Network_Up_Delay", 15);
     }
 
     /**
