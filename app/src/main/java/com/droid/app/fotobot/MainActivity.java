@@ -130,12 +130,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             fb.logger.fine(reportDate + ": " + message);
 
-            if (fb.Show_Help) {
+        /*    if (fb.Show_Help) {
                 tvInfo.setText(Html.fromHtml((getResources().getString(R.string.main_help))));
                 fb.Show_Help = false;
                 return false;
             }
-
+*/
             tvInfo.setText(fb.log);
 
             // Log.d(LOG_TAG, "Handler.Callback(): fb.getstatus()" + fb.getstatus());
