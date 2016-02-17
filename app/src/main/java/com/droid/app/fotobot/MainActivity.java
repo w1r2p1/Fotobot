@@ -129,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             tvInfo.setTextColor(Color.rgb(190, 190, 190));
 
             fb.logger.fine(reportDate + ": " + message);
+            fb.fh.flush();
 
         /*    if (fb.Show_Help) {
                 tvInfo.setText(Html.fromHtml((getResources().getString(R.string.main_help))));
@@ -341,6 +342,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
+       // fb.logger.fine("onCreate");
+       // fb.fh.flush();
+
         if (savedInstanceState == null)   // приложение запущено впервые
         {
             Log.d(LOG_TAG, "MainActivity: onCreate started first time");
@@ -504,23 +508,35 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     }
 
     protected void onDestroy() {
+        final FotoBot fb = (FotoBot) getApplicationContext();
         super.onDestroy();
         Log.d(LOG_TAG, "MainActivity: onDestroy");
+        fb.logger.fine("onDestroy");
+        fb.fh.flush();
     }
 
     protected void onPause() {
+        final FotoBot fb = (FotoBot) getApplicationContext();
         super.onPause();
         Log.d(LOG_TAG, "MainActivity: onPause");
+        fb.logger.fine("onPause");
+        fb.fh.flush();
     }
 
     protected void onRestart() {
+        final FotoBot fb = (FotoBot) getApplicationContext();
         super.onRestart();
         Log.d(LOG_TAG, "MainActivity: onRestart");
+        fb.logger.fine("onRestart");
+        fb.fh.flush();
     }
 
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        final FotoBot fb = (FotoBot) getApplicationContext();
         super.onRestoreInstanceState(savedInstanceState);
         Log.d(LOG_TAG, "MainActivity: onRestoreInstanceState");
+        fb.logger.fine("onRestoreInstanceState");
+        fb.fh.flush();
     }
 
     protected void onResume(SurfaceHolder holder) {
@@ -544,6 +560,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         }
 
         final FotoBot fb = (FotoBot) getApplicationContext();
+        fb.logger.fine("onResume");
+        fb.fh.flush();
         Log.d(LOG_TAG, "MainActivity: onResume");
         Log.d(LOG_TAG, "MainActivity: fb.getstatus()" + fb.getstatus());
         tvInfo = (TextView) findViewById(R.id.tvInfo);
@@ -594,6 +612,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     }
 
     protected void onSaveInstanceState(Bundle outState) {
+        final FotoBot fb = (FotoBot) getApplicationContext();
+        fb.logger.fine("onSaveInstanceState");
+        fb.fh.flush();
         super.onSaveInstanceState(outState);
         outState.clear();
         Log.d(LOG_TAG, "MainActivity: onSaveInstanceState");
@@ -635,6 +656,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             try {
                 fb.fh = new FileHandler(fb.logpath + "fblog.txt", fb.floglength, 1, true);
+
                 Log.d(LOG_TAG, "handler created");
 
             } catch (Exception e) {
@@ -650,6 +672,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             fb.logger.setLevel(Level.FINE);
 
             fb.logger.finest("Logger has been initialised.");
+            fb.fh.flush();
             Log.d(LOG_TAG, "Logger has been initialised.");
             fb.init_logger = true;
         }
@@ -657,12 +680,18 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     }
 
     protected void onStop() {
+        final FotoBot fb = (FotoBot) getApplicationContext();
+        fb.logger.fine("onStop");
+        fb.fh.flush();
         super.onStop();
         Log.d(LOG_TAG, "MainActivity: onStop");
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        final FotoBot fb = (FotoBot) getApplicationContext();
+        fb.logger.fine("onCreateOptionsMenu");
+        fb.fh.flush();
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
