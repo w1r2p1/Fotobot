@@ -51,7 +51,7 @@ public class Tab_Main_Activity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         final FotoBot fb = (FotoBot) getApplicationContext();
         super.onCreate(savedInstanceState);
-        fb.LoadData();
+        fb.LoadSettings();
 
             //   Logger fblogger = Logger.getLogger(FotoBot.class.getName());
       //  fb.logger.fine("Tab_Main_Activity");
@@ -808,7 +808,7 @@ public class Tab_Main_Activity extends Activity {
     protected void onPause() {
         super.onPause();
         final FotoBot fb = (FotoBot) getApplicationContext();
-        fb.LoadData();
+        fb.LoadSettings();
         Photo_Frequency.setText(Integer.toString(fb.Photo_Frequency));
         process_delay.setText(Integer.toString(fb.process_delay));
     }
@@ -820,7 +820,7 @@ public class Tab_Main_Activity extends Activity {
 
     protected void onResume(SurfaceHolder holder) {
         final FotoBot fb = (FotoBot) getApplicationContext();
-        fb.LoadData();
+        fb.LoadSettings();
         Photo_Frequency.setText(Integer.toString(fb.Photo_Frequency));
         //  spinner1.setSelection(spinnerArrayAdapter1.getPosition(fb.Image_Scale));
         Log.d(LOG_TAG, "Tab1: onResume");

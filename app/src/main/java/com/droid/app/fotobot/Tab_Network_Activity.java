@@ -59,7 +59,7 @@ public class Tab_Network_Activity extends Activity {
         super.onCreate(savedInstanceState);
 
         final FotoBot fb = (FotoBot) getApplicationContext();
-        fb.LoadData();
+        fb.LoadSettings();
 
        // Logger fblogger = Logger.getLogger(FotoBot.class.getName());
       //  fb.logger.fine("Tab_Network_Activity");
@@ -748,7 +748,7 @@ public class Tab_Network_Activity extends Activity {
     protected void onPause() {
         super.onPause();
         final FotoBot fb = (FotoBot) getApplicationContext();
-        fb.LoadData();
+        fb.LoadSettings();
         spinner_Channels.setSelection(getIndex(spinner_Channels, fb.Network_Channel));
         spinner_Connection_Method.setSelection(getIndex(spinner_Connection_Method, fb.Network_Connection_Method));
         editText_Fotobot_Email.setText(fb.EMail_Sender);

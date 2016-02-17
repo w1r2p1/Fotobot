@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         public void onPictureTaken(byte[] data, Camera camera) {
             final FotoBot fb = (FotoBot) getApplicationContext();
 
-            fb.LoadData();
+            fb.LoadSettings();
 
 // Wakelock 2
             PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
@@ -710,7 +710,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
-        //      fb.getData();
+        fb.LoadSettings();
 
         if (!fb.init_logger) {
 
@@ -789,7 +789,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             fb.Image_Index = i;
                             fb.SendMessage("Начинаем делать фото: " + fb.Image_Index);
 
-                            if (preview_stopped) {
+                           /* if (preview_stopped) {
 
                                 try {
                                     mCamera.setPreviewDisplay(fb.holder);
@@ -799,7 +799,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     fb.SendMessage("Problem with preview starting at the beginning of the cycle.");
                                 }
 
-                            }
+                            } */
 // https://sohabr.net/habr/post/215693/
                             fb.batteryLevel();
 
@@ -818,7 +818,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             fb.Image_Name = df.format(new Date()) + ".jpg";
                             fb.Image_Name_Full_Path = getFilesDir().toString() + "/" + fb.Image_Name;
 
-                            fb.LoadData();
+                            fb.LoadSettings();
 
                             if ((fb.Network_Connection_Method.contains("Method 2")) && (Build.VERSION.SDK_INT <= 21)) {
                                 fb.MakeInternetConnection();
@@ -909,8 +909,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             fb.fbpause(h, fb.process_delay);
 
                             if (fb.Use_Flash) {
-                                mCamera.stopPreview();
-                                preview_stopped = true;
+                                try {
+                                    mCamera.stopPreview();
+                                    preview_stopped = true;
+                                } catch (Exception e) {
+                                    fb.SendMessage("FLASH OFF: problem with stopping of preview.");
+                                }
                                 parameters = mCamera.getParameters();
 
                                 fb.fbpause(h, fb.process_delay);

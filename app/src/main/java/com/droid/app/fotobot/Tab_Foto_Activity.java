@@ -47,7 +47,7 @@ public class Tab_Foto_Activity  extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         final FotoBot fb = (FotoBot) getApplicationContext();
         super.onCreate(savedInstanceState);
-        fb.LoadData();
+        fb.LoadSettings();
 
        // fb.logger.fine("Tab_Foto_Activity");
 
@@ -558,7 +558,7 @@ public class Tab_Foto_Activity  extends Activity {
 
     protected void onResume(SurfaceHolder holder) {
         final FotoBot fb = (FotoBot) getApplicationContext();
-        fb.LoadData();
+        fb.LoadSettings();
         editText_JPEG_Compression.setText(Integer.toString(fb.JPEG_Compression));
         Log.d(LOG_TAG, "Tab3: onResume");
     }
@@ -576,7 +576,7 @@ public class Tab_Foto_Activity  extends Activity {
     protected void onPause() {
         super.onPause();
         final FotoBot fb = (FotoBot) getApplicationContext();
-        fb.LoadData();
+        fb.LoadSettings();
         // editText_JPEG_Compression.setText(Integer.toString(fb.JPEG_Compression));
         editText_JPEG_Compression.setText(Integer.toString(fb.JPEG_Compression));
        // spinner1.setSelection(getIndex(spinner1, fb.Image_Scale));

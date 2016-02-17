@@ -287,7 +287,7 @@ public class FotoBot extends Application {
      */
     public void FotoBot() {
 
-        LoadData();
+        LoadSettings();
     }
 
     public void Init() {
@@ -310,10 +310,10 @@ public class FotoBot extends Application {
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
 
         if (netInfo != null && netInfo.isConnected()) {
-            SendMessage(getResources().getString(R.string.Internet_connection_is_already_created));
+//            SendMessage(getResources().getString(R.string.Internet_connection_is_already_created));
             return true;
         } else {
-            SendMessage(getResources().getString(R.string.no_Internet_connection));
+//            SendMessage(getResources().getString(R.string.no_Internet_connection));
             return false;
         }
 
@@ -323,7 +323,7 @@ public class FotoBot extends Application {
      * Для проверки соединения выкачивает страницу из Internet
      */
 
-    public boolean getData() {
+    public boolean getPage() {
 
         BufferedReader rd = null;
         StringBuilder sb = null;
@@ -354,7 +354,7 @@ public class FotoBot extends Application {
                 sb.append(line + '\n');
             }
 
-            SendMessage("WEB page downloaded.");
+            SendMessage("WEB page downloaded:" + sb.toString().length() / 1000 + "Kb");
 
             urlc.disconnect();
 
@@ -485,12 +485,13 @@ public class FotoBot extends Application {
 
         }
 
-        if (isOnline() && getData()) {
-            SendMessage(getResources().getString(R.string.Internet_connection));
-            return true;
-        }
-
-    }
+            if (isOnline()) {
+                if (getPage()) {
+                    SendMessage(getResources().getString(R.string.Internet_connection));
+                    return true;
+                }
+            }
+            }
 
         if ( connect_attempt == 2 ) {
             SendMessage("Exiting without connecting to Internet, photo will be taken in offline mode.");
@@ -791,7 +792,7 @@ public class FotoBot extends Application {
     /**
      * Инициализируем глобальные переменные значениями из SharedPreferences
      */
-    public void LoadData() {
+    public void LoadSettings() {
         /******* Create SharedPreferences *******/
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
