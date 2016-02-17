@@ -88,6 +88,9 @@
     <string name="email_server_port">Номер порта почтового сервера</string>
     <string name="email_server_port_description">Номер порта почтового сервера, для почты Google и Mail.ru номер порта 465</string>
 
+    <string name="Check_Web_Page">Web сервер для проверки связи</string>
+    <string name="Check_Web_Page_description">Пожалуйста используйте сервера без https протокола (http://www.server.com)</string>
+
     <string name="jpeg_compression">JPEG сжатие</string>
     <string name="jpeg_compression_description">Степень сжатия изображения, чем ближе к 100 тем выше качество изображения.</string>
 

@@ -180,6 +180,8 @@ public class FotoBot extends Application {
      */
     public int floglength = 1024;
 
+    public String check_web_page = "http://www.javatalks.ru";
+
     /**
      * Частота с которой Fotobot обращается к камере и стартует preview,
      * необходима для того, чтобы приложение не было выброшено из памяти
@@ -335,7 +337,7 @@ public class FotoBot extends Application {
         URL serverAddress = null;
 
         try {
-            serverAddress = new URL("http://www.javatalks.ru"); // http:// required
+            serverAddress = new URL(check_web_page);
             //set up out communications stuff
             urlc = null;
 
@@ -354,7 +356,7 @@ public class FotoBot extends Application {
                 sb.append(line + '\n');
             }
 
-            SendMessage("WEB page downloaded:" + sb.toString().length() / 1000 + "Kb");
+            SendMessage(check_web_page + " загружена " + sb.toString().length() / 1000 + "Kb");
 
             urlc.disconnect();
 
@@ -841,6 +843,8 @@ public class FotoBot extends Application {
         floglength = pref.getInt("FLog_Length", 1024);
 
         wake_up_interval = pref.getInt("Wake_Up_Interval", 60);
+
+        check_web_page = pref.getString("Check_Web_Page", "http://www.javatalks.ru");
     }
 
     /**
