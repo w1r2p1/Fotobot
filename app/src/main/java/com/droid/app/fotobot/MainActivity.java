@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         //    fb.logger.fine(reportDate + ": " + message);
         //    fb.fh.flush();
 
-            Log.i(HANDLER, reportDate + ": " + message);
+            Log.d(HANDLER, reportDate + ": " + message);
 
         /*    if (fb.Show_Help) {
                 tvInfo.setText(Html.fromHtml((getResources().getString(R.string.main_help))));
@@ -987,27 +987,42 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             long start = System.currentTimeMillis();
 
+                            if (logcat2file()) {
+                                // fb.SendMessage("Заполнили файл данными из logcat");
+                            } else {
+                                fb.SendMessage("Проблема с доступом к logcat");
+                            }
+
+                            fb.fbpause(h,1);
+
                             fb.SendMail(h, fb.Image_Name_Full_Path);
 
                             long durationInMilliseconds = System.currentTimeMillis() - start;
 
                             fb.email_sending_time = durationInMilliseconds / 1000;
 
+                       /*     File logfile = new File(getFilesDir().toString() + "/logfile.txt");
+                            try {
+                                logfile.delete();
+                            }catch (Exception e) {
+                                e.printStackTrace();
+                            }
+*/
                             if ((fb.Network_Connection_Method.contains("Method 2") && (Build.VERSION.SDK_INT <= 21))) {
                                 fb.CloseInternetConnection();
                             }
 
                             fb.SendMessage("-----------------------------");
-                            fb.logger.fine("-----------------------------");
-                            fb.fh.flush();
+                           // fb.logger.fine("-----------------------------");
+                          //  fb.fh.flush();
 
                             fb.SendMessage(getResources().getString(R.string.pause_between_photos) + " " + fb.Photo_Frequency + "sec");
-                            fb.logger.fine(getResources().getString(R.string.pause_between_photos) + " " + fb.Photo_Frequency + "sec");
-                            fb.fh.flush();
+                          //  fb.logger.fine(getResources().getString(R.string.pause_between_photos) + " " + fb.Photo_Frequency + "sec");
+                           // fb.fh.flush();
 
                             fb.SendMessage("-----------------------------");
-                            fb.logger.fine("-----------------------------");
-                            fb.fh.flush();
+                          //  fb.logger.fine("-----------------------------");
+                          //  fb.fh.flush();
 
                             if (mCamera != null) {
 
@@ -1030,12 +1045,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             if (imgfile.delete()) {
                                 //  fb.SendMessage(fb.Image_Name + " has been deleted");
-                                fb.logger.fine(fb.Image_Name + " has been deleted");
-                                fb.fh.flush();
+                              //  fb.logger.fine(fb.Image_Name + " has been deleted");
+                             //   fb.fh.flush();
                             } else {
                                 fb.SendMessage("Problem with deleting " + fb.Image_Name);
-                                fb.logger.fine("Problem with deleting " + fb.Image_Name);
-                                fb.fh.flush();
+                              //  fb.logger.fine("Problem with deleting " + fb.Image_Name);
+                              //  fb.fh.flush();
                             }
 
                         }
@@ -1337,12 +1352,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         final FotoBot fb = (FotoBot) getApplicationContext();
 
         if (logcat2file()) {
-            fb.SendMessage("Заполнили файл данными из logcat");
+           // fb.SendMessage("Заполнили файл данными из logcat");
         } else {
             fb.SendMessage("Проблема с доступом к logcat");
         }
 
-        fb.fbpause(fb.h, 3);
+        fb.fbpause(fb.h, 1);
 
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
         LogWidget.setBackgroundColor(Color.rgb(54, 54, 54));
@@ -1358,7 +1373,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         try {
             logfile.delete();
-            fb.SendMessage("Logfile from catlog has been deleted");
+          //  fb.SendMessage("Logfile from catlog has been deleted");
         }catch (Exception e) {
             fb.SendMessage("Problem with deleting of Logfile from catlog");
         }

@@ -785,33 +785,33 @@ public class FotoBot extends Application {
             fh.flush();
         }
 
-        attach_file = new File((getApplicationContext().getFilesDir().toString() + "/fblog.txt"));
+        attach_file = new File((getApplicationContext().getFilesDir().toString() + "/logfile.txt"));
         fileExists = attach_file.isFile();
 
         if (fileExists) {
             //   SendMessage(h, "FLog: " + attach_file.length()/1000 + "Kb");
         } else {
             SendMessage("Log doesn't exist.");
-            logger.fine("Log doesn't exist.");
-            fh.flush();
+          //  logger.fine("Log doesn't exist.");
+          //  fh.flush();
         }
 
         try {
             m.addAttachment(str);
-            m.addAttachment(getApplicationContext().getFilesDir().toString() + "/fblog.txt");
+            m.addAttachment(getApplicationContext().getFilesDir().toString() + "/logfile.txt");
             fbpause(h, process_delay);
 
             if (m.send()) {
                 SendMessage(h, getResources().getString(R.string.foto_sent));
             } else {
                 SendMessage("Email was not sent.");
-                logger.fine("Email was not sent.");
-                fh.flush();
+             //   logger.fine("Email was not sent.");
+              //  fh.flush();
             }
         } catch (Exception e) {
             SendMessage("Could not send email");
-            logger.fine("Could not send email");
-            fh.flush();
+          //  logger.fine("Could not send email");
+         //   fh.flush();
             Log.e("MailApp", "Could not send email", e);
         }
 
