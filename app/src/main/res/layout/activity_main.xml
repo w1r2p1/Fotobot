@@ -125,7 +125,7 @@
             android:layout_alignStart="@+id/button"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:onClick="log"
+            android:onClick="logcat"
             android:nestedScrollingEnabled="false" />
         <Button
             android:layout_width="wrap_content"

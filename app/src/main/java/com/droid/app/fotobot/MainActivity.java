@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     private int screenWidth, screenHeight;
     public static final int UNKNOW_CODE = 99;
     final String LOG_TAG = "Logs";
+    final String HANDLER = "MainActivity";
     final int STATUS_STOPPED = 333;
 
     private static final int LOW_DPI_STATUS_BAR_HEIGHT = 19;
@@ -128,8 +129,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             tvInfo.setTypeface(Typeface.MONOSPACE);
             tvInfo.setTextColor(Color.rgb(190, 190, 190));
 
-            fb.logger.fine(reportDate + ": " + message);
-            fb.fh.flush();
+        //    fb.logger.fine(reportDate + ": " + message);
+        //    fb.fh.flush();
+
+            Log.i(HANDLER, reportDate + ": " + message);
 
         /*    if (fb.Show_Help) {
                 tvInfo.setText(Html.fromHtml((getResources().getString(R.string.main_help))));
@@ -342,8 +345,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
-       // fb.logger.fine("onCreate");
-       // fb.fh.flush();
+        //  fb.logger.fine("onCreate");
+        //   fb.fh.flush();
 
         if (savedInstanceState == null)   // приложение запущено впервые
         {
@@ -809,14 +812,19 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                         if (fb.Network_Connection_Method.contains("Method 1")) {
                             if (android.os.Build.VERSION.SDK_INT <= 21) {
 
-                            fb.MakeInternetConnection();
-                        }
+                                fb.MakeInternetConnection();
+                            }
                         }
 
                         for (int i = 1; i <= 1000000000; i++) {
 
                             fb.Image_Index = i;
                             fb.SendMessage("Начинаем делать фото: " + fb.Image_Index);
+                            fb.logger.fine("Начинаем делать фото: " + fb.Image_Index);
+                            fb.fh.flush();
+
+                            //  fb.logger.fine("Начинаем делать фото: " + fb.Image_Index);
+                            //  fb.fh.flush();
 
                            /* if (preview_stopped) {
 
@@ -867,13 +875,16 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             if (mCamera == null) {
 
-                             //   fb.SendMessage("Camera is not initialized.");
+                                //   fb.SendMessage("Camera is not initialized.");
 
                                 try {
                                     mCamera = Camera.open();
-                              //      fb.SendMessage("Camera has been initialized for parameters setting.");
+                                    //      fb.SendMessage("Camera has been initialized for parameters setting.");
                                 } catch (Exception e) {
                                     fb.SendMessage("Problem with camera itialization in main cycle.");
+                                    fb.logger.fine("Problem with camera itialization in main cycle.");
+                                    fb.fh.flush();
+
                                 }
                             }
 
@@ -882,6 +893,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     mCamera.stopPreview();
                                 } catch (Exception e) {
                                     fb.SendMessage("Preview couldn't be stopped in the main cycle.");
+                                    fb.logger.fine("Preview couldn't be stopped in the main cycle.");
+                                    fb.fh.flush();
                                 }
                                 preview_stopped = true;
                             }
@@ -900,6 +913,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 mCamera.setParameters(parameters);
                             } catch (Exception e) {
                                 fb.SendMessage("Camera parameters have not been changed in the main cycle.");
+                                fb.logger.fine("Camera parameters have not been changed in the main cycle.");
+                                fb.fh.flush();
                                 e.printStackTrace();
                             }
 
@@ -913,6 +928,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     preview_stopped = false;
                                 } catch (Exception e) {
                                     fb.SendMessage("Problem with preview starting after camera initialization in the main cycle.");
+                                    fb.logger.fine("Problem with preview starting after camera initialization in the main cycle.");
+                                    fb.fh.flush();
                                 }
                             }
 
@@ -923,6 +940,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 fb.SendMessage(getResources().getString(R.string.photo_has_been_taken));
                             } catch (Exception e) {
                                 fb.SendMessage("Problem with picture taking.");
+                                fb.logger.fine("Problem with picture taking.");
+                                fb.fh.flush();
                             }
 
                             fb.fbpause(h, 3);
@@ -943,6 +962,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     preview_stopped = true;
                                 } catch (Exception e) {
                                     fb.SendMessage("FLASH OFF: problem with stopping of preview.");
+                                    fb.logger.fine("FLASH OFF: problem with stopping of preview.");
+                                    fb.fh.flush();
                                 }
                                 parameters = mCamera.getParameters();
 
@@ -953,7 +974,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 try {
                                     mCamera.setParameters(parameters);
                                 } catch (Exception e) {
-                                    fb.SendMessage(h, "setParameters error");
+                                    fb.SendMessage("setParameters error");
+                                    fb.logger.fine("setParameters error");
+                                    fb.fh.flush();
                                 }
 
                             }
@@ -975,10 +998,16 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             }
 
                             fb.SendMessage("-----------------------------");
+                            fb.logger.fine("-----------------------------");
+                            fb.fh.flush();
 
                             fb.SendMessage(getResources().getString(R.string.pause_between_photos) + " " + fb.Photo_Frequency + "sec");
+                            fb.logger.fine(getResources().getString(R.string.pause_between_photos) + " " + fb.Photo_Frequency + "sec");
+                            fb.fh.flush();
 
                             fb.SendMessage("-----------------------------");
+                            fb.logger.fine("-----------------------------");
+                            fb.fh.flush();
 
                             if (mCamera != null) {
 
@@ -1000,9 +1029,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             File imgfile = new File(fb.Image_Name_Full_Path);
 
                             if (imgfile.delete()) {
-                                fb.SendMessage(fb.Image_Name + " has been deleted");
+                                //  fb.SendMessage(fb.Image_Name + " has been deleted");
+                                fb.logger.fine(fb.Image_Name + " has been deleted");
+                                fb.fh.flush();
                             } else {
                                 fb.SendMessage("Problem with deleting " + fb.Image_Name);
+                                fb.logger.fine("Problem with deleting " + fb.Image_Name);
+                                fb.fh.flush();
                             }
 
                         }
@@ -1243,6 +1276,96 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         Log.d(LOG_TAG, "reverse: " + contentsOfFile);
 
     }
+
+    private boolean logcat2file() {
+
+        final FotoBot fb = (FotoBot) getApplicationContext();
+
+        File logfile = null;
+
+        try {
+            logfile = new File(getFilesDir().toString() + "/logfile.txt");
+            logfile.createNewFile();
+            String cmd = "logcat -v brief -d -f " + logfile.getAbsolutePath();
+            Runtime.getRuntime().exec(cmd);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    private String file2string() {
+
+        BufferedReader fileReader = null;
+
+        try {
+            //  fileReader = new BufferedReader(new FileReader(getFilesDir().toString() + "/fblog.txt"));
+            fileReader = new BufferedReader(new FileReader(getFilesDir().toString() + "/logfile.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        StringBuilder strBuilder = new StringBuilder();
+
+        String line;
+        try {
+            while ((line = fileReader.readLine()) != null) {
+                strBuilder.insert(0, line);
+                strBuilder.insert(0, "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            fileReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String contentsOfFile = strBuilder.toString();
+
+        return contentsOfFile;
+    }
+
+    public void logcat(View v) {
+
+        File logfile = new File(getFilesDir().toString() + "/logfile.txt");
+
+        final FotoBot fb = (FotoBot) getApplicationContext();
+
+        if (logcat2file()) {
+            fb.SendMessage("Заполнили файл данными из logcat");
+        } else {
+            fb.SendMessage("Проблема с доступом к logcat");
+        }
+
+        fb.fbpause(fb.h, 3);
+
+        LogWidget = (ScrollView) findViewById(R.id.scrollView);
+        LogWidget.setBackgroundColor(Color.rgb(54, 54, 54));
+
+        tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
+        tvInfo.setTypeface(Typeface.MONOSPACE);
+        tvInfo.setTextColor(Color.rgb(190, 190, 190));
+
+        tvInfo.setText(file2string());
+
+
+  //      Log.d(LOG_TAG, "reverse: " + contentsOfFile);
+
+        try {
+            logfile.delete();
+            fb.SendMessage("Logfile from catlog has been deleted");
+        }catch (Exception e) {
+            fb.SendMessage("Problem with deleting of Logfile from catlog");
+        }
+
+
+    }
+
 
     /**
      * FotoBots help window

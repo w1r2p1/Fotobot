@@ -53,7 +53,7 @@ public class FotoBot extends Application {
 
     public String Camera_Name = "";
 
-    final String LOG_TAG = "Logs";
+    final String LOG_TAG = "FotoBot";
 
     /**
      * Интервал фотографирования (в секундах)
@@ -470,24 +470,35 @@ public class FotoBot extends Application {
         for (connect_attempt = 0; connect_attempt < 3; connect_attempt++) {
 
             SendMessage("Соединение с Internet, попытка: " + (connect_attempt + 1));
+            logger.fine("Соединение с Internet, попытка: " + (connect_attempt + 1));
+            fh.flush();
 
             if (Network_Channel.contains("Wi-Fi")) {
                 SendMessage(getResources().getString(R.string.connection_channel_wifi));
+                logger.fine(getResources().getString(R.string.connection_channel_wifi));
+                fh.flush();
                 enable_WiFi();
             }
 
         if (Network_Channel.contains("Mobile Data")) {
             SendMessage(getResources().getString(R.string.connection_channel_mobiledata));
+            logger.fine(getResources().getString(R.string.connection_channel_mobiledata));
+            fh.flush();
             enable_MobileData();
         }
 
         if (Network_Channel.contains("Both")) {
             SendMessage(getResources().getString(R.string.connection_channel_wifimobiledata));
-
+            logger.fine(getResources().getString(R.string.connection_channel_wifimobiledata));
+            fh.flush();
             if (enable_WiFi()) {
                 SendMessage("Wi-Fi is up in both metod");
+                logger.fine("Wi-Fi is up in both metod");
+                fh.flush();
             } else if (enable_MobileData()) {
                 SendMessage("MobileData is up in both metod");
+                logger.fine("MobileData is up in both metod");
+                fh.flush();
             }
 
         }
@@ -495,6 +506,8 @@ public class FotoBot extends Application {
             if (isOnline()) {
                 if (getPage()) {
                     SendMessage(getResources().getString(R.string.Internet_connection));
+                    logger.fine(getResources().getString(R.string.Internet_connection));
+                    fh.flush();
                     return true;
                 }
             }
@@ -502,6 +515,8 @@ public class FotoBot extends Application {
 
         if ( connect_attempt == 2 ) {
             SendMessage("Exiting without connecting to Internet, photo will be taken in offline mode.");
+            logger.fine("Exiting without connecting to Internet, photo will be taken in offline mode.");
+            fh.flush();
         }
 
         return false;
@@ -563,17 +578,25 @@ public class FotoBot extends Application {
 
                         // SendMessage("wake up: " + i);
                         SendMessage(".");
+                        logger.fine(".");
+                        fh.flush();
 
                         if (camera == null) {
                             //SendMessage("fb.apuse: Camera is not initialized.");
                             SendMessage("..");
+                            logger.fine("..");
+                            fh.flush();
                             try {
                                 camera = Camera.open();
                                 //SendMessage("fb.pause: Camera has been initialized.");
                                 SendMessage(".");
+                                logger.fine(".");
+                                fh.flush();
                             } catch (Exception e) {
                                 //SendMessage("fb pause: Problem with camera initialisation.");
                                 SendMessage("...");
+                                logger.fine("...");
+                                fh.flush();
                                 e.printStackTrace();
                             }
                         }
@@ -583,10 +606,14 @@ public class FotoBot extends Application {
                             camera.startPreview();
                             //SendMessage("fb.pause: startPreview");
                             SendMessage(".");
+                            logger.fine(".");
+                            fh.flush();
                         } catch (Exception e) {
                             e.printStackTrace();
                             //SendMessage("fb.pause: problem with starting of preview");
                             SendMessage("...");
+                            logger.fine("...");
+                            fh.flush();
                         }
 
                         try {
@@ -602,6 +629,8 @@ public class FotoBot extends Application {
                                 camera = null;
                             } catch (Exception e) {
                                 SendMessage("...");
+                                logger.fine("...");
+                                fh.flush();
                             }
 
                         }
@@ -751,7 +780,9 @@ public class FotoBot extends Application {
         if (fileExists) {
             //   SendMessage(h, attach_file.length()/1000 + "Kb");
         } else {
-            SendMessage(h, "Image doesn't exist.");
+            SendMessage("Image doesn't exist.");
+            logger.fine("Image doesn't exist.");
+            fh.flush();
         }
 
         attach_file = new File((getApplicationContext().getFilesDir().toString() + "/fblog.txt"));
@@ -760,7 +791,9 @@ public class FotoBot extends Application {
         if (fileExists) {
             //   SendMessage(h, "FLog: " + attach_file.length()/1000 + "Kb");
         } else {
-            SendMessage(h, "Log doesn't exist.");
+            SendMessage("Log doesn't exist.");
+            logger.fine("Log doesn't exist.");
+            fh.flush();
         }
 
         try {
@@ -771,10 +804,14 @@ public class FotoBot extends Application {
             if (m.send()) {
                 SendMessage(h, getResources().getString(R.string.foto_sent));
             } else {
-                SendMessage(h, "Email was not sent.");
+                SendMessage("Email was not sent.");
+                logger.fine("Email was not sent.");
+                fh.flush();
             }
         } catch (Exception e) {
-            SendMessage(h, "Could not send email");
+            SendMessage("Could not send email");
+            logger.fine("Could not send email");
+            fh.flush();
             Log.e("MailApp", "Could not send email", e);
         }
 
