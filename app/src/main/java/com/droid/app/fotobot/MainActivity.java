@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         //    fb.logger.fine(reportDate + ": " + message);
         //    fb.fh.flush();
 
-            Log.d(HANDLER, reportDate + ": " + message);
+            Log.d(LOG_TAG, reportDate + ": " + message);
 
         /*    if (fb.Show_Help) {
                 tvInfo.setText(Html.fromHtml((getResources().getString(R.string.main_help))));
@@ -1303,10 +1303,16 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         File logfile = null;
 
+        String cmd = null;
+
         try {
             logfile = new File(getFilesDir().toString() + "/logfile.txt");
             logfile.createNewFile();
-            String cmd = "logcat -v long -d -f " + logfile.getAbsolutePath();
+            if ( Build.VERSION.SDK_INT <= 12 ) {
+                cmd = "logcat -v brief -d -f " + logfile.getAbsolutePath() + " Logs:* FotoBot:* *:S";
+            } else {
+                cmd = "logcat -v brief -d -f " + logfile.getAbsolutePath();
+            }
             Runtime.getRuntime().exec(cmd);
             return true;
         } catch (IOException e) {
