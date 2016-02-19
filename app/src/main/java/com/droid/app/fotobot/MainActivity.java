@@ -807,7 +807,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                         // Log.d(LOG_TAG, fb.Camera_Properties);
 
-                        fb.CloseInternetConnection();
+                        if ( Build.VERSION.SDK_INT <= 21 ) {
+                            fb.CloseInternetConnection();
+                        }
 
                         if (fb.Network_Connection_Method.contains("Method 1")) {
                             if (android.os.Build.VERSION.SDK_INT <= 21) {
@@ -1304,7 +1306,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         try {
             logfile = new File(getFilesDir().toString() + "/logfile.txt");
             logfile.createNewFile();
-            String cmd = "logcat -v brief -d -f " + logfile.getAbsolutePath();
+            String cmd = "logcat -v long -d -f " + logfile.getAbsolutePath();
             Runtime.getRuntime().exec(cmd);
             return true;
         } catch (IOException e) {

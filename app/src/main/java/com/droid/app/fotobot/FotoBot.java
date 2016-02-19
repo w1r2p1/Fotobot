@@ -16,6 +16,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.SurfaceHolder;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -560,6 +561,8 @@ public class FotoBot extends Application {
 
         final String message;
 
+       // final Context context = getApplicationContext();
+
         Thread thread = new Thread() {
             public void run() {
                 for (int i = 1; i <= delay; i++) {
@@ -575,6 +578,9 @@ public class FotoBot extends Application {
                     }
 
                     if (i % wake_up_interval == 0 && frame_delay) {
+
+                    //    Toast toast = Toast.makeText(context, "Wake up!", Toast.LENGTH_LONG);
+                    //    toast.show();
 
                         // SendMessage("wake up: " + i);
                         SendMessage(".");
