@@ -470,35 +470,35 @@ public class FotoBot extends Application {
         for (connect_attempt = 0; connect_attempt < 3; connect_attempt++) {
 
             SendMessage("Соединение с Internet, попытка: " + (connect_attempt + 1));
-            logger.fine("Соединение с Internet, попытка: " + (connect_attempt + 1));
-            fh.flush();
+           // logger.fine("Соединение с Internet, попытка: " + (connect_attempt + 1));
+           // fh.flush();
 
             if (Network_Channel.contains("Wi-Fi")) {
                 SendMessage(getResources().getString(R.string.connection_channel_wifi));
-                logger.fine(getResources().getString(R.string.connection_channel_wifi));
-                fh.flush();
+              //  logger.fine(getResources().getString(R.string.connection_channel_wifi));
+              //  fh.flush();
                 enable_WiFi();
             }
 
         if (Network_Channel.contains("Mobile Data")) {
             SendMessage(getResources().getString(R.string.connection_channel_mobiledata));
-            logger.fine(getResources().getString(R.string.connection_channel_mobiledata));
-            fh.flush();
+          //  logger.fine(getResources().getString(R.string.connection_channel_mobiledata));
+          //  fh.flush();
             enable_MobileData();
         }
 
         if (Network_Channel.contains("Both")) {
             SendMessage(getResources().getString(R.string.connection_channel_wifimobiledata));
-            logger.fine(getResources().getString(R.string.connection_channel_wifimobiledata));
-            fh.flush();
+          //  logger.fine(getResources().getString(R.string.connection_channel_wifimobiledata));
+          //  fh.flush();
             if (enable_WiFi()) {
                 SendMessage("Wi-Fi is up in both metod");
-                logger.fine("Wi-Fi is up in both metod");
-                fh.flush();
+              //  logger.fine("Wi-Fi is up in both metod");
+              //  fh.flush();
             } else if (enable_MobileData()) {
                 SendMessage("MobileData is up in both metod");
-                logger.fine("MobileData is up in both metod");
-                fh.flush();
+              //  logger.fine("MobileData is up in both metod");
+              //  fh.flush();
             }
 
         }
@@ -506,8 +506,8 @@ public class FotoBot extends Application {
             if (isOnline()) {
                 if (getPage()) {
                     SendMessage(getResources().getString(R.string.Internet_connection));
-                    logger.fine(getResources().getString(R.string.Internet_connection));
-                    fh.flush();
+                  //  logger.fine(getResources().getString(R.string.Internet_connection));
+                  //  fh.flush();
                     return true;
                 }
             }
@@ -515,8 +515,8 @@ public class FotoBot extends Application {
 
         if ( connect_attempt == 2 ) {
             SendMessage("Exiting without connecting to Internet, photo will be taken in offline mode.");
-            logger.fine("Exiting without connecting to Internet, photo will be taken in offline mode.");
-            fh.flush();
+           // logger.fine("Exiting without connecting to Internet, photo will be taken in offline mode.");
+           // fh.flush();
         }
 
         return false;
@@ -788,8 +788,8 @@ public class FotoBot extends Application {
             //   SendMessage(h, attach_file.length()/1000 + "Kb");
         } else {
             SendMessage("Image doesn't exist.");
-            logger.fine("Image doesn't exist.");
-            fh.flush();
+         //   logger.fine("Image doesn't exist.");
+         //   fh.flush();
         }
 
         attach_file = new File((getApplicationContext().getFilesDir().toString() + "/logfile.txt"));

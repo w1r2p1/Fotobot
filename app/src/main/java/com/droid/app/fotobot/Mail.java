@@ -6,6 +6,8 @@ import android.util.Log;
 import com.sun.mail.smtp.SMTPAddressFailedException;
 import com.sun.mail.smtp.SMTPSendFailedException;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Date;
 import java.util.Properties;
 
@@ -48,6 +50,8 @@ public class Mail extends javax.mail.Authenticator {
     private boolean _debuggable;
 
     private Multipart _multipart;
+
+    final String LOG_TAG = "Mail";
 
 
     public Mail() {
@@ -125,16 +129,24 @@ public class Mail extends javax.mail.Authenticator {
             // send email
             try {
                 Transport.send(msg);
-                Log.d("DEBUG", "Transport passed");
+                Log.d("LOG_TAG", "Transport passed");
                 return true;
             } catch (SMTPAddressFailedException e) {
-                Log.d("DEBUG", "Mail host failed ");
+                Log.d("LOG_TAG", "Mail host failed ");
                 return false;
             } catch (SMTPSendFailedException e) {
-                Log.d("DEBUG", "SMTP timeout");
+                Log.d("LOG_TAG", "SMTP timeout");
                 return false;
             } catch (Exception e) {
-                Log.d("DEBUG", "Transport.send exception");
+                Log.d("LOG_TAG", "Transport.send exception");
+                e.printStackTrace();
+                StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);
+                e.printStackTrace(pw);
+                //String str = sw.toString();
+                Log.d("LOG_TAG", sw.toString());
+
+
                 return false;
             }
 
