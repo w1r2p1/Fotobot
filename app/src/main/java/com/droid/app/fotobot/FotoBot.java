@@ -578,25 +578,28 @@ public class FotoBot extends Application {
 
                         // SendMessage("wake up: " + i);
                         SendMessage(".");
-                        logger.fine(".");
-                        fh.flush();
+                       // logger.fine(".");
+                      //  fh.flush();
 
                         if (camera == null) {
+                            Log.d(LOG_TAG, "camera == null");
                             //SendMessage("fb.apuse: Camera is not initialized.");
                             SendMessage("..");
-                            logger.fine("..");
-                            fh.flush();
+                          //  logger.fine("..");
+                          //  fh.flush();
                             try {
                                 camera = Camera.open();
                                 //SendMessage("fb.pause: Camera has been initialized.");
                                 SendMessage(".");
-                                logger.fine(".");
-                                fh.flush();
+                                Log.d(LOG_TAG,"Camera has been successfully opened");
+                            //    logger.fine(".");
+                            //    fh.flush();
                             } catch (Exception e) {
                                 //SendMessage("fb pause: Problem with camera initialisation.");
                                 SendMessage("...");
-                                logger.fine("...");
-                                fh.flush();
+                                Log.d(LOG_TAG,"Problem with camera opening");
+                             //   logger.fine("...");
+                             //   fh.flush();
                                 e.printStackTrace();
                             }
                         }
@@ -606,14 +609,16 @@ public class FotoBot extends Application {
                             camera.startPreview();
                             //SendMessage("fb.pause: startPreview");
                             SendMessage(".");
-                            logger.fine(".");
-                            fh.flush();
+                            Log.d(LOG_TAG,"Preview started");
+                          //  logger.fine(".");
+                          //  fh.flush();
                         } catch (Exception e) {
                             e.printStackTrace();
                             //SendMessage("fb.pause: problem with starting of preview");
                             SendMessage("...");
-                            logger.fine("...");
-                            fh.flush();
+                            Log.d(LOG_TAG, "Problem with starting of preview");
+                          //  logger.fine("...");
+                          //  fh.flush();
                         }
 
                         try {
@@ -623,14 +628,16 @@ public class FotoBot extends Application {
                         }
 
                         if (camera != null) {
+                            Log.d(LOG_TAG, "Camera is busy");
                             try {
                                 camera.stopPreview();
                                 camera.release();
                                 camera = null;
+                                Log.d(LOG_TAG,"Camera unlocked");
                             } catch (Exception e) {
                                 SendMessage("...");
-                                logger.fine("...");
-                                fh.flush();
+                                //logger.fine("...");
+                               // fh.flush();
                             }
 
                         }

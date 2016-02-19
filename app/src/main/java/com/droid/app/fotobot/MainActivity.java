@@ -882,8 +882,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     //      fb.SendMessage("Camera has been initialized for parameters setting.");
                                 } catch (Exception e) {
                                     fb.SendMessage("Problem with camera itialization in main cycle.");
-                                    fb.logger.fine("Problem with camera itialization in main cycle.");
-                                    fb.fh.flush();
+                                   // fb.logger.fine("Problem with camera itialization in main cycle.");
+                                   // fb.fh.flush();
 
                                 }
                             }
@@ -893,8 +893,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     mCamera.stopPreview();
                                 } catch (Exception e) {
                                     fb.SendMessage("Preview couldn't be stopped in the main cycle.");
-                                    fb.logger.fine("Preview couldn't be stopped in the main cycle.");
-                                    fb.fh.flush();
+                                   // fb.logger.fine("Preview couldn't be stopped in the main cycle.");
+                                   // fb.fh.flush();
                                 }
                                 preview_stopped = true;
                             }
@@ -913,8 +913,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 mCamera.setParameters(parameters);
                             } catch (Exception e) {
                                 fb.SendMessage("Camera parameters have not been changed in the main cycle.");
-                                fb.logger.fine("Camera parameters have not been changed in the main cycle.");
-                                fb.fh.flush();
+                               // fb.logger.fine("Camera parameters have not been changed in the main cycle.");
+                              //  fb.fh.flush();
                                 e.printStackTrace();
                             }
 
@@ -928,8 +928,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     preview_stopped = false;
                                 } catch (Exception e) {
                                     fb.SendMessage("Problem with preview starting after camera initialization in the main cycle.");
-                                    fb.logger.fine("Problem with preview starting after camera initialization in the main cycle.");
-                                    fb.fh.flush();
+                                //    fb.logger.fine("Problem with preview starting after camera initialization in the main cycle.");
+                                //    fb.fh.flush();
                                 }
                             }
 
@@ -940,8 +940,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 fb.SendMessage(getResources().getString(R.string.photo_has_been_taken));
                             } catch (Exception e) {
                                 fb.SendMessage("Problem with picture taking.");
-                                fb.logger.fine("Problem with picture taking.");
-                                fb.fh.flush();
+                              //  fb.logger.fine("Problem with picture taking.");
+                              //  fb.fh.flush();
                             }
 
                             fb.fbpause(h, 3);
@@ -960,11 +960,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 try {
                                     mCamera.stopPreview();
                                     preview_stopped = true;
+                                    fb.fbpause(h,1);
                                 } catch (Exception e) {
                                     fb.SendMessage("FLASH OFF: problem with stopping of preview.");
-                                    fb.logger.fine("FLASH OFF: problem with stopping of preview.");
-                                    fb.fh.flush();
+                                 //   fb.logger.fine("FLASH OFF: problem with stopping of preview.");
+                                 //   fb.fh.flush();
                                 }
+
+
                                 parameters = mCamera.getParameters();
 
                                 fb.fbpause(h, fb.process_delay);
@@ -975,8 +978,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     mCamera.setParameters(parameters);
                                 } catch (Exception e) {
                                     fb.SendMessage("setParameters error");
-                                    fb.logger.fine("setParameters error");
-                                    fb.fh.flush();
+                                 //   fb.logger.fine("setParameters error");
+                                 //   fb.fh.flush();
                                 }
 
                             }
