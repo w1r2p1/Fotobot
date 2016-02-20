@@ -1324,6 +1324,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     private String file2string() {
 
+        final FotoBot fb = (FotoBot) getApplicationContext();
+
         BufferedReader fileReader = null;
 
         try {
