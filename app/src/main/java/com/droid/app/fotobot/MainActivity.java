@@ -1336,10 +1336,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         StringBuilder strBuilder = new StringBuilder();
 
         String line;
+
+        Integer line_count = 0;
+
         try {
-            while ((line = fileReader.readLine()) != null) {
+            while ((line = fileReader.readLine()) != null && line_count < 5) {
                 strBuilder.insert(0, line);
                 strBuilder.insert(0, "\n");
+                line_count = line_count + 1;
             }
         } catch (IOException e) {
             e.printStackTrace();
