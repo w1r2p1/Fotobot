@@ -563,8 +563,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         }
 
         final FotoBot fb = (FotoBot) getApplicationContext();
-        fb.logger.fine("onResume");
-        fb.fh.flush();
+       // fb.logger.fine("onResume");
+       // fb.fh.flush();
         Log.d(LOG_TAG, "MainActivity: onResume");
         Log.d(LOG_TAG, "MainActivity: fb.getstatus()" + fb.getstatus());
         tvInfo = (TextView) findViewById(R.id.tvInfo);
@@ -668,15 +668,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
 
             fb.fh.setFormatter(new MyCustomFormatter());
-            Log.d(LOG_TAG, "formatter created");
+          //  Log.d(LOG_TAG, "formatter created");
 
             fb.logger.addHandler(fb.fh);
-            Log.d(LOG_TAG, "handler added");
+          //  Log.d(LOG_TAG, "handler added");
             fb.logger.setLevel(Level.FINE);
 
-            fb.logger.finest("Logger has been initialised.");
-            fb.fh.flush();
-            Log.d(LOG_TAG, "Logger has been initialised.");
+          //  fb.logger.finest("Logger has been initialised.");
+          //  fb.fh.flush();
+         //   Log.d(LOG_TAG, "Logger has been initialised.");
             fb.init_logger = true;
         }
 
@@ -684,8 +684,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     protected void onStop() {
         final FotoBot fb = (FotoBot) getApplicationContext();
-        fb.logger.fine("onStop");
-        fb.fh.flush();
+     //   fb.logger.fine("onStop");
+     //   fb.fh.flush();
         super.onStop();
         Log.d(LOG_TAG, "MainActivity: onStop");
     }
@@ -693,8 +693,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         final FotoBot fb = (FotoBot) getApplicationContext();
-        fb.logger.fine("onCreateOptionsMenu");
-        fb.fh.flush();
+     //   fb.logger.fine("onCreateOptionsMenu");
+     //   fb.fh.flush();
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -747,8 +747,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         if (!fb.init_logger) {
 
             Log.d(LOG_TAG, "fb.init_logger");
-            fb.logger = Logger.getLogger(FotoBot.class.getName());
-            fb.logpath = getFilesDir().toString() + "/";
+       //     fb.logger = Logger.getLogger(FotoBot.class.getName());
+         //   fb.logpath = getFilesDir().toString() + "/";
 
             try {
                 fb.fh = new FileHandler(fb.logpath + "fblog.txt", fb.floglength, 1, true);
@@ -822,8 +822,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             fb.Image_Index = i;
                             fb.SendMessage("Начинаем делать фото: " + fb.Image_Index);
-                            fb.logger.fine("Начинаем делать фото: " + fb.Image_Index);
-                            fb.fh.flush();
+                        //    fb.logger.fine("Начинаем делать фото: " + fb.Image_Index);
+                          //  fb.fh.flush();
 
                             //  fb.logger.fine("Начинаем делать фото: " + fb.Image_Index);
                             //  fb.fh.flush();
@@ -1335,15 +1335,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         StringBuilder strBuilder = new StringBuilder();
 
+        int line_counter = 0;
+
         String line;
 
-        Integer line_count = 0;
-
-        try {
-            while ((line = fileReader.readLine()) != null && line_count < 5) {
+                try {
+            while ((line = fileReader.readLine()) != null && line_counter < fb.log_line_number) {
                 strBuilder.insert(0, line);
                 strBuilder.insert(0, "\n");
-                line_count = line_count + 1;
+                line_counter = line_counter + 1;
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -248,6 +248,8 @@ public class FotoBot extends Application {
 
     boolean init_logger = false;
 
+    public int log_line_number = 150;
+
     /**
      * Строка на экран
      */
@@ -895,7 +897,7 @@ public class FotoBot extends Application {
 
         loglength = pref.getInt("Log_Length", 1024);
 
-        floglength = pref.getInt("FLog_Length", 1024);
+        log_line_number = pref.getInt("FLog_Length", 150);
 
         wake_up_interval = pref.getInt("Wake_Up_Interval", 60);
 

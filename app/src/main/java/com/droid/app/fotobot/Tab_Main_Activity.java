@@ -578,7 +578,7 @@ public class Tab_Main_Activity extends Activity {
         editText_fbfloglength = new EditText(this);
         editText_fbfloglength.setLayoutParams(lpView_fbfloglength);
         editText_fbfloglength.setSingleLine(true);
-        editText_fbfloglength.setText(Integer.toString(fb.floglength));
+        editText_fbfloglength.setText(Integer.toString(fb.log_line_number));
         editText_fbfloglength.setTextColor(Color.rgb(50, 100, 150));
         editText_fbfloglength.setWidth((screenWidth - padding) / 100 * 40);
         editText_fbfloglength.setLayoutParams(lpView_fbfloglength);
@@ -588,7 +588,7 @@ public class Tab_Main_Activity extends Activity {
         editText_fbfloglength.setLayoutParams(lpView_fbfloglength_m1);
         linLayout_fbfloglength.addView(editText_fbfloglength);
 
-// Заметка для названия камеры
+// Заметка
         TextView tv_fbfloglength_note = new TextView(this);
         tv_fbfloglength_note.setTypeface(null, Typeface.NORMAL);
         tv_fbfloglength_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
@@ -783,9 +783,9 @@ public class Tab_Main_Activity extends Activity {
         FullFrame.addView(linLayout_fbloglength);
         FullFrame.addView(linLayout_fbloglength_note);
         FullFrame.addView(linLayout_fbfloglength);
-        FullFrame.addView(linLayout_fbfloglength_note);
-        FullFrame.addView(linLayout_Clean_Log);
-        FullFrame.addView(linLayout_Clean_Log_m);
+     //   FullFrame.addView(linLayout_fbfloglength_note);
+     //   FullFrame.addView(linLayout_Clean_Log);
+     //   FullFrame.addView(linLayout_Clean_Log_m);
         FullFrame.addView(linLayout_Clean_Text);
         FullFrame.addView(linLayout_Clean_Text_m);
         FullFrame.addView(linLayout_config_font_size);
