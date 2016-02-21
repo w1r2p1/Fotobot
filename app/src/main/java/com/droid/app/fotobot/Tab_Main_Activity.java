@@ -680,7 +680,7 @@ public class Tab_Main_Activity extends Activity {
 
 // CheckBox
         checkBox_Attach_Log = new CheckBox(this);
-        checkBox_Attach_Log.setChecked(false);
+        checkBox_Attach_Log.setChecked(fb.attach_log);
 
         lpView_Attach_Log_m.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, checkBox_Clean_Text.getId());
         checkBox_Attach_Log.setLayoutParams(lpView_Attach_Log_m);
@@ -753,6 +753,10 @@ public class Tab_Main_Activity extends Activity {
 
                 if (checkBox_Attach_Log.isChecked()) {
                     fb.attach_log = true;
+                    editor.putBoolean("Attach_Log", true);
+                } else {
+                    fb.attach_log = false;
+                    editor.putBoolean("Attach_Log", false);
                 }
 
                 editor.putString("Camera_Name", editText_Fotobot_Camera_Name.getText().toString());
