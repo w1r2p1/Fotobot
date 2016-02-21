@@ -124,6 +124,7 @@
 
     <string name="network_up_delay">Время на подключение к Internet</string>
     <string name="network_up_delay_description">Время (сек) на поднятие сетевого интерфейса (Wi-Fi или Mobile Data)</string>
+    <string name="attach_log">Приаттачить журнал к письму</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>

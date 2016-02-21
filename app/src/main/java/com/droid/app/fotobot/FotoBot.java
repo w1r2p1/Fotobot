@@ -181,7 +181,9 @@ public class FotoBot extends Application {
      */
     public int floglength = 1024;
 
-    public String check_web_page = "http://www.javatalks.ru";
+    public String check_web_page = "http://www.android.com";
+
+    public boolean attach_log = true;
 
     /**
      * Время (сек) необходимое на поднятие сетевого интерфейса
@@ -800,20 +802,24 @@ public class FotoBot extends Application {
          //   fh.flush();
         }
 
-        attach_file = new File((getApplicationContext().getFilesDir().toString() + "/logfile.txt"));
-        fileExists = attach_file.isFile();
+        if ( fb.attach_log) {
+            attach_file = new File((getApplicationContext().getFilesDir().toString() + "/logfile.txt"));
+            fileExists = attach_file.isFile();
 
-        if (fileExists) {
-            //   SendMessage(h, "FLog: " + attach_file.length()/1000 + "Kb");
-        } else {
-            SendMessage("Log doesn't exist.");
-          //  logger.fine("Log doesn't exist.");
-          //  fh.flush();
+            if (fileExists) {
+                //   SendMessage(h, "FLog: " + attach_file.length()/1000 + "Kb");
+            } else {
+                SendMessage("Log doesn't exist.");
+                //  logger.fine("Log doesn't exist.");
+                //  fh.flush();
+            }
         }
-
         try {
             m.addAttachment(str);
-            m.addAttachment(getApplicationContext().getFilesDir().toString() + "/logfile.txt");
+
+            if (fb.attach_log) {
+                m.addAttachment(getApplicationContext().getFilesDir().toString() + "/logfile.txt");
+            }
             fbpause(h, process_delay);
 
             if (m.send()) {
@@ -901,9 +907,11 @@ public class FotoBot extends Application {
 
         wake_up_interval = pref.getInt("Wake_Up_Interval", 60);
 
-        check_web_page = pref.getString("Check_Web_Page", "http://www.javatalks.ru");
+        check_web_page = pref.getString("Check_Web_Page", "http://www.android.com");
 
         network_up_delay = pref.getInt("Network_Up_Delay", 15);
+
+        attach_log  = pref.getBoolean("Attach_Log", true);
     }
 
     /**

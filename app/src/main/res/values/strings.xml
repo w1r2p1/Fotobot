@@ -63,6 +63,8 @@
 
     <string name="wake_up">Wake Up frequency</string>
 
+    <string name="attach_log">Attach Log to email</string>
+
     <string name="wake_up_description">Need to keep Fotobot in memory (to avoid kicking by Android)</string>
     <string name="settings_font">Font size for settings window</string>
     <string name="log_font">Font size for log</string>

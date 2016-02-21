@@ -36,6 +36,7 @@ public class Tab_Main_Activity extends Activity {
     private int padding = 15;
     CheckBox checkBox_Clean_Log;
     CheckBox checkBox_Clean_Text;
+    CheckBox checkBox_Attach_Log;
     EditText Photo_Frequency;
     EditText Config_Font_Size;
     EditText Log_Font_Size;
@@ -653,6 +654,38 @@ public class Tab_Main_Activity extends Activity {
         Wake_Up.setLayoutParams(lpView_Wake_Up_m);
         linLayout_Wake_Up.addView(Wake_Up);
 
+        // ------------------------------------------------------------------------------------------------
+
+// Приаттачить лог
+
+// Attach Log Container
+        RelativeLayout linLayout_Attach_Log = new RelativeLayout(this);
+        RelativeLayout.LayoutParams lpView_Attach_Log = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams lpView_Attach_Log_m = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams lpView_et_Attach_Log = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        linLayout_Clean_Text.setBackgroundColor(Color.rgb(192,192,192));
+
+// Attach Log TextView
+        TextView tv_Attach_Log = new TextView(this);
+        tv_Attach_Log.setText(getResources().getString(R.string.attach_log));
+        tv_Attach_Log.setWidth((screenWidth - padding) / 100 * 90);
+        tv_Attach_Log.setLayoutParams(lpView_Attach_Log);
+        tv_Attach_Log.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Attach_Log.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Attach_Log.setTextColor(Color.BLACK);
+
+        lpView_Attach_Log.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Attach_Log.getId());
+        tv_Attach_Log.setLayoutParams(lpView_Attach_Log);
+        linLayout_Attach_Log.addView(tv_Attach_Log);
+
+// CheckBox
+        checkBox_Attach_Log = new CheckBox(this);
+        checkBox_Attach_Log.setChecked(false);
+
+        lpView_Attach_Log_m.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, checkBox_Clean_Text.getId());
+        checkBox_Attach_Log.setLayoutParams(lpView_Attach_Log_m);
+        linLayout_Attach_Log.addView(checkBox_Attach_Log);
+
 // Buttons
 
 // Container
@@ -718,6 +751,10 @@ public class Tab_Main_Activity extends Activity {
                       fb.clean_log = true;
                 }
 
+                if (checkBox_Attach_Log.isChecked()) {
+                    fb.attach_log = true;
+                }
+
                 editor.putString("Camera_Name", editText_Fotobot_Camera_Name.getText().toString());
                 editor.putInt("Photo_Frequency", Integer.parseInt(Photo_Frequency.getText().toString()));
                 editor.putInt("Wake_Up", Integer.parseInt(Wake_Up.getText().toString()));
@@ -780,8 +817,10 @@ public class Tab_Main_Activity extends Activity {
         FullFrame.addView(linLayout_process_delay);
         FullFrame.addView(linLayout_Flash_notes);
     //    FullFrame.addView(linLayout_Flash_divider);
+
         FullFrame.addView(linLayout_fbloglength);
         FullFrame.addView(linLayout_fbloglength_note);
+        FullFrame.addView(linLayout_Attach_Log);
         FullFrame.addView(linLayout_fbfloglength);
      //   FullFrame.addView(linLayout_fbfloglength_note);
      //   FullFrame.addView(linLayout_Clean_Log);
