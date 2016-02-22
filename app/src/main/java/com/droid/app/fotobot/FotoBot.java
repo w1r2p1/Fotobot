@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -17,10 +16,20 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.SurfaceHolder;
+import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -33,14 +42,19 @@ import static android.os.Environment.getExternalStoragePublicDirectory;
  * <h1>FotoBot</h1>
  * Умеет делать фото и отправлять на почту.
  * Это глобальный класс, объект данного класса будет виден во всех активити. Инициализируется через Manifest.
+ * Все переменные с которыми работают методы других классов собраны здесь.
  */
 public class FotoBot extends Application {
+
+    Camera camera = null;
 
     private final static Logger fblogger = Logger.getLogger(FotoBot.class.getName());
 
     public String versionName = "";
 
-    final String LOG_TAG = "Logs";
+    public String Camera_Name = "";
+
+    final String LOG_TAG = "FotoBot";
 
     /**
      * Интервал фотографирования (в секундах)
@@ -114,7 +128,7 @@ public class FotoBot extends Application {
     /**
      * Соединятся с Internet один раз (Method1) или на каждом шаге (Method2)
      */
-    public String Network_Connection_Method = "В начале работы";
+    public String Network_Connection_Method = "Method 1";
 
     /**
      * Метод обработки фото (Hardaware или Software)
@@ -137,6 +151,8 @@ public class FotoBot extends Application {
 
     public SurfaceHolder sHolder = null;
 
+    public boolean frame_delay = false;
+
     /**
      * Размер шрифта в настройках (sp)
      */
@@ -154,6 +170,31 @@ public class FotoBot extends Application {
     public String Image_Name;
 
     public String Image_Name_Full_Path;
+
+    /**
+     * Длина лога в главном окне
+     */
+    public int loglength = 1024;
+
+    /**
+     * Длина лога в файле
+     */
+    public int floglength = 1024;
+
+    public String check_web_page = "http://www.android.com";
+
+    public boolean attach_log = true;
+
+    /**
+     * Время (сек) необходимое на поднятие сетевого интерфейса
+     */
+    public int network_up_delay = 15;
+
+    /**
+     * Частота с которой Fotobot обращается к камере и стартует preview,
+     * необходима для того, чтобы приложение не было выброшено из памяти
+     */
+    public int wake_up_interval = 60;
 
     /**
      * Camera properties
@@ -184,8 +225,18 @@ public class FotoBot extends Application {
     public String usedMemory;
 
     /**
-     * Длительность отправки предыдущего письма
+     * Батарейка
      */
+    int battery_health;
+    int battery_icon_small;
+    int battery_charge;
+    int battery_plugged;
+    boolean battery_present;
+    int battery_scale;
+    int battery_status;
+    String battery_technology;
+    float battery_temperature;
+    int battery_voltage;
 
     /**
      * Логфайл
@@ -199,11 +250,18 @@ public class FotoBot extends Application {
 
     boolean init_logger = false;
 
+    public int log_line_number = 150;
+
     /**
      * Строка на экран
      */
     public String log = "";
 
+    public boolean clean_log = false;
+
+    /**
+     * Длительность отправки предыдущего письма
+     */
     public long email_sending_time;
 
     /**
@@ -241,9 +299,7 @@ public class FotoBot extends Application {
      */
     public void FotoBot() {
 
-
-
-        LoadData();
+        LoadSettings();
     }
 
     public void Init() {
@@ -259,17 +315,17 @@ public class FotoBot extends Application {
      *
      * @return boolean
      */
-    public boolean isOnline(Handler h) {
+    public boolean isOnline() {
 
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
 
         if (netInfo != null && netInfo.isConnected()) {
-            SendMessage(h, getResources().getString(R.string.Internet_connection_is_already_created));
+//            SendMessage(getResources().getString(R.string.Internet_connection_is_already_created));
             return true;
         } else {
-            SendMessage(h, getResources().getString(R.string.no_Internet_connection));
+//            SendMessage(getResources().getString(R.string.no_Internet_connection));
             return false;
         }
 
@@ -277,26 +333,88 @@ public class FotoBot extends Application {
 
     /**
      * Для проверки соединения выкачивает страницу из Internet
-     *
-     * @param h
-     * @return
      */
-    public boolean getData(Handler h) {
+
+    public boolean getPage() {
+
+        BufferedReader rd = null;
+        StringBuilder sb = null;
+        String line = null;
+
+        InputStream is = null;
+
+        HttpURLConnection urlc = null;
+        URL serverAddress = null;
 
         try {
-            HttpURLConnection urlc = (HttpURLConnection) (new URL("http://www.google.com").openConnection());
-            urlc.setRequestProperty("User-Agent", "Test");
-            urlc.setRequestProperty("Connection", "close");
-            urlc.setConnectTimeout(3000); //choose your own timeframe
-            urlc.setReadTimeout(4000); //choose your own timeframe
+            serverAddress = new URL(check_web_page);
+            //set up out communications stuff
+            urlc = null;
+
+            //Set up the initial connection
+            urlc = (HttpURLConnection) serverAddress.openConnection();
+            urlc.setRequestMethod("GET");
+            urlc.setDoOutput(true);
+            urlc.setReadTimeout(60000);
+
             urlc.connect();
-           // SendMessage(h, "удалось скачать файл из Internet");
-            return (urlc.getResponseCode() == 200);
+//read the result from the server
+            rd = new BufferedReader(new InputStreamReader(urlc.getInputStream()));
+            sb = new StringBuilder();
+
+            while ((line = rd.readLine()) != null) {
+                sb.append(line + '\n');
+            }
+
+            SendMessage(check_web_page + " загружена " + sb.toString().length() / 1000 + "Kb");
+
+            urlc.disconnect();
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            String str = sw.toString();
+            SendMessage(str);
+            return false;
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+            e.printStackTrace();
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            SendMessage(sw.toString().toUpperCase());
+            return false;
         } catch (IOException e) {
-           // SendMessage(h, "не удалось скачать файл из Internet");
-            return (false);  //connectivity exists, but no internet.
+            e.printStackTrace();
+            e.printStackTrace();
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            SendMessage(sw.toString().toUpperCase());
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            SendMessage(sw.toString().toUpperCase());
+        } finally {
+            //close the connection, set all objects to null
+            //    urlc.disconnect();
+            rd = null;
+            sb = null;
+            urlc = null;
         }
 
+        return true;
+    }
+
+    // Reads an InputStream and converts it to a String.
+    public String readIt(InputStream stream, int len) throws IOException, UnsupportedEncodingException {
+        Reader reader = null;
+        reader = new InputStreamReader(stream, "UTF-8");
+        char[] buffer = new char[len];
+        reader.read(buffer);
+        return new String(buffer);
     }
 
     /**
@@ -306,91 +424,108 @@ public class FotoBot extends Application {
      * @param h
      * @return
      */
-    public boolean MakeInternetConnection(Context context, Handler h) {
 
-        WiFi wf;
+    private boolean enable_WiFi() {
 
-        wf = new WiFi();
+        try {
 
-        LoadData();
+            WiFi wf = new WiFi();
+            SendMessage(h, getResources().getString(R.string.turning_on_wifi));
+            wf.setWiFiEnabled(getApplicationContext(), true);
+            fbpause(h, network_up_delay);
+           // SendMessage(h, getResources().getString(R.string.turning_on_wifi_message));
+           // fbpause(h, 5);
 
-        boolean wf_connect_attempt = false;
+            return true;
 
-        MobileData md;
-        md = new MobileData();
+        } catch (Exception e) {
 
-        if (Network_Channel.contains("Wi-Fi")) {
-            SendMessage(h, getResources().getString(R.string.connection_channel_wifi));
-            if (!(isOnline(h) && getData(h))) {
-                SendMessage(h, getResources().getString(R.string.turning_on_wifi));
-                wf.setWiFiEnabled(getApplicationContext(), true);
-                fbpause(h, 5);
-                SendMessage(h, getResources().getString(R.string.turning_on_wifi_message));
-                fbpause(h, 5);
-
-                if ((isOnline(h) && getData(h))) {
-                    SendMessage(h, getResources().getString(R.string.Internet_connection));
-                    return true;
-                }
-
-            }
+            e.printStackTrace();
 
         }
 
+        return false;
+
+    }
+
+    private boolean enable_MobileData() {
+
+        try {
+
+            MobileData md = new MobileData();
+            SendMessage(h, getResources().getString(R.string.turning_on_mobiledata));
+            md.setMobileDataEnabled(getApplicationContext(), true);
+            fbpause(h, network_up_delay);
+
+            return true;
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            return false;
+
+        }
+
+    }
+
+    public boolean MakeInternetConnection() {
+
+        int connect_attempt;
+
+        for (connect_attempt = 0; connect_attempt < 3; connect_attempt++) {
+
+            SendMessage("Соединение с Internet, попытка: " + (connect_attempt + 1));
+           // logger.fine("Соединение с Internet, попытка: " + (connect_attempt + 1));
+           // fh.flush();
+
+            if (Network_Channel.contains("Wi-Fi")) {
+                SendMessage(getResources().getString(R.string.connection_channel_wifi));
+              //  logger.fine(getResources().getString(R.string.connection_channel_wifi));
+              //  fh.flush();
+                enable_WiFi();
+            }
+
         if (Network_Channel.contains("Mobile Data")) {
-            SendMessage(h, getResources().getString(R.string.connection_channel_mobiledata));
-            if (!(isOnline(h) && getData(h))) {
-                SendMessage(h, getResources().getString(R.string.turning_on_mobiledata));
-                wf.setWiFiEnabled(getApplicationContext(), false);
-                fbpause(h, 5);
-                md.setMobileDataEnabled(getApplicationContext(), true);
-                fbpause(h, 5);
-            }
-
-            if ((isOnline(h) && getData(h))) {
-                SendMessage(h, getResources().getString(R.string.Internet_connection));
-                return true;
-            } else {
-                return false;
-            }
-
+            SendMessage(getResources().getString(R.string.connection_channel_mobiledata));
+          //  logger.fine(getResources().getString(R.string.connection_channel_mobiledata));
+          //  fh.flush();
+            enable_MobileData();
         }
 
         if (Network_Channel.contains("Both")) {
-            SendMessage(h, getResources().getString(R.string.connection_channel_wifimobiledata));
-            if (!(isOnline(h) && getData(h))) {
-                SendMessage(h, getResources().getString(R.string.turning_on_wifi));
-                wf.setWiFiEnabled(getApplicationContext(), true);
-                fbpause(h, 5);
-                SendMessage(h, getResources().getString(R.string.turning_on_wifi_message));
-                fbpause(h, 5);
-
-                if ((isOnline(h) && getData(h))) {
-                    SendMessage(h, getResources().getString(R.string.Internet_connection));
-                    return true;
-                } else {
-                    wf_connect_attempt = true;
-                }
-
-            }
-
-            if (!(isOnline(h) && getData(h)) && wf_connect_attempt) {
-                SendMessage(h, getResources().getString(R.string.connection_channel_wifimobiledata_message));
-                wf.setWiFiEnabled(getApplicationContext(), false);
-                fbpause(h, 5);
-                md.setMobileDataEnabled(getApplicationContext(), true);
-                fbpause(h, 5);
-            }
-
-            if ((isOnline(h) && getData(h))) {
-                SendMessage(h, getResources().getString(R.string.Internet_connection));
-                return true;
-            } else {
-                return false;
+            SendMessage(getResources().getString(R.string.connection_channel_wifimobiledata));
+          //  logger.fine(getResources().getString(R.string.connection_channel_wifimobiledata));
+          //  fh.flush();
+            if (enable_WiFi()) {
+                SendMessage("Wi-Fi is up in both metod");
+              //  logger.fine("Wi-Fi is up in both metod");
+              //  fh.flush();
+            } else if (enable_MobileData()) {
+                SendMessage("MobileData is up in both metod");
+              //  logger.fine("MobileData is up in both metod");
+              //  fh.flush();
             }
 
         }
+
+            if (isOnline()) {
+                if (getPage()) {
+                    SendMessage(getResources().getString(R.string.Internet_connection));
+                  //  logger.fine(getResources().getString(R.string.Internet_connection));
+                  //  fh.flush();
+                    return true;
+                }
+            }
+            }
+
+        if ( connect_attempt == 2 ) {
+            SendMessage("Exiting without connecting to Internet, photo will be taken in offline mode.");
+           // logger.fine("Exiting without connecting to Internet, photo will be taken in offline mode.");
+           // fh.flush();
+        }
+
         return false;
+
     }
 
     /**
@@ -399,19 +534,25 @@ public class FotoBot extends Application {
      * @param context
      * @param h
      */
-    public void CloseInternetConnection(Context context, Handler h) {
+    public void CloseInternetConnection() {
 
-        MobileData md;
-        md = new MobileData();
+        try
+        {
+            MobileData md = new MobileData();
 //Sony Xperia error
 // http://stackoverflow.com/questions/29340150/android-l-5-x-turn-on-off-mobile-data-programmatically
-        md.setMobileDataEnabled(getApplicationContext(), false);
+            md.setMobileDataEnabled(getApplicationContext(), false);
+        } catch (Exception e) {
+            SendMessage("Couldn't turn off Mobile Data.");
+        }
 
-        WiFi wf;
-        wf = new WiFi();
-        wf.setWiFiEnabled(getApplicationContext(), false);
-
-        SendMessage(getResources().getString(R.string.Internet_connection_is_closed));
+        try {
+            WiFi wf = new WiFi();
+            wf.setWiFiEnabled(getApplicationContext(), false);
+            SendMessage(getResources().getString(R.string.Internet_connection_is_closed));
+        } catch (Exception e) {
+            SendMessage("Couldn't turn off WiFi.");
+        }
     }
 
     /**
@@ -423,6 +564,8 @@ public class FotoBot extends Application {
     public void fbpause(final Handler h, final int delay) {
 
         final String message;
+
+       // final Context context = getApplicationContext();
 
         Thread thread = new Thread() {
             public void run() {
@@ -437,6 +580,86 @@ public class FotoBot extends Application {
                     if (getstatus() == 3) {
                         return;
                     }
+
+                    if (i % wake_up_interval == 0 && frame_delay) {
+
+                    //    Toast toast = Toast.makeText(context, "Wake up!", Toast.LENGTH_LONG);
+                    //    toast.show();
+
+                        // SendMessage("wake up: " + i);
+                        SendMessage(".");
+                       // logger.fine(".");
+                      //  fh.flush();
+
+                        if (camera == null) {
+                            Log.d(LOG_TAG, "camera == null");
+                            //SendMessage("fb.apuse: Camera is not initialized.");
+                            SendMessage("..");
+                          //  logger.fine("..");
+                          //  fh.flush();
+                            try {
+                                camera = Camera.open();
+                                //SendMessage("fb.pause: Camera has been initialized.");
+                                SendMessage(".");
+                                Log.d(LOG_TAG,"Camera has been successfully opened");
+                            //    logger.fine(".");
+                            //    fh.flush();
+                            } catch (Exception e) {
+                                //SendMessage("fb pause: Problem with camera initialisation.");
+                                SendMessage("...");
+                                Log.d(LOG_TAG,"Problem with camera opening");
+                             //   logger.fine("...");
+                             //   fh.flush();
+                                e.printStackTrace();
+                            }
+                        }
+
+                        try {
+                            camera.setPreviewDisplay(holder);
+                            camera.startPreview();
+                            //SendMessage("fb.pause: startPreview");
+                            SendMessage(".");
+                            Log.d(LOG_TAG,"Preview started");
+                          //  logger.fine(".");
+                          //  fh.flush();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            //SendMessage("fb.pause: problem with starting of preview");
+                            SendMessage("...");
+                            Log.d(LOG_TAG, "Problem with starting of preview");
+                          //  logger.fine("...");
+                          //  fh.flush();
+                        }
+
+                        try {
+                            TimeUnit.SECONDS.sleep(5);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        if (camera != null) {
+                            Log.d(LOG_TAG, "Camera is busy");
+                            try {
+                                camera.stopPreview();
+                                camera.release();
+                                camera = null;
+                                Log.d(LOG_TAG,"Camera unlocked");
+                            } catch (Exception e) {
+                                SendMessage("...");
+                                //logger.fine("...");
+                               // fh.flush();
+                            }
+
+                        }
+
+                        try {
+                            TimeUnit.SECONDS.sleep(5);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
                 }
             }
 
@@ -490,39 +713,46 @@ public class FotoBot extends Application {
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
-       // SendMessage("Аттачим" + str);
+        // SendMessage("Аттачим" + str);
 
-        Mail m = new Mail(fb.EMail_Sender, fb.EMail_Sender_Password, fb.SMTP_Host, fb.SMTP_Port);
-       //Mail m = new Mail("fotobotmail@gmail.com", "fotobotmailpasswd", "smtp.gmail.com", "465");
+        Mail m = new Mail(getApplicationContext(), fb.EMail_Sender, fb.EMail_Sender_Password, fb.SMTP_Host, fb.SMTP_Port);
+        //Mail m = new Mail("fotobotmail@gmail.com", "fotobotmailpasswd", "smtp.gmail.com", "465");
 
         String[] toArr = {fb.EMail_Recepient};
 
         String s = "Debug-infos:";
-        s += "\n OS Version: "      + System.getProperty("os.version")      + "(" + android.os.Build.VERSION.INCREMENTAL + ")";
-        s += "\n OS API Level: "    + android.os.Build.VERSION.SDK_INT;
-        s += "\n Device: "          + android.os.Build.DEVICE;
-        s += "\n Model (and Product): " + android.os.Build.MODEL            + " ("+ android.os.Build.PRODUCT + ")";
+        s += "\n OS Version: " + System.getProperty("os.version") + "(" + android.os.Build.VERSION.INCREMENTAL + ")";
+        s += "\n OS API Level: " + android.os.Build.VERSION.SDK_INT;
+        s += "\n Device: " + android.os.Build.DEVICE;
+        s += "\n Model (and Product): " + android.os.Build.MODEL + " (" + android.os.Build.PRODUCT + ")";
 
-        s += "\n RELEASE: "         + android.os.Build.VERSION.RELEASE;
-        s += "\n BRAND: "           + android.os.Build.BRAND;
-        s += "\n DISPLAY: "         + android.os.Build.DISPLAY;
-        s += "\n CPU_ABI: "         + android.os.Build.CPU_ABI;
-        s += "\n CPU_ABI2: "        + android.os.Build.CPU_ABI2;
-        s += "\n UNKNOWN: "         + android.os.Build.UNKNOWN;
-        s += "\n HARDWARE: "        + android.os.Build.HARDWARE;
-        s += "\n Build ID: "        + android.os.Build.ID;
-        s += "\n MANUFACTURER: "    + android.os.Build.MANUFACTURER;
-        s += "\n SERIAL: "          + android.os.Build.SERIAL;
-        s += "\n USER: "            + android.os.Build.USER;
-        s += "\n HOST: "            + android.os.Build.HOST;
+        s += "\n RELEASE: " + android.os.Build.VERSION.RELEASE;
+        s += "\n BRAND: " + android.os.Build.BRAND;
+        s += "\n DISPLAY: " + android.os.Build.DISPLAY;
+        s += "\n CPU_ABI: " + android.os.Build.CPU_ABI;
+        s += "\n CPU_ABI2: " + android.os.Build.CPU_ABI2;
+        s += "\n UNKNOWN: " + android.os.Build.UNKNOWN;
+        s += "\n HARDWARE: " + android.os.Build.HARDWARE;
+        s += "\n Build ID: " + android.os.Build.ID;
+        s += "\n MANUFACTURER: " + android.os.Build.MANUFACTURER;
+        s += "\n SERIAL: " + android.os.Build.SERIAL;
+        s += "\n USER: " + android.os.Build.USER;
+        s += "\n HOST: " + android.os.Build.HOST;
 
         m.setTo(toArr);
         m.setFrom(fb.EMail_Sender);
-        m.setSubject("Fotobot v" + versionName);
+        m.setSubject("Fotobot v" + versionName + " " + fb.Camera_Name);
         m.setBody("Fotobot v" + versionName + "\n" +
                 "---------------------------------------------\n" +
+                "Camera Name" + ": " + fb.Camera_Name + "\n" +
                 getResources().getString(R.string.battery_charge) + ": " + fb.battery_level + "%" + "\n" +
+                getResources().getString(R.string.battery_temperature) + ": " + fb.battery_temperature + "C" + "\n" +
                 getResources().getString(R.string.gsm) + ": " + fb.GSM_Signal + "ASU    " + (2.0 * fb.GSM_Signal - 113) + "dBm" + "\n" +
+                "-50 -82 dbm   -   very good" + "\n" +
+                "-83 -86 dbm   -   good" + "\n" +
+                "-87 -91 dbm   -   normal" + "\n" +
+                "-92 -95 dbm   -   bad" + "\n" +
+                "-96 -100 dbm   -  almost no signal" + "\n" +
                 "---------------------------------------------\n" +
                 "Image Index:" + fb.Image_Index + "\n" +
                 "---------------------------------------------\n" +
@@ -531,13 +761,13 @@ public class FotoBot extends Application {
                 "usedMemory: " + fb.usedMemory + "\n" +
                 "freeMemory: " + fb.freeMemory + "\n" +
                 "---------------------------------------------\n" +
-                 getResources().getString(R.string.email_sending_time) + ": " + fb.email_sending_time + "\n" +
+                getResources().getString(R.string.email_sending_time) + ": " + fb.email_sending_time + "\n" +
                 "---------------------------------------------\n" +
                 getResources().getString(R.string.Fotobot_settings) + ":\n" +
-                "Network_Channel: "+ Network_Channel + "\n" +
-                "Network_Connection_Method: "+ Network_Connection_Method + "\n" +
-                "Use_WiFi: "+ Use_WiFi + "\n" +
-                "Use_Mobile_Data: "+ Use_Mobile_Data + "\n" +
+                "Network_Channel: " + Network_Channel + "\n" +
+                "Network_Connection_Method: " + Network_Connection_Method + "\n" +
+                "Use_WiFi: " + Use_WiFi + "\n" +
+                "Use_Mobile_Data: " + Use_Mobile_Data + "\n" +
                 "Use_Flash: " + Use_Flash + "\n" +
                 "JPEG_Compression: " + JPEG_Compression + "\n" +
                 "Photo_Frequency: " + Photo_Frequency + "\n" +
@@ -552,35 +782,57 @@ public class FotoBot extends Application {
                 "Photo_Post_Processing_Method: " + Photo_Post_Processing_Method + "\n" +
                 "SMTP_Host: " + SMTP_Host + "\n" +
                 "SMTP_Port: " + SMTP_Port + "\n" +
+                "Log length: " + loglength + "\n" +
+                "FLog length: " + floglength + "\n" +
+                "wake_up_interval: " + wake_up_interval + "\n" +
                 "---------------------------------------------\n" +
                 getResources().getString(R.string.hardware_info) + ":\n" +
                 "Android: " + Build.VERSION.SDK_INT + "\n" +
                 s + "\n");
 
-       // str = getApplicationContext().getFilesDir().toString() + "/" + str;
-
         File attach_file;
         attach_file = new File(str);
         boolean fileExists = attach_file.isFile();
 
-     //   if (fileExists) {
-     //       SendMessage(h, attach_file.length()/1000 + "Kb");
-     //   } else {
-     //       SendMessage(h, "Image doesn't exist.");
-     //   }
+        if (fileExists) {
+            //   SendMessage(h, attach_file.length()/1000 + "Kb");
+        } else {
+            SendMessage("Image doesn't exist.");
+         //   logger.fine("Image doesn't exist.");
+         //   fh.flush();
+        }
 
+        if ( fb.attach_log) {
+            attach_file = new File((getApplicationContext().getFilesDir().toString() + "/logfile.txt"));
+            fileExists = attach_file.isFile();
+
+            if (fileExists) {
+                //   SendMessage(h, "FLog: " + attach_file.length()/1000 + "Kb");
+            } else {
+                SendMessage("Log doesn't exist.");
+                //  logger.fine("Log doesn't exist.");
+                //  fh.flush();
+            }
+        }
         try {
             m.addAttachment(str);
-            m.addAttachment(getApplicationContext().getFilesDir().toString() + "/fblog.txt");
+
+            if (fb.attach_log) {
+                m.addAttachment(getApplicationContext().getFilesDir().toString() + "/logfile.txt");
+            }
             fbpause(h, process_delay);
 
             if (m.send()) {
                 SendMessage(h, getResources().getString(R.string.foto_sent));
             } else {
-                SendMessage(h, "Email was not sent.");
+                SendMessage("Email was not sent.");
+             //   logger.fine("Email was not sent.");
+              //  fh.flush();
             }
         } catch (Exception e) {
-            SendMessage(h, "Could not send email");
+            SendMessage("Could not send email");
+          //  logger.fine("Could not send email");
+         //   fh.flush();
             Log.e("MailApp", "Could not send email", e);
         }
 
@@ -605,7 +857,7 @@ public class FotoBot extends Application {
     /**
      * Инициализируем глобальные переменные значениями из SharedPreferences
      */
-    public void LoadData() {
+    public void LoadSettings() {
         /******* Create SharedPreferences *******/
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
@@ -622,6 +874,8 @@ public class FotoBot extends Application {
         Use_Flash = pref.getBoolean("Use_Flash", false);
 
         JPEG_Compression = pref.getInt("JPEG_Compression", 50);
+
+        Camera_Name = pref.getString("Camera_Name", "default");
 
         Photo_Frequency = pref.getInt("Photo_Frequency", 15);
 
@@ -647,6 +901,17 @@ public class FotoBot extends Application {
 
         SMTP_Port = pref.getString("SMTP_Port", "465");
 
+        loglength = pref.getInt("Log_Length", 1024);
+
+        log_line_number = pref.getInt("FLog_Length", 150);
+
+        wake_up_interval = pref.getInt("Wake_Up_Interval", 60);
+
+        check_web_page = pref.getString("Check_Web_Page", "http://www.android.com");
+
+        network_up_delay = pref.getInt("Network_Up_Delay", 15);
+
+        attach_log  = pref.getBoolean("Attach_Log", true);
     }
 
     /**
@@ -659,6 +924,7 @@ public class FotoBot extends Application {
                 //context.unregisterReceiver(this);
                 int rawlevel = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
                 int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+                battery_temperature = ((float) intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, -1)) / 10.0f;
                 battery_level = -1;
                 if (rawlevel >= 0 && scale > 0) {
                     battery_level = (rawlevel * 100) / scale;
@@ -685,5 +951,16 @@ git pull origin master
 git fetch downloads the latest from remote without trying to merge or rebase anything.
 
 Then the git reset resets the master branch to what you just fetched. The --hard option changes all the files in your working tree to match the files in origin/master
+
+Все ветки на локальном сервере
+git branch
+
+Посмотреть все ветки на удаленном сервере
+git remote show origin
+git branch -r
+
+История коммитов
+git log
+git log --pretty=format:"%h %s" --graph
 
 */

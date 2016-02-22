@@ -11,6 +11,14 @@
 
     <string name="Fotobot">Welcome to Fotobot!</string>
 
+    <string name="Camera_Name">Camera Name</string>
+    <string name="Camera_Name_description">Give name for you device</string>
+
+    <string name="fbloglength">Log Length in main screen (bytes)</string>
+    <string name="fbloglength_description">Define the length of the log</string>
+    <string name="fbfloglength">Log Length in file (lines)</string>
+    <string name="fbfloglength_description">Number of lines in log file</string>
+
     <string name="foto_sent">Foto has been sent</string>
 
     <string name="connection_channel_wifi">Connection channel is Wi-Fi</string>
@@ -53,6 +61,11 @@
     <string name="pause_between_processes_description">Time delay between processes. Very important for old devices. Default
         values are 5-15sec.</string>
 
+    <string name="wake_up">Wake Up frequency</string>
+
+    <string name="attach_log">Attach Log to email</string>
+
+    <string name="wake_up_description">Need to keep Fotobot in memory (to avoid kicking by Android)</string>
     <string name="settings_font">Font size for settings window</string>
     <string name="log_font">Font size for log</string>
 
@@ -75,6 +88,12 @@
     <string name="email_server_port">Fotobots SMTP server port</string>
     <string name="email_server_port_description">SMTP server port number, usually equal 465</string>
 
+    <string name="Check_Web_Page">Web page for connection checking</string>
+    <string name="Check_Web_Page_description">Please use non-https servers (http://www.server.com)</string>
+
+    <string name="network_up_delay">Network up delay</string>
+    <string name="network_up_delay_description">Time (sec) required to bring up network interface (Wi-Fi or Mobile Data)</string>
+
     <string name="jpeg_compression">JPEG compression</string>
     <string name="jpeg_compression_description">100 - highest qualty</string>
 
@@ -91,7 +110,14 @@
 
     <string name="pause_between_photos">"Pause for"</string>
 
+    <string name="clean_log">Clean Log</string>
+    <string name="clean_log_note">Check this and press APPLY button, after that log will be cleaned</string>
+
+    <string name="clean_text">Clean text</string>
+    <string name="clean_text_note">Check this and press APPLY button, after that text in main window will be cleaned</string>
+
     <string name="battery_charge">Battery charge</string>
+    <string name="battery_temperature">Battery temperature</string>
     <string name="gsm">GSM network</string>
     <string name="phone_memory">Phone memory</string>
     <string name="used_memory">Used memory (RAM)</string>

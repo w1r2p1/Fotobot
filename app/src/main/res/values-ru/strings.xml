@@ -11,6 +11,17 @@
 
     <string name="Fotobot">Фотобот приветствует Вас!</string>
 
+    <string name="Camera_Name">Название камеры</string>
+    <string name="Camera_Name_description">Дайте название камере, чтобы потом было проще искать письма</string>
+
+    <string name="fbloglength">Длина лога в главном окне (в байтах)</string>
+    <string name="fbloglength_description">Задайте ограничитель на количество выводимых символов</string>
+    <string name="fbfloglength">Длина журнала в строках</string>
+    <string name="fbfloglength_description">Количество строк в журнале</string>
+
+    <string name="wake_up">Защита от засыпания</string>
+    <string name="wake_up_description">Необходим, чтобы приложение было активно. По умолчанию, каждые 60 секунд делается обращение к камере (фото при этом не делается).</string>
+
     <string name="foto_sent">Фото выслано на почту</string>
 
     <string name="connection_channel_wifi">Метод подключения Wi-Fi</string>
@@ -77,6 +88,9 @@
     <string name="email_server_port">Номер порта почтового сервера</string>
     <string name="email_server_port_description">Номер порта почтового сервера, для почты Google и Mail.ru номер порта 465</string>
 
+    <string name="Check_Web_Page">Web сервер для проверки связи</string>
+    <string name="Check_Web_Page_description">Пожалуйста используйте сервера без https протокола (http://www.server.com)</string>
+
     <string name="jpeg_compression">JPEG сжатие</string>
     <string name="jpeg_compression_description">Степень сжатия изображения, чем ближе к 100 тем выше качество изображения.</string>
 
@@ -92,7 +106,14 @@
     <string name="flash">Использовать вспышку</string>
     <string name="pause_between_photos">"Пауза"</string>
 
+    <string name="clean_log">Почистить журнал</string>
+    <string name="clean_log_note">Поставьте галочку в квадратике и нажмите ПРИМЕНИТЬ после этого журнал будет очищен</string>
+
+    <string name="clean_text">Почистить вывод информации</string>
+    <string name="clean_text_note">Поставьте галочку в квадратике и нажмите ПРИМЕНИТЬ после этого весь текст будет очищен</string>
+
     <string name="battery_charge">Заряд батареи</string>
+    <string name="battery_temperature">Температура батареи</string>
     <string name="gsm">Уровень сигнала GSM сети</string>
     <string name="phone_memory">Используемая память (RAM)</string>
     <string name="free_memory">Свободная память (RAM)</string>
@@ -100,6 +121,10 @@
     <string name="Fotobot_settings">Установки Fotobotа</string>
     <string name="hardware_info">Информация о телефоне</string>
     <string name="email_sending_time">Длительность отправки предыдущего письма (sec)</string>
+
+    <string name="network_up_delay">Время на подключение к Internet</string>
+    <string name="network_up_delay_description">Время (сек) на поднятие сетевого интерфейса (Wi-Fi или Mobile Data)</string>
+    <string name="attach_log">Приаттачить журнал к письму</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>

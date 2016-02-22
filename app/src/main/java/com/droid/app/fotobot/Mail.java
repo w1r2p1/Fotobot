@@ -1,6 +1,16 @@
 package com.droid.app.fotobot;
+
+import android.content.Context;
+import android.util.Log;
+
+import com.sun.mail.smtp.SMTPAddressFailedException;
+import com.sun.mail.smtp.SMTPSendFailedException;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Date;
 import java.util.Properties;
+
 import javax.activation.CommandMap;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -18,6 +28,9 @@ import javax.mail.internet.MimeMultipart;
 
 
 public class Mail extends javax.mail.Authenticator {
+
+    private Context context;
+
     private String _user;
     private String _pass;
 
@@ -37,6 +50,8 @@ public class Mail extends javax.mail.Authenticator {
     private boolean _debuggable;
 
     private Multipart _multipart;
+
+    final String LOG_TAG = "Mail";
 
 
     public Mail() {
@@ -66,8 +81,10 @@ public class Mail extends javax.mail.Authenticator {
         CommandMap.setDefaultCommandMap(mc);
     }
 
-    public Mail(String user, String pass, String SMTP_Host, String SMTP_Port) {
+    public Mail(Context appcontext, String user, String pass, String SMTP_Host, String SMTP_Port) {
         this();
+
+        this.context = appcontext;
 
         _user = user;
         _pass = pass;
@@ -77,6 +94,12 @@ public class Mail extends javax.mail.Authenticator {
     }
 
     public boolean send() throws Exception {
+
+        final FotoBot fb = (FotoBot) this.context;
+
+        //fb.SendMessage("send");
+        fb.SendMessage(".");
+
         Properties props = _setProperties();
 
         if(!_user.equals("") && !_pass.equals("") && _to.length > 0 && !_from.equals("") && !_subject.equals("") && !_body.equals("")) {
@@ -104,9 +127,29 @@ public class Mail extends javax.mail.Authenticator {
             msg.setContent(_multipart);
 
             // send email
-            Transport.send(msg);
+            try {
+                Transport.send(msg);
+                Log.d("LOG_TAG", "Transport passed");
+                return true;
+            } catch (SMTPAddressFailedException e) {
+                Log.d("LOG_TAG", "Mail host failed ");
+                return false;
+            } catch (SMTPSendFailedException e) {
+                Log.d("LOG_TAG", "SMTP timeout");
+                return false;
+            } catch (Exception e) {
+                Log.d("LOG_TAG", "Transport.send exception");
+                e.printStackTrace();
+                StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);
+                e.printStackTrace(pw);
+                //String str = sw.toString();
+                Log.d("LOG_TAG", sw.toString());
 
-            return true;
+
+                return false;
+            }
+
         } else {
             return false;
         }
@@ -141,6 +184,8 @@ public class Mail extends javax.mail.Authenticator {
 
         props.put("mail.smtp.port", _port);
         props.put("mail.smtp.socketFactory.port", _sport);
+        props.put("mail.smtp.connectiontimeout", "60000");
+        props.put("mail.smtp.timeout", "60000");
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.socketFactory.fallback", "false");
         props.put("mail.smtp.ssl.enable", "true");

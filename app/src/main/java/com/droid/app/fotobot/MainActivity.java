@@ -31,7 +31,6 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -45,7 +44,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -56,24 +54,9 @@ import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
-//import android.util.Size;
-
-//class FotobotLogger {
-  //  final FotoBot fb = (FotoBot) getApplicationContext();
-//    private final static Logger logger = Logger.getLogger(FotobotLogger.class.getName());
-
-
-  //  }
-
-
-
-
 public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
-
     private static class MyCustomFormatter extends Formatter {
-
-
 
         @Override
 
@@ -81,43 +64,27 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             StringBuffer sb = new StringBuffer();
 
-       //     sb.append("Prefixn");
-
             sb.append(record.getMessage());
-
-       //     sb.append("Suffixn");
-
             sb.append("\n");
 
             return sb.toString();
 
         }
 
-
-
     }
-
-
 
     private int screenWidth, screenHeight;
     public static final int UNKNOW_CODE = 99;
-    private final static String FILE_DIR = "/MySampleFolder/";
     final String LOG_TAG = "Logs";
-    final int STATUS_STARTED = 111;
-    final int STATUS_WORKING = 222;
+    final String HANDLER = "MainActivity";
     final int STATUS_STOPPED = 333;
-    int MAX_SIGNAL_DBM_VALUE = 31;
 
     private static final int LOW_DPI_STATUS_BAR_HEIGHT = 19;
-
     private static final int MEDIUM_DPI_STATUS_BAR_HEIGHT = 25;
-
     private static final int HIGH_DPI_STATUS_BAR_HEIGHT = 38;
 
     int n;
     FotoBot fb;
-  //  String log;
-   // HorizontalScrollView LogWidget;
     ScrollView LogWidget;
     LinearLayout Buttons1, Buttons2;
     RelativeLayout WorkSpace;
@@ -129,8 +96,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     TextView tvInfo;
     boolean preview_stopped = false;
 
-
-
     /**
      * Печатает сообщения на экран телефона, нужен для того чтобы получать данные из потока в котором работает FotoBot
      */
@@ -138,11 +103,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         public boolean handleMessage(Message msg) {
 
             final FotoBot fb = (FotoBot) getApplicationContext();
+
+// Wakelock 1
             PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
             PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                     "MyWakelockTag");
 
             wakeLock.acquire();
+
 
             DateFormat dateformat = new SimpleDateFormat("HH:mm:ss");
             Date today = Calendar.getInstance().getTime();
@@ -151,32 +119,30 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             String message = (String) msg.obj; //Extract the string from the Message
             fb.log = reportDate + ": " + message + "\n" + fb.log;
 
+// string length
+
+            if (fb.log.length() > fb.loglength) {
+                fb.log = fb.log.substring(0, fb.loglength);
+            }
+
             tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
             tvInfo.setTypeface(Typeface.MONOSPACE);
             tvInfo.setTextColor(Color.rgb(190, 190, 190));
 
+        //    fb.logger.fine(reportDate + ": " + message);
+        //    fb.fh.flush();
 
-            fb.logger.fine(reportDate + ": " + message);
+            Log.d(LOG_TAG, reportDate + ": " + message);
 
-
-            if (fb.Show_Help) {
+        /*    if (fb.Show_Help) {
                 tvInfo.setText(Html.fromHtml((getResources().getString(R.string.main_help))));
-             //   Linkify.addLinks(tvInfo, Linkify.ALL);
-
-                //   SpannableStringBuilder ssb = new SpannableStringBuilder( "Here's a smiley  " );
-             //   Bitmap smiley = BitmapFactory.decodeResource( getResources(), R.mipmap.ic_fotobot );
-             //  ssb.setSpan( new ImageSpan( smiley ), 16, 17, Spannable.SPAN_INCLUSIVE_INCLUSIVE );
-             //   tvInfo.setText(ssb, TextView.BufferType.SPANNABLE);
-
                 fb.Show_Help = false;
                 return false;
             }
-
-           // tvInfo.setText(log.substring(0,1024));
+*/
             tvInfo.setText(fb.log);
 
-            //final FotoBot fb = (FotoBot) getApplicationContext();
-            Log.d(LOG_TAG, "Handler.Callback(): fb.getstatus()" + fb.getstatus());
+            // Log.d(LOG_TAG, "Handler.Callback(): fb.getstatus()" + fb.getstatus());
             n = msg.what;
             if (msg.what == STATUS_STOPPED) btnStart.setText("Play");
 
@@ -194,11 +160,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 btnHelp.setEnabled(true);
 
                 Button btnLog = (Button) findViewById(R.id.log);
-                btnLog.setBackgroundColor(Color.rgb(90,90,90));
+                btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
                 btnLog.setEnabled(true);
 
                 Button btnMainw = (Button) findViewById(R.id.mainw);
-                btnMainw.setBackgroundColor(Color.rgb(90,90,90));
+                btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
                 btnMainw.setEnabled(true);
 
                 btnStart.postInvalidate();
@@ -212,14 +178,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     TextView text;
     Intent intent;
-    String str1 = "Fotobot str to file";
+    //   String str1 = "Fotobot str to file";
     TelephonyManager tel;
     MyPhoneStateListener myPhoneStateListener;
-    //a variable to store a reference to the Image View at the main.xml file
-    private ImageView iv_image;
-    //a variable to store a reference to the Surface View at the main.xml file
+    //   private ImageView iv_image;
     private SurfaceView sv;
-    //a bitmap to display the captured image
     private Bitmap bmp;
 
     /**
@@ -230,17 +193,16 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         public void onPictureTaken(byte[] data, Camera camera) {
             final FotoBot fb = (FotoBot) getApplicationContext();
 
-            fb.LoadData();
+            fb.LoadSettings();
 
+// Wakelock 2
             PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
             PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                     "MyWakelockTag");
 
             wakeLock.acquire();
 
-            Log.d(LOG_TAG, "***** mCall started: " + getUsedMemorySize());
 
-            //decode the data obtained by the camera into a Bitmap
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPurgeable = true;
 
@@ -273,8 +235,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             bmp = BitmapFactory.decodeByteArray(data, 0, data.length, options);
 
             FileOutputStream fOut = null;
-            // File file = new File(getApplicationContext().getFilesDir(), fb.Image_Name);
-            String fdir = getFilesDir().toString();
+            //  String fdir = getFilesDir().toString();
             File file = new File(getFilesDir(), fb.Image_Name);
 
             try {
@@ -290,7 +251,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             bmp.compress(Bitmap.CompressFormat.JPEG, fb.JPEG_Compression, fOut);
 
-            fb.fbpause(h,1);
+            fb.fbpause(h, 1);
 
             getUsedMemorySize();
 
@@ -322,10 +283,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             boolean fileExists = attach_file.isFile();
 
-            //fb.File_Size = (int)attach_file.length()/1000;
-
             if (fileExists) {
-             fb.SendMessage(h, attach_file.length()/1000 + "Kb");
+                fb.SendMessage(h, attach_file.length() / 1000 + "Kb");
             } else {
                 fb.SendMessage(h, "Image doesn't exist.");
             }
@@ -351,9 +310,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     public long getUsedMemorySize() {
 
         final FotoBot fb = (FotoBot) getApplicationContext();
-
-        final String LOG_USED_MEMORY = "UsedMem";
-
+        //  final String LOG_USED_MEMORY = "UsedMem";
         long freeMemory = 0L;
         long totalMemory = 0L;
         long usedMemory = -1L;
@@ -365,9 +322,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             totalMemory = info.totalMemory();
             usedMemory = totalMemory - freeMemory;
 
-            fb.freeMemory = String.format("%.2f",(float)freeMemory/1000000) + "MB";
-            fb.totalMemory = String.format("%.2f",(float)totalMemory/1000000) + "MB";
-            fb.usedMemory = String.format("%.2f",(float)usedMemory/1000000) + "MB";
+            fb.freeMemory = String.format("%.2f", (float) freeMemory / 1000000) + "MB";
+            fb.totalMemory = String.format("%.2f", (float) totalMemory / 1000000) + "MB";
+            fb.usedMemory = String.format("%.2f", (float) usedMemory / 1000000) + "MB";
 
         } catch (Exception e) {
 
@@ -382,9 +339,31 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        Log.d(LOG_TAG, "\n\n\n\n\nMainActivity: onCreate\n\n\n\n\n");
+        super.onCreate(savedInstanceState);
+
+        Log.d(LOG_TAG, "MainActivity: onCreate");
 
         final FotoBot fb = (FotoBot) getApplicationContext();
+
+        //  fb.logger.fine("onCreate");
+        //   fb.fh.flush();
+
+        if (savedInstanceState == null)   // приложение запущено впервые
+        {
+            Log.d(LOG_TAG, "MainActivity: onCreate started first time");
+
+            if (fb.clean_log) {
+                fb.log = "";
+                fb.clean_log = false;
+            }
+        } else // приложение восстановлено из памяти
+        {
+            Log.d(LOG_TAG, "MainActivity: onCreate restored");
+            if (fb.clean_log) {
+                fb.log = "";
+                fb.clean_log = false;
+            }
+        }
 
         Display display = getWindowManager().getDefaultDisplay();
         screenWidth = display.getWidth();
@@ -420,12 +399,17 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 // http://stackoverflow.com/questions/20264268/how-to-get-height-and-width-of-navigation-bar-programmatically
 
-        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+        //   this.registerReceiver(this.batteryInfoReceiver,	new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+
+// Wakelock 3
+/*        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
         PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                 "MyWakelockTag");
-
-        super.onCreate(savedInstanceState);
         wakeLock.acquire();
+ */
+        // super.onCreate(savedInstanceState);
+        // super.onCreate(null);
+
 
         myPhoneStateListener = new MyPhoneStateListener();
         tel = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -433,38 +417,28 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         setContentView(R.layout.activity_main);
 
-     //   final FotoBot fb = (FotoBot) getApplicationContext();
-
         btnStart = (Button) findViewById(R.id.play);
         btnConfig = (Button) findViewById(R.id.config);
 
         tvInfo = (TextView) findViewById(R.id.tvInfo);
-      //  tvInfo = (WebView) findViewById(R.id.tvInfo);
 
         text = (TextView) findViewById(R.id.textView);
 
         WorkSpace = (RelativeLayout) findViewById(R.id.workspace);
-        WorkSpace.setBackgroundColor(Color.rgb(64,98,125));
+        WorkSpace.setBackgroundColor(Color.rgb(64, 98, 125));
         WorkSpace.setMinimumHeight(screenHeight);
         WorkSpace.setMinimumWidth(screenWidth);
 
         Buttons1 = (LinearLayout) findViewById(R.id.buttons1);
         Buttons1.setBackgroundColor(Color.rgb(192, 192, 192));
-        //Buttons1.setMinimumHeight(screenHeight / 100 * 5);
-        //Buttons1.setMinimumHeight(50);
         Buttons1.setMinimumWidth(screenWidth);
 
-      //  LogWidget = (HorizontalScrollView) findViewById(R.id.horizontalScrollView);
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
         LogWidget.setBackgroundColor(Color.rgb(34, 58, 95));
-        //LogWidget.setMinimumHeight(screenHeight / 100 * 80);
-        //LogWidget.setMinimumHeight(803);
         LogWidget.setMinimumWidth(screenWidth);
 
         Buttons2 = (LinearLayout) findViewById(R.id.buttons2);
         Buttons2.setBackgroundColor(Color.rgb(192, 192, 192));
-        //Buttons2.setMinimumHeight(screenHeight / 100 * 5);
-        //Buttons2.setMinimumHeight(50);
         Buttons2.setMinimumWidth(screenWidth);
 
         final Button btnHelp = (Button) findViewById(R.id.help);
@@ -515,34 +489,17 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         });
 
-        //get the Image View at the main.xml file
-        iv_image = (ImageView) findViewById(R.id.imageView);
-
-        //get the Surface View at the main.xml file
         sv = (SurfaceView) findViewById(R.id.surfaceView);
-
-        //Get a surface
         sHolder = sv.getHolder();
-
-        //add the callback interface methods defined below as the Surface View callbacks
         sHolder.addCallback(this);
-
-        //tells Android that this surface will have its data constantly replaced
         sHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-
-      //  fb.sHolder = sHolder;
-
         intent = new Intent(MainActivity.this, Status.class);
 
         tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
         tvInfo.setTypeface(Typeface.MONOSPACE);
         tvInfo.setTextColor(Color.rgb(190, 190, 190));
 
-      //  fb.SendMessage(getResources().getString(R.string.Fotobot));
-
         tvInfo.setText(fb.log);
-
-      //  tvInfo.setText(log);
 
         h = new Handler(hc);
 
@@ -554,38 +511,47 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     }
 
     protected void onDestroy() {
+        final FotoBot fb = (FotoBot) getApplicationContext();
         super.onDestroy();
         Log.d(LOG_TAG, "MainActivity: onDestroy");
+        fb.logger.fine("onDestroy");
+        fb.fh.flush();
     }
 
     protected void onPause() {
+        final FotoBot fb = (FotoBot) getApplicationContext();
         super.onPause();
         Log.d(LOG_TAG, "MainActivity: onPause");
+        fb.logger.fine("onPause");
+        fb.fh.flush();
     }
 
     protected void onRestart() {
+        final FotoBot fb = (FotoBot) getApplicationContext();
         super.onRestart();
         Log.d(LOG_TAG, "MainActivity: onRestart");
+        fb.logger.fine("onRestart");
+        fb.fh.flush();
     }
 
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        final FotoBot fb = (FotoBot) getApplicationContext();
         super.onRestoreInstanceState(savedInstanceState);
         Log.d(LOG_TAG, "MainActivity: onRestoreInstanceState");
+        fb.logger.fine("onRestoreInstanceState");
+        fb.fh.flush();
     }
 
     protected void onResume(SurfaceHolder holder) {
 
+// Wakelock 4
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
         PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                 "MyWakelockTag");
 
-
         wakeLock.acquire();
 
         Log.d(LOG_TAG, "MainActivity: onResume");
-// Camera
-
-        // -----------------------
 
         mCamera = Camera.open();
         try {
@@ -597,6 +563,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         }
 
         final FotoBot fb = (FotoBot) getApplicationContext();
+       // fb.logger.fine("onResume");
+       // fb.fh.flush();
         Log.d(LOG_TAG, "MainActivity: onResume");
         Log.d(LOG_TAG, "MainActivity: fb.getstatus()" + fb.getstatus());
         tvInfo = (TextView) findViewById(R.id.tvInfo);
@@ -616,11 +584,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             btnHelp.setEnabled(true);
 
             Button btnLog = (Button) findViewById(R.id.log);
-            btnLog.setBackgroundColor(Color.rgb(90,90,90));
+            btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
             btnLog.setEnabled(true);
 
             Button btnMainw = (Button) findViewById(R.id.mainw);
-            btnMainw.setBackgroundColor(Color.rgb(90,90,90));
+            btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
             btnMainw.setEnabled(true);
 
         }
@@ -635,11 +603,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             btnHelp.setEnabled(false);
 
             Button btnLog = (Button) findViewById(R.id.log);
-            btnLog.setBackgroundColor(Color.rgb(90,90,90));
+            btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
             btnLog.setEnabled(false);
 
             Button btnMainw = (Button) findViewById(R.id.mainw);
-            btnMainw.setBackgroundColor(Color.rgb(90,90,90));
+            btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
             btnMainw.setEnabled(false);
 
         }
@@ -647,14 +615,18 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     }
 
     protected void onSaveInstanceState(Bundle outState) {
+        final FotoBot fb = (FotoBot) getApplicationContext();
+        fb.logger.fine("onSaveInstanceState");
+        fb.fh.flush();
         super.onSaveInstanceState(outState);
+        outState.clear();
         Log.d(LOG_TAG, "MainActivity: onSaveInstanceState");
     }
 
     protected void onStart() {
 
         super.onStart();
-        Log.d(LOG_TAG, "\n\n\n\n\nMainActivity: onStart\n\n\n\n\n");
+        Log.d(LOG_TAG, "MainActivity: onStart");
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
@@ -666,20 +638,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         if (!fb.init_logger) {
 
-            //  fb.SendMessage("Logger init");
-
             Log.d(LOG_TAG, "fb.init_logger");
 
             fb.logger = Logger.getLogger(FotoBot.class.getName());
 
-            // fb.logpath = "/storage/external_SD/";
-            //   fb.logpath = "/mnt/sdcard/";
             fb.logpath = getFilesDir().toString() + "/";
-
 
             File file = new File(fb.logpath + "fblog.txt");
 
-            if(!file.exists()) {
+            if (!file.exists()) {
                 Log.d(LOG_TAG, "fblog.txt doesn't exist");
                 try {
                     file.createNewFile();
@@ -690,13 +657,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 Log.d(LOG_TAG, "fblog.txt created");
             }
 
-
-
-
-
-
             try {
-                fb.fh = new FileHandler(fb.logpath + "fblog.txt",9000,1,true);
+                fb.fh = new FileHandler(fb.logpath + "fblog.txt", fb.floglength, 1, true);
+
                 Log.d(LOG_TAG, "handler created");
 
             } catch (Exception e) {
@@ -704,48 +667,42 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 Log.d(LOG_TAG, "handler is not created");
             }
 
-
             fb.fh.setFormatter(new MyCustomFormatter());
-            Log.d(LOG_TAG, "formatter created");
-            //    fb.fh.setFormatter(new SimpleFormatter());
+          //  Log.d(LOG_TAG, "formatter created");
 
             fb.logger.addHandler(fb.fh);
-            Log.d(LOG_TAG, "handler added");
+          //  Log.d(LOG_TAG, "handler added");
             fb.logger.setLevel(Level.FINE);
 
-
-            fb.logger.finest("Logger has been initialised.");
-            Log.d(LOG_TAG, "Logger has been initialised.");
+          //  fb.logger.finest("Logger has been initialised.");
+          //  fb.fh.flush();
+         //   Log.d(LOG_TAG, "Logger has been initialised.");
             fb.init_logger = true;
         }
-
-
-
-
-
 
     }
 
     protected void onStop() {
+        final FotoBot fb = (FotoBot) getApplicationContext();
+     //   fb.logger.fine("onStop");
+     //   fb.fh.flush();
         super.onStop();
         Log.d(LOG_TAG, "MainActivity: onStop");
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        final FotoBot fb = (FotoBot) getApplicationContext();
+     //   fb.logger.fine("onCreateOptionsMenu");
+     //   fb.fh.flush();
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -775,6 +732,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
      * @param v
      */
     public void startFotobot(View v) {
+
+// Wakelock 5
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
         PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                 "MyWakelockTag");
@@ -783,45 +742,28 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
+        fb.LoadSettings();
+
         if (!fb.init_logger) {
 
-            //  fb.SendMessage("Logger init");
-
             Log.d(LOG_TAG, "fb.init_logger");
-
-            fb.logger = Logger.getLogger(FotoBot.class.getName());
-
-            // fb.logpath = "/storage/external_SD/";
-            //   fb.logpath = "/mnt/sdcard/";
-            fb.logpath = getFilesDir().toString() + "/";
+       //     fb.logger = Logger.getLogger(FotoBot.class.getName());
+         //   fb.logpath = getFilesDir().toString() + "/";
 
             try {
-                fb.fh = new FileHandler(fb.logpath + "fblog.txt",3000,1,true);
-
+                fb.fh = new FileHandler(fb.logpath + "fblog.txt", fb.floglength, 1, true);
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
             fb.fh.setFormatter(new MyCustomFormatter());
-
-            //    fb.fh.setFormatter(new SimpleFormatter());
-
             fb.logger.addHandler(fb.fh);
-
             fb.logger.setLevel(Level.FINE);
-
 
             fb.logger.finest("Logger has been initialised.");
 
             fb.init_logger = true;
         }
-
-
-
-
-
-
-
 
         switch (v.getId()) {
             case R.id.play:
@@ -840,101 +782,65 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 btnMainw.setEnabled(false);
 
                 Button btnLog = (Button) findViewById(R.id.log);
-                btnLog.setBackgroundColor(Color.rgb(165,165,165));
+                btnLog.setBackgroundColor(Color.rgb(165, 165, 165));
                 btnLog.setEnabled(false);
 
                 Thread t = new Thread(new Runnable() {
                     public void run() {
 
+// Wakelock 6
                         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
                         PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                                 "MyWakelockTag");
 
                         wakeLock.acquire();
 
-                       // FotobotLogger flogger = new FotobotLogger();
-
-                       // flogger.init();
-                       // flogger.log(Level.INFO, "message 1");
-                       // logger.log(Level.SEVERE, "message 2");
-                       // logger.log(Level.FINE, "message 3");
-
-
-
 
                         fb.SendMessage(getResources().getString(R.string.start_message));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Добавлено в Andorid 5. Без этого не работает. Не понятно, как раньше работало.
-                        if ( mCamera == null ) {
+                        if (mCamera == null) {
                             mCamera = Camera.open();
                         }
 
                         fb.Camera_Properties = mCamera.getParameters().flatten();
 
-                        Log.d(LOG_TAG, fb.Camera_Properties);
+                        // Log.d(LOG_TAG, fb.Camera_Properties);
 
-                      //  fb.SendMessage(fb.Camera_Properties);
+                        if ( Build.VERSION.SDK_INT <= 21 ) {
+                            fb.CloseInternetConnection();
+                        }
 
+                        if (fb.Network_Connection_Method.contains("Method 1")) {
+                            if (android.os.Build.VERSION.SDK_INT <= 21) {
 
-                        if (fb.Network_Connection_Method.contains("Method 1")  && (Build.VERSION.SDK_INT <= 21)) {
-                            fb.MakeInternetConnection(getApplicationContext(), h);
+                                fb.MakeInternetConnection();
+                            }
                         }
 
                         for (int i = 1; i <= 1000000000; i++) {
 
                             fb.Image_Index = i;
+                            fb.SendMessage("Начинаем делать фото: " + fb.Image_Index);
+                        //    fb.logger.fine("Начинаем делать фото: " + fb.Image_Index);
+                          //  fb.fh.flush();
 
-                            fb.SendMessage("n: " + fb.Image_Index);
+                            //  fb.logger.fine("Начинаем делать фото: " + fb.Image_Index);
+                            //  fb.fh.flush();
 
-                       //     fb.logger.fine("n: " + fb.Image_Index);
-
-                            if (preview_stopped) {
+                           /* if (preview_stopped) {
 
                                 try {
                                     mCamera.setPreviewDisplay(fb.holder);
                                     mCamera.startPreview();
+                                    preview_stopped = false;
                                 } catch (Exception e) {
-                                   // fb.SendMessage("Problem with preview starting 1.");
+                                    fb.SendMessage("Problem with preview starting at the beginning of the cycle.");
                                 }
 
-                               // mCamera.startPreview();
-                            }
+                            } */
 // https://sohabr.net/habr/post/215693/
                             fb.batteryLevel();
-
-
-                          //  if (mCamera != null) {
-                                //  sPreviewing = false;
-                                // first stop preview
-                           //     mCamera.stopPreview();
-                                // then cancel its preview callback
-                           //     mCamera.setPreviewCallback(null);
-                                // and finally release it
-                           //     mCamera.release();
-                                // sanitize you Camera object holder
-                          //      mCamera = null;
-                         //   }
-
-
-
 
                             if (fb.getstatus() == 3) {
                                 if (mCamera != null) {
@@ -951,28 +857,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             fb.Image_Name = df.format(new Date()) + ".jpg";
                             fb.Image_Name_Full_Path = getFilesDir().toString() + "/" + fb.Image_Name;
 
-                            fb.LoadData();
+                            fb.LoadSettings();
 
-                            if ( (fb.Network_Connection_Method.contains("Method 2")) && (Build.VERSION.SDK_INT <= 21)) {
-                                fb.MakeInternetConnection(getApplicationContext(), h);
+                            if ((fb.Network_Connection_Method.contains("Method 2")) && (Build.VERSION.SDK_INT <= 21)) {
+                                fb.MakeInternetConnection();
                             }
 
                             AudioManager mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                             mgr.setStreamMute(AudioManager.STREAM_SYSTEM, true);
 
-                            if (fb.Use_Flash) {
-                                mCamera.stopPreview();
-                                Camera.Parameters parameters = mCamera.getParameters();
-                                try {
-                                    parameters.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
-                                } catch (Exception e) {
-                                    fb.SendMessage(h, "Camera.Parameters.FLASH_MODE_ON error");
-                                }
-                                mCamera.setParameters(parameters);
-                                mCamera.startPreview();
-
-                                fb.fbpause(h, fb.process_delay);
-                            }
 
                             // Camera.Parameters params;
                             String string = fb.Image_Size;
@@ -980,43 +873,80 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             String width = parts[0];
                             String height = parts[1];
 
-                            if ( mCamera == null ) {
-                                fb.SendMessage("Camera is not initialized.");
+// start and set camera parameters
+
+                            if (mCamera == null) {
+
+                                //   fb.SendMessage("Camera is not initialized.");
+
                                 try {
                                     mCamera = Camera.open();
+                                    //      fb.SendMessage("Camera has been initialized for parameters setting.");
                                 } catch (Exception e) {
-                                  //  fb.SendMessage("Problem with camera initialisation.");
+                                    fb.SendMessage("Problem with camera itialization in main cycle.");
+                                   // fb.logger.fine("Problem with camera itialization in main cycle.");
+                                   // fb.fh.flush();
+
                                 }
                             }
-                            if (preview_stopped) {
-                                fb.SendMessage("Preview is not started.");
+
+                            if (!preview_stopped) {
                                 try {
-                                    mCamera.setPreviewDisplay(fb.holder);
-                                    mCamera.startPreview();
+                                    mCamera.stopPreview();
                                 } catch (Exception e) {
-                                    fb.SendMessage("Problem with preview starting 2.");
+                                    fb.SendMessage("Preview couldn't be stopped in the main cycle.");
+                                   // fb.logger.fine("Preview couldn't be stopped in the main cycle.");
+                                   // fb.fh.flush();
                                 }
+                                preview_stopped = true;
+                            }
+
+                            Camera.Parameters parameters = mCamera.getParameters();
+
+                            if (fb.Use_Flash) {
+                                parameters.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
                             }
 
                             if (fb.Photo_Post_Processing_Method.contains("Software")) {
-
-                                Camera.Parameters params = mCamera.getParameters();
-
-                                params.setPictureSize(Integer.parseInt(width), Integer.parseInt(height));
-
-                                mCamera.setParameters(params);
-
-                                //fb.SendMessage(Integer.parseInt(width) + "x" + Integer.parseInt(height));
+                                parameters.setPictureSize(Integer.parseInt(width), Integer.parseInt(height));
                             }
 
+                            try {
+                                mCamera.setParameters(parameters);
+                            } catch (Exception e) {
+                                fb.SendMessage("Camera parameters have not been changed in the main cycle.");
+                               // fb.logger.fine("Camera parameters have not been changed in the main cycle.");
+                              //  fb.fh.flush();
+                                e.printStackTrace();
+                            }
 
+                            fb.fbpause(h, 3);
 
+                            if (preview_stopped) {
 
+                                try {
+                                    mCamera.setPreviewDisplay(fb.holder);
+                                    mCamera.startPreview();
+                                    preview_stopped = false;
+                                } catch (Exception e) {
+                                    fb.SendMessage("Problem with preview starting after camera initialization in the main cycle.");
+                                //    fb.logger.fine("Problem with preview starting after camera initialization in the main cycle.");
+                                //    fb.fh.flush();
+                                }
+                            }
+
+                            fb.fbpause(h, 3);
+
+                            try {
                                 mCamera.takePicture(null, null, mCall);
+                                fb.SendMessage(getResources().getString(R.string.photo_has_been_taken));
+                            } catch (Exception e) {
+                                fb.SendMessage("Problem with picture taking.");
+                              //  fb.logger.fine("Problem with picture taking.");
+                              //  fb.fh.flush();
+                            }
 
-                            fb.SendMessage(getResources().getString(R.string.photo_has_been_taken));
-
-                            fb.fbpause(h,3);
+                            fb.fbpause(h, 3);
 
                             if (fb.Photo_Post_Processing_Method.contains("Software")) {
                                 fb.SendMessage(Integer.parseInt(width) + "x" + Integer.parseInt(height));
@@ -1024,29 +954,34 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 fb.SendMessage(fb.Image_Scale);
                             }
 
-                          //  fb.SendMessage("Total Memory:" + fb.totalMemory);
-                          //  fb.SendMessage("Free Memory:" + fb.freeMemory);
                             fb.SendMessage(getResources().getString(R.string.free_memory) + ": " + fb.freeMemory);
 
                             fb.fbpause(h, fb.process_delay);
 
                             if (fb.Use_Flash) {
-                                mCamera.stopPreview();
+                                try {
+                                    mCamera.stopPreview();
+                                    preview_stopped = true;
+                                    fb.fbpause(h,1);
+                                } catch (Exception e) {
+                                    fb.SendMessage("FLASH OFF: problem with stopping of preview.");
+                                 //   fb.logger.fine("FLASH OFF: problem with stopping of preview.");
+                                 //   fb.fh.flush();
+                                }
+
 
                                 parameters = mCamera.getParameters();
 
                                 fb.fbpause(h, fb.process_delay);
 
-                                try {
-                                    parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-                                } catch (Exception e) {
-                                    fb.SendMessage(h, "Camera.Parameters.FLASH_MODE_OFF error");
-                                }
+                                parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
 
                                 try {
                                     mCamera.setParameters(parameters);
                                 } catch (Exception e) {
-                                    fb.SendMessage(h, "setParameters error");
+                                    fb.SendMessage("setParameters error");
+                                 //   fb.logger.fine("setParameters error");
+                                 //   fb.fh.flush();
                                 }
 
                             }
@@ -1057,55 +992,71 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             long start = System.currentTimeMillis();
 
+                            if (logcat2file()) {
+                                // fb.SendMessage("Заполнили файл данными из logcat");
+                            } else {
+                                fb.SendMessage("Проблема с доступом к logcat");
+                            }
+
+                            fb.fbpause(h,1);
+
                             fb.SendMail(h, fb.Image_Name_Full_Path);
 
-                            long durationInMilliseconds = System.currentTimeMillis()-start;
+                            long durationInMilliseconds = System.currentTimeMillis() - start;
 
                             fb.email_sending_time = durationInMilliseconds / 1000;
 
-                            if ( (fb.Network_Connection_Method.contains("Method 2") && (Build.VERSION.SDK_INT <= 21))) {
-                                fb.CloseInternetConnection(getApplicationContext(), h);
+                       /*     File logfile = new File(getFilesDir().toString() + "/logfile.txt");
+                            try {
+                                logfile.delete();
+                            }catch (Exception e) {
+                                e.printStackTrace();
+                            }
+*/
+                            if ((fb.Network_Connection_Method.contains("Method 2") && (Build.VERSION.SDK_INT <= 21))) {
+                                fb.CloseInternetConnection();
                             }
 
-                            fb.SendMessage("-------------------------------");
-                           // fb.logger.fine("-------------------------------");
+                            fb.SendMessage("-----------------------------");
+                           // fb.logger.fine("-----------------------------");
+                          //  fb.fh.flush();
+
                             fb.SendMessage(getResources().getString(R.string.pause_between_photos) + " " + fb.Photo_Frequency + "sec");
-                           // fb.logger.fine(getResources().getString(R.string.pause_between_photos) + " " + fb.Photo_Frequency + "sec");
-                            fb.SendMessage("-------------------------------");
-                           // fb.logger.fine("-------------------------------");
+                          //  fb.logger.fine(getResources().getString(R.string.pause_between_photos) + " " + fb.Photo_Frequency + "sec");
+                           // fb.fh.flush();
+
+                            fb.SendMessage("-----------------------------");
+                          //  fb.logger.fine("-----------------------------");
+                          //  fb.fh.flush();
+
+                            if (mCamera != null) {
+
+                                mCamera.stopPreview();
+                                preview_stopped = true;
+                                mCamera.setPreviewCallback(null);
+                                mCamera.release();
+                                mCamera = null;
+
+                            }
+
+                            //  preview_stopped = true;
+
+                            fb.camera = mCamera;
+                            fb.frame_delay = true;
                             fb.fbpause(h, fb.Photo_Frequency);
+                            fb.frame_delay = false;
 
                             File imgfile = new File(fb.Image_Name_Full_Path);
 
-                            if ( imgfile.delete() ) {
-                           //     fb.SendMessage(fb.Image_Name + " was deleted");
+                            if (imgfile.delete()) {
+                                //  fb.SendMessage(fb.Image_Name + " has been deleted");
+                              //  fb.logger.fine(fb.Image_Name + " has been deleted");
+                             //   fb.fh.flush();
                             } else {
-                           //     fb.SendMessage(fb.Image_Name + " wasn't deleted");
+                                fb.SendMessage("Problem with deleting " + fb.Image_Name);
+                              //  fb.logger.fine("Problem with deleting " + fb.Image_Name);
+                              //  fb.fh.flush();
                             }
-
-                         //   fb.SendMessage("\n");
-                            // @
-
-
-                          /*  mCamera.stopPreview(); */
-
-                            if (mCamera != null) {
-                              //  sPreviewing = false;
-                                // first stop preview
-                                mCamera.stopPreview();
-                                // then cancel its preview callback
-                                mCamera.setPreviewCallback(null);
-                                // and finally release it
-                                mCamera.release();
-                                // sanitize you Camera object holder
-                                mCamera = null;
-                            }
-
-
-
-
-
-                            preview_stopped = true;
 
                         }
 
@@ -1128,9 +1079,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         h = new Handler(hc);
         final FotoBot fb = (FotoBot) getApplicationContext();
 
-   //     if (Build.VERSION.SDK_INT < 21 ) {
-   //         fb.CloseInternetConnection(getApplicationContext(), h);
-   //     }
+        //     if (Build.VERSION.SDK_INT < 21 ) {
+        //         fb.CloseInternetConnection(getApplicationContext(), h);
+        //     }
 
         Log.d(LOG_TAG, "stopFotobot: fb.getstatus()" + fb.getstatus());
         fb.setstatus(3);
@@ -1258,7 +1209,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     }
 
     private class MyPhoneStateListener extends PhoneStateListener {
-        /* Get the Signal strength from the provider, each tiome there is an update */
         @Override
         public void onSignalStrengthsChanged(SignalStrength signalStrength) {
             final FotoBot fb = (FotoBot) getApplicationContext();
@@ -1267,7 +1217,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             if (null != signalStrength && signalStrength.getGsmSignalStrength() != UNKNOW_CODE) {
                 int signalStrengthPercent = calculateSignalStrengthInPercent(signalStrength.getGsmSignalStrength());
                 fb.GSM_Signal = calculateSignalStrengthInPercent(signalStrength.getGsmSignalStrength());
-                // viewModel.setSignalStrengthString(IntegerHelper.getString(signalStrengthPercent));
+
             }
         }
     }
@@ -1297,9 +1247,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         tvInfo.setText(fb.log);
 
-
     }
-
 
     /**
      * FotoBots log window
@@ -1309,11 +1257,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     public void log(View v) {
         final FotoBot fb = (FotoBot) getApplicationContext();
 
-
         BufferedReader fileReader = null;
         try {
             fileReader = new BufferedReader(new FileReader(getFilesDir().toString() + "/fblog.txt"));
-           // fileReader = new BufferedReader(new FileReader("/storage/external_SD/str.txt"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -1322,10 +1268,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         String line;
         try {
-            while((line = fileReader.readLine()) != null)
-            {
-                strBuilder.insert(0,line);
-                strBuilder.insert(0,"\n");
+            while ((line = fileReader.readLine()) != null) {
+                strBuilder.insert(0, line);
+                strBuilder.insert(0, "\n");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -1337,9 +1282,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             e.printStackTrace();
         }
 
-      //  strBuilder.trimToSize();
-
-        String contentsOfFile = "Fotobot's log" + strBuilder.toString();
+        String contentsOfFile = strBuilder.toString();
 
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
         LogWidget.setBackgroundColor(Color.rgb(54, 54, 54));
@@ -1354,6 +1297,108 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     }
 
+    private boolean logcat2file() {
+
+        final FotoBot fb = (FotoBot) getApplicationContext();
+
+        File logfile = null;
+
+        String cmd = null;
+
+        try {
+            logfile = new File(getFilesDir().toString() + "/logfile.txt");
+            logfile.createNewFile();
+            if ( Build.VERSION.SDK_INT <= 12 ) {
+                cmd = "logcat -v long -d -f " + logfile.getAbsolutePath() + " Logs:* FotoBot:* *:S";
+            } else {
+                cmd = "logcat -v long -d -f " + logfile.getAbsolutePath();
+            }
+            Runtime.getRuntime().exec(cmd);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    private String file2string() {
+
+        final FotoBot fb = (FotoBot) getApplicationContext();
+
+        BufferedReader fileReader = null;
+
+        try {
+            //  fileReader = new BufferedReader(new FileReader(getFilesDir().toString() + "/fblog.txt"));
+            fileReader = new BufferedReader(new FileReader(getFilesDir().toString() + "/logfile.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        StringBuilder strBuilder = new StringBuilder();
+
+        int line_counter = 0;
+
+        String line;
+
+                try {
+            while ((line = fileReader.readLine()) != null && line_counter < fb.log_line_number) {
+                strBuilder.insert(0, line);
+                strBuilder.insert(0, "\n");
+                line_counter = line_counter + 1;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            fileReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String contentsOfFile = strBuilder.toString();
+
+        return contentsOfFile;
+    }
+
+    public void logcat(View v) {
+
+        File logfile = new File(getFilesDir().toString() + "/logfile.txt");
+
+        final FotoBot fb = (FotoBot) getApplicationContext();
+
+        if (logcat2file()) {
+           // fb.SendMessage("Заполнили файл данными из logcat");
+        } else {
+            fb.SendMessage("Проблема с доступом к logcat");
+        }
+
+        fb.fbpause(fb.h, 1);
+
+        LogWidget = (ScrollView) findViewById(R.id.scrollView);
+        LogWidget.setBackgroundColor(Color.rgb(54, 54, 54));
+
+        tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
+        tvInfo.setTypeface(Typeface.MONOSPACE);
+        tvInfo.setTextColor(Color.rgb(190, 190, 190));
+
+        tvInfo.setText(file2string());
+
+
+  //      Log.d(LOG_TAG, "reverse: " + contentsOfFile);
+
+        try {
+            logfile.delete();
+          //  fb.SendMessage("Logfile from catlog has been deleted");
+        }catch (Exception e) {
+            fb.SendMessage("Problem with deleting of Logfile from catlog");
+        }
+
+
+    }
+
+
     /**
      * FotoBots help window
      *
@@ -1367,29 +1412,40 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         InputStream is = getResources().openRawResource(R.raw.file);
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         String readLine = null;
-        String str="";
+        String str = "";
 
         try {
             while ((readLine = br.readLine()) != null) {
-                     str = str + readLine;
+                str = str + readLine;
 
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-
-
-
-     //   fb.SendMessage("Fotobot " + versionName);
-     //   fb.SendMessage(getResources().getString(R.string.main_help));
-
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
         LogWidget.setBackgroundColor(Color.rgb(26, 54, 60));
 
         tvInfo.setText(Html.fromHtml("<h1>Fotobot " + fb.versionName + "</h1>" + str));
-        //tvInfo.setText(Html.fromHtml(("<h1>Fotobot " + fb.versionName + "</h1>" + getResources().getString(R.string.main_help) )) );
 
     }
-}
 
+   /* private BroadcastReceiver batteryInfoReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            int  health= intent.getIntExtra(BatteryManager.EXTRA_HEALTH,0);
+            int  icon_small= intent.getIntExtra(BatteryManager.EXTRA_ICON_SMALL,0);
+            int  level= intent.getIntExtra(BatteryManager.EXTRA_LEVEL,0);
+            int  plugged= intent.getIntExtra(BatteryManager.EXTRA_PLUGGED,0);
+            boolean  present= intent.getExtras().getBoolean(BatteryManager.EXTRA_PRESENT);
+            int  scale= intent.getIntExtra(BatteryManager.EXTRA_SCALE,0);
+            int  status= intent.getIntExtra(BatteryManager.EXTRA_STATUS,0);
+            String  technology= intent.getExtras().getString(BatteryManager.EXTRA_TECHNOLOGY);
+            int  temperature= intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE,0);
+            int  voltage= intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE,0);
+
+        }
+    }; */
+
+}
