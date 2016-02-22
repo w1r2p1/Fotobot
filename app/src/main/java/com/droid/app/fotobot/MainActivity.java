@@ -807,9 +807,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                         // Log.d(LOG_TAG, fb.Camera_Properties);
 
-                        if ( Build.VERSION.SDK_INT <= 21 ) {
-                            fb.CloseInternetConnection();
-                        }
+                    //    if ( Build.VERSION.SDK_INT <= 21 ) {
+                     //       fb.CloseInternetConnection();
+                     //   }
 
                         if (fb.Network_Connection_Method.contains("Method 1")) {
                             if (android.os.Build.VERSION.SDK_INT <= 21) {
@@ -1053,7 +1053,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                               //  fb.logger.fine(fb.Image_Name + " has been deleted");
                              //   fb.fh.flush();
                             } else {
-                                fb.SendMessage("Problem with deleting " + fb.Image_Name);
+                                fb.SendMessage("Проблема с удалением фото: " + fb.Image_Name);
+                                fb.SendMessage("Попробуйте поменять разрешение для фото в настройках");
                               //  fb.logger.fine("Problem with deleting " + fb.Image_Name);
                               //  fb.fh.flush();
                             }

@@ -509,12 +509,12 @@ public class FotoBot extends Application {
         }
 
             if (isOnline()) {
-                if (getPage()) {
+              //  if (getPage()) {
                     SendMessage(getResources().getString(R.string.Internet_connection));
                   //  logger.fine(getResources().getString(R.string.Internet_connection));
                   //  fh.flush();
                     return true;
-                }
+            //    }
             }
             }
 
@@ -825,7 +825,7 @@ public class FotoBot extends Application {
             if (m.send()) {
                 SendMessage(h, getResources().getString(R.string.foto_sent));
             } else {
-                SendMessage("Email was not sent.");
+                SendMessage("Письмо не было отправлено");
              //   logger.fine("Email was not sent.");
               //  fh.flush();
             }

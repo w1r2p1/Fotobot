@@ -27,7 +27,7 @@
     <string name="connection_channel_wifi">Метод подключения Wi-Fi</string>
     <string name="turning_on_wifi">Включаем Wi-Fi</string>
     <string name="turning_on_wifi_message">Wi-Fi включается долго, нужно подождать</string>
-    <string name="Internet_connection">Ура! Связь с Internet появилась!</string>
+    <string name="Internet_connection">Связь с Internet появилась</string>
     <string name="Internet_connection_is_already_created">есть соединение с Internet</string>
     <string name="no_Internet_connection">нет соединения с Internet</string>
 

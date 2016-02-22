@@ -98,7 +98,7 @@ public class Mail extends javax.mail.Authenticator {
         final FotoBot fb = (FotoBot) this.context;
 
         //fb.SendMessage("send");
-        fb.SendMessage(".");
+      //  fb.SendMessage(".");
 
         Properties props = _setProperties();
 
@@ -184,8 +184,8 @@ public class Mail extends javax.mail.Authenticator {
 
         props.put("mail.smtp.port", _port);
         props.put("mail.smtp.socketFactory.port", _sport);
-        props.put("mail.smtp.connectiontimeout", "60000");
-        props.put("mail.smtp.timeout", "60000");
+        props.put("mail.smtp.connectiontimeout", "180000");
+        props.put("mail.smtp.timeout", "180000");
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.socketFactory.fallback", "false");
         props.put("mail.smtp.ssl.enable", "true");

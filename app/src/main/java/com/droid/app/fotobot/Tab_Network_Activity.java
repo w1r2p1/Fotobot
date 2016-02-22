@@ -816,8 +816,8 @@ public class Tab_Network_Activity extends Activity {
         FullFrame.addView(linLayout_SMTP_Port);
         FullFrame.addView(linLayout_SMTP_Port_note);
 
-        FullFrame.addView(linLayout_Check_Web_Page);
-        FullFrame.addView(linLayout_Check_Web_Page_note);
+      //  FullFrame.addView(linLayout_Check_Web_Page);
+      //  FullFrame.addView(linLayout_Check_Web_Page_note);
 
         FullFrame.addView(linLayout_Buttons);
 
