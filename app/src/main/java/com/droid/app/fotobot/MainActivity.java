@@ -171,6 +171,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 btnStop.postInvalidate();
             }
 
+            wakeLock.release();
+
             return false;
 
         }
@@ -288,6 +290,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             } else {
                 fb.SendMessage(h, "Image doesn't exist.");
             }
+
+            wakeLock.release();
 
         }
 
