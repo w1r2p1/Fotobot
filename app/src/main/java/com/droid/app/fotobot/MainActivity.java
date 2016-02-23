@@ -345,7 +345,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         super.onCreate(savedInstanceState);
 
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+     //   getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         Log.d(LOG_TAG, "MainActivity: onCreate");
 
@@ -424,7 +424,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         setContentView(R.layout.activity_main);
 
         btnStart = (Button) findViewById(R.id.play);
-        btnConfig = (Button) findViewById(R.id.config);
+      //  btnConfig = (Button) findViewById(R.id.config);
 
         tvInfo = (TextView) findViewById(R.id.tvInfo);
 
@@ -434,19 +434,19 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         WorkSpace.setBackgroundColor(Color.rgb(64, 98, 125));
         WorkSpace.setMinimumHeight(screenHeight);
         WorkSpace.setMinimumWidth(screenWidth);
-
+/*
         Buttons1 = (LinearLayout) findViewById(R.id.buttons1);
         Buttons1.setBackgroundColor(Color.rgb(192, 192, 192));
         Buttons1.setMinimumWidth(screenWidth);
-
+*/
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
         LogWidget.setBackgroundColor(Color.rgb(34, 58, 95));
         LogWidget.setMinimumWidth(screenWidth);
-
+/*
         Buttons2 = (LinearLayout) findViewById(R.id.buttons2);
         Buttons2.setBackgroundColor(Color.rgb(192, 192, 192));
         Buttons2.setMinimumWidth(screenWidth);
-
+*/
         final Button btnHelp = (Button) findViewById(R.id.help);
         btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
         btnHelp.setOnTouchListener(new View.OnTouchListener() {
@@ -579,7 +579,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         h = new Handler(hc);
         btnStart = (Button) findViewById(R.id.play);
         btnStop = (Button) findViewById(R.id.stop);
-
+/*
         if (fb.getstatus() == 1) {
             btnStart.setText(getResources().getString(R.string.start_button));
             btnStart.setEnabled(true);
@@ -617,7 +617,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             btnMainw.setEnabled(false);
 
         }
-
+*/
     }
 
     protected void onSaveInstanceState(Bundle outState) {
@@ -778,7 +778,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 btnStop = (Button) findViewById(R.id.stop);
                 btnStop.setEnabled(true);
                 btnConfig.setEnabled(false);
-
+/*
                 Button btnHelp = (Button) findViewById(R.id.help);
                 btnHelp.setBackgroundColor(Color.rgb(165, 165, 165));
                 btnHelp.setEnabled(false);
@@ -790,7 +790,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 Button btnLog = (Button) findViewById(R.id.log);
                 btnLog.setBackgroundColor(Color.rgb(165, 165, 165));
                 btnLog.setEnabled(false);
-
+*/
                 Thread t = new Thread(new Runnable() {
                     public void run() {
 
@@ -1098,7 +1098,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         btnStart.setEnabled(true);
         btnStop.setEnabled(false);
         btnConfig.setEnabled(true);
-
+/*
         Button btnHelp = (Button) findViewById(R.id.help);
         btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
         btnHelp.setEnabled(true);
@@ -1110,7 +1110,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         Button btnMainw = (Button) findViewById(R.id.log);
         btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
         btnMainw.setEnabled(true);
-
+*/
         if (fb.init_logger) {
             fb.fh.flush();
             fb.fh.close();
@@ -1370,6 +1370,19 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     }
 
     public void logcat(View v) {
+
+      /*  findViewById(R.id.play).setEnabled(false);
+        findViewById(R.id.play).setBackgroundColor(Color.rgb(165,165,165));
+
+        findViewById(R.id.stop).setEnabled(false);
+        findViewById(R.id.stop).setBackgroundColor(Color.rgb(165,165,165));
+
+        findViewById(R.id.log).setEnabled(false);
+        findViewById(R.id.log).setBackgroundColor(Color.rgb(165,165,165));
+*/
+      //  findViewById(R.id.buttons1).setBackgroundColor(Color.rgb(192, 192, 192));
+
+      //  findViewById(R.id.play).postInvalidate();
 
         File logfile = new File(getFilesDir().toString() + "/logfile.txt");
 

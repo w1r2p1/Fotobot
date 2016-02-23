@@ -583,6 +583,26 @@ public class FotoBot extends Application {
 
                     if (i % wake_up_interval == 0 && frame_delay) {
 
+                        File logfile = null;
+
+                        String cmd = null;
+
+                        try {
+                            logfile = new File(getFilesDir().toString() + "/logfile.txt");
+                            logfile.createNewFile();
+                            if ( Build.VERSION.SDK_INT <= 12 ) {
+                                cmd = "logcat -v long -d -f " + logfile.getAbsolutePath() + " Logs:* FotoBot:* *:S";
+                            } else {
+                                cmd = "logcat -v long -d -f " + logfile.getAbsolutePath();
+                            }
+                            Runtime.getRuntime().exec(cmd);
+                           // return true;
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            Log.d("LOG_TAG","logcat2file doesn't work");
+                         //   return false;
+                        }
+
                     //    Toast toast = Toast.makeText(context, "Wake up!", Toast.LENGTH_LONG);
                     //    toast.show();
 
