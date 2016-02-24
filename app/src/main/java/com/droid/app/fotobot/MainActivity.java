@@ -167,8 +167,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
           //      btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
                 findViewById(R.id.mainw).setEnabled(true);
 
-                btnStart.postInvalidate();
-                btnStop.postInvalidate();
+             //   btnStart.postInvalidate();
+             //   btnStop.postInvalidate();
             }
 
             wakeLock.release();
@@ -777,6 +777,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                // btnStart.setText(getResources().getString(R.string.start_button));
                // btnStop = (Button) findViewById(R.id.stop);
 //                findViewById(R.id.stop).setEnabled(true);
+                findViewById(R.id.stop).setEnabled(true);
                 findViewById(R.id.config).setEnabled(false);
 
                // Button btnHelp = (Button) findViewById(R.id.help);
@@ -1104,17 +1105,17 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
       //  btnStop.setEnabled(false);
       //  btnConfig.setEnabled(true);
 
-        Button btnHelp = (Button) findViewById(R.id.help);
+       // Button btnHelp = (Button) findViewById(R.id.help);
       //  btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
-        btnHelp.setEnabled(true);
+        findViewById(R.id.help).setEnabled(true);
 
-        Button btnLog = (Button) findViewById(R.id.log);
+      //  Button btnLog = (Button) findViewById(R.id.log);
       //  btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
-        btnLog.setEnabled(true);
+        findViewById(R.id.log).setEnabled(true);
 
-        Button btnMainw = (Button) findViewById(R.id.log);
+      //  Button btnMainw = (Button) findViewById(R.id.log);
       //  btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
-        btnMainw.setEnabled(true);
+        findViewById(R.id.mainw).setEnabled(true);
 
         if (fb.init_logger) {
             fb.fh.flush();
