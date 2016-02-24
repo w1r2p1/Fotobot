@@ -156,15 +156,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 btnConfig.setEnabled(true);
 
                 Button btnHelp = (Button) findViewById(R.id.help);
-                btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
+            //    btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
                 btnHelp.setEnabled(true);
 
                 Button btnLog = (Button) findViewById(R.id.log);
-                btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
+              //  btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
                 btnLog.setEnabled(true);
 
                 Button btnMainw = (Button) findViewById(R.id.mainw);
-                btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
+          //      btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
                 btnMainw.setEnabled(true);
 
                 btnStart.postInvalidate();
@@ -454,9 +454,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
-                    btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
+                   // btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
                 } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    btnHelp.setBackgroundColor(Color.rgb(128, 128, 128));
+                   // btnHelp.setBackgroundColor(Color.rgb(128, 128, 128));
                 }
                 return false;
             }
@@ -470,9 +470,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
-                    btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
+                  //  btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
                 } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    btnLog.setBackgroundColor(Color.rgb(128, 128, 128));
+                 //   btnLog.setBackgroundColor(Color.rgb(128, 128, 128));
                 }
                 return false;
             }
@@ -486,9 +486,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
-                    btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
+                  //  btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
                 } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    btnMainw.setBackgroundColor(Color.rgb(128, 128, 128));
+                 //   btnMainw.setBackgroundColor(Color.rgb(128, 128, 128));
                 }
                 return false;
             }
@@ -586,15 +586,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             btnStop.setEnabled(false);
 
             Button btnHelp = (Button) findViewById(R.id.help);
-            btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
+         //   btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
             btnHelp.setEnabled(true);
 
             Button btnLog = (Button) findViewById(R.id.log);
-            btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
+         //   btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
             btnLog.setEnabled(true);
 
             Button btnMainw = (Button) findViewById(R.id.mainw);
-            btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
+         //   btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
             btnMainw.setEnabled(true);
 
         }
@@ -605,15 +605,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             btnStop.setEnabled(true);
 
             Button btnHelp = (Button) findViewById(R.id.help);
-            btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
+         //   btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
             btnHelp.setEnabled(false);
 
             Button btnLog = (Button) findViewById(R.id.log);
-            btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
+         //   btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
             btnLog.setEnabled(false);
 
             Button btnMainw = (Button) findViewById(R.id.mainw);
-            btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
+         //   btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
             btnMainw.setEnabled(false);
 
         }
@@ -780,15 +780,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 btnConfig.setEnabled(false);
 
                 Button btnHelp = (Button) findViewById(R.id.help);
-                btnHelp.setBackgroundColor(Color.rgb(165, 165, 165));
+              //  btnHelp.setBackgroundColor(Color.rgb(165, 165, 165));
                 btnHelp.setEnabled(false);
 
                 Button btnMainw = (Button) findViewById(R.id.mainw);
-                btnMainw.setBackgroundColor(Color.rgb(165, 165, 165));
+              //  btnMainw.setBackgroundColor(Color.rgb(165, 165, 165));
                 btnMainw.setEnabled(false);
 
                 Button btnLog = (Button) findViewById(R.id.log);
-                btnLog.setBackgroundColor(Color.rgb(165, 165, 165));
+              //  btnLog.setBackgroundColor(Color.rgb(165, 165, 165));
                 btnLog.setEnabled(false);
 
                 Thread t = new Thread(new Runnable() {
@@ -1100,15 +1100,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         btnConfig.setEnabled(true);
 
         Button btnHelp = (Button) findViewById(R.id.help);
-        btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
+      //  btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
         btnHelp.setEnabled(true);
 
         Button btnLog = (Button) findViewById(R.id.log);
-        btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
+      //  btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
         btnLog.setEnabled(true);
 
         Button btnMainw = (Button) findViewById(R.id.log);
-        btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
+      //  btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
         btnMainw.setEnabled(true);
 
         if (fb.init_logger) {
