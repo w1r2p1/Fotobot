@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             n = msg.what;
             if (msg.what == STATUS_STOPPED) btnStart.setText("Play");
 
-            if (fb.getstatus() == 3) {
+            if (fb.getstatus() == 3 && fb.thread_stopped) {
 
              //   btnStart = (Button) findViewById(R.id.play);
              //   btnStop = (Button) findViewById(R.id.stop);
@@ -169,6 +169,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
              //   btnStart.postInvalidate();
              //   btnStop.postInvalidate();
+
+                fb.thread_stopped = false;
+
             }
 
             wakeLock.release();
@@ -828,6 +831,19 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                         for (int i = 1; i <= 1000000000; i++) {
 
                             fb.Image_Index = i;
+
+                            if (fb.getstatus() == 3) {
+                                if (mCamera != null) {
+                                    mCamera.stopPreview();
+                                    mCamera.setPreviewCallback(null);
+                                    mCamera.release();
+                                    mCamera = null;
+                                }
+                                fb.thread_stopped = true;
+                                fb.SendMessage(h, getResources().getString(R.string.stop_message));
+                                return;
+                            }
+
                             fb.SendMessage("Начинаем делать фото: " + fb.Image_Index);
                         //    fb.logger.fine("Начинаем делать фото: " + fb.Image_Index);
                           //  fb.fh.flush();
@@ -849,16 +865,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 // https://sohabr.net/habr/post/215693/
                             fb.batteryLevel();
 
-                            if (fb.getstatus() == 3) {
-                                if (mCamera != null) {
-                                    mCamera.stopPreview();
-                                    mCamera.setPreviewCallback(null);
-                                    mCamera.release();
-                                    mCamera = null;
-                                }
-                                fb.SendMessage(h, getResources().getString(R.string.stop_message));
-                                return;
-                            }
+
 
                             DateFormat df = new SimpleDateFormat("MM-dd-yy_HH-mm-ss-SSS");
                             fb.Image_Name = df.format(new Date()) + ".jpg";
@@ -1095,11 +1102,20 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         fb.setstatus(3);
         Log.d(LOG_TAG, "stopFotobot: STOP_FOTOBOT" + STOP_FOTOBOT);
 
+     //   if (mCamera != null) {
+     //       mCamera.stopPreview();
+     //       mCamera.setPreviewCallback(null);
+     //       mCamera.release();
+     //       mCamera = null;
+     //   }
+
+        fb.SendMessage("Запрос на остановку Fotobot'а отправлен, дождитесь корректного завершения и соответствующей надписи на экране");
+
       //  btnStart.setText(getResources().getString(R.string.start_button));
 
-        findViewById(R.id.play).setEnabled(true);
+       /* findViewById(R.id.play).setEnabled(true);
         findViewById(R.id.stop).setEnabled(false);
-        findViewById(R.id.config).setEnabled(true);
+        findViewById(R.id.config).setEnabled(true); */
 
        // btnStart.setEnabled(true);
       //  btnStop.setEnabled(false);
@@ -1107,15 +1123,18 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
        // Button btnHelp = (Button) findViewById(R.id.help);
       //  btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
-        findViewById(R.id.help).setEnabled(true);
+
+       /* findViewById(R.id.help).setEnabled(true); */
 
       //  Button btnLog = (Button) findViewById(R.id.log);
       //  btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
-        findViewById(R.id.log).setEnabled(true);
+
+       /* findViewById(R.id.log).setEnabled(true); */
 
       //  Button btnMainw = (Button) findViewById(R.id.log);
       //  btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
-        findViewById(R.id.mainw).setEnabled(true);
+
+       /* findViewById(R.id.mainw).setEnabled(true); */
 
         if (fb.init_logger) {
             fb.fh.flush();

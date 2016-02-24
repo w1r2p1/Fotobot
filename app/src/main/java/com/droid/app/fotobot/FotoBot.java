@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Browser;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.widget.Toast;
@@ -195,6 +196,8 @@ public class FotoBot extends Application {
      * необходима для того, чтобы приложение не было выброшено из памяти
      */
     public int wake_up_interval = 60;
+
+    public boolean thread_stopped = false;
 
     /**
      * Camera properties
