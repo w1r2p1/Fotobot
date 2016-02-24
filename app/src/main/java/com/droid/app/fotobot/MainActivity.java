@@ -830,6 +830,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                         for (int i = 1; i <= 1000000000; i++) {
 
+                           // fb.LoadSettings();
+
                             fb.Image_Index = i;
 
                             if (fb.getstatus() == 3) {
