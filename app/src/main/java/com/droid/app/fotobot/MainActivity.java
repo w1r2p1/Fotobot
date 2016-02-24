@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             }
 
-            wakeLock.release();
+          //  wakeLock.release();
 
             return false;
 
@@ -294,7 +294,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 fb.SendMessage(h, "Image doesn't exist.");
             }
 
-            wakeLock.release();
+         //   wakeLock.release();
 
         }
 
