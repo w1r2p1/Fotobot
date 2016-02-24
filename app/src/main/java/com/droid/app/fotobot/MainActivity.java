@@ -423,8 +423,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         setContentView(R.layout.activity_main);
 
-        btnStart = (Button) findViewById(R.id.play);
-        btnConfig = (Button) findViewById(R.id.config);
+   //     btnStart = (Button) findViewById(R.id.play);
+   //     btnConfig = (Button) findViewById(R.id.config);
 
         tvInfo = (TextView) findViewById(R.id.tvInfo);
 
@@ -435,20 +435,20 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         WorkSpace.setMinimumHeight(screenHeight);
         WorkSpace.setMinimumWidth(screenWidth);
 
-        Buttons1 = (LinearLayout) findViewById(R.id.buttons1);
-        Buttons1.setBackgroundColor(Color.rgb(192, 192, 192));
-        Buttons1.setMinimumWidth(screenWidth);
+    //    Buttons1 = (LinearLayout) findViewById(R.id.buttons1);
+    //    Buttons1.setBackgroundColor(Color.rgb(192, 192, 192));
+    //    Buttons1.setMinimumWidth(screenWidth);
 
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
         LogWidget.setBackgroundColor(Color.rgb(34, 58, 95));
         LogWidget.setMinimumWidth(screenWidth);
 
-        Buttons2 = (LinearLayout) findViewById(R.id.buttons2);
-        Buttons2.setBackgroundColor(Color.rgb(192, 192, 192));
-        Buttons2.setMinimumWidth(screenWidth);
+    //    Buttons2 = (LinearLayout) findViewById(R.id.buttons2);
+    //    Buttons2.setBackgroundColor(Color.rgb(192, 192, 192));
+   //     Buttons2.setMinimumWidth(screenWidth);
 
         final Button btnHelp = (Button) findViewById(R.id.help);
-        btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
+    //    btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
         btnHelp.setOnTouchListener(new View.OnTouchListener() {
 
             @Override
@@ -464,7 +464,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         });
 
         final Button btnLog = (Button) findViewById(R.id.log);
-        btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
+      //  btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
         btnLog.setOnTouchListener(new View.OnTouchListener() {
 
             @Override
@@ -480,7 +480,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         });
 
         final Button btnMainw = (Button) findViewById(R.id.mainw);
-        btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
+      //  btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
         btnMainw.setOnTouchListener(new View.OnTouchListener() {
 
             @Override
