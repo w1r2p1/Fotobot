@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/buttons1"
         android:layout_alignParentTop="true"
-        android:padding="4dp"
+        android:padding="2dp"
         android:background="#c0c0c0">
 
         <Button
@@ -30,10 +30,9 @@
             android:layout_alignStart="@+id/button"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="2dp"
             android:onClick="startFotobot"
             android:nestedScrollingEnabled="false"
-             />
+            android:layout_marginRight="1dp" />
 
         <Button
             android:layout_width="wrap_content"
@@ -46,11 +45,11 @@
             android:layout_alignStart="@+id/button"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="2dp"
-            android:layout_marginLeft="2dp"
             android:onClick="stopFotobot"
             android:enabled="false"
-            android:nestedScrollingEnabled="false" />
+            android:nestedScrollingEnabled="false"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,10 +61,9 @@
             android:layout_alignStart="@+id/button"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginLeft="2dp"
             android:onClick="showSettings"
             android:nestedScrollingEnabled="false"
-            />
+            android:layout_marginLeft="1dp" />
 
         <SurfaceView android:id="@+id/surfaceView" android:layout_height="1dip" android:layout_width="1dip"></SurfaceView>
         <ImageView android:layout_width="1dip" android:layout_height="1dip" android:id="@+id/imageView"></ImageView>
@@ -102,14 +100,14 @@
         android:layout_height="wrap_content"
         android:id="@+id/buttons2"
         android:layout_alignParentBottom="true"
-        android:padding="4dp"
+        android:padding="2dp"
         android:background="#c0c0c0">
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/mainw_button"
             android:id="@+id/mainw"
-            android:layout_marginRight="2dp"
+            android:layout_marginRight="1dp"
             android:layout_weight="0.5"
             android:layout_alignParentBottom="true"
             android:layout_alignLeft="@+id/button"
@@ -124,8 +122,8 @@
             android:layout_height="wrap_content"
             android:text="@string/log_button"
             android:id="@+id/log"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
             android:layout_weight="0.5"
             android:layout_alignParentBottom="true"
             android:layout_alignLeft="@+id/button"
@@ -139,7 +137,7 @@
             android:layout_height="wrap_content"
             android:text="@string/help_button"
             android:id="@+id/help"
-            android:layout_marginLeft="2dp"
+            android:layout_marginLeft="1dp"
             android:layout_weight="0.5"
             android:layout_alignParentBottom="true"
             android:layout_alignLeft="@+id/button"
