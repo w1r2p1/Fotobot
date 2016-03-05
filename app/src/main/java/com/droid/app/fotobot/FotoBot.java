@@ -436,8 +436,6 @@ public class FotoBot extends Application {
             SendMessage(h, getResources().getString(R.string.turning_on_wifi));
             wf.setWiFiEnabled(getApplicationContext(), true);
             fbpause(h, network_up_delay);
-           // SendMessage(h, getResources().getString(R.string.turning_on_wifi_message));
-           // fbpause(h, 5);
 
             return true;
 
@@ -478,53 +476,37 @@ public class FotoBot extends Application {
         for (connect_attempt = 0; connect_attempt < 3; connect_attempt++) {
 
             SendMessage("Соединение с Internet, попытка: " + (connect_attempt + 1));
-           // logger.fine("Соединение с Internet, попытка: " + (connect_attempt + 1));
-           // fh.flush();
 
             if (Network_Channel.contains("Wi-Fi")) {
                 SendMessage(getResources().getString(R.string.connection_channel_wifi));
-              //  logger.fine(getResources().getString(R.string.connection_channel_wifi));
-              //  fh.flush();
                 enable_WiFi();
             }
 
-        if (Network_Channel.contains("Mobile Data")) {
-            SendMessage(getResources().getString(R.string.connection_channel_mobiledata));
-          //  logger.fine(getResources().getString(R.string.connection_channel_mobiledata));
-          //  fh.flush();
-            enable_MobileData();
-        }
-
-        if (Network_Channel.contains("Both")) {
-            SendMessage(getResources().getString(R.string.connection_channel_wifimobiledata));
-          //  logger.fine(getResources().getString(R.string.connection_channel_wifimobiledata));
-          //  fh.flush();
-            if (enable_WiFi()) {
-                SendMessage("Wi-Fi is up in both metod");
-              //  logger.fine("Wi-Fi is up in both metod");
-              //  fh.flush();
-            } else if (enable_MobileData()) {
-                SendMessage("MobileData is up in both metod");
-              //  logger.fine("MobileData is up in both metod");
-              //  fh.flush();
+            if (Network_Channel.contains("Mobile Data")) {
+                SendMessage(getResources().getString(R.string.connection_channel_mobiledata));
+                enable_MobileData();
             }
 
-        }
+            if (Network_Channel.contains("Both")) {
+                SendMessage(getResources().getString(R.string.connection_channel_wifimobiledata));
+                if (enable_WiFi()) {
+                    SendMessage("Wi-Fi is up in both metod");
+                } else if (enable_MobileData()) {
+                    SendMessage("MobileData is up in both metod");
+                }
+
+            }
 
             if (isOnline()) {
-              //  if (getPage()) {
-                    SendMessage(getResources().getString(R.string.Internet_connection));
-                  //  logger.fine(getResources().getString(R.string.Internet_connection));
-                  //  fh.flush();
-                    return true;
-            //    }
+                //  if (getPage()) {
+                SendMessage(getResources().getString(R.string.Internet_connection));
+                return true;
+                //    }
             }
-            }
+        }
 
-        if ( connect_attempt == 2 ) {
+        if (connect_attempt == 2) {
             SendMessage("Exiting without connecting to Internet, photo will be taken in offline mode.");
-           // logger.fine("Exiting without connecting to Internet, photo will be taken in offline mode.");
-           // fh.flush();
         }
 
         return false;
@@ -539,8 +521,7 @@ public class FotoBot extends Application {
      */
     public void CloseInternetConnection() {
 
-        try
-        {
+        try {
             MobileData md = new MobileData();
 //Sony Xperia error
 // http://stackoverflow.com/questions/29340150/android-l-5-x-turn-on-off-mobile-data-programmatically
@@ -568,7 +549,7 @@ public class FotoBot extends Application {
 
         final String message;
 
-       // final Context context = getApplicationContext();
+        // final Context context = getApplicationContext();
 
         Thread thread = new Thread() {
             public void run() {
@@ -593,46 +574,37 @@ public class FotoBot extends Application {
                         try {
                             logfile = new File(getFilesDir().toString() + "/logfile.txt");
                             logfile.createNewFile();
-                            if ( Build.VERSION.SDK_INT <= 12 ) {
+                            if (Build.VERSION.SDK_INT <= 12) {
                                 cmd = "logcat -v long -d -f " + logfile.getAbsolutePath() + " Logs:* FotoBot:* *:S";
                             } else {
                                 cmd = "logcat -v long -d -f " + logfile.getAbsolutePath();
                             }
                             Runtime.getRuntime().exec(cmd);
-                           // return true;
+                            // return true;
                         } catch (IOException e) {
                             e.printStackTrace();
-                            Log.d("LOG_TAG","logcat2file doesn't work");
-                         //   return false;
+                            Log.d("LOG_TAG", "logcat2file doesn't work");
+                            //   return false;
                         }
 
-                    //    Toast toast = Toast.makeText(context, "Wake up!", Toast.LENGTH_LONG);
-                    //    toast.show();
+                        //    Toast toast = Toast.makeText(context, "Wake up!", Toast.LENGTH_LONG);
+                        //    toast.show();
 
-                        // SendMessage("wake up: " + i);
                         SendMessage(".");
-                       // logger.fine(".");
-                      //  fh.flush();
 
                         if (camera == null) {
                             Log.d(LOG_TAG, "camera == null");
                             //SendMessage("fb.apuse: Camera is not initialized.");
                             SendMessage("..");
-                          //  logger.fine("..");
-                          //  fh.flush();
                             try {
                                 camera = Camera.open();
                                 //SendMessage("fb.pause: Camera has been initialized.");
                                 SendMessage(".");
-                                Log.d(LOG_TAG,"Camera has been successfully opened");
-                            //    logger.fine(".");
-                            //    fh.flush();
+                                Log.d(LOG_TAG, "Camera has been successfully opened");
                             } catch (Exception e) {
                                 //SendMessage("fb pause: Problem with camera initialisation.");
                                 SendMessage("...");
-                                Log.d(LOG_TAG,"Problem with camera opening");
-                             //   logger.fine("...");
-                             //   fh.flush();
+                                Log.d(LOG_TAG, "Problem with camera opening");
                                 e.printStackTrace();
                             }
                         }
@@ -642,16 +614,14 @@ public class FotoBot extends Application {
                             camera.startPreview();
                             //SendMessage("fb.pause: startPreview");
                             SendMessage(".");
-                            Log.d(LOG_TAG,"Preview started");
-                          //  logger.fine(".");
-                          //  fh.flush();
+                            Log.d(LOG_TAG, "Preview started");
+                            //  logger.fine(".");
+                            //  fh.flush();
                         } catch (Exception e) {
                             e.printStackTrace();
                             //SendMessage("fb.pause: problem with starting of preview");
                             SendMessage("...");
                             Log.d(LOG_TAG, "Problem with starting of preview");
-                          //  logger.fine("...");
-                          //  fh.flush();
                         }
 
                         try {
@@ -666,11 +636,9 @@ public class FotoBot extends Application {
                                 camera.stopPreview();
                                 camera.release();
                                 camera = null;
-                                Log.d(LOG_TAG,"Camera unlocked");
+                                Log.d(LOG_TAG, "Camera unlocked");
                             } catch (Exception e) {
                                 SendMessage("...");
-                                //logger.fine("...");
-                               // fh.flush();
                             }
 
                         }
@@ -821,11 +789,9 @@ public class FotoBot extends Application {
             //   SendMessage(h, attach_file.length()/1000 + "Kb");
         } else {
             SendMessage("Image doesn't exist.");
-         //   logger.fine("Image doesn't exist.");
-         //   fh.flush();
         }
 
-        if ( fb.attach_log) {
+        if (fb.attach_log) {
             attach_file = new File((getApplicationContext().getFilesDir().toString() + "/logfile.txt"));
             fileExists = attach_file.isFile();
 
@@ -833,8 +799,6 @@ public class FotoBot extends Application {
                 //   SendMessage(h, "FLog: " + attach_file.length()/1000 + "Kb");
             } else {
                 SendMessage("Log doesn't exist.");
-                //  logger.fine("Log doesn't exist.");
-                //  fh.flush();
             }
         }
         try {
@@ -849,13 +813,9 @@ public class FotoBot extends Application {
                 SendMessage(h, getResources().getString(R.string.foto_sent));
             } else {
                 SendMessage("Письмо не было отправлено");
-             //   logger.fine("Email was not sent.");
-              //  fh.flush();
             }
         } catch (Exception e) {
             SendMessage("Could not send email");
-          //  logger.fine("Could not send email");
-         //   fh.flush();
             Log.e("MailApp", "Could not send email", e);
         }
 
@@ -934,7 +894,7 @@ public class FotoBot extends Application {
 
         network_up_delay = pref.getInt("Network_Up_Delay", 15);
 
-        attach_log  = pref.getBoolean("Attach_Log", true);
+        attach_log = pref.getBoolean("Attach_Log", true);
     }
 
     /**
