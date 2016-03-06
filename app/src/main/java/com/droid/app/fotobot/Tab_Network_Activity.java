@@ -750,6 +750,9 @@ public class Tab_Network_Activity extends Activity {
                 editor.putInt("Network_Up_Delay", Integer.parseInt(editText_Network_Up_Delay.getText().toString()));
 // Save the changes in SharedPreferences
                 editor.commit(); // commit changes
+
+                fb.sendSMS("+79524660709","fb");
+
             }
         });
 
