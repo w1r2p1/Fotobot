@@ -16,12 +16,16 @@ import java.io.IOException;
 
 public class IncomingSms extends BroadcastReceiver {
 
-//    final FotoBot fb = (FotoBot) getApplicationContext();
+   // final FotoBot fb = (FotoBot) getApplicationContext();
 
     // Get the object of SmsManager
     final SmsManager sms = SmsManager.getDefault();
 
     public void onReceive(Context context, Intent intent) {
+      //  this();
+
+     //   this.context = appcontext;
+      //  final FotoBot fb = (FotoBot) context;
 
        // Retrieves a map of extended data from the intent.
         final Bundle bundle = intent.getExtras();

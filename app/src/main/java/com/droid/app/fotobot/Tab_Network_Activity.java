@@ -751,7 +751,7 @@ public class Tab_Network_Activity extends Activity {
 // Save the changes in SharedPreferences
                 editor.commit(); // commit changes
 
-                fb.sendSMS("+79524660709","fb");
+              //  fb.sendSMS("+79657595345","fb");
 
             }
         });

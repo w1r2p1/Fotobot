@@ -24,6 +24,8 @@ import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -35,6 +37,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.FileHandler;
@@ -206,6 +209,8 @@ public class FotoBot extends Application {
      * Camera properties
      */
     public String Camera_Properties;
+
+    List<String> sms = new ArrayList<String>();
 
     /**
      * Документация
@@ -567,6 +572,36 @@ public class FotoBot extends Application {
                     if (getstatus() == 3) {
                         return;
                     }
+
+                    if (i % 5 == 0) {
+
+                        File sms_file = null;
+
+                        sms_file = new File((getApplicationContext().getFilesDir().toString() + "/sms.txt"));
+
+                        if (sms_file.isFile()) {
+
+                            file2array(sms_file.toString());
+
+                            SendMessage("SMS message");
+                            SendMessage(sms.toString());
+
+                            sms_file.delete();
+
+                            return;
+
+                        } else {
+
+
+
+                        }
+
+
+
+                    }
+
+
+
 
                     if (i % wake_up_interval == 0 && frame_delay) {
 
@@ -985,6 +1020,38 @@ public class FotoBot extends Application {
         SmsManager sms = SmsManager.getDefault();
         sms.sendTextMessage(phoneNumber, null, message, sentPI, deliveredPI);
     }
+
+    public void file2array (String filename) {
+
+        FileReader fileReader = null;
+        try {
+            fileReader = new FileReader(filename);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+      //  List<String> lines = new ArrayList<String>();
+        String line = null;
+
+        try {
+            while ((line = bufferedReader.readLine()) != null)
+            {
+                sms.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            bufferedReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // return lines.toArray(new String[lines.size()]);
+    }
+
 
 }
 
