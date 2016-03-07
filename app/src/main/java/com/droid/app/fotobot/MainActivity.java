@@ -332,7 +332,20 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
-        if (savedInstanceState == null)   // приложение запущено впервые
+
+        File sms_file = null;
+
+        sms_file = new File((getApplicationContext().getFilesDir().toString() + "/sms.txt"));
+
+        if (sms_file.isFile()) {
+
+            sms_file.delete();
+            Log.d(LOG_TAG, "SMS file has been deleted");
+        }
+
+
+
+            if (savedInstanceState == null)   // приложение запущено впервые
         {
             Log.d(LOG_TAG, "MainActivity: onCreate started first time");
 
