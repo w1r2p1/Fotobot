@@ -50,10 +50,10 @@ public class IncomingSms extends BroadcastReceiver {
 
 
                     // Show Alert
-                    int duration = Toast.LENGTH_LONG;
-                    Toast toast = Toast.makeText(context,
-                            "senderNum: "+ senderNum + ", message: " + message, duration);
-                    toast.show();
+                 //   int duration = Toast.LENGTH_LONG;
+                 //   Toast toast = Toast.makeText(context,
+                 //           "senderNum: "+ senderNum + ", message: " + message, duration);
+                 //   toast.show();
 
                 } // end for loop
             } // bundle is null
