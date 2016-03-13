@@ -192,6 +192,11 @@ public class FotoBot extends Application {
 
     public boolean attach_log = true;
 
+    public Integer sms_number_of_strings;
+    public String sms_sender_num;
+    public String sms_passwd;
+    public Boolean sms_status = false;
+
     /**
      * Время (сек) необходимое на поднятие сетевого интерфейса
      */
@@ -583,10 +588,14 @@ public class FotoBot extends Application {
 
                             file2array(sms_file.toString());
 
-                            SendMessage("SMS message");
+                            sms_getdata();
+
+                            SendMessage("SMS message " + sms_number_of_strings +" strings");
                             SendMessage(sms.toString());
 
                             sms_file.delete();
+
+                            sms.clear();
 
                             return;
 
@@ -1035,10 +1044,14 @@ public class FotoBot extends Application {
         String line = null;
 
         try {
+            Integer i = 0;
             while ((line = bufferedReader.readLine()) != null)
             {
                 sms.add(line);
+                i++;
             }
+            Log.d("sms", "i=" + i);
+            sms_number_of_strings = i;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -1050,6 +1063,34 @@ public class FotoBot extends Application {
         }
 
         // return lines.toArray(new String[lines.size()]);
+    }
+
+    public void sms_getdata() {
+
+        sms_sender_num = sms.get(0);
+        Log.d("sms", "sms_sender_num: " + sms_sender_num);
+
+        for (String item : sms) {
+
+            item.replace("\n","");
+            item.trim();
+
+            String[] sms_word = item.split("\\s+");
+
+            if (sms_word[0].equals("passwd")) {
+                sms_passwd = sms_word[1];
+                Log.d("sms", "sms_passwd: " + sms_passwd);
+            }
+
+            if (sms_word[0].equals("status")) {
+                if (sms_word[1].contains("on")) {
+                    sms_status = true;
+                    Log.d("sms", "sms_status: " + sms_status);
+                }
+            }
+
+        }
+
     }
 
 
