@@ -460,7 +460,7 @@ public class Tab_Network_Activity extends Activity {
         tv_SMTP_Host.setTypeface(Typeface.DEFAULT_BOLD);
         tv_SMTP_Host.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_SMTP_Host.setTextColor(Color.BLACK);
-        tv_SMTP_Host.setText(getResources().getString(R.string.Fotobot_email));
+        tv_SMTP_Host.setText(getResources().getString(R.string.email_server));
         tv_SMTP_Host.setMinimumWidth((screenWidth - padding) / 100 * 60);
         tv_SMTP_Host.setLayoutParams(lpView_email);
 
@@ -740,12 +740,11 @@ public class Tab_Network_Activity extends Activity {
 
                 editor.putString("Network_Channel", spinner_Channels.getSelectedItem().toString());
                 editor.putString("Network_Connection_Method", spinner_Connection_Method.getSelectedItem().toString());
-
                 editor.putString("EMail_Sender", editText_Fotobot_Email.getText().toString());
                 editor.putString("EMail_Sender_Password", editText_Fotobot_Password.getText().toString());
-                editor.putString("EMail_Recepient", editText_Fotobot_Recipient.getText().toString());
                 editor.putString("SMTP_Host", editText_SMTP_Host.getText().toString());
                 editor.putString("SMTP_Port", editText_SMTP_Port.getText().toString());
+                editor.putString("EMail_Recepient", editText_Fotobot_Recipient.getText().toString());
                 editor.putString("Check_Web_Page", editText_Check_Web_Page.getText().toString());
                 editor.putInt("Network_Up_Delay", Integer.parseInt(editText_Network_Up_Delay.getText().toString()));
 // Save the changes in SharedPreferences
@@ -809,15 +808,17 @@ public class Tab_Network_Activity extends Activity {
        // FullFrame.addView(linLayout_Fotobot_Password_note);
         //  FullFrame.addView(linLayout_Fotobot_Password_divider);
 
-        FullFrame.addView(linLayout_Fotobot_Recipient);
-        //  FullFrame.addView(linLayout_Fotobot_Recipient_divider);
-
         FullFrame.addView(linLayout_SMTP_Host);
         FullFrame.addView(linLayout_SMTP_Host_note);
         //   FullFrame.addView(linLayout_SMTP_Host_divider);
 
         FullFrame.addView(linLayout_SMTP_Port);
         FullFrame.addView(linLayout_SMTP_Port_note);
+
+        FullFrame.addView(linLayout_Fotobot_Recipient);
+        //  FullFrame.addView(linLayout_Fotobot_Recipient_divider);
+
+
 
       //  FullFrame.addView(linLayout_Check_Web_Page);
       //  FullFrame.addView(linLayout_Check_Web_Page_note);

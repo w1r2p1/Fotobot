@@ -83,7 +83,7 @@
     <string name="Recipient_email">Recipients email address</string>
 
     <string name="email_server">Fotobots SMTP server</string>
-    <string name="email_server_description">SMTP server address (f.e. smtp.google.com)</string>
+    <string name="email_server_description">SMTP server address (f.e. smtp.google.com for Google Mail)</string>
 
     <string name="email_server_port">Fotobots SMTP server port</string>
     <string name="email_server_port_description">SMTP server port number, usually equal 465</string>
