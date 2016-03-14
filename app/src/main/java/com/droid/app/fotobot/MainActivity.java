@@ -950,7 +950,16 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             fb.camera = mCamera;
                             fb.frame_delay = true;
+
+                            fb.sms_check_file = true;
                             fb.fbpause(h, fb.Photo_Frequency);
+                            fb.sms_check_file = false;
+
+                            //if (fb.sms_update_db) {
+                            //    fb.SendMessage("Возвращаемся к началу цикла");
+                            //    fb.sms_update_db = false;
+                            //    continue;
+                           // }
                             fb.frame_delay = false;
 
                             File imgfile = new File(fb.Image_Name_Full_Path);

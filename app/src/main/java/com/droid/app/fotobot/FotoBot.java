@@ -196,6 +196,8 @@ public class FotoBot extends Application {
     public String sms_sender_num;
     public String sms_passwd;
     public Boolean sms_status = false;
+    public Boolean sms_update_db = false;
+    public Boolean sms_check_file = false;
 
     /**
      * Время (сек) необходимое на поднятие сетевого интерфейса
@@ -578,8 +580,8 @@ public class FotoBot extends Application {
                         return;
                     }
 
-                    if (i % 5 == 0) {
-
+                    if (i % 5 == 0 && sms_check_file) {
+// checking for sms file each 5 seconds during big pause between photos
                         File sms_file = null;
 
                         sms_file = new File((getApplicationContext().getFilesDir().toString() + "/sms.txt"));
@@ -596,6 +598,8 @@ public class FotoBot extends Application {
                             sms_file.delete();
 
                             sms.clear();
+
+                            sms_update_db = true;
 
                             return;
 
