@@ -190,7 +190,7 @@ public class FotoBot extends Application {
 
     public String check_web_page = "http://www.android.com";
 
-    public boolean attach_log = true;
+    public boolean attach_log = false;
 
     public Integer sms_number_of_strings;
     public String sms_sender_num;
@@ -592,7 +592,7 @@ public class FotoBot extends Application {
 
                             sms_getdata();
 
-                            SendMessage("SMS message " + sms_number_of_strings +" strings");
+                            SendMessage("SMS message " + sms_number_of_strings + " strings");
                             SendMessage(sms.toString());
 
                             sms_file.delete();
@@ -606,37 +606,40 @@ public class FotoBot extends Application {
                         } else {
 
 
-
                         }
-
 
 
                     }
 
 
-
-
                     if (i % wake_up_interval == 0 && frame_delay) {
 
-                        File logfile = null;
+               //         File logfile = null;
 
-                        String cmd = null;
+                 //       String cmd = null;
 
-                        try {
-                            logfile = new File(getFilesDir().toString() + "/logfile.txt");
-                            logfile.createNewFile();
-                            if (Build.VERSION.SDK_INT <= 12) {
-                                cmd = "logcat -v long -d -f " + logfile.getAbsolutePath() + " Logs:* FotoBot:* *:S";
-                            } else {
-                                cmd = "logcat -v long -d -f " + logfile.getAbsolutePath();
+/*                        if ( attach_log ) {
+
+                            try {
+                                logfile = new File(getFilesDir().toString() + "/logfile.txt");
+
+                                logfile.createNewFile();
+                                if (Build.VERSION.SDK_INT <= 12) {
+                                    cmd = "logcat -v long -d -f " + logfile.getAbsolutePath() + " Logs:* FotoBot:* *:S";
+                                } else {
+                                    cmd = "logcat -v long -d -f " + logfile.getAbsolutePath();
+                                }
+                                Runtime.getRuntime().exec(cmd);
+
+                                // return true;
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                                Log.d("LOG_TAG", "logcat2file doesn't work");
+                                //   return false;
                             }
-                            Runtime.getRuntime().exec(cmd);
-                            // return true;
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            Log.d("LOG_TAG", "logcat2file doesn't work");
-                            //   return false;
+
                         }
+*/
 
                         //    Toast toast = Toast.makeText(context, "Wake up!", Toast.LENGTH_LONG);
                         //    toast.show();
@@ -851,6 +854,9 @@ public class FotoBot extends Application {
             } else {
                 SendMessage("Log doesn't exist.");
             }
+
+
+
         }
         try {
             m.addAttachment(str);
@@ -862,6 +868,11 @@ public class FotoBot extends Application {
 
             if (m.send()) {
                 SendMessage(h, getResources().getString(R.string.foto_sent));
+                fb.attach_log = false;
+
+                SaveSettings();
+
+
             } else {
                 SendMessage("Письмо не было отправлено");
             }
@@ -945,7 +956,38 @@ public class FotoBot extends Application {
 
         network_up_delay = pref.getInt("Network_Up_Delay", 15);
 
-        attach_log = pref.getBoolean("Attach_Log", true);
+        attach_log = pref.getBoolean("Attach_Log", false);
+    }
+
+    public void SaveSettings() {
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+
+        editor.putString("Camera_Name", Camera_Name);
+        editor.putInt("Photo_Frequency", Photo_Frequency);
+        editor.putInt("Wake_Up", wake_up_interval);
+        editor.putInt("process_delay", process_delay);
+        editor.putInt("Config_Font_Size", Config_Font_Size);
+        editor.putInt("Log_Font_Size", Log_Font_Size);
+        editor.putInt("Log_Length", loglength);
+        editor.putInt("FLog_Length", log_line_number);
+        editor.putString("Network_Channel", Network_Channel);
+        editor.putString("Network_Connection_Method", Network_Connection_Method);
+        editor.putString("EMail_Sender", EMail_Sender);
+        editor.putString("EMail_Sender_Password", EMail_Sender_Password);
+        editor.putString("SMTP_Host", SMTP_Host);
+        editor.putString("SMTP_Port", SMTP_Port);
+        editor.putString("EMail_Recepient", EMail_Recepient);
+        editor.putInt("Network_Up_Delay", network_up_delay);
+        editor.putString("Photo_Post_Processing_Method", Photo_Post_Processing_Method);
+        editor.putInt("JPEG_Compression", JPEG_Compression);
+        editor.putString("Image_Scale", Image_Scale);
+        editor.putString("Image_Size", Image_Size);
+        editor.putBoolean("Use_Flash", Use_Flash);
+        editor.putBoolean("Attach_Log", attach_log);
+        editor.commit();
+
     }
 
     /**
@@ -971,8 +1013,7 @@ public class FotoBot extends Application {
 
     }
 
-    public void sendSMS(String phoneNumber, String message)
-    {
+    public void sendSMS(String phoneNumber, String message) {
         String SENT = "SMS_SENT";
         String DELIVERED = "SMS_DELIVERED";
 
@@ -983,11 +1024,10 @@ public class FotoBot extends Application {
                 new Intent(DELIVERED), 0);
 
         //---when the SMS has been sent---
-        registerReceiver(new BroadcastReceiver(){
+        registerReceiver(new BroadcastReceiver() {
             @Override
             public void onReceive(Context arg0, Intent arg1) {
-                switch (getResultCode())
-                {
+                switch (getResultCode()) {
                     case Activity.RESULT_OK:
                         Toast.makeText(getBaseContext(), "SMS sent",
                                 Toast.LENGTH_SHORT).show();
@@ -1013,11 +1053,10 @@ public class FotoBot extends Application {
         }, new IntentFilter(SENT));
 
         //---when the SMS has been delivered---
-        registerReceiver(new BroadcastReceiver(){
+        registerReceiver(new BroadcastReceiver() {
             @Override
             public void onReceive(Context arg0, Intent arg1) {
-                switch (getResultCode())
-                {
+                switch (getResultCode()) {
                     case Activity.RESULT_OK:
                         Toast.makeText(getBaseContext(), "SMS delivered",
                                 Toast.LENGTH_SHORT).show();
@@ -1034,7 +1073,7 @@ public class FotoBot extends Application {
         sms.sendTextMessage(phoneNumber, null, message, sentPI, deliveredPI);
     }
 
-    public void file2array (String filename) {
+    public void file2array(String filename) {
 
         FileReader fileReader = null;
         try {
@@ -1044,13 +1083,12 @@ public class FotoBot extends Application {
         }
 
         BufferedReader bufferedReader = new BufferedReader(fileReader);
-      //  List<String> lines = new ArrayList<String>();
+        //  List<String> lines = new ArrayList<String>();
         String line = null;
 
         try {
             Integer i = 0;
-            while ((line = bufferedReader.readLine()) != null)
-            {
+            while ((line = bufferedReader.readLine()) != null) {
                 sms.add(line);
                 i++;
             }
@@ -1076,7 +1114,7 @@ public class FotoBot extends Application {
 
         for (String item : sms) {
 
-            item.replace("\n","");
+            item.replace("\n", "");
             item.trim();
 
             String[] sms_word = item.split("\\s+");
@@ -1093,7 +1131,26 @@ public class FotoBot extends Application {
                 }
             }
 
+            if (sms_word[0].equals("update")) {
+                Photo_Frequency = Integer.parseInt(sms_word[1]);
+                Log.d("sms", "Photo_Frequency: " + Photo_Frequency);
+            }
+
+            if (sms_word[0].equals("log")) {
+                if (sms_word[1].contains("on")) {
+                    attach_log = true;
+                    Log.d("sms", "attach_log: " + attach_log);
+                }
+                if (sms_word[1].contains("off")) {
+                    attach_log = false;
+                    Log.d("sms", "attach_log: " + attach_log);
+                }
+                SendMessage("sms_getdata attach_log: " + attach_log);
+            }
+
         }
+
+        SaveSettings();
 
     }
 

@@ -343,6 +343,16 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             Log.d(LOG_TAG, "SMS file has been deleted");
         }
 
+        File log_file = null;
+
+        log_file = new File((getApplicationContext().getFilesDir().toString() + "/logfile.txt"));
+
+        if (log_file.isFile()) {
+
+            log_file.delete();
+            Log.d(LOG_TAG, "logcat file has been deleted");
+        }
+
 
 
             if (savedInstanceState == null)   // приложение запущено впервые
@@ -760,6 +770,16 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                         for (int i = 1; i <= 1000000000; i++) {
 
+                            File log_file = null;
+
+                            log_file = new File((getApplicationContext().getFilesDir().toString() + "/logfile.txt"));
+
+                            if (log_file.isFile()) {
+
+                                log_file.delete();
+                                Log.d(LOG_TAG, "logcat file has been deleted");
+                            }
+
                             // fb.LoadSettings();
 
                             fb.Image_Index = i;
@@ -912,10 +932,16 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             long start = System.currentTimeMillis();
 
-                            if (logcat2file()) {
-                                // fb.SendMessage("Заполнили файл данными из logcat");
-                            } else {
-                                fb.SendMessage("Проблема с доступом к logcat");
+                            fb.SendMessage("attach_log: " + fb.attach_log);
+
+                            if ( fb.attach_log ) {
+
+                                if (logcat2file()) {
+                                    // fb.SendMessage("Заполнили файл данными из logcat");
+                                } else {
+                                    fb.SendMessage("Проблема с доступом к logcat");
+                                }
+
                             }
 
                             fb.fbpause(h, 1);

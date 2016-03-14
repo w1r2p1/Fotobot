@@ -761,7 +761,7 @@ public class Tab_Main_Activity extends Activity {
 
                 editor.putString("Camera_Name", editText_Fotobot_Camera_Name.getText().toString());
                 editor.putInt("Photo_Frequency", Integer.parseInt(Photo_Frequency.getText().toString()));
-                editor.putInt("Wake_Up", Integer.parseInt(Wake_Up.getText().toString()));
+                editor.putInt("Wake_Up_Interval", Integer.parseInt(Wake_Up.getText().toString()));
                 editor.putInt("process_delay", Integer.parseInt(process_delay.getText().toString()));
                 editor.putInt("Config_Font_Size", Integer.parseInt(Config_Font_Size.getText().toString()));
                 editor.putInt("Log_Font_Size", Integer.parseInt(Log_Font_Size.getText().toString()));
