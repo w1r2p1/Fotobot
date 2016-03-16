@@ -199,6 +199,8 @@ public class FotoBot extends Application {
     public Boolean sms_update_db = false;
     public Boolean sms_check_file = false;
 
+    public String work_dir;
+
     /**
      * Время (сек) необходимое на поднятие сетевого интерфейса
      */
@@ -957,6 +959,8 @@ public class FotoBot extends Application {
         network_up_delay = pref.getInt("Network_Up_Delay", 15);
 
         attach_log = pref.getBoolean("Attach_Log", false);
+
+        work_dir = pref.getString("Work_Dir", "/data/data/com.droid.app.fotobot/files");
     }
 
     public void SaveSettings() {
@@ -986,6 +990,7 @@ public class FotoBot extends Application {
         editor.putString("Image_Size", Image_Size);
         editor.putBoolean("Use_Flash", Use_Flash);
         editor.putBoolean("Attach_Log", attach_log);
+        editor.putString("Work_Dir", work_dir);
         editor.commit();
 
     }

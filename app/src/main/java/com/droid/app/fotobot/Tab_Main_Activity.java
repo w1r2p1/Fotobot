@@ -45,6 +45,7 @@ public class Tab_Main_Activity extends Activity {
     EditText editText_fbloglength;
     EditText editText_fbfloglength;
     EditText Wake_Up;
+    EditText editText_Work_Dir;
     final String LOG_TAG = "Logs";
 
     Logger fblogger = Logger.getLogger(FotoBot.class.getName());
@@ -210,6 +211,59 @@ public class Tab_Main_Activity extends Activity {
         line.setBackgroundColor(Color.rgb(210, 210, 210));
         line.getLayoutParams().height = 3;
         linLayout1_divider.addView(line);
+
+// ------------------------------------------------------------------------------------------------
+// Work dir
+
+// work dir Container
+        RelativeLayout linLayout_Work_Dir = new RelativeLayout(this);
+        RelativeLayout.LayoutParams lpView_Work_Dir = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams lpView_Work_Dir_m1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        linLayout_Work_Dir.setPadding(5, 9, 5, 9);
+        linLayout_Work_Dir.setBackgroundColor(Color.rgb(192, 192, 192));
+
+// Пояснение контейнер
+        LinearLayout linLayout_Work_Dir_note = new LinearLayout(this);
+        linLayout_Work_Dir_note.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_Work_Dir_note.setPadding(5, 9, 5, 9);
+        linLayout_Work_Dir_note.setBackgroundColor(Color.rgb(192, 192, 192));
+
+// Название
+        TextView tv_Work_Dir = new TextView(this);
+        tv_Work_Dir.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Work_Dir.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Work_Dir.setTextColor(Color.BLACK);
+        tv_Work_Dir.setText(getResources().getString(R.string.Work_Dir));
+        tv_Work_Dir.setMinimumWidth((screenWidth - padding) / 100 * 60);
+        tv_Work_Dir.setLayoutParams(lpView_Work_Dir);
+
+        lpView_Work_Dir.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Work_Dir.getId());
+        tv_Work_Dir.setLayoutParams(lpView_Work_Dir);
+        linLayout_Work_Dir.addView(tv_Work_Dir);
+
+// Camera Name
+        editText_Work_Dir = new EditText(this);
+        editText_Work_Dir.setLayoutParams(lpView_Work_Dir);
+        editText_Work_Dir.setSingleLine(true);
+        editText_Work_Dir.setText(fb.work_dir);
+        editText_Work_Dir.setTextColor(Color.rgb(50, 100, 150));
+        editText_Work_Dir.setWidth((screenWidth - padding) / 100 * 40);
+        editText_Work_Dir.setLayoutParams(lpView_camera_name);
+        editText_Work_Dir.setGravity(Gravity.RIGHT);
+
+        lpView_Work_Dir_m1.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, editText_Fotobot_Camera_Name.getId());
+        editText_Work_Dir.setLayoutParams(lpView_Work_Dir_m1);
+        linLayout_Work_Dir.addView(editText_Work_Dir);
+
+// Заметка для названия камеры
+        TextView tv_Work_Dir_note = new TextView(this);
+        tv_Work_Dir_note.setTypeface(null, Typeface.NORMAL);
+        tv_Work_Dir_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_Work_Dir_note.setTextColor(Color.BLACK);
+        tv_Work_Dir_note.setText(getResources().getString(R.string.Work_Dir_description));
+        tv_Work_Dir_note.setLayoutParams(lpView_Work_Dir);
+        tv_Work_Dir_note.setPadding(5, 9, 5, 9);
+        linLayout_Work_Dir_note.addView(tv_Work_Dir_note);
 
 // ------------------------------------------------------------------------------------------------
 
@@ -767,6 +821,7 @@ public class Tab_Main_Activity extends Activity {
                 editor.putInt("Log_Font_Size", Integer.parseInt(Log_Font_Size.getText().toString()));
                 editor.putInt("Log_Length", Integer.parseInt(editText_fbloglength.getText().toString()));
                 editor.putInt("FLog_Length", Integer.parseInt(editText_fbfloglength.getText().toString()));
+                editor.putInt("Work_Dir", Integer.parseInt(editText_Work_Dir.getText().toString()));
 
 // Save the changes in SharedPreferences
                 editor.commit();
@@ -814,6 +869,8 @@ public class Tab_Main_Activity extends Activity {
 // Расставляем контейнеры (порядок важен)
         FullFrame.addView(linLayout_Fotobot_Camera_Name);
         FullFrame.addView(linLayout_Fotobot_Camera_Name_note);
+        FullFrame.addView(linLayout_Work_Dir);
+        FullFrame.addView(linLayout_Work_Dir_note);
     //    FullFrame.addView(linLayout_Fotobot_Camera_Name_divider);
         FullFrame.addView(linLayout1);
         FullFrame.addView(linLayout1_notes);

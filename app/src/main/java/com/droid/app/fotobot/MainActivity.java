@@ -332,6 +332,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
+        fb.work_dir = getApplicationContext().getFilesDir().toString();
 
         File sms_file = null;
 
@@ -1233,9 +1234,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             logfile = new File(getFilesDir().toString() + "/logfile.txt");
             logfile.createNewFile();
             if (Build.VERSION.SDK_INT <= 12) {
-                cmd = "logcat -v long -d -f " + logfile.getAbsolutePath() + " Logs:* FotoBot:* *:S";
+                cmd = "logcat -v brief -d -f " + logfile.getAbsolutePath() + " Logs:* FotoBot:* *:S";
             } else {
-                cmd = "logcat -v long -d -f " + logfile.getAbsolutePath();
+                cmd = "logcat -v brief -d -f " + logfile.getAbsolutePath();
             }
             Runtime.getRuntime().exec(cmd);
             return true;

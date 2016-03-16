@@ -14,6 +14,9 @@
     <string name="Camera_Name">Название камеры</string>
     <string name="Camera_Name_description">Дайте название камере, чтобы потом было проще искать письма</string>
 
+    <string name="Work_Dir">Папка для фотографий</string>
+    <string name="Work_Dir_description">Полный путь к папке с фотографиями</string>
+
     <string name="fbloglength">Длина лога в главном окне (в байтах)</string>
     <string name="fbloglength_description">Задайте ограничитель на количество выводимых символов</string>
     <string name="fbfloglength">Длина журнала в строках</string>
