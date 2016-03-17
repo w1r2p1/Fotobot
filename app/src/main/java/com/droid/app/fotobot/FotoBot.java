@@ -55,7 +55,7 @@ public class FotoBot extends Application {
 
     Camera camera = null;
 
-    private final static Logger fblogger = Logger.getLogger(FotoBot.class.getName());
+  //  private final static Logger fblogger = Logger.getLogger(FotoBot.class.getName());
 
     public String versionName = "";
 
@@ -264,7 +264,7 @@ public class FotoBot extends Application {
     public String logpath = "";
     public String logfile = "Fotobot.txt";
 
-    Logger logger;
+ //   Logger logger;
 
     FileHandler fh = null;
 
@@ -586,7 +586,7 @@ public class FotoBot extends Application {
 // checking for sms file each 5 seconds during big pause between photos
                         File sms_file = null;
 
-                        sms_file = new File((getApplicationContext().getFilesDir().toString() + "/sms.txt"));
+                        sms_file = new File((work_dir + "/sms.txt"));
 
                         if (sms_file.isFile()) {
 
@@ -848,7 +848,7 @@ public class FotoBot extends Application {
         }
 
         if (fb.attach_log) {
-            attach_file = new File((getApplicationContext().getFilesDir().toString() + "/logfile.txt"));
+            attach_file = new File((work_dir + "/logfile.txt"));
             fileExists = attach_file.isFile();
 
             if (fileExists) {
@@ -864,7 +864,7 @@ public class FotoBot extends Application {
             m.addAttachment(str);
 
             if (fb.attach_log) {
-                m.addAttachment(getApplicationContext().getFilesDir().toString() + "/logfile.txt");
+                m.addAttachment(work_dir + "/logfile.txt");
             }
             fbpause(h, process_delay);
 
@@ -1159,6 +1159,21 @@ public class FotoBot extends Application {
 
     }
 
+
+    public void work_dir_init () {
+
+        work_dir = getApplicationContext().getFilesDir().toString();
+
+        File sms_file = null;
+
+        sms_file = new File((work_dir + "/sms.txt"));
+
+        if (sms_file.isFile()) {
+
+            sms_file.delete();
+            Log.d(LOG_TAG, "SMS file has been deleted");
+        }
+    }
 
 }
 

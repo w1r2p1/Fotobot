@@ -821,10 +821,15 @@ public class Tab_Main_Activity extends Activity {
                 editor.putInt("Log_Font_Size", Integer.parseInt(Log_Font_Size.getText().toString()));
                 editor.putInt("Log_Length", Integer.parseInt(editText_fbloglength.getText().toString()));
                 editor.putInt("FLog_Length", Integer.parseInt(editText_fbfloglength.getText().toString()));
-                editor.putInt("Work_Dir", Integer.parseInt(editText_Work_Dir.getText().toString()));
+                editor.putString("Work_Dir", editText_Work_Dir.getText().toString());
 
 // Save the changes in SharedPreferences
                 editor.commit();
+
+//                fb.SendMessage("Default work dir: " + getApplicationContext().getFilesDir().toString());
+
+                clearLog();
+
             }
         });
 
@@ -931,4 +936,15 @@ public class Tab_Main_Activity extends Activity {
         super.onRestoreInstanceState(savedInstanceState);
         Log.d(LOG_TAG, "Tab1: onRestoreInstanceState");
     }
+
+    public void clearLog(){
+        try {
+            Process process = new ProcessBuilder()
+                    .command("logcat", "-c")
+                    .redirectErrorStream(true)
+                    .start();
+        } catch (IOException e) {
+        }
+    }
+
 }

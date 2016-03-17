@@ -48,11 +48,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.logging.FileHandler;
 import java.util.logging.Formatter;
-import java.util.logging.Level;
 import java.util.logging.LogRecord;
-import java.util.logging.Logger;
 
 public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
@@ -219,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             bmp = BitmapFactory.decodeByteArray(data, 0, data.length, options);
 
             FileOutputStream fOut = null;
-            File file = new File(getFilesDir(), fb.Image_Name);
+            File file = new File(fb.work_dir + "/" + fb.Image_Name);
 
             try {
                 file.createNewFile();
@@ -262,7 +259,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             bmp = null;
 
             File attach_file;
-            attach_file = new File(fb.Image_Name_Full_Path);
+            attach_file = new File(fb.work_dir + "/" + fb.Image_Name);
 
             boolean fileExists = attach_file.isFile();
 
@@ -332,21 +329,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
-        fb.work_dir = getApplicationContext().getFilesDir().toString();
+        fb.LoadSettings();
 
-        File sms_file = null;
+     /*   File log_file = null;
 
-        sms_file = new File((getApplicationContext().getFilesDir().toString() + "/sms.txt"));
-
-        if (sms_file.isFile()) {
-
-            sms_file.delete();
-            Log.d(LOG_TAG, "SMS file has been deleted");
-        }
-
-        File log_file = null;
-
-        log_file = new File((getApplicationContext().getFilesDir().toString() + "/logfile.txt"));
+        log_file = new File((fb.work_dir + "/logfile.txt"));
 
         if (log_file.isFile()) {
 
@@ -354,7 +341,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             Log.d(LOG_TAG, "logcat file has been deleted");
         }
 
-
+*/
 
             if (savedInstanceState == null)   // приложение запущено впервые
         {
@@ -494,32 +481,32 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         final FotoBot fb = (FotoBot) getApplicationContext();
         super.onDestroy();
         Log.d(LOG_TAG, "MainActivity: onDestroy");
-        fb.logger.fine("onDestroy");
-        fb.fh.flush();
+     //   fb.logger.fine("onDestroy");
+     //   fb.fh.flush();
     }
 
     protected void onPause() {
         final FotoBot fb = (FotoBot) getApplicationContext();
         super.onPause();
         Log.d(LOG_TAG, "MainActivity: onPause");
-        fb.logger.fine("onPause");
-        fb.fh.flush();
+     //   fb.logger.fine("onPause");
+     //   fb.fh.flush();
     }
 
     protected void onRestart() {
         final FotoBot fb = (FotoBot) getApplicationContext();
         super.onRestart();
         Log.d(LOG_TAG, "MainActivity: onRestart");
-        fb.logger.fine("onRestart");
-        fb.fh.flush();
+     //   fb.logger.fine("onRestart");
+     //   fb.fh.flush();
     }
 
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         final FotoBot fb = (FotoBot) getApplicationContext();
         super.onRestoreInstanceState(savedInstanceState);
         Log.d(LOG_TAG, "MainActivity: onRestoreInstanceState");
-        fb.logger.fine("onRestoreInstanceState");
-        fb.fh.flush();
+     //   fb.logger.fine("onRestoreInstanceState");
+     //   fb.fh.flush();
     }
 
     protected void onResume(SurfaceHolder holder) {
@@ -608,13 +595,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             e.printStackTrace();
         }
 
-        if (!fb.init_logger) {
+    /*    if (!fb.init_logger) {
 
             Log.d(LOG_TAG, "fb.init_logger");
 
             fb.logger = Logger.getLogger(FotoBot.class.getName());
 
-            fb.logpath = getFilesDir().toString() + "/";
+            fb.logpath = fb.work_dir + "/";
 
             File file = new File(fb.logpath + "fblog.txt");
 
@@ -649,7 +636,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             Log.d(LOG_TAG, "Logger has been initialised.");
             fb.init_logger = true;
         }
-
+*/
     }
 
     protected void onStop() {
@@ -710,7 +697,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         fb.LoadSettings();
 
-        if (!fb.init_logger) {
+        fb.work_dir_init();
+
+     /*   if (!fb.init_logger) {
 
             Log.d(LOG_TAG, "fb.init_logger");
 
@@ -728,7 +717,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             fb.init_logger = true;
         }
-
+*/
         switch (v.getId()) {
             case R.id.play:
                 findViewById(R.id.play).setEnabled(false);
@@ -771,9 +760,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                         for (int i = 1; i <= 1000000000; i++) {
 
+                            fb.LoadSettings();
+
                             File log_file = null;
 
-                            log_file = new File((getApplicationContext().getFilesDir().toString() + "/logfile.txt"));
+                            log_file = new File((fb.work_dir + "/logfile.txt"));
 
                             if (log_file.isFile()) {
 
@@ -804,7 +795,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             DateFormat df = new SimpleDateFormat("MM-dd-yy_HH-mm-ss-SSS");
                             fb.Image_Name = df.format(new Date()) + ".jpg";
-                            fb.Image_Name_Full_Path = getFilesDir().toString() + "/" + fb.Image_Name;
+                            fb.Image_Name_Full_Path = fb.work_dir + "/" + fb.Image_Name;
 
                             fb.LoadSettings();
 
@@ -1026,11 +1017,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         fb.SendMessage("Запрос на остановку Fotobot'а отправлен, дождитесь корректного завершения и соответствующей надписи на экране");
 
-        if (fb.init_logger) {
+      /*  if (fb.init_logger) {
             fb.fh.flush();
             fb.fh.close();
             fb.init_logger = false;
         }
+        */
     }
 
     @Override
@@ -1073,11 +1065,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     public void surfaceDestroyed(SurfaceHolder holder) {
         releaseCamera();
         final FotoBot fb = (FotoBot) getApplicationContext();
-        if (fb.init_logger) {
+       /* if (fb.init_logger) {
             fb.fh.flush();
             fb.fh.close();
             fb.init_logger = false;
         }
+        */
     }
 
     private void releaseCamera() {
@@ -1184,7 +1177,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         BufferedReader fileReader = null;
         try {
-            fileReader = new BufferedReader(new FileReader(getFilesDir().toString() + "/fblog.txt"));
+            fileReader = new BufferedReader(new FileReader(fb.work_dir + "/fblog.txt"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -1231,7 +1224,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         String cmd = null;
 
         try {
-            logfile = new File(getFilesDir().toString() + "/logfile.txt");
+            logfile = new File(fb.work_dir + "/logfile.txt");
             logfile.createNewFile();
             if (Build.VERSION.SDK_INT <= 12) {
                 cmd = "logcat -v brief -d -f " + logfile.getAbsolutePath() + " Logs:* FotoBot:* *:S";
@@ -1255,7 +1248,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         try {
             //  fileReader = new BufferedReader(new FileReader(getFilesDir().toString() + "/fblog.txt"));
-            fileReader = new BufferedReader(new FileReader(getFilesDir().toString() + "/logfile.txt"));
+            fileReader = new BufferedReader(new FileReader(fb.work_dir + "/logfile.txt"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -1289,9 +1282,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     public void logcat(View v) {
 
-        File logfile = new File(getFilesDir().toString() + "/logfile.txt");
-
         final FotoBot fb = (FotoBot) getApplicationContext();
+
+        File logfile = new File(fb.work_dir + "/logfile.txt");
 
         if (logcat2file()) {
             // fb.SendMessage("Заполнили файл данными из logcat");
