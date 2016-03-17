@@ -15,6 +15,7 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -50,6 +51,9 @@ public class Tab_Network_Activity extends Activity {
     EditText editText_Check_Web_Page;
     EditText editText_Network_Up_Delay;
     Button btn, btn_mp;
+    Spinner spinner_ppm;
+    ArrayAdapter<String> spinnerArrayAdapter1, spinnerArrayAdapter_Hardware;
+    ArrayList<String> spinnerArray_ppm;
     String[] connect_methods = {"Wi-Fi", "Mobile Data", "Both"};
     private CheckBox check_box_flash;
     private EditText edit_text_jpeg_compression;
@@ -694,6 +698,110 @@ public class Tab_Network_Activity extends Activity {
 
 // ------------------------------------------------------------------------------------------------
 
+// Network Status
+
+// Контейнер для метода
+        RelativeLayout linLayout_Net_Stat = new RelativeLayout(this);
+        linLayout_Net_Stat.setBackgroundColor(Color.rgb(192,192,192));
+        lpView_m1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        lpView_m2 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+
+// Контейнер для пояснение
+        LinearLayout linLayout_Net_Stat_notes = new LinearLayout(this);
+        linLayout_Net_Stat_notes.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_Net_Stat_notes.setBackgroundColor(Color.rgb(192,192,192));
+
+// Название
+        TextView tv_Net_Stat = new TextView(this);
+        tv_Net_Stat.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Net_Stat.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Net_Stat.setTextColor(Color.BLACK);
+        tv_Net_Stat.setText(getResources().getString(R.string.photo_processing_method));
+        tv_Net_Stat.setTypeface(Typeface.DEFAULT_BOLD);
+
+        lpView_m1.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Net_Stat.getId());
+        lpView_m1.width = (screenWidth - padding) / 100 * 60;
+        tv_Net_Stat.setLayoutParams(lpView_m1);
+        linLayout_Net_Stat.addView(tv_Net_Stat);
+
+// Список
+        spinnerArray_ppm = new ArrayList<String>();
+        spinnerArray_ppm.add("Online");
+        spinnerArray_ppm.add("Offline");
+
+        spinner_ppm = new Spinner(this);
+        ArrayAdapter<String> spinnerArrayAdapter_ppm = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray_ppm);
+        spinner_ppm.setAdapter(spinnerArrayAdapter_ppm);
+        spinner_ppm.setSelection(getIndex(spinner_ppm, fb.Photo_Post_Processing_Method));
+        spinner_ppm.setMinimumWidth((screenWidth - padding) / 100 * 50);
+        spinner_ppm.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            public void onItemSelected(AdapterView<?> adapterView,
+                                       View view, int i, long l) {
+
+                if (spinnerArray_ppm.get(i) == "Online") {
+
+                        linLayout_Channels.setVisibility(View.VISIBLE);
+                        linLayout_Channels_note.setVisibility(View.VISIBLE);
+
+                        linLayout_Connection_Method.setVisibility(View.VISIBLE);
+                        linLayout_Connection_Method_note.setVisibility(View.VISIBLE);
+
+                    linLayout_Fotobot_Email.setVisibility(View.VISIBLE);
+                    linLayout_Fotobot_Email_note.setVisibility(View.VISIBLE);
+
+
+                    linLayout_Fotobot_Password.setVisibility(View.VISIBLE);
+
+
+                    linLayout_SMTP_Host.setVisibility(View.VISIBLE);
+                    linLayout_SMTP_Host_note.setVisibility(View.VISIBLE);
+
+
+                    linLayout_SMTP_Port.setVisibility(View.VISIBLE);
+                    linLayout_SMTP_Port_note.setVisibility(View.VISIBLE);
+
+                    linLayout_Fotobot_Recipient.setVisibility(View.VISIBLE);
+
+
+
+
+
+
+
+
+                } else {
+
+                }
+
+            }
+
+            // If no option selected
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+
+        });
+
+        lpView_m2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, spinner_ppm.getId());
+        lpView_m2.width = (screenWidth - padding) / 100 * 40;
+        spinner_ppm.setLayoutParams(lpView_m2);
+        linLayout_Net_Stat.addView(spinner_ppm);
+
+// Заметка для метода
+        TextView tv_Net_Stat_note = new TextView(this);
+        tv_Net_Stat_note.setTypeface(null, Typeface.NORMAL);
+        tv_Net_Stat_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_Net_Stat_note.setTextColor(Color.BLACK);
+        tv_Net_Stat_note.setText(getResources().getString(R.string.photo_processing_method_dscription));
+        tv_Net_Stat_note.setLayoutParams(lpView);
+        tv_Net_Stat_note.setPadding(5, 9, 5, 9);
+        linLayout_Net_Stat_notes.addView(tv_Net_Stat_note);
+
+
+// ------------------------------------------------------------------------------------------------
+
 // Buttons
 
 // Container
@@ -787,6 +895,8 @@ public class Tab_Network_Activity extends Activity {
 
         linLayout_Buttons.addView(btn, lpViewbutton1);
         linLayout_Buttons.addView(btn_mp, lpViewbutton2);
+
+        FullFrame.addView(linLayout_Net_Stat);
 
         if (Build.VERSION.SDK_INT <= 21) {
 
