@@ -1,6 +1,7 @@
 package com.droid.app.fotobot;
 
 import android.app.Activity;
+import android.app.backup.FullBackupDataOutput;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -14,16 +15,20 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 public class Tab_Main_Activity extends Activity {
@@ -46,6 +51,11 @@ public class Tab_Main_Activity extends Activity {
     EditText editText_fbfloglength;
     EditText Wake_Up;
     EditText editText_Work_Dir;
+    Spinner spinner_ppm;
+    ArrayAdapter<String> spinnerArrayAdapter1, spinnerArrayAdapter_Hardware;
+    ArrayList<String> spinnerArray_ppm;
+    RelativeLayout linLayout_Work_Dir;
+    LinearLayout linLayout_Work_Dir_note;
     final String LOG_TAG = "Logs";
 
     Logger fblogger = Logger.getLogger(FotoBot.class.getName());
@@ -213,17 +223,94 @@ public class Tab_Main_Activity extends Activity {
         linLayout1_divider.addView(line);
 
 // ------------------------------------------------------------------------------------------------
+
+// Storage
+
+// Контейнер для метода
+        RelativeLayout linLayout_Storage = new RelativeLayout(this);
+        linLayout_Storage.setBackgroundColor(Color.rgb(192,192,192));
+        RelativeLayout.LayoutParams lpView_m1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams lpView_m2 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+
+// Контейнер для пояснение
+        LinearLayout linLayout_Storage_notes = new LinearLayout(this);
+        linLayout_Storage_notes.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_Storage_notes.setBackgroundColor(Color.rgb(192,192,192));
+
+// Название
+        TextView tv_Storage = new TextView(this);
+        tv_Storage.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Storage.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Storage.setTextColor(Color.BLACK);
+        tv_Storage.setText(getResources().getString(R.string.photo_processing_method));
+        tv_Storage.setTypeface(Typeface.DEFAULT_BOLD);
+
+        lpView_m1.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Storage.getId());
+        lpView_m1.width = (screenWidth - padding) / 100 * 60;
+        tv_Storage.setLayoutParams(lpView_m1);
+        linLayout_Storage.addView(tv_Storage);
+
+// Список
+        spinnerArray_ppm = new ArrayList<String>();
+        spinnerArray_ppm.add("Internal");
+        spinnerArray_ppm.add("External");
+
+        spinner_ppm = new Spinner(this);
+        ArrayAdapter<String> spinnerArrayAdapter_ppm = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray_ppm);
+        spinner_ppm.setAdapter(spinnerArrayAdapter_ppm);
+        spinner_ppm.setSelection(getIndex(spinner_ppm, fb.Photo_Post_Processing_Method));
+        spinner_ppm.setMinimumWidth((screenWidth - padding) / 100 * 50);
+        spinner_ppm.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            public void onItemSelected(AdapterView<?> adapterView,
+                                       View view, int i, long l) {
+
+                if (spinnerArray_ppm.get(i) == "Internal") {
+                    linLayout_Work_Dir.setVisibility(View.GONE);
+                    linLayout_Work_Dir_note.setVisibility(View.GONE);
+                } else {
+                    linLayout_Work_Dir.setVisibility(View.VISIBLE);
+                    linLayout_Work_Dir_note.setVisibility(View.VISIBLE);
+                }
+
+            }
+
+            // If no option selected
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+
+        });
+
+        lpView_m2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, spinner_ppm.getId());
+        lpView_m2.width = (screenWidth - padding) / 100 * 40;
+        spinner_ppm.setLayoutParams(lpView_m2);
+        linLayout_Storage.addView(spinner_ppm);
+
+// Заметка для метода
+        TextView tv_Storage_note = new TextView(this);
+        tv_Storage_note.setTypeface(null, Typeface.NORMAL);
+        tv_Storage_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_Storage_note.setTextColor(Color.BLACK);
+        tv_Storage_note.setText(getResources().getString(R.string.photo_processing_method_dscription));
+        tv_Storage_note.setLayoutParams(lpView);
+        tv_Storage_note.setPadding(5, 9, 5, 9);
+        linLayout_Storage_notes.addView(tv_Storage_note);
+
+
+// ------------------------------------------------------------------------------------------------
 // Work dir
 
 // work dir Container
-        RelativeLayout linLayout_Work_Dir = new RelativeLayout(this);
+        linLayout_Work_Dir = new RelativeLayout(this);
         RelativeLayout.LayoutParams lpView_Work_Dir = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         RelativeLayout.LayoutParams lpView_Work_Dir_m1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         linLayout_Work_Dir.setPadding(5, 9, 5, 9);
         linLayout_Work_Dir.setBackgroundColor(Color.rgb(192, 192, 192));
 
 // Пояснение контейнер
-        LinearLayout linLayout_Work_Dir_note = new LinearLayout(this);
+        linLayout_Work_Dir_note = new LinearLayout(this);
         linLayout_Work_Dir_note.setOrientation(LinearLayout.HORIZONTAL);
         linLayout_Work_Dir_note.setPadding(5, 9, 5, 9);
         linLayout_Work_Dir_note.setBackgroundColor(Color.rgb(192, 192, 192));
@@ -271,8 +358,8 @@ public class Tab_Main_Activity extends Activity {
         RelativeLayout linLayout_process_delay = new RelativeLayout(this);
 //        linLayout_process_delay.setOrientation(LinearLayout.HORIZONTAL);
         linLayout_process_delay.setBackgroundColor(Color.rgb(192,192,192));
-        RelativeLayout.LayoutParams lpView_m1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        RelativeLayout.LayoutParams lpView_m2 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        lpView_m1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        lpView_m2 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
       //  RelativeLayout.LayoutParams lpView = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 
 // 2. Интервал между процессами (пояснение контейнер)
@@ -874,6 +961,7 @@ public class Tab_Main_Activity extends Activity {
 // Расставляем контейнеры (порядок важен)
         FullFrame.addView(linLayout_Fotobot_Camera_Name);
         FullFrame.addView(linLayout_Fotobot_Camera_Name_note);
+        FullFrame.addView(linLayout_Storage);
         FullFrame.addView(linLayout_Work_Dir);
         FullFrame.addView(linLayout_Work_Dir_note);
     //    FullFrame.addView(linLayout_Fotobot_Camera_Name_divider);
@@ -946,5 +1034,16 @@ public class Tab_Main_Activity extends Activity {
         } catch (IOException e) {
         }
     }
+    private int getIndex(Spinner spinner, String myString)
+    {
+        int index = 0;
 
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
 }
