@@ -731,7 +731,7 @@ public class Tab_Network_Activity extends Activity {
         tv_Net_Stat.setTypeface(Typeface.DEFAULT_BOLD);
         tv_Net_Stat.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Net_Stat.setTextColor(Color.BLACK);
-        tv_Net_Stat.setText(getResources().getString(R.string.photo_processing_method));
+        tv_Net_Stat.setText(getResources().getString(R.string.network));
         tv_Net_Stat.setTypeface(Typeface.DEFAULT_BOLD);
 
         lpView_m1.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Net_Stat.getId());
@@ -803,7 +803,7 @@ public class Tab_Network_Activity extends Activity {
         tv_Net_Stat_note.setTypeface(null, Typeface.NORMAL);
         tv_Net_Stat_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Net_Stat_note.setTextColor(Color.BLACK);
-        tv_Net_Stat_note.setText(getResources().getString(R.string.photo_processing_method_dscription));
+        tv_Net_Stat_note.setText(getResources().getString(R.string.network_description));
         tv_Net_Stat_note.setLayoutParams(lpView);
         tv_Net_Stat_note.setPadding(5, 9, 5, 9);
         linLayout_Net_Stat_notes.addView(tv_Net_Stat_note);

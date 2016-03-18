@@ -241,7 +241,7 @@ public class Tab_Main_Activity extends Activity {
         tv_Storage.setTypeface(Typeface.DEFAULT_BOLD);
         tv_Storage.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Storage.setTextColor(Color.BLACK);
-        tv_Storage.setText(getResources().getString(R.string.photo_processing_method));
+        tv_Storage.setText(getResources().getString(R.string.storage));
         tv_Storage.setTypeface(Typeface.DEFAULT_BOLD);
 
         lpView_m1.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Storage.getId());
@@ -292,7 +292,7 @@ public class Tab_Main_Activity extends Activity {
         tv_Storage_note.setTypeface(null, Typeface.NORMAL);
         tv_Storage_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Storage_note.setTextColor(Color.BLACK);
-        tv_Storage_note.setText(getResources().getString(R.string.photo_processing_method_dscription));
+        tv_Storage_note.setText(getResources().getString(R.string.storage_description));
         tv_Storage_note.setLayoutParams(lpView);
         tv_Storage_note.setPadding(5, 9, 5, 9);
         linLayout_Storage_notes.addView(tv_Storage_note);

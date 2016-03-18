@@ -272,6 +272,8 @@ public class FotoBot extends Application {
 
     public int log_line_number = 150;
 
+    public Boolean network = true;
+
     /**
      * Строка на экран
      */

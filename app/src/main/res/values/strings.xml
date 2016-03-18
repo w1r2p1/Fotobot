@@ -14,8 +14,13 @@
     <string name="Camera_Name">Camera Name</string>
     <string name="Camera_Name_description">Give name for you device</string>
 
+    <string name="network">Network status</string>
+    <string name="network_description">Select network mode: Online(photos will be sent to email), Offline (photos will be saved in folder)</string>
+
     <string name="Work_Dir">Working Folder</string>
     <string name="Work_Dir_description">Path to folder for photos</string>
+
+
 
     <string name="fbloglength">Log Length in main screen (bytes)</string>
     <string name="fbloglength_description">Define the length of the log</string>
@@ -69,6 +74,7 @@
     <string name="attach_log">Attach Log to email</string>
 
     <string name="storage">Storage type</string>
+    <string name="storage_description">Select memory type for photo</string>
 
     <string name="wake_up_description">Need to keep Fotobot in memory (to avoid kicking by Android)</string>
     <string name="settings_font">Font size for settings window</string>
