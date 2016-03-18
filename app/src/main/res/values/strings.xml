@@ -14,8 +14,8 @@
     <string name="Camera_Name">Camera Name</string>
     <string name="Camera_Name_description">Give name for you device</string>
 
-    <string name="network">Network status</string>
-    <string name="network_description">Select network mode: Online(photos will be sent to email), Offline (photos will be saved in folder)</string>
+    <string name="network">Network</string>
+    <string name="network_description">Select network mode: on(photos will be sent to email), off (photos will be saved in folder)</string>
 
     <string name="Work_Dir">Working Folder</string>
     <string name="Work_Dir_description">Path to folder for photos</string>

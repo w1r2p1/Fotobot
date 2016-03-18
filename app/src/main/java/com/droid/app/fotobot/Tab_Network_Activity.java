@@ -747,14 +747,18 @@ public class Tab_Network_Activity extends Activity {
         spinner_ppm = new Spinner(this);
         ArrayAdapter<String> spinnerArrayAdapter_ppm = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray_ppm);
         spinner_ppm.setAdapter(spinnerArrayAdapter_ppm);
-        spinner_ppm.setSelection(getIndex(spinner_ppm, fb.Photo_Post_Processing_Method));
+        if (fb.network) {
+            spinner_ppm.setSelection(getIndex(spinner_ppm, "on"));
+        } else {
+            spinner_ppm.setSelection(getIndex(spinner_ppm, "off"));
+        }
         spinner_ppm.setMinimumWidth((screenWidth - padding) / 100 * 50);
         spinner_ppm.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             public void onItemSelected(AdapterView<?> adapterView,
                                        View view, int i, long l) {
 
-                if (spinnerArray_ppm.get(i) == "Online") {
+                if (spinnerArray_ppm.get(i) == "on") {
                     linLayout_Channels.setVisibility(View.VISIBLE);
                     linLayout_Channels_note.setVisibility(View.VISIBLE);
                     linLayout_Connection_Method.setVisibility(View.VISIBLE);
@@ -864,6 +868,14 @@ public class Tab_Network_Activity extends Activity {
                 editor.putString("EMail_Recepient", editText_Fotobot_Recipient.getText().toString());
                 editor.putString("Check_Web_Page", editText_Check_Web_Page.getText().toString());
                 editor.putInt("Network_Up_Delay", Integer.parseInt(editText_Network_Up_Delay.getText().toString()));
+
+                if (spinner_Connection_Method.getSelectedItem().toString() == "on") {
+                    editor.putBoolean("Network", true);
+                } else {
+                    editor.putBoolean("Network", false);
+                }
+
+
 // Save the changes in SharedPreferences
                 editor.commit(); // commit changes
 

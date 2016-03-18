@@ -257,7 +257,7 @@ public class Tab_Main_Activity extends Activity {
         spinner_ppm = new Spinner(this);
         ArrayAdapter<String> spinnerArrayAdapter_ppm = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray_ppm);
         spinner_ppm.setAdapter(spinnerArrayAdapter_ppm);
-        spinner_ppm.setSelection(getIndex(spinner_ppm, fb.Photo_Post_Processing_Method));
+        spinner_ppm.setSelection(getIndex(spinner_ppm, fb.storage_type));
         spinner_ppm.setMinimumWidth((screenWidth - padding) / 100 * 50);
         spinner_ppm.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -908,6 +908,7 @@ public class Tab_Main_Activity extends Activity {
                 editor.putInt("Log_Length", Integer.parseInt(editText_fbloglength.getText().toString()));
                 editor.putInt("FLog_Length", Integer.parseInt(editText_fbfloglength.getText().toString()));
                 editor.putString("Work_Dir", editText_Work_Dir.getText().toString());
+                editor.putString("Storage_Type", spinner_ppm.getSelectedItem().toString());
 
 // Save the changes in SharedPreferences
                 editor.commit();

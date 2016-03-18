@@ -199,6 +199,7 @@ public class FotoBot extends Application {
     public Boolean sms_update_db = false;
     public Boolean sms_check_file = false;
 
+    public String storage_type;
     public String work_dir;
 
     /**
@@ -963,6 +964,11 @@ public class FotoBot extends Application {
         attach_log = pref.getBoolean("Attach_Log", false);
 
         work_dir = pref.getString("Work_Dir", "/data/data/com.droid.app.fotobot/files");
+
+        storage_type = pref.getString("Storage_Type", "Internal");
+
+        network = pref.getBoolean("Network", true);
+
     }
 
     public void SaveSettings() {
@@ -993,6 +999,8 @@ public class FotoBot extends Application {
         editor.putBoolean("Use_Flash", Use_Flash);
         editor.putBoolean("Attach_Log", attach_log);
         editor.putString("Work_Dir", work_dir);
+        editor.putString("Storage_Type", storage_type);
+        editor.putBoolean("Network", network);
         editor.commit();
 
     }

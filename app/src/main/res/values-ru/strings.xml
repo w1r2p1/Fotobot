@@ -67,8 +67,8 @@
     <string name="pause_between_frames_description">Не используйте слишком малые значения этого параметра - это может
     привести к зависанию телефона. Для моделей телефона с Android 2 значения этого параметра меньше 30сек могут
     привести к зависанию телефона.</string>
-    <string name="network">Сетевой режим</string>
-    <string name="network_description">Online-фото будут высланы на почту, Offline-фото будут сохранены на телефоне</string>
+    <string name="network">Сеть</string>
+    <string name="network_description">on - фото будут высланы на почту, off - фото будут сохранены на телефоне</string>
     <string name="pause_between_processes">Интервал между процессами(сек)</string>
     <string name="pause_between_processes_description">Необходим для того, чтобы слабый процессор телефона успел обработать данные. Подбирается экспериментальным путем, примерно > 5 секунд.</string>
 
