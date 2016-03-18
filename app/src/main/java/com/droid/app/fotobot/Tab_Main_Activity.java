@@ -1,7 +1,6 @@
 package com.droid.app.fotobot;
 
 import android.app.Activity;
-import android.app.backup.FullBackupDataOutput;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -975,7 +974,7 @@ public class Tab_Main_Activity extends Activity {
         FullFrame.addView(linLayout_fbloglength);
         FullFrame.addView(linLayout_fbloglength_note);
         FullFrame.addView(linLayout_Attach_Log);
-        FullFrame.addView(linLayout_fbfloglength);
+//        FullFrame.addView(linLayout_fbfloglength);
      //   FullFrame.addView(linLayout_fbfloglength_note);
      //   FullFrame.addView(linLayout_Clean_Log);
      //   FullFrame.addView(linLayout_Clean_Log_m);

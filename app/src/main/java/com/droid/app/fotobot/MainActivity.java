@@ -760,6 +760,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                         for (int i = 1; i <= 1000000000; i++) {
 
+                            clearLog();
+
                             fb.LoadSettings();
 
                             File log_file = null;
@@ -1353,5 +1355,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         findViewById(R.id.stop).setEnabled(false);
 
     }
-
+    public void clearLog(){
+        try {
+            Process process = new ProcessBuilder()
+                    .command("logcat", "-c")
+                    .redirectErrorStream(true)
+                    .start();
+        } catch (IOException e) {
+        }
+    }
 }
