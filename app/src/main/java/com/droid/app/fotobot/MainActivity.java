@@ -263,11 +263,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             boolean fileExists = attach_file.isFile();
 
-            if (fileExists) {
+           /* if (fileExists) {
                 fb.SendMessage(h, attach_file.length() / 1000 + "Kb");
             } else {
                 fb.SendMessage(h, "Image doesn't exist.");
-            }
+            } */
 
             //   wakeLock.release();
 
@@ -383,12 +383,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 statusBarHeight = MEDIUM_DPI_STATUS_BAR_HEIGHT;
         }
 
-        Log.d(LOG_TAG, "screenHeight: " + screenHeight);
-        Log.d(LOG_TAG, "statusBarHeight: " + statusBarHeight);
+    //    Log.d(LOG_TAG, "screenHeight: " + screenHeight);
+     //   Log.d(LOG_TAG, "statusBarHeight: " + statusBarHeight);
 
         screenHeight = screenHeight - ((int) pxFromDp(getApplicationContext(), statusBarHeight));
-        Log.d(LOG_TAG, "pxFromDp: " + (int) pxFromDp(getApplicationContext(), statusBarHeight));
-        Log.d(LOG_TAG, "screenHeight: " + screenHeight);
+  //      Log.d(LOG_TAG, "pxFromDp: " + (int) pxFromDp(getApplicationContext(), statusBarHeight));
+    //    Log.d(LOG_TAG, "screenHeight: " + screenHeight);
 
         fb.Working_Area_Height = screenHeight;
 
@@ -751,16 +751,26 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                         fb.Camera_Properties = mCamera.getParameters().flatten();
 
 
-                        if ( fb.network ) {
+                      /*  if ( fb.network ) {
                             if (fb.Network_Connection_Method.contains("Method 1")) {
                                 if (android.os.Build.VERSION.SDK_INT <= 21) {
 
                                     fb.MakeInternetConnection();
                                 }
                             }
-                        }
+                        } */
 
                         for (int i = 1; i <= 1000000000; i++) {
+
+                            if ( fb.network && !(fb.Method1_activated) ) {
+                                if (fb.Network_Connection_Method.contains("Method 1")) {
+                                    if (android.os.Build.VERSION.SDK_INT <= 21) {
+
+                                        fb.MakeInternetConnection();
+                                    }
+                                    fb.Method1_activated = true;
+                                }
+                            }
 
                         //    clearLog();
 
@@ -888,14 +898,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             fb.fbpause(h, 3);
 
-                            if (fb.Photo_Post_Processing_Method.contains("Software")) {
+/*                           if (fb.Photo_Post_Processing_Method.contains("Software")) {
                                 fb.SendMessage(Integer.parseInt(width) + "x" + Integer.parseInt(height));
                             } else {
                                 fb.SendMessage(fb.Image_Scale);
                             }
 
                             fb.SendMessage(getResources().getString(R.string.free_memory) + ": " + fb.freeMemory);
-
+*/
                             fb.fbpause(h, fb.process_delay);
 
                             if (fb.Use_Flash) {

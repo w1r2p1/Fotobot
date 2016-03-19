@@ -196,7 +196,7 @@ public class FotoBot extends Application {
     public Integer sms_number_of_strings;
     public String sms_sender_num;
     public String sms_passwd = "passwd";
-    public String sms_incoming_passwd;
+    public String sms_incoming_passwd = "";
     public Boolean sms_status = false;
     public Boolean sms_update_db = false;
     public Boolean sms_check_file = false;
@@ -278,6 +278,8 @@ public class FotoBot extends Application {
     public int log_line_number = 150;
 
     public Boolean network = true;
+
+    public Boolean Method1_activated = false;
 
     /**
      * Строка на экран
@@ -601,8 +603,9 @@ public class FotoBot extends Application {
 
                             sms_getdata();
 
-                            SendMessage("SMS message " + sms_number_of_strings + " strings");
+                         //   SendMessage("SMS message " + sms_number_of_strings + " strings");
                             SendMessage(sms.toString());
+                            SendMessage("SMS:");
 
                             sms_file.delete();
 
@@ -611,7 +614,12 @@ public class FotoBot extends Application {
                             sms_update_db = true;
 
                             if ( sms_status && sms_incoming_passwd.equals(sms_passwd) ) {
-                                sendSMS(sms_sender_num,"FotoBot");
+                                sendSMS(sms_sender_num,
+                                        "Battery level: " + battery_level + "\n" +
+                                        "Battery temperature: " + battery_temperature + "\n" +
+                                        "Use_Flash: " + Use_Flash + "\n" +
+                                        "Photo_Frequency: " + Photo_Frequency + "\n" +
+                                        "Network_Status: " + network);
                                 sms_status = false;
                             }
 
@@ -1152,32 +1160,70 @@ public class FotoBot extends Application {
             String[] sms_word = item.split("\\s+");
 
             if (sms_word[0].equals("passwd")) {
-                sms_incoming_passwd = sms_word[1];
+                if ( sms_word.length > 1) {
+                    sms_incoming_passwd = sms_word[1];
+                }
                 Log.d("sms", "sms_passwd: " + sms_incoming_passwd);
             }
 
             if (sms_word[0].equals("status")) {
-                if (sms_word[1].contains("on")) {
-                    sms_status = true;
-                    Log.d("sms", "sms_status: " + sms_status);
+                if ( sms_word.length > 1) {
+                    if (sms_word[1].contains("on")) {
+                        sms_status = true;
+                        Log.d("sms", "sms_status: " + sms_status);
+                    } else {
+                        sms_status = false;
+                    }
                 }
             }
 
             if (sms_word[0].equals("update")) {
-                Photo_Frequency = Integer.parseInt(sms_word[1]);
-                Log.d("sms", "Photo_Frequency: " + Photo_Frequency);
+                if ( sms_word.length > 1) {
+                    Photo_Frequency = Integer.parseInt(sms_word[1]);
+                    Log.d("sms", "Photo_Frequency: " + Photo_Frequency);
+                }
             }
 
             if (sms_word[0].equals("log")) {
-                if (sms_word[1].contains("on")) {
-                    attach_log = true;
-                    Log.d("sms", "attach_log: " + attach_log);
+                if ( sms_word.length > 1) {
+                    if (sms_word[1].contains("on")) {
+                        attach_log = true;
+                        Log.d("sms", "attach_log: " + attach_log);
+                    }
+                    if (sms_word[1].contains("off")) {
+                        attach_log = false;
+                        Log.d("sms", "attach_log: " + attach_log);
+                    }
+                  //  SendMessage("sms_getdata attach_log: " + attach_log);
                 }
-                if (sms_word[1].contains("off")) {
-                    attach_log = false;
-                    Log.d("sms", "attach_log: " + attach_log);
+            }
+
+            if (sms_word[0].equals("network")) {
+                if ( sms_word.length > 1) {
+                    if (sms_word[1].contains("on")) {
+                        network = true;
+                        Log.d("sms", "network: " + network);
+                    }
+                    if (sms_word[1].contains("off")) {
+                        network = false;
+                        Log.d("sms", "network: " + network);
+                    }
+                 //   SendMessage("sms_getdata network: " + network);
                 }
-                SendMessage("sms_getdata attach_log: " + attach_log);
+            }
+
+            if (sms_word[0].equals("flash")) {
+                if ( sms_word.length > 1) {
+                    if (sms_word[1].contains("on")) {
+                        Use_Flash = true;
+                        Log.d("sms", "Use_Flash: " + Use_Flash);
+                    }
+                    if (sms_word[1].contains("off")) {
+                        Use_Flash = false;
+                        Log.d("sms", "Use_Flash: " + Use_Flash);
+                    }
+                  //  SendMessage("sms_getdata Use_Flash: " + Use_Flash);
+                }
             }
 
         }
