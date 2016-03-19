@@ -23,7 +23,8 @@
     <string name="Work_Dir">Working Folder</string>
     <string name="Work_Dir_description">Path to folder for photos</string>
 
-
+    <string name="Delete_Foto">Delete Foto</string>
+    <string name="Delete_Foto_description">Check this box to delete foto after sending to email</string>
 
     <string name="fbloglength">Log Length in main screen (bytes)</string>
     <string name="fbloglength_description">Define the length of the log</string>

@@ -994,13 +994,17 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                            // }
                             fb.frame_delay = false;
 
-                            File imgfile = new File(fb.Image_Name_Full_Path);
+                            if ( fb.delete_foto ) {
 
-                            if (imgfile.delete()) {
+                                File imgfile = new File(fb.Image_Name_Full_Path);
 
-                            } else {
-                                fb.SendMessage("Проблема с удалением фото: " + fb.Image_Name);
-                                fb.SendMessage("Попробуйте поменять разрешение для фото в настройках");
+                                if (imgfile.delete()) {
+
+                                } else {
+                                    fb.SendMessage("Проблема с удалением фото: " + fb.Image_Name);
+                                    fb.SendMessage("Попробуйте поменять разрешение для фото в настройках");
+
+                                }
 
                             }
 

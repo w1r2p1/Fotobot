@@ -42,6 +42,7 @@ public class Tab_Main_Activity extends Activity {
     CheckBox checkBox_Clean_SystemLog;
     CheckBox checkBox_Clean_Text;
     CheckBox checkBox_Attach_Log;
+    CheckBox checkBox_Delete_Foto;
     EditText Photo_Frequency;
     EditText Config_Font_Size;
     EditText Log_Font_Size;
@@ -934,6 +935,60 @@ public class Tab_Main_Activity extends Activity {
         checkBox_Attach_Log.setLayoutParams(lpView_Attach_Log_m);
         linLayout_Attach_Log.addView(checkBox_Attach_Log);
 
+// ------------------------------------------------------------------------------------------------
+
+// Удалить фото после отправки на почту
+
+// Delete Foto Container
+        RelativeLayout linLayout_Delete_Foto = new RelativeLayout(this);
+        RelativeLayout.LayoutParams lpView_Delete_Foto = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams lpView_Delete_Foto_m = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams lpView_et_Delete_Foto = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        linLayout_Delete_Foto.setBackgroundColor(Color.rgb(192,192,192));
+
+// Delete Foto TextView
+        TextView tv_Delete_Foto = new TextView(this);
+        tv_Delete_Foto.setText(getResources().getString(R.string.Delete_Foto));
+        tv_Delete_Foto.setWidth((screenWidth - padding) / 100 * 90);
+        tv_Delete_Foto.setLayoutParams(lpView_Clean_Text);
+        tv_Delete_Foto.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Delete_Foto.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Delete_Foto.setTextColor(Color.BLACK);
+
+        lpView_Delete_Foto.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Delete_Foto.getId());
+        tv_Delete_Foto.setLayoutParams(lpView_Delete_Foto);
+        linLayout_Delete_Foto.addView(tv_Delete_Foto);
+
+// CheckBox
+        checkBox_Delete_Foto = new CheckBox(this);
+        checkBox_Delete_Foto.setChecked(fb.delete_foto);
+
+        lpView_Delete_Foto_m.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, checkBox_Delete_Foto.getId());
+        checkBox_Delete_Foto.setLayoutParams(lpView_Delete_Foto_m);
+        linLayout_Delete_Foto.addView(checkBox_Delete_Foto);
+
+// Second Container (Horizontal LinearLayout)
+        LinearLayout linLayout_Delete_Foto_m = new LinearLayout(this);
+        linLayout_Delete_Foto_m.setOrientation(LinearLayout.HORIZONTAL);
+        //   LinearLayout.LayoutParams lpView_Clean_Log_m = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        //   LinearLayout.LayoutParams lpViewbutton = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        linLayout_Delete_Foto_m.setGravity(Gravity.BOTTOM | Gravity.CENTER);
+
+
+// Заметка для метода
+        TextView tv_Delete_Foto_note = new TextView(this);
+        tv_Delete_Foto_note.setTypeface(null, Typeface.NORMAL);
+        tv_Delete_Foto_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_Delete_Foto_note.setTextColor(Color.BLACK);
+        tv_Delete_Foto_note.setText(getResources().getString(R.string.Delete_Foto_description));
+        // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
+        tv_Delete_Foto_note.setLayoutParams(lpView);
+        //   tv_Photo_Processing_Method_note.setTextColor(Color.GRAY);
+        tv_Delete_Foto_note.setPadding(5, 9, 5, 9);
+        linLayout_Delete_Foto_m.addView(tv_Delete_Foto_note);
+
+
 // Buttons
 
 // Container
@@ -999,6 +1054,18 @@ public class Tab_Main_Activity extends Activity {
                 } else {
                     fb.attach_log = false;
                     editor.putBoolean("Attach_Log", false);
+                }
+
+                if (checkBox_Delete_Foto.isChecked()) {
+
+                    fb.delete_foto = true;
+                    editor.putBoolean("Delete_Foto", true);
+
+                } else {
+
+                    fb.delete_foto = false;
+                    editor.putBoolean("Delete_Foto", false);
+
                 }
 
                 editor.putString("Camera_Name", editText_Fotobot_Camera_Name.getText().toString());
@@ -1067,6 +1134,8 @@ public class Tab_Main_Activity extends Activity {
         FullFrame.addView(linLayout_Storage);
         FullFrame.addView(linLayout_Work_Dir);
         FullFrame.addView(linLayout_Work_Dir_note);
+        FullFrame.addView(linLayout_Delete_Foto);
+        FullFrame.addView(linLayout_Delete_Foto_m);
     //    FullFrame.addView(linLayout_Fotobot_Camera_Name_divider);
         FullFrame.addView(linLayout1);
         FullFrame.addView(linLayout1_notes);

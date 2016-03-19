@@ -195,7 +195,7 @@ public class FotoBot extends Application {
 
     public Integer sms_number_of_strings;
     public String sms_sender_num;
-    public String sms_passwd;
+    public String sms_passwd = "passwd";
     public String sms_incoming_passwd;
     public Boolean sms_status = false;
     public Boolean sms_update_db = false;
@@ -203,6 +203,8 @@ public class FotoBot extends Application {
 
     public String storage_type;
     public String work_dir;
+
+    public Boolean delete_foto = false;
 
     /**
      * Время (сек) необходимое на поднятие сетевого интерфейса
@@ -973,6 +975,10 @@ public class FotoBot extends Application {
 
         sms_passwd = pref.getString("SMS_Password", "passwd");
 
+        delete_foto = pref.getBoolean("Delete_Foto", false);
+
+
+
     }
 
     public void SaveSettings() {
@@ -1006,6 +1012,7 @@ public class FotoBot extends Application {
         editor.putString("SMS_Password", sms_passwd);
         editor.putString("Storage_Type", storage_type);
         editor.putBoolean("Network", network);
+        editor.putBoolean("Delete_Foto", delete_foto);
         editor.commit();
 
     }
@@ -1171,8 +1178,10 @@ public class FotoBot extends Application {
         }
 
         if ( sms_incoming_passwd == sms_passwd ) {
+            SendMessage("Пароль верный, записываем настройки");
             SaveSettings();
         } else {
+            SendMessage("Пароль неверный");
             LoadSettings();
         }
 
