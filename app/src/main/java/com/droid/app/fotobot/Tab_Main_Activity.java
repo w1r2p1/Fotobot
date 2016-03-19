@@ -39,6 +39,7 @@ public class Tab_Main_Activity extends Activity {
     private int screenWidth, screenHeight;
     private int padding = 15;
     CheckBox checkBox_Clean_Log;
+    CheckBox checkBox_Clean_SystemLog;
     CheckBox checkBox_Clean_Text;
     CheckBox checkBox_Attach_Log;
     EditText Photo_Frequency;
@@ -582,12 +583,12 @@ public class Tab_Main_Activity extends Activity {
         TextView tv_Clean_Text = new TextView(this);
         tv_Clean_Text.setText(getResources().getString(R.string.clean_text));
         tv_Clean_Text.setWidth((screenWidth - padding) / 100 * 90);
-        tv_Clean_Text.setLayoutParams(lpView_Clean_Log);
+        tv_Clean_Text.setLayoutParams(lpView_Clean_Text);
         tv_Clean_Text.setTypeface(Typeface.DEFAULT_BOLD);
         tv_Clean_Text.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Clean_Text.setTextColor(Color.BLACK);
 
-        lpView_Clean_Text.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Clean_Log.getId());
+        lpView_Clean_Text.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Clean_Text.getId());
         tv_Clean_Text.setLayoutParams(lpView_Clean_Text);
         linLayout_Clean_Text.addView(tv_Clean_Text);
 
@@ -620,6 +621,58 @@ public class Tab_Main_Activity extends Activity {
         tv_Clean_Text_note.setPadding(5, 9, 5, 9);
         linLayout_Clean_Text_m.addView(tv_Clean_Text_note);
 
+// ------------------------------------------------------------------------------------------------
+
+// Почистить журнал
+
+// Clean Log Container
+        RelativeLayout linLayout_Clean_SystemLog = new RelativeLayout(this);
+        RelativeLayout.LayoutParams lpView_Clean_SystemLog = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams lpView_Clean_SystemLog_m = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams lpView_et_Clean_SystemLog = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        linLayout_Clean_SystemLog.setBackgroundColor(Color.rgb(192,192,192));
+
+// Clean SystemLog TextView
+        TextView tv_Clean_SystemLog = new TextView(this);
+        tv_Clean_SystemLog.setText(getResources().getString(R.string.clean_systemlog));
+        tv_Clean_SystemLog.setWidth((screenWidth - padding) / 100 * 90);
+        tv_Clean_SystemLog.setLayoutParams(lpView_Clean_SystemLog);
+        tv_Clean_SystemLog.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Clean_SystemLog.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Clean_SystemLog.setTextColor(Color.BLACK);
+
+        lpView_Clean_SystemLog.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Clean_SystemLog.getId());
+        tv_Clean_SystemLog.setLayoutParams(lpView_Clean_SystemLog);
+        linLayout_Clean_SystemLog.addView(tv_Clean_SystemLog);
+
+// CheckBox
+        checkBox_Clean_SystemLog = new CheckBox(this);
+        checkBox_Clean_SystemLog.setChecked(false);
+
+        lpView_Clean_SystemLog_m.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, checkBox_Clean_SystemLog.getId());
+        checkBox_Clean_SystemLog.setLayoutParams(lpView_Clean_SystemLog_m);
+        linLayout_Clean_SystemLog.addView(checkBox_Clean_SystemLog);
+
+// Second Container (Horizontal LinearLayout)
+        LinearLayout linLayout_Clean_SystemLog_m = new LinearLayout(this);
+        linLayout_Clean_SystemLog_m.setOrientation(LinearLayout.HORIZONTAL);
+        //   LinearLayout.LayoutParams lpView_Clean_Log_m = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        //   LinearLayout.LayoutParams lpViewbutton = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        linLayout_Clean_SystemLog_m.setGravity(Gravity.BOTTOM | Gravity.CENTER);
+
+
+// Заметка для метода
+        TextView tv_Clean_SystemLog_note = new TextView(this);
+        tv_Clean_SystemLog_note.setTypeface(null, Typeface.NORMAL);
+        tv_Clean_SystemLog_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_Clean_SystemLog_note.setTextColor(Color.BLACK);
+        tv_Clean_SystemLog_note.setText(getResources().getString(R.string.clean_text_note));
+        // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
+        tv_Clean_SystemLog_note.setLayoutParams(lpView);
+        //   tv_Photo_Processing_Method_note.setTextColor(Color.GRAY);
+        tv_Clean_SystemLog_note.setPadding(5, 9, 5, 9);
+        linLayout_Clean_SystemLog_m.addView(tv_Clean_SystemLog_note);
 
 // ------------------------------------------------------------------------------------------------
 
@@ -875,15 +928,9 @@ public class Tab_Main_Activity extends Activity {
 
                 FileWriter log;
 
-                if (checkBox_Clean_Log.isChecked()) {
+                if (checkBox_Clean_SystemLog.isChecked()) {
 
-                    try {
-                        log = new FileWriter(fb.logpath + "fblog.txt");
-                        log.write("");
-                        log.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                        clearLog();
 
                 }
 
@@ -914,8 +961,6 @@ public class Tab_Main_Activity extends Activity {
                 editor.commit();
 
 //                fb.SendMessage("Default work dir: " + getApplicationContext().getFilesDir().toString());
-
-                clearLog();
 
             }
         });
@@ -975,6 +1020,8 @@ public class Tab_Main_Activity extends Activity {
         FullFrame.addView(linLayout_fbloglength);
         FullFrame.addView(linLayout_fbloglength_note);
         FullFrame.addView(linLayout_Attach_Log);
+        FullFrame.addView(linLayout_Clean_SystemLog);
+        FullFrame.addView(linLayout_Clean_SystemLog_m);
 //        FullFrame.addView(linLayout_fbfloglength);
      //   FullFrame.addView(linLayout_fbfloglength_note);
      //   FullFrame.addView(linLayout_Clean_Log);

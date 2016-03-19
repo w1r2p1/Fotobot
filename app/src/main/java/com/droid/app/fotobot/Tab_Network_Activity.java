@@ -741,8 +741,8 @@ public class Tab_Network_Activity extends Activity {
 
 // Список
         spinnerArray_ppm = new ArrayList<String>();
-        spinnerArray_ppm.add("Online");
-        spinnerArray_ppm.add("Offline");
+        spinnerArray_ppm.add("on");
+        spinnerArray_ppm.add("off");
 
         spinner_ppm = new Spinner(this);
         ArrayAdapter<String> spinnerArrayAdapter_ppm = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray_ppm);
