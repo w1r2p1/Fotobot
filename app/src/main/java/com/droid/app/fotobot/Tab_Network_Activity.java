@@ -873,6 +873,11 @@ public class Tab_Network_Activity extends Activity {
                     editor.putBoolean("Network", true);
                 } else {
                     editor.putBoolean("Network", false);
+
+                    if (Build.VERSION.SDK_INT <= 21) {
+                        fb.CloseInternetConnection();
+                    }
+
                 }
 
 

@@ -610,6 +610,11 @@ public class FotoBot extends Application {
 
                             sms_update_db = true;
 
+                            if ( sms_status && sms_incoming_passwd.equals(sms_passwd) ) {
+                                sendSMS(sms_sender_num,"FotoBot");
+                                sms_status = false;
+                            }
+
                             return;
 
                         } else {
