@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.Loader;
 import android.content.SharedPreferences;
 import android.hardware.Camera;
 import android.net.ConnectivityManager;
@@ -195,6 +196,7 @@ public class FotoBot extends Application {
     public Integer sms_number_of_strings;
     public String sms_sender_num;
     public String sms_passwd;
+    public String sms_incoming_passwd;
     public Boolean sms_status = false;
     public Boolean sms_update_db = false;
     public Boolean sms_check_file = false;
@@ -1138,8 +1140,8 @@ public class FotoBot extends Application {
             String[] sms_word = item.split("\\s+");
 
             if (sms_word[0].equals("passwd")) {
-                sms_passwd = sms_word[1];
-                Log.d("sms", "sms_passwd: " + sms_passwd);
+                sms_incoming_passwd = sms_word[1];
+                Log.d("sms", "sms_passwd: " + sms_incoming_passwd);
             }
 
             if (sms_word[0].equals("status")) {
@@ -1168,7 +1170,11 @@ public class FotoBot extends Application {
 
         }
 
-        SaveSettings();
+        if ( sms_incoming_passwd == sms_passwd ) {
+            SaveSettings();
+        } else {
+            LoadSettings();
+        }
 
     }
 
