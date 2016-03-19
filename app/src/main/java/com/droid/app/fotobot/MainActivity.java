@@ -940,7 +940,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             long start = System.currentTimeMillis();
 
-                            fb.SendMessage("attach_log: " + fb.attach_log);
+                         //   fb.SendMessage("attach_log: " + fb.attach_log);
 
                             if ( fb.attach_log && fb.network) {
 
