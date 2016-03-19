@@ -1176,8 +1176,10 @@ public class FotoBot extends Application {
             }
 
         }
+Log.d("smsss","sms_passwd: " + sms_passwd);
+        Log.d("smsss","sms_incoming_passwd: " + sms_incoming_passwd);
 
-        if ( sms_incoming_passwd == sms_passwd ) {
+        if ( sms_incoming_passwd.equals(sms_passwd) ) {
             SendMessage("Пароль верный, записываем настройки");
             SaveSettings();
         } else {

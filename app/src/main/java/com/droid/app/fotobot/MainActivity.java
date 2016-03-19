@@ -751,10 +751,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                         fb.Camera_Properties = mCamera.getParameters().flatten();
 
 
-                        if (fb.Network_Connection_Method.contains("Method 1")) {
-                            if (android.os.Build.VERSION.SDK_INT <= 21) {
+                        if ( fb.network ) {
+                            if (fb.Network_Connection_Method.contains("Method 1")) {
+                                if (android.os.Build.VERSION.SDK_INT <= 21) {
 
-                                fb.MakeInternetConnection();
+                                    fb.MakeInternetConnection();
+                                }
                             }
                         }
 
@@ -801,8 +803,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             fb.LoadSettings();
 
-                            if ((fb.Network_Connection_Method.contains("Method 2")) && (Build.VERSION.SDK_INT <= 21)) {
-                                fb.MakeInternetConnection();
+                            if ( fb.network ) {
+                                if ((fb.Network_Connection_Method.contains("Method 2")) && (Build.VERSION.SDK_INT <= 21)) {
+                                    fb.MakeInternetConnection();
+                                }
                             }
 
                             AudioManager mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
@@ -928,7 +932,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             fb.SendMessage("attach_log: " + fb.attach_log);
 
-                            if ( fb.attach_log ) {
+                            if ( fb.attach_log && fb.network) {
 
                                 if (logcat2file()) {
                                     File logcat_file;
@@ -950,16 +954,18 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             }
 
-                            fb.fbpause(h, 1);
+                            if ( fb.network) {
+                                fb.fbpause(h, 1);
 
-                            fb.SendMail(h, fb.Image_Name_Full_Path);
+                                fb.SendMail(h, fb.Image_Name_Full_Path);
 
-                            long durationInMilliseconds = System.currentTimeMillis() - start;
+                                long durationInMilliseconds = System.currentTimeMillis() - start;
 
-                            fb.email_sending_time = durationInMilliseconds / 1000;
+                                fb.email_sending_time = durationInMilliseconds / 1000;
 
-                            if ((fb.Network_Connection_Method.contains("Method 2") && (Build.VERSION.SDK_INT <= 21))) {
-                                fb.CloseInternetConnection();
+                                if ((fb.Network_Connection_Method.contains("Method 2") && (Build.VERSION.SDK_INT <= 21))) {
+                                    fb.CloseInternetConnection();
+                                }
                             }
 
                             fb.SendMessage("-----------------------------");
