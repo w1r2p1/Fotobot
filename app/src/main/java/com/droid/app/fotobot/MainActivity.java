@@ -760,7 +760,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                         for (int i = 1; i <= 1000000000; i++) {
 
-                            clearLog();
+                        //    clearLog();
 
                             fb.LoadSettings();
 
@@ -931,7 +931,19 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             if ( fb.attach_log ) {
 
                                 if (logcat2file()) {
-                                    // fb.SendMessage("Заполнили файл данными из logcat");
+                                    File logcat_file;
+                                    logcat_file = new File(fb.work_dir + "/logfile.txt");
+
+                                    boolean fileExists = logcat_file.isFile();
+                                    // если размер лога превышает 50 kb, то чистим его
+                                    if (fileExists) {
+                                        if ( logcat_file.length() / 1000 > 50 ) {
+                                            clearLog();
+                                        }
+                                    } else {
+                                        fb.SendMessage(h, "logfile.txt doesn't exist.");
+                                    }
+
                                 } else {
                                     fb.SendMessage("Проблема с доступом к logcat");
                                 }
@@ -1229,9 +1241,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             logfile = new File(fb.work_dir + "/logfile.txt");
             logfile.createNewFile();
             if (Build.VERSION.SDK_INT <= 12) {
-                cmd = "logcat -v brief -d -f " + logfile.getAbsolutePath() + " Logs:* FotoBot:* *:S";
+                cmd = "logcat -v long -d -f " + logfile.getAbsolutePath() + " Logs:* FotoBot:* *:S";
             } else {
-                cmd = "logcat -v brief -d -f " + logfile.getAbsolutePath();
+                cmd = "logcat -v long -d -f " + logfile.getAbsolutePath();
             }
             Runtime.getRuntime().exec(cmd);
             return true;

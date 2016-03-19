@@ -14,6 +14,9 @@
     <string name="Camera_Name">Название камеры</string>
     <string name="Camera_Name_description">Дайте название камере, чтобы потом было проще искать письма</string>
 
+    <string name="SMS_Password">SMS пароль</string>
+    <string name="SMS_Password_description">Пароль для управления через SMS</string>
+
     <string name="Work_Dir">Папка для фотографий</string>
     <string name="Work_Dir_description">Полный путь к папке с фотографиями</string>
 

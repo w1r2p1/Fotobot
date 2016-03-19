@@ -51,6 +51,7 @@ public class Tab_Main_Activity extends Activity {
     EditText editText_fbfloglength;
     EditText Wake_Up;
     EditText editText_Work_Dir;
+    EditText editText_SMS_Password;
     Spinner spinner_ppm;
     ArrayAdapter<String> spinnerArrayAdapter1, spinnerArrayAdapter_Hardware;
     ArrayList<String> spinnerArray_ppm;
@@ -151,6 +152,60 @@ public class Tab_Main_Activity extends Activity {
         line_Fotobot_Camera_Name.getLayoutParams().height = 3;
         linLayout_Fotobot_Camera_Name_divider.addView(line_Fotobot_Camera_Name);
 
+// ------------------------------------------------------------------------------------------------
+// SMS password
+
+// sms password Container
+        RelativeLayout linLayout_SMS_Password = new RelativeLayout(this);
+        RelativeLayout.LayoutParams lpView_SMS_Password = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams lpView_SMS_Password_m1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        linLayout_SMS_Password.setPadding(5, 9, 5, 9);
+        linLayout_SMS_Password.setBackgroundColor(Color.rgb(192, 192, 192));
+
+// Пояснение контейнер
+        LinearLayout linLayout_SMS_Password_note = new LinearLayout(this);
+        linLayout_SMS_Password_note.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_SMS_Password_note.setPadding(5, 9, 5, 9);
+        linLayout_SMS_Password_note.setBackgroundColor(Color.rgb(192, 192, 192));
+
+// Название
+        TextView tv_SMS_Password = new TextView(this);
+        tv_SMS_Password.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_SMS_Password.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_SMS_Password.setTextColor(Color.BLACK);
+        tv_SMS_Password.setText(getResources().getString(R.string.SMS_Password));
+        tv_SMS_Password.setMinimumWidth((screenWidth - padding) / 100 * 60);
+        tv_SMS_Password.setLayoutParams(lpView_SMS_Password);
+
+        lpView_SMS_Password.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_SMS_Password.getId());
+        tv_SMS_Password.setLayoutParams(lpView_SMS_Password);
+        linLayout_SMS_Password.addView(tv_SMS_Password);
+
+// Camera Name
+        editText_SMS_Password = new EditText(this);
+        editText_SMS_Password.setLayoutParams(lpView_SMS_Password);
+        editText_SMS_Password.setSingleLine(true);
+        editText_SMS_Password.setText(fb.sms_passwd);
+        editText_SMS_Password.setTextColor(Color.rgb(50, 100, 150));
+        editText_SMS_Password.setWidth((screenWidth - padding) / 100 * 40);
+        editText_SMS_Password.setLayoutParams(lpView_camera_name);
+        editText_SMS_Password.setGravity(Gravity.RIGHT);
+
+        lpView_SMS_Password_m1.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, editText_SMS_Password.getId());
+        editText_SMS_Password.setLayoutParams(lpView_SMS_Password_m1);
+        linLayout_SMS_Password.addView(editText_SMS_Password);
+
+// Заметка для названия камеры
+        TextView tv_SMS_Password_note = new TextView(this);
+        tv_SMS_Password_note.setTypeface(null, Typeface.NORMAL);
+        tv_SMS_Password_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_SMS_Password_note.setTextColor(Color.BLACK);
+        tv_SMS_Password_note.setText(getResources().getString(R.string.SMS_Password_description));
+        tv_SMS_Password_note.setLayoutParams(lpView_SMS_Password);
+        tv_SMS_Password_note.setPadding(5, 9, 5, 9);
+        linLayout_SMS_Password_note.addView(tv_SMS_Password_note);
+
+// ------------------------------------------------------------------------------------------------
 
 // 1. Интервал между фото (Horizontal LinearLayout контейнер)
        // LinearLayout linLayout1 = new LinearLayout(this);
@@ -947,6 +1002,7 @@ public class Tab_Main_Activity extends Activity {
                 }
 
                 editor.putString("Camera_Name", editText_Fotobot_Camera_Name.getText().toString());
+                editor.putString("SMS_Password", editText_SMS_Password.getText().toString());
                 editor.putInt("Photo_Frequency", Integer.parseInt(Photo_Frequency.getText().toString()));
                 editor.putInt("Wake_Up_Interval", Integer.parseInt(Wake_Up.getText().toString()));
                 editor.putInt("process_delay", Integer.parseInt(process_delay.getText().toString()));
@@ -1006,6 +1062,8 @@ public class Tab_Main_Activity extends Activity {
 // Расставляем контейнеры (порядок важен)
         FullFrame.addView(linLayout_Fotobot_Camera_Name);
         FullFrame.addView(linLayout_Fotobot_Camera_Name_note);
+        FullFrame.addView(linLayout_SMS_Password);
+        FullFrame.addView(linLayout_SMS_Password_note);
         FullFrame.addView(linLayout_Storage);
         FullFrame.addView(linLayout_Work_Dir);
         FullFrame.addView(linLayout_Work_Dir_note);

@@ -14,6 +14,9 @@
     <string name="Camera_Name">Camera Name</string>
     <string name="Camera_Name_description">Give name for you device</string>
 
+    <string name="SMS_Password">SMS Password</string>
+    <string name="SMS_Password_description">Pasword for administration via SMS </string>
+
     <string name="network">Network</string>
     <string name="network_description">Select network mode: on(photos will be sent to email), off (photos will be saved in folder)</string>
 

@@ -969,6 +969,8 @@ public class FotoBot extends Application {
 
         network = pref.getBoolean("Network", true);
 
+        sms_passwd = pref.getString("SMS_Password", "passwd");
+
     }
 
     public void SaveSettings() {
@@ -999,6 +1001,7 @@ public class FotoBot extends Application {
         editor.putBoolean("Use_Flash", Use_Flash);
         editor.putBoolean("Attach_Log", attach_log);
         editor.putString("Work_Dir", work_dir);
+        editor.putString("SMS_Password", sms_passwd);
         editor.putString("Storage_Type", storage_type);
         editor.putBoolean("Network", network);
         editor.commit();
