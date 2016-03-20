@@ -1002,6 +1002,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             fb.frame_delay = true;
 
                             fb.sms_check_file = true;
+                            fb.SendMessage("Ready for pause");
                             fb.fbpause(h, fb.Photo_Frequency);
                             fb.sms_check_file = false;
 

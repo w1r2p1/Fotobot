@@ -17,6 +17,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.PowerManager;
 import android.provider.Browser;
 import android.telephony.SmsManager;
 import android.util.Log;
@@ -577,8 +578,23 @@ public class FotoBot extends Application {
 
         // final Context context = getApplicationContext();
 
+        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+        PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+                "MyWakelockTag");
+
+        wakeLock.acquire();
+
+        SendMessage("fbpause");
+
         Thread thread = new Thread() {
             public void run() {
+
+                PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+                PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+                        "MyWakelockTag");
+
+                wakeLock.acquire();
+
                 for (int i = 1; i <= delay; i++) {
                     Message msg = Message.obtain(); // Creates an new Message instance
                     try {
@@ -636,11 +652,11 @@ public class FotoBot extends Application {
 
                     if (i % wake_up_interval == 0 && frame_delay) {
 
-               //         File logfile = null;
+                        File logfile = null;
 
-                 //       String cmd = null;
+                        String cmd = null;
 
-/*                        if ( attach_log ) {
+//                        if ( attach_log ) {
 
                             try {
                                 logfile = new File(getFilesDir().toString() + "/logfile.txt");
@@ -660,8 +676,25 @@ public class FotoBot extends Application {
                                 //   return false;
                             }
 
+                        File logcat_file;
+                        logcat_file = new File(work_dir + "/logfile.txt");
+
+                        boolean fileExists = logcat_file.isFile();
+                        // если размер лога превышает 50 kb, то чистим его
+                        if (fileExists) {
+
+                            SendMessage("logcat file length: " + logcat_file.length() + "Kb");
+                            if ( logcat_file.length() / 1000 > 50 ) {
+                                clearLog();
+                            }
+
+
+                        } else {
+                            SendMessage("logfile.txt doesn't exist.");
                         }
-*/
+
+                     //   }
+//
 
                         //    Toast toast = Toast.makeText(context, "Wake up!", Toast.LENGTH_LONG);
                         //    toast.show();
@@ -738,6 +771,8 @@ public class FotoBot extends Application {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        wakeLock.release();
 
     }
 
@@ -1262,6 +1297,16 @@ Log.d("smsss","sms_passwd: " + sms_passwd);
             e.printStackTrace();
         }
 
+    }
+
+    public void clearLog(){
+        try {
+            Process process = new ProcessBuilder()
+                    .command("logcat", "-c")
+                    .redirectErrorStream(true)
+                    .start();
+        } catch (IOException e) {
+        }
     }
 
 }
