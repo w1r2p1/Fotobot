@@ -202,7 +202,7 @@ public class FotoBot extends Application {
     public Boolean sms_check_file = false;
 
     public String storage_type;
-    public String work_dir;
+    public String work_dir = "/data/data/com.droid.app.fotobot/files";
 
     public Boolean delete_foto = false;
 
@@ -1254,6 +1254,14 @@ Log.d("smsss","sms_passwd: " + sms_passwd);
             sms_file.delete();
             Log.d(LOG_TAG, "SMS file has been deleted");
         }
+
+        File logfile = new File(work_dir + "/logfile.txt");
+        try {
+            logfile.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

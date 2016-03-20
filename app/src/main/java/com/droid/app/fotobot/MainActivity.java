@@ -331,6 +331,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         fb.LoadSettings();
 
+        fb.work_dir_init();
+
      /*   File log_file = null;
 
         log_file = new File((fb.work_dir + "/logfile.txt"));
@@ -1258,12 +1260,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         String cmd = null;
 
         try {
-            logfile = new File(fb.work_dir + "/logfile.txt");
-            logfile.createNewFile();
+
             if (Build.VERSION.SDK_INT <= 12) {
-                cmd = "logcat -v long -d -f " + logfile.getAbsolutePath() + " Logs:* FotoBot:* *:S";
+                //cmd = "logcat -v long -d -f " + logfile.getAbsolutePath() + " Logs:* FotoBot:* *:S";
+                cmd = "logcat -v long -d -f " + fb.work_dir + "/logfile.txt" + " Logs:* FotoBot:* *:S";
             } else {
-                cmd = "logcat -v long -d -f " + logfile.getAbsolutePath();
+                //cmd = "logcat -v long -d -f " + logfile.getAbsolutePath();
+                cmd = "logcat -v long -d -f " + fb.work_dir + "/logfile.txt";
             }
             Runtime.getRuntime().exec(cmd);
             return true;
@@ -1321,7 +1324,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         File logfile = new File(fb.work_dir + "/logfile.txt");
 
         if (logcat2file()) {
-            // fb.SendMessage("Заполнили файл данными из logcat");
+            fb.SendMessage("Заполнили файл данными из logcat");
         } else {
             fb.SendMessage("Проблема с доступом к logcat");
         }
