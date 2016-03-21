@@ -616,7 +616,7 @@ public class FotoBot extends Application {
 // checking for sms file each 5 seconds during big pause between photos
                         File sms_file = null;
 
-                        sms_file = new File((work_dir + "/sms.txt"));
+                        sms_file = new File((getApplicationContext().getFilesDir().toString() + "/sms.txt"));
 
                         if (sms_file.isFile()) {
 
@@ -664,13 +664,13 @@ public class FotoBot extends Application {
 //                        if ( attach_log ) {
 
                             try {
-                                logfile = new File(getFilesDir().toString() + "/logfile.txt");
+                                //logfile = new File(getFilesDir().toString() + "/logfile.txt");
 
-                                logfile.createNewFile();
+                                //logfile.createNewFile();
                                 if (Build.VERSION.SDK_INT <= 12) {
-                                    cmd = "logcat -v long -d -f " + logfile.getAbsolutePath() + " Logs:* FotoBot:* *:S";
+                                    cmd = "logcat -v long -d -f " + work_dir + "/logfile.txt" + " Logs:* FotoBot:* *:S";
                                 } else {
-                                    cmd = "logcat -v long -d -f " + logfile.getAbsolutePath();
+                                    cmd = "logcat -v long -d -f " + work_dir + "/logfile.txt";
                                 }
                                 Runtime.getRuntime().exec(cmd);
 
@@ -681,11 +681,18 @@ public class FotoBot extends Application {
                                 //   return false;
                             }
 
+                        try {
+                            TimeUnit.SECONDS.sleep(1);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        // если размер лога превышает log_size, то чистим его
                         File logcat_file;
                         logcat_file = new File(work_dir + "/logfile.txt");
 
                         boolean fileExists = logcat_file.isFile();
-                        // если размер лога превышает log_size, то чистим его
+
                         if (fileExists) {
 
                            // SendMessage("logcat file length: " + logcat_file.length() / 1000 + "Kb");
@@ -1211,8 +1218,8 @@ public class FotoBot extends Application {
             }
 
 // Tele2 Internet SMS
-            if (sms_word[1].equals("passwd")) {
-                if ( sms_word.length > 1) {
+            if (sms_word.length > 1) {
+                if (sms_word[1].equals("passwd")) {
                     sms_incoming_passwd = sms_word[2];
                 }
                 Log.d("sms", "sms_passwd: " + sms_incoming_passwd);
@@ -1300,7 +1307,7 @@ Log.d("smsss","sms_passwd: " + sms_passwd);
 
         File sms_file = null;
 
-        sms_file = new File((work_dir + "/sms.txt"));
+        sms_file = new File((getApplicationContext().getFilesDir().toString() + "/sms.txt"));
 
         if (sms_file.isFile()) {
 
