@@ -1029,7 +1029,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     clearLog();
                                 }
                             } else {
-                                fb.SendMessage(h, "logfile.txt doesn't exist.");
+                                // fb.SendMessage(h, "logfile.txt doesn't exist.");
                             }
 
 

@@ -685,7 +685,7 @@ public class FotoBot extends Application {
                         logcat_file = new File(work_dir + "/logfile.txt");
 
                         boolean fileExists = logcat_file.isFile();
-                        // если размер лога превышает 50 kb, то чистим его
+                        // если размер лога превышает log_size, то чистим его
                         if (fileExists) {
 
                            // SendMessage("logcat file length: " + logcat_file.length() / 1000 + "Kb");
@@ -930,7 +930,7 @@ public class FotoBot extends Application {
 
             if (m.send()) {
                 SendMessage(h, getResources().getString(R.string.foto_sent));
-                fb.attach_log = false;
+               // fb.attach_log = false;
 
                 SaveSettings();
 
