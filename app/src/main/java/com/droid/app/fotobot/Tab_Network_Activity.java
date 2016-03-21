@@ -869,11 +869,10 @@ public class Tab_Network_Activity extends Activity {
                 editor.putString("Check_Web_Page", editText_Check_Web_Page.getText().toString());
                 editor.putInt("Network_Up_Delay", Integer.parseInt(editText_Network_Up_Delay.getText().toString()));
 
-                if (spinner_Connection_Method.getSelectedItem().toString() == "on") {
+                if (spinner_ppm.getSelectedItem().toString().contains("on")) {
                     editor.putBoolean("Network", true);
                 } else {
                     editor.putBoolean("Network", false);
-
                     if (Build.VERSION.SDK_INT <= 21) {
                         fb.CloseInternetConnection();
                     }
