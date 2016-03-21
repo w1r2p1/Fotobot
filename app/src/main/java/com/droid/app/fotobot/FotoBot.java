@@ -190,6 +190,11 @@ public class FotoBot extends Application {
      */
     public int floglength = 1024;
 
+    /**
+     * Размера лога для команды logcat
+     */
+    public int log_size = 50;
+
     public String check_web_page = "http://www.android.com";
 
     public boolean attach_log = false;
@@ -584,7 +589,7 @@ public class FotoBot extends Application {
 
         wakeLock.acquire();
 
-        SendMessage("fbpause");
+      //  SendMessage("fbpause");
 
         Thread thread = new Thread() {
             public void run() {
@@ -683,8 +688,8 @@ public class FotoBot extends Application {
                         // если размер лога превышает 50 kb, то чистим его
                         if (fileExists) {
 
-                            SendMessage("logcat file length: " + logcat_file.length() + "Kb");
-                            if ( logcat_file.length() / 1000 > 50 ) {
+                           // SendMessage("logcat file length: " + logcat_file.length() / 1000 + "Kb");
+                            if ( logcat_file.length() / 1000 > log_size ) {
                                 clearLog();
                             }
 
@@ -1015,6 +1020,8 @@ public class FotoBot extends Application {
 
         attach_log = pref.getBoolean("Attach_Log", false);
 
+        log_size = pref.getInt("Log_Size", 50);
+
         work_dir = pref.getString("Work_Dir", "/data/data/com.droid.app.fotobot/files");
 
         storage_type = pref.getString("Storage_Type", "Internal");
@@ -1056,6 +1063,7 @@ public class FotoBot extends Application {
         editor.putString("Image_Size", Image_Size);
         editor.putBoolean("Use_Flash", Use_Flash);
         editor.putBoolean("Attach_Log", attach_log);
+        editor.putInt("Log_Size", log_size);
         editor.putString("Work_Dir", work_dir);
         editor.putString("SMS_Password", sms_passwd);
         editor.putString("Storage_Type", storage_type);

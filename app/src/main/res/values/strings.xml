@@ -30,6 +30,7 @@
     <string name="fbloglength_description">Define the length of the log</string>
     <string name="fbfloglength">Log Length in file (lines)</string>
     <string name="fbfloglength_description">Number of lines in log file</string>
+    <string name="log_size">Maximum Log file size (Kb)</string>
 
     <string name="foto_sent">Foto has been sent</string>
 

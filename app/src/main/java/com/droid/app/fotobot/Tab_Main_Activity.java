@@ -816,7 +816,7 @@ public class Tab_Main_Activity extends Activity {
         tv_fbfloglength.setTypeface(Typeface.DEFAULT_BOLD);
         tv_fbfloglength.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_fbfloglength.setTextColor(Color.BLACK);
-        tv_fbfloglength.setText(getResources().getString(R.string.fbfloglength));
+        tv_fbfloglength.setText(getResources().getString(R.string.log_size));
         tv_fbfloglength.setMinimumWidth((screenWidth - padding) / 100 * 60);
         tv_fbfloglength.setLayoutParams(lpView_camera_name);
 
@@ -828,7 +828,7 @@ public class Tab_Main_Activity extends Activity {
         editText_fbfloglength = new EditText(this);
         editText_fbfloglength.setLayoutParams(lpView_fbfloglength);
         editText_fbfloglength.setSingleLine(true);
-        editText_fbfloglength.setText(Integer.toString(fb.log_line_number));
+        editText_fbfloglength.setText(Integer.toString(fb.log_size));
         editText_fbfloglength.setTextColor(Color.rgb(50, 100, 150));
         editText_fbfloglength.setWidth((screenWidth - padding) / 100 * 40);
         editText_fbfloglength.setLayoutParams(lpView_fbfloglength);
@@ -1076,7 +1076,7 @@ public class Tab_Main_Activity extends Activity {
                 editor.putInt("Config_Font_Size", Integer.parseInt(Config_Font_Size.getText().toString()));
                 editor.putInt("Log_Font_Size", Integer.parseInt(Log_Font_Size.getText().toString()));
                 editor.putInt("Log_Length", Integer.parseInt(editText_fbloglength.getText().toString()));
-                editor.putInt("FLog_Length", Integer.parseInt(editText_fbfloglength.getText().toString()));
+                editor.putInt("Log_Size", Integer.parseInt(editText_fbfloglength.getText().toString()));
                 editor.putString("Work_Dir", editText_Work_Dir.getText().toString());
                 editor.putString("Storage_Type", spinner_ppm.getSelectedItem().toString());
 
@@ -1149,7 +1149,7 @@ public class Tab_Main_Activity extends Activity {
         FullFrame.addView(linLayout_Attach_Log);
         FullFrame.addView(linLayout_Clean_SystemLog);
         FullFrame.addView(linLayout_Clean_SystemLog_m);
-//        FullFrame.addView(linLayout_fbfloglength);
+        FullFrame.addView(linLayout_fbfloglength);
      //   FullFrame.addView(linLayout_fbfloglength_note);
      //   FullFrame.addView(linLayout_Clean_Log);
      //   FullFrame.addView(linLayout_Clean_Log_m);

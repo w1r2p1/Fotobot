@@ -27,6 +27,7 @@
     <string name="fbloglength_description">Задайте ограничитель на количество выводимых символов</string>
     <string name="fbfloglength">Длина журнала в строках</string>
     <string name="fbfloglength_description">Количество строк в журнале</string>
+    <string name="log_size">Размер лог файла (Kb)</string>
 
     <string name="wake_up">Защита от засыпания</string>
     <string name="wake_up_description">Необходим, чтобы приложение было активно. По умолчанию, каждые 60 секунд делается обращение к камере (фото при этом не делается).</string>

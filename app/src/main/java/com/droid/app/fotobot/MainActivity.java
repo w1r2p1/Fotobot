@@ -764,6 +764,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                         for (int i = 1; i <= 1000000000; i++) {
 
+// method1 соединяемся с сетью
                             if ( fb.network && !(fb.Method1_activated) ) {
                                 if (fb.Network_Connection_Method.contains("Method 1")) {
                                     if (android.os.Build.VERSION.SDK_INT <= 21) {
@@ -774,10 +775,23 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 }
                             }
 
+// method1 рарзрываем соединение с сетью
+                            if ( !(fb.network) && fb.Method1_activated ) {
+                                if (fb.Network_Connection_Method.contains("Method 1")) {
+                                    if (android.os.Build.VERSION.SDK_INT <= 21) {
+
+                                        fb.CloseInternetConnection();
+                                    }
+                                    fb.Method1_activated = false;
+                                }
+                            }
+
                         //    clearLog();
 
+// загружаем настройки из реестра
                             fb.LoadSettings();
 
+// на каждом шаге удаляем логфайл, чтобы не забить память
                             File log_file = null;
 
                             log_file = new File((fb.work_dir + "/logfile.txt"));
@@ -788,8 +802,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 Log.d(LOG_TAG, "logcat file has been deleted");
                             }
 
-                            // fb.LoadSettings();
-
+// подготавливаем камеру для фото
                             fb.Image_Index = i;
 
                             if (fb.getstatus() == 3) {
@@ -947,7 +960,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             if ( fb.attach_log && fb.network) {
 
                                 if (logcat2file()) {
-                                    File logcat_file;
+                                    /* File logcat_file;
                                     logcat_file = new File(fb.work_dir + "/logfile.txt");
 
                                     boolean fileExists = logcat_file.isFile();
@@ -958,7 +971,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                         }
                                     } else {
                                         fb.SendMessage(h, "logfile.txt doesn't exist.");
-                                    }
+                                    } */
 
                                 } else {
                                     fb.SendMessage("Проблема с доступом к logcat");
@@ -985,6 +998,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             fb.SendMessage(getResources().getString(R.string.pause_between_photos) + " " + fb.Photo_Frequency + "sec");
 
                             fb.SendMessage("-----------------------------");
+                            fb.SendMessage("");
 
                             if (mCamera != null) {
 
@@ -1002,7 +1016,25 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             fb.frame_delay = true;
 
                             fb.sms_check_file = true;
-                            fb.SendMessage("Ready for pause");
+                         //   fb.SendMessage("Ready for pause");
+
+
+                            File logcat_file;
+                            logcat_file = new File(fb.work_dir + "/logfile.txt");
+
+                            boolean fileExists = logcat_file.isFile();
+                            // если размер лога превышает 50 kb, то чистим его
+                            if (fileExists) {
+                                if ( logcat_file.length() / 1000 > fb.log_size ) {
+                                    clearLog();
+                                }
+                            } else {
+                                fb.SendMessage(h, "logfile.txt doesn't exist.");
+                            }
+
+
+
+
                             fb.fbpause(h, fb.Photo_Frequency);
                             fb.sms_check_file = false;
 
@@ -1325,7 +1357,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         File logfile = new File(fb.work_dir + "/logfile.txt");
 
         if (logcat2file()) {
-            fb.SendMessage("Заполнили файл данными из logcat");
+            //fb.SendMessage("Заполнили файл данными из logcat");
         } else {
             fb.SendMessage("Проблема с доступом к logcat");
         }
