@@ -18,10 +18,11 @@
     <string name="SMS_Password_description">Пароль для управления через SMS</string>
 
     <string name="Work_Dir">Папка для фотографий</string>
-    <string name="Work_Dir_description">Полный путь к папке с фотографиями</string>
+    <string name="Work_Dir_description">Полный путь к папке с фотографиями, например для LG это /storage/external_SD</string>
 
     <string name="Delete_Foto">Удалить фото</string>
-    <string name="Delete_Foto_description">Выберите эту опцию если хотите удалить фото с телефона после отправки фото на почту</string>
+    <string name="Delete_Foto_description">Выберите эту опцию если хотите удалить фото с телефона после отправки фото на почту. Держите ее включенной если записываете фото во внутреннюю память телефона (Internal) иначе фотографии забьют память телефона и почистить их можно будет только из настроек.
+    Если же записываете фото на SD карту, то можно их не удалять.</string>
 
     <string name="fbloglength">Длина лога в главном окне (в байтах)</string>
     <string name="fbloglength_description">Задайте ограничитель на количество выводимых символов</string>

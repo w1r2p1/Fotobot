@@ -1202,12 +1202,22 @@ public class FotoBot extends Application {
 
             String[] sms_word = item.split("\\s+");
 
+// standard SMS, Beeline Internet SMS
             if (sms_word[0].equals("passwd")) {
                 if ( sms_word.length > 1) {
                     sms_incoming_passwd = sms_word[1];
                 }
                 Log.d("sms", "sms_passwd: " + sms_incoming_passwd);
             }
+
+// Tele2 Internet SMS
+            if (sms_word[1].equals("passwd")) {
+                if ( sms_word.length > 1) {
+                    sms_incoming_passwd = sms_word[2];
+                }
+                Log.d("sms", "sms_passwd: " + sms_incoming_passwd);
+            }
+
 
             if (sms_word[0].equals("status")) {
                 if ( sms_word.length > 1) {
