@@ -620,6 +620,20 @@ public class FotoBot extends Application {
 
                         if (sms_file.isFile()) {
 
+                       /*     wakeLock.release();
+
+                            SendMessage("Пришла СМС-ка ждем 30 секунд, чтобы выключился экран.");
+
+                            try {
+                                TimeUnit.SECONDS.sleep(30);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+
+                            powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+                            wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+                                    "MyWakelockTag");
+*/
                             file2array(sms_file.toString());
 
                             sms_getdata();
@@ -643,6 +657,9 @@ public class FotoBot extends Application {
                                         "Network_Status: " + network);
                                 sms_status = false;
                             }
+
+
+
 
                             return;
 
