@@ -22,18 +22,24 @@ Below are main features of Fotobot:<br>
 <br>
 9) internla/external(SD) storage;<br>
 <br>
-10) offline mode (no emails, just saving photos in storage)<br>
+10) offline mode (no emails, just saving photos into storage);<br>
 <br>
 <h1>Typical workflow</h1>
+Launch Fotobot and make some important settings<br>
 <br>
-Launch Fotobot<br>
+<u><b>Settings/Behaviour</b></u><br>
 <br>
-Settings/Behaviour<br>
-Camera Name (f.e. Fazenda), helps to sort out email in Inbox.<br>
+<b>Camera Name</b> (f.e. Fazenda), helps to sort out email in Inbox.<br>
+<br>
+<b>SMS Password</b><br>
+<br>
+<b>Storage Type</b><br>
+<br>
+<b>Pause between frames (sec)</b><br>
 Интервал между фото - с таким интервалом камера телефона будет делать снимки, а затем они будут отсылаться на почту. Не рекомендуется ставить меньше 60 секунд, иначе старые модели телефонов могут не справиться.
-Интервал между процессами - процессор телефона переходит от задания к заданию не последовательно. Грубо говоря, сделав фото, телефон должен перейти к отправке его на почту. Но в большинстве случаев возникает ситуация, когда фото после камеры еще не записалось на флэшку, а почтовая программа требует ее, чтобы приаттачить к письму и отправить. Вот для этого и нужен интервал между процессами, он позволяет программе успеть доделать предыдущее, прежде чем переходить к следующему. В большинстве случаев хватает 5 секундной задержки.
+
 <br>
-Настраиваем "Сеть".<br>
+<u><b>Settings/Network</b></u><br>
 Связь с Internet - тут все понятно, нужно выбрать метод выхода в Internet, либо по Wi-Fi, либо по 3G, либо использовать комбинированный метод (если не получилось по Wi-Fi, то Fotobot будет пытаться соединиться через 3G).
 Это одна из главных возможностей Fotobot'а. Если нет связи или связь была медленная на предыдущем сеансе отправке письма, то Fotobot попытается подсоединиться заново, может провайдер выдаст socket со связью побыстрее  (в версии 2.4.0).
 <br>
