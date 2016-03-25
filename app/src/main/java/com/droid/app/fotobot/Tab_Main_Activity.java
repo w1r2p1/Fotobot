@@ -92,22 +92,10 @@ public class Tab_Main_Activity extends Activity {
 // Camera name
 
 // camera name Container
-        RelativeLayout linLayout_Fotobot_Camera_Name = new RelativeLayout(this);
-        RelativeLayout.LayoutParams lpView_camera_name = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        RelativeLayout.LayoutParams lpView_camera_name_m1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout linLayout_Fotobot_Camera_Name = new LinearLayout(this);
+        linLayout_Fotobot_Camera_Name.setOrientation(LinearLayout.VERTICAL);
         linLayout_Fotobot_Camera_Name.setPadding(5, 9, 5, 9);
         linLayout_Fotobot_Camera_Name.setBackgroundColor(Color.rgb(192, 192, 192));
-
-// Пояснение контейнер
-        LinearLayout linLayout_Fotobot_Camera_Name_note = new LinearLayout(this);
-        linLayout_Fotobot_Camera_Name_note.setOrientation(LinearLayout.HORIZONTAL);
-        linLayout_Fotobot_Camera_Name_note.setPadding(5, 9, 5, 9);
-        linLayout_Fotobot_Camera_Name_note.setBackgroundColor(Color.rgb(192, 192, 192));
-
-// Контейнер для разделителя
-        LinearLayout linLayout_Fotobot_Camera_Name_divider = new LinearLayout(this);
-        linLayout_Fotobot_Camera_Name_divider.setOrientation(LinearLayout.HORIZONTAL);
-        linLayout_Fotobot_Camera_Name_divider.setPadding(5, 9, 5, 9);
 
 // Название
         TextView tv_Fotobot_Camera_Name = new TextView(this);
@@ -115,25 +103,13 @@ public class Tab_Main_Activity extends Activity {
         tv_Fotobot_Camera_Name.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Fotobot_Camera_Name.setTextColor(Color.BLACK);
         tv_Fotobot_Camera_Name.setText(getResources().getString(R.string.Camera_Name));
-        tv_Fotobot_Camera_Name.setMinimumWidth((screenWidth - padding) / 100 * 60);
-        tv_Fotobot_Camera_Name.setLayoutParams(lpView_camera_name);
-
-        lpView_camera_name.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Fotobot_Camera_Name.getId());
-        tv_Fotobot_Camera_Name.setLayoutParams(lpView_camera_name);
         linLayout_Fotobot_Camera_Name.addView(tv_Fotobot_Camera_Name);
 
 // Camera Name
         editText_Fotobot_Camera_Name = new EditText(this);
-        editText_Fotobot_Camera_Name.setLayoutParams(lpView_camera_name);
         editText_Fotobot_Camera_Name.setSingleLine(true);
         editText_Fotobot_Camera_Name.setText(fb.Camera_Name);
         editText_Fotobot_Camera_Name.setTextColor(Color.rgb(50, 100, 150));
-        editText_Fotobot_Camera_Name.setWidth((screenWidth - padding) / 100 * 40);
-        editText_Fotobot_Camera_Name.setLayoutParams(lpView_camera_name);
-        editText_Fotobot_Camera_Name.setGravity(Gravity.RIGHT);
-
-        lpView_camera_name_m1.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, editText_Fotobot_Camera_Name.getId());
-        editText_Fotobot_Camera_Name.setLayoutParams(lpView_camera_name_m1);
         linLayout_Fotobot_Camera_Name.addView(editText_Fotobot_Camera_Name);
 
 // Заметка для названия камеры
@@ -142,16 +118,7 @@ public class Tab_Main_Activity extends Activity {
         tv_Fotobot_Camera_Name_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Fotobot_Camera_Name_note.setTextColor(Color.BLACK);
         tv_Fotobot_Camera_Name_note.setText(getResources().getString(R.string.Camera_Name_description));
-        tv_Fotobot_Camera_Name_note.setLayoutParams(lpView_camera_name);
-        tv_Fotobot_Camera_Name_note.setPadding(5, 9, 5, 9);
-        linLayout_Fotobot_Camera_Name_note.addView(tv_Fotobot_Camera_Name_note);
-
-// Разделитель
-        View line_Fotobot_Camera_Name = new View(this);
-        line_Fotobot_Camera_Name.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 1));
-        line_Fotobot_Camera_Name.setBackgroundColor(Color.rgb(210, 210, 210));
-        line_Fotobot_Camera_Name.getLayoutParams().height = 3;
-        linLayout_Fotobot_Camera_Name_divider.addView(line_Fotobot_Camera_Name);
+        linLayout_Fotobot_Camera_Name.addView(tv_Fotobot_Camera_Name_note);
 
 // ------------------------------------------------------------------------------------------------
 // SMS password
@@ -189,7 +156,7 @@ public class Tab_Main_Activity extends Activity {
         editText_SMS_Password.setText(fb.sms_passwd);
         editText_SMS_Password.setTextColor(Color.rgb(50, 100, 150));
         editText_SMS_Password.setWidth((screenWidth - padding) / 100 * 40);
-        editText_SMS_Password.setLayoutParams(lpView_camera_name);
+     //   editText_SMS_Password.setLayoutParams(lpView_camera_name);
         editText_SMS_Password.setGravity(Gravity.RIGHT);
 
         lpView_SMS_Password_m1.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, editText_SMS_Password.getId());
@@ -391,7 +358,7 @@ public class Tab_Main_Activity extends Activity {
         editText_Work_Dir.setText(fb.work_dir);
         editText_Work_Dir.setTextColor(Color.rgb(50, 100, 150));
         editText_Work_Dir.setWidth((screenWidth - padding) / 100 * 40);
-        editText_Work_Dir.setLayoutParams(lpView_camera_name);
+      //  editText_Work_Dir.setLayoutParams(lpView_camera_name);
         editText_Work_Dir.setGravity(Gravity.RIGHT);
 
         lpView_Work_Dir_m1.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, editText_Fotobot_Camera_Name.getId());
@@ -759,7 +726,7 @@ public class Tab_Main_Activity extends Activity {
         tv_fbloglength.setTextColor(Color.BLACK);
         tv_fbloglength.setText(getResources().getString(R.string.fbloglength));
         tv_fbloglength.setMinimumWidth((screenWidth - padding) / 100 * 60);
-        tv_fbloglength.setLayoutParams(lpView_camera_name);
+    //    tv_fbloglength.setLayoutParams(lpView_camera_name);
 
         lpView_fbloglength.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_fbloglength.getId());
         tv_fbloglength.setLayoutParams(lpView_fbloglength);
@@ -818,7 +785,7 @@ public class Tab_Main_Activity extends Activity {
         tv_fbfloglength.setTextColor(Color.BLACK);
         tv_fbfloglength.setText(getResources().getString(R.string.log_size));
         tv_fbfloglength.setMinimumWidth((screenWidth - padding) / 100 * 60);
-        tv_fbfloglength.setLayoutParams(lpView_camera_name);
+    //    tv_fbfloglength.setLayoutParams(lpView_camera_name);
 
         lpView_fbfloglength.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_fbfloglength.getId());
         tv_fbloglength.setLayoutParams(lpView_fbloglength);
@@ -1128,7 +1095,7 @@ public class Tab_Main_Activity extends Activity {
 
 // Расставляем контейнеры (порядок важен)
         FullFrame.addView(linLayout_Fotobot_Camera_Name);
-        FullFrame.addView(linLayout_Fotobot_Camera_Name_note);
+     //   FullFrame.addView(linLayout_Fotobot_Camera_Name_note);
         FullFrame.addView(linLayout_SMS_Password);
         FullFrame.addView(linLayout_SMS_Password_note);
         FullFrame.addView(linLayout_Storage);
