@@ -1,16 +1,12 @@
 package com.droid.app.fotobot;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
-import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +16,10 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Logger;
@@ -191,9 +185,9 @@ public class Tab_Main_Activity extends Activity {
 
 // Контейнер для метода
         LinearLayout linLayout_Storage = new LinearLayout(this);
-        linLayout1.setOrientation(LinearLayout.VERTICAL);
-        linLayout1.setPadding(5, 9, 5, 9);
-        linLayout1.setBackgroundColor(Color.rgb(192, 192, 192));
+        linLayout_Storage.setOrientation(LinearLayout.VERTICAL);
+        linLayout_Storage.setPadding(5, 9, 5, 9);
+        linLayout_Storage.setBackgroundColor(Color.rgb(192, 192, 192));
 
 // Название
         TextView tv_Storage = new TextView(this);
@@ -213,7 +207,7 @@ public class Tab_Main_Activity extends Activity {
         ArrayAdapter<String> spinnerArrayAdapter_ppm = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray_ppm);
         spinner_ppm.setAdapter(spinnerArrayAdapter_ppm);
         spinner_ppm.setSelection(getIndex(spinner_ppm, fb.storage_type));
-        spinner_ppm.setMinimumWidth((screenWidth - padding) / 100 * 50);
+     //   spinner_ppm.setMinimumWidth((screenWidth - padding) / 100 * 50);
         spinner_ppm.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             public void onItemSelected(AdapterView<?> adapterView,
@@ -221,10 +215,10 @@ public class Tab_Main_Activity extends Activity {
 
                 if (spinnerArray_ppm.get(i) == "Internal") {
                     linLayout_Work_Dir.setVisibility(View.GONE);
-                    linLayout_Work_Dir_note.setVisibility(View.GONE);
+                 //   linLayout_Work_Dir_note.setVisibility(View.GONE);
                 } else {
                     linLayout_Work_Dir.setVisibility(View.VISIBLE);
-                    linLayout_Work_Dir_note.setVisibility(View.VISIBLE);
+                  //  linLayout_Work_Dir_note.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -248,6 +242,11 @@ public class Tab_Main_Activity extends Activity {
 //        tv_Storage_note.setLayoutParams(lpView);
         tv_Storage_note.setPadding(5, 9, 5, 9);
         linLayout_Storage.addView(tv_Storage_note);
+
+
+
+
+
 
 
 // ------------------------------------------------------------------------------------------------
@@ -283,27 +282,29 @@ public class Tab_Main_Activity extends Activity {
         tv_Work_Dir_note.setPadding(5, 9, 5, 9);
         linLayout_Work_Dir.addView(tv_Work_Dir_note);
 
+
+
 // ------------------------------------------------------------------------------------------------
 
 // 2. Интервал между процессами (основной контейнер)
-        RelativeLayout linLayout_process_delay = new RelativeLayout(this);
-//        linLayout_process_delay.setOrientation(LinearLayout.HORIZONTAL);
-        linLayout_process_delay.setBackgroundColor(Color.rgb(192,192,192));
-        lpView_m1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        lpView_m2 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout linLayout_process_delay = new LinearLayout(this);
+        linLayout_process_delay.setOrientation(LinearLayout.VERTICAL);
+        linLayout_process_delay.setBackgroundColor(Color.rgb(208,208,208));
+     //   lpView_m1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+      //  lpView_m2 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
       //  RelativeLayout.LayoutParams lpView = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 
 // 2. Интервал между процессами (пояснение контейнер)
-        LinearLayout linLayout_Flash_notes = new LinearLayout(this);
-        linLayout_Flash_notes.setOrientation(LinearLayout.HORIZONTAL);
-        linLayout_Flash_notes.setBackgroundColor(Color.rgb(192,192,192));
-        linLayout_Flash_notes.setPadding(0,0,0,9);
+//        LinearLayout linLayout_Flash_notes = new LinearLayout(this);
+//        linLayout_Flash_notes.setOrientation(LinearLayout.VERTICAL);
+//        linLayout_Flash_notes.setBackgroundColor(Color.rgb(192,192,192));
+//        linLayout_Flash_notes.setPadding(0,0,0,9);
 
 // 2.1 Интервал между процессами (divider контейнер)
-        LinearLayout linLayout_Flash_divider = new LinearLayout(this);
-        linLayout_Flash_divider.setOrientation(LinearLayout.HORIZONTAL);
-        linLayout_Flash_divider.setPadding(1,5,5,5);
-        linLayout_Flash_divider.setBackgroundColor(Color.rgb(192,192,192));
+     //   LinearLayout linLayout_Flash_divider = new LinearLayout(this);
+     //   linLayout_Flash_divider.setOrientation(LinearLayout.HORIZONTAL);
+     //   linLayout_Flash_divider.setPadding(1,5,5,5);
+     //   linLayout_Flash_divider.setBackgroundColor(Color.rgb(192,192,192));
 
 // 2.2 Интервал между процессами (название поля)
         TextView tv_process_delay = new TextView(this);
@@ -311,13 +312,13 @@ public class Tab_Main_Activity extends Activity {
         tv_process_delay.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_process_delay.setTextColor(Color.BLACK);
         tv_process_delay.setText(getResources().getString(R.string.pause_between_processes));
-        tv_process_delay.setWidth((screenWidth - padding) / 100 * 80);
+      //  tv_process_delay.setWidth((screenWidth - padding) / 100 * 80);
      //   tv_process_delay.setLayoutParams(lpView);
         tv_process_delay.setTypeface(Typeface.DEFAULT_BOLD);
         tv_process_delay.setPadding(1, 5, 5, 5);
 
-        lpView_m1.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_process_delay.getId());
-        tv_process_delay.setLayoutParams(lpView_m1);
+      //  lpView_m1.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_process_delay.getId());
+      //  tv_process_delay.setLayoutParams(lpView_m1);
         //linLayout1.addView(Photo_Frequency);
 
         linLayout_process_delay.addView(tv_process_delay);
@@ -327,13 +328,13 @@ public class Tab_Main_Activity extends Activity {
       //  process_delay.setLayoutParams(lpView_et);
         process_delay.setText(Integer.toString(fb.process_delay));
         process_delay.setTextColor(Color.rgb(50, 100, 150));
-        ViewGroup.LayoutParams lp_process_delay = process_delay.getLayoutParams();
-        lp_process_delay.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 80);
-        process_delay.setLayoutParams(lp);
-        process_delay.setGravity(Gravity.RIGHT);
+       // ViewGroup.LayoutParams lp_process_delay = process_delay.getLayoutParams();
+       // lp_process_delay.width = (screenWidth - padding) - ((screenWidth - padding) / 2);
+       // process_delay.setLayoutParams(lp);
+      //  process_delay.setGravity(Gravity.RIGHT);
 
-        lpView_m2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, process_delay.getId());
-        process_delay.setLayoutParams(lpView_m2);
+      //  lpView_m2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, process_delay.getId());
+     //   process_delay.setLayoutParams(lpView_m2);
         linLayout_process_delay.addView(process_delay);
 
 // 2.4 Интервал между процессами (ввод notes)
@@ -345,40 +346,41 @@ public class Tab_Main_Activity extends Activity {
                 tv_process_notes.setWidth((screenWidth - padding) / 100 * 99);
      //   tv_process_notes.setLayoutParams(lpView);
       //  tv_process_notes.setTextColor(Color.GRAY);
-        linLayout_Flash_notes.addView(tv_process_notes);
+        linLayout_process_delay.addView(tv_process_notes);
 
 // 2.5 Интервал между процессами (divider)
-        View line1 = new View(this);
-        line1.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 1));
-        line1.setBackgroundColor(Color.rgb(210, 210, 210));
-        line1.getLayoutParams().height = 3;
-        linLayout_Flash_divider.addView(line1);
+       // View line1 = new View(this);
+      //  line1.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 1));
+      //  line1.setBackgroundColor(Color.rgb(210, 210, 210));
+      //  line1.getLayoutParams().height = 3;
+      //  linLayout_Flash_divider.addView(line1);
 
+/*
 // ------------------------------------------------------------------------------------------------
 
 // 3. Шрифты (Config_Font_Size Container)
-        RelativeLayout linLayout_config_font_size = new RelativeLayout(this);
+        LinearLayout linLayout_config_font_size = new LinearLayout(this);
       //  linLayout_config_font_size.setOrientation(LinearLayout.HORIZONTAL);
         linLayout_config_font_size.setBackgroundColor(Color.rgb(192,192,192));
 
 // 3.1 Шрифты (Log_Font_Size Container)
-        RelativeLayout linLayout_log_font_size = new RelativeLayout(this);
+        LinearLayout linLayout_log_font_size = new LinearLayout(this);
       //  linLayout_config_log_font_size.setOrientation(LinearLayout.HORIZONTAL);
         linLayout_log_font_size.setBackgroundColor(Color.rgb(192,192,192));
 
-        RelativeLayout.LayoutParams lpView_m3 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        RelativeLayout.LayoutParams lpView_m4 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        RelativeLayout.LayoutParams lpView_m5 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        RelativeLayout.LayoutParams lpView_m6 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+       // RelativeLayout.LayoutParams lpView_m3 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+      //  RelativeLayout.LayoutParams lpView_m4 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+      //  RelativeLayout.LayoutParams lpView_m5 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+      //  RelativeLayout.LayoutParams lpView_m6 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 
 // 3.2 Шрифты (Horizontal LinearLayout)
         LinearLayout linLayout2 = new LinearLayout(this);
-        linLayout2.setOrientation(LinearLayout.HORIZONTAL);
-        LinearLayout.LayoutParams lpView2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        LinearLayout.LayoutParams lpViewbutton1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT,1.0f);
-        LinearLayout.LayoutParams lpViewbutton2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT,1.0f);
-        linLayout2.setGravity(Gravity.BOTTOM | Gravity.CENTER);
-        linLayout2.setLayoutParams(lpView2);
+        linLayout2.setOrientation(LinearLayout.VERTICAL);
+//        LinearLayout.LayoutParams lpView2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+
+
+//        linLayout2.setGravity(Gravity.BOTTOM | Gravity.CENTER);
+ //       linLayout2.setLayoutParams(lpView2);
 
         linLayout2.setBackgroundColor(Color.rgb(192,192,192));
 
@@ -388,12 +390,12 @@ public class Tab_Main_Activity extends Activity {
         cfs.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         cfs.setTextColor(Color.BLACK);
         cfs.setText(getResources().getString(R.string.settings_font));
-        cfs.setWidth((screenWidth - padding) / 100 * 80);
+    //    cfs.setWidth((screenWidth - padding) / 100 * 80);
        // cfs.setLayoutParams(lpView);
         cfs.setTypeface(Typeface.DEFAULT_BOLD);
 
-        lpView_m3.addRule(RelativeLayout.ALIGN_PARENT_LEFT, cfs.getId());
-        cfs.setLayoutParams(lpView_m3);
+  //      lpView_m3.addRule(RelativeLayout.ALIGN_PARENT_LEFT, cfs.getId());
+    //    cfs.setLayoutParams(lpView_m3);
      //   linLayout_process_delay.addView(cfs);
 
         linLayout_config_font_size.addView(cfs);
@@ -408,8 +410,8 @@ public class Tab_Main_Activity extends Activity {
         Config_Font_Size.setLayoutParams(lp_cfs);
         Config_Font_Size.setGravity(Gravity.RIGHT);
 
-        lpView_m4.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, Config_Font_Size.getId());
-        Config_Font_Size.setLayoutParams(lpView_m4);
+    //    lpView_m4.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, Config_Font_Size.getId());
+      //  Config_Font_Size.setLayoutParams(lpView_m4);
         linLayout_config_font_size.addView(Config_Font_Size);
 
 // Log_Font_Size
@@ -422,8 +424,8 @@ public class Tab_Main_Activity extends Activity {
       //  lfs.setLayoutParams(lpView);
         lfs.setTypeface(Typeface.DEFAULT_BOLD);
 
-        lpView_m5.addRule(RelativeLayout.ALIGN_PARENT_LEFT, lfs.getId());
-        lfs.setLayoutParams(lpView_m5);
+      //  lpView_m5.addRule(RelativeLayout.ALIGN_PARENT_LEFT, lfs.getId());
+      //  lfs.setLayoutParams(lpView_m5);
         //linLayout_config_font_size.addView(Config_Font_Size);
 
         linLayout_log_font_size.addView(lfs);
@@ -438,8 +440,8 @@ public class Tab_Main_Activity extends Activity {
         Log_Font_Size.setLayoutParams(lp_lfs);
         Log_Font_Size.setGravity(Gravity.RIGHT);
 
-        lpView_m6.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, Log_Font_Size.getId());
-        Log_Font_Size.setLayoutParams(lpView_m6);
+      //  lpView_m6.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, Log_Font_Size.getId());
+      //  Log_Font_Size.setLayoutParams(lpView_m6);
         //linLayout_config_font_size.addView(Config_Font_Size);
 
     //    linLayout_config_font_size.addView(Log_Font_Size);
@@ -451,31 +453,31 @@ public class Tab_Main_Activity extends Activity {
 // Почистить лог
 
 // Clean Log Container
-        RelativeLayout linLayout_Clean_Log = new RelativeLayout(this);
-        RelativeLayout.LayoutParams lpView_Clean_Log = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        RelativeLayout.LayoutParams lpView_Clean_Log_m = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        LinearLayout.LayoutParams lpView_et_Clean_Log = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout linLayout_Clean_Log = new LinearLayout(this);
+//        RelativeLayout.LayoutParams lpView_Clean_Log = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+  //      RelativeLayout.LayoutParams lpView_Clean_Log_m = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+  //      LinearLayout.LayoutParams lpView_et_Clean_Log = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         linLayout_Clean_Log.setBackgroundColor(Color.rgb(192,192,192));
 
 // Clean Log TextView
         TextView tv_Clean_Log = new TextView(this);
         tv_Clean_Log.setText(getResources().getString(R.string.clean_log));
         tv_Clean_Log.setWidth((screenWidth - padding) / 100 * 90);
-        tv_Clean_Log.setLayoutParams(lpView_Clean_Log);
+    //    tv_Clean_Log.setLayoutParams(lpView_Clean_Log);
         tv_Clean_Log.setTypeface(Typeface.DEFAULT_BOLD);
         tv_Clean_Log.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Clean_Log.setTextColor(Color.BLACK);
 
-        lpView_Clean_Log.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Clean_Log.getId());
-        tv_Clean_Log.setLayoutParams(lpView_Clean_Log);
+      //  lpView_Clean_Log.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Clean_Log.getId());
+     //   tv_Clean_Log.setLayoutParams(lpView_Clean_Log);
         linLayout_Clean_Log.addView(tv_Clean_Log);
 
 // CheckBox
         checkBox_Clean_Log = new CheckBox(this);
         checkBox_Clean_Log.setChecked(false);
 
-        lpView_Clean_Log_m.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, checkBox_Clean_Log.getId());
-        checkBox_Clean_Log.setLayoutParams(lpView_Clean_Log_m);
+     //   lpView_Clean_Log_m.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, checkBox_Clean_Log.getId());
+      //  checkBox_Clean_Log.setLayoutParams(lpView_Clean_Log_m);
         linLayout_Clean_Log.addView(checkBox_Clean_Log);
 
 // Second Container (Horizontal LinearLayout)
@@ -484,7 +486,7 @@ public class Tab_Main_Activity extends Activity {
      //   LinearLayout.LayoutParams lpView_Clean_Log_m = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
      //   LinearLayout.LayoutParams lpViewbutton = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-        linLayout_Clean_Log_m.setGravity(Gravity.BOTTOM | Gravity.CENTER);
+     //   linLayout_Clean_Log_m.setGravity(Gravity.BOTTOM | Gravity.CENTER);
 
 
 // Заметка для метода
@@ -497,7 +499,7 @@ public class Tab_Main_Activity extends Activity {
        // tv_Clean_Log_note.setLayoutParams(lpView);
         //   tv_Photo_Processing_Method_note.setTextColor(Color.GRAY);
         tv_Clean_Log_note.setPadding(5, 9, 5, 9);
-        linLayout_Clean_Log_m.addView(tv_Clean_Log_note);
+        linLayout_Clean_Log.addView(tv_Clean_Log_note);
 
 // ------------------------------------------------------------------------------------------------
 
@@ -505,22 +507,22 @@ public class Tab_Main_Activity extends Activity {
 
 // Clean Log Container
         RelativeLayout linLayout_Clean_Text = new RelativeLayout(this);
-        RelativeLayout.LayoutParams lpView_Clean_Text = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+      //  RelativeLayout.LayoutParams lpView_Clean_Text = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         RelativeLayout.LayoutParams lpView_Clean_Text_m = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        LinearLayout.LayoutParams lpView_et_Clean_Text = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+      //  LinearLayout.LayoutParams lpView_et_Clean_Text = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         linLayout_Clean_Text.setBackgroundColor(Color.rgb(192,192,192));
 
 // Clean Log TextView
         TextView tv_Clean_Text = new TextView(this);
         tv_Clean_Text.setText(getResources().getString(R.string.clean_text));
         tv_Clean_Text.setWidth((screenWidth - padding) / 100 * 90);
-        tv_Clean_Text.setLayoutParams(lpView_Clean_Text);
+     //   tv_Clean_Text.setLayoutParams(lpView_Clean_Text);
         tv_Clean_Text.setTypeface(Typeface.DEFAULT_BOLD);
         tv_Clean_Text.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Clean_Text.setTextColor(Color.BLACK);
 
-        lpView_Clean_Text.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Clean_Text.getId());
-        tv_Clean_Text.setLayoutParams(lpView_Clean_Text);
+       // lpView_Clean_Text.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Clean_Text.getId());
+     //   tv_Clean_Text.setLayoutParams(lpView_Clean_Text);
         linLayout_Clean_Text.addView(tv_Clean_Text);
 
 // CheckBox
@@ -771,7 +773,7 @@ public class Tab_Main_Activity extends Activity {
         Wake_Up.setText(Integer.toString(fb.wake_up_interval));
         ViewGroup.LayoutParams lp_Wake_Up = Wake_Up.getLayoutParams();
         lp_Wake_Up.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 80);
-        Wake_Up.setLayoutParams(lp);
+      //  Wake_Up.setLayoutParams(lp);
         Wake_Up.setGravity(Gravity.RIGHT);
 
         lpView_Wake_Up_m.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, Wake_Up.getId());
@@ -825,7 +827,7 @@ public class Tab_Main_Activity extends Activity {
         TextView tv_Delete_Foto = new TextView(this);
         tv_Delete_Foto.setText(getResources().getString(R.string.Delete_Foto));
         tv_Delete_Foto.setWidth((screenWidth - padding) / 100 * 90);
-        tv_Delete_Foto.setLayoutParams(lpView_Clean_Text);
+        tv_Delete_Foto.setLayoutParams(lpView_Delete_Foto);
         tv_Delete_Foto.setTypeface(Typeface.DEFAULT_BOLD);
         tv_Delete_Foto.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Delete_Foto.setTextColor(Color.BLACK);
@@ -870,6 +872,7 @@ public class Tab_Main_Activity extends Activity {
         LinearLayout linLayout_Buttons = new LinearLayout(this);
         linLayout_Buttons.setOrientation(LinearLayout.HORIZONTAL);
         linLayout_Buttons.setGravity(Gravity.BOTTOM | Gravity.CENTER);
+        LinearLayout.LayoutParams lpViewbutton1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT,1.0f);
         lpViewbutton1.setMargins(0, 0, 5, 0);
         LinearLayout.LayoutParams lpView3 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT);
         linLayout_Buttons.setLayoutParams(lpView3);
@@ -997,7 +1000,15 @@ public class Tab_Main_Activity extends Activity {
         });
 
         linLayout_Buttons.addView(btn, lpViewbutton1);
+        LinearLayout.LayoutParams lpViewbutton2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT,1.0f);
         linLayout_Buttons.addView(btn_mp, lpViewbutton2);
+
+
+
+
+
+*/
+
 
 // ------------------------------------------------------------------------------------------------
 
@@ -1006,12 +1017,11 @@ public class Tab_Main_Activity extends Activity {
         FullFrame.addView(linLayout_SMS_Password);
         FullFrame.addView(linLayout_Storage);
         FullFrame.addView(linLayout_Work_Dir);
-        FullFrame.addView(linLayout_Work_Dir_note);
-        FullFrame.addView(linLayout_Delete_Foto);
-        FullFrame.addView(linLayout_Delete_Foto_m);
-        FullFrame.addView(linLayout1);
+   //     FullFrame.addView(linLayout_Delete_Foto);
+    //    FullFrame.addView(linLayout_Delete_Foto_m);
+    //    FullFrame.addView(linLayout1);
         FullFrame.addView(linLayout_process_delay);
-        FullFrame.addView(linLayout_Flash_notes);
+ /*       FullFrame.addView(linLayout_Flash_notes);
         FullFrame.addView(linLayout_fbloglength);
         FullFrame.addView(linLayout_fbloglength_note);
         FullFrame.addView(linLayout_Attach_Log);
@@ -1026,7 +1036,7 @@ public class Tab_Main_Activity extends Activity {
         FullFrame.addView(linLayout_Wake_Up_notes);
         FullFrame.addView(linLayout2);
         FullFrame.addView(linLayout_Buttons);
-
+*/
         ScrollView m_Scroll = new ScrollView(this);
         m_Scroll.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
                 ViewGroup.LayoutParams.FILL_PARENT));
