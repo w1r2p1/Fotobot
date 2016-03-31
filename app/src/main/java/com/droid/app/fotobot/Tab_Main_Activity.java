@@ -355,34 +355,13 @@ public class Tab_Main_Activity extends Activity {
       //  line1.getLayoutParams().height = 3;
       //  linLayout_Flash_divider.addView(line1);
 
-/*
+
 // ------------------------------------------------------------------------------------------------
 
 // 3. Шрифты (Config_Font_Size Container)
         LinearLayout linLayout_config_font_size = new LinearLayout(this);
-      //  linLayout_config_font_size.setOrientation(LinearLayout.HORIZONTAL);
+        linLayout_config_font_size.setOrientation(LinearLayout.VERTICAL);
         linLayout_config_font_size.setBackgroundColor(Color.rgb(192,192,192));
-
-// 3.1 Шрифты (Log_Font_Size Container)
-        LinearLayout linLayout_log_font_size = new LinearLayout(this);
-      //  linLayout_config_log_font_size.setOrientation(LinearLayout.HORIZONTAL);
-        linLayout_log_font_size.setBackgroundColor(Color.rgb(192,192,192));
-
-       // RelativeLayout.LayoutParams lpView_m3 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-      //  RelativeLayout.LayoutParams lpView_m4 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-      //  RelativeLayout.LayoutParams lpView_m5 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-      //  RelativeLayout.LayoutParams lpView_m6 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-
-// 3.2 Шрифты (Horizontal LinearLayout)
-        LinearLayout linLayout2 = new LinearLayout(this);
-        linLayout2.setOrientation(LinearLayout.VERTICAL);
-//        LinearLayout.LayoutParams lpView2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-
-
-//        linLayout2.setGravity(Gravity.BOTTOM | Gravity.CENTER);
- //       linLayout2.setLayoutParams(lpView2);
-
-        linLayout2.setBackgroundColor(Color.rgb(192,192,192));
 
 // Шрифты (Config_Font_Size)
         TextView cfs = new TextView(this);
@@ -390,29 +369,21 @@ public class Tab_Main_Activity extends Activity {
         cfs.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         cfs.setTextColor(Color.BLACK);
         cfs.setText(getResources().getString(R.string.settings_font));
-    //    cfs.setWidth((screenWidth - padding) / 100 * 80);
-       // cfs.setLayoutParams(lpView);
         cfs.setTypeface(Typeface.DEFAULT_BOLD);
-
-  //      lpView_m3.addRule(RelativeLayout.ALIGN_PARENT_LEFT, cfs.getId());
-    //    cfs.setLayoutParams(lpView_m3);
-     //   linLayout_process_delay.addView(cfs);
-
         linLayout_config_font_size.addView(cfs);
 
 // Шрифты (ввод данных)
         Config_Font_Size = new EditText(this);
-      //  Config_Font_Size.setLayoutParams(lpView_et);
         Config_Font_Size.setText(Integer.toString(fb.Config_Font_Size));
         Config_Font_Size.setTextColor(Color.rgb(50,100,150));
-        ViewGroup.LayoutParams lp_cfs = Config_Font_Size.getLayoutParams();
-        lp_cfs.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 80);
-        Config_Font_Size.setLayoutParams(lp_cfs);
-        Config_Font_Size.setGravity(Gravity.RIGHT);
-
-    //    lpView_m4.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, Config_Font_Size.getId());
-      //  Config_Font_Size.setLayoutParams(lpView_m4);
+        Config_Font_Size.setWidth((screenWidth - padding) - ((screenWidth - padding) / 2));
         linLayout_config_font_size.addView(Config_Font_Size);
+
+// 3.1 Шрифты (Log_Font_Size Container)
+        LinearLayout linLayout_log_font_size = new LinearLayout(this);
+        linLayout_log_font_size.setOrientation(LinearLayout.VERTICAL);
+        linLayout_log_font_size.setBackgroundColor(Color.rgb(208,208,208));
+
 
 // Log_Font_Size
         TextView lfs = new TextView(this);
@@ -420,36 +391,18 @@ public class Tab_Main_Activity extends Activity {
         lfs.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         lfs.setTextColor(Color.BLACK);
         lfs.setText(getResources().getString(R.string.log_font));
-        lfs.setWidth((screenWidth - padding) / 100 * 80);
-      //  lfs.setLayoutParams(lpView);
         lfs.setTypeface(Typeface.DEFAULT_BOLD);
-
-      //  lpView_m5.addRule(RelativeLayout.ALIGN_PARENT_LEFT, lfs.getId());
-      //  lfs.setLayoutParams(lpView_m5);
-        //linLayout_config_font_size.addView(Config_Font_Size);
-
         linLayout_log_font_size.addView(lfs);
 
 // Log_Font_Size
         Log_Font_Size = new EditText(this);
-      //  Log_Font_Size.setLayoutParams(lpView_et);
         Log_Font_Size.setText(Integer.toString(fb.Log_Font_Size));
         Log_Font_Size.setTextColor(Color.rgb(50,100,150));
-        ViewGroup.LayoutParams lp_lfs = Log_Font_Size.getLayoutParams();
-        lp_lfs.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 80);
-        Log_Font_Size.setLayoutParams(lp_lfs);
-        Log_Font_Size.setGravity(Gravity.RIGHT);
-
-      //  lpView_m6.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, Log_Font_Size.getId());
-      //  Log_Font_Size.setLayoutParams(lpView_m6);
-        //linLayout_config_font_size.addView(Config_Font_Size);
-
-    //    linLayout_config_font_size.addView(Log_Font_Size);
-
+        Log_Font_Size.setWidth((screenWidth - padding) - ((screenWidth - padding) / 2));
         linLayout_log_font_size.addView(Log_Font_Size);
 
+/*
 // ------------------------------------------------------------------------------------------------
-
 // Почистить лог
 
 // Clean Log Container
@@ -501,6 +454,8 @@ public class Tab_Main_Activity extends Activity {
         tv_Clean_Log_note.setPadding(5, 9, 5, 9);
         linLayout_Clean_Log.addView(tv_Clean_Log_note);
 
+*/
+/*
 // ------------------------------------------------------------------------------------------------
 
 // Почистить вывод на экран
@@ -553,47 +508,28 @@ public class Tab_Main_Activity extends Activity {
         //   tv_Photo_Processing_Method_note.setTextColor(Color.GRAY);
         tv_Clean_Text_note.setPadding(5, 9, 5, 9);
         linLayout_Clean_Text_m.addView(tv_Clean_Text_note);
-
+*/
 // ------------------------------------------------------------------------------------------------
 
 // Почистить журнал
 
 // Clean Log Container
-        RelativeLayout linLayout_Clean_SystemLog = new RelativeLayout(this);
-        RelativeLayout.LayoutParams lpView_Clean_SystemLog = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        RelativeLayout.LayoutParams lpView_Clean_SystemLog_m = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        LinearLayout.LayoutParams lpView_et_Clean_SystemLog = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout linLayout_Clean_SystemLog = new LinearLayout(this);
+        linLayout_Clean_SystemLog.setOrientation(LinearLayout.VERTICAL);
         linLayout_Clean_SystemLog.setBackgroundColor(Color.rgb(192,192,192));
 
 // Clean SystemLog TextView
         TextView tv_Clean_SystemLog = new TextView(this);
         tv_Clean_SystemLog.setText(getResources().getString(R.string.clean_systemlog));
-        tv_Clean_SystemLog.setWidth((screenWidth - padding) / 100 * 90);
-        tv_Clean_SystemLog.setLayoutParams(lpView_Clean_SystemLog);
         tv_Clean_SystemLog.setTypeface(Typeface.DEFAULT_BOLD);
         tv_Clean_SystemLog.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Clean_SystemLog.setTextColor(Color.BLACK);
-
-        lpView_Clean_SystemLog.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Clean_SystemLog.getId());
-        tv_Clean_SystemLog.setLayoutParams(lpView_Clean_SystemLog);
         linLayout_Clean_SystemLog.addView(tv_Clean_SystemLog);
 
 // CheckBox
         checkBox_Clean_SystemLog = new CheckBox(this);
         checkBox_Clean_SystemLog.setChecked(false);
-
-        lpView_Clean_SystemLog_m.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, checkBox_Clean_SystemLog.getId());
-        checkBox_Clean_SystemLog.setLayoutParams(lpView_Clean_SystemLog_m);
         linLayout_Clean_SystemLog.addView(checkBox_Clean_SystemLog);
-
-// Second Container (Horizontal LinearLayout)
-        LinearLayout linLayout_Clean_SystemLog_m = new LinearLayout(this);
-        linLayout_Clean_SystemLog_m.setOrientation(LinearLayout.HORIZONTAL);
-        //   LinearLayout.LayoutParams lpView_Clean_Log_m = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        //   LinearLayout.LayoutParams lpViewbutton = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
-        linLayout_Clean_SystemLog_m.setGravity(Gravity.BOTTOM | Gravity.CENTER);
-
 
 // Заметка для метода
         TextView tv_Clean_SystemLog_note = new TextView(this);
@@ -605,29 +541,17 @@ public class Tab_Main_Activity extends Activity {
       //  tv_Clean_SystemLog_note.setLayoutParams(lpView);
         //   tv_Photo_Processing_Method_note.setTextColor(Color.GRAY);
         tv_Clean_SystemLog_note.setPadding(5, 9, 5, 9);
-        linLayout_Clean_SystemLog_m.addView(tv_Clean_SystemLog_note);
+        linLayout_Clean_SystemLog.addView(tv_Clean_SystemLog_note);
 
 // ------------------------------------------------------------------------------------------------
 
 // fb.log length
 
 // fb.log length Container
-        RelativeLayout linLayout_fbloglength = new RelativeLayout(this);
-        RelativeLayout.LayoutParams lpView_fbloglength = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        RelativeLayout.LayoutParams lpView_fbloglength_m1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout linLayout_fbloglength = new LinearLayout(this);
+        linLayout_fbloglength.setOrientation(LinearLayout.VERTICAL);
         linLayout_fbloglength.setPadding(5, 9, 5, 9);
         linLayout_fbloglength.setBackgroundColor(Color.rgb(192, 192, 192));
-
-// Пояснение контейнер
-        LinearLayout linLayout_fbloglength_note = new LinearLayout(this);
-        linLayout_fbloglength_note.setOrientation(LinearLayout.HORIZONTAL);
-        linLayout_fbloglength_note.setPadding(5, 9, 5, 9);
-        linLayout_fbloglength_note.setBackgroundColor(Color.rgb(192, 192, 192));
-
-// Контейнер для разделителя
-        LinearLayout linLayout_fbloglength_divider = new LinearLayout(this);
-        linLayout_fbloglength_divider.setOrientation(LinearLayout.HORIZONTAL);
-        linLayout_fbloglength_divider.setPadding(5, 9, 5, 9);
 
 // Название
         TextView tv_fbloglength = new TextView(this);
@@ -636,24 +560,21 @@ public class Tab_Main_Activity extends Activity {
         tv_fbloglength.setTextColor(Color.BLACK);
         tv_fbloglength.setText(getResources().getString(R.string.fbloglength));
         tv_fbloglength.setMinimumWidth((screenWidth - padding) / 100 * 60);
-    //    tv_fbloglength.setLayoutParams(lpView_camera_name);
 
-        lpView_fbloglength.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_fbloglength.getId());
-        tv_fbloglength.setLayoutParams(lpView_fbloglength);
         linLayout_fbloglength.addView(tv_fbloglength);
 
 // fb.log length
         editText_fbloglength = new EditText(this);
-        editText_fbloglength.setLayoutParams(lpView_fbloglength);
+//        editText_fbloglength.setLayoutParams(lpView_fbloglength);
         editText_fbloglength.setSingleLine(true);
         editText_fbloglength.setText(Integer.toString(fb.loglength));
         editText_fbloglength.setTextColor(Color.rgb(50, 100, 150));
         editText_fbloglength.setWidth((screenWidth - padding) / 100 * 40);
-        editText_fbloglength.setLayoutParams(lpView_fbloglength);
-        editText_fbloglength.setGravity(Gravity.RIGHT);
+  //      editText_fbloglength.setLayoutParams(lpView_fbloglength);
+    //    editText_fbloglength.setGravity(Gravity.RIGHT);
 
-        lpView_fbloglength_m1.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, editText_fbloglength.getId());
-        editText_fbloglength.setLayoutParams(lpView_fbloglength_m1);
+      //  lpView_fbloglength_m1.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, editText_fbloglength.getId());
+        //editText_fbloglength.setLayoutParams(lpView_fbloglength_m1);
         linLayout_fbloglength.addView(editText_fbloglength);
 
 // Заметка для названия камеры
@@ -662,31 +583,20 @@ public class Tab_Main_Activity extends Activity {
         tv_fbloglength_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_fbloglength_note.setTextColor(Color.BLACK);
         tv_fbloglength_note.setText(getResources().getString(R.string.fbloglength_description));
-        tv_fbloglength_note.setLayoutParams(lpView_fbloglength);
+        //tv_fbloglength_note.setLayoutParams(lpView_fbloglength);
         tv_fbloglength_note.setPadding(5, 9, 5, 9);
-        linLayout_fbloglength_note.addView(tv_fbloglength_note);
+        linLayout_fbloglength.addView(tv_fbloglength_note);
+
 
 // ------------------------------------------------------------------------------------------------
 
 // fbf.log length
 
 // fbf.log length Container
-        RelativeLayout linLayout_fbfloglength = new RelativeLayout(this);
-        RelativeLayout.LayoutParams lpView_fbfloglength = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        RelativeLayout.LayoutParams lpView_fbfloglength_m1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout linLayout_fbfloglength = new LinearLayout(this);
+        linLayout_fbfloglength.setOrientation(LinearLayout.VERTICAL);
         linLayout_fbfloglength.setPadding(5, 9, 5, 9);
         linLayout_fbfloglength.setBackgroundColor(Color.rgb(192, 192, 192));
-
-// Пояснение контейнер
-        LinearLayout linLayout_fbfloglength_note = new LinearLayout(this);
-        linLayout_fbfloglength_note.setOrientation(LinearLayout.HORIZONTAL);
-        linLayout_fbfloglength_note.setPadding(5, 9, 5, 9);
-        linLayout_fbfloglength_note.setBackgroundColor(Color.rgb(192, 192, 192));
-
-// Контейнер для разделителя
-        LinearLayout linLayout_fbfloglength_divider = new LinearLayout(this);
-        linLayout_fbfloglength_divider.setOrientation(LinearLayout.HORIZONTAL);
-        linLayout_fbfloglength_divider.setPadding(5, 9, 5, 9);
 
 // Название
         TextView tv_fbfloglength = new TextView(this);
@@ -696,23 +606,18 @@ public class Tab_Main_Activity extends Activity {
         tv_fbfloglength.setText(getResources().getString(R.string.log_size));
         tv_fbfloglength.setMinimumWidth((screenWidth - padding) / 100 * 60);
     //    tv_fbfloglength.setLayoutParams(lpView_camera_name);
-
-        lpView_fbfloglength.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_fbfloglength.getId());
-        tv_fbloglength.setLayoutParams(lpView_fbloglength);
         linLayout_fbfloglength.addView(tv_fbfloglength);
 
 // fb.log length
         editText_fbfloglength = new EditText(this);
-        editText_fbfloglength.setLayoutParams(lpView_fbfloglength);
+       // editText_fbfloglength.setLayoutParams(lpView_fbfloglength);
         editText_fbfloglength.setSingleLine(true);
         editText_fbfloglength.setText(Integer.toString(fb.log_size));
         editText_fbfloglength.setTextColor(Color.rgb(50, 100, 150));
         editText_fbfloglength.setWidth((screenWidth - padding) / 100 * 40);
-        editText_fbfloglength.setLayoutParams(lpView_fbfloglength);
-        editText_fbfloglength.setGravity(Gravity.RIGHT);
+       // editText_fbfloglength.setLayoutParams(lpView_fbfloglength);
+       // editText_fbfloglength.setGravity(Gravity.RIGHT);
 
-        lpView_fbfloglength_m1.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, editText_fbfloglength.getId());
-        editText_fbfloglength.setLayoutParams(lpView_fbfloglength_m1);
         linLayout_fbfloglength.addView(editText_fbfloglength);
 
 // Заметка
@@ -721,25 +626,17 @@ public class Tab_Main_Activity extends Activity {
         tv_fbfloglength_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_fbfloglength_note.setTextColor(Color.BLACK);
         tv_fbfloglength_note.setText(getResources().getString(R.string.fbfloglength_description));
-        tv_fbfloglength_note.setLayoutParams(lpView_fbfloglength);
+      //  tv_fbfloglength_note.setLayoutParams(lpView_fbfloglength);
         tv_fbfloglength_note.setPadding(5, 9, 5, 9);
-        linLayout_fbfloglength_note.addView(tv_fbfloglength_note);
+        linLayout_fbfloglength.addView(tv_fbfloglength_note);
 
 // ------------------------------------------------------------------------------------------------
 
 // Wake Up (Horizontal LinearLayout контейнер)
-        RelativeLayout linLayout_Wake_Up = new RelativeLayout(this);
-        RelativeLayout.LayoutParams lpView_Wake_Up = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        RelativeLayout.LayoutParams lpView_Wake_Up_m = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout linLayout_Wake_Up = new LinearLayout(this);
+        linLayout_Wake_Up.setOrientation(LinearLayout.VERTICAL);
         LinearLayout.LayoutParams lpView_Wake_Up_et = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         linLayout1.setBackgroundColor(Color.rgb(192, 192, 192));
-
-
-// Wake Up (пояснение контейнер)
-        LinearLayout linLayout_Wake_Up_notes = new LinearLayout(this);
-        linLayout_Wake_Up_notes.setOrientation(LinearLayout.HORIZONTAL);
-        linLayout_Wake_Up_notes.setBackgroundColor(Color.rgb(192, 192, 192));
-        linLayout_Wake_Up_notes.setPadding(0, 0, 0, 9);
 
 // Wake Up
         TextView tv_Wake_Up = new TextView(this);
@@ -747,12 +644,9 @@ public class Tab_Main_Activity extends Activity {
         tv_Wake_Up.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Wake_Up.setTextColor(Color.BLACK);
         tv_Wake_Up.setText(getResources().getString(R.string.wake_up));
-        tv_Wake_Up.setWidth((screenWidth - padding) / 100 * 80);
+        tv_Wake_Up.setWidth((screenWidth - padding) / 2);
        // tv_Wake_Up.setLayoutParams(lpView);
         tv_Wake_Up.setTypeface(Typeface.DEFAULT_BOLD);
-
-        lpView_Wake_Up.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Wake_Up.getId());
-        tv_Wake_Up.setLayoutParams(lpView_Wake_Up);
         linLayout_Wake_Up.addView(tv_Wake_Up);
 
 // Wake Up (notes)
@@ -764,54 +658,42 @@ public class Tab_Main_Activity extends Activity {
         tv_Wake_Up_notes.setWidth((screenWidth - padding) / 100 * 99);
        // tv_Wake_Up_notes.setLayoutParams(lpView);
         tv_Wake_Up_notes.setPadding(1, 5, 5, 5);
-        linLayout_Wake_Up_notes.addView(tv_Wake_Up_notes);
+        linLayout_Wake_Up.addView(tv_Wake_Up_notes);
 
 // Wake Up (ввод данных)
         Wake_Up = new EditText(this);
         Wake_Up.setLayoutParams(lpView_Wake_Up_et);
         Wake_Up.setTextColor(Color.rgb(50, 100, 150));
         Wake_Up.setText(Integer.toString(fb.wake_up_interval));
-        ViewGroup.LayoutParams lp_Wake_Up = Wake_Up.getLayoutParams();
-        lp_Wake_Up.width = (screenWidth - padding) - ((screenWidth - padding) / 100 * 80);
-      //  Wake_Up.setLayoutParams(lp);
-        Wake_Up.setGravity(Gravity.RIGHT);
-
-        lpView_Wake_Up_m.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, Wake_Up.getId());
-        Wake_Up.setLayoutParams(lpView_Wake_Up_m);
+        Wake_Up.setWidth((screenWidth - padding) - ((screenWidth - padding) / 2));
         linLayout_Wake_Up.addView(Wake_Up);
 
-        // ------------------------------------------------------------------------------------------------
+
+// ------------------------------------------------------------------------------------------------
 
 // Приаттачить лог
 
 // Attach Log Container
-        RelativeLayout linLayout_Attach_Log = new RelativeLayout(this);
-        RelativeLayout.LayoutParams lpView_Attach_Log = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        RelativeLayout.LayoutParams lpView_Attach_Log_m = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout linLayout_Attach_Log = new LinearLayout(this);
+        linLayout_Attach_Log.setOrientation(LinearLayout.VERTICAL);
         LinearLayout.LayoutParams lpView_et_Attach_Log = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        linLayout_Clean_Text.setBackgroundColor(Color.rgb(192,192,192));
+        linLayout_Attach_Log.setBackgroundColor(Color.rgb(192,192,192));
 
 // Attach Log TextView
         TextView tv_Attach_Log = new TextView(this);
         tv_Attach_Log.setText(getResources().getString(R.string.attach_log));
         tv_Attach_Log.setWidth((screenWidth - padding) / 100 * 90);
-        tv_Attach_Log.setLayoutParams(lpView_Attach_Log);
         tv_Attach_Log.setTypeface(Typeface.DEFAULT_BOLD);
         tv_Attach_Log.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Attach_Log.setTextColor(Color.BLACK);
-
-        lpView_Attach_Log.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Attach_Log.getId());
-        tv_Attach_Log.setLayoutParams(lpView_Attach_Log);
         linLayout_Attach_Log.addView(tv_Attach_Log);
 
 // CheckBox
         checkBox_Attach_Log = new CheckBox(this);
         checkBox_Attach_Log.setChecked(fb.attach_log);
-
-        lpView_Attach_Log_m.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, checkBox_Clean_Text.getId());
-        checkBox_Attach_Log.setLayoutParams(lpView_Attach_Log_m);
         linLayout_Attach_Log.addView(checkBox_Attach_Log);
 
+/*
 // ------------------------------------------------------------------------------------------------
 
 // Удалить фото после отправки на почту
@@ -1021,19 +903,18 @@ public class Tab_Main_Activity extends Activity {
     //    FullFrame.addView(linLayout_Delete_Foto_m);
     //    FullFrame.addView(linLayout1);
         FullFrame.addView(linLayout_process_delay);
- /*       FullFrame.addView(linLayout_Flash_notes);
+ //       FullFrame.addView(linLayout_Flash_notes);
         FullFrame.addView(linLayout_fbloglength);
-        FullFrame.addView(linLayout_fbloglength_note);
         FullFrame.addView(linLayout_Attach_Log);
         FullFrame.addView(linLayout_Clean_SystemLog);
-        FullFrame.addView(linLayout_Clean_SystemLog_m);
+/*        FullFrame.addView(linLayout_Clean_SystemLog_m);
         FullFrame.addView(linLayout_fbfloglength);
         FullFrame.addView(linLayout_Clean_Text);
-        FullFrame.addView(linLayout_Clean_Text_m);
+        FullFrame.addView(linLayout_Clean_Text_m); */
         FullFrame.addView(linLayout_config_font_size);
         FullFrame.addView(linLayout_log_font_size);
         FullFrame.addView(linLayout_Wake_Up);
-        FullFrame.addView(linLayout_Wake_Up_notes);
+/*        FullFrame.addView(linLayout_Wake_Up_notes);
         FullFrame.addView(linLayout2);
         FullFrame.addView(linLayout_Buttons);
 */
