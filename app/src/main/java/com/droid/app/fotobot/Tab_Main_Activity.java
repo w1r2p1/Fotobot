@@ -77,7 +77,7 @@ public class Tab_Main_Activity extends Activity {
 // Главный контейнер внутри которого вся раскладка
         LinearLayout FullFrame = new LinearLayout(this);
         FullFrame.setOrientation(LinearLayout.VERTICAL);
-        FullFrame.setPadding(5, 5, 5, 5);
+        FullFrame.setPadding(0, 0, 0, 0);
         FullFrame.setBackgroundColor(Color.rgb(192,192,192));
         LinearLayout.LayoutParams lpFull_Frame = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT);
         FullFrame.setLayoutParams(lpFull_Frame);
@@ -175,7 +175,7 @@ public class Tab_Main_Activity extends Activity {
         tv_notes.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_notes.setTextColor(Color.BLACK);
         tv_notes.setText(getResources().getString(R.string.pause_between_frames_description));
-        tv_notes.setPadding(1, 5, 5, 5);
+     //   tv_notes.setPadding(1, 5, 5, 5);
         linLayout1.addView(tv_notes);
 
 // 1.5 Интервал между фото (ввод данных)
@@ -245,14 +245,8 @@ public class Tab_Main_Activity extends Activity {
         tv_Storage_note.setTextColor(Color.BLACK);
         tv_Storage_note.setText(getResources().getString(R.string.storage_description));
 //        tv_Storage_note.setLayoutParams(lpView);
-        tv_Storage_note.setPadding(5, 9, 5, 9);
+   //     tv_Storage_note.setPadding(5, 9, 5, 9);
         linLayout_Storage.addView(tv_Storage_note);
-
-
-
-
-
-
 
 // ------------------------------------------------------------------------------------------------
 // Work Dir
@@ -284,7 +278,7 @@ public class Tab_Main_Activity extends Activity {
         tv_Work_Dir_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Work_Dir_note.setTextColor(Color.BLACK);
         tv_Work_Dir_note.setText(getResources().getString(R.string.Work_Dir_description));
-        tv_Work_Dir_note.setPadding(5, 9, 5, 9);
+     //   tv_Work_Dir_note.setPadding(5, 9, 5, 9);
         linLayout_Work_Dir.addView(tv_Work_Dir_note);
 
 
@@ -294,6 +288,7 @@ public class Tab_Main_Activity extends Activity {
 // 2. Интервал между процессами (основной контейнер)
         LinearLayout linLayout_process_delay = new LinearLayout(this);
         linLayout_process_delay.setOrientation(LinearLayout.VERTICAL);
+        linLayout_process_delay.setPadding(5, 9, 5, 9);
         linLayout_process_delay.setBackgroundColor(Color.rgb(208,208,208));
      //   lpView_m1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
       //  lpView_m2 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -320,7 +315,7 @@ public class Tab_Main_Activity extends Activity {
       //  tv_process_delay.setWidth((screenWidth - padding) / 100 * 80);
      //   tv_process_delay.setLayoutParams(lpView);
         tv_process_delay.setTypeface(Typeface.DEFAULT_BOLD);
-        tv_process_delay.setPadding(1, 5, 5, 5);
+     //   tv_process_delay.setPadding(1, 5, 5, 5);
 
       //  lpView_m1.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_process_delay.getId());
       //  tv_process_delay.setLayoutParams(lpView_m1);
@@ -347,8 +342,8 @@ public class Tab_Main_Activity extends Activity {
         tv_process_notes.setTypeface(null, Typeface.NORMAL);
         tv_process_notes.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_process_notes.setTextColor(Color.BLACK);
-        tv_process_notes.setText(getResources().getString(R.string.pause_between_processes_description));
-                tv_process_notes.setWidth((screenWidth - padding) / 100 * 99);
+    //    tv_process_notes.setText(getResources().getString(R.string.pause_between_processes_description));
+    //            tv_process_notes.setWidth((screenWidth - padding) / 100 * 99);
      //   tv_process_notes.setLayoutParams(lpView);
       //  tv_process_notes.setTextColor(Color.GRAY);
         linLayout_process_delay.addView(tv_process_notes);
@@ -366,7 +361,8 @@ public class Tab_Main_Activity extends Activity {
 // 3. Шрифты (Config_Font_Size Container)
         LinearLayout linLayout_config_font_size = new LinearLayout(this);
         linLayout_config_font_size.setOrientation(LinearLayout.VERTICAL);
-        linLayout_config_font_size.setBackgroundColor(Color.rgb(192,192,192));
+        linLayout_config_font_size.setPadding(5, 9, 5, 9);
+        linLayout_config_font_size.setBackgroundColor(Color.rgb(208,208,208));
 
 // Шрифты (Config_Font_Size)
         TextView cfs = new TextView(this);
@@ -387,7 +383,8 @@ public class Tab_Main_Activity extends Activity {
 // 3.1 Шрифты (Log_Font_Size Container)
         LinearLayout linLayout_log_font_size = new LinearLayout(this);
         linLayout_log_font_size.setOrientation(LinearLayout.VERTICAL);
-        linLayout_log_font_size.setBackgroundColor(Color.rgb(208,208,208));
+        linLayout_log_font_size.setPadding(5, 9, 5, 9);
+        linLayout_log_font_size.setBackgroundColor(Color.rgb(192,192,192));
 
 
 // Log_Font_Size
@@ -468,12 +465,13 @@ public class Tab_Main_Activity extends Activity {
 // Clean Log Container
         LinearLayout linLayout_Clean_Text = new LinearLayout(this);
         linLayout_Clean_Text.setOrientation(LinearLayout.VERTICAL);
+        linLayout_Clean_Text.setPadding(5, 9, 5, 9);
         linLayout_Clean_Text.setBackgroundColor(Color.rgb(192,192,192));
 
 // Clean Log TextView
         TextView tv_Clean_Text = new TextView(this);
         tv_Clean_Text.setText(getResources().getString(R.string.clean_text));
-                tv_Clean_Text.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Clean_Text.setTypeface(Typeface.DEFAULT_BOLD);
         tv_Clean_Text.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Clean_Text.setTextColor(Color.BLACK);
         linLayout_Clean_Text.addView(tv_Clean_Text);
@@ -501,7 +499,7 @@ public class Tab_Main_Activity extends Activity {
         // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
        // tv_Clean_Text_note.setLayoutParams(lpView);
         //   tv_Photo_Processing_Method_note.setTextColor(Color.GRAY);
-        tv_Clean_Text_note.setPadding(5, 9, 5, 9);
+      //  tv_Clean_Text_note.setPadding(5, 9, 5, 9);
         linLayout_Clean_Text.addView(tv_Clean_Text_note);
 
 // ------------------------------------------------------------------------------------------------
@@ -511,6 +509,7 @@ public class Tab_Main_Activity extends Activity {
 // Clean Log Container
         LinearLayout linLayout_Clean_SystemLog = new LinearLayout(this);
         linLayout_Clean_SystemLog.setOrientation(LinearLayout.VERTICAL);
+        linLayout_Clean_SystemLog.setPadding(5, 9, 5, 9);
         linLayout_Clean_SystemLog.setBackgroundColor(Color.rgb(192,192,192));
 
 // Clean SystemLog TextView
@@ -535,7 +534,7 @@ public class Tab_Main_Activity extends Activity {
         // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
       //  tv_Clean_SystemLog_note.setLayoutParams(lpView);
         //   tv_Photo_Processing_Method_note.setTextColor(Color.GRAY);
-        tv_Clean_SystemLog_note.setPadding(5, 9, 5, 9);
+       // tv_Clean_SystemLog_note.setPadding(5, 9, 5, 9);
         linLayout_Clean_SystemLog.addView(tv_Clean_SystemLog_note);
 
 // ------------------------------------------------------------------------------------------------
@@ -579,7 +578,7 @@ public class Tab_Main_Activity extends Activity {
         tv_fbloglength_note.setTextColor(Color.BLACK);
         tv_fbloglength_note.setText(getResources().getString(R.string.fbloglength_description));
         //tv_fbloglength_note.setLayoutParams(lpView_fbloglength);
-        tv_fbloglength_note.setPadding(5, 9, 5, 9);
+      //  tv_fbloglength_note.setPadding(5, 9, 5, 9);
         linLayout_fbloglength.addView(tv_fbloglength_note);
 
 
@@ -591,7 +590,7 @@ public class Tab_Main_Activity extends Activity {
         LinearLayout linLayout_fbfloglength = new LinearLayout(this);
         linLayout_fbfloglength.setOrientation(LinearLayout.VERTICAL);
         linLayout_fbfloglength.setPadding(5, 9, 5, 9);
-        linLayout_fbfloglength.setBackgroundColor(Color.rgb(192, 192, 192));
+        linLayout_fbfloglength.setBackgroundColor(Color.rgb(208, 208, 208));
 
 // Название
         TextView tv_fbfloglength = new TextView(this);
@@ -600,19 +599,14 @@ public class Tab_Main_Activity extends Activity {
         tv_fbfloglength.setTextColor(Color.BLACK);
         tv_fbfloglength.setText(getResources().getString(R.string.log_size));
         tv_fbfloglength.setMinimumWidth((screenWidth - padding) / 100 * 60);
-    //    tv_fbfloglength.setLayoutParams(lpView_camera_name);
         linLayout_fbfloglength.addView(tv_fbfloglength);
 
 // fb.log length
         editText_fbfloglength = new EditText(this);
-       // editText_fbfloglength.setLayoutParams(lpView_fbfloglength);
         editText_fbfloglength.setSingleLine(true);
         editText_fbfloglength.setText(Integer.toString(fb.log_size));
         editText_fbfloglength.setTextColor(Color.rgb(50, 100, 150));
         editText_fbfloglength.setWidth((screenWidth - padding) / 100 * 40);
-       // editText_fbfloglength.setLayoutParams(lpView_fbfloglength);
-       // editText_fbfloglength.setGravity(Gravity.RIGHT);
-
         linLayout_fbfloglength.addView(editText_fbfloglength);
 
 // Заметка
@@ -621,8 +615,6 @@ public class Tab_Main_Activity extends Activity {
         tv_fbfloglength_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_fbfloglength_note.setTextColor(Color.BLACK);
         tv_fbfloglength_note.setText(getResources().getString(R.string.fbfloglength_description));
-      //  tv_fbfloglength_note.setLayoutParams(lpView_fbfloglength);
-        tv_fbfloglength_note.setPadding(5, 9, 5, 9);
         linLayout_fbfloglength.addView(tv_fbfloglength_note);
 
 // ------------------------------------------------------------------------------------------------
@@ -630,8 +622,8 @@ public class Tab_Main_Activity extends Activity {
 // Wake Up (Horizontal LinearLayout контейнер)
         LinearLayout linLayout_Wake_Up = new LinearLayout(this);
         linLayout_Wake_Up.setOrientation(LinearLayout.VERTICAL);
-        LinearLayout.LayoutParams lpView_Wake_Up_et = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        linLayout1.setBackgroundColor(Color.rgb(192, 192, 192));
+        linLayout_Wake_Up.setPadding(5, 9, 5, 9);
+        linLayout_Wake_Up.setBackgroundColor(Color.rgb(208, 208, 208));
 
 // Wake Up
         TextView tv_Wake_Up = new TextView(this);
@@ -640,7 +632,6 @@ public class Tab_Main_Activity extends Activity {
         tv_Wake_Up.setTextColor(Color.BLACK);
         tv_Wake_Up.setText(getResources().getString(R.string.wake_up));
         tv_Wake_Up.setWidth((screenWidth - padding) / 2);
-       // tv_Wake_Up.setLayoutParams(lpView);
         tv_Wake_Up.setTypeface(Typeface.DEFAULT_BOLD);
         linLayout_Wake_Up.addView(tv_Wake_Up);
 
@@ -651,13 +642,12 @@ public class Tab_Main_Activity extends Activity {
         tv_Wake_Up_notes.setTextColor(Color.BLACK);
         tv_Wake_Up_notes.setText(getResources().getString(R.string.wake_up_description));
         tv_Wake_Up_notes.setWidth((screenWidth - padding) / 100 * 99);
-       // tv_Wake_Up_notes.setLayoutParams(lpView);
         tv_Wake_Up_notes.setPadding(1, 5, 5, 5);
         linLayout_Wake_Up.addView(tv_Wake_Up_notes);
 
 // Wake Up (ввод данных)
         Wake_Up = new EditText(this);
-        Wake_Up.setLayoutParams(lpView_Wake_Up_et);
+      //  Wake_Up.setLayoutParams(lpView_Wake_Up_et);
         Wake_Up.setTextColor(Color.rgb(50, 100, 150));
         Wake_Up.setText(Integer.toString(fb.wake_up_interval));
         Wake_Up.setWidth((screenWidth - padding) - ((screenWidth - padding) / 2));
@@ -671,8 +661,9 @@ public class Tab_Main_Activity extends Activity {
 // Attach Log Container
         LinearLayout linLayout_Attach_Log = new LinearLayout(this);
         linLayout_Attach_Log.setOrientation(LinearLayout.VERTICAL);
-        LinearLayout.LayoutParams lpView_et_Attach_Log = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        linLayout_Attach_Log.setBackgroundColor(Color.rgb(192,192,192));
+        linLayout_Attach_Log.setPadding(5, 9, 5, 9);
+      //  LinearLayout.LayoutParams lpView_et_Attach_Log = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        linLayout_Attach_Log.setBackgroundColor(Color.rgb(208,208,208));
 
 // Attach Log TextView
         TextView tv_Attach_Log = new TextView(this);
@@ -696,7 +687,8 @@ public class Tab_Main_Activity extends Activity {
 // Delete Foto Container
         LinearLayout linLayout_Delete_Foto = new LinearLayout(this);
         linLayout_Delete_Foto.setOrientation(LinearLayout.VERTICAL);
-        linLayout_Delete_Foto.setBackgroundColor(Color.rgb(192,192,192));
+        linLayout_Delete_Foto.setPadding(5, 9, 5, 9);
+        linLayout_Delete_Foto.setBackgroundColor(Color.rgb(208,208,208));
 
 // Delete Foto TextView
         TextView tv_Delete_Foto = new TextView(this);
@@ -720,7 +712,7 @@ public class Tab_Main_Activity extends Activity {
         // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
       //  tv_Delete_Foto_note.setLayoutParams(lpView);
         //   tv_Photo_Processing_Method_note.setTextColor(Color.GRAY);
-        tv_Delete_Foto_note.setPadding(5, 9, 5, 9);
+       // tv_Delete_Foto_note.setPadding(5, 9, 5, 9);
         linLayout_Delete_Foto.addView(tv_Delete_Foto_note);
 
 // ------------------------------------------------------------------------------------------------
@@ -861,13 +853,6 @@ public class Tab_Main_Activity extends Activity {
         LinearLayout.LayoutParams lpViewbutton2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT,1.0f);
         linLayout_Buttons.addView(btn_mp, lpViewbutton2);
 
-
-
-
-
-
-
-
 // ------------------------------------------------------------------------------------------------
 
 // Расставляем контейнеры (порядок важен)
@@ -876,19 +861,16 @@ public class Tab_Main_Activity extends Activity {
         FullFrame.addView(linLayout_Storage);
         FullFrame.addView(linLayout_Work_Dir);
         FullFrame.addView(linLayout_Delete_Foto);
-       //    FullFrame.addView(linLayout1);
+        FullFrame.addView(linLayout1);
         FullFrame.addView(linLayout_process_delay);
- //       FullFrame.addView(linLayout_Flash_notes);
         FullFrame.addView(linLayout_fbloglength);
         FullFrame.addView(linLayout_Attach_Log);
         FullFrame.addView(linLayout_Clean_SystemLog);
-       // FullFrame.addView(linLayout_fbfloglength);
+        FullFrame.addView(linLayout_fbfloglength);
         FullFrame.addView(linLayout_Clean_Text);
         FullFrame.addView(linLayout_config_font_size);
         FullFrame.addView(linLayout_log_font_size);
         FullFrame.addView(linLayout_Wake_Up);
-/*        FullFrame.addView(linLayout_Wake_Up_notes);
-        FullFrame.addView(linLayout2); */
         FullFrame.addView(linLayout_Buttons);
 
         ScrollView m_Scroll = new ScrollView(this);
