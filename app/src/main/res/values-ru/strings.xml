@@ -28,10 +28,10 @@
     <string name="fbloglength_description">Задайте ограничитель на количество выводимых символов в главном окне</string>
     <string name="fbfloglength">Длина журнала в строках</string>
     <string name="fbfloglength_description">Количество строк в журнале</string>
-    <string name="log_size">Размер лог файла (Kb)</string>
+    <string name="log_size">Размер журнала (Kb)</string>
 
-    <string name="wake_up">Защита от засыпания</string>
-    <string name="wake_up_description">Необходим, чтобы приложение было активно. По умолчанию, каждые 60 секунд делается обращение к камере (фото при этом не делается).</string>
+    <string name="wake_up">Защита от засыпания (сек)</string>
+    <string name="wake_up_description">Необходим, чтобы приложение было активно.</string>
 
     <string name="foto_sent">Фото выслано на почту</string>
 
@@ -81,7 +81,7 @@
     <string name="pause_between_processes_description">Необходим для того, чтобы слабый процессор телефона успел обработать данные. Подбирается экспериментальным путем, примерно > 5 секунд.</string>
 
     <string name="settings_font">Размер шрифта в настройках</string>
-    <string name="log_font">Размер шрифта в логах</string>
+    <string name="log_font">Размер шрифта в выдаче</string>
 
     <string name="Internet_connection_channel">Связь с Internet</string>
     <string name="Internet_connection_channel_description">Выберите способ подключения к Internet (мобильные данные, wi-fi или оба).</string>

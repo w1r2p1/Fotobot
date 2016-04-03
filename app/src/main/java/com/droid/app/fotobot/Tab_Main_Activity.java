@@ -612,12 +612,12 @@ public class Tab_Main_Activity extends Activity {
         linLayout_fbfloglength.addView(editText_fbfloglength);
 
 // Заметка
-        TextView tv_fbfloglength_note = new TextView(this);
-        tv_fbfloglength_note.setTypeface(null, Typeface.NORMAL);
-        tv_fbfloglength_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
-        tv_fbfloglength_note.setTextColor(Color.BLACK);
-        tv_fbfloglength_note.setText(getResources().getString(R.string.fbfloglength_description));
-        linLayout_fbfloglength.addView(tv_fbfloglength_note);
+//        TextView tv_fbfloglength_note = new TextView(this);
+//        tv_fbfloglength_note.setTypeface(null, Typeface.NORMAL);
+//        tv_fbfloglength_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+//        tv_fbfloglength_note.setTextColor(Color.BLACK);
+//        tv_fbfloglength_note.setText(getResources().getString(R.string.fbfloglength_description));
+//        linLayout_fbfloglength.addView(tv_fbfloglength_note);
 
 // ------------------------------------------------------------------------------------------------
 
