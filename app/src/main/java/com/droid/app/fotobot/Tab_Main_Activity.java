@@ -169,7 +169,14 @@ public class Tab_Main_Activity extends Activity {
         tv.setTypeface(Typeface.DEFAULT_BOLD);
         linLayout1.addView(tv);
 
-// 1.4 Интервал между фото (notes)
+// Интервал между фото (ввод данных)
+        Photo_Frequency = new EditText(this);
+        Photo_Frequency.setTextColor(Color.rgb(50,100,150));
+        Photo_Frequency.setText(Integer.toString(fb.Photo_Frequency));
+        linLayout1.addView(Photo_Frequency);
+
+
+// Интервал между фото (notes)
         TextView tv_notes = new TextView(this);
         tv_notes.setTypeface(null, Typeface.NORMAL);
         tv_notes.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
@@ -178,11 +185,6 @@ public class Tab_Main_Activity extends Activity {
      //   tv_notes.setPadding(1, 5, 5, 5);
         linLayout1.addView(tv_notes);
 
-// 1.5 Интервал между фото (ввод данных)
-        Photo_Frequency = new EditText(this);
-        Photo_Frequency.setTextColor(Color.rgb(50,100,150));
-        Photo_Frequency.setText(Integer.toString(fb.Photo_Frequency));
-        linLayout1.addView(Photo_Frequency);
 
 // ------------------------------------------------------------------------------------------------
 
@@ -342,7 +344,7 @@ public class Tab_Main_Activity extends Activity {
         tv_process_notes.setTypeface(null, Typeface.NORMAL);
         tv_process_notes.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_process_notes.setTextColor(Color.BLACK);
-    //    tv_process_notes.setText(getResources().getString(R.string.pause_between_processes_description));
+        tv_process_notes.setText(getResources().getString(R.string.pause_between_processes_description));
     //            tv_process_notes.setWidth((screenWidth - padding) / 100 * 99);
      //   tv_process_notes.setLayoutParams(lpView);
       //  tv_process_notes.setTextColor(Color.GRAY);
@@ -635,15 +637,6 @@ public class Tab_Main_Activity extends Activity {
         tv_Wake_Up.setTypeface(Typeface.DEFAULT_BOLD);
         linLayout_Wake_Up.addView(tv_Wake_Up);
 
-// Wake Up (notes)
-        TextView tv_Wake_Up_notes = new TextView(this);
-        tv_Wake_Up_notes.setTypeface(null, Typeface.NORMAL);
-        tv_Wake_Up_notes.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
-        tv_Wake_Up_notes.setTextColor(Color.BLACK);
-        tv_Wake_Up_notes.setText(getResources().getString(R.string.wake_up_description));
-        tv_Wake_Up_notes.setWidth((screenWidth - padding) / 100 * 99);
-        tv_Wake_Up_notes.setPadding(1, 5, 5, 5);
-        linLayout_Wake_Up.addView(tv_Wake_Up_notes);
 
 // Wake Up (ввод данных)
         Wake_Up = new EditText(this);
@@ -653,6 +646,15 @@ public class Tab_Main_Activity extends Activity {
         Wake_Up.setWidth((screenWidth - padding) - ((screenWidth - padding) / 2));
         linLayout_Wake_Up.addView(Wake_Up);
 
+// Wake Up (notes)
+        TextView tv_Wake_Up_notes = new TextView(this);
+        tv_Wake_Up_notes.setTypeface(null, Typeface.NORMAL);
+        tv_Wake_Up_notes.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_Wake_Up_notes.setTextColor(Color.BLACK);
+        tv_Wake_Up_notes.setText(getResources().getString(R.string.wake_up_description));
+        tv_Wake_Up_notes.setWidth((screenWidth - padding) / 100 * 99);
+        tv_Wake_Up_notes.setPadding(1, 5, 5, 5);
+        linLayout_Wake_Up.addView(tv_Wake_Up_notes);
 
 // ------------------------------------------------------------------------------------------------
 
@@ -678,6 +680,16 @@ public class Tab_Main_Activity extends Activity {
         checkBox_Attach_Log = new CheckBox(this);
         checkBox_Attach_Log.setChecked(fb.attach_log);
         linLayout_Attach_Log.addView(checkBox_Attach_Log);
+
+        // Wake Up (notes)
+        TextView tv_Attach_Log_notes = new TextView(this);
+        tv_Attach_Log_notes.setTypeface(null, Typeface.NORMAL);
+        tv_Attach_Log_notes.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_Attach_Log_notes.setTextColor(Color.BLACK);
+        tv_Attach_Log_notes.setText(getResources().getString(R.string.attach_log_description));
+        tv_Attach_Log_notes.setWidth((screenWidth - padding) / 100 * 99);
+        tv_Attach_Log_notes.setPadding(1, 5, 5, 5);
+        linLayout_Attach_Log.addView(tv_Attach_Log_notes);
 
 
 // ------------------------------------------------------------------------------------------------
