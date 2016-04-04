@@ -532,7 +532,7 @@ public class Tab_Main_Activity extends Activity {
         tv_Clean_SystemLog_note.setTypeface(null, Typeface.NORMAL);
         tv_Clean_SystemLog_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Clean_SystemLog_note.setTextColor(Color.BLACK);
-        tv_Clean_SystemLog_note.setText(getResources().getString(R.string.clean_text_note));
+        tv_Clean_SystemLog_note.setText(getResources().getString(R.string.clean_systemlog_note));
         // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
       //  tv_Clean_SystemLog_note.setLayoutParams(lpView);
         //   tv_Photo_Processing_Method_note.setTextColor(Color.GRAY);

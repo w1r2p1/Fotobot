@@ -18,16 +18,16 @@
     <string name="SMS_Password_description">Password for administration via SMS (if password is wrong than rest part of SMS will be ignored)</string>
 
     <string name="network">Network</string>
-    <string name="network_description">Select network mode: on(photos will be sent to email), off (photos will be saved in folder)</string>
+    <string name="network_description">Select network mode: on (photos will be saved on phone and sent to email), off (photos will be saved on phone without of mail sending )</string>
 
     <string name="Work_Dir">Working Folder</string>
-    <string name="Work_Dir_description">Path to folder for photos</string>
+    <string name="Work_Dir_description">Absolute path to folder for photos, f.e. for LG it is /storage/external_SD (you can use any file manager to find path for external storage)</string>
 
     <string name="Delete_Foto">Delete Foto</string>
     <string name="Delete_Foto_description">Check this box to delete foto after sending to email</string>
 
     <string name="fbloglength">Log Length in main screen (bytes)</string>
-    <string name="fbloglength_description">Define the length of the log</string>
+    <string name="fbloglength_description">Define the length of the text output in Main Window</string>
     <string name="fbfloglength">Log Length in file (lines)</string>
     <string name="fbfloglength_description">Number of lines in log file</string>
     <string name="log_size">Maximum Log file size (Kb)</string>
@@ -90,10 +90,10 @@
     <string name="Internet_connection_channel_description">Select Internet connection (Mobile Data, Wi-Fi or Both)</string>
     <string name="connection_method">Connection method</string>
     <string name="connection_method_description">Select method for Internet connection. Method 1 - connection will be opened before Fotobot starts.
-                "Method 2 - connection will be opened before taking of picture and Fotobot disconnects from Internet after sending of picture.</string>
+                "Method 2 - connection will be opened before taking of picture and closed after sending picture to email.</string>
 
     <string name="Fotobot_email">Fotobots email</string>
-    <string name="Fotobot_email_description">This is aux email address for mail sending.</string>
+    <string name="Fotobot_email_description">Fotobot uses this account for mail sending.</string>
 
     <string name="Fotobot_email_password">Fotobots email password</string>
 
@@ -116,12 +116,12 @@
 
     <string name="photo_processing_method">Foto processing method</string>
     <string name="photo_processing_method_dscription">Select method for image processing.
-    Method1 - get RAW from sensor and convert it to JPEG.
-    Method2 - get JPEG from camera.</string>
+    Hardware - get RAW from sensor and convert it to JPEG.
+    Software - get JPEG from camera.</string>
 
-    <string name="photo_scale">Foto scale</string>
+    <string name="photo_scale">Foto scale: 1-full size image, 1/2-image will be reduced 2 times along both directions, 1/4-4 times</string>
 
-    <string name="photo_resolution">Foto resolution</string>
+    <string name="photo_resolution">Foto resolution (width x height) in pixels</string>
 
     <string name="flash">Use flash</string>
 

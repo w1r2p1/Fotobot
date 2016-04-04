@@ -76,7 +76,7 @@
     привести к зависанию телефона. Для моделей телефона с Android 2 значения этого параметра меньше 30сек могут
     привести к зависанию телефона.</string>
     <string name="network">Сеть</string>
-    <string name="network_description">on - фото будут высланы на почту, off - фото будут сохранены на телефоне</string>
+    <string name="network_description">on - фото будут сохраняться на телефоне и будут высланы на почту, off - фото будут сохранены на телефоне, но отправляться на почту не будут</string>
     <string name="pause_between_processes">Интервал между процессами(сек)</string>
     <string name="pause_between_processes_description">Необходим для того, чтобы слабый процессор телефона успел обработать данные. Подбирается экспериментальным путем, примерно > 5 секунд.</string>
 
@@ -86,8 +86,8 @@
     <string name="Internet_connection_channel">Связь с Internet</string>
     <string name="Internet_connection_channel_description">Выберите способ подключения к Internet (мобильные данные, wi-fi или оба).</string>
     <string name="connection_method">Метод подключения</string>
-    <string name="connection_method_description">Выберите режим установки связи с Internet. В начале работы - связь будет установлена сразу и не будет отключаться от сети.
-                На кажом шаге - соедение с Internet будет устонавливаться перед тем, как сделать фото, затем фотобот отключится от Internet.</string>
+    <string name="connection_method_description">Выберите режим установки связи с Internet. Method 1 - связь будет установлена сразу и телефон не будет отключаться от сети.
+                Method 2 - соедение с Internet будет устонавливаться перед тем, как сделать фото, затем, после отправки фото на почту фотобот отключится от Internet.</string>
 
     <string name="Fotobot_email">Почтовый адрес Фотобота</string>
     <string name="Fotobot_email_description">С этого адреса Фотобот будет рассылать письма.</string>
@@ -109,12 +109,12 @@
     <string name="jpeg_compression">JPEG сжатие</string>
     <string name="jpeg_compression_description">Степень сжатия изображения, чем ближе к 100 тем выше качество изображения.</string>
 
-    <string name="photo_processing_method">Метод обработки фото.</string>
+    <string name="photo_processing_method">Метод обработки фото</string>
     <string name="photo_processing_method_dscription">Выберите метод дляпостобработки фото:
-    Method1 - получаем от камеры RAW массив и конвертирем его в JPEG.
-    Method2 - получаем с камеры готовый JPEG.</string>
+    Hardware - получаем от камеры RAW массив и конвертирем его в JPEG
+    Software - получаем с камеры готовый JPEG</string>
 
-    <string name="photo_scale">Масштаб фото</string>
+    <string name="photo_scale">Масштаб фото: 1-полноразмерное изображение, 1/2-фото будет уменьшено в 2 раза по обеим сторонам, 1/4-в 4 раза</string>
 
     <string name="photo_resolution">Разрешение в пикселях</string>
 
