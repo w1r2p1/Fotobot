@@ -41,6 +41,8 @@ public class Tab_Foto_Activity  extends Activity {
     ArrayList<String> spinnerArray_ppm;
     final String LOG_TAG = "Logs";
     TextView tv_Photo_Size_h, tv_Photo_Size_s;
+    TextView tv_Photo_Size_h_note;
+    TextView tv_Photo_Size_s_note;
     LinearLayout linLayout_Photo_Size_h_notes, linLayout_Photo_Size_s_notes;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,105 +141,7 @@ public class Tab_Foto_Activity  extends Activity {
       //  line_JPEG_Compression.getLayoutParams().height = 3;
       //  linLayout_JPEG_Compression_divider.addView(line_JPEG_Compression);
 
-// ------------------------------------------------------------------------------------------------
 
-// Метод обработки фото
-
-// Контейнер для метода
-        LinearLayout linLayout_Photo_Processing_Method = new LinearLayout(this);
-        linLayout_Photo_Processing_Method.setOrientation(LinearLayout.VERTICAL);
-        linLayout_Photo_Processing_Method.setPadding(5, 9, 5, 9);
-        linLayout_Photo_Processing_Method.setBackgroundColor(Color.rgb(208,208,208));
-      //  RelativeLayout.LayoutParams lpView_m1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-      //  RelativeLayout.LayoutParams lpView_m2 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-
-
-
-//        LinearLayout.LayoutParams lpView = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-  //      LinearLayout.LayoutParams lpView_et = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
-// Контейнер для пояснение
-      //  LinearLayout linLayout_Photo_Processing_Method_notes = new LinearLayout(this);
-      //  linLayout_Photo_Processing_Method_notes.setOrientation(LinearLayout.HORIZONTAL);
-      //  linLayout_Photo_Processing_Method_notes.setBackgroundColor(Color.rgb(192,192,192));
-
-// Контейнер для разделителя
-    //    LinearLayout linLayout_Photo_Processing_Method_divider = new LinearLayout(this);
-     //   linLayout_Photo_Processing_Method_divider.setOrientation(LinearLayout.HORIZONTAL);
-     //   linLayout_Photo_Processing_Method_divider.setPadding(5, 9, 5, 9);
-
-// Название
-        TextView tv_Photo_Processing_Method = new TextView(this);
-        tv_Photo_Processing_Method.setTypeface(Typeface.DEFAULT_BOLD);
-        tv_Photo_Processing_Method.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
-        tv_Photo_Processing_Method.setTextColor(Color.BLACK);
-        tv_Photo_Processing_Method.setText(getResources().getString(R.string.photo_processing_method));
-     //   tv_Photo_Processing_Method.setWidth((screenWidth - padding) / 100 * 80);
-     //   tv_Photo_Processing_Method.setLayoutParams(lpView);
-        tv_Photo_Processing_Method.setTypeface(Typeface.DEFAULT_BOLD);
-
-      //  lpView_m1.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Photo_Processing_Method.getId());
-      //  lpView_m1.width = (screenWidth - padding) / 100 * 60;
-      //  tv_Photo_Processing_Method.setLayoutParams(lpView_m1);
-        linLayout_Photo_Processing_Method.addView(tv_Photo_Processing_Method);
-
-// Список
-        spinnerArray_ppm = new ArrayList<String>();
-        spinnerArray_ppm.add("Hardware");
-        spinnerArray_ppm.add("Software");
-
-        spinner_ppm = new Spinner(this);
-        ArrayAdapter<String> spinnerArrayAdapter_ppm = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray_ppm);
-        spinner_ppm.setAdapter(spinnerArrayAdapter_ppm);
-        spinner_ppm.setSelection(getIndex(spinner_ppm, fb.Photo_Post_Processing_Method));
-      //  spinner_ppm.setMinimumWidth((screenWidth - padding) / 100 * 50);
-        spinner_ppm.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            public void onItemSelected(AdapterView<?> adapterView,
-                                       View view, int i, long l) {
-
-                if (spinnerArray_ppm.get(i) == "Hardware") {
-                    tv_Photo_Size_s.setVisibility(View.GONE);
-                    spinner_Software.setVisibility(View.GONE);
-                    tv_Photo_Size_h.setVisibility(View.VISIBLE);
-                    spinner_Hardware.setVisibility(View.VISIBLE);
-                   // linLayout_Photo_Size_h_notes.setVisibility(View.VISIBLE);
-                  //  linLayout_Photo_Size_s_notes.setVisibility(View.GONE);
-                } else {
-                    tv_Photo_Size_s.setVisibility(View.VISIBLE);
-                    spinner_Software.setVisibility(View.VISIBLE);
-                    tv_Photo_Size_h.setVisibility(View.GONE);
-                    spinner_Hardware.setVisibility(View.GONE);
-                  //  linLayout_Photo_Size_h_notes.setVisibility(View.GONE);
-                  //  linLayout_Photo_Size_s_notes.setVisibility(View.VISIBLE);
-                }
-
-            }
-
-            // If no option selected
-            public void onNothingSelected(AdapterView<?> arg0) {
-                // TODO Auto-generated method stub
-
-            }
-
-        });
-
-     //   lpView_m2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, spinner_ppm.getId());
-      //  lpView_m2.width = (screenWidth - padding) / 100 * 40;
-      //  spinner_ppm.setLayoutParams(lpView_m2);
-        linLayout_Photo_Processing_Method.addView(spinner_ppm);
-
-// Заметка для метода
-        TextView tv_Photo_Processing_Method_note = new TextView(this);
-        tv_Photo_Processing_Method_note.setTypeface(null, Typeface.NORMAL);
-        tv_Photo_Processing_Method_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
-        tv_Photo_Processing_Method_note.setTextColor(Color.BLACK);
-        tv_Photo_Processing_Method_note.setText(getResources().getString(R.string.photo_processing_method_dscription));
-        // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
-       // tv_Photo_Processing_Method_note.setLayoutParams(lpView);
-     //   tv_Photo_Processing_Method_note.setTextColor(Color.GRAY);
-      //  tv_Photo_Processing_Method_note.setPadding(5, 9, 5, 9);
-        linLayout_Photo_Processing_Method.addView(tv_Photo_Processing_Method_note);
 
 // ------------------------------------------------------------------------------------------------
 
@@ -256,7 +160,7 @@ public class Tab_Foto_Activity  extends Activity {
        // RelativeLayout.LayoutParams lpView_m6 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 
 
-        linLayout_Photo_Size.setBackgroundColor(Color.rgb(192,192,192));
+        linLayout_Photo_Size.setBackgroundColor(Color.rgb(208,208,208));
 
 // Контейнер для пояснение
 //        linLayout_Photo_Size_h_notes = new LinearLayout(this);
@@ -278,7 +182,8 @@ public class Tab_Foto_Activity  extends Activity {
         tv_Photo_Size_h.setTypeface(Typeface.DEFAULT_BOLD);
         tv_Photo_Size_h.setTextSize(14);
         tv_Photo_Size_h.setTextColor(Color.BLACK);
-        tv_Photo_Size_h.setText(getResources().getString(R.string.photo_scale));
+        tv_Photo_Size_h.setText("Hardware");
+
        // tv_Photo_Size_h.setWidth((screenWidth - padding) / 100 * 80);
 //        tv_Photo_Size_h.setLayoutParams(lpView_photo_size);
 
@@ -312,7 +217,8 @@ public class Tab_Foto_Activity  extends Activity {
         tv_Photo_Size_s.setTypeface(Typeface.DEFAULT_BOLD);
         tv_Photo_Size_s.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Photo_Size_s.setTextColor(Color.BLACK);
-        tv_Photo_Size_s.setText(getResources().getString(R.string.photo_resolution));
+        tv_Photo_Size_s.setText("Software");
+
       //  tv_Photo_Size_s.setWidth((screenWidth - padding) / 100 * 80);
        // tv_Photo_Size_s.setLayoutParams(lpView_photo_size);
 
@@ -358,11 +264,11 @@ public class Tab_Foto_Activity  extends Activity {
         linLayout_Photo_Size.addView(spinner_Software);
 
 // Заметка для Hardware
-        TextView tv_Photo_Size_h_note = new TextView(this);
+        tv_Photo_Size_h_note = new TextView(this);
         tv_Photo_Size_h_note.setTypeface(null, Typeface.NORMAL);
         tv_Photo_Size_h_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Photo_Size_h_note.setTextColor(Color.BLACK);
-        tv_Photo_Size_h_note.setText("Hardware");
+        tv_Photo_Size_h_note.setText(getResources().getString(R.string.photo_scale));
         // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
        // tv_Photo_Size_h_note.setLayoutParams(lpView);
         //tv_Photo_Size_h_note.setTextColor(Color.GRAY);
@@ -370,11 +276,11 @@ public class Tab_Foto_Activity  extends Activity {
         linLayout_Photo_Size.addView(tv_Photo_Size_h_note);
 
 // Заметка для Software
-        TextView tv_Photo_Size_s_note = new TextView(this);
+        tv_Photo_Size_s_note = new TextView(this);
         tv_Photo_Size_s_note.setTypeface(null, Typeface.NORMAL);
         tv_Photo_Size_s_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Photo_Size_s_note.setTextColor(Color.BLACK);
-        tv_Photo_Size_s_note.setText("Software");
+        tv_Photo_Size_s_note.setText(getResources().getString(R.string.photo_resolution));
         // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
       //  tv_Photo_Size_s_note.setLayoutParams(lpView);
      //   tv_Photo_Size_s_note.setTextColor(Color.GRAY);
@@ -390,6 +296,107 @@ public class Tab_Foto_Activity  extends Activity {
 
 // ------------------------------------------------------------------------------------------------
 
+// Метод обработки фото
+
+// Контейнер для метода
+        LinearLayout linLayout_Photo_Processing_Method = new LinearLayout(this);
+        linLayout_Photo_Processing_Method.setOrientation(LinearLayout.VERTICAL);
+        linLayout_Photo_Processing_Method.setPadding(5, 9, 5, 9);
+        linLayout_Photo_Processing_Method.setBackgroundColor(Color.rgb(208,208,208));
+        //  RelativeLayout.LayoutParams lpView_m1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        //  RelativeLayout.LayoutParams lpView_m2 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+
+
+
+//        LinearLayout.LayoutParams lpView = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        //      LinearLayout.LayoutParams lpView_et = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+// Контейнер для пояснение
+        //  LinearLayout linLayout_Photo_Processing_Method_notes = new LinearLayout(this);
+        //  linLayout_Photo_Processing_Method_notes.setOrientation(LinearLayout.HORIZONTAL);
+        //  linLayout_Photo_Processing_Method_notes.setBackgroundColor(Color.rgb(192,192,192));
+
+// Контейнер для разделителя
+        //    LinearLayout linLayout_Photo_Processing_Method_divider = new LinearLayout(this);
+        //   linLayout_Photo_Processing_Method_divider.setOrientation(LinearLayout.HORIZONTAL);
+        //   linLayout_Photo_Processing_Method_divider.setPadding(5, 9, 5, 9);
+
+// Название
+        TextView tv_Photo_Processing_Method = new TextView(this);
+        tv_Photo_Processing_Method.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Photo_Processing_Method.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Photo_Processing_Method.setTextColor(Color.BLACK);
+        tv_Photo_Processing_Method.setText(getResources().getString(R.string.photo_processing_method));
+        //   tv_Photo_Processing_Method.setWidth((screenWidth - padding) / 100 * 80);
+        //   tv_Photo_Processing_Method.setLayoutParams(lpView);
+        tv_Photo_Processing_Method.setTypeface(Typeface.DEFAULT_BOLD);
+
+        //  lpView_m1.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Photo_Processing_Method.getId());
+        //  lpView_m1.width = (screenWidth - padding) / 100 * 60;
+        //  tv_Photo_Processing_Method.setLayoutParams(lpView_m1);
+        linLayout_Photo_Processing_Method.addView(tv_Photo_Processing_Method);
+
+// Список
+        spinnerArray_ppm = new ArrayList<String>();
+        spinnerArray_ppm.add("Hardware");
+        spinnerArray_ppm.add("Software");
+
+        spinner_ppm = new Spinner(this);
+        ArrayAdapter<String> spinnerArrayAdapter_ppm = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray_ppm);
+        spinner_ppm.setAdapter(spinnerArrayAdapter_ppm);
+        spinner_ppm.setSelection(getIndex(spinner_ppm, fb.Photo_Post_Processing_Method));
+        //  spinner_ppm.setMinimumWidth((screenWidth - padding) / 100 * 50);
+        spinner_ppm.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            public void onItemSelected(AdapterView<?> adapterView,
+                                       View view, int i, long l) {
+
+                if (spinnerArray_ppm.get(i) == "Hardware") {
+                    tv_Photo_Size_s.setVisibility(View.GONE);
+                    spinner_Software.setVisibility(View.GONE);
+                    tv_Photo_Size_s_note.setVisibility(View.GONE);
+                    tv_Photo_Size_h.setVisibility(View.VISIBLE);
+                    spinner_Hardware.setVisibility(View.VISIBLE);
+                    tv_Photo_Size_h_note.setVisibility(View.VISIBLE);
+                    // linLayout_Photo_Size_h_notes.setVisibility(View.VISIBLE);
+                    //  linLayout_Photo_Size_s_notes.setVisibility(View.GONE);
+                } else {
+                    tv_Photo_Size_s.setVisibility(View.VISIBLE);
+                    spinner_Software.setVisibility(View.VISIBLE);
+                    tv_Photo_Size_s_note.setVisibility(View.VISIBLE);
+                    tv_Photo_Size_h.setVisibility(View.GONE);
+                    spinner_Hardware.setVisibility(View.GONE);
+                    tv_Photo_Size_h_note.setVisibility(View.GONE);
+                    //  linLayout_Photo_Size_h_notes.setVisibility(View.GONE);
+                    //  linLayout_Photo_Size_s_notes.setVisibility(View.VISIBLE);
+                }
+
+            }
+
+            // If no option selected
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+
+        });
+
+        //   lpView_m2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, spinner_ppm.getId());
+        //  lpView_m2.width = (screenWidth - padding) / 100 * 40;
+        //  spinner_ppm.setLayoutParams(lpView_m2);
+        linLayout_Photo_Processing_Method.addView(spinner_ppm);
+
+// Заметка для метода
+        TextView tv_Photo_Processing_Method_note = new TextView(this);
+        tv_Photo_Processing_Method_note.setTypeface(null, Typeface.NORMAL);
+        tv_Photo_Processing_Method_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_Photo_Processing_Method_note.setTextColor(Color.BLACK);
+        tv_Photo_Processing_Method_note.setText(getResources().getString(R.string.photo_processing_method_dscription));
+        // tv_Channels_notes.setWidth((screenWidth - padding) / 100 * 99);
+        // tv_Photo_Processing_Method_note.setLayoutParams(lpView);
+        //   tv_Photo_Processing_Method_note.setTextColor(Color.GRAY);
+        //  tv_Photo_Processing_Method_note.setPadding(5, 9, 5, 9);
+        linLayout_Photo_Processing_Method.addView(tv_Photo_Processing_Method_note);
 // Вспышка
 
 // Flash Container
@@ -399,7 +406,7 @@ public class Tab_Foto_Activity  extends Activity {
        // RelativeLayout.LayoutParams lpView_Flash = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
       //  RelativeLayout.LayoutParams lpView_Flash_m = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
       //  LinearLayout.LayoutParams lpView_et_Flash = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        linLayout_Flash.setBackgroundColor(Color.rgb(208,208,208));
+        linLayout_Flash.setBackgroundColor(Color.rgb(192,192,192));
 
 // Flash TextView
         TextView tv_Flash = new TextView(this);

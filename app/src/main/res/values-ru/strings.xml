@@ -111,8 +111,7 @@
 
     <string name="photo_processing_method">Метод обработки фото</string>
     <string name="photo_processing_method_dscription">Выберите метод дляпостобработки фото:
-    Hardware - получаем от камеры RAW массив и конвертирем его в JPEG
-    Software - получаем с камеры готовый JPEG</string>
+    Hardware - получаем от камеры RAW массив и конвертирем его в JPEG. Software - получаем с камеры готовый JPEG</string>
 
     <string name="photo_scale">Масштаб фото: 1-полноразмерное изображение, 1/2-фото будет уменьшено в 2 раза по обеим сторонам, 1/4-в 4 раза</string>
 
