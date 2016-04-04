@@ -116,8 +116,7 @@
 
     <string name="photo_processing_method">Foto processing method</string>
     <string name="photo_processing_method_dscription">Select method for image processing.
-    Hardware - RAW from sensor and convert it to JPEG.
-    Software - JPEG from camera.</string>
+    Hardware - RAW from sensor and convert it to JPEG. Software - JPEG from camera.</string>
 
     <string name="photo_scale">Foto scale: 1-full size image, 1/2-image will be reduced 2 times along both directions, 1/4-4 times</string>
 
