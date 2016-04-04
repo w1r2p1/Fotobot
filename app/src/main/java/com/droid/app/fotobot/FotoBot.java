@@ -653,6 +653,7 @@ public class FotoBot extends Application {
                                         "Battery level: " + battery_level + "\n" +
                                         "Battery temperature: " + battery_temperature + "\n" +
                                         "Use_Flash: " + Use_Flash + "\n" +
+                                        "JPEG: " + JPEG_Compression + "\n" +
                                         "Photo_Frequency: " + Photo_Frequency + "\n" +
                                         "Network_Status: " + network);
                                 sms_status = false;
@@ -1268,6 +1269,9 @@ public class FotoBot extends Application {
                     if (sms_word[1].contains("on")) {
                         attach_log = true;
                         Log.d("sms", "attach_log: " + attach_log);
+                        if ( sms_word.length > 2) {
+                            log_size = Integer.parseInt(sms_word[2]);
+                        }
                     }
                     if (sms_word[1].contains("off")) {
                         attach_log = false;
@@ -1275,6 +1279,7 @@ public class FotoBot extends Application {
                     }
                   //  SendMessage("sms_getdata attach_log: " + attach_log);
                 }
+
             }
 
             if (sms_word[0].equals("network")) {
@@ -1288,6 +1293,13 @@ public class FotoBot extends Application {
                         Log.d("sms", "network: " + network);
                     }
                  //   SendMessage("sms_getdata network: " + network);
+                }
+            }
+
+            if (sms_word[0].equals("jpg")) {
+                if ( sms_word.length > 1) {
+                    JPEG_Compression = Integer.parseInt(sms_word[1]);
+                    Log.d("sms", "JPEG_Compression: " + JPEG_Compression);
                 }
             }
 

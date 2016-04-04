@@ -58,7 +58,7 @@ That's all for fast start, go to main window and press START button, after that 
 Control via SMS:<br>
 1) password required in settings;<br>
 2) launch Fotobot by pressing START (Fotobot checks for SMS only when started);<br>
-3) send SMS to cellphone with started Fotobot:<br>
+3) send SMS to phone with started Fotobot:<br>
 <br>
 [SMS body]<br>
 passwd pass <br>
@@ -66,6 +66,7 @@ update 300 <br>
 network on <br>
 log on <br>
 flash on <br>
+jpg 50 <br>
 status on <br>
 <br>
 Description:<br>
@@ -73,7 +74,9 @@ passwd - password <br>
 update 300 - make photo each 300sec<br>
 network on - photo to email and storage, network off - photo to storage<br>
 log on - log will be attached to email<br>
+log on 50 - log will be attached to email (size of log is 50Kb)<br>
 flash on - photo with flash<br>
+jpg 50 - JPEG quality<br>
 status on - after that you will receive SMS with report.<br>
 <br>
 <br>
