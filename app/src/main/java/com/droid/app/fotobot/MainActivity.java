@@ -331,6 +331,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         fb.LoadSettings();
 
+        fb.log = getResources().getString(R.string.Fotobot) + "\n" +
+                getResources().getString(R.string.update);
+
         fb.work_dir_init();
 
      /*   File log_file = null;

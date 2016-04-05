@@ -10,6 +10,7 @@
     <string name="back_button">MAIN WINDOW</string>
 
     <string name="Fotobot">Welcome to Fotobot!</string>
+    <string name="update">Version 2.4.3:\nCocmetic issues has been fixed</string>
 
     <string name="Camera_Name">Camera Name</string>
     <string name="Camera_Name_description">Camera Name will be added to emails title, it will help to sort out mails in Inbox</string>
