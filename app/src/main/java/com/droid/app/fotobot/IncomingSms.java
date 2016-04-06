@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,16 +15,10 @@ import java.io.IOException;
 
 public class IncomingSms extends BroadcastReceiver {
 
-   // final FotoBot fb = (FotoBot) getApplicationContext();
-
     // Get the object of SmsManager
     final SmsManager sms = SmsManager.getDefault();
 
     public void onReceive(Context context, Intent intent) {
-      //  this();
-
-     //   this.context = appcontext;
-      //  final FotoBot fb = (FotoBot) context;
 
        // Retrieves a map of extended data from the intent.
         final Bundle bundle = intent.getExtras();
@@ -48,13 +41,6 @@ public class IncomingSms extends BroadcastReceiver {
                     Log.i("SmsReceiver", "senderNum: " + senderNum + "; message: " + message);
 
                     sms2file(context, message);
-
-
-                    // Show Alert
-                 //   int duration = Toast.LENGTH_LONG;
-                 //   Toast toast = Toast.makeText(context,
-                 //           "senderNum: "+ senderNum + ", message: " + message, duration);
-                 //   toast.show();
 
                 } // end for loop
             } // bundle is null

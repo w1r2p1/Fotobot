@@ -18,7 +18,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -51,27 +50,18 @@ public class Tab_Network_Activity extends Activity {
     EditText editText_Check_Web_Page;
     EditText editText_Network_Up_Delay;
     LinearLayout linLayout_Channels;
-    LinearLayout linLayout_Channels_note;
     LinearLayout linLayout_Connection_Method;
-    LinearLayout linLayout_Connection_Method_note;
     LinearLayout linLayout_Fotobot_Email;
-    LinearLayout linLayout_Fotobot_Email_note;
     LinearLayout linLayout_Fotobot_Password;
-    LinearLayout linLayout_Fotobot_Password_note;
     LinearLayout linLayout_Fotobot_Recipient;
-    LinearLayout linLayout_Fotobot_Recipient_note;
     LinearLayout linLayout_SMTP_Host;
-    LinearLayout linLayout_SMTP_Host_note;
     LinearLayout linLayout_SMTP_Port;
-    LinearLayout linLayout_SMTP_Port_note;
 
     Button btn, btn_mp;
     Spinner spinner_ppm;
-    ArrayAdapter<String> spinnerArrayAdapter1, spinnerArrayAdapter_Hardware;
+
     ArrayList<String> spinnerArray_ppm;
-    String[] connect_methods = {"Wi-Fi", "Mobile Data", "Both"};
-    private CheckBox check_box_flash;
-    private EditText edit_text_jpeg_compression;
+
     private int screenWidth, screenHeight;
     private int padding = 5;
 
@@ -102,10 +92,10 @@ public class Tab_Network_Activity extends Activity {
         linLayout_Channels = new LinearLayout(this);
         linLayout_Channels.setOrientation(LinearLayout.VERTICAL);
         RelativeLayout.LayoutParams lpView = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        RelativeLayout.LayoutParams lpView1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        RelativeLayout.LayoutParams lpView2m = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        //   RelativeLayout.LayoutParams lpView1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        //   RelativeLayout.LayoutParams lpView2m = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 
-        LinearLayout.LayoutParams lpView_et = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        //    LinearLayout.LayoutParams lpView_et = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         linLayout_Channels.setPadding(5, 9, 5, 9);
         linLayout_Channels.setBackgroundColor(Color.rgb(208, 208, 208));
 
@@ -135,14 +125,7 @@ public class Tab_Network_Activity extends Activity {
         tv_Channels_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Channels_note.setTextColor(Color.BLACK);
         tv_Channels_note.setText(getResources().getString(R.string.Internet_connection_channel_description));
-        //  tv_Channels_note.setPadding(5, 9, 5, 9);
         linLayout_Channels.addView(tv_Channels_note);
-
-// Разделитель
-//        View line = new View(this);
-//        line.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 1));
-//        line.setBackgroundColor(Color.rgb(210, 210, 210));
-//        line.getLayoutParams().height = 3;
 
 // ------------------------------------------------------------------------------------------------
 
@@ -152,23 +135,13 @@ public class Tab_Network_Activity extends Activity {
         linLayout_Connection_Method = new LinearLayout(this);
         linLayout_Connection_Method.setOrientation(LinearLayout.VERTICAL);
         linLayout_Connection_Method.setPadding(5, 9, 5, 9);
-        LinearLayout.LayoutParams lpView_Flash = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        LinearLayout.LayoutParams lpView_et_Flash = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+//        LinearLayout.LayoutParams lpView_Flash = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+//        LinearLayout.LayoutParams lpView_et_Flash = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-        RelativeLayout.LayoutParams lpView_m1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        RelativeLayout.LayoutParams lpView_m2 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+//        RelativeLayout.LayoutParams lpView_m1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+//        RelativeLayout.LayoutParams lpView_m2 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 
         linLayout_Connection_Method.setBackgroundColor(Color.rgb(192, 192, 192));
-
-// Пояснение контейнер
-        //  linLayout_Connection_Method_note = new LinearLayout(this);
-        //   linLayout_Connection_Method_note.setOrientation(LinearLayout.HORIZONTAL);
-        //   linLayout_Connection_Method_note.setBackgroundColor(Color.rgb(192, 192, 192));
-
-// Контейнер для разделителя
-        //   LinearLayout linLayout_Connection_Method_divider = new LinearLayout(this);
-        //   linLayout_Connection_Method_divider.setOrientation(LinearLayout.HORIZONTAL);
-        //   linLayout_Connection_Method_divider.setPadding(5, 9, 5, 9);
 
 // Название
         TextView tv_Connection_Method = new TextView(this);
@@ -176,12 +149,6 @@ public class Tab_Network_Activity extends Activity {
         tv_Connection_Method.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Connection_Method.setTextColor(Color.BLACK);
         tv_Connection_Method.setText(getResources().getString(R.string.connection_method));
-        //  tv_Connection_Method.setWidth((screenWidth - padding) / 100 * 70);
-        //  tv_Connection_Method.setLayoutParams(lpView_Flash);
-
-        // lpView2m.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Connection_Method.getId());
-        //  lpView2m.width = (screenWidth - padding) / 100 * 60;
-        //   tv_Connection_Method.setLayoutParams(lpView2m);
         linLayout_Connection_Method.addView(tv_Connection_Method);
 
 // Список
@@ -193,11 +160,6 @@ public class Tab_Network_Activity extends Activity {
         ArrayAdapter<String> spinnerArrayAdapter2 = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray_Connection_Method);
         spinner_Connection_Method.setAdapter(spinnerArrayAdapter2);
         spinner_Connection_Method.setSelection(getIndex(spinner_Connection_Method, fb.Network_Connection_Method));
-        //   spinner_Connection_Method.setMinimumWidth((screenWidth - padding) / 100 * 30);
-
-        //  lpView1.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, spinner_Connection_Method.getId());
-        //  lpView1.width = (screenWidth - padding) / 100 * 40;
-        //  spinner_Connection_Method.setLayoutParams(lpView1);
         linLayout_Connection_Method.addView(spinner_Connection_Method);
 
 // Заметка для каналов связи
@@ -206,16 +168,7 @@ public class Tab_Network_Activity extends Activity {
         tv_Connection_Method_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Connection_Method_note.setTextColor(Color.BLACK);
         tv_Connection_Method_note.setText(getResources().getString(R.string.connection_method_description));
-        //   tv_Connection_Method_note.setLayoutParams(lpView);
-        //  tv_Connection_Method_note.setPadding(5, 9, 5, 9);
         linLayout_Connection_Method.addView(tv_Connection_Method_note);
-
-// Разделитель
-        //  View line_Connection_Method = new View(this);
-        //  line_Connection_Method.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 1));
-        //   line_Connection_Method.setBackgroundColor(Color.rgb(210, 210, 210));
-        //  line_Connection_Method.getLayoutParams().height = 3;
-        //  linLayout_Connection_Method_divider.addView(line_Connection_Method);
 
 // ------------------------------------------------------------------------------------------------
 
@@ -224,21 +177,8 @@ public class Tab_Network_Activity extends Activity {
 // E-Mail Container
         linLayout_Fotobot_Email = new LinearLayout(this);
         linLayout_Fotobot_Email.setOrientation(LinearLayout.VERTICAL);
-        //  RelativeLayout.LayoutParams lpView_email = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        //  RelativeLayout.LayoutParams lpView_email_m1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         linLayout_Fotobot_Email.setPadding(5, 9, 5, 9);
         linLayout_Fotobot_Email.setBackgroundColor(Color.rgb(208, 208, 208));
-
-// Пояснение контейнер
-        //     linLayout_Fotobot_Email_note = new LinearLayout(this);
-        //   linLayout_Fotobot_Email_note.setOrientation(LinearLayout.HORIZONTAL);
-        //    linLayout_Fotobot_Email_note.setPadding(5, 9, 5, 9);
-        //     linLayout_Fotobot_Email_note.setBackgroundColor(Color.rgb(192, 192, 192));
-
-// Контейнер для разделителя
-        //    LinearLayout linLayout_Fotobot_Email_divider = new LinearLayout(this);
-        //    linLayout_Fotobot_Email_divider.setOrientation(LinearLayout.HORIZONTAL);
-        //     linLayout_Fotobot_Email_divider.setPadding(5, 9, 5, 9);
 
 // Название
         TextView tv_Fotobot_Email = new TextView(this);
@@ -246,26 +186,13 @@ public class Tab_Network_Activity extends Activity {
         tv_Fotobot_Email.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Fotobot_Email.setTextColor(Color.BLACK);
         tv_Fotobot_Email.setText(getResources().getString(R.string.Fotobot_email));
-        //  tv_Fotobot_Email.setMinimumWidth((screenWidth - padding) / 100 * 90);
-        //   tv_Fotobot_Email.setLayoutParams(lpView_email);
-
-        //   lpView_email.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Fotobot_Email.getId());
-        //   tv_Fotobot_Email.setLayoutParams(lpView_email);
         linLayout_Fotobot_Email.addView(tv_Fotobot_Email);
 
 // Почтовый адрес
         editText_Fotobot_Email = new EditText(this);
-        // editText_Fotobot_Email.setLayoutParams(lpView_et);
         editText_Fotobot_Email.setSingleLine(true);
         editText_Fotobot_Email.setText(fb.EMail_Sender);
         editText_Fotobot_Email.setTextColor(Color.rgb(50, 100, 150));
-        //   ViewGroup.LayoutParams lp = editText_Fotobot_Email.getLayoutParams();
-        // editText_Fotobot_Email.setWidth((screenWidth - padding) / 100 * 90);
-        //   editText_Fotobot_Email.setLayoutParams(lpView_email);
-        //   editText_Fotobot_Email.setGravity(Gravity.RIGHT);
-
-        //  lpView_email_m1.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, editText_Fotobot_Email.getId());
-        //    editText_Fotobot_Email.setLayoutParams(lpView_email_m1);
         linLayout_Fotobot_Email.addView(editText_Fotobot_Email);
 
 // Заметка для почты Фотобота
@@ -274,16 +201,7 @@ public class Tab_Network_Activity extends Activity {
         tv_Fotobot_Email_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Fotobot_Email_note.setTextColor(Color.BLACK);
         tv_Fotobot_Email_note.setText(getResources().getString(R.string.Fotobot_email_description));
-        //   tv_Fotobot_Email_note.setLayoutParams(lpView);
-        //   tv_Fotobot_Email_note.setPadding(5, 9, 5, 9);
         linLayout_Fotobot_Email.addView(tv_Fotobot_Email_note);
-
-// Разделитель
-        //   View line_Fotobot_Email = new View(this);
-        //    line_Fotobot_Email.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 1));
-        //    line_Fotobot_Email.setBackgroundColor(Color.rgb(210, 210, 210));
-        //    line_Fotobot_Email.getLayoutParams().height = 3;
-        //    linLayout_Fotobot_Email_divider.addView(line_Fotobot_Email);
 
 // ------------------------------------------------------------------------------------------------
 
@@ -292,21 +210,10 @@ public class Tab_Network_Activity extends Activity {
 // E-Mail Container
         linLayout_Fotobot_Password = new LinearLayout(this);
         linLayout_Fotobot_Password.setOrientation(LinearLayout.VERTICAL);
-        RelativeLayout.LayoutParams lpView_email_passwd = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        RelativeLayout.LayoutParams lpView_email_passwd_m = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        //      RelativeLayout.LayoutParams lpView_email_passwd = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        //      RelativeLayout.LayoutParams lpView_email_passwd_m = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         linLayout_Fotobot_Password.setPadding(5, 9, 5, 9);
         linLayout_Fotobot_Password.setBackgroundColor(Color.rgb(192, 192, 192));
-
-// Пояснение контейнер
-        //   linLayout_Fotobot_Password_note = new LinearLayout(this);
-        //   linLayout_Fotobot_Password_note.setOrientation(LinearLayout.HORIZONTAL);
-        //   linLayout_Fotobot_Password_note.setPadding(5, 9, 5, 9);
-        //   linLayout_Fotobot_Password_note.setBackgroundColor(Color.rgb(192, 192, 192));
-
-// Контейнер для разделителя
-        //   LinearLayout linLayout_Fotobot_Password_divider = new LinearLayout(this);
-        //   linLayout_Fotobot_Password_divider.setOrientation(LinearLayout.HORIZONTAL);
-        //   linLayout_Fotobot_Password_divider.setPadding(5, 9, 5, 9);
 
 // Название
         TextView tv_Fotobot_Password = new TextView(this);
@@ -314,29 +221,14 @@ public class Tab_Network_Activity extends Activity {
         tv_Fotobot_Password.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Fotobot_Password.setTextColor(Color.BLACK);
         tv_Fotobot_Password.setText(getResources().getString(R.string.Fotobot_email_password));
-        // tv_Fotobot_Password.setMinimumWidth((screenWidth - padding) / 100 * 90);
-        //  tv_Fotobot_Password.setLayoutParams(lpView_email);
-
-        //  lpView_email_passwd.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Fotobot_Password.getId());
-        //  tv_Fotobot_Password.setLayoutParams(lpView_email_passwd);
         linLayout_Fotobot_Password.addView(tv_Fotobot_Password);
 
 // Пароль
         editText_Fotobot_Password = new EditText(this);
-        //  editText_Fotobot_Password.setLayoutParams(lpView_et);
         editText_Fotobot_Password.setSingleLine(true);
-
         editText_Fotobot_Password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         editText_Fotobot_Password.setText(fb.EMail_Sender_Password);
-
         editText_Fotobot_Password.setTextColor(Color.rgb(50, 100, 150));
-        // ViewGroup.LayoutParams lp1 = editText_Fotobot_Email.getLayoutParams();
-        //  editText_Fotobot_Password.setWidth((screenWidth - padding) / 100 * 40);
-        //  editText_Fotobot_Password.setLayoutParams(lpView_email);
-        //  editText_Fotobot_Password.setGravity(Gravity.RIGHT);
-
-        //   lpView_email_passwd_m.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, editText_Fotobot_Password.getId());
-        //   editText_Fotobot_Password.setLayoutParams(lpView_email_passwd_m);
         linLayout_Fotobot_Password.addView(editText_Fotobot_Password);
 
 // Заметка для пароля
@@ -345,16 +237,7 @@ public class Tab_Network_Activity extends Activity {
         tv_Fotobot_Password_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Fotobot_Password_note.setTextColor(Color.BLACK);
         tv_Fotobot_Password_note.setText("Пароль.");
-        //   tv_Fotobot_Password_note.setLayoutParams(lpView);
-        //  tv_Fotobot_Password_note.setPadding(5, 9, 5, 9);
         linLayout_Fotobot_Password.addView(tv_Fotobot_Password_note);
-
-// Разделитель
-        //  View line_Fotobot_Password = new View(this);
-        //  line_Fotobot_Password.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 1));
-        //  line_Fotobot_Password.setBackgroundColor(Color.rgb(210, 210, 210));
-        //  line_Fotobot_Password.getLayoutParams().height = 3;
-        //   linLayout_Fotobot_Password_divider.addView(line_Fotobot_Password);
 
 // ------------------------------------------------------------------------------------------------
 
@@ -363,21 +246,8 @@ public class Tab_Network_Activity extends Activity {
 // Recipient Container
         linLayout_Fotobot_Recipient = new LinearLayout(this);
         linLayout_Fotobot_Recipient.setOrientation(LinearLayout.VERTICAL);
-        // RelativeLayout.LayoutParams lpView_recipient = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        //  RelativeLayout.LayoutParams lpView_recipient_m = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         linLayout_Fotobot_Recipient.setPadding(5, 9, 5, 9);
         linLayout_Fotobot_Recipient.setBackgroundColor(Color.rgb(208, 208, 208));
-
-// Пояснение контейнер
-        //  linLayout_Fotobot_Recipient_note = new LinearLayout(this);
-        //  linLayout_Fotobot_Recipient_note.setOrientation(LinearLayout.HORIZONTAL);
-        //   linLayout_Fotobot_Recipient_note.setPadding(5, 9, 5, 9);
-        //   linLayout_Fotobot_Recipient_note.setBackgroundColor(Color.rgb(192, 192, 192));
-
-// Контейнер для разделителя
-        //  LinearLayout linLayout_Fotobot_Recipient_divider = new LinearLayout(this);
-        //   linLayout_Fotobot_Recipient_divider.setOrientation(LinearLayout.HORIZONTAL);
-        //   linLayout_Fotobot_Recipient_divider.setPadding(5, 9, 5, 9);
 
 // Название
         TextView tv_Fotobot_Recipient = new TextView(this);
@@ -385,25 +255,13 @@ public class Tab_Network_Activity extends Activity {
         tv_Fotobot_Recipient.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Fotobot_Recipient.setTextColor(Color.BLACK);
         tv_Fotobot_Recipient.setText(getResources().getString(R.string.Recipient_email));
-        //  tv_Fotobot_Recipient.setMinimumWidth((screenWidth - padding) / 100 * 60);
-        //   tv_Fotobot_Recipient.setLayoutParams(lpView_email);
-
-        //  lpView_recipient.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Fotobot_Recipient.getId());
-        //   tv_Fotobot_Recipient.setLayoutParams(lpView_recipient);
         linLayout_Fotobot_Recipient.addView(tv_Fotobot_Recipient);
 
 // Почтовый адрес получателя
         editText_Fotobot_Recipient = new EditText(this);
-        //   editText_Fotobot_Recipient.setLayoutParams(lpView_et);
         editText_Fotobot_Recipient.setSingleLine(true);
         editText_Fotobot_Recipient.setText(fb.EMail_Recepient);
         editText_Fotobot_Recipient.setTextColor(Color.rgb(50, 100, 150));
-        //   editText_Fotobot_Recipient.setWidth((screenWidth - padding) / 100 * 40);
-        //   editText_Fotobot_Recipient.setLayoutParams(lpView_email);
-        //    editText_Fotobot_Recipient.setGravity(Gravity.RIGHT);
-
-        //    lpView_recipient_m.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, editText_Fotobot_Recipient.getId());
-        //   editText_Fotobot_Recipient.setLayoutParams(lpView_recipient_m);
         linLayout_Fotobot_Recipient.addView(editText_Fotobot_Recipient);
 
 // Заметка для почты Фотобота
@@ -412,16 +270,7 @@ public class Tab_Network_Activity extends Activity {
         tv_Fotobot_Recipient_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Fotobot_Recipient_note.setTextColor(Color.BLACK);
         tv_Fotobot_Recipient_note.setText("Получатель писем с фото");
-        // tv_Fotobot_Recipient_note.setLayoutParams(lpView);
-        // tv_Fotobot_Recipient_note.setPadding(5, 9, 5, 9);
         linLayout_Fotobot_Recipient.addView(tv_Fotobot_Recipient_note);
-
-// Разделитель
-//        View line_Fotobot_Recipient = new View(this);
-//        line_Fotobot_Recipient.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 1));
-//        line_Fotobot_Recipient.setBackgroundColor(Color.rgb(210, 210, 210));
-//        line_Fotobot_Recipient.getLayoutParams().height = 3;
-//        linLayout_Fotobot_Recipient_divider.addView(line_Fotobot_Recipient);
 
 // ------------------------------------------------------------------------------------------------
 
@@ -430,21 +279,8 @@ public class Tab_Network_Activity extends Activity {
 // SMTPHost Container
         linLayout_SMTP_Host = new LinearLayout(this);
         linLayout_SMTP_Host.setOrientation(LinearLayout.VERTICAL);
-        //  RelativeLayout.LayoutParams lpView_smtp_host = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        //   RelativeLayout.LayoutParams lpView_smtp_host_m = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         linLayout_SMTP_Host.setPadding(5, 9, 5, 9);
         linLayout_SMTP_Host.setBackgroundColor(Color.rgb(208, 208, 208));
-
-// Пояснение контейнер
-        //  linLayout_SMTP_Host_note = new LinearLayout(this);
-        //  linLayout_SMTP_Host_note.setOrientation(LinearLayout.HORIZONTAL);
-        //  linLayout_SMTP_Host_note.setPadding(5, 9, 5, 9);
-        //  linLayout_SMTP_Host_note.setBackgroundColor(Color.rgb(192, 192, 192));
-
-// Контейнер для разделителя
-        //  LinearLayout linLayout_SMTP_Host_divider = new LinearLayout(this);
-        //  linLayout_SMTP_Host_divider.setOrientation(LinearLayout.HORIZONTAL);
-        //  linLayout_SMTP_Host_divider.setPadding(5, 9, 5, 9);
 
 // Название
         TextView tv_SMTP_Host = new TextView(this);
@@ -452,25 +288,13 @@ public class Tab_Network_Activity extends Activity {
         tv_SMTP_Host.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_SMTP_Host.setTextColor(Color.BLACK);
         tv_SMTP_Host.setText(getResources().getString(R.string.email_server));
-//        tv_SMTP_Host.setMinimumWidth((screenWidth - padding) / 100 * 60);
-        //       tv_SMTP_Host.setLayoutParams(lpView_email);
-
-        //     lpView_smtp_host.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_SMTP_Host.getId());
-        //   tv_SMTP_Host.setLayoutParams(lpView_smtp_host);
         linLayout_SMTP_Host.addView(tv_SMTP_Host);
 
 // Адрес почтового сервера
         editText_SMTP_Host = new EditText(this);
-        //   editText_SMTP_Host.setLayoutParams(lpView_et);
         editText_SMTP_Host.setSingleLine(true);
         editText_SMTP_Host.setText(fb.SMTP_Host);
         editText_SMTP_Host.setTextColor(Color.rgb(50, 100, 150));
-        //  editText_SMTP_Host.setWidth((screenWidth - padding) / 100 * 40);
-        //  editText_SMTP_Host.setLayoutParams(lpView_email);
-        //  editText_SMTP_Host.setGravity(Gravity.RIGHT);
-
-        //  lpView_smtp_host_m.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, editText_SMTP_Host.getId());
-        //  editText_SMTP_Host.setLayoutParams(lpView_smtp_host_m);
         linLayout_SMTP_Host.addView(editText_SMTP_Host);
 
 // Заметка для SMTP Host
@@ -479,16 +303,7 @@ public class Tab_Network_Activity extends Activity {
         tv_SMTP_Host_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_SMTP_Host_note.setTextColor(Color.BLACK);
         tv_SMTP_Host_note.setText(getResources().getString(R.string.email_server_description));
-        //  tv_SMTP_Host_note.setLayoutParams(lpView);
-        //  tv_SMTP_Host_note.setPadding(5, 9, 5, 9);
         linLayout_SMTP_Host.addView(tv_SMTP_Host_note);
-
-// Разделитель
-//        View line_SMTP_Host = new View(this);
-//        line_SMTP_Host.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 1));
-//        line_SMTP_Host.setBackgroundColor(Color.rgb(210, 210, 210));
-//        line_SMTP_Host.getLayoutParams().height = 3;
-//        linLayout_SMTP_Host_divider.addView(line_SMTP_Host);
 
 // ------------------------------------------------------------------------------------------------
 
@@ -497,21 +312,8 @@ public class Tab_Network_Activity extends Activity {
 // SMTP Port Container
         linLayout_SMTP_Port = new LinearLayout(this);
         linLayout_SMTP_Port.setOrientation(LinearLayout.VERTICAL);
-        //  RelativeLayout.LayoutParams lpView_smtp_port = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        //  RelativeLayout.LayoutParams lpView_smtp_port_m = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         linLayout_SMTP_Port.setPadding(5, 9, 5, 9);
         linLayout_SMTP_Port.setBackgroundColor(Color.rgb(192, 192, 192));
-
-// Пояснение контейнер
-        // linLayout_SMTP_Port_note = new LinearLayout(this);
-        // linLayout_SMTP_Port_note.setOrientation(LinearLayout.HORIZONTAL);
-        //  linLayout_SMTP_Port_note.setPadding(5, 9, 5, 9);
-        //  linLayout_SMTP_Port_note.setBackgroundColor(Color.rgb(192, 192, 192));
-
-// Контейнер для разделителя
-        //   LinearLayout linLayout_SMTP_Port_divider = new LinearLayout(this);
-        //   linLayout_SMTP_Port_divider.setOrientation(LinearLayout.HORIZONTAL);
-        //   linLayout_SMTP_Port_divider.setPadding(5, 9, 5, 9);
 
 // Название
         TextView tv_SMTP_Port = new TextView(this);
@@ -519,25 +321,13 @@ public class Tab_Network_Activity extends Activity {
         tv_SMTP_Port.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_SMTP_Port.setTextColor(Color.BLACK);
         tv_SMTP_Port.setText(getResources().getString(R.string.email_server_port));
-        //   tv_SMTP_Port.setMinimumWidth((screenWidth - padding) / 100 * 80);
-        //   tv_SMTP_Port.setLayoutParams(lpView_email);
-
-        //   lpView_smtp_port.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_SMTP_Port.getId());
-        //   tv_SMTP_Port.setLayoutParams(lpView_smtp_port);
         linLayout_SMTP_Port.addView(tv_SMTP_Port);
 
 // Порт почтового сервера
         editText_SMTP_Port = new EditText(this);
-        //  editText_SMTP_Port.setLayoutParams(lpView_et);
         editText_SMTP_Port.setSingleLine(true);
         editText_SMTP_Port.setText(fb.SMTP_Port);
         editText_SMTP_Port.setTextColor(Color.rgb(50, 100, 150));
-        //   editText_SMTP_Port.setWidth((screenWidth - padding) / 100 * 20);
-        //   editText_SMTP_Port.setLayoutParams(lpView_email);
-        //   editText_SMTP_Port.setGravity(Gravity.RIGHT);
-
-        // lpView_smtp_port_m.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, editText_SMTP_Port.getId());
-        //  editText_SMTP_Port.setLayoutParams(lpView_smtp_port_m);
         linLayout_SMTP_Port.addView(editText_SMTP_Port);
 
 // Заметка для SMTP Port
@@ -546,36 +336,22 @@ public class Tab_Network_Activity extends Activity {
         tv_SMTP_Port_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_SMTP_Port_note.setTextColor(Color.BLACK);
         tv_SMTP_Port_note.setText(getResources().getString(R.string.email_server_port_description));
-        //  tv_SMTP_Port_note.setLayoutParams(lpView);
-        //  tv_SMTP_Port_note.setPadding(5, 9, 5, 9);
         linLayout_SMTP_Port.addView(tv_SMTP_Port_note);
-
-// Разделитель
-//        View line_SMTP_Port = new View(this);
-//        line_SMTP_Port.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 1));
-//        line_SMTP_Port.setBackgroundColor(Color.rgb(210, 210, 210));
-//        line_SMTP_Port.getLayoutParams().height = 3;
-//        linLayout_SMTP_Port_divider.addView(line_SMTP_Port);
 
 // Second Container (Horizontal LinearLayout)
         LinearLayout linLayout2 = new LinearLayout(this);
         linLayout2.setOrientation(LinearLayout.VERTICAL);
         linLayout2.setPadding(5, 9, 5, 9);
-        LinearLayout.LayoutParams lpView2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        LinearLayout.LayoutParams lpViewbutton = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
-//        linLayout2.setGravity(Gravity.BOTTOM | Gravity.CENTER);
-        //       linLayout2.setLayoutParams(lpView2);
+//        LinearLayout.LayoutParams lpView2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+//        LinearLayout.LayoutParams lpViewbutton = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
 // Password Container
         LinearLayout linLayout_email_password = new LinearLayout(this);
         linLayout_email_password.setOrientation(LinearLayout.VERTICAL);
-//        LinearLayout.LayoutParams lpView_email_password = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
 // E-Mail Container2
         LinearLayout linLayout_email_recepient = new LinearLayout(this);
         linLayout_email_recepient.setOrientation(LinearLayout.VERTICAL);
-        // LinearLayout.LayoutParams lpView_email_recepient = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
 // ------------------------------------------------------------------------------------------------
 
@@ -609,14 +385,9 @@ public class Tab_Network_Activity extends Activity {
 
 // Адрес сервера для проверки связи
         editText_Check_Web_Page = new EditText(this);
-        //  editText_Check_Web_Page.setLayoutParams(lpView_et);
         editText_Check_Web_Page.setSingleLine(true);
         editText_Check_Web_Page.setText(fb.check_web_page);
         editText_Check_Web_Page.setTextColor(Color.rgb(50, 100, 150));
-        //  editText_Check_Web_Page.setWidth((screenWidth - padding) / 100 * 40);
-        //  editText_Check_Web_Page.setLayoutParams(lpView_Check_Web_Page);
-        //  editText_Check_Web_Page.setGravity(Gravity.RIGHT);
-
         lpView_Check_Web_Page_m.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, editText_Check_Web_Page.getId());
         editText_Check_Web_Page.setLayoutParams(lpView_Check_Web_Page_m);
         linLayout_Check_Web_Page.addView(editText_Check_Web_Page);
@@ -636,16 +407,8 @@ public class Tab_Network_Activity extends Activity {
 
 // Network Up Delay Container
         LinearLayout linLayout_Network_Up_Delay = new LinearLayout(this);
-        // RelativeLayout.LayoutParams lpView_Network_Up_Delay = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        //  RelativeLayout.LayoutParams lpView_Network_Up_Delay_m = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         linLayout_Network_Up_Delay.setPadding(5, 9, 5, 9);
         linLayout_Network_Up_Delay.setBackgroundColor(Color.rgb(192, 192, 192));
-
-// Пояснение контейнер
-        //  LinearLayout linLayout_Network_Up_Delay_note = new LinearLayout(this);
-        //  linLayout_Network_Up_Delay_note.setOrientation(LinearLayout.HORIZONTAL);
-        //   linLayout_Network_Up_Delay_note.setPadding(5, 9, 5, 9);
-        //   linLayout_Network_Up_Delay_note.setBackgroundColor(Color.rgb(192, 192, 192));
 
 // Название
         TextView tv_Network_Up_Delay = new TextView(this);
@@ -653,11 +416,6 @@ public class Tab_Network_Activity extends Activity {
         tv_Network_Up_Delay.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Network_Up_Delay.setTextColor(Color.BLACK);
         tv_Network_Up_Delay.setText(getResources().getString(R.string.network_up_delay));
-        //  tv_Network_Up_Delay.setMinimumWidth((screenWidth - padding) / 100 * 80);
-        //   tv_Network_Up_Delay.setLayoutParams(lpView_email);
-
-        //   lpView_Network_Up_Delay.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Network_Up_Delay.getId());
-        //   tv_Network_Up_Delay.setLayoutParams(lpView_Network_Up_Delay);
         linLayout_Network_Up_Delay.addView(tv_Network_Up_Delay);
 
 // Network Up Delay
@@ -666,12 +424,6 @@ public class Tab_Network_Activity extends Activity {
         editText_Network_Up_Delay.setSingleLine(true);
         editText_Network_Up_Delay.setText(Integer.toString(fb.network_up_delay));
         editText_Network_Up_Delay.setTextColor(Color.rgb(50, 100, 150));
-        //  editText_Network_Up_Delay.setWidth((screenWidth - padding) / 100 * 20);
-        //  editText_Network_Up_Delay.setLayoutParams(lpView_Network_Up_Delay);
-        //  editText_Network_Up_Delay.setGravity(Gravity.RIGHT);
-
-        //  lpView_Network_Up_Delay_m.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, editText_Network_Up_Delay.getId());
-        //   editText_Network_Up_Delay.setLayoutParams(lpView_Network_Up_Delay_m);
         linLayout_Network_Up_Delay.addView(editText_Network_Up_Delay);
 
 // Заметка для Network Up Delay
@@ -680,9 +432,6 @@ public class Tab_Network_Activity extends Activity {
         tv_Network_Up_Delay_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Network_Up_Delay_note.setTextColor(Color.BLACK);
         tv_Network_Up_Delay_note.setText(getResources().getString(R.string.network_up_delay_description));
-        //  tv_Network_Up_Delay_note.setLayoutParams(lpView);
-        //  tv_Network_Up_Delay_note.setPadding(5, 9, 5, 9);
-        //  linLayout_Network_Up_Delay_note.addView(tv_Network_Up_Delay_note);
 
 // ------------------------------------------------------------------------------------------------
 
@@ -693,13 +442,6 @@ public class Tab_Network_Activity extends Activity {
         linLayout_Net_Stat.setOrientation(LinearLayout.VERTICAL);
         linLayout_Net_Stat.setPadding(5, 9, 5, 9);
         linLayout_Net_Stat.setBackgroundColor(Color.rgb(192, 192, 192));
-        //  lpView_m1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        //  lpView_m2 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-
-// Контейнер для пояснение
-//        LinearLayout linLayout_Net_Stat_notes = new LinearLayout(this);
-//        linLayout_Net_Stat_notes.setOrientation(LinearLayout.HORIZONTAL);
-//        linLayout_Net_Stat_notes.setBackgroundColor(Color.rgb(192, 192, 192));
 
 // Название
         TextView tv_Net_Stat = new TextView(this);
@@ -708,10 +450,6 @@ public class Tab_Network_Activity extends Activity {
         tv_Net_Stat.setTextColor(Color.BLACK);
         tv_Net_Stat.setText(getResources().getString(R.string.network));
         tv_Net_Stat.setTypeface(Typeface.DEFAULT_BOLD);
-
-//        lpView_m1.addRule(RelativeLayout.ALIGN_PARENT_LEFT, tv_Net_Stat.getId());
-//        lpView_m1.width = (screenWidth - padding) / 100 * 60;
-//        tv_Net_Stat.setLayoutParams(lpView_m1);
         linLayout_Net_Stat.addView(tv_Net_Stat);
 
 // Список
@@ -727,7 +465,7 @@ public class Tab_Network_Activity extends Activity {
         } else {
             spinner_ppm.setSelection(getIndex(spinner_ppm, "off"));
         }
-        //      spinner_ppm.setMinimumWidth((screenWidth - padding) / 100 * 50);
+
         spinner_ppm.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             public void onItemSelected(AdapterView<?> adapterView,
@@ -735,30 +473,19 @@ public class Tab_Network_Activity extends Activity {
 
                 if (spinnerArray_ppm.get(i) == "on") {
                     linLayout_Channels.setVisibility(View.VISIBLE);
-                    //      linLayout_Channels_note.setVisibility(View.VISIBLE);
                     linLayout_Connection_Method.setVisibility(View.VISIBLE);
-                    //                linLayout_Connection_Method_note.setVisibility(View.VISIBLE);
                     linLayout_Fotobot_Email.setVisibility(View.VISIBLE);
-                    //              linLayout_Fotobot_Email_note.setVisibility(View.VISIBLE);
                     linLayout_Fotobot_Password.setVisibility(View.VISIBLE);
                     linLayout_SMTP_Host.setVisibility(View.VISIBLE);
-                    //            linLayout_SMTP_Host_note.setVisibility(View.VISIBLE);
                     linLayout_SMTP_Port.setVisibility(View.VISIBLE);
-                    //          linLayout_SMTP_Port_note.setVisibility(View.VISIBLE);
                     linLayout_Fotobot_Recipient.setVisibility(View.VISIBLE);
-
                 } else {
                     linLayout_Channels.setVisibility(View.GONE);
-                    //  linLayout_Channels_note.setVisibility(View.GONE);
                     linLayout_Connection_Method.setVisibility(View.GONE);
-                    //        linLayout_Connection_Method_note.setVisibility(View.GONE);
                     linLayout_Fotobot_Email.setVisibility(View.GONE);
-                    //      linLayout_Fotobot_Email_note.setVisibility(View.GONE);
                     linLayout_Fotobot_Password.setVisibility(View.GONE);
                     linLayout_SMTP_Host.setVisibility(View.GONE);
-                    //      linLayout_SMTP_Host_note.setVisibility(View.GONE);
                     linLayout_SMTP_Port.setVisibility(View.GONE);
-                    //      linLayout_SMTP_Port_note.setVisibility(View.GONE);
                     linLayout_Fotobot_Recipient.setVisibility(View.GONE);
                 }
 
@@ -772,9 +499,6 @@ public class Tab_Network_Activity extends Activity {
 
         });
 
-        //    lpView_m2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, spinner_ppm.getId());
-        //  lpView_m2.width = (screenWidth - padding) / 100 * 40;
-        //spinner_ppm.setLayoutParams(lpView_m2);
         linLayout_Net_Stat.addView(spinner_ppm);
 
 // Заметка для метода
@@ -783,9 +507,6 @@ public class Tab_Network_Activity extends Activity {
         tv_Net_Stat_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Net_Stat_note.setTextColor(Color.BLACK);
         tv_Net_Stat_note.setText(getResources().getString(R.string.network_description));
-        //  tv_Net_Stat_note.setLayoutParams(lpView);
-        //  tv_Net_Stat_note.setPadding(5, 9, 5, 9);
-        //  linLayout_Net_Stat_notes.addView(tv_Net_Stat_note);
         linLayout_Net_Stat.addView(tv_Net_Stat_note);
 
 // ------------------------------------------------------------------------------------------------
@@ -858,8 +579,6 @@ public class Tab_Network_Activity extends Activity {
 // Save the changes in SharedPreferences
                 editor.commit(); // commit changes
 
-                //  fb.sendSMS("+79657595345","fb");
-
             }
         });
 
@@ -899,10 +618,8 @@ public class Tab_Network_Activity extends Activity {
         FullFrame.addView(linLayout_Net_Stat);
 
         if (Build.VERSION.SDK_INT <= 21) {
-
             FullFrame.addView(linLayout_Channels);
             FullFrame.addView(linLayout_Connection_Method);
-
         }
 
         FullFrame.addView(linLayout_Fotobot_Email);

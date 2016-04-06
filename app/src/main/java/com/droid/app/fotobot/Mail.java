@@ -51,9 +51,6 @@ public class Mail extends javax.mail.Authenticator {
 
     private Multipart _multipart;
 
-    final String LOG_TAG = "Mail";
-
-
     public Mail() {
         _host = "smtp.gmail.com"; // default smtp server
         //_host = "smtp.mail.ru";
@@ -94,11 +91,6 @@ public class Mail extends javax.mail.Authenticator {
     }
 
     public boolean send() throws Exception {
-
-        final FotoBot fb = (FotoBot) this.context;
-
-        //fb.SendMessage("send");
-      //  fb.SendMessage(".");
 
         Properties props = _setProperties();
 
