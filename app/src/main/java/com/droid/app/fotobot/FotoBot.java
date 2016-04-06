@@ -7,7 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.Loader;
+//import android.content.Loader;
 import android.content.SharedPreferences;
 import android.hardware.Camera;
 import android.net.ConnectivityManager;
@@ -18,7 +18,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
-import android.provider.Browser;
+//import android.provider.Browser;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -43,7 +43,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.FileHandler;
-import java.util.logging.Logger;
+//import java.util.logging.Logger;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
 
@@ -154,7 +154,7 @@ public class FotoBot extends Application {
 
     public Handler h;
 
-    public SurfaceHolder sHolder = null;
+ //   public SurfaceHolder sHolder = null;
 
     public boolean frame_delay = false;
 
@@ -254,26 +254,26 @@ public class FotoBot extends Application {
     /**
      * Батарейка
      */
-    int battery_health;
-    int battery_icon_small;
-    int battery_charge;
-    int battery_plugged;
-    boolean battery_present;
-    int battery_scale;
-    int battery_status;
-    String battery_technology;
+  //  int battery_health;
+  //  int battery_icon_small;
+  //  int battery_charge;
+ //   int battery_plugged;
+ //   boolean battery_present;
+ //   int battery_scale;
+ //   int battery_status;
+ //   String battery_technology;
     float battery_temperature;
-    int battery_voltage;
+ //   int battery_voltage;
 
     /**
      * Логфайл
      */
-    public String logpath = "";
-    public String logfile = "Fotobot.txt";
+  //  public String logpath = "";
+  //  public String logfile = "Fotobot.txt";
 
-    FileHandler fh = null;
+  //  FileHandler fh = null;
 
-    boolean init_logger = false;
+  //  boolean init_logger = false;
 
     public int log_line_number = 150;
 
@@ -318,11 +318,11 @@ public class FotoBot extends Application {
         return str;
     }
 
-    public void setstr(String fb_str) {
+  /*  public void setstr(String fb_str) {
 
         str = fb_str;
     }
-
+*/
     /**
      * В конструкторе проводим инициализацию объекта посредством считывания всех свойств из SharedPreferences.
      */
@@ -331,14 +331,15 @@ public class FotoBot extends Application {
         LoadSettings();
     }
 
-    public void Init() {
+  /*  public void Init() {
 
     }
-
+*/
+/*
     public void WriteData() {
 
     }
-
+*/
     /**
      * isOnline - Check if there is a NetworkConnection
      *
@@ -573,10 +574,6 @@ public class FotoBot extends Application {
      */
     public void fbpause(final Handler h, final int delay) {
 
-        final String message;
-
-        // final Context context = getApplicationContext();
-
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
         PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                 "MyWakelockTag");
@@ -647,7 +644,7 @@ public class FotoBot extends Application {
 
                     if (i % wake_up_interval == 0 && frame_delay) {
 
-                        File logfile = null;
+                     //   File logfile = null;
 
                         String cmd = null;
 
@@ -663,7 +660,6 @@ public class FotoBot extends Application {
                         } catch (IOException e) {
                             e.printStackTrace();
                             Log.d("LOG_TAG", "logcat2file doesn't work");
-                            //   return false;
                         }
 
                         try {
@@ -1223,9 +1219,7 @@ public class FotoBot extends Application {
                         attach_log = false;
                         Log.d("sms", "attach_log: " + attach_log);
                     }
-                    //  SendMessage("sms_getdata attach_log: " + attach_log);
                 }
-
             }
 
             if (sms_word[0].equals("network")) {
@@ -1238,7 +1232,6 @@ public class FotoBot extends Application {
                         network = false;
                         Log.d("sms", "network: " + network);
                     }
-                    //   SendMessage("sms_getdata network: " + network);
                 }
             }
 
@@ -1259,7 +1252,6 @@ public class FotoBot extends Application {
                         Use_Flash = false;
                         Log.d("sms", "Use_Flash: " + Use_Flash);
                     }
-                    //  SendMessage("sms_getdata Use_Flash: " + Use_Flash);
                 }
             }
 
@@ -1270,6 +1262,8 @@ public class FotoBot extends Application {
         if (sms_incoming_passwd.equals(sms_passwd)) {
             SendMessage("Пароль верный, записываем настройки");
             SaveSettings();
+// drop password before next usage
+            sms_incoming_passwd = "";
         } else {
             SendMessage("Пароль неверный");
             LoadSettings();
