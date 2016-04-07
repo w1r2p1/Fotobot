@@ -633,6 +633,9 @@ public class FotoBot extends Application {
                                 sms_status = false;
                             }
 
+                            // drop password before next usage
+                            sms_incoming_passwd = "";
+
                             return;
 
                         } else {
@@ -1262,8 +1265,6 @@ public class FotoBot extends Application {
         if (sms_incoming_passwd.equals(sms_passwd)) {
             SendMessage("Пароль верный, записываем настройки");
             SaveSettings();
-// drop password before next usage
-            sms_incoming_passwd = "";
         } else {
             SendMessage("Пароль неверный");
             LoadSettings();
