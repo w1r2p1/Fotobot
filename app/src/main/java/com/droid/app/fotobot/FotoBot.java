@@ -1211,9 +1211,9 @@ public class FotoBot extends Application {
                     if (sms_word[1].contains("on")) {
                         attach_log = true;
                         Log.d("sms", "attach_log: " + attach_log);
-                        if (sms_word.length > 2) {
-                            log_size = Integer.parseInt(sms_word[2]);
-                        }
+                       // if (sms_word.length > 2) {
+                       //     log_size = Integer.parseInt(sms_word[2]);
+                       // }
                     }
                     if (sms_word[1].contains("off")) {
                         attach_log = false;
