@@ -9,9 +9,9 @@
     <string name="apply_button">APPLY</string>
     <string name="back_button">MAIN WINDOW</string>
 
-    <string name="Fotobot">Welcome to Fotobot! This application will help you to control remote places via thousands of miles. You will receive photo-reports periodically after predefined interval of time.
+    <string name="Fotobot">Welcome to Fotobot! This application will help you to control remote places thrue thousands of miles. You will receive photo-reports periodically after predefined interval of time.
     You will be able to change Fotobot\'s settings remotely via SMS.</string>
-    <string name="update">Version 2.4.3:\nCocmetic issues has been fixed</string>
+    <string name="update">Version 2.4.3:\nCocmetic issues has been fixed\n\n\n\n\n</string>
 
     <string name="Camera_Name">Camera Name</string>
     <string name="Camera_Name_description">Camera Name will be added to emails title, it will help to sort out mails in Inbox</string>

@@ -1,7 +1,7 @@
 <h2>User Manual</h2>
 
-Fotobot is a powerfull server which is running on your cellphone.
-
+Fotobot is powerful photo server which is running on your device.<br>
+<br>
 Below are main features of Fotobot:<br>
 <br>
 1) connect to Internet via Wi-Fi or MobileData;<br>
