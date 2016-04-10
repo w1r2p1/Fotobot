@@ -502,7 +502,7 @@ public class FotoBot extends Application {
 
         for (connect_attempt = 0; connect_attempt < 3; connect_attempt++) {
 
-            SendMessage("Соединение с Internet, попытка: " + (connect_attempt + 1));
+            SendMessage(getResources().getString(R.string.connection_attempt) + (connect_attempt + 1));
 
             if (Network_Channel.contains("Wi-Fi")) {
                 SendMessage(getResources().getString(R.string.connection_channel_wifi));

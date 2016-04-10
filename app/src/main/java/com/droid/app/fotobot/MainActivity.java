@@ -681,7 +681,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 return;
                             }
 
-                            fb.SendMessage("Начинаем делать фото: " + fb.Image_Index);
+                            fb.SendMessage(getResources().getString(R.string.starting_to_make_photo) + fb.Image_Index);
 
                             fb.batteryLevel();
 
@@ -915,7 +915,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         fb.setstatus(3);
         Log.d(LOG_TAG, "stopFotobot: STOP_FOTOBOT" + STOP_FOTOBOT);
 
-        fb.SendMessage("Запрос на остановку Fotobot'а отправлен, дождитесь корректного завершения и соответствующей надписи на экране");
+        fb.SendMessage(getResources().getString(R.string.request_for_stopping));
 
     }
 
