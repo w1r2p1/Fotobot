@@ -955,7 +955,7 @@ public class FotoBot extends Application {
 
         Camera_Name = pref.getString("Camera_Name", "default");
 
-        Photo_Frequency = pref.getInt("Photo_Frequency", 15);
+        Photo_Frequency = pref.getInt("Photo_Frequency", 60);
 
         process_delay = pref.getInt("process_delay", 5);
 

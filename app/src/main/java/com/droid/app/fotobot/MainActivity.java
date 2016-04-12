@@ -292,8 +292,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         fb.LoadSettings();
 
-        fb.log = getResources().getString(R.string.Fotobot) + "\n\n" +
-                "---------------------" + "\n\n" +
+        fb.log = Html.fromHtml(getResources().getString(R.string.Fotobot)) + "\n\n" +
+                 "---------------------" + "\n\n" +
                 getResources().getString(R.string.update);
 
         fb.work_dir_init();
@@ -416,6 +416,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         tvInfo.setTypeface(Typeface.MONOSPACE);
         tvInfo.setTextColor(Color.rgb(190, 190, 190));
 
+        tvInfo.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
         tvInfo.setText(fb.log);
 
         h = new Handler(hc);
