@@ -24,7 +24,10 @@
     <string name="network_description">Select network mode: on (photos will be saved on phone and sent to email), off (photos will be saved on phone without of mail sending )</string>
 
     <string name="Work_Dir">Working Folder</string>
-    <string name="Work_Dir_description">Absolute path to folder for photos, f.e. for LG it is /storage/external_SD (you can use any file manager to find path for external storage)</string>
+    <string name="Work_Dir_description">Absolute path to folder with photos</string>
+    <string name="Work_Dir_error1">No such folder for images</string>
+    <string name="Work_Dir_error2">Please check \"Working Folder\" field.</string>
+
 
     <string name="Delete_Foto">Delete Foto</string>
     <string name="Delete_Foto_description">Check this box to delete foto after sending to email</string>

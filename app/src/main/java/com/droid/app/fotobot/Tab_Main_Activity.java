@@ -23,7 +23,9 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -677,6 +679,11 @@ public class Tab_Main_Activity extends Activity {
 // Save the changes in SharedPreferences
                 editor.commit();
 
+                if (!check_working_dir(editText_Work_Dir.getText().toString())){
+                    Toast.makeText(Tab_Main_Activity.this,
+                            getResources().getString(R.string.Work_Dir_error1) + "\n" + editText_Work_Dir.getText().toString() + "\n" + getResources().getString(R.string.Work_Dir_error2), Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 
@@ -720,7 +727,7 @@ public class Tab_Main_Activity extends Activity {
 // Расставляем контейнеры (порядок важен)
         FullFrame.addView(linLayout_Fotobot_Camera_Name);
         FullFrame.addView(linLayout_SMS_Password);
-        FullFrame.addView(linLayout_Storage);
+      //  FullFrame.addView(linLayout_Storage);
         FullFrame.addView(linLayout_Work_Dir);
         FullFrame.addView(linLayout_Delete_Foto);
         FullFrame.addView(linLayout1);
@@ -793,4 +800,15 @@ public class Tab_Main_Activity extends Activity {
         }
         return index;
     }
+
+    private boolean check_working_dir(String str) {
+
+        File dir = new File(str);
+
+        boolean exists = dir.exists();
+
+        return exists;
+
+    }
+
 }
