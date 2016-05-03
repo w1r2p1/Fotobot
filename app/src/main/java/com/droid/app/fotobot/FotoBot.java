@@ -294,6 +294,11 @@ public class FotoBot extends Application {
     public long email_sending_time;
 
     /**
+     * Паузы для fbpause
+     */
+    public int short_pause = 1;
+    public int long_pause = 5;
+    /**
      * Возвращает текущее состояние FotoBot'а, сейчас не пользуюсь этим
      *
      * @return
@@ -589,8 +594,16 @@ public class FotoBot extends Application {
 
                 wakeLock.acquire();
 
-                for (int i = 1; i <= delay; i++) {
+                int n = 5;
+
+                if (delay >= wake_up_interval ) {
+                    n = (int)( delay - ((delay / wake_up_interval) * long_pause * 2) );
+                }
+
+                for (int i = 1; i <= n; i++) {
                     Message msg = Message.obtain(); // Creates an new Message instance
+
+                    // we make 1 sec for each n
                     try {
                         TimeUnit.SECONDS.sleep(1);
                     } catch (InterruptedException e) {
@@ -666,7 +679,7 @@ public class FotoBot extends Application {
                         }
 
                         try {
-                            TimeUnit.SECONDS.sleep(1);
+                            TimeUnit.SECONDS.sleep(short_pause);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -716,7 +729,7 @@ public class FotoBot extends Application {
                         }
 
                         try {
-                            TimeUnit.SECONDS.sleep(5);
+                            TimeUnit.SECONDS.sleep(long_pause);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -735,7 +748,7 @@ public class FotoBot extends Application {
                         }
 
                         try {
-                            TimeUnit.SECONDS.sleep(5);
+                            TimeUnit.SECONDS.sleep(long_pause);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
