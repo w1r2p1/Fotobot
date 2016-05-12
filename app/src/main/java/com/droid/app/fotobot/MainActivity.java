@@ -358,7 +358,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         WorkSpace.setMinimumWidth(screenWidth);
 
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
-        LogWidget.setBackgroundColor(Color.rgb(34, 58, 95));
+       // LogWidget.setBackgroundColor(Color.rgb(34, 58, 95));
+        LogWidget.setBackgroundColor(Color.rgb(51, 51, 51));
         LogWidget.setMinimumWidth(screenWidth);
 
         final Button btnHelp = (Button) findViewById(R.id.help);
@@ -1036,7 +1037,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         final FotoBot fb = (FotoBot) getApplicationContext();
 
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
-        LogWidget.setBackgroundColor(Color.rgb(34, 58, 95));
+        //LogWidget.setBackgroundColor(Color.rgb(34, 58, 95));
+        LogWidget.setBackgroundColor(Color.rgb(51, 51, 51));
 
         tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
         tvInfo.setTypeface(Typeface.MONOSPACE);

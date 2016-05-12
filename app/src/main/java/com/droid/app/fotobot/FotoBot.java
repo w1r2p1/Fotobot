@@ -653,7 +653,6 @@ public class FotoBot extends Application {
 
                         } else {
 
-
                         }
 
                     }
@@ -695,7 +694,6 @@ public class FotoBot extends Application {
                             if (logcat_file.length() / 1000 > log_size) {
                                 clearLog();
                             }
-
 
                         } else {
                             SendMessage("logfile.txt doesn't exist.");
@@ -903,7 +901,6 @@ public class FotoBot extends Application {
             } else {
                 SendMessage("Log doesn't exist.");
             }
-
 
         }
         try {
