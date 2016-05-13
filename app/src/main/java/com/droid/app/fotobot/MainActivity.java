@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             String reportDate = dateformat.format(today);
 
             String message = (String) msg.obj; //Extract the string from the Message
-            fb.log = reportDate + ": " + message + "\n" + fb.log;
+            fb.log = reportDate + ": " + message + "\n\n" + fb.log;
 
 // string length
 
@@ -683,7 +683,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 return;
                             }
 
-                            fb.SendMessage(getResources().getString(R.string.starting_to_make_photo) + fb.Image_Index);
+                            fb.SendMessage(getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index);
 
                             fb.batteryLevel();
 
@@ -720,7 +720,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     mCamera = Camera.open();
                                     //      fb.SendMessage("Camera has been initialized for parameters setting.");
                                 } catch (Exception e) {
-                                    fb.SendMessage("Problem with camera itialization in main cycle.");
+                                    fb.SendMessage("Problem with camera initialization in main cycle.");
 
                                 }
                             }
@@ -870,9 +870,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             } else {
                                 // fb.SendMessage(h, "logfile.txt doesn't exist.");
                             }
-
-
-
 
                             fb.fbpause(h, fb.Photo_Frequency);
                             fb.sms_check_file = false;
