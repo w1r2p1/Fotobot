@@ -522,9 +522,9 @@ public class FotoBot extends Application {
             if (Network_Channel.contains("Both")) {
                 SendMessage(getResources().getString(R.string.connection_channel_wifimobiledata));
                 if (enable_WiFi()) {
-                    SendMessage("Wi-Fi is up in both metod");
+                    SendMessage(getResources().getString(R.string.connection_channel_wifimobiledata_wifi));
                 } else if (enable_MobileData()) {
-                    SendMessage("MobileData is up in both metod");
+                    SendMessage(getResources().getString(R.string.connection_channel_wifimobiledata_mobiledata));
                 }
 
             }
@@ -535,6 +535,14 @@ public class FotoBot extends Application {
                 return true;
                 //    }
             }
+
+            try {
+                TimeUnit.SECONDS.sleep(15);
+                SendMessage(getResources().getString(R.string.pause_between_connections) + "15 sec");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
         }
 
         if (connect_attempt == 2) {

@@ -48,14 +48,17 @@
     <string name="Internet_connection">Связь с Internet появилась</string>
     <string name="Internet_connection_is_already_created">есть соединение с Internet</string>
     <string name="no_Internet_connection">нет соединения с Internet</string>
+    <string name="pause_between_connections">Пауза перед следующей попыткой подслединения к сети</string>
 
     <string name="connection_channel_mobiledata">Метод подключения Mobile Data</string>
     <string name="turning_on_mobiledata">включаем Mobile Data</string>
-    <string name="connection_attempt">Соединяемся с Internet, попытка n: </string>
+    <string name="connection_attempt">Соединяемся с Internet, попытка  </string>
     <string name="starting_to_make_photo">Начинаем делать фото</string>
     <string name="request_for_stopping">Запрос на остановку Fotobot\'а отправлен, дождитесь корректного завершения и соответствующей надписи на экране</string>
 
     <string name="connection_channel_wifimobiledata">Метод подключения Wi-Fi и Mobile Data</string>
+    <string name="connection_channel_wifimobiledata_wifi">Подключилиись через Wi-Fi</string>
+    <string name="connection_channel_wifimobiledata_mobiledata">Подключились через Mobile Data</string>
     <string name="connection_channel_wifimobiledata_message">По Wi-Fi нет связи, включаем Mobile Data</string>
     <string name="Internet_connection_is_closed">Соединение с Internet завершено</string>
 
