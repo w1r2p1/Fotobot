@@ -12,7 +12,7 @@
     <string name="Fotobot">Welcome to Fotobot! This application will help you to control remote places thrue thousands of miles. You will receive photo-reports periodically after predefined interval of time.
     You will be able to change Fotobot\'s settings remotely via SMS. Detailed instructions can be found there:
             &lt;a href=http://v-and-f.ru/fotobot&gt;http://v-and-f.ru/fotobot&lt;/a&gt;</string>
-    <string name="update">Version 2.4.4:\nInternal and External types of storage have been removed. From now we have to set absolute path to folder for images storing. Just use your favorite File Browser to obtain this path.\n\n\n\n\n</string>
+    <string name="update">Version 2.6.0:\n1) logo has been changed.\n2)network connection issue in \"Both\" method has been fixed.\n\n\n\n\n</string>
 
     <string name="Camera_Name">Camera Name</string>
     <string name="Camera_Name_description">Camera Name will be added to emails title, it will help to sort out mails in Inbox</string>
