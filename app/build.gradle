@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.droid.app.fotobot"
-        minSdkVersion 8
+        minSdkVersion 9
         targetSdkVersion 10
         versionCode 21
         versionName "2.6.0"
