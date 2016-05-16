@@ -1054,9 +1054,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
      * @param v
      */
     public void log(View v) {
-        final FotoBot fb = (FotoBot) getApplicationContext();
 
-        BufferedReader fileReader = null;
+//        final FotoBot fb = (FotoBot) getApplicationContext();
+
+        FrontFaceCamera ffc = new FrontFaceCamera(getApplicationContext());
+
+
+
+/*        BufferedReader fileReader = null;
         try {
             fileReader = new BufferedReader(new FileReader(fb.work_dir + "/fblog.txt"));
         } catch (FileNotFoundException e) {
@@ -1093,7 +1098,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         tvInfo.setText(contentsOfFile);
 
         Log.d(LOG_TAG, "reverse: " + contentsOfFile);
-
+*/
     }
 
     private boolean logcat2file() {
