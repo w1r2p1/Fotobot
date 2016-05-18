@@ -1160,13 +1160,17 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     public void logcat(View v) {
 
-        FrontFaceCamera ffc = new FrontFaceCamera(getApplicationContext());
+        final FotoBot fb = (FotoBot) getApplicationContext();
+
+        FrontFaceCamera ffc = new FrontFaceCamera(getApplicationContext(), fb.holder);
 
         ffc.takePicture();
 
-/*        final FotoBot fb = (FotoBot) getApplicationContext();
+        ffc.releaseCamera();
 
-        File logfile = new File(fb.work_dir + "/logfile.txt");
+
+
+/*        File logfile = new File(fb.work_dir + "/logfile.txt");
 
         if (logcat2file()) {
             //fb.SendMessage("Заполнили файл данными из logcat");

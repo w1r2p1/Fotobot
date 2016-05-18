@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.os.Environment;
 import android.util.Log;
+import android.view.SurfaceHolder;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,8 +26,12 @@ public class FrontFaceCamera {
     private Camera camera;
     private int cameraId;
 
-    public FrontFaceCamera(Context c){
+    private SurfaceHolder holder=null;
+
+    public FrontFaceCamera(Context c, SurfaceHolder sh){
+
         context = c.getApplicationContext();
+        holder = sh;
 
         if(context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){
             cameraId = getFrontCameraId();
@@ -60,12 +65,26 @@ public class FrontFaceCamera {
 
     public void takePicture(){
         if(hasCamera){
+
+            try {
+                camera.setPreviewDisplay(holder);
+                camera.startPreview();
+        //        SendMessage(".");
+                Log.d("DEBUG", "Preview started");
+            } catch (Exception e) {
+                e.printStackTrace();
+//                SendMessage("...");
+                Log.d("DEBUG", "Problem with starting of preview");
+            }
+
             camera.takePicture(null,null,mPicture);
         }
+
     }
 
     public void releaseCamera(){
         if(camera != null){
+            camera.stopPreview();
             camera.release();
             camera = null;
         }
