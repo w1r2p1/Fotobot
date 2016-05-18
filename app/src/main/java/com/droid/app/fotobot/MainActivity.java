@@ -1162,7 +1162,17 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
+        if (mCamera != null) {
+            mCamera.stopPreview();
+            mCamera.setPreviewCallback(null);
+            mCamera.release();
+            mCamera = null;
+        }
+
         FrontFaceCamera ffc = new FrontFaceCamera(getApplicationContext(), fb.holder);
+        ffc.getCameraInstance();
+        String ffc_Properties = ffc.getCameraParameters();
+        Log.d(LOG_TAG, "ffc: " + ffc_Properties);
 
         ffc.takePicture();
 

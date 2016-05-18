@@ -63,6 +63,10 @@ public class FrontFaceCamera {
         }
     }
 
+    public String getCameraParameters(){
+        return camera.getParameters().flatten();
+    }
+
     public void takePicture(){
         if(hasCamera){
 
@@ -147,7 +151,7 @@ public class FrontFaceCamera {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 
         File mediaFile;
-        mediaFile = new File(mediaStorageDir.getPath()+File.separator+"IMG_"+timeStamp+".jpg");
+        mediaFile = new File("/storage/external_SD/"+"IMG_"+timeStamp+".jpg");
 
         return mediaFile;
     }
