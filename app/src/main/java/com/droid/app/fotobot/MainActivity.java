@@ -70,6 +70,28 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     TextView tvInfo;
     boolean preview_stopped = false;
 
+    Camera.PictureCallback mPicture = new Camera.PictureCallback(){
+        @Override
+        public void onPictureTaken(byte[] data, Camera camera){
+            File pictureFile = new File("/storage/sdcard0/"+"img.jpg");
+
+            if(pictureFile == null){
+                Log.d("TEST", "Error creating media file, check storage permissions");
+                return;
+            }
+
+            try{
+                FileOutputStream fos = new FileOutputStream(pictureFile);
+                fos.write(data);
+                fos.close();
+            }catch(FileNotFoundException e){
+                Log.d("TEST","File not found: "+e.getMessage());
+            } catch (IOException e){
+                Log.d("TEST","Error accessing file: "+e.getMessage());
+            }
+        }
+    };
+
     /**
      * Печатает сообщения на экран телефона, нужен для того чтобы получать данные из потока в котором работает FotoBot
      */
@@ -1169,7 +1191,27 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             mCamera = null;
         }
 
-        FrontFaceCamera ffc = new FrontFaceCamera(getApplicationContext(), fb.holder);
+        Camera camera;
+        camera = Camera.open(1);
+        String camera_Properties = camera.getParameters().flatten();
+        try {
+            camera.setPreviewDisplay(fb.holder);
+        } catch (Exception e) {
+
+        }
+
+        camera.startPreview();
+
+        camera.takePicture(null,null,mPicture);
+
+        if (camera != null) {
+            camera.stopPreview();
+            camera.setPreviewCallback(null);
+            camera.release();
+            camera = null;
+        }
+
+        /*FrontFaceCamera ffc = new FrontFaceCamera(getApplicationContext(), fb.holder);
         ffc.getCameraInstance();
         String ffc_Properties = ffc.getCameraParameters();
         Log.d(LOG_TAG, "ffc: " + ffc_Properties);
@@ -1177,7 +1219,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         ffc.takePicture();
 
         ffc.releaseCamera();
-
+*/
 
 
 /*        File logfile = new File(fb.work_dir + "/logfile.txt");

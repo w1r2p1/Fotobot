@@ -72,6 +72,7 @@ public class FrontFaceCamera {
 
             try {
                 camera.setPreviewDisplay(holder);
+            //    camera.stopPreview();
                 camera.startPreview();
         //        SendMessage(".");
                 Log.d("DEBUG", "Preview started");
