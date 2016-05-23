@@ -646,13 +646,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                         fb.SendMessage(getResources().getString(R.string.start_message));
 
+/* comment to debug ffc
 // Добавлено в Andorid 5. Без этого не работает. Не понятно, как раньше работало.
                         if (mCamera == null) {
                             mCamera = Camera.open(1);
                         }
 
                         fb.Camera_Properties = mCamera.getParameters().flatten();
-
+*/
                         for (int i = 1; i <= 1000000000; i++) {
 
 // method1 соединяемся с сетью
@@ -1229,7 +1230,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
-        if (mCamera != null) {
+/*        if (mCamera != null) {
             mCamera.stopPreview();
             mCamera.setPreviewCallback(null);
             mCamera.release();
@@ -1259,7 +1260,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             camera.release();
             camera = null;
         }
-
+*/
         /*FrontFaceCamera ffc = new FrontFaceCamera(getApplicationContext(), fb.holder);
         ffc.getCameraInstance();
         String ffc_Properties = ffc.getCameraParameters();
@@ -1271,7 +1272,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 */
 
 
-/*        File logfile = new File(fb.work_dir + "/logfile.txt");
+        File logfile = new File(fb.work_dir + "/logfile.txt");
 
         if (logcat2file()) {
             //fb.SendMessage("Заполнили файл данными из logcat");
@@ -1300,7 +1301,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             fb.SendMessage("Problem with deleting of Logfile from catlog");
         }
 
-*/
     }
 
 
