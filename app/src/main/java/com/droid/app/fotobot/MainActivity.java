@@ -47,9 +47,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
+// commented to debug ffc
 public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
+  //  public class MainActivity extends AppCompatActivity {
     private int screenWidth, screenHeight;
     public static final int UNKNOW_CODE = 99;
     final String LOG_TAG = "Logs";
@@ -485,8 +486,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         wakeLock.acquire();
 
         Log.d(LOG_TAG, "MainActivity: onResume");
-
-        mCamera = Camera.open();
+/* commented to debug ffc
+        mCamera = Camera.open(1);
         try {
             mCamera.setPreviewDisplay(holder);
 
@@ -494,7 +495,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             mCamera.release();
             mCamera = null;
         }
-
+*/
         final FotoBot fb = (FotoBot) getApplicationContext();
         Log.d(LOG_TAG, "MainActivity: onResume");
         Log.d(LOG_TAG, "MainActivity: fb.getstatus()" + fb.getstatus());
@@ -647,7 +648,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 // Добавлено в Andorid 5. Без этого не работает. Не понятно, как раньше работало.
                         if (mCamera == null) {
-                            mCamera = Camera.open();
+                            mCamera = Camera.open(1);
                         }
 
                         fb.Camera_Properties = mCamera.getParameters().flatten();
@@ -739,7 +740,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 //   fb.SendMessage("Camera is not initialized.");
 
                                 try {
-                                    mCamera = Camera.open();
+                                    mCamera = Camera.open(1);
                                     //      fb.SendMessage("Camera has been initialized for parameters setting.");
                                 } catch (Exception e) {
                                     fb.SendMessage("Problem with camera initialization in main cycle.");
@@ -791,6 +792,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             fb.fbpause(h, 3);
 
+
+
                             try {
                                 mCamera.takePicture(null, null, mCall);
                                 fb.SendMessage(getResources().getString(R.string.photo_has_been_taken));
@@ -798,6 +801,45 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 fb.SendMessage("Problem with picture taking.");
 
                             }
+
+
+
+
+// *************************************** FFC *****************************************
+/*                            if (mCamera != null) {
+                                mCamera.stopPreview();
+                                mCamera.setPreviewCallback(null);
+                                mCamera.release();
+                                mCamera = null;
+                            }
+
+                            Camera camera;
+                            camera = Camera.open(1);
+                            String camera_Properties = camera.getParameters().flatten();
+                            try {
+                                camera.setPreviewDisplay(fb.holder);
+                            } catch (Exception e) {
+                                Log.d(LOG_TAG,"setPreviewDisplay failed for ffc");
+                            }
+
+                            try {
+                                camera.startPreview();
+                            } catch (Exception e) {
+                                Log.d(LOG_TAG,"startPreview failed for ffc");
+                            }
+
+                            camera.takePicture(null,null,mPicture);
+
+                            if (camera != null) {
+                             //   camera.stopPreview();
+                             //   camera.setPreviewCallback(null);
+                                camera.release();
+                                camera = null;
+                            }
+*/
+// *************************************************************************************
+
+
 
                             fb.fbpause(h, 3);
 
@@ -943,6 +985,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     @Override
     public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
 
+/* commented to debug ffc
 // Camera
 
         //get camera parameters
@@ -951,7 +994,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         //set camera parameters
         mCamera.setParameters(parameters);
         mCamera.startPreview();
-
+*/
     }
 
     @Override
@@ -962,7 +1005,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         // to draw the preview.
         mUnexpectedTerminationHelper.init();
 
-        mCamera = Camera.open();
+/* commented to debug ffc
+        mCamera = Camera.open(1);
         try {
             mCamera.setPreviewDisplay(holder);
 
@@ -973,7 +1017,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         Camera.Parameters params = mCamera.getParameters();
         fb.camera_resolutions = params.getSupportedPictureSizes();
-
+*/
     }
 
     @Override
@@ -989,6 +1033,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             mCamera = null;
             mUnexpectedTerminationHelper.fini();
         }
+
     }
 
     private int calculateSignalStrengthInPercent(int signalStrength) {
@@ -1002,9 +1047,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         private Thread.UncaughtExceptionHandler mUncaughtExceptionHandler = new Thread.UncaughtExceptionHandler() {
             @Override
             public void uncaughtException(Thread thread, Throwable ex) { // gets called on the same (main) thread
-
+/* commented to debug ffc
                 releaseCamera();
-
+*/
                 if (mOldUncaughtExceptionHandler != null) {
                     // it displays the "force close" dialog
                     mOldUncaughtExceptionHandler.uncaughtException(thread, ex);
@@ -1197,10 +1242,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         try {
             camera.setPreviewDisplay(fb.holder);
         } catch (Exception e) {
-
+          Log.d(LOG_TAG,"setPreviewDisplay failed for ffc");
         }
 
-        camera.startPreview();
+        try {
+            camera.startPreview();
+        } catch (Exception e) {
+            Log.d(LOG_TAG,"startPreview failed for ffc");
+        }
 
         camera.takePicture(null,null,mPicture);
 
