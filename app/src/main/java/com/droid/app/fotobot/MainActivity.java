@@ -69,8 +69,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     Button btnStop;
     Handler h = null;
     TextView tvInfo;
-    boolean preview_stopped = false;
-
+// adopted for ffc
+//    boolean preview_stopped = false;
+    boolean preview_stopped = true;
     Camera.PictureCallback mPicture = new Camera.PictureCallback(){
         @Override
         public void onPictureTaken(byte[] data, Camera camera){
@@ -1001,35 +1002,96 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         final FotoBot fb = (FotoBot) getApplicationContext();
-        fb.holder = holder;
-        // The Surface has been created, acquire the camera and tell it where
-        // to draw the preview.
-        mUnexpectedTerminationHelper.init();
 
-/* commented to debug ffc
-        mCamera = Camera.open(1);
-        try {
+        Camera.Parameters params;
+
+        int fcId = -1;
+        int bcId = -1;
+
+        fb.numberOfCameras = Camera.getNumberOfCameras();
+        Camera.CameraInfo ci = new Camera.CameraInfo();
+
+        for(int i = 0; i < fb.numberOfCameras; i++){
+            Camera.getCameraInfo(i,ci);
+            if(ci.facing == Camera.CameraInfo.CAMERA_FACING_FRONT){
+                fcId = i;
+                mCamera = Camera.open(fcId);
+
+       /*
+       try {
             mCamera.setPreviewDisplay(holder);
 
         } catch (IOException exception) {
             mCamera.release();
             mCamera = null;
         }
+        */
 
-        Camera.Parameters params = mCamera.getParameters();
-        fb.camera_resolutions = params.getSupportedPictureSizes();
-*/
+                params = mCamera.getParameters();
+                fb.fc_camera_resolutions = params.getSupportedPictureSizes();
+
+                mCamera.release();
+                mCamera = null;
+            }
+            if(ci.facing == Camera.CameraInfo.CAMERA_FACING_BACK){
+                bcId = i;
+                mCamera = Camera.open(bcId);
+                params = mCamera.getParameters();
+                fb.camera_resolutions = params.getSupportedPictureSizes();
+                mCamera.release();
+                mCamera = null;
+
+            }
+        }
+
+
+
+
+
+
+
+
+        fb.holder = holder;
+        // The Surface has been created, acquire the camera and tell it where
+        // to draw the preview.
+        mUnexpectedTerminationHelper.init();
+
+// adopted for ffc
+
+
+
+
+
+
+
+
+
+
+
     }
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        releaseCamera();
+// adopted for ffc
+//        releaseCamera();
     }
 
     private void releaseCamera() {
+
+        final FotoBot fb = (FotoBot) getApplicationContext();
+
         if (mCamera != null) {
-            mCamera.stopPreview();
-            mCamera.setPreviewCallback(null);
+            if ( !preview_stopped) {
+                try {
+                    mCamera.stopPreview();
+                } catch (Exception e) {
+                    fb.SendMessage("Preview couldn't be stopped in the main cycle.");
+
+                }
+
+                mCamera.setPreviewCallback(null);
+                preview_stopped = true;
+            }
             mCamera.release();
             mCamera = null;
             mUnexpectedTerminationHelper.fini();

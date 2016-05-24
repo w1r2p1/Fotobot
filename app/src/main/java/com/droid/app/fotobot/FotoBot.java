@@ -57,6 +57,8 @@ public class FotoBot extends Application {
 
     Camera camera = null;
 
+    public int numberOfCameras = 1;
+
     public String versionName = "";
 
     public String Camera_Name = "";
@@ -143,6 +145,7 @@ public class FotoBot extends Application {
     public int GSM_Signal = 0;
 
     List<Camera.Size> camera_resolutions;
+    List<Camera.Size> fc_camera_resolutions;
 
     public int process_delay = 3;
 
