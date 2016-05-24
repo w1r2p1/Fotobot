@@ -875,6 +875,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     }
 
                                 }
+
+                                releaseCamera();
+
                             }
 
 
@@ -930,7 +933,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                                     try {
                                         mCamera = Camera.open(fb.fcId);
-                                        //      fb.SendMessage("Camera has been initialized for parameters setting.");
+                                        fb.SendMessage("Front camera has been initialized for parameters setting.");
                                     } catch (Exception e) {
                                         fb.SendMessage("Problem with camera initialization in main cycle.");
 
@@ -949,12 +952,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                                 Camera.Parameters parameters = mCamera.getParameters();
 
-                                if (fb.Use_Flash) {
-                                    parameters.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
-                                }
 
                                 if (fb.Photo_Post_Processing_Method.contains("Software")) {
-                                    parameters.setPictureSize(Integer.parseInt(width), Integer.parseInt(height));
+                                    parameters.setPictureSize(640, 480);
                                 }
 
                                 try {
@@ -990,9 +990,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                                 }
 
-                                fb.fbpause(h, 3);
+                                //fb.fbpause(h, 3);
 
                                 fb.fbpause(h, fb.process_delay);
+
+
+                                releaseCamera();
 
                             }
 
