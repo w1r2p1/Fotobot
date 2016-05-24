@@ -876,13 +876,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                                 }
 
-                                releaseCamera();
+                                //releaseCamera();
+                                mCamera.release();
+                                mCamera = null;
 
                             }
 
-
-
-
+                            fb.fbpause(h,5);
 
                             if ( fb.front_camera) {
 
@@ -907,6 +907,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 fb.Image_Name = "fc_" + df.format(new Date()) + ".jpg";
                                 fb.Image_Name_Full_Path = fb.work_dir + "/" + fb.Image_Name;
 
+                                fb.fc_Image_Name = fb.Image_Name;
+                                fb.fc_Image_Name_Full_Path = fb.Image_Name_Full_Path;
+
                             /*    fb.LoadSettings();
 
                                 if (fb.network) {
@@ -920,10 +923,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 
                                 // Camera.Parameters params;
-                                String string = fb.Image_Size;
-                                String[] parts = string.split("x");
-                                String width = parts[0];
-                                String height = parts[1];
+                                String string = fb.fc_Image_Size;
+                                String[] fc_parts = string.split("x");
+                                String fc_width = fc_parts[0];
+                                String fc_height = fc_parts[1];
 
 // start and set camera parameters
 
@@ -954,7 +957,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 
                                 if (fb.Photo_Post_Processing_Method.contains("Software")) {
-                                    parameters.setPictureSize(640, 480);
+                                    parameters.setPictureSize(Integer.parseInt(fc_width), Integer.parseInt(fc_height));
                                 }
 
                                 try {
@@ -995,7 +998,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 fb.fbpause(h, fb.process_delay);
 
 
-                                releaseCamera();
+                                //releaseCamera();
+                                mCamera.release();
+                                mCamera = null;
 
                             }
 
@@ -1075,7 +1080,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             if ( fb.network) {
                                 fb.fbpause(h, 1);
 
-                                fb.SendMail(h, fb.Image_Name_Full_Path);
+                                fb.SendMail(h, fb.Image_Name_Full_Path, fb.fc_Image_Name_Full_Path);
 
                                 long durationInMilliseconds = System.currentTimeMillis() - start;
 
@@ -1133,6 +1138,16 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                                 } else {
                                     fb.SendMessage("Проблема с удалением фото: " + fb.Image_Name);
+                                    fb.SendMessage("Попробуйте поменять разрешение для фото в настройках");
+
+                                }
+
+                                imgfile = new File(fb.fc_Image_Name_Full_Path);
+
+                                if (imgfile.delete()) {
+
+                                } else {
+                                    fb.SendMessage("Проблема с удалением фото: " + fb.fc_Image_Name);
                                     fb.SendMessage("Попробуйте поменять разрешение для фото в настройках");
 
                                 }

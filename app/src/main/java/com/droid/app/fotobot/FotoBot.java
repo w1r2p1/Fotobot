@@ -112,6 +112,7 @@ public class FotoBot extends Application {
      * Размер изображения в пикселях
      */
     public String Image_Size = "1024x768";
+    public String fc_Image_Size = "320x240";
 
     /**
      * Размер изображения в килобайтах
@@ -182,8 +183,10 @@ public class FotoBot extends Application {
     public int menuheight;
 
     public String Image_Name;
+    public String fc_Image_Name;
 
     public String Image_Name_Full_Path;
+    public String fc_Image_Name_Full_Path;
 
     /**
      * Длина лога в главном окне
@@ -821,7 +824,7 @@ public class FotoBot extends Application {
      * @param h
      * @param str
      */
-    public void SendMail(Handler h, String str) {
+    public void SendMail(Handler h, String str, String fc_str) {
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
@@ -909,6 +912,16 @@ public class FotoBot extends Application {
             SendMessage("Image doesn't exist.");
         }
 
+        attach_file = new File(fc_str);
+        boolean fc_fileExists = attach_file.isFile();
+
+        if (fc_fileExists) {
+
+        } else {
+            SendMessage("Front Camera image doesn't exist.");
+        }
+
+
         if (fb.attach_log) {
             attach_file = new File((work_dir + "/logfile.txt"));
             fileExists = attach_file.isFile();
@@ -922,6 +935,7 @@ public class FotoBot extends Application {
         }
         try {
             m.addAttachment(str);
+            m.addAttachment(fc_str);
 
             if (fb.attach_log) {
                 m.addAttachment(work_dir + "/logfile.txt");
