@@ -725,6 +725,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 fb.Image_Name = df.format(new Date()) + ".jpg";
                                 fb.Image_Name_Full_Path = fb.work_dir + "/" + fb.Image_Name;
 
+                                fb.bc_Image_Name = fb.Image_Name;
+                                fb.bc_Image_Name_Full_Path = fb.Image_Name_Full_Path;
+
                                 fb.LoadSettings();
 
                                 if (fb.network) {
@@ -1080,7 +1083,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             if ( fb.network) {
                                 fb.fbpause(h, 1);
 
-                                fb.SendMail(h, fb.Image_Name_Full_Path, fb.fc_Image_Name_Full_Path);
+                                fb.SendMail(h, fb.bc_Image_Name_Full_Path, fb.fc_Image_Name_Full_Path);
 
                                 long durationInMilliseconds = System.currentTimeMillis() - start;
 
