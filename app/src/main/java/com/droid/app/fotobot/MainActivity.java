@@ -1034,8 +1034,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                                 }
 
-                                fb.Image_Name = str1;
-                                fb.Image_Name_Full_Path = str2;
+
 
                                 fb.fbpause(h, fb.process_delay);
 
@@ -1043,6 +1042,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 //releaseCamera();
                                 mCamera.release();
                                 mCamera = null;
+
+// эти строки нельзя передвигать выше, иначе callback не поспевает
+                                fb.Image_Name = str1;
+                                fb.Image_Name_Full_Path = str2;
 
                             }
 

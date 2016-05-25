@@ -150,7 +150,7 @@ public class FotoBot extends Application {
     /**
      * Метод обработки фото (Hardaware или Software)
      */
-    public String Photo_Post_Processing_Method = "Hardware";
+    public String Photo_Post_Processing_Method = "Software";
 
     public int GSM_Signal = 0;
 
