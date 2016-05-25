@@ -72,7 +72,7 @@ public class Tab_Foto_Activity extends Activity {
         LinearLayout linLayout_JPEG_Compression = new LinearLayout(this);
         linLayout_JPEG_Compression.setOrientation(LinearLayout.VERTICAL);
         linLayout_JPEG_Compression.setPadding(5, 9, 5, 9);
-        linLayout_JPEG_Compression.setBackgroundColor(Color.rgb(192, 192, 192));
+        linLayout_JPEG_Compression.setBackgroundColor(Color.rgb(208, 208, 208));
 
 // Название
         TextView tv_JPEG_Compression = new TextView(this);
@@ -114,7 +114,7 @@ public class Tab_Foto_Activity extends Activity {
         tv_Photo_Size_h.setTextSize(14);
         tv_Photo_Size_h.setTextColor(Color.BLACK);
         tv_Photo_Size_h.setText("Hardware");
-        linLayout_Photo_Size.addView(tv_Photo_Size_h);
+ //       linLayout_Photo_Size.addView(tv_Photo_Size_h);
 
 // Коэффициенты масштабирования
         ArrayList<String> spinnerArray_Hardware = new ArrayList<String>();
@@ -128,7 +128,7 @@ public class Tab_Foto_Activity extends Activity {
         spinnerArrayAdapter_Hardware = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray_Hardware);
         spinner_Hardware.setAdapter(spinnerArrayAdapter_Hardware);
         spinner_Hardware.setSelection(getIndex(spinner_Hardware, fb.Image_Scale));
-        linLayout_Photo_Size.addView(spinner_Hardware);
+ //       linLayout_Photo_Size.addView(spinner_Hardware);
 
 // Размер фото
         tv_Photo_Size_s = new TextView(this);
@@ -136,7 +136,16 @@ public class Tab_Foto_Activity extends Activity {
         tv_Photo_Size_s.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Photo_Size_s.setTextColor(Color.BLACK);
         tv_Photo_Size_s.setText("Software");
-        linLayout_Photo_Size.addView(tv_Photo_Size_s);
+//        linLayout_Photo_Size.addView(tv_Photo_Size_s);
+
+// Название
+        TextView tv_bc = new TextView(this);
+        tv_bc.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_bc.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_bc.setTextColor(Color.BLACK);
+        tv_bc.setText("Камера");
+        tv_bc.setTypeface(Typeface.DEFAULT_BOLD);
+        linLayout_Photo_Size.addView(tv_bc);
 
 // Доступные разрешения
         ArrayList<String> spinnerArray = new ArrayList<String>();
@@ -172,7 +181,7 @@ public class Tab_Foto_Activity extends Activity {
         tv_Photo_Size_h_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Photo_Size_h_note.setTextColor(Color.BLACK);
         tv_Photo_Size_h_note.setText(getResources().getString(R.string.photo_scale));
-        linLayout_Photo_Size.addView(tv_Photo_Size_h_note);
+//        linLayout_Photo_Size.addView(tv_Photo_Size_h_note);
 
 // Заметка для Software
         tv_Photo_Size_s_note = new TextView(this);
@@ -180,7 +189,7 @@ public class Tab_Foto_Activity extends Activity {
         tv_Photo_Size_s_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Photo_Size_s_note.setTextColor(Color.BLACK);
         tv_Photo_Size_s_note.setText(getResources().getString(R.string.photo_resolution));
-        linLayout_Photo_Size.addView(tv_Photo_Size_s_note);
+//        linLayout_Photo_Size.addView(tv_Photo_Size_s_note);
 
 // ------------------------------------------------------------------------------------------------
 
@@ -256,7 +265,7 @@ public class Tab_Foto_Activity extends Activity {
         LinearLayout linLayout_Flash = new LinearLayout(this);
         linLayout_Flash.setOrientation(LinearLayout.VERTICAL);
         linLayout_Flash.setPadding(5, 9, 5, 9);
-        linLayout_Flash.setBackgroundColor(Color.rgb(192, 192, 192));
+        linLayout_Flash.setBackgroundColor(Color.rgb(208, 208, 208));
 
 // Flash TextView
         TextView tv_Flash = new TextView(this);
@@ -287,13 +296,26 @@ public class Tab_Foto_Activity extends Activity {
 
 
 
-// Параметры изображения
+// Фронтальная камера
+// Контейнер для фронтальной камеры
+        LinearLayout linLayout_fc = new LinearLayout(this);
+        linLayout_fc.setOrientation(LinearLayout.VERTICAL);
+        linLayout_fc.setPadding(5, 9, 5, 9);
+        linLayout_fc.setBackgroundColor(Color.rgb(192, 192, 192));
+// Название
+        TextView tv_fc = new TextView(this);
+        tv_fc.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_fc.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_fc.setTextColor(Color.BLACK);
+        tv_fc.setText("Фронтальная камера");
+        tv_fc.setTypeface(Typeface.DEFAULT_BOLD);
+        linLayout_fc.addView(tv_fc);
 
 // Контейнер для метода
         LinearLayout fc_linLayout_Photo_Size = new LinearLayout(this);
         fc_linLayout_Photo_Size.setOrientation(LinearLayout.VERTICAL);
         fc_linLayout_Photo_Size.setPadding(5, 9, 5, 9);
-        fc_linLayout_Photo_Size.setBackgroundColor(Color.rgb(208, 208, 208));
+        fc_linLayout_Photo_Size.setBackgroundColor(Color.rgb(192, 192, 192));
 
         // Размер фото
         fc_tv_Photo_Size_s = new TextView(this);
@@ -301,7 +323,7 @@ public class Tab_Foto_Activity extends Activity {
         fc_tv_Photo_Size_s.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         fc_tv_Photo_Size_s.setTextColor(Color.BLACK);
         fc_tv_Photo_Size_s.setText("Software");
-        fc_linLayout_Photo_Size.addView(fc_tv_Photo_Size_s);
+       // linLayout_fc.addView(fc_tv_Photo_Size_s);
 
 // Доступные разрешения
         ArrayList<String> fc_spinnerArray = new ArrayList<String>();
@@ -326,10 +348,10 @@ public class Tab_Foto_Activity extends Activity {
         }
 
         fc_spinner_Software = new Spinner(this);
-        fc_spinnerArrayAdapter1 = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray);
+        fc_spinnerArrayAdapter1 = new ArrayAdapter<String>(this, R.layout.spinner_item, fc_spinnerArray);
         fc_spinner_Software.setAdapter(fc_spinnerArrayAdapter1);
         fc_spinner_Software.setSelection(getIndex(fc_spinner_Software, fb.fc_Image_Size));
-        fc_linLayout_Photo_Size.addView(fc_spinner_Software);
+        linLayout_fc.addView(fc_spinner_Software);
 
 
 
@@ -444,12 +466,14 @@ public class Tab_Foto_Activity extends Activity {
         linLayout_Buttons.addView(btn, lpViewbutton1);
         linLayout_Buttons.addView(btn_mp, lpViewbutton2);
 
-        FullFrame.addView(linLayout_JPEG_Compression);
-        FullFrame.addView(linLayout_Photo_Processing_Method);
+
+     //   FullFrame.addView(linLayout_Photo_Processing_Method);
         FullFrame.addView(linLayout_Photo_Size);
         FullFrame.addView(linLayout_Flash);
 
-        FullFrame.addView(fc_linLayout_Photo_Size);
+        FullFrame.addView(linLayout_fc);
+
+        FullFrame.addView(linLayout_JPEG_Compression);
 
         FullFrame.addView(linLayout_Buttons);
 
