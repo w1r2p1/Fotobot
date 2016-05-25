@@ -33,6 +33,8 @@ public class Tab_Foto_Activity extends Activity {
     private int padding = 15;
     Button btn, btn_mp;
     CheckBox checkBox_Flash;
+    CheckBox checkBox_bc;
+    CheckBox checkBox_fc;
     EditText editText_JPEG_Compression;
     Spinner spinner_Hardware, spinner_ppm, spinner_Software;
     Spinner fc_spinner_Software;
@@ -190,6 +192,20 @@ public class Tab_Foto_Activity extends Activity {
         tv_Photo_Size_s_note.setTextColor(Color.BLACK);
         tv_Photo_Size_s_note.setText(getResources().getString(R.string.photo_resolution));
 //        linLayout_Photo_Size.addView(tv_Photo_Size_s_note);
+
+// Использовать камеру
+        TextView tv_use_bc = new TextView(this);
+        tv_use_bc.setText("Использовать камеру");
+        tv_use_bc.setWidth((screenWidth - padding) / 100 * 90);
+        tv_use_bc.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_use_bc.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_use_bc.setTextColor(Color.BLACK);
+        linLayout_Photo_Size.addView(tv_use_bc);
+
+// CheckBox
+        checkBox_bc = new CheckBox(this);
+        checkBox_bc.setChecked(fb.Use_Bc);
+        linLayout_Photo_Size.addView(checkBox_bc);
 
 // ------------------------------------------------------------------------------------------------
 
@@ -353,7 +369,19 @@ public class Tab_Foto_Activity extends Activity {
         fc_spinner_Software.setSelection(getIndex(fc_spinner_Software, fb.fc_Image_Size));
         linLayout_fc.addView(fc_spinner_Software);
 
+// Использовать фронтальную камеру
+        TextView tv_use_fc = new TextView(this);
+        tv_use_fc.setText("Использовать фронтальную камеру");
+        tv_use_fc.setWidth((screenWidth - padding) / 100 * 90);
+        tv_use_fc.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_use_fc.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_use_fc.setTextColor(Color.BLACK);
+        linLayout_fc.addView(tv_use_fc);
 
+// CheckBox
+        checkBox_fc = new CheckBox(this);
+        checkBox_fc.setChecked(fb.Use_Fc);
+        linLayout_fc.addView(checkBox_fc);
 
 
 
@@ -420,6 +448,18 @@ public class Tab_Foto_Activity extends Activity {
                     editor.putBoolean("Use_Flash", true);
                 } else {
                     editor.putBoolean("Use_Flash", false);
+                }
+
+                if (checkBox_fc.isChecked()) {
+                    editor.putBoolean("Use_Fc", true);
+                } else {
+                    editor.putBoolean("Use_Fc", false);
+                }
+
+                if (checkBox_bc.isChecked()) {
+                    editor.putBoolean("Use_Bc", true);
+                } else {
+                    editor.putBoolean("Use_Bc", false);
                 }
 
                 String input = editText_JPEG_Compression.getText().toString();

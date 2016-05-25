@@ -91,6 +91,9 @@ public class FotoBot extends Application {
      */
     public boolean Use_Flash;
 
+    public boolean Use_Fc = false;
+    public boolean Use_Bc = true;
+
     public int battery_level;
 
     /**
@@ -994,6 +997,10 @@ public class FotoBot extends Application {
 
         Use_Flash = pref.getBoolean("Use_Flash", false);
 
+        Use_Fc = pref.getBoolean("Use_Fc", false);
+
+        Use_Bc = pref.getBoolean("Use_Bc", true);
+
         JPEG_Compression = pref.getInt("JPEG_Compression", 50);
 
         Camera_Name = pref.getString("Camera_Name", "default");
@@ -1075,6 +1082,8 @@ public class FotoBot extends Application {
         editor.putString("Image_Scale", Image_Scale);
         editor.putString("Image_Size", Image_Size);
         editor.putBoolean("Use_Flash", Use_Flash);
+        editor.putBoolean("Use_Fc", Use_Fc);
+        editor.putBoolean("Use_Bc", Use_Bc);
         editor.putBoolean("Attach_Log", attach_log);
         editor.putInt("Log_Size", log_size);
         editor.putString("Work_Dir", work_dir);
