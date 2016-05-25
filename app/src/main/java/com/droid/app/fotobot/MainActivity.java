@@ -949,8 +949,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 fb.fc_Image_Name = fb.Image_Name;
                                 fb.fc_Image_Name_Full_Path = fb.Image_Name_Full_Path;
 
-                                fb.Image_Name = str1;
-                                fb.Image_Name_Full_Path = str2;
+
 
                             /*    fb.LoadSettings();
 
@@ -1035,7 +1034,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                                 }
 
-                                //fb.fbpause(h, 3);
+                                fb.Image_Name = str1;
+                                fb.Image_Name_Full_Path = str2;
 
                                 fb.fbpause(h, fb.process_delay);
 
