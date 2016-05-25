@@ -934,13 +934,23 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                          //       fb.batteryLevel();
 
+                                String str1 = null;
+                                String str2 = null;
+
 
                                 DateFormat df = new SimpleDateFormat("MM-dd-yy_HH-mm-ss-SSS");
+
+                                str1 = fb.Image_Name;
+                                str2 = fb.Image_Name_Full_Path;
+
                                 fb.Image_Name = "fc_" + df.format(new Date()) + ".jpg";
                                 fb.Image_Name_Full_Path = fb.work_dir + "/" + fb.Image_Name;
 
                                 fb.fc_Image_Name = fb.Image_Name;
                                 fb.fc_Image_Name_Full_Path = fb.Image_Name_Full_Path;
+
+                                fb.Image_Name = str1;
+                                fb.Image_Name_Full_Path = str2;
 
                             /*    fb.LoadSettings();
 
@@ -1158,33 +1168,37 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 // fb.SendMessage(h, "logfile.txt doesn't exist.");
                             }
 
-                            fb.fbpause(h, fb.Photo_Frequency);
-                            fb.sms_check_file = false;
-                            fb.frame_delay = false;
-
                             if ( fb.delete_foto ) {
 
-                                File imgfile = new File(fb.Image_Name_Full_Path);
+                                if ( fb.Use_Bc) {
+                                    File imgfile = new File(fb.Image_Name_Full_Path);
 
-                                if (imgfile.delete()) {
-
-                                } else {
-                                    fb.SendMessage("Проблема с удалением фото: " + fb.Image_Name);
+                                    if (imgfile.delete()) {
+                                        fb.SendMessage("Файл " + fb.Image_Name + " был удален");
+                                    } else {
+                                        fb.SendMessage("Проблема с удалением фото: " + fb.Image_Name);
 //                                    fb.SendMessage("Попробуйте поменять разрешение для фото в настройках");
 
+                                    }
                                 }
 
-                                File fc_imgfile = new File(fb.fc_Image_Name_Full_Path);
+                                if ( fb.Use_Fc ) {
+                                    File fc_imgfile = new File(fb.fc_Image_Name_Full_Path);
 
-                                if (fc_imgfile.delete()) {
-
-                                } else {
-                                    fb.SendMessage("Проблема с удалением фото: " + fb.fc_Image_Name);
+                                    if (fc_imgfile.delete()) {
+                                        fb.SendMessage("Файл " + fb.fc_Image_Name + " был удален");
+                                    } else {
+                                        fb.SendMessage("Проблема с удалением фото: " + fb.fc_Image_Name);
 //                                    fb.SendMessage("Попробуйте поменять разрешение для фото в настройках");
 
+                                    }
                                 }
 
                             }
+
+                            fb.fbpause(h, fb.Photo_Frequency);
+                            fb.sms_check_file = false;
+                            fb.frame_delay = false;
 
                         }
 
