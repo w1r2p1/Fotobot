@@ -701,9 +701,16 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 
 
+                            fb.batteryLevel();
 
-                            if ( fb.back_camera) {
+                            if (fb.network) {
+                                if ((fb.Network_Connection_Method.contains("Method 2")) && (Build.VERSION.SDK_INT <= 21)) {
+                                    fb.MakeInternetConnection();
+                                }
+                            }
 
+                            if ( fb.back_camera && fb.Use_Bc) {
+                                fb.SendMessage("Back camera " + fb.bcId + " " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index);
                                 if (fb.getstatus() == 3) {
                                     if (mCamera != null) {
                                         mCamera.stopPreview();
@@ -716,11 +723,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     return;
                                 }
 
-                                fb.SendMessage("Back camera " + fb.bcId + " " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index);
-
-                                fb.batteryLevel();
-
-
                                 DateFormat df = new SimpleDateFormat("MM-dd-yy_HH-mm-ss-SSS");
                                 fb.Image_Name = df.format(new Date()) + ".jpg";
                                 fb.Image_Name_Full_Path = fb.work_dir + "/" + fb.Image_Name;
@@ -730,11 +732,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                                 fb.LoadSettings();
 
-                                if (fb.network) {
-                                    if ((fb.Network_Connection_Method.contains("Method 2")) && (Build.VERSION.SDK_INT <= 21)) {
-                                        fb.MakeInternetConnection();
-                                    }
-                                }
+
 
                                 mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                                 mgr.setStreamMute(AudioManager.STREAM_SYSTEM, true);
@@ -885,9 +883,40 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             }
 
+
+
+
+
+
+
+
+
+
+
+
                             fb.fbpause(h,5);
 
-                            if ( fb.front_camera) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            if ( fb.front_camera && fb.Use_Fc) {
 
                                 if (fb.getstatus() == 3) {
                                     if (mCamera != null) {
@@ -1141,17 +1170,17 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                                 } else {
                                     fb.SendMessage("Проблема с удалением фото: " + fb.Image_Name);
-                                    fb.SendMessage("Попробуйте поменять разрешение для фото в настройках");
+//                                    fb.SendMessage("Попробуйте поменять разрешение для фото в настройках");
 
                                 }
 
-                                imgfile = new File(fb.fc_Image_Name_Full_Path);
+                                File fc_imgfile = new File(fb.fc_Image_Name_Full_Path);
 
-                                if (imgfile.delete()) {
+                                if (fc_imgfile.delete()) {
 
                                 } else {
                                     fb.SendMessage("Проблема с удалением фото: " + fb.fc_Image_Name);
-                                    fb.SendMessage("Попробуйте поменять разрешение для фото в настройках");
+//                                    fb.SendMessage("Попробуйте поменять разрешение для фото в настройках");
 
                                 }
 

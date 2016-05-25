@@ -908,28 +908,35 @@ public class FotoBot extends Application {
                 s + "\n");
 
         File attach_file;
-        attach_file = new File(str);
-        boolean fileExists = attach_file.isFile();
 
-        if (fileExists) {
+        if ( Use_Bc ) {
 
-        } else {
-            SendMessage("Image doesn't exist.");
+            attach_file = new File(str);
+            boolean fileExists = attach_file.isFile();
+
+            if ( fileExists ) {
+
+            } else {
+                SendMessage("Image doesn't exist.");
+            }
         }
 
-        attach_file = new File(fc_str);
-        boolean fc_fileExists = attach_file.isFile();
 
-        if (fc_fileExists) {
+        if ( Use_Fc ) {
 
-        } else {
-            SendMessage("Front Camera image doesn't exist.");
+            attach_file = new File(fc_str);
+            boolean fc_fileExists = attach_file.isFile();
+
+            if (fc_fileExists && Use_Fc) {
+
+            } else {
+                SendMessage("Front Camera image doesn't exist.");
+            }
         }
-
 
         if (fb.attach_log) {
             attach_file = new File((work_dir + "/logfile.txt"));
-            fileExists = attach_file.isFile();
+            boolean fileExists = attach_file.isFile();
 
             if (fileExists) {
 
@@ -939,8 +946,14 @@ public class FotoBot extends Application {
 
         }
         try {
-            m.addAttachment(str);
-            m.addAttachment(fc_str);
+
+            if ( fb.Use_Bc) {
+                m.addAttachment(str);
+            }
+
+            if ( fb.Use_Fc ) {
+                m.addAttachment(fc_str);
+            }
 
             if (fb.attach_log) {
                 m.addAttachment(work_dir + "/logfile.txt");
@@ -1013,6 +1026,8 @@ public class FotoBot extends Application {
 
         Image_Size = pref.getString("Image_Size", "1024x768");
 
+        fc_Image_Size = pref.getString("fc_Image_Size", "320x240");
+
         EMail_Sender = pref.getString("EMail_Sender", "fotobot@gmail.com");
 
         EMail_Sender_Password = pref.getString("EMail_Sender_Password", "passwd");
@@ -1081,6 +1096,7 @@ public class FotoBot extends Application {
         editor.putInt("JPEG_Compression", JPEG_Compression);
         editor.putString("Image_Scale", Image_Scale);
         editor.putString("Image_Size", Image_Size);
+        editor.putString("fc_Image_Size", fc_Image_Size);
         editor.putBoolean("Use_Flash", Use_Flash);
         editor.putBoolean("Use_Fc", Use_Fc);
         editor.putBoolean("Use_Bc", Use_Bc);

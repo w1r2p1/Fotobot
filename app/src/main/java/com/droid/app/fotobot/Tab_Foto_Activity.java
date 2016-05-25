@@ -467,6 +467,7 @@ public class Tab_Foto_Activity extends Activity {
                 editor.putInt("JPEG_Compression", Integer.parseInt(editText_JPEG_Compression.getText().toString()));
                 editor.putString("Image_Scale", spinner_Hardware.getSelectedItem().toString());
                 editor.putString("Image_Size", spinner_Software.getSelectedItem().toString());
+                editor.putString("fc_Image_Size", fc_spinner_Software.getSelectedItem().toString());
 
 // Save the changes in SharedPreferences
                 editor.commit(); // commit changes
@@ -511,7 +512,9 @@ public class Tab_Foto_Activity extends Activity {
         FullFrame.addView(linLayout_Photo_Size);
         FullFrame.addView(linLayout_Flash);
 
-        FullFrame.addView(linLayout_fc);
+        if ( fb.front_camera ) {
+            FullFrame.addView(linLayout_fc);
+        }
 
         FullFrame.addView(linLayout_JPEG_Compression);
 
