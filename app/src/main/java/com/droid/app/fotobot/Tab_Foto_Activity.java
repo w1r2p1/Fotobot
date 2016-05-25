@@ -35,10 +35,13 @@ public class Tab_Foto_Activity extends Activity {
     CheckBox checkBox_Flash;
     EditText editText_JPEG_Compression;
     Spinner spinner_Hardware, spinner_ppm, spinner_Software;
+    Spinner fc_spinner_Software;
     ArrayAdapter<String> spinnerArrayAdapter1, spinnerArrayAdapter_Hardware;
+    ArrayAdapter<String> fc_spinnerArrayAdapter1;
     ArrayList<String> spinnerArray_ppm;
     final String LOG_TAG = "Logs";
     TextView tv_Photo_Size_h, tv_Photo_Size_s;
+    TextView fc_tv_Photo_Size_s;
     TextView tv_Photo_Size_h_note;
     TextView tv_Photo_Size_s_note;
 
@@ -271,6 +274,82 @@ public class Tab_Foto_Activity extends Activity {
 
 // ------------------------------------------------------------------------------------------------
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Параметры изображения
+
+// Контейнер для метода
+        LinearLayout fc_linLayout_Photo_Size = new LinearLayout(this);
+        fc_linLayout_Photo_Size.setOrientation(LinearLayout.VERTICAL);
+        fc_linLayout_Photo_Size.setPadding(5, 9, 5, 9);
+        fc_linLayout_Photo_Size.setBackgroundColor(Color.rgb(208, 208, 208));
+
+        // Размер фото
+        fc_tv_Photo_Size_s = new TextView(this);
+        fc_tv_Photo_Size_s.setTypeface(Typeface.DEFAULT_BOLD);
+        fc_tv_Photo_Size_s.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        fc_tv_Photo_Size_s.setTextColor(Color.BLACK);
+        fc_tv_Photo_Size_s.setText("Software");
+        fc_linLayout_Photo_Size.addView(fc_tv_Photo_Size_s);
+
+// Доступные разрешения
+        ArrayList<String> fc_spinnerArray = new ArrayList<String>();
+
+        Camera.Size fc_mSize = null;
+
+        int fc_fe_w = (int) fb.fc_camera_resolutions.get(0).width;
+        int fc_fe_h = (int) fb.fc_camera_resolutions.get(0).height;
+        float fc_fe_s, fc_fe_z;
+
+        fc_fe_z = (float) fc_fe_w / (float) fc_fe_h;
+
+        for (Camera.Size size : fb.fc_camera_resolutions) {
+            fc_fe_w = (int) size.width;
+            fc_fe_h = (int) size.height;
+            fc_fe_s = (float) fc_fe_w / (float) fc_fe_h;
+
+            if (Math.abs(fc_fe_s - fc_fe_z) < 0.01f) {
+                fc_spinnerArray.add(size.width + "x" + size.height);
+            }
+
+        }
+
+        fc_spinner_Software = new Spinner(this);
+        fc_spinnerArrayAdapter1 = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray);
+        fc_spinner_Software.setAdapter(fc_spinnerArrayAdapter1);
+        fc_spinner_Software.setSelection(getIndex(fc_spinner_Software, fb.fc_Image_Size));
+        fc_linLayout_Photo_Size.addView(fc_spinner_Software);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Buttons
 
 // Container
@@ -369,6 +448,9 @@ public class Tab_Foto_Activity extends Activity {
         FullFrame.addView(linLayout_Photo_Processing_Method);
         FullFrame.addView(linLayout_Photo_Size);
         FullFrame.addView(linLayout_Flash);
+
+        FullFrame.addView(fc_linLayout_Photo_Size);
+
         FullFrame.addView(linLayout_Buttons);
 
         ScrollView m_Scroll = new ScrollView(this);
