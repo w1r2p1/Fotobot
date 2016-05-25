@@ -710,7 +710,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             }
 
                             if ( fb.back_camera && fb.Use_Bc) {
-                                fb.SendMessage("Back camera " + fb.bcId + " " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index);
+                                fb.SendMessage(getResources().getString(R.string.Back_Camera) + " " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index);
                                 if (fb.getstatus() == 3) {
                                     if (mCamera != null) {
                                         mCamera.stopPreview();
@@ -930,7 +930,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     return;
                                 }
 
-                                fb.SendMessage("Front camera " + fb.fcId + " " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index);
+                                fb.SendMessage(getResources().getString(R.string.Front_Camera) + " " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index);
 
                          //       fb.batteryLevel();
 
@@ -977,7 +977,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                                     try {
                                         mCamera = Camera.open(fb.fcId);
-                                        fb.SendMessage("Front camera has been initialized for parameters setting.");
+//                                        fb.SendMessage("Front camera has been initialized for parameters setting.");
                                     } catch (Exception e) {
                                         fb.SendMessage("Problem with camera initialization in main cycle.");
 

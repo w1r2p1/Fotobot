@@ -16,6 +16,8 @@
 
     <string name="Camera_Name">Camera Name</string>
     <string name="Camera_Name_description">Camera Name will be added to emails title, it will help to sort out mails in Inbox</string>
+    <string name="Front_Camera">Front camera</string>
+    <string name="Back_Camera">Back camera</string>
 
     <string name="SMS_Password">SMS Password</string>
     <string name="SMS_Password_description">Password for administration via SMS (if password is wrong than rest part of SMS will be ignored)</string>
