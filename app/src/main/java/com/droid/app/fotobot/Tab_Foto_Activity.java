@@ -452,10 +452,12 @@ if ( fb.front_camera) {
                     editor.putBoolean("Use_Flash", false);
                 }
 
-                if (checkBox_fc.isChecked()) {
-                    editor.putBoolean("Use_Fc", true);
-                } else {
-                    editor.putBoolean("Use_Fc", false);
+                if ( fb.front_camera ) {
+                    if (checkBox_fc.isChecked()) {
+                        editor.putBoolean("Use_Fc", true);
+                    } else {
+                        editor.putBoolean("Use_Fc", false);
+                    }
                 }
 
                 if (checkBox_bc.isChecked()) {
@@ -469,7 +471,9 @@ if ( fb.front_camera) {
                 editor.putInt("JPEG_Compression", Integer.parseInt(editText_JPEG_Compression.getText().toString()));
                 editor.putString("Image_Scale", spinner_Hardware.getSelectedItem().toString());
                 editor.putString("Image_Size", spinner_Software.getSelectedItem().toString());
-                editor.putString("fc_Image_Size", fc_spinner_Software.getSelectedItem().toString());
+                if ( fb.front_camera ) {
+                    editor.putString("fc_Image_Size", fc_spinner_Software.getSelectedItem().toString());
+                }
 
 // Save the changes in SharedPreferences
                 editor.commit(); // commit changes
