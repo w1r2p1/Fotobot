@@ -60,7 +60,7 @@ public class FotoBot extends Application {
     public int numberOfCameras = 1;
 
     public boolean back_camera = true;
-    public boolean front_camera = true;
+    public boolean front_camera = false;
 
     int fcId = -1;
     int bcId = -1;

@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 21
+    compileSdkVersion 22
     buildToolsVersion '23.0.2'
 
     defaultConfig {
         applicationId "com.droid.app.fotobot"
         minSdkVersion 9
         targetSdkVersion 10
-        versionCode 22
-        versionName "2.6.1"
+        versionCode 23
+        versionName "2.6.2"
     }
     buildTypes {
         release {
