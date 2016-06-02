@@ -11,6 +11,7 @@ import android.hardware.Camera;
 import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
@@ -1539,6 +1540,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
+        String SD_cards = getExternalStorage();
+
 /*        if (mCamera != null) {
             mCamera.stopPreview();
             mCamera.setPreviewCallback(null);
@@ -1655,4 +1658,34 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         } catch (IOException e) {
         }
     }
+
+    static String getExternalStorage(){
+        String exts =  Environment.getExternalStorageDirectory().getPath();
+        try {
+            FileReader fr = new FileReader(new File("/proc/mounts"));
+            BufferedReader br = new BufferedReader(fr);
+            String sdCard=null;
+            String line;
+            while((line = br.readLine())!=null){
+                if(line.contains("secure") || line.contains("asec")) continue;
+                if(line.contains("fat")){
+                    String[] pars = line.split("\\s");
+                    if(pars.length<2) continue;
+                    if(pars[1].equals(exts)) continue;
+                    sdCard =pars[1];
+                    break;
+                }
+            }
+            fr.close();
+            br.close();
+            return sdCard;
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 }
