@@ -1263,6 +1263,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             Camera.getCameraInfo(i,ci);
             if(ci.facing == Camera.CameraInfo.CAMERA_FACING_FRONT){
                 fb.fcId = i;
+                fb.front_camera = true;
                 mCamera = Camera.open(fb.fcId);
 
        /*
