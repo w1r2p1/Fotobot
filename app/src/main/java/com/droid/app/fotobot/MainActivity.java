@@ -1542,6 +1542,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         String SD_cards = getExternalStorage();
 
+        fb.SendMessage("External SD card: " + SD_cards);
+        fb.SendMessage("Internal storage: " + Environment.getExternalStorageDirectory());
+
 /*        if (mCamera != null) {
             mCamera.stopPreview();
             mCamera.setPreviewCallback(null);
