@@ -65,7 +65,13 @@ public class Tab_Main_Activity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         final FotoBot fb = (FotoBot) getApplicationContext();
         super.onCreate(savedInstanceState);
+
         fb.LoadSettings();
+
+        if ( fb.launched_first_time ) {
+            fb.set_default_storage();
+            fb.launched_first_time = false;
+        }
 
         //   Logger fblogger = Logger.getLogger(FotoBot.class.getName());
         //  fb.logger.fine("Tab_Main_Activity");
@@ -675,6 +681,7 @@ public class Tab_Main_Activity extends Activity {
                 editor.putInt("Log_Size", Integer.parseInt(editText_fbfloglength.getText().toString()));
                 editor.putString("Work_Dir", editText_Work_Dir.getText().toString());
                 editor.putString("Storage_Type", spinner_ppm.getSelectedItem().toString());
+                editor.putBoolean("Launched_First_Time", fb.launched_first_time);
 
 // Save the changes in SharedPreferences
                 editor.commit();

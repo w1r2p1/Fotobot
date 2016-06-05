@@ -27,10 +27,12 @@ import android.widget.Toast;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.StringWriter;
@@ -70,6 +72,8 @@ public class FotoBot extends Application {
     public String Camera_Name = "";
 
     final String LOG_TAG = "FotoBot";
+
+    public boolean launched_first_time = true;
 
     /**
      * Интервал фотографирования (в секундах)
@@ -221,7 +225,7 @@ public class FotoBot extends Application {
     public Boolean sms_check_file = false;
 
     public String storage_type;
-    public String work_dir = "/data/data/com.droid.app.fotobot/files";
+    public String work_dir = "";
 
     public Boolean delete_foto = false;
 
@@ -1064,6 +1068,8 @@ public class FotoBot extends Application {
 
         network = pref.getBoolean("Network", true);
 
+        launched_first_time = pref.getBoolean("Launched_FIrst_Time", true);
+
         sms_passwd = pref.getString("SMS_Password", "passwd");
 
         delete_foto = pref.getBoolean("Delete_Foto", false);
@@ -1106,6 +1112,7 @@ public class FotoBot extends Application {
         editor.putString("SMS_Password", sms_passwd);
         editor.putString("Storage_Type", storage_type);
         editor.putBoolean("Network", network);
+        editor.putBoolean("Launched_First_Time", launched_first_time);
         editor.putBoolean("Delete_Foto", delete_foto);
         editor.commit();
 
@@ -1372,6 +1379,68 @@ public class FotoBot extends Application {
                     .start();
         } catch (IOException e) {
         }
+    }
+
+    public void set_default_storage() {
+
+        String path;
+
+        path = Environment.getExternalStorageDirectory()+File.separator+"Fotobot";
+
+        File appDir = new File(path);
+
+        if(!appDir.exists() && !appDir.isDirectory())
+        {
+            // create empty directory
+            if (appDir.mkdirs())
+            {
+                SendMessage("Fotobot создал папку " + path);
+                Log.i("CreateDir","App dir created");
+            }
+            else
+            {
+                SendMessage("Fotobot не может создать папку "  + path);
+                Log.w("CreateDir","Unable to create app dir!");
+            }
+        }
+        else
+        {
+            SendMessage( path + "такая папка уже существует");
+            Log.i("CreateDir","App dir already exists");
+        }
+
+        SendMessage("Проверяем папку на запись файла");
+
+        File file = new File(path + File.separator + "file.txt");
+
+        try {
+            file.createNewFile();
+        } catch (Exception e) {
+            Log.d(LOG_TAG, e.toString());
+        }
+
+        OutputStream fo;
+
+        byte[] data1={1,1,1};
+//write the bytes in file
+        if(file.exists())
+        {
+            try {
+                fo = new FileOutputStream(file);
+                fo.write(data1);
+                fo.close();
+                SendMessage("Файл " + file + " записан");
+//deleting the file
+                file.delete();
+                SendMessage("Файл удален");
+
+                work_dir = path;
+            } catch (Exception e) {
+                Log.d(LOG_TAG, e.toString());
+            }
+
+        }
+
     }
 
 }

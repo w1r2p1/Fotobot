@@ -1541,9 +1541,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
-        fb.SendMessage("getExternalStorage(): " + getExternalStorage());
-        fb.SendMessage("Environment.getExternalStorageDirectory(): " + Environment.getExternalStorageDirectory());
-        fb.SendMessage("Environment.getExternalStoragePublicDirectory(): " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS));
+    //    fb.SendMessage("getExternalStorage(): " + getExternalStorage());
+    //    fb.SendMessage("Environment.getExternalStorageDirectory(): " + Environment.getExternalStorageDirectory());
+    //    fb.SendMessage("Environment.getExternalStoragePublicDirectory(): " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS));
 
 /*        if (mCamera != null) {
             mCamera.stopPreview();
