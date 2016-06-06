@@ -95,7 +95,7 @@ public class FotoBot extends Application {
      */
     public boolean Use_Flash;
 
-    public boolean Use_Fc = false;
+    public boolean Use_Fc = true;
     public boolean Use_Bc = true;
 
     public int battery_level;
@@ -298,7 +298,7 @@ public class FotoBot extends Application {
 
     public int log_line_number = 150;
 
-    public Boolean network = true;
+    public Boolean network = false;
 
     public Boolean Method1_activated = false;
 
@@ -1014,7 +1014,7 @@ public class FotoBot extends Application {
 
         Use_Flash = pref.getBoolean("Use_Flash", false);
 
-        Use_Fc = pref.getBoolean("Use_Fc", false);
+        Use_Fc = pref.getBoolean("Use_Fc", true);
 
         Use_Bc = pref.getBoolean("Use_Bc", true);
 
@@ -1022,7 +1022,7 @@ public class FotoBot extends Application {
 
         Camera_Name = pref.getString("Camera_Name", "default");
 
-        Photo_Frequency = pref.getInt("Photo_Frequency", 60);
+        Photo_Frequency = pref.getInt("Photo_Frequency", 300);
 
         process_delay = pref.getInt("process_delay", 5);
 
@@ -1066,7 +1066,7 @@ public class FotoBot extends Application {
 
         storage_type = pref.getString("Storage_Type", "Internal");
 
-        network = pref.getBoolean("Network", true);
+        network = pref.getBoolean("Network", false);
 
         launched_first_time = pref.getBoolean("Launched_First_Time", true);
 

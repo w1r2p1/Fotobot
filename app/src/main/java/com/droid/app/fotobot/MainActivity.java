@@ -317,6 +317,21 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         fb.LoadSettings();
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         fb.log = Html.fromHtml(getResources().getString(R.string.Fotobot)) + "\n\n" +
                  "---------------------" + "\n\n" +
                 getResources().getString(R.string.update);
@@ -451,6 +466,17 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
          * получили указатель на обработчик сообщений сразу же говорим FotoBot'у об этом
          */
         fb.h = h;
+
+
+
+        if ( fb.launched_first_time ) {
+            fb.set_default_storage();
+            fb.launched_first_time = false;
+        }
+
+
+
+
 
     }
 

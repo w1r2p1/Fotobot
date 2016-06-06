@@ -68,10 +68,10 @@ public class Tab_Main_Activity extends Activity {
 
         fb.LoadSettings();
 
-        if ( fb.launched_first_time ) {
-            fb.set_default_storage();
-            fb.launched_first_time = false;
-        }
+       // if ( fb.launched_first_time ) {
+       //     fb.set_default_storage();
+       //     fb.launched_first_time = false;
+       // }
 
         //   Logger fblogger = Logger.getLogger(FotoBot.class.getName());
         //  fb.logger.fine("Tab_Main_Activity");
