@@ -1393,7 +1393,7 @@ public class FotoBot extends Application {
             // create empty directory
             if (appDir.mkdirs())
             {
-                SendMessage("Fotobot создал папку " + path);
+             //   SendMessage("Fotobot создал папку " + path);
                 Log.i("CreateDir","App dir created");
             }
             else
@@ -1404,11 +1404,11 @@ public class FotoBot extends Application {
         }
         else
         {
-            SendMessage( path + "такая папка уже существует");
+         //   SendMessage( path + "такая папка уже существует");
             Log.i("CreateDir","App dir already exists");
         }
 
-        SendMessage("Проверяем папку на запись файла");
+       // SendMessage("Проверяем папку на запись файла");
 
         File file = new File(path + File.separator + "file.txt");
 
@@ -1428,12 +1428,15 @@ public class FotoBot extends Application {
                 fo = new FileOutputStream(file);
                 fo.write(data1);
                 fo.close();
-                SendMessage("Файл " + file + " записан");
+           //     SendMessage("Файл " + file + " записан");
 //deleting the file
                 file.delete();
-                SendMessage("Файл удален");
+          //      SendMessage("Файл удален");
 
                 work_dir = path;
+
+                SaveSettings();
+
             } catch (Exception e) {
                 Log.d(LOG_TAG, e.toString());
             }
