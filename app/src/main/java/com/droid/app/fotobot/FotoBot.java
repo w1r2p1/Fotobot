@@ -1347,6 +1347,7 @@ public class FotoBot extends Application {
     }
 
 
+
     public void work_dir_init() {
 
         work_dir = getApplicationContext().getFilesDir().toString();
