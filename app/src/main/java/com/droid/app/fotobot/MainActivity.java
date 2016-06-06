@@ -332,9 +332,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 
 
-        fb.log = Html.fromHtml(getResources().getString(R.string.Fotobot)) + "\n\n" +
-                 "---------------------" + "\n\n" +
-                getResources().getString(R.string.update);
+//        fb.log = Html.fromHtml(getResources().getString(R.string.Fotobot)) + "\n\n" +
+//                 "---------------------" + "\n\n" +
+//                getResources().getString(R.string.fast_start) + "\n\n" +
+//                fb.work_dir + "\n\n" +
+//                getResources().getString(R.string.update);
 
         fb.work_dir_init();
 
@@ -458,7 +460,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         tvInfo.setTextColor(Color.rgb(190, 190, 190));
 
         tvInfo.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
-        tvInfo.setText(fb.log);
+//        tvInfo.setText(fb.log);
 
         h = new Handler(hc);
 
@@ -474,8 +476,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             fb.launched_first_time = false;
         }
 
+        fb.log = Html.fromHtml(getResources().getString(R.string.Fotobot)) + "\n\n" +
+                "---------------------" + "\n\n" +
+                getResources().getString(R.string.fast_start) + "\n\n" +
+                fb.work_dir + "\n\n" +
+                getResources().getString(R.string.update);
 
-
+        tvInfo.setText(fb.log);
 
 
     }
