@@ -58,6 +58,17 @@ public class Tab_Main_Activity extends Activity {
     //   ArrayAdapter<String> spinnerArrayAdapter1, spinnerArrayAdapter_Hardware;
     ArrayList<String> spinnerArray_ppm;
     LinearLayout linLayout_Work_Dir;
+
+    LinearLayout linLayout_process_delay;
+    LinearLayout linLayout_fbloglength;
+    LinearLayout linLayout_Attach_Log;
+    LinearLayout linLayout_Clean_SystemLog;
+    LinearLayout linLayout_fbfloglength;
+    LinearLayout linLayout_Clean_Text;
+    LinearLayout linLayout_config_font_size;
+    LinearLayout linLayout_log_font_size;
+    LinearLayout linLayout_Wake_Up;
+
     //   LinearLayout linLayout_Work_Dir_note;
     final String LOG_TAG = "Logs";
 
@@ -291,7 +302,7 @@ public class Tab_Main_Activity extends Activity {
 // ------------------------------------------------------------------------------------------------
 
 // 2. Интервал между процессами (основной контейнер)
-        LinearLayout linLayout_process_delay = new LinearLayout(this);
+        linLayout_process_delay = new LinearLayout(this);
         linLayout_process_delay.setOrientation(LinearLayout.VERTICAL);
         linLayout_process_delay.setPadding(5, 9, 5, 9);
         linLayout_process_delay.setBackgroundColor(Color.rgb(208, 208, 208));
@@ -322,7 +333,7 @@ public class Tab_Main_Activity extends Activity {
 // ------------------------------------------------------------------------------------------------
 
 // 3. Шрифты (Config_Font_Size Container)
-        LinearLayout linLayout_config_font_size = new LinearLayout(this);
+        linLayout_config_font_size = new LinearLayout(this);
         linLayout_config_font_size.setOrientation(LinearLayout.VERTICAL);
         linLayout_config_font_size.setPadding(5, 9, 5, 9);
         linLayout_config_font_size.setBackgroundColor(Color.rgb(208, 208, 208));
@@ -344,7 +355,7 @@ public class Tab_Main_Activity extends Activity {
         linLayout_config_font_size.addView(Config_Font_Size);
 
 // 3.1 Шрифты (Log_Font_Size Container)
-        LinearLayout linLayout_log_font_size = new LinearLayout(this);
+        linLayout_log_font_size = new LinearLayout(this);
         linLayout_log_font_size.setOrientation(LinearLayout.VERTICAL);
         linLayout_log_font_size.setPadding(5, 9, 5, 9);
         linLayout_log_font_size.setBackgroundColor(Color.rgb(192, 192, 192));
@@ -370,7 +381,7 @@ public class Tab_Main_Activity extends Activity {
 // Почистить вывод на экран
 
 // Clean Log Container
-        LinearLayout linLayout_Clean_Text = new LinearLayout(this);
+        linLayout_Clean_Text = new LinearLayout(this);
         linLayout_Clean_Text.setOrientation(LinearLayout.VERTICAL);
         linLayout_Clean_Text.setPadding(5, 9, 5, 9);
         linLayout_Clean_Text.setBackgroundColor(Color.rgb(192, 192, 192));
@@ -405,7 +416,7 @@ public class Tab_Main_Activity extends Activity {
 // Почистить журнал
 
 // Clean Log Container
-        LinearLayout linLayout_Clean_SystemLog = new LinearLayout(this);
+        linLayout_Clean_SystemLog = new LinearLayout(this);
         linLayout_Clean_SystemLog.setOrientation(LinearLayout.VERTICAL);
         linLayout_Clean_SystemLog.setPadding(5, 9, 5, 9);
         linLayout_Clean_SystemLog.setBackgroundColor(Color.rgb(192, 192, 192));
@@ -436,7 +447,7 @@ public class Tab_Main_Activity extends Activity {
 // fb.log length
 
 // fb.log length Container
-        LinearLayout linLayout_fbloglength = new LinearLayout(this);
+        linLayout_fbloglength = new LinearLayout(this);
         linLayout_fbloglength.setOrientation(LinearLayout.VERTICAL);
         linLayout_fbloglength.setPadding(5, 9, 5, 9);
         linLayout_fbloglength.setBackgroundColor(Color.rgb(192, 192, 192));
@@ -472,7 +483,7 @@ public class Tab_Main_Activity extends Activity {
 // fbf.log length
 
 // fbf.log length Container
-        LinearLayout linLayout_fbfloglength = new LinearLayout(this);
+        linLayout_fbfloglength = new LinearLayout(this);
         linLayout_fbfloglength.setOrientation(LinearLayout.VERTICAL);
         linLayout_fbfloglength.setPadding(5, 9, 5, 9);
         linLayout_fbfloglength.setBackgroundColor(Color.rgb(208, 208, 208));
@@ -497,7 +508,7 @@ public class Tab_Main_Activity extends Activity {
 // ------------------------------------------------------------------------------------------------
 
 // Wake Up (Horizontal LinearLayout контейнер)
-        LinearLayout linLayout_Wake_Up = new LinearLayout(this);
+        linLayout_Wake_Up = new LinearLayout(this);
         linLayout_Wake_Up.setOrientation(LinearLayout.VERTICAL);
         linLayout_Wake_Up.setPadding(5, 9, 5, 9);
         linLayout_Wake_Up.setBackgroundColor(Color.rgb(208, 208, 208));
@@ -552,6 +563,43 @@ public class Tab_Main_Activity extends Activity {
         checkBox_Adv_Settings = new CheckBox(this);
         checkBox_Adv_Settings.setChecked(fb.advanced_settings);
         linLayout_Adv_Settings_Log.addView(checkBox_Adv_Settings);
+
+        checkBox_Adv_Settings.setChecked(new AdapterView.OnItemSelectedListener() {
+
+            public void onItemSelected(AdapterView<?> adapterView,
+                                       View view, int i, long l) {
+
+                if (checkBox_Adv_Settings.isChecked()) {
+                    linLayout_process_delay.setVisibility(View.VISIBLE);
+                    linLayout_fbloglength.setVisibility(View.VISIBLE);
+                    linLayout_Attach_Log.setVisibility(View.VISIBLE);
+                    linLayout_Clean_SystemLog.setVisibility(View.VISIBLE);
+                    linLayout_fbfloglength.setVisibility(View.VISIBLE);
+                    linLayout_Clean_Text.setVisibility(View.VISIBLE);
+                    linLayout_config_font_size.setVisibility(View.VISIBLE);
+                    linLayout_log_font_size.setVisibility(View.VISIBLE);
+                    linLayout_Wake_Up.setVisibility(View.VISIBLE);
+                } else {
+                    linLayout_process_delay.setVisibility(View.GONE);
+                    linLayout_fbloglength.setVisibility(View.GONE);
+                    linLayout_Attach_Log.setVisibility(View.GONE);
+                    linLayout_Clean_SystemLog.setVisibility(View.GONE);
+                    linLayout_fbfloglength.setVisibility(View.GONE);
+                    linLayout_Clean_Text.setVisibility(View.GONE);
+                    linLayout_config_font_size.setVisibility(View.GONE);
+                    linLayout_log_font_size.setVisibility(View.GONE);
+                    linLayout_Wake_Up.setVisibility(View.GONE);
+                }
+
+            }
+
+            // If no option selected
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+
+        });
 
 // ------------------------------------------------------------------------------------------------
 
