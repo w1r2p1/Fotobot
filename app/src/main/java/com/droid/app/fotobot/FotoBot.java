@@ -265,6 +265,8 @@ public class FotoBot extends Application {
      */
     public Boolean Show_Help = false;
 
+    public Boolean advanced_settings = false;
+
     /**
      * Память в телефоне
      */
@@ -1072,6 +1074,8 @@ public class FotoBot extends Application {
 
         sms_passwd = pref.getString("SMS_Password", "passwd");
 
+        advanced_settings = pref.getBoolean("Advanced_Settings", false);
+
         delete_foto = pref.getBoolean("Delete_Foto", false);
 
     }
@@ -1109,6 +1113,7 @@ public class FotoBot extends Application {
         editor.putInt("Log_Size", log_size);
         editor.putString("Work_Dir", work_dir);
         editor.putString("SMS_Password", sms_passwd);
+        editor.putBoolean("Advanced_Settings", advanced_settings);
         editor.putString("Storage_Type", storage_type);
         editor.putBoolean("Network", network);
         editor.putBoolean("Launched_First_Time", launched_first_time);

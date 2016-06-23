@@ -42,6 +42,7 @@ public class Tab_Main_Activity extends Activity {
     CheckBox checkBox_Clean_SystemLog;
     CheckBox checkBox_Clean_Text;
     CheckBox checkBox_Attach_Log;
+    CheckBox checkBox_Adv_Settings;
     CheckBox checkBox_Delete_Foto;
     EditText Photo_Frequency;
     EditText Config_Font_Size;
@@ -530,6 +531,30 @@ public class Tab_Main_Activity extends Activity {
 
 // ------------------------------------------------------------------------------------------------
 
+// Advanced Settings
+
+// Advanced Settingd Container
+        LinearLayout linLayout_Adv_Settings_Log = new LinearLayout(this);
+        linLayout_Adv_Settings_Log.setOrientation(LinearLayout.VERTICAL);
+        linLayout_Adv_Settings_Log.setPadding(5, 9, 5, 9);
+        linLayout_Adv_Settings_Log.setBackgroundColor(Color.rgb(208, 208, 208));
+
+// Attach Log TextView
+        TextView tv_Adv_Settings = new TextView(this);
+        tv_Adv_Settings.setText(getResources().getString(R.string.advanced_settings));
+        tv_Adv_Settings.setWidth((screenWidth - padding) / 100 * 90);
+        tv_Adv_Settings.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Adv_Settings.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Adv_Settings.setTextColor(Color.BLACK);
+        linLayout_Adv_Settings_Log.addView(tv_Adv_Settings);
+
+// CheckBox
+        checkBox_Adv_Settings = new CheckBox(this);
+        checkBox_Adv_Settings.setChecked(fb.advanced_settings);
+        linLayout_Adv_Settings_Log.addView(checkBox_Adv_Settings);
+
+// ------------------------------------------------------------------------------------------------
+
 // Приаттачить лог
 
 // Attach Log Container
@@ -670,6 +695,14 @@ public class Tab_Main_Activity extends Activity {
 
                 }
 
+                if (checkBox_Adv_Settings.isChecked()) {
+                    fb.advanced_settings = true;
+                    editor.putBoolean("Advanced_Settings", true);
+                } else {
+                    fb.advanced_settings = false;
+                    editor.putBoolean("Advanced_Settings", false);
+                }
+
                 editor.putString("Camera_Name", editText_Fotobot_Camera_Name.getText().toString());
                 editor.putString("SMS_Password", editText_SMS_Password.getText().toString());
                 editor.putInt("Photo_Frequency", Integer.parseInt(Photo_Frequency.getText().toString()));
@@ -683,6 +716,7 @@ public class Tab_Main_Activity extends Activity {
                 fb.work_dir = editText_Work_Dir.getText().toString();
                 editor.putString("Storage_Type", spinner_ppm.getSelectedItem().toString());
                 editor.putBoolean("Launched_First_Time", fb.launched_first_time);
+
 
 // Save the changes in SharedPreferences
                 editor.commit();
@@ -739,15 +773,20 @@ public class Tab_Main_Activity extends Activity {
         FullFrame.addView(linLayout_Work_Dir);
         FullFrame.addView(linLayout_Delete_Foto);
         FullFrame.addView(linLayout1);
-        FullFrame.addView(linLayout_process_delay);
-        FullFrame.addView(linLayout_fbloglength);
-        FullFrame.addView(linLayout_Attach_Log);
-        FullFrame.addView(linLayout_Clean_SystemLog);
-        FullFrame.addView(linLayout_fbfloglength);
-        FullFrame.addView(linLayout_Clean_Text);
-        FullFrame.addView(linLayout_config_font_size);
-        FullFrame.addView(linLayout_log_font_size);
-        FullFrame.addView(linLayout_Wake_Up);
+        FullFrame.addView(linLayout_Adv_Settings_Log);
+
+        if (fb.advanced_settings) {
+            FullFrame.addView(linLayout_process_delay);
+            FullFrame.addView(linLayout_fbloglength);
+            FullFrame.addView(linLayout_Attach_Log);
+            FullFrame.addView(linLayout_Clean_SystemLog);
+            FullFrame.addView(linLayout_fbfloglength);
+            FullFrame.addView(linLayout_Clean_Text);
+            FullFrame.addView(linLayout_config_font_size);
+            FullFrame.addView(linLayout_log_font_size);
+            FullFrame.addView(linLayout_Wake_Up);
+        }
+
         FullFrame.addView(linLayout_Buttons);
 
         ScrollView m_Scroll = new ScrollView(this);

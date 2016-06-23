@@ -28,6 +28,8 @@
     <string name="network">Network</string>
     <string name="network_description">Select network mode: on (photos will be saved on phone and sent to email), off (photos will be saved on phone without of mail sending )</string>
 
+    <string name="advanced_settings">Show advanced settings</string>
+
     <string name="Work_Dir">Working Folder</string>
     <string name="Work_Dir_description">Absolute path to folder with photos</string>
     <string name="Work_Dir_error1">No such folder for images</string>
