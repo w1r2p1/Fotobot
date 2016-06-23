@@ -540,73 +540,14 @@ public class Tab_Main_Activity extends Activity {
         tv_Wake_Up_notes.setPadding(1, 5, 5, 5);
         linLayout_Wake_Up.addView(tv_Wake_Up_notes);
 
-// ------------------------------------------------------------------------------------------------
 
-// Advanced Settings
-
-// Advanced Settingd Container
-        LinearLayout linLayout_Adv_Settings_Log = new LinearLayout(this);
-        linLayout_Adv_Settings_Log.setOrientation(LinearLayout.VERTICAL);
-        linLayout_Adv_Settings_Log.setPadding(5, 9, 5, 9);
-        linLayout_Adv_Settings_Log.setBackgroundColor(Color.rgb(208, 208, 208));
-
-// Attach Log TextView
-        TextView tv_Adv_Settings = new TextView(this);
-        tv_Adv_Settings.setText(getResources().getString(R.string.advanced_settings));
-        tv_Adv_Settings.setWidth((screenWidth - padding) / 100 * 90);
-        tv_Adv_Settings.setTypeface(Typeface.DEFAULT_BOLD);
-        tv_Adv_Settings.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
-        tv_Adv_Settings.setTextColor(Color.BLACK);
-        linLayout_Adv_Settings_Log.addView(tv_Adv_Settings);
-
-// CheckBox
-        checkBox_Adv_Settings = new CheckBox(this);
-        checkBox_Adv_Settings.setChecked(fb.advanced_settings);
-        linLayout_Adv_Settings_Log.addView(checkBox_Adv_Settings);
-
-        checkBox_Adv_Settings.setChecked(new AdapterView.OnItemSelectedListener() {
-
-            public void onItemSelected(AdapterView<?> adapterView,
-                                       View view, int i, long l) {
-
-                if (checkBox_Adv_Settings.isChecked()) {
-                    linLayout_process_delay.setVisibility(View.VISIBLE);
-                    linLayout_fbloglength.setVisibility(View.VISIBLE);
-                    linLayout_Attach_Log.setVisibility(View.VISIBLE);
-                    linLayout_Clean_SystemLog.setVisibility(View.VISIBLE);
-                    linLayout_fbfloglength.setVisibility(View.VISIBLE);
-                    linLayout_Clean_Text.setVisibility(View.VISIBLE);
-                    linLayout_config_font_size.setVisibility(View.VISIBLE);
-                    linLayout_log_font_size.setVisibility(View.VISIBLE);
-                    linLayout_Wake_Up.setVisibility(View.VISIBLE);
-                } else {
-                    linLayout_process_delay.setVisibility(View.GONE);
-                    linLayout_fbloglength.setVisibility(View.GONE);
-                    linLayout_Attach_Log.setVisibility(View.GONE);
-                    linLayout_Clean_SystemLog.setVisibility(View.GONE);
-                    linLayout_fbfloglength.setVisibility(View.GONE);
-                    linLayout_Clean_Text.setVisibility(View.GONE);
-                    linLayout_config_font_size.setVisibility(View.GONE);
-                    linLayout_log_font_size.setVisibility(View.GONE);
-                    linLayout_Wake_Up.setVisibility(View.GONE);
-                }
-
-            }
-
-            // If no option selected
-            public void onNothingSelected(AdapterView<?> arg0) {
-                // TODO Auto-generated method stub
-
-            }
-
-        });
 
 // ------------------------------------------------------------------------------------------------
 
 // Приаттачить лог
 
 // Attach Log Container
-        LinearLayout linLayout_Attach_Log = new LinearLayout(this);
+        linLayout_Attach_Log = new LinearLayout(this);
         linLayout_Attach_Log.setOrientation(LinearLayout.VERTICAL);
         linLayout_Attach_Log.setPadding(5, 9, 5, 9);
         linLayout_Attach_Log.setBackgroundColor(Color.rgb(208, 208, 208));
@@ -668,6 +609,69 @@ public class Tab_Main_Activity extends Activity {
         linLayout_Delete_Foto.addView(tv_Delete_Foto_note);
 
 // ------------------------------------------------------------------------------------------------
+
+// Advanced Settings
+
+// Advanced Settingd Container
+        LinearLayout linLayout_Adv_Settings_Log = new LinearLayout(this);
+        linLayout_Adv_Settings_Log.setOrientation(LinearLayout.VERTICAL);
+        linLayout_Adv_Settings_Log.setPadding(5, 9, 5, 9);
+        linLayout_Adv_Settings_Log.setBackgroundColor(Color.rgb(208, 208, 208));
+
+// Attach Log TextView
+        TextView tv_Adv_Settings = new TextView(this);
+        tv_Adv_Settings.setText(getResources().getString(R.string.advanced_settings));
+        tv_Adv_Settings.setWidth((screenWidth - padding) / 100 * 90);
+        tv_Adv_Settings.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Adv_Settings.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Adv_Settings.setTextColor(Color.BLACK);
+        linLayout_Adv_Settings_Log.addView(tv_Adv_Settings);
+
+// CheckBox
+        checkBox_Adv_Settings = new CheckBox(this);
+        checkBox_Adv_Settings.setChecked(fb.advanced_settings);
+        linLayout_Adv_Settings_Log.addView(checkBox_Adv_Settings);
+
+        checkBox_Adv_Settings.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                //   if ( ((CheckBox)v).isChecked() ) {
+
+                if (checkBox_Adv_Settings.isChecked()) {
+                    linLayout_process_delay.setVisibility(View.VISIBLE);
+                    linLayout_fbloglength.setVisibility(View.VISIBLE);
+                    linLayout_Attach_Log.setVisibility(View.VISIBLE);
+                    linLayout_Clean_SystemLog.setVisibility(View.VISIBLE);
+                    linLayout_fbfloglength.setVisibility(View.VISIBLE);
+                    linLayout_Clean_Text.setVisibility(View.VISIBLE);
+                    linLayout_config_font_size.setVisibility(View.VISIBLE);
+                    linLayout_log_font_size.setVisibility(View.VISIBLE);
+                    linLayout_Wake_Up.setVisibility(View.VISIBLE);
+                } else {
+                    linLayout_process_delay.setVisibility(View.GONE);
+                    linLayout_fbloglength.setVisibility(View.GONE);
+                    linLayout_Attach_Log.setVisibility(View.GONE);
+                    linLayout_Clean_SystemLog.setVisibility(View.GONE);
+                    linLayout_fbfloglength.setVisibility(View.GONE);
+                    linLayout_Clean_Text.setVisibility(View.GONE);
+                    linLayout_config_font_size.setVisibility(View.GONE);
+                    linLayout_log_font_size.setVisibility(View.GONE);
+                    linLayout_Wake_Up.setVisibility(View.GONE);
+                }
+
+            }
+
+            // If no option selected
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+
+        });
+
+
 // Buttons
 
 // Container
@@ -823,7 +827,7 @@ public class Tab_Main_Activity extends Activity {
         FullFrame.addView(linLayout1);
         FullFrame.addView(linLayout_Adv_Settings_Log);
 
-        if (fb.advanced_settings) {
+      //  if (fb.advanced_settings) {
             FullFrame.addView(linLayout_process_delay);
             FullFrame.addView(linLayout_fbloglength);
             FullFrame.addView(linLayout_Attach_Log);
@@ -833,7 +837,7 @@ public class Tab_Main_Activity extends Activity {
             FullFrame.addView(linLayout_config_font_size);
             FullFrame.addView(linLayout_log_font_size);
             FullFrame.addView(linLayout_Wake_Up);
-        }
+    //    }
 
         FullFrame.addView(linLayout_Buttons);
 
