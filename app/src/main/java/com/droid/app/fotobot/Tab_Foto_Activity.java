@@ -116,7 +116,7 @@ public class Tab_Foto_Activity extends Activity {
         tv_Photo_Size_h.setTextSize(14);
         tv_Photo_Size_h.setTextColor(Color.BLACK);
         tv_Photo_Size_h.setText("Hardware");
- //       linLayout_Photo_Size.addView(tv_Photo_Size_h);
+        linLayout_Photo_Size.addView(tv_Photo_Size_h);
 
 // Коэффициенты масштабирования
         ArrayList<String> spinnerArray_Hardware = new ArrayList<String>();
@@ -130,7 +130,7 @@ public class Tab_Foto_Activity extends Activity {
         spinnerArrayAdapter_Hardware = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray_Hardware);
         spinner_Hardware.setAdapter(spinnerArrayAdapter_Hardware);
         spinner_Hardware.setSelection(getIndex(spinner_Hardware, fb.Image_Scale));
- //       linLayout_Photo_Size.addView(spinner_Hardware);
+        linLayout_Photo_Size.addView(spinner_Hardware);
 
 // Размер фото
         tv_Photo_Size_s = new TextView(this);
@@ -138,7 +138,7 @@ public class Tab_Foto_Activity extends Activity {
         tv_Photo_Size_s.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Photo_Size_s.setTextColor(Color.BLACK);
         tv_Photo_Size_s.setText("Software");
-//        linLayout_Photo_Size.addView(tv_Photo_Size_s);
+        linLayout_Photo_Size.addView(tv_Photo_Size_s);
 
 // Название
         TextView tv_bc = new TextView(this);
@@ -183,7 +183,7 @@ public class Tab_Foto_Activity extends Activity {
         tv_Photo_Size_h_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Photo_Size_h_note.setTextColor(Color.BLACK);
         tv_Photo_Size_h_note.setText(getResources().getString(R.string.photo_scale));
-//        linLayout_Photo_Size.addView(tv_Photo_Size_h_note);
+        linLayout_Photo_Size.addView(tv_Photo_Size_h_note);
 
 // Заметка для Software
         tv_Photo_Size_s_note = new TextView(this);
@@ -191,7 +191,7 @@ public class Tab_Foto_Activity extends Activity {
         tv_Photo_Size_s_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Photo_Size_s_note.setTextColor(Color.BLACK);
         tv_Photo_Size_s_note.setText(getResources().getString(R.string.photo_resolution));
-//        linLayout_Photo_Size.addView(tv_Photo_Size_s_note);
+        linLayout_Photo_Size.addView(tv_Photo_Size_s_note);
 
 // Использовать камеру
         TextView tv_use_bc = new TextView(this);
@@ -514,7 +514,7 @@ if ( fb.front_camera) {
         linLayout_Buttons.addView(btn_mp, lpViewbutton2);
 
 
-     //   FullFrame.addView(linLayout_Photo_Processing_Method);
+        FullFrame.addView(linLayout_Photo_Processing_Method);
         FullFrame.addView(linLayout_Photo_Size);
         FullFrame.addView(linLayout_Flash);
 
