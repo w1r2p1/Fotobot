@@ -116,7 +116,7 @@ public class Tab_Foto_Activity extends Activity {
         tv_Photo_Size_h.setTextSize(14);
         tv_Photo_Size_h.setTextColor(Color.BLACK);
         tv_Photo_Size_h.setText("Hardware");
-        linLayout_Photo_Size.addView(tv_Photo_Size_h);
+    //    linLayout_Photo_Size.addView(tv_Photo_Size_h);
 
 // Коэффициенты масштабирования
         ArrayList<String> spinnerArray_Hardware = new ArrayList<String>();
@@ -138,7 +138,7 @@ public class Tab_Foto_Activity extends Activity {
         tv_Photo_Size_s.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Photo_Size_s.setTextColor(Color.BLACK);
         tv_Photo_Size_s.setText("Software");
-        linLayout_Photo_Size.addView(tv_Photo_Size_s);
+//        linLayout_Photo_Size.addView(tv_Photo_Size_s);
 
 // Название
         TextView tv_bc = new TextView(this);
@@ -345,7 +345,7 @@ if ( fb.front_camera) {
     fc_tv_Photo_Size_s.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
     fc_tv_Photo_Size_s.setTextColor(Color.BLACK);
     fc_tv_Photo_Size_s.setText("Software");
-    // linLayout_fc.addView(fc_tv_Photo_Size_s);
+  //  linLayout_fc.addView(fc_tv_Photo_Size_s);
 
 // Доступные разрешения
     ArrayList<String> fc_spinnerArray = new ArrayList<String>();
@@ -374,11 +374,11 @@ if ( fb.front_camera) {
     fc_spinner_Software.setAdapter(fc_spinnerArrayAdapter1);
     fc_spinner_Software.setSelection(getIndex(fc_spinner_Software, fb.fc_Image_Size));
 
-/*
-    if (fb.Photo_Post_Processing_Method.contains("Software")) {
+
+//    if (fb.Photo_Post_Processing_Method.contains("Software")) {
         linLayout_fc.addView(fc_spinner_Software);
-    }
-*/
+//    }
+
 
 // Использовать фронтальную камеру
     TextView tv_use_fc = new TextView(this);
