@@ -248,6 +248,7 @@ public class Tab_Foto_Activity extends Activity {
                     tv_Photo_Size_h.setVisibility(View.VISIBLE);
                     spinner_Hardware.setVisibility(View.VISIBLE);
                     tv_Photo_Size_h_note.setVisibility(View.VISIBLE);
+                    fc_spinner_Software.setVisibility(View.GONE);
                 } else {
                     fb.Photo_Post_Processing_Method = "Software";
                     tv_Photo_Size_s.setVisibility(View.VISIBLE);
@@ -256,6 +257,7 @@ public class Tab_Foto_Activity extends Activity {
                     tv_Photo_Size_h.setVisibility(View.GONE);
                     spinner_Hardware.setVisibility(View.GONE);
                     tv_Photo_Size_h_note.setVisibility(View.GONE);
+                    fc_spinner_Software.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -372,11 +374,11 @@ if ( fb.front_camera) {
     fc_spinner_Software.setAdapter(fc_spinnerArrayAdapter1);
     fc_spinner_Software.setSelection(getIndex(fc_spinner_Software, fb.fc_Image_Size));
 
-
-
+/*
     if (fb.Photo_Post_Processing_Method.contains("Software")) {
         linLayout_fc.addView(fc_spinner_Software);
     }
+*/
 
 // Использовать фронтальную камеру
     TextView tv_use_fc = new TextView(this);
