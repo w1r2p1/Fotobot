@@ -18,7 +18,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -633,14 +632,15 @@ public class Tab_Main_Activity extends Activity {
         checkBox_Adv_Settings.setChecked(fb.advanced_settings);
         linLayout_Adv_Settings_Log.addView(checkBox_Adv_Settings);
 
-        checkBox_Adv_Settings.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        checkBox_Adv_Settings.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onClick(View v) {
 
-                //   if ( ((CheckBox)v).isChecked() ) {
+                   //if ( ((CheckBox)v).isChecked() ) {
 
                 if (checkBox_Adv_Settings.isChecked()) {
+                    fb.advanced_settings = true;
                     linLayout_process_delay.setVisibility(View.VISIBLE);
                     linLayout_fbloglength.setVisibility(View.VISIBLE);
                     linLayout_Attach_Log.setVisibility(View.VISIBLE);
@@ -651,6 +651,7 @@ public class Tab_Main_Activity extends Activity {
                     linLayout_log_font_size.setVisibility(View.VISIBLE);
                     linLayout_Wake_Up.setVisibility(View.VISIBLE);
                 } else {
+                    fb.advanced_settings = false;
                     linLayout_process_delay.setVisibility(View.GONE);
                     linLayout_fbloglength.setVisibility(View.GONE);
                     linLayout_Attach_Log.setVisibility(View.GONE);
@@ -828,16 +829,27 @@ public class Tab_Main_Activity extends Activity {
         FullFrame.addView(linLayout1);
         FullFrame.addView(linLayout_Adv_Settings_Log);
 
-        if (fb.advanced_settings) {
-            FullFrame.addView(linLayout_process_delay);
-            FullFrame.addView(linLayout_fbloglength);
-            FullFrame.addView(linLayout_Attach_Log);
-            FullFrame.addView(linLayout_Clean_SystemLog);
-            FullFrame.addView(linLayout_fbfloglength);
-            FullFrame.addView(linLayout_Clean_Text);
-            FullFrame.addView(linLayout_config_font_size);
-            FullFrame.addView(linLayout_log_font_size);
-            FullFrame.addView(linLayout_Wake_Up);
+
+        FullFrame.addView(linLayout_process_delay);
+        FullFrame.addView(linLayout_fbloglength);
+        FullFrame.addView(linLayout_Attach_Log);
+        FullFrame.addView(linLayout_Clean_SystemLog);
+        FullFrame.addView(linLayout_fbfloglength);
+        FullFrame.addView(linLayout_Clean_Text);
+        FullFrame.addView(linLayout_config_font_size);
+        FullFrame.addView(linLayout_log_font_size);
+        FullFrame.addView(linLayout_Wake_Up);
+
+        if ( !fb.advanced_settings ) {
+            linLayout_process_delay.setVisibility(View.GONE);
+            linLayout_fbloglength.setVisibility(View.GONE);
+            linLayout_Attach_Log.setVisibility(View.GONE);
+            linLayout_Clean_SystemLog.setVisibility(View.GONE);
+            linLayout_fbfloglength.setVisibility(View.GONE);
+            linLayout_Clean_Text.setVisibility(View.GONE);
+            linLayout_config_font_size.setVisibility(View.GONE);
+            linLayout_log_font_size.setVisibility(View.GONE);
+            linLayout_Wake_Up.setVisibility(View.GONE);
         }
 
         FullFrame.addView(linLayout_Buttons);
