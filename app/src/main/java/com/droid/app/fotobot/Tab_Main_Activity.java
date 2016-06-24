@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -632,10 +633,10 @@ public class Tab_Main_Activity extends Activity {
         checkBox_Adv_Settings.setChecked(fb.advanced_settings);
         linLayout_Adv_Settings_Log.addView(checkBox_Adv_Settings);
 
-        checkBox_Adv_Settings.setOnClickListener(new View.OnClickListener() {
+        checkBox_Adv_Settings.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
-            public void onClick(View v) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                 //   if ( ((CheckBox)v).isChecked() ) {
 
@@ -827,7 +828,7 @@ public class Tab_Main_Activity extends Activity {
         FullFrame.addView(linLayout1);
         FullFrame.addView(linLayout_Adv_Settings_Log);
 
-      //  if (fb.advanced_settings) {
+        if (fb.advanced_settings) {
             FullFrame.addView(linLayout_process_delay);
             FullFrame.addView(linLayout_fbloglength);
             FullFrame.addView(linLayout_Attach_Log);
@@ -837,7 +838,7 @@ public class Tab_Main_Activity extends Activity {
             FullFrame.addView(linLayout_config_font_size);
             FullFrame.addView(linLayout_log_font_size);
             FullFrame.addView(linLayout_Wake_Up);
-    //    }
+        }
 
         FullFrame.addView(linLayout_Buttons);
 

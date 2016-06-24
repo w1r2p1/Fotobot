@@ -241,6 +241,7 @@ public class Tab_Foto_Activity extends Activity {
                                        View view, int i, long l) {
 
                 if (spinnerArray_ppm.get(i) == "Hardware") {
+                    fb.Photo_Post_Processing_Method = "Hardware";
                     tv_Photo_Size_s.setVisibility(View.GONE);
                     spinner_Software.setVisibility(View.GONE);
                     tv_Photo_Size_s_note.setVisibility(View.GONE);
@@ -248,6 +249,7 @@ public class Tab_Foto_Activity extends Activity {
                     spinner_Hardware.setVisibility(View.VISIBLE);
                     tv_Photo_Size_h_note.setVisibility(View.VISIBLE);
                 } else {
+                    fb.Photo_Post_Processing_Method = "Software";
                     tv_Photo_Size_s.setVisibility(View.VISIBLE);
                     spinner_Software.setVisibility(View.VISIBLE);
                     tv_Photo_Size_s_note.setVisibility(View.VISIBLE);
@@ -369,7 +371,12 @@ if ( fb.front_camera) {
     fc_spinnerArrayAdapter1 = new ArrayAdapter<String>(this, R.layout.spinner_item, fc_spinnerArray);
     fc_spinner_Software.setAdapter(fc_spinnerArrayAdapter1);
     fc_spinner_Software.setSelection(getIndex(fc_spinner_Software, fb.fc_Image_Size));
-    linLayout_fc.addView(fc_spinner_Software);
+
+
+
+    if (fb.Photo_Post_Processing_Method.contains("Software")) {
+        linLayout_fc.addView(fc_spinner_Software);
+    }
 
 // Использовать фронтальную камеру
     TextView tv_use_fc = new TextView(this);
