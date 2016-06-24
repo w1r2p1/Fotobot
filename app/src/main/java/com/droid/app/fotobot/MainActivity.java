@@ -340,20 +340,32 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         fb.work_dir_init();
 
+        if ( fb.show_start_tip ) {
+            fb.log = Html.fromHtml(getResources().getString(R.string.Fotobot)) + "\n\n" +
+                    "---------------------" + "\n\n" +
+                    getResources().getString(R.string.fast_start) + "\n\n" +
+                    fb.work_dir + "\n\n" +
+                    getResources().getString(R.string.update);
+
+            fb.show_start_tip = false;
+        }
+
             if (savedInstanceState == null)   // приложение запущено впервые
         {
-            Log.d(LOG_TAG, "MainActivity: onCreate started first time");
+            Log.d(LOG_TAG, "************************************************************************************* MainActivity: onCreate started first time");
 
             if (fb.clean_log) {
                 fb.log = "";
                 fb.clean_log = false;
+                Log.d(LOG_TAG, "************************************************************************************* clean log");
             }
         } else // приложение восстановлено из памяти
         {
-            Log.d(LOG_TAG, "MainActivity: onCreate restored");
+            Log.d(LOG_TAG, "************************************************************************************* MainActivity: onCreate restored");
             if (fb.clean_log) {
                 fb.log = "";
                 fb.clean_log = false;
+                Log.d(LOG_TAG, "************************************************************************************* clean log");
             }
         }
 
@@ -476,11 +488,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             fb.launched_first_time = false;
         }
 
-        fb.log = Html.fromHtml(getResources().getString(R.string.Fotobot)) + "\n\n" +
-                "---------------------" + "\n\n" +
-                getResources().getString(R.string.fast_start) + "\n\n" +
-                fb.work_dir + "\n\n" +
-                getResources().getString(R.string.update);
+
 
         tvInfo.setText(fb.log);
 

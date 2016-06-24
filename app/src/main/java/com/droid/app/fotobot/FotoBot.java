@@ -197,6 +197,8 @@ public class FotoBot extends Application {
     public String fc_Image_Name_Full_Path;
     public String bc_Image_Name_Full_Path;
 
+    public Boolean show_start_tip = true;
+
     /**
      * Длина лога в главном окне
      */
@@ -321,6 +323,7 @@ public class FotoBot extends Application {
      */
     public int short_pause = 1;
     public int long_pause = 5;
+
     /**
      * Возвращает текущее состояние FotoBot'а, сейчас не пользуюсь этим
      *
@@ -357,6 +360,7 @@ public class FotoBot extends Application {
     public void FotoBot() {
 
         LoadSettings();
+        show_start_tip = true;
     }
 
   /*  public void Init() {
