@@ -74,7 +74,7 @@ public class Tab_Foto_Activity extends Activity {
         LinearLayout linLayout_JPEG_Compression = new LinearLayout(this);
         linLayout_JPEG_Compression.setOrientation(LinearLayout.VERTICAL);
         linLayout_JPEG_Compression.setPadding(5, 9, 5, 9);
-        linLayout_JPEG_Compression.setBackgroundColor(Color.rgb(208, 208, 208));
+        linLayout_JPEG_Compression.setBackgroundColor(Color.rgb(192, 192, 192));
 
 // Название
         TextView tv_JPEG_Compression = new TextView(this);
@@ -132,6 +132,14 @@ public class Tab_Foto_Activity extends Activity {
         spinner_Hardware.setSelection(getIndex(spinner_Hardware, fb.Image_Scale));
         linLayout_Photo_Size.addView(spinner_Hardware);
 
+        // Заметка для Hardware
+        tv_Photo_Size_h_note = new TextView(this);
+        tv_Photo_Size_h_note.setTypeface(null, Typeface.NORMAL);
+        tv_Photo_Size_h_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_Photo_Size_h_note.setTextColor(Color.BLACK);
+        tv_Photo_Size_h_note.setText(getResources().getString(R.string.photo_scale));
+        linLayout_Photo_Size.addView(tv_Photo_Size_h_note);
+
 // Размер фото
         tv_Photo_Size_s = new TextView(this);
         tv_Photo_Size_s.setTypeface(Typeface.DEFAULT_BOLD);
@@ -140,6 +148,14 @@ public class Tab_Foto_Activity extends Activity {
         tv_Photo_Size_s.setText("Software");
 //        linLayout_Photo_Size.addView(tv_Photo_Size_s);
 
+
+
+// камера
+// Контейнер для камеры
+        LinearLayout linLayout_camera = new LinearLayout(this);
+        linLayout_camera.setOrientation(LinearLayout.VERTICAL);
+        linLayout_camera.setPadding(5, 9, 5, 9);
+        linLayout_camera.setBackgroundColor(Color.rgb(192, 192, 192));
 // Название
         TextView tv_bc = new TextView(this);
         tv_bc.setTypeface(Typeface.DEFAULT_BOLD);
@@ -147,7 +163,7 @@ public class Tab_Foto_Activity extends Activity {
         tv_bc.setTextColor(Color.BLACK);
         tv_bc.setText("Камера");
         tv_bc.setTypeface(Typeface.DEFAULT_BOLD);
-        linLayout_Photo_Size.addView(tv_bc);
+        linLayout_camera.addView(tv_bc);
 
 // Доступные разрешения
         ArrayList<String> spinnerArray = new ArrayList<String>();
@@ -175,15 +191,9 @@ public class Tab_Foto_Activity extends Activity {
         spinnerArrayAdapter1 = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray);
         spinner_Software.setAdapter(spinnerArrayAdapter1);
         spinner_Software.setSelection(getIndex(spinner_Software, fb.Image_Size));
-        linLayout_Photo_Size.addView(spinner_Software);
+        linLayout_camera.addView(spinner_Software);
 
-// Заметка для Hardware
-        tv_Photo_Size_h_note = new TextView(this);
-        tv_Photo_Size_h_note.setTypeface(null, Typeface.NORMAL);
-        tv_Photo_Size_h_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
-        tv_Photo_Size_h_note.setTextColor(Color.BLACK);
-        tv_Photo_Size_h_note.setText(getResources().getString(R.string.photo_scale));
-        linLayout_Photo_Size.addView(tv_Photo_Size_h_note);
+
 
 // Заметка для Software
         tv_Photo_Size_s_note = new TextView(this);
@@ -191,7 +201,7 @@ public class Tab_Foto_Activity extends Activity {
         tv_Photo_Size_s_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Photo_Size_s_note.setTextColor(Color.BLACK);
         tv_Photo_Size_s_note.setText(getResources().getString(R.string.photo_resolution));
-        linLayout_Photo_Size.addView(tv_Photo_Size_s_note);
+//        linLayout_camera.addView(tv_Photo_Size_s_note);
 
 // Использовать камеру
         TextView tv_use_bc = new TextView(this);
@@ -200,12 +210,12 @@ public class Tab_Foto_Activity extends Activity {
         tv_use_bc.setTypeface(Typeface.DEFAULT_BOLD);
         tv_use_bc.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_use_bc.setTextColor(Color.BLACK);
-        linLayout_Photo_Size.addView(tv_use_bc);
+        linLayout_camera.addView(tv_use_bc);
 
 // CheckBox
         checkBox_bc = new CheckBox(this);
         checkBox_bc.setChecked(fb.Use_Bc);
-        linLayout_Photo_Size.addView(checkBox_bc);
+        linLayout_camera.addView(checkBox_bc);
 
 // ------------------------------------------------------------------------------------------------
 
@@ -294,12 +304,14 @@ public class Tab_Foto_Activity extends Activity {
         tv_Flash.setTypeface(Typeface.DEFAULT_BOLD);
         tv_Flash.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Flash.setTextColor(Color.BLACK);
-        linLayout_Flash.addView(tv_Flash);
+//        linLayout_Flash.addView(tv_Flash);
+        linLayout_camera.addView(tv_Flash);
 
 // CheckBox
         checkBox_Flash = new CheckBox(this);
         checkBox_Flash.setChecked(fb.Use_Flash);
-        linLayout_Flash.addView(checkBox_Flash);
+//        linLayout_Flash.addView(checkBox_Flash);
+        linLayout_camera.addView(checkBox_Flash);
 
 // ------------------------------------------------------------------------------------------------
 
@@ -321,7 +333,7 @@ public class Tab_Foto_Activity extends Activity {
         LinearLayout linLayout_fc = new LinearLayout(this);
         linLayout_fc.setOrientation(LinearLayout.VERTICAL);
         linLayout_fc.setPadding(5, 9, 5, 9);
-        linLayout_fc.setBackgroundColor(Color.rgb(192, 192, 192));
+        linLayout_fc.setBackgroundColor(Color.rgb(208, 208, 208));
 
 if ( fb.front_camera) {
 // Название
@@ -526,7 +538,7 @@ if ( fb.front_camera) {
         FullFrame.addView(linLayout_Photo_Processing_Method);
         FullFrame.addView(linLayout_Photo_Size);
         FullFrame.addView(linLayout_Flash);
-
+        FullFrame.addView(linLayout_camera);
         if ( fb.front_camera ) {
             FullFrame.addView(linLayout_fc);
         }
