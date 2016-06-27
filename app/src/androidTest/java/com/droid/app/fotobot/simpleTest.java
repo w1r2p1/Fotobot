@@ -26,7 +26,7 @@ public class simpleTest extends ActivityInstrumentationTestCase2<MainActivity> {
     public void testEnterName() throws Exception {
       //  Intents.init();
         onView(withId(R.id.config)).perform(click());
-        onView(withId(R.id.camera_name)).check(matches(withText("defaultsss")));
+        onView(withId(R.id.camera_name)).check(matches(withText("default")));
         //intended(hasComponent(Settings.class.getName()));
        // intended(hasComponent(new ComponentName(getTargetContext(), Settings.class)));
 
