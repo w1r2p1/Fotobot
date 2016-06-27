@@ -121,13 +121,14 @@ public class Tab_Main_Activity extends Activity {
         tv_Fotobot_Camera_Name.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Fotobot_Camera_Name.setTextColor(Color.BLACK);
         tv_Fotobot_Camera_Name.setText(getResources().getString(R.string.Camera_Name));
-        tv_Fotobot_Camera_Name.setId(R.id.camera_name);
+      //  tv_Fotobot_Camera_Name.setId(R.id.camera_name);
         linLayout_Fotobot_Camera_Name.addView(tv_Fotobot_Camera_Name);
 
 // Camera Name
         editText_Fotobot_Camera_Name = new EditText(this);
         editText_Fotobot_Camera_Name.setSingleLine(true);
         editText_Fotobot_Camera_Name.setText(fb.Camera_Name);
+        editText_Fotobot_Camera_Name.setId(R.id.camera_name);
         editText_Fotobot_Camera_Name.setTextColor(Color.rgb(50, 100, 150));
         linLayout_Fotobot_Camera_Name.addView(editText_Fotobot_Camera_Name);
 
