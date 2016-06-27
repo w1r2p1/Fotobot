@@ -53,10 +53,10 @@
             android:name=".Settings"
             android:label="@string/title_activity_settings" >
         </activity>
-        <activity
+<!--        <activity
             android:name=".Status"
             android:label="@string/title_activity_status" >
-        </activity>
+        </activity> -->
         <activity
             android:name=".Tab_Main_Activity"
             android:label="@string/title_main_activity_settings" >

@@ -121,6 +121,7 @@ public class Tab_Main_Activity extends Activity {
         tv_Fotobot_Camera_Name.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Fotobot_Camera_Name.setTextColor(Color.BLACK);
         tv_Fotobot_Camera_Name.setText(getResources().getString(R.string.Camera_Name));
+        tv_Fotobot_Camera_Name.setId(R.id.camera_name);
         linLayout_Fotobot_Camera_Name.addView(tv_Fotobot_Camera_Name);
 
 // Camera Name
