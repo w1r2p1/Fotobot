@@ -39,6 +39,7 @@ public class Tab_Foto_Activity extends Activity {
     Spinner spinner_Hardware, spinner_ppm, spinner_Software;
     Spinner fc_spinner_Software;
     ArrayAdapter<String> spinnerArrayAdapter1, spinnerArrayAdapter_Hardware;
+    ArrayAdapter<String> spinnerArrayAdapter2;
     ArrayAdapter<String> fc_spinnerArrayAdapter1;
     ArrayList<String> spinnerArray_ppm;
     final String LOG_TAG = "Logs";
@@ -189,7 +190,14 @@ public class Tab_Foto_Activity extends Activity {
 
         spinner_Software = new Spinner(this);
         spinnerArrayAdapter1 = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray);
-        spinner_Software.setAdapter(spinnerArrayAdapter1);
+
+        spinnerArrayAdapter2 = new CustomAdapter(this, R.layout.spinner_item, spinnerArray);
+
+
+
+
+     //   spinner_Software.setAdapter(spinnerArrayAdapter1);
+        spinner_Software.setAdapter(spinnerArrayAdapter2);
         spinner_Software.setSelection(getIndex(spinner_Software, fb.Image_Size));
         linLayout_camera.addView(spinner_Software);
 
