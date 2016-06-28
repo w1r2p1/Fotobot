@@ -35,6 +35,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -48,6 +49,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 // commented to debug ffc
 public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
@@ -493,7 +496,63 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         tvInfo.setText(fb.log);
 
 
-    }
+
+
+
+
+
+
+
+
+        Button button = (Button) findViewById(R.id.log);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "создание отчета может потребовать 5 - 15 сек", Toast.LENGTH_LONG).show();
+
+                final FotoBot fb = (FotoBot) getApplicationContext();
+
+                File logfile = new File(fb.work_dir + "/logfile.txt");
+
+                if (logcat2file()) {
+                    //fb.SendMessage("Заполнили файл данными из logcat");
+                } else {
+                    fb.SendMessage("Проблема с доступом к logcat");
+                }
+
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                LogWidget = (ScrollView) findViewById(R.id.scrollView);
+                LogWidget.setBackgroundColor(Color.rgb(54, 54, 54));
+
+                tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
+                tvInfo.setTypeface(Typeface.MONOSPACE);
+                tvInfo.setTextColor(Color.rgb(190, 190, 190));
+
+                tvInfo.setText(file2string());
+
+                findViewById(R.id.play).setEnabled(false);
+                findViewById(R.id.stop).setEnabled(false);
+
+                try {
+                    logfile.delete();
+                    //  fb.SendMessage("Logfile from catlog has been deleted");
+                } catch (Exception e) {
+                    fb.SendMessage("Problem with deleting of Logfile from catlog");
+                }
+                Toast.makeText(MainActivity.this, "вывод системного журнала на экран завершен ", Toast.LENGTH_LONG).show();
+            }
+
+
+
+
+        });
+
+        }
 
     protected void onDestroy() {
         final FotoBot fb = (FotoBot) getApplicationContext();
@@ -1582,51 +1641,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
-    //    fb.SendMessage("getExternalStorage(): " + getExternalStorage());
-    //    fb.SendMessage("Environment.getExternalStorageDirectory(): " + Environment.getExternalStorageDirectory());
-    //    fb.SendMessage("Environment.getExternalStoragePublicDirectory(): " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS));
-
-/*        if (mCamera != null) {
-            mCamera.stopPreview();
-            mCamera.setPreviewCallback(null);
-            mCamera.release();
-            mCamera = null;
-        }
-
-        Camera camera;
-        camera = Camera.open(1);
-        String camera_Properties = camera.getParameters().flatten();
-        try {
-            camera.setPreviewDisplay(fb.holder);
-        } catch (Exception e) {
-          Log.d(LOG_TAG,"setPreviewDisplay failed for ffc");
-        }
-
-        try {
-            camera.startPreview();
-        } catch (Exception e) {
-            Log.d(LOG_TAG,"startPreview failed for ffc");
-        }
-
-        camera.takePicture(null,null,mPicture);
-
-        if (camera != null) {
-            camera.stopPreview();
-            camera.setPreviewCallback(null);
-            camera.release();
-            camera = null;
-        }
-*/
-        /*FrontFaceCamera ffc = new FrontFaceCamera(getApplicationContext(), fb.holder);
-        ffc.getCameraInstance();
-        String ffc_Properties = ffc.getCameraParameters();
-        Log.d(LOG_TAG, "ffc: " + ffc_Properties);
-
-        ffc.takePicture();
-
-        ffc.releaseCamera();
-*/
-
+        Toast.makeText(this,"generating report", Toast.LENGTH_LONG).show();
 
         File logfile = new File(fb.work_dir + "/logfile.txt");
 
@@ -1636,7 +1651,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             fb.SendMessage("Проблема с доступом к logcat");
         }
 
-        fb.fbpause(fb.h, 1);
+ //       fb.fbpause(fb.h, 1);
 
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
         LogWidget.setBackgroundColor(Color.rgb(54, 54, 54));
