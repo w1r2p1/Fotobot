@@ -185,9 +185,9 @@ public class Tab_Foto_Activity extends Activity {
             fe_h = (int) size.height;
             fe_s = (float) fe_w / (float) fe_h;
 
-            if (Math.abs(fe_s - fe_z) < 0.01f) {
+         //   if (Math.abs(fe_s - fe_z) < 0.01f) {
                 spinnerArray.add(size.width + "x" + size.height);
-            }
+         //   }
 
         }
 
@@ -272,9 +272,9 @@ public class Tab_Foto_Activity extends Activity {
                 fc_fe_h = (int) size.height;
                 fc_fe_s = (float) fc_fe_w / (float) fc_fe_h;
 
-                if (Math.abs(fc_fe_s - fc_fe_z) < 0.01f) {
+             //   if (Math.abs(fc_fe_s - fc_fe_z) < 0.01f) {
                     fc_spinnerArray.add(size.width + "x" + size.height);
-                }
+             //   }
 
             }
 
@@ -644,8 +644,20 @@ public class Tab_Foto_Activity extends Activity {
             LayoutInflater inflater=getLayoutInflater();
             View row=inflater.inflate(R.layout.spinner_item, parent, false);
             TextView label=(TextView)row.findViewById(R.id.textView1);
-            label.setText(spinnerArray.get(position));
-            label.setTextColor(Color.GREEN);
+            String str = spinnerArray.get(position);
+            String[] parts = str.split("x");
+            int width = Integer.parseInt(parts[0]);
+            int height = Integer.parseInt(parts[1]);
+            float diff = Math.abs(width/height - 4/3 );
+            Log.d("DEUG", "diff = " + diff);
+            if ( diff > 0.01f ) {
+                label.setTextColor(Color.rgb(150,0,0));
+            }
+
+            label.setText(str);
+
+
+
 //            label.setText("sss");
 
             return row;
