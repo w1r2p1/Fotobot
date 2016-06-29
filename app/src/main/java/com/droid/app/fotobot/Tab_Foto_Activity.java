@@ -648,10 +648,12 @@ public class Tab_Foto_Activity extends Activity {
             String[] parts = str.split("x");
             int width = Integer.parseInt(parts[0]);
             int height = Integer.parseInt(parts[1]);
-            float diff = Math.abs(width/height - 4/3 );
-            Log.d("DEUG", "diff = " + diff);
+            float diff = Math.abs((float)width/(float)height - 4.0f/3.0f );
+            Log.d("DEUG", "width = " + width + " height = " + height + " diff = " + diff + " " + position);
             if ( diff > 0.01f ) {
-                label.setTextColor(Color.rgb(150,0,0));
+                label.setTextColor(Color.rgb(210,90,90));
+            } else {
+                label.setTextColor(Color.rgb(50,100,150));
             }
 
             label.setText(str);
