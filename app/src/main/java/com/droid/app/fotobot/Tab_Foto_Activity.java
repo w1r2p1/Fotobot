@@ -190,9 +190,7 @@ public class Tab_Foto_Activity extends Activity {
 
         spinner_Software = new Spinner(this);
         spinnerArrayAdapter1 = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray);
-
-                spinner_Software.setAdapter(spinnerArrayAdapter1);
-
+        spinner_Software.setAdapter(spinnerArrayAdapter1);
         spinner_Software.setSelection(getIndex(spinner_Software, fb.Image_Size));
         linLayout_camera.addView(spinner_Software);
 
@@ -221,6 +219,89 @@ public class Tab_Foto_Activity extends Activity {
         linLayout_camera.addView(checkBox_bc);
 
 // ------------------------------------------------------------------------------------------------
+
+// Фронтальная камера
+// Контейнер для фронтальной камеры
+        LinearLayout linLayout_fc = new LinearLayout(this);
+        linLayout_fc.setOrientation(LinearLayout.VERTICAL);
+        linLayout_fc.setPadding(5, 9, 5, 9);
+        linLayout_fc.setBackgroundColor(Color.rgb(208, 208, 208));
+
+        if ( fb.front_camera) {
+// Название
+            TextView tv_fc = new TextView(this);
+            tv_fc.setTypeface(Typeface.DEFAULT_BOLD);
+            tv_fc.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+            tv_fc.setTextColor(Color.BLACK);
+            tv_fc.setText("Фронтальная камера");
+            tv_fc.setTypeface(Typeface.DEFAULT_BOLD);
+            linLayout_fc.addView(tv_fc);
+
+// Контейнер для метода
+            LinearLayout fc_linLayout_Photo_Size = new LinearLayout(this);
+            fc_linLayout_Photo_Size.setOrientation(LinearLayout.VERTICAL);
+            fc_linLayout_Photo_Size.setPadding(5, 9, 5, 9);
+            fc_linLayout_Photo_Size.setBackgroundColor(Color.rgb(192, 192, 192));
+
+            // Размер фото
+            fc_tv_Photo_Size_s = new TextView(this);
+            fc_tv_Photo_Size_s.setTypeface(Typeface.DEFAULT_BOLD);
+            fc_tv_Photo_Size_s.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+            fc_tv_Photo_Size_s.setTextColor(Color.BLACK);
+            fc_tv_Photo_Size_s.setText("Software");
+            //  linLayout_fc.addView(fc_tv_Photo_Size_s);
+
+// Доступные разрешения
+            ArrayList<String> fc_spinnerArray = new ArrayList<String>();
+
+            Camera.Size fc_mSize = null;
+
+            int fc_fe_w = (int) fb.fc_camera_resolutions.get(0).width;
+            int fc_fe_h = (int) fb.fc_camera_resolutions.get(0).height;
+            float fc_fe_s, fc_fe_z;
+
+            fc_fe_z = (float) fc_fe_w / (float) fc_fe_h;
+
+            for (Camera.Size size : fb.fc_camera_resolutions) {
+                fc_fe_w = (int) size.width;
+                fc_fe_h = (int) size.height;
+                fc_fe_s = (float) fc_fe_w / (float) fc_fe_h;
+
+                if (Math.abs(fc_fe_s - fc_fe_z) < 0.01f) {
+                    fc_spinnerArray.add(size.width + "x" + size.height);
+                }
+
+            }
+
+            fc_spinner_Software = new Spinner(this);
+            fc_spinnerArrayAdapter1 = new ArrayAdapter<String>(this, R.layout.spinner_item, fc_spinnerArray);
+            fc_spinner_Software.setAdapter(fc_spinnerArrayAdapter1);
+            fc_spinner_Software.setSelection(getIndex(fc_spinner_Software, fb.fc_Image_Size));
+
+
+//    if (fb.Photo_Post_Processing_Method.contains("Software")) {
+            linLayout_fc.addView(fc_spinner_Software);
+//    }
+
+
+// Использовать фронтальную камеру
+            TextView tv_use_fc = new TextView(this);
+            tv_use_fc.setText("Использовать фронтальную камеру");
+            tv_use_fc.setWidth((screenWidth - padding) / 100 * 90);
+            tv_use_fc.setTypeface(Typeface.DEFAULT_BOLD);
+            tv_use_fc.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+            tv_use_fc.setTextColor(Color.BLACK);
+            linLayout_fc.addView(tv_use_fc);
+
+// CheckBox
+            checkBox_fc = new CheckBox(this);
+            checkBox_fc.setChecked(fb.Use_Fc);
+            linLayout_fc.addView(checkBox_fc);
+        }
+
+
+
+
 
 // Метод обработки фото
 
@@ -261,7 +342,7 @@ public class Tab_Foto_Activity extends Activity {
                     tv_Photo_Size_h.setVisibility(View.VISIBLE);
                     spinner_Hardware.setVisibility(View.VISIBLE);
                     tv_Photo_Size_h_note.setVisibility(View.VISIBLE);
-                    fc_spinner_Software.setVisibility(View.GONE);
+                   // fc_spinner_Software.setVisibility(View.GONE);
                 } else {
                     fb.Photo_Post_Processing_Method = "Software";
                     tv_Photo_Size_s.setVisibility(View.VISIBLE);
@@ -270,7 +351,7 @@ public class Tab_Foto_Activity extends Activity {
                     tv_Photo_Size_h.setVisibility(View.GONE);
                     spinner_Hardware.setVisibility(View.GONE);
                     tv_Photo_Size_h_note.setVisibility(View.GONE);
-                    fc_spinner_Software.setVisibility(View.VISIBLE);
+                  //  fc_spinner_Software.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -331,84 +412,6 @@ public class Tab_Foto_Activity extends Activity {
 
 
 
-// Фронтальная камера
-// Контейнер для фронтальной камеры
-        LinearLayout linLayout_fc = new LinearLayout(this);
-        linLayout_fc.setOrientation(LinearLayout.VERTICAL);
-        linLayout_fc.setPadding(5, 9, 5, 9);
-        linLayout_fc.setBackgroundColor(Color.rgb(208, 208, 208));
-
-if ( fb.front_camera) {
-// Название
-    TextView tv_fc = new TextView(this);
-    tv_fc.setTypeface(Typeface.DEFAULT_BOLD);
-    tv_fc.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
-    tv_fc.setTextColor(Color.BLACK);
-    tv_fc.setText("Фронтальная камера");
-    tv_fc.setTypeface(Typeface.DEFAULT_BOLD);
-    linLayout_fc.addView(tv_fc);
-
-// Контейнер для метода
-    LinearLayout fc_linLayout_Photo_Size = new LinearLayout(this);
-    fc_linLayout_Photo_Size.setOrientation(LinearLayout.VERTICAL);
-    fc_linLayout_Photo_Size.setPadding(5, 9, 5, 9);
-    fc_linLayout_Photo_Size.setBackgroundColor(Color.rgb(192, 192, 192));
-
-    // Размер фото
-    fc_tv_Photo_Size_s = new TextView(this);
-    fc_tv_Photo_Size_s.setTypeface(Typeface.DEFAULT_BOLD);
-    fc_tv_Photo_Size_s.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
-    fc_tv_Photo_Size_s.setTextColor(Color.BLACK);
-    fc_tv_Photo_Size_s.setText("Software");
-  //  linLayout_fc.addView(fc_tv_Photo_Size_s);
-
-// Доступные разрешения
-    ArrayList<String> fc_spinnerArray = new ArrayList<String>();
-
-    Camera.Size fc_mSize = null;
-
-    int fc_fe_w = (int) fb.fc_camera_resolutions.get(0).width;
-    int fc_fe_h = (int) fb.fc_camera_resolutions.get(0).height;
-    float fc_fe_s, fc_fe_z;
-
-    fc_fe_z = (float) fc_fe_w / (float) fc_fe_h;
-
-    for (Camera.Size size : fb.fc_camera_resolutions) {
-        fc_fe_w = (int) size.width;
-        fc_fe_h = (int) size.height;
-        fc_fe_s = (float) fc_fe_w / (float) fc_fe_h;
-
-        if (Math.abs(fc_fe_s - fc_fe_z) < 0.01f) {
-            fc_spinnerArray.add(size.width + "x" + size.height);
-        }
-
-    }
-
-    fc_spinner_Software = new Spinner(this);
-    fc_spinnerArrayAdapter1 = new ArrayAdapter<String>(this, R.layout.spinner_item, fc_spinnerArray);
-    fc_spinner_Software.setAdapter(fc_spinnerArrayAdapter1);
-    fc_spinner_Software.setSelection(getIndex(fc_spinner_Software, fb.fc_Image_Size));
-
-
-//    if (fb.Photo_Post_Processing_Method.contains("Software")) {
-        linLayout_fc.addView(fc_spinner_Software);
-//    }
-
-
-// Использовать фронтальную камеру
-    TextView tv_use_fc = new TextView(this);
-    tv_use_fc.setText("Использовать фронтальную камеру");
-    tv_use_fc.setWidth((screenWidth - padding) / 100 * 90);
-    tv_use_fc.setTypeface(Typeface.DEFAULT_BOLD);
-    tv_use_fc.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
-    tv_use_fc.setTextColor(Color.BLACK);
-    linLayout_fc.addView(tv_use_fc);
-
-// CheckBox
-    checkBox_fc = new CheckBox(this);
-    checkBox_fc.setChecked(fb.Use_Fc);
-    linLayout_fc.addView(checkBox_fc);
-}
 
 
 
