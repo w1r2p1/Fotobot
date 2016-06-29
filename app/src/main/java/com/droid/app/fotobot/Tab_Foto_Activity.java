@@ -1,6 +1,7 @@
 package com.droid.app.fotobot;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.View;
@@ -42,6 +44,7 @@ public class Tab_Foto_Activity extends Activity {
     ArrayAdapter<String> spinnerArrayAdapter2;
     ArrayAdapter<String> fc_spinnerArrayAdapter1;
     ArrayList<String> spinnerArray_ppm;
+    ArrayList<String> spinnerArray;
     final String LOG_TAG = "Logs";
     TextView tv_Photo_Size_h, tv_Photo_Size_s;
     TextView fc_tv_Photo_Size_s;
@@ -167,7 +170,7 @@ public class Tab_Foto_Activity extends Activity {
         linLayout_camera.addView(tv_bc);
 
 // Доступные разрешения
-        ArrayList<String> spinnerArray = new ArrayList<String>();
+        spinnerArray = new ArrayList<String>();
 
         Camera.Size mSize = null;
 
@@ -190,8 +193,10 @@ public class Tab_Foto_Activity extends Activity {
 
         spinner_Software = new Spinner(this);
   //      spinnerArrayAdapter1 = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray);
-        CustomAdapter customAdapter=new CustomAdapter(this, R.layout.spinner_item, spinnerArray);
-        spinner_Software.setAdapter(customAdapter);
+      //  CustomAdapter customAdapter=new CustomAdapter(this, R.layout.spinner_item, spinnerArray);
+        //Spinner mySpinner = (Spinner)findViewById(R.id.spinner);
+        spinner_Software.setAdapter(new MyAdapter(this, R.layout.spinner_item, spinnerArray));
+       // spinner_Software.setAdapter(customAdapter);
       //  spinner_Software.setAdapter(spinnerArrayAdapter1);
         spinner_Software.setSelection(getIndex(spinner_Software, fb.Image_Size));
         linLayout_camera.addView(spinner_Software);
@@ -608,4 +613,45 @@ public class Tab_Foto_Activity extends Activity {
         }
         return index;
     }
+
+    public class MyAdapter extends ArrayAdapter<String>
+    {
+// http://abhiandroid.com/ui/custom-arrayadapter-tutorial-example.html
+// http://www.edureka.co/blog/custom-spinner-in-android
+// http://karanbalkar.com/2013/07/tutorial-39-create-custom-spinner-in-android/
+
+        public MyAdapter(Context context, int textViewResourceId, ArrayList<String> objects)
+        {
+            super(context, textViewResourceId, objects);
+        }
+
+
+        @Override
+        public View getDropDownView(int position, View convertView,ViewGroup parent)
+        {
+            return getCustomView(position, convertView, parent);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent)
+        {
+            return getCustomView(position, convertView, parent);
+        }
+
+        public View getCustomView(int position, View convertView, ViewGroup parent)
+        {
+
+            LayoutInflater inflater=getLayoutInflater();
+            View row=inflater.inflate(R.layout.spinner_item, parent, false);
+            TextView label=(TextView)row.findViewById(R.id.textView1);
+            label.setText(spinnerArray.get(position));
+//            label.setText("sss");
+
+            return row;
+        }
+
+    }
+
+
+
 }
