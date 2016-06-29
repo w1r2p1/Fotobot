@@ -645,6 +645,7 @@ public class Tab_Foto_Activity extends Activity {
             View row=inflater.inflate(R.layout.spinner_item, parent, false);
             TextView label=(TextView)row.findViewById(R.id.textView1);
             label.setText(spinnerArray.get(position));
+            label.setTextColor(Color.GREEN);
 //            label.setText("sss");
 
             return row;
