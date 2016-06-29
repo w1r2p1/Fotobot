@@ -12,8 +12,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.view.LayoutInflater;
 
 import java.util.ArrayList;
+
+// http://abhiandroid.com/ui/custom-arrayadapter-tutorial-example.html
+// http://www.edureka.co/blog/custom-spinner-in-android
 
 public class CustomAdapter extends ArrayAdapter<String> {
 
@@ -34,6 +38,7 @@ public class CustomAdapter extends ArrayAdapter<String> {
 
 // Inflating the layout for the custom Spinner
         LayoutInflater inflater = getLayoutInflater();
+
         View layout = inflater.inflate(R.layout.spinner_item, parent, false);
 
 // Declaring and Typecasting the textview in the inflated layout
