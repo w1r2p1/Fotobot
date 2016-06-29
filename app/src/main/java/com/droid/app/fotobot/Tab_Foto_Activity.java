@@ -189,12 +189,12 @@ public class Tab_Foto_Activity extends Activity {
         }
 
         spinner_Software = new Spinner(this);
-        spinnerArrayAdapter1 = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray);
-        spinner_Software.setAdapter(spinnerArrayAdapter1);
+  //      spinnerArrayAdapter1 = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray);
+        CustomAdapter customAdapter=new CustomAdapter(this, R.layout.spinner_item, spinnerArray);
+        spinner_Software.setAdapter(customAdapter);
+      //  spinner_Software.setAdapter(spinnerArrayAdapter1);
         spinner_Software.setSelection(getIndex(spinner_Software, fb.Image_Size));
         linLayout_camera.addView(spinner_Software);
-
-
 
 // Заметка для Software
         tv_Photo_Size_s_note = new TextView(this);
@@ -278,11 +278,7 @@ public class Tab_Foto_Activity extends Activity {
             fc_spinner_Software.setAdapter(fc_spinnerArrayAdapter1);
             fc_spinner_Software.setSelection(getIndex(fc_spinner_Software, fb.fc_Image_Size));
 
-
-//    if (fb.Photo_Post_Processing_Method.contains("Software")) {
             linLayout_fc.addView(fc_spinner_Software);
-//    }
-
 
 // Использовать фронтальную камеру
             TextView tv_use_fc = new TextView(this);
@@ -342,7 +338,9 @@ public class Tab_Foto_Activity extends Activity {
                     tv_Photo_Size_h.setVisibility(View.VISIBLE);
                     spinner_Hardware.setVisibility(View.VISIBLE);
                     tv_Photo_Size_h_note.setVisibility(View.VISIBLE);
-                   // fc_spinner_Software.setVisibility(View.GONE);
+                    if ( fb.front_camera ) {
+                        fc_spinner_Software.setVisibility(View.GONE);
+                    }
                 } else {
                     fb.Photo_Post_Processing_Method = "Software";
                     tv_Photo_Size_s.setVisibility(View.VISIBLE);
@@ -351,7 +349,9 @@ public class Tab_Foto_Activity extends Activity {
                     tv_Photo_Size_h.setVisibility(View.GONE);
                     spinner_Hardware.setVisibility(View.GONE);
                     tv_Photo_Size_h_note.setVisibility(View.GONE);
-                  //  fc_spinner_Software.setVisibility(View.VISIBLE);
+                    if ( fb.front_camera ) {
+                        fc_spinner_Software.setVisibility(View.VISIBLE);
+                    }
                 }
 
             }
