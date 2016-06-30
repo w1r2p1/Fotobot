@@ -1074,7 +1074,7 @@ public class FotoBot extends Application {
 
         network = pref.getBoolean("Network", false);
 
-        launched_first_time = pref.getBoolean("Launched_First_Time", true);
+        launched_first_time = pref.getBoolean("Launched_First_Time", false);
 
         sms_passwd = pref.getString("SMS_Password", "passwd");
 

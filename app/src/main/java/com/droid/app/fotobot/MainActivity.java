@@ -316,7 +316,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         Log.d(LOG_TAG, "MainActivity: onCreate");
 
+
+
         final FotoBot fb = (FotoBot) getApplicationContext();
+
+        if ( fb.launched_first_time ) {
+            fb.set_default_storage();
+            fb.launched_first_time = false;
+            fb.SaveSettings();
+        }
 
         fb.LoadSettings();
 
@@ -486,10 +494,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 
 
-        if ( fb.launched_first_time ) {
-            fb.set_default_storage();
-            fb.launched_first_time = false;
-        }
+
 
 
 

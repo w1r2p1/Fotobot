@@ -721,6 +721,8 @@ public class Tab_Main_Activity extends Activity {
 
                 FileWriter log;
 
+                fb.work_dir = editText_Work_Dir.getText().toString();
+
                 if (checkBox_Clean_SystemLog.isChecked()) {
 
                     clearLog();
@@ -769,7 +771,7 @@ public class Tab_Main_Activity extends Activity {
                 editor.putInt("Log_Length", Integer.parseInt(editText_fbloglength.getText().toString()));
                 editor.putInt("Log_Size", Integer.parseInt(editText_fbfloglength.getText().toString()));
                 editor.putString("Work_Dir", editText_Work_Dir.getText().toString());
-                fb.work_dir = editText_Work_Dir.getText().toString();
+
                 editor.putString("Storage_Type", spinner_ppm.getSelectedItem().toString());
                 editor.putBoolean("Launched_First_Time", fb.launched_first_time);
 
