@@ -40,10 +40,10 @@
     Если же записываете фото на SD карту, то можно их не удалять.</string>
 
     <string name="fbloglength">Длина выдачи в главном окне (в байтах)</string>
-    <string name="fbloglength_description">Задайте ограничитель на количество выводимых символов в главном окне</string>
+    <string name="fbloglength_description">Для того, чтобы буфер текста не переполнился и телефон не стал тормозить задайте ограничитель на количество выводимых символов в главном окне</string>
     <string name="fbfloglength">Длина журнала в строках</string>
     <string name="fbfloglength_description">Количество строк в журнале</string>
-    <string name="log_size">Размер журнала (Kb)</string>
+    <string name="log_size">Размер присоединяемого к письму журнала (Kb)</string>
 
     <string name="wake_up">Защита от засыпания (сек)</string>
     <string name="wake_up_description">Необходим, чтобы приложение было активно.</string>
@@ -101,7 +101,7 @@
     <string name="network">Сеть</string>
     <string name="network_description">on - фото будут сохраняться на телефоне и будут высланы на почту, off - фото будут сохранены на телефоне, но отправляться на почту не будут</string>
     <string name="pause_between_processes">Интервал между процессами(сек)</string>
-    <string name="pause_between_processes_description">Необходим для того, чтобы слабый процессор телефона успел обработать данные. Подбирается экспериментальным путем, примерно > 5 секунд.</string>
+    <string name="pause_between_processes_description">Необходим для того, чтобы слабый процессор телефона успел обработать данные, рекомендуется 5-9 секунд.</string>
 
     <string name="settings_font">Размер шрифта в настройках</string>
     <string name="log_font">Размер шрифта в выдаче</string>
@@ -138,7 +138,7 @@
 
     <string name="photo_scale">Масштаб фото: 1-полноразмерное изображение, 1/2-фото будет уменьшено в 2 раза по обеим сторонам, 1/4-в 4 раза</string>
 
-    <string name="photo_resolution">Разрешение в пикселях. Синим цветом выделены разрешения с соотношением сторон 4/3, красным - 16/9.</string>
+    <string name="photo_resolution">Разрешение в пикселях. Синим цветом выделены разрешения с соотношением сторон 4/3 (рекомендуется), красным - 16/9.</string>
 
     <string name="flash">Использовать вспышку</string>
     <string name="pause_between_photos">"Пауза"</string>
