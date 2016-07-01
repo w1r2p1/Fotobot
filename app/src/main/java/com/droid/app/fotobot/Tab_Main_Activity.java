@@ -763,7 +763,10 @@ public class Tab_Main_Activity extends Activity {
 
                 editor.putString("Camera_Name", editText_Fotobot_Camera_Name.getText().toString());
                 editor.putString("SMS_Password", editText_SMS_Password.getText().toString());
-                editor.putInt("Photo_Frequency", Integer.parseInt(Photo_Frequency.getText().toString()));
+
+                fb.Photo_Frequency = Integer.parseInt(Photo_Frequency.getText().toString());
+                editor.putInt("Photo_Frequency", fb.Photo_Frequency);
+
                 editor.putInt("Wake_Up_Interval", Integer.parseInt(Wake_Up.getText().toString()));
                 editor.putInt("process_delay", Integer.parseInt(process_delay.getText().toString()));
                 editor.putInt("Config_Font_Size", Integer.parseInt(Config_Font_Size.getText().toString()));
@@ -773,7 +776,7 @@ public class Tab_Main_Activity extends Activity {
                 editor.putString("Work_Dir", editText_Work_Dir.getText().toString());
 
                 editor.putString("Storage_Type", spinner_ppm.getSelectedItem().toString());
-                editor.putBoolean("Launched_First_Time", fb.launched_first_time);
+         //       editor.putBoolean("Launched_First_Time", fb.launched_first_time);
 
 
 // Save the changes in SharedPreferences
@@ -873,8 +876,8 @@ public class Tab_Main_Activity extends Activity {
         super.onPause();
         final FotoBot fb = (FotoBot) getApplicationContext();
         fb.LoadSettings();
-        Photo_Frequency.setText(Integer.toString(fb.Photo_Frequency));
-        process_delay.setText(Integer.toString(fb.process_delay));
+//        Photo_Frequency.setText(Integer.toString(fb.Photo_Frequency));
+//        process_delay.setText(Integer.toString(fb.process_delay));
     }
 
     protected void onRestart() {
@@ -885,8 +888,7 @@ public class Tab_Main_Activity extends Activity {
     protected void onResume(SurfaceHolder holder) {
         final FotoBot fb = (FotoBot) getApplicationContext();
         fb.LoadSettings();
-        Photo_Frequency.setText(Integer.toString(fb.Photo_Frequency));
-        //  spinner1.setSelection(spinnerArrayAdapter1.getPosition(fb.Image_Scale));
+//        Photo_Frequency.setText(Integer.toString(fb.Photo_Frequency));
         Log.d(LOG_TAG, "Tab1: onResume");
     }
 

@@ -69,7 +69,7 @@ public class FotoBot extends Application {
 
     public String versionName = "";
 
-    public String Camera_Name = "";
+    public String Camera_Name = "default";
 
     final String LOG_TAG = "FotoBot";
 
@@ -78,7 +78,7 @@ public class FotoBot extends Application {
     /**
      * Интервал фотографирования (в секундах)
      */
-    public int Photo_Frequency;
+    public int Photo_Frequency = 300;
 
     /**
      * Нужно ли использовать Wi-Fi для выхода в Internet
@@ -359,7 +359,7 @@ public class FotoBot extends Application {
      */
     public void FotoBot() {
 
-        LoadSettings();
+     //   LoadSettings();
         show_start_tip = true;
     }
 
@@ -1028,7 +1028,7 @@ public class FotoBot extends Application {
 
         Camera_Name = pref.getString("Camera_Name", "default");
 
-        Photo_Frequency = pref.getInt("Photo_Frequency", 300);
+        Photo_Frequency = pref.getInt("Photo_Frequency", 900);
 
         process_delay = pref.getInt("process_delay", 5);
 
@@ -1445,7 +1445,11 @@ public class FotoBot extends Application {
 
                 work_dir = path;
 
-                SaveSettings();
+
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("Work_Dir", work_dir);
+                editor.commit();
 
             } catch (Exception e) {
                 Log.d(LOG_TAG, e.toString());

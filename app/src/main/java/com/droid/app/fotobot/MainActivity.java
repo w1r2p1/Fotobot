@@ -2,6 +2,7 @@ package com.droid.app.fotobot;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -323,7 +324,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         if ( fb.launched_first_time ) {
             fb.set_default_storage();
             fb.launched_first_time = false;
-            fb.SaveSettings();
+
+            SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putBoolean("Launched_First_Time", fb.launched_first_time);
+            editor.commit();
         }
 
         fb.LoadSettings();
