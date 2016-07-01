@@ -563,9 +563,10 @@ public class FotoBot extends Application {
                 //    }
             }
 
+            SendMessage(getResources().getString(R.string.pause_between_connections) + "15 sec");
+
             try {
                 TimeUnit.SECONDS.sleep(15);
-                SendMessage(getResources().getString(R.string.pause_between_connections) + "15 sec");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
