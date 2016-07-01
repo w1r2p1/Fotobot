@@ -137,7 +137,7 @@
 
     <string name="photo_scale">Foto scale: 1-full size image, 1/2-image will be reduced 2 times along both directions, 1/4-4 times</string>
 
-    <string name="photo_resolution">Foto resolution (width x height) in pixels</string>
+    <string name="photo_resolution">Foto resolution (width x height) in pixels. Blue: width/height = 4/3, Red = 16/9 </string>
 
     <string name="flash">Use flash</string>
 

@@ -78,7 +78,11 @@ public class Tab_Foto_Activity extends Activity {
         LinearLayout linLayout_JPEG_Compression = new LinearLayout(this);
         linLayout_JPEG_Compression.setOrientation(LinearLayout.VERTICAL);
         linLayout_JPEG_Compression.setPadding(5, 9, 5, 9);
-        linLayout_JPEG_Compression.setBackgroundColor(Color.rgb(192, 192, 192));
+        if ( fb.front_camera) {
+            linLayout_JPEG_Compression.setBackgroundColor(Color.rgb(192, 192, 192));
+        } else {
+            linLayout_JPEG_Compression.setBackgroundColor(Color.rgb(208, 208, 208));
+        }
 
 // Название
         TextView tv_JPEG_Compression = new TextView(this);
@@ -207,7 +211,7 @@ public class Tab_Foto_Activity extends Activity {
         tv_Photo_Size_s_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Photo_Size_s_note.setTextColor(Color.BLACK);
         tv_Photo_Size_s_note.setText(getResources().getString(R.string.photo_resolution));
-//        linLayout_camera.addView(tv_Photo_Size_s_note);
+        linLayout_camera.addView(tv_Photo_Size_s_note);
 
 // Использовать камеру
         TextView tv_use_bc = new TextView(this);

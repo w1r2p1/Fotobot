@@ -893,8 +893,8 @@ public class FotoBot extends Application {
                 getResources().getString(R.string.Fotobot_settings) + ":\n" +
                 "Network_Channel: " + Network_Channel + "\n" +
                 "Network_Connection_Method: " + Network_Connection_Method + "\n" +
-                "Use_WiFi: " + Use_WiFi + "\n" +
-                "Use_Mobile_Data: " + Use_Mobile_Data + "\n" +
+              //  "Use_WiFi: " + Use_WiFi + "\n" +
+              //  "Use_Mobile_Data: " + Use_Mobile_Data + "\n" +
                 "Use_Flash: " + Use_Flash + "\n" +
                 "JPEG_Compression: " + JPEG_Compression + "\n" +
                 "Photo_Frequency: " + Photo_Frequency + "\n" +
