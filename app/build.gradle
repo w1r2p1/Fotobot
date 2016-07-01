@@ -9,7 +9,7 @@ android {
         minSdkVersion 9
         targetSdkVersion 10
         versionCode 25
-        versionName "2.8.0"
+        versionName "2.8.0_Espresso"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

@@ -1028,7 +1028,7 @@ public class FotoBot extends Application {
 
         Camera_Name = pref.getString("Camera_Name", "default");
 
-        Photo_Frequency = pref.getInt("Photo_Frequency", 900);
+        Photo_Frequency = pref.getInt("Photo_Frequency", 300);
 
         process_delay = pref.getInt("process_delay", 5);
 
@@ -1074,7 +1074,7 @@ public class FotoBot extends Application {
 
         network = pref.getBoolean("Network", false);
 
-        launched_first_time = pref.getBoolean("Launched_First_Time", false);
+        launched_first_time = pref.getBoolean("Launched_First_Time", true);
 
         sms_passwd = pref.getString("SMS_Password", "passwd");
 

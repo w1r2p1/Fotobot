@@ -321,6 +321,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
+        fb.LoadSettings();
+
         if ( fb.launched_first_time ) {
             fb.set_default_storage();
             fb.launched_first_time = false;
@@ -331,7 +333,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             editor.commit();
         }
 
-        fb.LoadSettings();
+//        fb.LoadSettings();
 
 
 
