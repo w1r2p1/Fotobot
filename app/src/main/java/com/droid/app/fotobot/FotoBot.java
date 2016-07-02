@@ -563,7 +563,7 @@ public class FotoBot extends Application {
                 //    }
             }
 
-            SendMessage(getResources().getString(R.string.pause_between_connections) + "15 sec");
+            SendMessage(getResources().getString(R.string.pause_between_connections) + " 15 sec");
 
             try {
                 TimeUnit.SECONDS.sleep(15);
@@ -842,11 +842,11 @@ public class FotoBot extends Application {
      */
     public void SendMail(Handler h, String str, String fc_str) {
 
-        final FotoBot fb = (FotoBot) getApplicationContext();
+//        final FotoBot fb = (FotoBot) getApplicationContext();
 
-        Mail m = new Mail(getApplicationContext(), fb.EMail_Sender, fb.EMail_Sender_Password, fb.SMTP_Host, fb.SMTP_Port);
+        Mail m = new Mail(getApplicationContext(), EMail_Sender, EMail_Sender_Password, SMTP_Host, SMTP_Port);
 
-        String[] toArr = {fb.EMail_Recepient};
+        String[] toArr = {EMail_Recepient};
 
         String s = "Debug-infos:";
         s += "\n OS Version: " + System.getProperty("os.version") + "(" + android.os.Build.VERSION.INCREMENTAL + ")";
@@ -868,28 +868,28 @@ public class FotoBot extends Application {
         s += "\n HOST: " + android.os.Build.HOST;
 
         m.setTo(toArr);
-        m.setFrom(fb.EMail_Sender);
-        m.setSubject("Fotobot v" + versionName + " " + fb.Camera_Name);
+        m.setFrom(EMail_Sender);
+        m.setSubject("Fotobot v" + versionName + " " + Camera_Name);
         m.setBody("Fotobot v" + versionName + "\n" +
                 "---------------------------------------------\n" +
-                "Camera Name" + ": " + fb.Camera_Name + "\n" +
-                getResources().getString(R.string.battery_charge) + ": " + fb.battery_level + "%" + "\n" +
-                getResources().getString(R.string.battery_temperature) + ": " + fb.battery_temperature + "C" + "\n" +
-                getResources().getString(R.string.gsm) + ": " + fb.GSM_Signal + "ASU    " + (2.0 * fb.GSM_Signal - 113) + "dBm" + "\n" +
+                "Camera Name" + ": " + Camera_Name + "\n" +
+                getResources().getString(R.string.battery_charge) + ": " + battery_level + "%" + "\n" +
+                getResources().getString(R.string.battery_temperature) + ": " + battery_temperature + "C" + "\n" +
+                getResources().getString(R.string.gsm) + ": " + GSM_Signal + "ASU    " + (2.0 * GSM_Signal - 113) + "dBm" + "\n" +
                 "-50 -82 dbm   -   very good" + "\n" +
                 "-83 -86 dbm   -   good" + "\n" +
                 "-87 -91 dbm   -   normal" + "\n" +
                 "-92 -95 dbm   -   bad" + "\n" +
                 "-96 -100 dbm   -  almost no signal" + "\n" +
                 "---------------------------------------------\n" +
-                "Image Index:" + fb.Image_Index + "\n" +
+                "Image Index:" + Image_Index + "\n" +
                 "---------------------------------------------\n" +
                 getResources().getString(R.string.phone_memory) + ":" + "\n" +
-                "totalMemory: " + fb.totalMemory + "\n" +
-                "usedMemory: " + fb.usedMemory + "\n" +
-                "freeMemory: " + fb.freeMemory + "\n" +
+                "totalMemory: " + totalMemory + "\n" +
+                "usedMemory: " + usedMemory + "\n" +
+                "freeMemory: " + freeMemory + "\n" +
                 "---------------------------------------------\n" +
-                getResources().getString(R.string.email_sending_time) + ": " + fb.email_sending_time + "\n" +
+                getResources().getString(R.string.email_sending_time) + ": " + email_sending_time + "\n" +
                 "---------------------------------------------\n" +
                 getResources().getString(R.string.Fotobot_settings) + ":\n" +
                 "Network_Channel: " + Network_Channel + "\n" +
@@ -933,19 +933,19 @@ public class FotoBot extends Application {
         }
 
 
-        if ( Use_Fc ) {
+        if ( front_camera && Use_Fc ) {
 
             attach_file = new File(fc_str);
             boolean fc_fileExists = attach_file.isFile();
 
-            if (fc_fileExists && Use_Fc) {
+            if (front_camera && fc_fileExists && Use_Fc) {
 
             } else {
                 SendMessage("Front Camera image doesn't exist.");
             }
         }
 
-        if (fb.attach_log) {
+        if (attach_log) {
             attach_file = new File((work_dir + "/logfile.txt"));
             boolean fileExists = attach_file.isFile();
 
@@ -958,15 +958,15 @@ public class FotoBot extends Application {
         }
         try {
 
-            if ( fb.Use_Bc) {
+            if ( Use_Bc) {
                 m.addAttachment(str);
             }
 
-            if ( fb.Use_Fc ) {
+            if ( front_camera && Use_Fc ) {
                 m.addAttachment(fc_str);
             }
 
-            if (fb.attach_log) {
+            if (attach_log) {
                 m.addAttachment(work_dir + "/logfile.txt");
             }
             fbpause(h, process_delay);
@@ -1347,10 +1347,10 @@ public class FotoBot extends Application {
         Log.d("smsss", "sms_incoming_passwd: " + sms_incoming_passwd);
 
         if (sms_incoming_passwd.equals(sms_passwd)) {
-            SendMessage("Пароль верный, записываем настройки");
+            SendMessage("Пароль" + sms_incoming_passwd + " верный, записываем настройки");
             SaveSettings();
         } else {
-            SendMessage("Пароль неверный");
+            SendMessage("Пароль" + sms_incoming_passwd + " неверный");
             LoadSettings();
         }
 
