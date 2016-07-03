@@ -66,6 +66,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     private static final int MEDIUM_DPI_STATUS_BAR_HEIGHT = 25;
     private static final int HIGH_DPI_STATUS_BAR_HEIGHT = 38;
 
+    public boolean savedStreamMuted = false;
+
     int n;
     ScrollView LogWidget;
     RelativeLayout WorkSpace;
@@ -77,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 // adopted for ffc
 //    boolean preview_stopped = false;
     boolean preview_stopped = true;
+    AudioManager mgr = null;
     Camera.PictureCallback mPicture = new Camera.PictureCallback(){
         @Override
         public void onPictureTaken(byte[] data, Camera camera){
@@ -759,9 +762,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                         wakeLock.acquire();
 
-                        AudioManager mgr = null;
+
 
                         fb.SendMessage(getResources().getString(R.string.start_message));
+
+                        fb.SendMessage("Android SDK: " + Build.VERSION.SDK_INT);
 
 /* comment to debug ffc
 // Добавлено в Andorid 5. Без этого не работает. Не понятно, как раньше работало.
@@ -771,6 +776,21 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                         fb.Camera_Properties = mCamera.getParameters().flatten();
 */
+
+                        mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                        // mgr.setStreamMute(AudioManager.STREAM_SYSTEM, true);
+
+                        if (Build.VERSION.SDK_INT >= 23){
+                            mgr.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
+                            savedStreamMuted = true;
+                        } else {
+                            mgr.setStreamMute(AudioManager.STREAM_MUSIC, true);
+                            mgr.setStreamMute(AudioManager.STREAM_SYSTEM, true);
+                            mgr.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                        }
+
+
+
                         for (int i = 1; i <= 1000000000; i++) {
 
 // method1 соединяемся с сетью
@@ -822,6 +842,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 }
                             }
 
+
+
                             if ( fb.back_camera && fb.Use_Bc) {
                                 fb.SendMessage(getResources().getString(R.string.Back_Camera) + " " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index);
                                 if (fb.getstatus() == 3) {
@@ -847,16 +869,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 
 
-                                mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-                                // mgr.setStreamMute(AudioManager.STREAM_SYSTEM, true);
 
 
-
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                                    mgr.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
-                                } else {
-                                    mgr.setStreamMute(AudioManager.STREAM_MUSIC, true);
-                                }
 
 
                                 // Camera.Parameters params;
@@ -1080,8 +1094,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     }
                                 }
 */
-                                mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-                                mgr.setStreamMute(AudioManager.STREAM_SYSTEM, true);
+                           /*     mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                    mgr.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
+                                } else {
+                                    mgr.setStreamMute(AudioManager.STREAM_MUSIC, true);
+                                } */
 
 
                                 // Camera.Parameters params;
@@ -1227,9 +1246,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 
 
-                            mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+//                            mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
-                            mgr.setStreamMute(AudioManager.STREAM_SYSTEM, false);
+
+
+
 
                             long start = System.currentTimeMillis();
 
@@ -1350,6 +1371,17 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         Log.d(LOG_TAG, "stopFotobot: STOP_FOTOBOT" + STOP_FOTOBOT);
 
         fb.SendMessage(getResources().getString(R.string.request_for_stopping));
+
+        if (Build.VERSION.SDK_INT >= 23){
+            if (savedStreamMuted) {
+                mgr.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_UNMUTE, 0);
+                savedStreamMuted = false;
+            }
+        } else {
+            mgr.setStreamMute(AudioManager.STREAM_MUSIC, false);
+            mgr.setStreamMute(AudioManager.STREAM_SYSTEM, false);
+            mgr.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+        }
 
     }
 
