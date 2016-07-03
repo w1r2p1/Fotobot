@@ -58,7 +58,7 @@
     <string name="Internet_connection">Связь с Internet появилась</string>
     <string name="Internet_connection_is_already_created">есть соединение с Internet</string>
     <string name="no_Internet_connection">нет соединения с Internet</string>
-    <string name="pause_between_connections">Пауза перед следующей попыткой подслединения к сети </string>
+    <string name="pause_between_connections">Пауза перед следующей попыткой подсоединения к сети </string>
 
     <string name="connection_channel_mobiledata">Метод подключения Mobile Data</string>
     <string name="turning_on_mobiledata">включаем Mobile Data</string>

@@ -848,7 +848,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 
                                 mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-                                mgr.setStreamMute(AudioManager.STREAM_SYSTEM, true);
+                                // mgr.setStreamMute(AudioManager.STREAM_SYSTEM, true);
+
+
+
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                    mgr.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
+                                } else {
+                                    mgr.setStreamMute(AudioManager.STREAM_MUSIC, true);
+                                }
 
 
                                 // Camera.Parameters params;
