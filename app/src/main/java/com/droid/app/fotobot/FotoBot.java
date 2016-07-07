@@ -1360,11 +1360,12 @@ public class FotoBot extends Application {
 
     public void work_dir_init() {
 
-        work_dir = getApplicationContext().getFilesDir().toString();
+//        work_dir = getApplicationContext().getFilesDir().toString();
 
         File sms_file = null;
 
-        sms_file = new File((getApplicationContext().getFilesDir().toString() + "/sms.txt"));
+//        sms_file = new File((getApplicationContext().getFilesDir().toString() + "/sms.txt"));
+        sms_file = new File( work_dir + "/sms.txt");
 
         if (sms_file.isFile()) {
 

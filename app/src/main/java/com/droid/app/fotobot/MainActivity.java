@@ -766,7 +766,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                         fb.SendMessage(getResources().getString(R.string.start_message));
 
-                        fb.SendMessage("Android SDK: " + Build.VERSION.SDK_INT);
+//                        fb.SendMessage("Android SDK: " + Build.VERSION.SDK_INT);
 
 /* comment to debug ffc
 // Добавлено в Andorid 5. Без этого не работает. Не понятно, как раньше работало.
