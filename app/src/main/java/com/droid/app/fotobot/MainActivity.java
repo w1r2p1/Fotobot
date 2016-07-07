@@ -21,7 +21,6 @@ import android.telephony.PhoneStateListener;
 import android.telephony.SignalStrength;
 import android.telephony.TelephonyManager;
 import android.text.Html;
-import android.text.Spanned;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
@@ -363,13 +362,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         fb.work_dir_init();
 
         if ( fb.show_start_tip ) {
-            Spanned str = getResources().getString(R.string.Fotobot);
-            fb.log = Html.fromHtml(str);
-//            "\n\n" +
+            String str = getResources().getString(R.string.Fotobot);
+            fb.log = Html.fromHtml(str).toString();
 //                    "---------------------" + "\n\n" +
 //                    getResources().getString(R.string.fast_start) + "\n\n" +
 //                    fb.work_dir + "\n\n" +
-//                    Html.fromHtml(getResources().getString(R.string.update));
+//                    Html.fromHtml(getResources().getString(R.string.update)).toString();
 
             fb.show_start_tip = false;
         }
