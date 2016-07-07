@@ -565,11 +565,13 @@ public class FotoBot extends Application {
 
             SendMessage(getResources().getString(R.string.pause_between_connections) + " 15 sec");
 
-            try {
+/*            try {
                 TimeUnit.SECONDS.sleep(15);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            } */
+
+            fbpause(h, 15);
 
         }
 
@@ -654,7 +656,8 @@ public class FotoBot extends Application {
 // checking for sms file each 5 seconds during big pause between photos
                         File sms_file = null;
 
-                        sms_file = new File((getApplicationContext().getFilesDir().toString() + "/sms.txt"));
+                        //sms_file = new File((getApplicationContext().getFilesDir().toString() + "/sms.txt"));
+                        sms_file = new File( work_dir + "/sms.txt");
 
                         if (sms_file.isFile()) {
 
