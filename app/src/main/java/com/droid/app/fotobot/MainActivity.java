@@ -503,22 +503,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
          */
         fb.h = h;
 
-
-
-
-
-
-
         tvInfo.setText(fb.log);
-
-
-
-
-
-
-
-
-
 
         Button button = (Button) findViewById(R.id.log);
 
@@ -868,12 +853,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                                 fb.LoadSettings();
 
-
-
-
-
-
-
                                 // Camera.Parameters params;
                                 String string = fb.Image_Size;
                                 String[] parts = string.split("x");
@@ -1019,38 +998,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             }
 
-
-
-
-
-
-
-
-
-
-
-
                             fb.fbpause(h,5);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                             if ( fb.front_camera && fb.Use_Fc) {
 
@@ -1072,7 +1020,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                                 String str1 = null;
                                 String str2 = null;
-
 
                                 DateFormat df = new SimpleDateFormat("MM-dd-yy_HH-mm-ss-SSS");
 
@@ -1189,69 +1136,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 fb.Image_Name_Full_Path = str2;
 
                             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//                            mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-
-
-
-
 
                             long start = System.currentTimeMillis();
 
@@ -1446,29 +1330,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
         }
 
-
-
-
-
-
-
-
         fb.holder = holder;
         // The Surface has been created, acquire the camera and tell it where
         // to draw the preview.
         mUnexpectedTerminationHelper.init();
 
 // adopted for ffc
-
-
-
-
-
-
-
-
-
-
 
     }
 
