@@ -438,6 +438,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         LogWidget.setBackgroundColor(Color.rgb(51, 51, 51));
         LogWidget.setMinimumWidth(screenWidth);
 
+
+Button startButton;
+
+        startButton = (Button) findViewById(R.id.play);
+      //  startButton.setBackgroundColor(Color.parseColor("#ff0000"));
+
         final Button btnHelp = (Button) findViewById(R.id.help);
         btnHelp.setOnTouchListener(new View.OnTouchListener() {
 
@@ -482,6 +488,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
 
         });
+
 
         sv = (SurfaceView) findViewById(R.id.surfaceView);
         sHolder = sv.getHolder();
@@ -609,9 +616,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         btnStart = (Button) findViewById(R.id.play);
         btnStop = (Button) findViewById(R.id.stop);
 
+
         if (fb.getstatus() == 1) {
             btnStart.setText(getResources().getString(R.string.start_button));
+
             btnStart.setEnabled(true);
+
+
+
             btnStop.setEnabled(false);
 
             Button btnHelp = (Button) findViewById(R.id.help);
