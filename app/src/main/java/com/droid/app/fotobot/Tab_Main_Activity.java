@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -55,6 +56,7 @@ public class Tab_Main_Activity extends Activity {
     EditText editText_Work_Dir;
     EditText editText_SMS_Password;
     Spinner spinner_ppm;
+    Spinner spinner_Channels;
     //   ArrayAdapter<String> spinnerArrayAdapter1, spinnerArrayAdapter_Hardware;
     ArrayList<String> spinnerArray_ppm;
     LinearLayout linLayout_Work_Dir;
@@ -68,6 +70,8 @@ public class Tab_Main_Activity extends Activity {
     LinearLayout linLayout_config_font_size;
     LinearLayout linLayout_log_font_size;
     LinearLayout linLayout_Wake_Up;
+
+    LinearLayout linLayout_AttachedInfo;
 
     //   LinearLayout linLayout_Work_Dir_note;
     final String LOG_TAG = "Logs";
@@ -652,6 +656,7 @@ public class Tab_Main_Activity extends Activity {
                     linLayout_config_font_size.setVisibility(View.VISIBLE);
                     linLayout_log_font_size.setVisibility(View.VISIBLE);
                     linLayout_Wake_Up.setVisibility(View.VISIBLE);
+                    linLayout_AttachedInfo.setVisibility(View.VISIBLE);
                 } else {
                     fb.advanced_settings = false;
                     linLayout_process_delay.setVisibility(View.GONE);
@@ -663,6 +668,7 @@ public class Tab_Main_Activity extends Activity {
                     linLayout_config_font_size.setVisibility(View.GONE);
                     linLayout_log_font_size.setVisibility(View.GONE);
                     linLayout_Wake_Up.setVisibility(View.GONE);
+                    linLayout_AttachedInfo.setVisibility(View.GONE);
                 }
 
             }
@@ -674,6 +680,47 @@ public class Tab_Main_Activity extends Activity {
             }
 
         });
+
+// ------------------------------------------------------------------------------------------------
+
+// Информация в письме
+
+// Контейнер для информации в письме
+        linLayout_AttachedInfo = new LinearLayout(this);
+        linLayout_AttachedInfo.setOrientation(LinearLayout.VERTICAL);
+        RelativeLayout.LayoutParams lpView = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+
+        linLayout_AttachedInfo.setPadding(5, 9, 5, 9);
+        linLayout_AttachedInfo.setBackgroundColor(Color.rgb(208, 208, 208));
+
+// Название
+        TextView tv_AttachedInfo = new TextView(this);
+        tv_AttachedInfo.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_AttachedInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_AttachedInfo.setTextColor(Color.BLACK);
+        tv_AttachedInfo.setText(getResources().getString(R.string.AttachedInfo));
+        linLayout_AttachedInfo.addView(tv_AttachedInfo);
+
+// Список
+        ArrayList<String> spinnerArray_Channels = new ArrayList<String>();
+        spinnerArray_Channels.add("Brief");
+        spinnerArray_Channels.add("Normal");
+        spinnerArray_Channels.add("Detailed");
+
+        spinner_Channels = new Spinner(this);
+        ArrayAdapter<String> spinnerArrayAdapter1 = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray_Channels);
+        spinner_Channels.setAdapter(spinnerArrayAdapter1);
+        spinner_Channels.setSelection(getIndex(spinner_Channels, fb.Network_Channel));
+        linLayout_AttachedInfo.addView(spinner_Channels);
+
+// Заметка для каналов связи
+        TextView tv_Channels_note = new TextView(this);
+        tv_Channels_note.setTypeface(null, Typeface.NORMAL);
+        tv_Channels_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_Channels_note.setTextColor(Color.BLACK);
+        tv_Channels_note.setText(getResources().getString(R.string.Internet_connection_channel_description));
+        linLayout_AttachedInfo.addView(tv_Channels_note);
+
 
 
 // Buttons
@@ -839,6 +886,7 @@ public class Tab_Main_Activity extends Activity {
 
         FullFrame.addView(linLayout_process_delay);
         FullFrame.addView(linLayout_fbloglength);
+        FullFrame.addView(linLayout_AttachedInfo);
         FullFrame.addView(linLayout_Attach_Log);
         FullFrame.addView(linLayout_Clean_SystemLog);
         FullFrame.addView(linLayout_fbfloglength);
@@ -851,6 +899,7 @@ public class Tab_Main_Activity extends Activity {
             linLayout_process_delay.setVisibility(View.GONE);
             linLayout_fbloglength.setVisibility(View.GONE);
             linLayout_Attach_Log.setVisibility(View.GONE);
+            linLayout_AttachedInfo.setVisibility(View.GONE);
             linLayout_Clean_SystemLog.setVisibility(View.GONE);
             linLayout_fbfloglength.setVisibility(View.GONE);
             linLayout_Clean_Text.setVisibility(View.GONE);

@@ -94,6 +94,7 @@
     <string name="wake_up">Wake Up frequency</string>
 
     <string name="attach_log">Attach Log to email</string>
+    <string name="AttachedInfo">E-Mail attached info detalization</string>
     <string name="attach_log_description">Log wil help to debug some situations with Fotobot</string>
 
     <string name="storage">Storage type</string>

@@ -441,8 +441,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 Button startButton;
 
-        startButton = (Button) findViewById(R.id.play);
-      //  startButton.setBackgroundColor(Color.parseColor("#ff0000"));
+      //  startButton = (Button) findViewById(R.id.play);
+     //   startButton.setBackgroundColor(Color.rgb(21,76,177));
 
         final Button btnHelp = (Button) findViewById(R.id.help);
         btnHelp.setOnTouchListener(new View.OnTouchListener() {
@@ -488,6 +488,11 @@ Button startButton;
             }
 
         });
+
+
+    //    Button btnStart = (Button) findViewById(R.id.play);
+
+    //    btnStart.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
 
 
         sv = (SurfaceView) findViewById(R.id.surfaceView);
