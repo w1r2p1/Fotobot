@@ -691,7 +691,7 @@ public class Tab_Main_Activity extends Activity {
         RelativeLayout.LayoutParams lpView = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 
         linLayout_AttachedInfo.setPadding(5, 9, 5, 9);
-        linLayout_AttachedInfo.setBackgroundColor(Color.rgb(208, 208, 208));
+        linLayout_AttachedInfo.setBackgroundColor(Color.rgb(240,150,150));
 
 // Название
         TextView tv_AttachedInfo = new TextView(this);
@@ -713,12 +713,12 @@ public class Tab_Main_Activity extends Activity {
         spinner_Channels.setSelection(getIndex(spinner_Channels, fb.Network_Channel));
         linLayout_AttachedInfo.addView(spinner_Channels);
 
-// Заметка для каналов связи
+// Заметка для информации в письме
         TextView tv_Channels_note = new TextView(this);
         tv_Channels_note.setTypeface(null, Typeface.NORMAL);
         tv_Channels_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Channels_note.setTextColor(Color.BLACK);
-        tv_Channels_note.setText(getResources().getString(R.string.Internet_connection_channel_description));
+        tv_Channels_note.setText(getResources().getString(R.string.AttachedInfo_description));
         linLayout_AttachedInfo.addView(tv_Channels_note);
 
 

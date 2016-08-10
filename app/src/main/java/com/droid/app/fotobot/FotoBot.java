@@ -269,6 +269,8 @@ public class FotoBot extends Application {
 
     public Boolean advanced_settings = false;
 
+    public Boolean autofocus = false;
+
     /**
      * Память в телефоне
      */

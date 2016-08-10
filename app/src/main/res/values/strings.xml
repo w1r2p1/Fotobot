@@ -95,6 +95,7 @@
 
     <string name="attach_log">Attach Log to email</string>
     <string name="AttachedInfo">E-Mail attached info detalization</string>
+    <string name="AttachedInfo_description">Brief - current status;\n Normal - current status + active settings;\n Detailed - current status + active settings + hardware information </string>
     <string name="attach_log_description">Log wil help to debug some situations with Fotobot</string>
 
     <string name="storage">Storage type</string>

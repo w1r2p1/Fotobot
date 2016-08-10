@@ -65,6 +65,7 @@
 
     <string name="advanced_settings">Показать расширенные настройки</string>
     <string name="AttachedInfo">Уровень детализации информации в письме</string>
+    <string name="AttachedInfo_description">E-Mail attached info detalization</string>
     <string name="foto_sent">Фото выслано на почту</string>
 
     <string name="connection_channel_wifi">Метод подключения Wi-Fi</string>

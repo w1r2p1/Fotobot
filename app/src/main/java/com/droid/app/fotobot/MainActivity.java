@@ -336,6 +336,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             editor.commit();
         }
 
+        PackageManager pm = getPackageManager();
+        if(pm.hasSystemFeature(PackageManager.FEATURE_CAMERA) && pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_AUTOFOCUS)){
+            fb.autofocus = true;
+            Log.d(LOG_TAG, "Autofocus is available");
+        } else {
+            fb.autofocus = false;
+            Log.d(LOG_TAG, "Autofocus is not available");
+        }
+
 //        fb.LoadSettings();
 
 
@@ -514,6 +523,8 @@ Button startButton;
          * получили указатель на обработчик сообщений сразу же говорим FotoBot'у об этом
          */
         fb.h = h;
+
+        fb.log = fb.log + "\n" + "Autofocus: " + fb.autofocus + "\n\n\n\n\n";
 
         tvInfo.setText(fb.log);
 
