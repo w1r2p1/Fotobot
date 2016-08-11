@@ -382,6 +382,9 @@ public class Tab_Foto_Activity extends Activity {
         tv_Photo_Processing_Method_note.setTextColor(Color.BLACK);
         tv_Photo_Processing_Method_note.setText(getResources().getString(R.string.photo_processing_method_dscription));
         linLayout_Photo_Processing_Method.addView(tv_Photo_Processing_Method_note);
+
+
+
 // Вспышка
 
 // Flash Container

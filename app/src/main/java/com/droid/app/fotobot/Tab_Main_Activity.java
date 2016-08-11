@@ -710,7 +710,7 @@ public class Tab_Main_Activity extends Activity {
         spinner_Channels = new Spinner(this);
         ArrayAdapter<String> spinnerArrayAdapter1 = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray_Channels);
         spinner_Channels.setAdapter(spinnerArrayAdapter1);
-        spinner_Channels.setSelection(getIndex(spinner_Channels, fb.Network_Channel));
+        spinner_Channels.setSelection(getIndex(spinner_Channels, fb.Attached_Info_Detailisation));
         linLayout_AttachedInfo.addView(spinner_Channels);
 
 // Заметка для информации в письме

@@ -918,6 +918,10 @@ Button startButton;
                                     parameters.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
                                 }
 
+
+
+
+
                                 if (fb.Photo_Post_Processing_Method.contains("Software")) {
                                     parameters.setPictureSize(Integer.parseInt(width), Integer.parseInt(height));
                                 }
@@ -937,6 +941,40 @@ Button startButton;
                                     try {
                                         mCamera.setPreviewDisplay(fb.holder);
                                         mCamera.startPreview();
+
+
+
+
+
+
+
+
+
+                                        if (fb.autofocus && fb.use_autofocus) {
+
+                                            fb.fbpause(h, fb.time_for_focusing);
+
+                                            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+
+                                            mCamera.autoFocus(new Camera.AutoFocusCallback() {
+
+                                                public void onAutoFocus(boolean success, Camera camera) {
+
+
+                                                }});
+
+
+                                        }
+
+
+
+
+
+
+
+
+
+
                                         preview_stopped = false;
                                     } catch (Exception e) {
                                         fb.SendMessage("Problem with preview starting after camera initialization in the main cycle.");

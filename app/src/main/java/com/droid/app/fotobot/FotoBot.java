@@ -197,6 +197,8 @@ public class FotoBot extends Application {
     public String fc_Image_Name_Full_Path;
     public String bc_Image_Name_Full_Path;
 
+    public String Attached_Info_Detailisation = "Normal";
+
     public Boolean show_start_tip = true;
 
     /**
@@ -270,6 +272,8 @@ public class FotoBot extends Application {
     public Boolean advanced_settings = false;
 
     public Boolean autofocus = false;
+    public Boolean use_autofocus = true;
+    public int time_for_focusing = 1;
 
     /**
      * Память в телефоне
@@ -1032,6 +1036,10 @@ public class FotoBot extends Application {
 
         JPEG_Compression = pref.getInt("JPEG_Compression", 50);
 
+        use_autofocus = pref.getBoolean("Use_Autofocus", true);
+
+        time_for_focusing = pref.getInt("Time_For_Focusing", 1);
+
         Camera_Name = pref.getString("Camera_Name", "default");
 
         Photo_Frequency = pref.getInt("Photo_Frequency", 300);
@@ -1071,6 +1079,8 @@ public class FotoBot extends Application {
         network_up_delay = pref.getInt("Network_Up_Delay", 15);
 
         attach_log = pref.getBoolean("Attach_Log", false);
+
+        Attached_Info_Detailisation = pref.getString("Attached_Info_Detailisation", "Normal");
 
         log_size = pref.getInt("Log_Size", 50);
 
@@ -1113,6 +1123,8 @@ public class FotoBot extends Application {
         editor.putInt("Network_Up_Delay", network_up_delay);
         editor.putString("Photo_Post_Processing_Method", Photo_Post_Processing_Method);
         editor.putInt("JPEG_Compression", JPEG_Compression);
+        editor.putBoolean("Use_Autofocus", use_autofocus);
+        editor.putInt("Time_For_Focusing", time_for_focusing);
         editor.putString("Image_Scale", Image_Scale);
         editor.putString("Image_Size", Image_Size);
         editor.putString("fc_Image_Size", fc_Image_Size);
@@ -1120,6 +1132,7 @@ public class FotoBot extends Application {
         editor.putBoolean("Use_Fc", Use_Fc);
         editor.putBoolean("Use_Bc", Use_Bc);
         editor.putBoolean("Attach_Log", attach_log);
+        editor.putString("Attached_Info_Detailisation", Attached_Info_Detailisation);
         editor.putInt("Log_Size", log_size);
         editor.putString("Work_Dir", work_dir);
         editor.putString("SMS_Password", sms_passwd);
