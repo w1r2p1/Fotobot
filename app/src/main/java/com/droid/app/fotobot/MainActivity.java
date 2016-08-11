@@ -524,7 +524,7 @@ Button startButton;
          */
         fb.h = h;
 
-        fb.log = fb.log + "\n" + "Autofocus: " + fb.autofocus + "\n\n\n\n\n";
+       // fb.log = fb.log + "\n" + "Autofocus: " + fb.autofocus + "\n\n\n\n\n";
 
         tvInfo.setText(fb.log);
 
@@ -787,9 +787,9 @@ Button startButton;
                         if (mCamera == null) {
                             mCamera = Camera.open(1);
                         }
-
-                        fb.Camera_Properties = mCamera.getParameters().flatten();
 */
+//                        fb.Camera_Properties = mCamera.getParameters().flatten();
+
 
                         mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                         // mgr.setStreamMute(AudioManager.STREAM_SYSTEM, true);
@@ -1379,8 +1379,11 @@ Button startButton;
         }
         */
 
+                fb.fc_Camera_Properties = mCamera.getParameters().flatten();
+
                 params = mCamera.getParameters();
                 fb.fc_camera_resolutions = params.getSupportedPictureSizes();
+
 
                 mCamera.release();
                 mCamera = null;
@@ -1388,6 +1391,9 @@ Button startButton;
             if(ci.facing == Camera.CameraInfo.CAMERA_FACING_BACK){
                 fb.bcId = i;
                 mCamera = Camera.open(fb.bcId);
+
+                fb.Camera_Properties = mCamera.getParameters().flatten();
+
                 params = mCamera.getParameters();
                 fb.camera_resolutions = params.getSupportedPictureSizes();
                 mCamera.release();

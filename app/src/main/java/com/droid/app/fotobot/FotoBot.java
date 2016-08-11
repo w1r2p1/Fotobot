@@ -251,6 +251,11 @@ public class FotoBot extends Application {
      */
     public String Camera_Properties;
 
+    /**
+     * FC Camera properties
+     */
+    public String fc_Camera_Properties;
+
     List<String> sms = new ArrayList<String>();
 
     /**
@@ -879,53 +884,66 @@ public class FotoBot extends Application {
         m.setTo(toArr);
         m.setFrom(EMail_Sender);
         m.setSubject("Fotobot v" + versionName + " " + Camera_Name);
-        m.setBody("Fotobot v" + versionName + "\n" +
+
+        String email_body="";
+
+
+                email_body = "Fotobot v" + versionName + "\n" +
                 "---------------------------------------------\n" +
                 "Camera Name" + ": " + Camera_Name + "\n" +
                 getResources().getString(R.string.battery_charge) + ": " + battery_level + "%" + "\n" +
-                getResources().getString(R.string.battery_temperature) + ": " + battery_temperature + "C" + "\n" +
-                getResources().getString(R.string.gsm) + ": " + GSM_Signal + "ASU    " + (2.0 * GSM_Signal - 113) + "dBm" + "\n" +
-                "-50 -82 dbm   -   very good" + "\n" +
-                "-83 -86 dbm   -   good" + "\n" +
-                "-87 -91 dbm   -   normal" + "\n" +
-                "-92 -95 dbm   -   bad" + "\n" +
-                "-96 -100 dbm   -  almost no signal" + "\n" +
-                "---------------------------------------------\n" +
-                "Image Index:" + Image_Index + "\n" +
-                "---------------------------------------------\n" +
-                getResources().getString(R.string.phone_memory) + ":" + "\n" +
-                "totalMemory: " + totalMemory + "\n" +
-                "usedMemory: " + usedMemory + "\n" +
-                "freeMemory: " + freeMemory + "\n" +
-                "---------------------------------------------\n" +
-                getResources().getString(R.string.email_sending_time) + ": " + email_sending_time + "\n" +
-                "---------------------------------------------\n" +
-                getResources().getString(R.string.Fotobot_settings) + ":\n" +
-                "Network_Channel: " + Network_Channel + "\n" +
-                "Network_Connection_Method: " + Network_Connection_Method + "\n" +
-              //  "Use_WiFi: " + Use_WiFi + "\n" +
-              //  "Use_Mobile_Data: " + Use_Mobile_Data + "\n" +
-                "Use_Flash: " + Use_Flash + "\n" +
-                "JPEG_Compression: " + JPEG_Compression + "\n" +
-                "Photo_Frequency: " + Photo_Frequency + "\n" +
-                "process_delay: " + process_delay + "\n" +
-                "Image_Scale: " + Image_Scale + "\n" +
-                "Image_Size: " + Image_Size + "\n" +
-                "EMail_Sender: " + EMail_Sender + "\n" +
-                "EMail_Sender_Password: *********" + "\n" +
-                "EMail_Recepient: " + EMail_Recepient + "\n" +
-                "Log_Font_Size: " + Log_Font_Size + "\n" +
-                "Config_Font_Size: " + Config_Font_Size + "\n" +
-                "Photo_Post_Processing_Method: " + Photo_Post_Processing_Method + "\n" +
-                "SMTP_Host: " + SMTP_Host + "\n" +
-                "SMTP_Port: " + SMTP_Port + "\n" +
-                "Log length: " + loglength + "\n" +
-                "FLog length: " + floglength + "\n" +
-                "wake_up_interval: " + wake_up_interval + "\n" +
-                "---------------------------------------------\n" +
-                getResources().getString(R.string.hardware_info) + ":\n" +
-                "Android: " + Build.VERSION.SDK_INT + "\n" +
-                s + "\n");
+                getResources().getString(R.string.battery_temperature) + ": " + battery_temperature + "C" + "\n";
+
+        if ( Attached_Info_Detailisation.equals("Normal") || Attached_Info_Detailisation.equals("Detailed")) {
+
+            email_body = email_body + getResources().getString(R.string.gsm) + ": " + GSM_Signal + "ASU    " + (2.0 * GSM_Signal - 113) + "dBm" + "\n" +
+                    "-50 -82 dbm   -   very good" + "\n" +
+                    "-83 -86 dbm   -   good" + "\n" +
+                    "-87 -91 dbm   -   normal" + "\n" +
+                    "-92 -95 dbm   -   bad" + "\n" +
+                    "-96 -100 dbm   -  almost no signal" + "\n" +
+                    "---------------------------------------------\n" +
+                    "Image Index:" + Image_Index + "\n" +
+                    "---------------------------------------------\n" +
+                    getResources().getString(R.string.phone_memory) + ":" + "\n" +
+                    "totalMemory: " + totalMemory + "\n" +
+                    "usedMemory: " + usedMemory + "\n" +
+                    "freeMemory: " + freeMemory + "\n" +
+                    "---------------------------------------------\n" +
+                    getResources().getString(R.string.email_sending_time) + ": " + email_sending_time + "\n" +
+                    "---------------------------------------------\n" +
+                    getResources().getString(R.string.Fotobot_settings) + ":\n" +
+                    "Network_Channel: " + Network_Channel + "\n" +
+                    "Network_Connection_Method: " + Network_Connection_Method + "\n" +
+                    "Use_Flash: " + Use_Flash + "\n" +
+                    "JPEG_Compression: " + JPEG_Compression + "\n" +
+                    "Photo_Frequency: " + Photo_Frequency + "\n" +
+                    "process_delay: " + process_delay + "\n" +
+                    "Image_Scale: " + Image_Scale + "\n" +
+                    "Image_Size: " + Image_Size + "\n" +
+                    "EMail_Sender: " + EMail_Sender + "\n" +
+                    "EMail_Sender_Password: *********" + "\n" +
+                    "EMail_Recepient: " + EMail_Recepient + "\n" +
+                    "Log_Font_Size: " + Log_Font_Size + "\n" +
+                    "Config_Font_Size: " + Config_Font_Size + "\n" +
+                    "Photo_Post_Processing_Method: " + Photo_Post_Processing_Method + "\n" +
+                    "SMTP_Host: " + SMTP_Host + "\n" +
+                    "SMTP_Port: " + SMTP_Port + "\n" +
+                    "Log length: " + loglength + "\n" +
+                    "FLog length: " + floglength + "\n" +
+                    "wake_up_interval: " + wake_up_interval + "\n" +
+                    "---------------------------------------------\n" +
+                    getResources().getString(R.string.hardware_info) + ":\n" +
+                    "Android: " + Build.VERSION.SDK_INT + "\n" +
+                    s + "\n";
+            if ( Attached_Info_Detailisation.equals("Detailed")) {
+                email_body = email_body + "\n\n\nBack Camera Properties:\n" + Camera_Properties +
+                        "\n\n\nFront Camera Properties:\n" + fc_Camera_Properties;
+            }
+
+        }
+
+        m.setBody(email_body);
 
         File attach_file;
 
