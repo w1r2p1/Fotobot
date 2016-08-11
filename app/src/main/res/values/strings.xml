@@ -141,7 +141,7 @@
 
     <string name="photo_resolution">Foto resolution (width x height) in pixels. Blue: width/height = 4/3, Red = 16/9 </string>
 
-    <string name="flash">Use flash</string>
+    <string name="flash">Flash</string>
 
     <string name="pause_between_photos">"Pause for"</string>
 

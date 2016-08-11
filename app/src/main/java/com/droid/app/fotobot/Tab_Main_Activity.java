@@ -342,7 +342,7 @@ public class Tab_Main_Activity extends Activity {
         linLayout_config_font_size = new LinearLayout(this);
         linLayout_config_font_size.setOrientation(LinearLayout.VERTICAL);
         linLayout_config_font_size.setPadding(5, 9, 5, 9);
-        linLayout_config_font_size.setBackgroundColor(Color.rgb(240, 150, 150));
+        linLayout_config_font_size.setBackgroundColor(Color.rgb(210, 129, 129));
 
 // Шрифты (Config_Font_Size)
         TextView cfs = new TextView(this);
@@ -364,7 +364,7 @@ public class Tab_Main_Activity extends Activity {
         linLayout_log_font_size = new LinearLayout(this);
         linLayout_log_font_size.setOrientation(LinearLayout.VERTICAL);
         linLayout_log_font_size.setPadding(5, 9, 5, 9);
-        linLayout_log_font_size.setBackgroundColor(Color.rgb(210, 129, 129));
+        linLayout_log_font_size.setBackgroundColor(Color.rgb(240, 150, 150));
 
 // Log_Font_Size
         TextView lfs = new TextView(this);
@@ -390,7 +390,7 @@ public class Tab_Main_Activity extends Activity {
         linLayout_Clean_Text = new LinearLayout(this);
         linLayout_Clean_Text.setOrientation(LinearLayout.VERTICAL);
         linLayout_Clean_Text.setPadding(5, 9, 5, 9);
-        linLayout_Clean_Text.setBackgroundColor(Color.rgb(210, 129, 129));
+        linLayout_Clean_Text.setBackgroundColor(Color.rgb(240, 150, 150));
 
 // Clean Log TextView
         TextView tv_Clean_Text = new TextView(this);
@@ -425,7 +425,7 @@ public class Tab_Main_Activity extends Activity {
         linLayout_Clean_SystemLog = new LinearLayout(this);
         linLayout_Clean_SystemLog.setOrientation(LinearLayout.VERTICAL);
         linLayout_Clean_SystemLog.setPadding(5, 9, 5, 9);
-        linLayout_Clean_SystemLog.setBackgroundColor(Color.rgb(210, 129, 129));
+        linLayout_Clean_SystemLog.setBackgroundColor(Color.rgb(240, 150, 150));
 
 // Clean SystemLog TextView
         TextView tv_Clean_SystemLog = new TextView(this);
@@ -492,7 +492,7 @@ public class Tab_Main_Activity extends Activity {
         linLayout_fbfloglength = new LinearLayout(this);
         linLayout_fbfloglength.setOrientation(LinearLayout.VERTICAL);
         linLayout_fbfloglength.setPadding(5, 9, 5, 9);
-        linLayout_fbfloglength.setBackgroundColor(Color.rgb(240, 150, 150));
+        linLayout_fbfloglength.setBackgroundColor(Color.rgb(210, 129, 129));
 
 // Название
         TextView tv_fbfloglength = new TextView(this);
@@ -517,7 +517,7 @@ public class Tab_Main_Activity extends Activity {
         linLayout_Wake_Up = new LinearLayout(this);
         linLayout_Wake_Up.setOrientation(LinearLayout.VERTICAL);
         linLayout_Wake_Up.setPadding(5, 9, 5, 9);
-        linLayout_Wake_Up.setBackgroundColor(Color.rgb(240, 150, 150));
+        linLayout_Wake_Up.setBackgroundColor(Color.rgb(210, 129, 129));
 
 // Wake Up
         TextView tv_Wake_Up = new TextView(this);
@@ -556,7 +556,7 @@ public class Tab_Main_Activity extends Activity {
         linLayout_Attach_Log = new LinearLayout(this);
         linLayout_Attach_Log.setOrientation(LinearLayout.VERTICAL);
         linLayout_Attach_Log.setPadding(5, 9, 5, 9);
-        linLayout_Attach_Log.setBackgroundColor(Color.rgb(240, 150, 150));
+        linLayout_Attach_Log.setBackgroundColor(Color.rgb(210, 129, 129));
 
 // Attach Log TextView
         TextView tv_Attach_Log = new TextView(this);
@@ -702,7 +702,7 @@ public class Tab_Main_Activity extends Activity {
         linLayout_AttachedInfo.addView(tv_AttachedInfo);
 
 // Список
-        ArrayList<String> spinnerArray_Channels = new ArrayList<String>();
+        final ArrayList<String> spinnerArray_Channels = new ArrayList<String>();
         spinnerArray_Channels.add("Brief");
         spinnerArray_Channels.add("Normal");
         spinnerArray_Channels.add("Detailed");
@@ -821,6 +821,7 @@ public class Tab_Main_Activity extends Activity {
                 editor.putInt("Log_Length", Integer.parseInt(editText_fbloglength.getText().toString()));
                 editor.putInt("Log_Size", Integer.parseInt(editText_fbfloglength.getText().toString()));
                 editor.putString("Work_Dir", editText_Work_Dir.getText().toString());
+                editor.putString("Attached_Info_Detailisation", spinner_Channels.getSelectedItem().toString());
 
                 editor.putString("Storage_Type", spinner_ppm.getSelectedItem().toString());
          //       editor.putBoolean("Launched_First_Time", fb.launched_first_time);

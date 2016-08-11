@@ -156,7 +156,7 @@
 
     <string name="photo_resolution">Разрешение в пикселях. Синим цветом выделены разрешения с соотношением сторон 4/3 (рекомендуется), красным - 16/9.</string>
 
-    <string name="flash">Использовать вспышку</string>
+    <string name="flash">Вспышка</string>
     <string name="pause_between_photos">"Пауза"</string>
 
     <string name="clean_text">Почистить вывод информации</string>
