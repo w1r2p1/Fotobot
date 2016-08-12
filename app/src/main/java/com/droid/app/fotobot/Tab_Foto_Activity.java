@@ -37,7 +37,9 @@ public class Tab_Foto_Activity extends Activity {
     CheckBox checkBox_Flash;
     CheckBox checkBox_bc;
     CheckBox checkBox_fc;
+    CheckBox checkBox_Autofocus;
     EditText editText_JPEG_Compression;
+    EditText editText_Autofocus;
     Spinner spinner_Hardware, spinner_ppm, spinner_Software;
     Spinner fc_spinner_Software;
     ArrayAdapter<String> spinnerArrayAdapter1, spinnerArrayAdapter_Hardware;
@@ -410,6 +412,58 @@ public class Tab_Foto_Activity extends Activity {
         linLayout_camera.addView(checkBox_Flash);
 
 // ------------------------------------------------------------------------------------------------
+// Autofocus
+
+// Autofocus Container
+        LinearLayout linLayout_Autofocus = new LinearLayout(this);
+        linLayout_Autofocus.setOrientation(LinearLayout.VERTICAL);
+        linLayout_Autofocus.setPadding(5, 9, 5, 9);
+        linLayout_Autofocus.setBackgroundColor(Color.rgb(208, 208, 208));
+
+// Autofocus TextView
+        TextView tv_Autofocus = new TextView(this);
+        tv_Autofocus.setText(getResources().getString(R.string.Autofocus));
+        tv_Autofocus.setWidth((screenWidth - padding) / 100 * 90);
+        tv_Autofocus.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Autofocus.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Autofocus.setTextColor(Color.BLACK);
+
+        linLayout_Autofocus.addView(tv_Autofocus);
+
+// CheckBox
+        checkBox_Autofocus = new CheckBox(this);
+        checkBox_Autofocus.setChecked(fb.use_autofocus);
+        linLayout_Autofocus.addView(checkBox_Autofocus);
+
+        // Ввод данных
+        editText_Autofocus = new EditText(this);
+        editText_Autofocus.setText(Integer.toString(fb.time_for_focusing));
+        editText_Autofocus.setTextColor(Color.rgb(50, 100, 150));
+        linLayout_Autofocus.addView(editText_Autofocus);
+
+        checkBox_Autofocus.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                if (checkBox_Autofocus.isChecked()) {
+                    fb.use_autofocus = true;
+                    editText_Autofocus.setVisibility(View.VISIBLE);
+                } else {
+                    fb.use_autofocus = false;
+                    editText_Autofocus.setVisibility(View.GONE);
+                }
+
+            }
+
+            // If no option selected
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+
+        });
+
 
 
 
@@ -556,9 +610,17 @@ public class Tab_Foto_Activity extends Activity {
         FullFrame.addView(linLayout_Photo_Processing_Method);
         FullFrame.addView(linLayout_Photo_Size);
         FullFrame.addView(linLayout_Flash);
+
+
+
         FullFrame.addView(linLayout_camera);
+
         if ( fb.front_camera ) {
             FullFrame.addView(linLayout_fc);
+        }
+
+        if ( fb.autofocus ) {
+            FullFrame.addView(linLayout_Autofocus);
         }
 
         FullFrame.addView(linLayout_JPEG_Compression);

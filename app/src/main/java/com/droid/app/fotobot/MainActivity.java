@@ -952,7 +952,7 @@ Button startButton;
 
                                         if (fb.autofocus && fb.use_autofocus) {
 
-                                            fb.fbpause(h, fb.time_for_focusing);
+
 
                                             parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
 
@@ -963,6 +963,7 @@ Button startButton;
 
                                                 }});
 
+                                            fb.fbpause(h, fb.time_for_focusing);
 
                                         }
 

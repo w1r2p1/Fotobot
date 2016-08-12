@@ -132,6 +132,7 @@
 
     <string name="jpeg_compression">JPEG compression</string>
     <string name="jpeg_compression_description">100 - highest qualty</string>
+    <string name="Autofocus">Autofocus</string>
 
     <string name="photo_processing_method">Foto processing method</string>
     <string name="photo_processing_method_dscription">Select method for image processing.

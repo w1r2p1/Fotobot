@@ -148,6 +148,8 @@
     <string name="jpeg_compression">JPEG сжатие</string>
     <string name="jpeg_compression_description">Степень сжатия изображения, чем ближе к 100 тем выше качество изображения.</string>
 
+    <string name="Autofocus">Автофокус</string>
+
     <string name="photo_processing_method">Метод обработки фото</string>
     <string name="photo_processing_method_dscription">Выберите метод для постобработки фото:
     Hardware - получаем от камеры RAW массив и конвертирем его в JPEG. Software - получаем с камеры готовый JPEG</string>
