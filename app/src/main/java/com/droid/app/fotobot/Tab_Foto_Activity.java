@@ -435,6 +435,16 @@ public class Tab_Foto_Activity extends Activity {
         checkBox_Autofocus.setChecked(fb.use_autofocus);
         linLayout_Autofocus.addView(checkBox_Autofocus);
 
+// Time for focusing
+        final TextView tv_Time_for_Focusing = new TextView(this);
+        tv_Time_for_Focusing.setText(getResources().getString(R.string.Time_for_Focusing));
+        tv_Time_for_Focusing.setWidth((screenWidth - padding) / 100 * 90);
+        tv_Time_for_Focusing.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Time_for_Focusing.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Time_for_Focusing.setTextColor(Color.BLACK);
+
+        linLayout_Autofocus.addView(tv_Time_for_Focusing);
+
         // Ввод данных
         editText_Autofocus = new EditText(this);
         editText_Autofocus.setText(Integer.toString(fb.time_for_focusing));
@@ -448,9 +458,11 @@ public class Tab_Foto_Activity extends Activity {
 
                 if (checkBox_Autofocus.isChecked()) {
                     fb.use_autofocus = true;
+                    tv_Time_for_Focusing.setVisibility(View.VISIBLE);
                     editText_Autofocus.setVisibility(View.VISIBLE);
                 } else {
                     fb.use_autofocus = false;
+                    tv_Time_for_Focusing.setVisibility(View.GONE);
                     editText_Autofocus.setVisibility(View.GONE);
                 }
 

@@ -149,6 +149,7 @@
     <string name="jpeg_compression_description">Степень сжатия изображения, чем ближе к 100 тем выше качество изображения.</string>
 
     <string name="Autofocus">Автофокус</string>
+    <string name="Time_for_Focusing">Время для фокусировки(сек)</string>
 
     <string name="photo_processing_method">Метод обработки фото</string>
     <string name="photo_processing_method_dscription">Выберите метод для постобработки фото:
