@@ -81,9 +81,9 @@ public class Tab_Foto_Activity extends Activity {
         linLayout_JPEG_Compression.setOrientation(LinearLayout.VERTICAL);
         linLayout_JPEG_Compression.setPadding(5, 9, 5, 9);
         if ( fb.front_camera) {
-            linLayout_JPEG_Compression.setBackgroundColor(Color.rgb(192, 192, 192));
+            linLayout_JPEG_Compression.setBackgroundColor(Color.rgb(192,192,192));
         } else {
-            linLayout_JPEG_Compression.setBackgroundColor(Color.rgb(208, 208, 208));
+            linLayout_JPEG_Compression.setBackgroundColor(Color.rgb(208,208,208));
         }
 
 // Название
@@ -418,7 +418,7 @@ public class Tab_Foto_Activity extends Activity {
         LinearLayout linLayout_Autofocus = new LinearLayout(this);
         linLayout_Autofocus.setOrientation(LinearLayout.VERTICAL);
         linLayout_Autofocus.setPadding(5, 9, 5, 9);
-        linLayout_Autofocus.setBackgroundColor(Color.rgb(208, 208, 208));
+        linLayout_Autofocus.setBackgroundColor(Color.rgb(192,192,192));
 
 // Autofocus TextView
         TextView tv_Autofocus = new TextView(this);
@@ -615,13 +615,15 @@ public class Tab_Foto_Activity extends Activity {
 
         FullFrame.addView(linLayout_camera);
 
+        if ( fb.autofocus ) {
+            FullFrame.addView(linLayout_Autofocus);
+        }
+
         if ( fb.front_camera ) {
             FullFrame.addView(linLayout_fc);
         }
 
-        if ( fb.autofocus ) {
-            FullFrame.addView(linLayout_Autofocus);
-        }
+
 
         FullFrame.addView(linLayout_JPEG_Compression);
 
