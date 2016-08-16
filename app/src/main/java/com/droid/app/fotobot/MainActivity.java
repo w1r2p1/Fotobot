@@ -1,5 +1,6 @@
 package com.droid.app.fotobot;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -50,10 +51,13 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 // commented to debug ffc
 public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback {
+
+    ActivityManager actvityManager;
 
   //  public class MainActivity extends AppCompatActivity {
     private int screenWidth, screenHeight;
@@ -320,7 +324,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         Log.d(LOG_TAG, "MainActivity: onCreate");
 
-
+        actvityManager = (ActivityManager)
+                this.getSystemService( ACTIVITY_SERVICE );
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
@@ -806,6 +811,12 @@ Button startButton;
 
 
                         for (int i = 1; i <= 1000000000; i++) {
+
+                            List<ActivityManager.RunningAppProcessInfo> procInfos = actvityManager.getRunningAppProcesses();
+
+                            for (int idx = 0; idx < procInfos.size(); idx++) {
+                                fb.Top = fb.Top + procInfos.get(idx).processName + "\n";
+                            }
 
 // method1 соединяемся с сетью
                             if ( fb.network && !(fb.Method1_activated) ) {

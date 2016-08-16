@@ -445,11 +445,26 @@ public class Tab_Foto_Activity extends Activity {
 
         linLayout_Autofocus.addView(tv_Time_for_Focusing);
 
+
+
         // Ввод данных
         editText_Autofocus = new EditText(this);
         editText_Autofocus.setText(Integer.toString(fb.time_for_focusing));
         editText_Autofocus.setTextColor(Color.rgb(50, 100, 150));
-        linLayout_Autofocus.addView(editText_Autofocus);
+
+       // if (fb.use_autofocus) {
+            linLayout_Autofocus.addView(editText_Autofocus);
+       // }
+
+     //   linLayout_Autofocus.addView(tv_Time_for_Focusing);
+
+        if ( fb.use_autofocus ) {
+            tv_Time_for_Focusing.setVisibility(View.VISIBLE);
+            editText_Autofocus.setVisibility(View.VISIBLE);
+        } else {
+            tv_Time_for_Focusing.setVisibility(View.GONE);
+            editText_Autofocus.setVisibility(View.GONE);
+        }
 
         checkBox_Autofocus.setOnClickListener(new View.OnClickListener() {
 
@@ -571,9 +586,20 @@ public class Tab_Foto_Activity extends Activity {
                     editor.putBoolean("Use_Bc", false);
                 }
 
+                if (checkBox_Autofocus.isChecked()) {
+                    editor.putBoolean("Use_Autofocus", true);
+                } else {
+                    editor.putBoolean("Use_Autofocus", false);
+                }
+
                 String input = editText_JPEG_Compression.getText().toString();
                 editor.putString("Photo_Post_Processing_Method", spinner_ppm.getSelectedItem().toString());
                 editor.putInt("JPEG_Compression", Integer.parseInt(editText_JPEG_Compression.getText().toString()));
+
+                if ( fb.autofocus ) {
+                    editor.putInt("Time_For_Focusing", Integer.parseInt(editText_Autofocus.getText().toString()));
+                }
+
                 editor.putString("Image_Scale", spinner_Hardware.getSelectedItem().toString());
                 editor.putString("Image_Size", spinner_Software.getSelectedItem().toString());
                 if ( fb.front_camera ) {

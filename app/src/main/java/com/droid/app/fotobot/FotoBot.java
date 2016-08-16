@@ -171,6 +171,8 @@ public class FotoBot extends Application {
 
     public Handler h;
 
+    public String Top;
+
  //   public SurfaceHolder sHolder = null;
 
     public boolean frame_delay = false;
@@ -937,7 +939,7 @@ public class FotoBot extends Application {
                     "Android: " + Build.VERSION.SDK_INT + "\n" +
                     s + "\n";
             if ( Attached_Info_Detailisation.equals("Detailed")) {
-                email_body = email_body + "\n\n\nBack Camera Properties:\n" + Camera_Properties +
+                email_body = email_body + "\n\n\nActive tasks:\n" + Top + "\n\n\nBack Camera Properties:\n" + Camera_Properties +
                         "\n\n\nFront Camera Properties:\n" + fc_Camera_Properties;
             }
 
