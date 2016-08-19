@@ -880,8 +880,8 @@ public class Tab_Main_Activity extends Activity {
         FullFrame.addView(linLayout_SMS_Password);
       //  FullFrame.addView(linLayout_Storage);
         FullFrame.addView(linLayout_Work_Dir);
-        FullFrame.addView(linLayout_Delete_Foto);
         FullFrame.addView(linLayout1);
+        FullFrame.addView(linLayout_Delete_Foto);
         FullFrame.addView(linLayout_Adv_Settings_Log);
 
 

@@ -46,12 +46,16 @@
     <string name="SMS_Password_description">Пароль для управления через SMS (если пароль не совпадает с заданным, то SMS будет игнорироваться)</string>
 
     <string name="Work_Dir">Папка для фотографий</string>
-    <string name="Work_Dir_description">Полный путь к папке с фотографиями</string>
+    <string name="Work_Dir_description">Полный путь к папке с фотографиями.
+        Можете изменить ее. Воспользуйтесь любым менеджером файлов для получения полного пути к папке.
+    По умолчанию Fotobot предлагает складывать фото во внутреннюю память телефона.</string>
     <string name="Work_Dir_error1">Нет директории для записи фото</string>
     <string name="Work_Dir_error2">Пожалуйста проверьте поле \"Папка для фотографий\"</string>
 
     <string name="Delete_Foto">Удалить фото</string>
-    <string name="Delete_Foto_description">Выберите эту опцию если хотите удалить фото с телефона после отправки фото на почту. Держите ее включенной если записываете фото во внутреннюю память телефона (Internal) иначе фотографии забьют память телефона и почистить их можно будет только из настроек.
+    <string name="Delete_Foto_description">Выберите эту опцию если хотите удалить фото с телефона
+        после отправки фото на почту. Держите ее включенной если записываете фото во внутреннюю память
+        телефона (Internal) иначе фотографии забьют память телефона.
     Если же записываете фото на SD карту, то можно их не удалять.</string>
 
     <string name="fbloglength">Длина выдачи в главном окне (в байтах)</string>
@@ -65,7 +69,9 @@
 
     <string name="advanced_settings">Показать расширенные настройки</string>
     <string name="AttachedInfo">Уровень детализации информации в письме</string>
-    <string name="AttachedInfo_description">E-Mail attached info detalization</string>
+    <string name="AttachedInfo_description">Brief - только информация о зарядке и температуре батареи.
+    Normal - Brief + GSM сигнал + текущие настройки Fotobotа;
+    Detailed - Brief + Normal + список запущенных процессов + информация по камерам</string>
     <string name="foto_sent">Фото выслано на почту</string>
 
     <string name="connection_channel_wifi">Метод подключения Wi-Fi</string>
@@ -111,8 +117,9 @@
     <string name="storage_description">Выберите место для хранения фото (Internal - внутренняя память, External - SD карта)</string>
 
     <string name="pause_between_frames">Интервал между фото(сек)</string>
-    <string name="pause_between_frames_description">Не используйте слишком малые значения этого параметра - это может
-    привести к зависанию телефона. Для моделей телефона с Android 2 значения этого параметра меньше 30сек могут
+    <string name="pause_between_frames_description">Фактически это самый главный параметр,
+        частота с которой будут делаться фото и отправляться на почту.
+        Не используйте слишком малые значения этого параметра - это может
     привести к зависанию телефона.</string>
     <string name="network">Сеть</string>
     <string name="network_description">on - фото будут сохраняться на телефоне и будут высланы на почту, off - фото будут сохранены на телефоне, но отправляться на почту не будут</string>
@@ -162,8 +169,8 @@
     <string name="flash">Вспышка</string>
     <string name="pause_between_photos">"Пауза"</string>
 
-    <string name="clean_text">Почистить вывод информации</string>
-    <string name="clean_text_note">Поставьте галочку в квадратике и нажмите ПРИМЕНИТЬ после этого весь текст будет очищен</string>
+    <string name="clean_text">Почистить вывод информации в главном окне</string>
+    <string name="clean_text_note">Поставьте галочку в квадратике и нажмите ПРИМЕНИТЬ после этого весь текст, выведенный в главном окне, будет очищен</string>
 
     <string name="clean_log">Почистить журнал логгера</string>
     <string name="clean_log_note">Поставьте галочку в квадратике и нажмите ПРИМЕНИТЬ после этого весь журнал логгера будет сброшен</string>
