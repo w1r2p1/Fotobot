@@ -146,6 +146,8 @@
     <string name="flash">Flash</string>
 
     <string name="pause_between_photos">"Pause for"</string>
+    <string name="pause">"pause "</string>
+    <string name="sec">"sec"</string>
 
     <string name="clean_text">Clean text</string>
     <string name="clean_text_note">Check this and press APPLY button, after that text in main window will be cleaned</string>

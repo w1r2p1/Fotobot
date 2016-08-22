@@ -95,7 +95,7 @@ public class FotoBot extends Application {
      */
     public boolean Use_Flash;
 
-    public boolean Use_Fc = true;
+    public boolean Use_Fc = false;
     public boolean Use_Bc = true;
 
     public int battery_level;
@@ -578,12 +578,6 @@ public class FotoBot extends Application {
 
             SendMessage(getResources().getString(R.string.pause_between_connections) + " 15 sec");
 
-/*            try {
-                TimeUnit.SECONDS.sleep(15);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } */
-
             fbpause(h, 15);
 
         }
@@ -629,6 +623,10 @@ public class FotoBot extends Application {
      * @param delay
      */
     public void fbpause(final Handler h, final int delay) {
+
+        if ( delay > 3 ) {
+            SendMessage(getResources().getString(R.string.pause) + delay + getResources().getString(R.string.sec));
+        }
 
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
         PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
@@ -1050,7 +1048,7 @@ public class FotoBot extends Application {
 
         Use_Flash = pref.getBoolean("Use_Flash", false);
 
-        Use_Fc = pref.getBoolean("Use_Fc", true);
+        Use_Fc = pref.getBoolean("Use_Fc", false);
 
         Use_Bc = pref.getBoolean("Use_Bc", true);
 

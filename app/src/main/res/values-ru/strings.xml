@@ -67,6 +67,9 @@
     <string name="wake_up">Защита от засыпания (сек)</string>
     <string name="wake_up_description">Необходим, чтобы приложение было активно.</string>
 
+    <string name="pause">"пауза "</string>
+    <string name="sec">"сек"</string>
+
     <string name="advanced_settings">Показать расширенные настройки</string>
     <string name="AttachedInfo">Уровень детализации информации в письме</string>
     <string name="AttachedInfo_description">Brief - только информация о зарядке и температуре батареи.
