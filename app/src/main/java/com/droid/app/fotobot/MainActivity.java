@@ -146,30 +146,35 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             n = msg.what;
             if (msg.what == STATUS_STOPPED) btnStart.setText("Play");
 
-            if (fb.getstatus() == 3) {
+            if (fb.getstatus() == 3 && fb.thread_stopped) {
 
-                btnStart = (Button) findViewById(R.id.play);
-                btnStop = (Button) findViewById(R.id.stop);
-                btnStart.setText(getResources().getString(R.string.start_button));
-                btnStart.setEnabled(true);
-                btnStop.setEnabled(false);
-                btnConfig.setEnabled(true);
+             //   btnStart = (Button) findViewById(R.id.play);
+             //   btnStop = (Button) findViewById(R.id.stop);
+             //   btnStart.setText(getResources().getString(R.string.start_button));
+                findViewById(R.id.play).setEnabled(true);
+                findViewById(R.id.stop).setEnabled(false);
+                findViewById(R.id.config).setEnabled(true);
 
                 Button btnHelp = (Button) findViewById(R.id.help);
-                btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
-                btnHelp.setEnabled(true);
+            //    btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
+                findViewById(R.id.help).setEnabled(true);
 
-                Button btnLog = (Button) findViewById(R.id.log);
-                btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
-                btnLog.setEnabled(true);
+             //   Button btnLog = (Button) findViewById(R.id.log);
+              //  btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
+                findViewById(R.id.log).setEnabled(true);
 
-                Button btnMainw = (Button) findViewById(R.id.mainw);
-                btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
-                btnMainw.setEnabled(true);
+              //  Button btnMainw = (Button) findViewById(R.id.mainw);
+          //      btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
+                findViewById(R.id.mainw).setEnabled(true);
 
-                btnStart.postInvalidate();
-                btnStop.postInvalidate();
+             //   btnStart.postInvalidate();
+             //   btnStop.postInvalidate();
+
+                fb.thread_stopped = false;
+
             }
+
+          //  wakeLock.release();
 
             return false;
 
@@ -289,6 +294,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 fb.SendMessage(h, "Image doesn't exist.");
             }
 
+         //   wakeLock.release();
+
         }
 
     };
@@ -340,6 +347,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         Log.d(LOG_TAG, "MainActivity: onCreate");
 
@@ -417,8 +426,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         setContentView(R.layout.activity_main);
 
-        btnStart = (Button) findViewById(R.id.play);
-        btnConfig = (Button) findViewById(R.id.config);
+   //     btnStart = (Button) findViewById(R.id.play);
+   //     btnConfig = (Button) findViewById(R.id.config);
 
         tvInfo = (TextView) findViewById(R.id.tvInfo);
 
@@ -429,28 +438,28 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         WorkSpace.setMinimumHeight(screenHeight);
         WorkSpace.setMinimumWidth(screenWidth);
 
-        Buttons1 = (LinearLayout) findViewById(R.id.buttons1);
-        Buttons1.setBackgroundColor(Color.rgb(192, 192, 192));
-        Buttons1.setMinimumWidth(screenWidth);
+    //    Buttons1 = (LinearLayout) findViewById(R.id.buttons1);
+    //    Buttons1.setBackgroundColor(Color.rgb(192, 192, 192));
+    //    Buttons1.setMinimumWidth(screenWidth);
 
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
         LogWidget.setBackgroundColor(Color.rgb(34, 58, 95));
         LogWidget.setMinimumWidth(screenWidth);
 
-        Buttons2 = (LinearLayout) findViewById(R.id.buttons2);
-        Buttons2.setBackgroundColor(Color.rgb(192, 192, 192));
-        Buttons2.setMinimumWidth(screenWidth);
+    //    Buttons2 = (LinearLayout) findViewById(R.id.buttons2);
+    //    Buttons2.setBackgroundColor(Color.rgb(192, 192, 192));
+   //     Buttons2.setMinimumWidth(screenWidth);
 
         final Button btnHelp = (Button) findViewById(R.id.help);
-        btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
+    //    btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
         btnHelp.setOnTouchListener(new View.OnTouchListener() {
 
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
-                    btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
+                   // btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
                 } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    btnHelp.setBackgroundColor(Color.rgb(128, 128, 128));
+                   // btnHelp.setBackgroundColor(Color.rgb(128, 128, 128));
                 }
                 return false;
             }
@@ -458,15 +467,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         });
 
         final Button btnLog = (Button) findViewById(R.id.log);
-        btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
+      //  btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
         btnLog.setOnTouchListener(new View.OnTouchListener() {
 
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
-                    btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
+                  //  btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
                 } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    btnLog.setBackgroundColor(Color.rgb(128, 128, 128));
+                 //   btnLog.setBackgroundColor(Color.rgb(128, 128, 128));
                 }
                 return false;
             }
@@ -474,15 +483,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         });
 
         final Button btnMainw = (Button) findViewById(R.id.mainw);
-        btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
+      //  btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
         btnMainw.setOnTouchListener(new View.OnTouchListener() {
 
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
-                    btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
+                  //  btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
                 } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    btnMainw.setBackgroundColor(Color.rgb(128, 128, 128));
+                 //   btnMainw.setBackgroundColor(Color.rgb(128, 128, 128));
                 }
                 return false;
             }
@@ -580,15 +589,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             btnStop.setEnabled(false);
 
             Button btnHelp = (Button) findViewById(R.id.help);
-            btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
+         //   btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
             btnHelp.setEnabled(true);
 
             Button btnLog = (Button) findViewById(R.id.log);
-            btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
+         //   btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
             btnLog.setEnabled(true);
 
             Button btnMainw = (Button) findViewById(R.id.mainw);
-            btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
+         //   btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
             btnMainw.setEnabled(true);
 
         }
@@ -599,15 +608,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             btnStop.setEnabled(true);
 
             Button btnHelp = (Button) findViewById(R.id.help);
-            btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
+         //   btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
             btnHelp.setEnabled(false);
 
             Button btnLog = (Button) findViewById(R.id.log);
-            btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
+         //   btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
             btnLog.setEnabled(false);
 
             Button btnMainw = (Button) findViewById(R.id.mainw);
-            btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
+         //   btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
             btnMainw.setEnabled(false);
 
         }
@@ -767,23 +776,24 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         switch (v.getId()) {
             case R.id.play:
-                btnStart.setEnabled(false);
-                btnStart.setText(getResources().getString(R.string.start_button));
-                btnStop = (Button) findViewById(R.id.stop);
-                btnStop.setEnabled(true);
-                btnConfig.setEnabled(false);
+                findViewById(R.id.play).setEnabled(false);
+               // btnStart.setText(getResources().getString(R.string.start_button));
+               // btnStop = (Button) findViewById(R.id.stop);
+//                findViewById(R.id.stop).setEnabled(true);
+                findViewById(R.id.stop).setEnabled(true);
+                findViewById(R.id.config).setEnabled(false);
 
-                Button btnHelp = (Button) findViewById(R.id.help);
-                btnHelp.setBackgroundColor(Color.rgb(165, 165, 165));
-                btnHelp.setEnabled(false);
+               // Button btnHelp = (Button) findViewById(R.id.help);
+              //  btnHelp.setBackgroundColor(Color.rgb(165, 165, 165));
+                findViewById(R.id.help).setEnabled(false);
 
-                Button btnMainw = (Button) findViewById(R.id.mainw);
-                btnMainw.setBackgroundColor(Color.rgb(165, 165, 165));
-                btnMainw.setEnabled(false);
+                //Button btnMainw = (Button) findViewById(R.id.mainw);
+              //  btnMainw.setBackgroundColor(Color.rgb(165, 165, 165));
+                findViewById(R.id.mainw).setEnabled(false);
 
-                Button btnLog = (Button) findViewById(R.id.log);
-                btnLog.setBackgroundColor(Color.rgb(165, 165, 165));
-                btnLog.setEnabled(false);
+               // Button btnLog = (Button) findViewById(R.id.log);
+              //  btnLog.setBackgroundColor(Color.rgb(165, 165, 165));
+                findViewById(R.id.log).setEnabled(false);
 
                 Thread t = new Thread(new Runnable() {
                     public void run() {
@@ -820,7 +830,22 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                         for (int i = 1; i <= 1000000000; i++) {
 
+                           // fb.LoadSettings();
+
                             fb.Image_Index = i;
+
+                            if (fb.getstatus() == 3) {
+                                if (mCamera != null) {
+                                    mCamera.stopPreview();
+                                    mCamera.setPreviewCallback(null);
+                                    mCamera.release();
+                                    mCamera = null;
+                                }
+                                fb.thread_stopped = true;
+                                fb.SendMessage(h, getResources().getString(R.string.stop_message));
+                                return;
+                            }
+
                             fb.SendMessage("Начинаем делать фото: " + fb.Image_Index);
                         //    fb.logger.fine("Начинаем делать фото: " + fb.Image_Index);
                           //  fb.fh.flush();
@@ -842,16 +867,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 // https://sohabr.net/habr/post/215693/
                             fb.batteryLevel();
 
-                            if (fb.getstatus() == 3) {
-                                if (mCamera != null) {
-                                    mCamera.stopPreview();
-                                    mCamera.setPreviewCallback(null);
-                                    mCamera.release();
-                                    mCamera = null;
-                                }
-                                fb.SendMessage(h, getResources().getString(R.string.stop_message));
-                                return;
-                            }
+
 
                             DateFormat df = new SimpleDateFormat("MM-dd-yy_HH-mm-ss-SSS");
                             fb.Image_Name = df.format(new Date()) + ".jpg";
@@ -1088,22 +1104,39 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         fb.setstatus(3);
         Log.d(LOG_TAG, "stopFotobot: STOP_FOTOBOT" + STOP_FOTOBOT);
 
-        btnStart.setText(getResources().getString(R.string.start_button));
-        btnStart.setEnabled(true);
-        btnStop.setEnabled(false);
-        btnConfig.setEnabled(true);
+     //   if (mCamera != null) {
+     //       mCamera.stopPreview();
+     //       mCamera.setPreviewCallback(null);
+     //       mCamera.release();
+     //       mCamera = null;
+     //   }
 
-        Button btnHelp = (Button) findViewById(R.id.help);
-        btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
-        btnHelp.setEnabled(true);
+        fb.SendMessage("Запрос на остановку Fotobot'а отправлен, дождитесь корректного завершения и соответствующей надписи на экране");
 
-        Button btnLog = (Button) findViewById(R.id.log);
-        btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
-        btnLog.setEnabled(true);
+      //  btnStart.setText(getResources().getString(R.string.start_button));
 
-        Button btnMainw = (Button) findViewById(R.id.log);
-        btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
-        btnMainw.setEnabled(true);
+       /* findViewById(R.id.play).setEnabled(true);
+        findViewById(R.id.stop).setEnabled(false);
+        findViewById(R.id.config).setEnabled(true); */
+
+       // btnStart.setEnabled(true);
+      //  btnStop.setEnabled(false);
+      //  btnConfig.setEnabled(true);
+
+       // Button btnHelp = (Button) findViewById(R.id.help);
+      //  btnHelp.setBackgroundColor(Color.rgb(90, 90, 90));
+
+       /* findViewById(R.id.help).setEnabled(true); */
+
+      //  Button btnLog = (Button) findViewById(R.id.log);
+      //  btnLog.setBackgroundColor(Color.rgb(90, 90, 90));
+
+       /* findViewById(R.id.log).setEnabled(true); */
+
+      //  Button btnMainw = (Button) findViewById(R.id.log);
+      //  btnMainw.setBackgroundColor(Color.rgb(90, 90, 90));
+
+       /* findViewById(R.id.mainw).setEnabled(true); */
 
         if (fb.init_logger) {
             fb.fh.flush();
@@ -1248,6 +1281,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         tvInfo.setText(fb.log);
 
+        findViewById(R.id.play).setEnabled(true);
+        findViewById(R.id.stop).setEnabled(false);
+
     }
 
     /**
@@ -1386,6 +1422,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         tvInfo.setText(file2string());
 
+        findViewById(R.id.play).setEnabled(false);
+        findViewById(R.id.stop).setEnabled(false);
+
 
   //      Log.d(LOG_TAG, "reverse: " + contentsOfFile);
 
@@ -1428,6 +1467,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         LogWidget.setBackgroundColor(Color.rgb(26, 54, 60));
 
         tvInfo.setText(Html.fromHtml("<h1>Fotobot " + fb.versionName + "</h1>" + str));
+
+        findViewById(R.id.play).setEnabled(false);
+        findViewById(R.id.stop).setEnabled(false);
 
     }
 
