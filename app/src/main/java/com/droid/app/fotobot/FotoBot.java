@@ -935,7 +935,11 @@ public class FotoBot extends Application {
                     "---------------------------------------------\n" +
                     getResources().getString(R.string.hardware_info) + ":\n" +
                     "Android: " + Build.VERSION.SDK_INT + "\n" +
-                    s + "\n";
+                    s + "\n" +
+                    "---------------------------------------------\n" +
+                    "Available SMS commands: " + "\n" +
+                    sms_commands_list() + "\n";
+            ;
             if ( Attached_Info_Detailisation.equals("Detailed")) {
                 email_body = email_body + "\n\n\nActive tasks:\n" + Top + "\n\n\nBack Camera Properties:\n" + Camera_Properties +
                         "\n\n\nFront Camera Properties:\n" + fc_Camera_Properties;
@@ -1495,6 +1499,15 @@ public class FotoBot extends Application {
 
         }
 
+    }
+
+    public String sms_commands_list(){
+        String list;
+
+        list = getResources().getString(R.string.sms_cmd_list)
+        ;
+
+        return list;
     }
 
 }
