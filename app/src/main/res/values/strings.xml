@@ -26,12 +26,12 @@
     <string name="SMS_Password_description">Password for administration via SMS (if password is wrong than rest part of SMS will be ignored)</string>
 
     <string name="sms_cmd_list">
- passwd &lt;passwd&gt;" \n"
-update &lt;interval sec&gt;" \n"
-network &lt;on/off&gt;" \n"
-log &lt;on/off&gt;" \n"
-jpg &lt;compression&gt;" \n"
-flash &lt;on/off&gt;" \n"
+passwd &lt;passwd&gt;\n
+update &lt;interval sec&gt;\n
+network &lt;on/off&gt;\n
+log &lt;on/off&gt;\n
+jpg &lt;compression&gt;\n
+flash &lt;on/off&gt;\n
     </string>
 
     <string name="network">Network</string>
