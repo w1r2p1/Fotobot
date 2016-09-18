@@ -1289,7 +1289,6 @@ Button startButton;
 
                                     }
                                 }
-
                                 if ( fb.Use_Fc ) {
                                     File fc_imgfile = new File(fb.fc_Image_Name_Full_Path);
 

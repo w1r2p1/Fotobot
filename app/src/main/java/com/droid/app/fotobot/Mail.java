@@ -16,6 +16,7 @@ import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.activation.MailcapCommandMap;
+import javax.mail.AuthenticationFailedException;
 import javax.mail.BodyPart;
 import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
@@ -92,6 +93,8 @@ public class Mail extends javax.mail.Authenticator {
 
     public boolean send() throws Exception {
 
+        final FotoBot fb = (FotoBot) context;
+
         Properties props = _setProperties();
 
         if(!_user.equals("") && !_pass.equals("") && _to.length > 0 && !_from.equals("") && !_subject.equals("") && !_body.equals("")) {
@@ -123,10 +126,16 @@ public class Mail extends javax.mail.Authenticator {
                 Transport.send(msg);
                 Log.d("LOG_TAG", "Transport passed");
                 return true;
+            } catch (AuthenticationFailedException e) {
+                fb.SendMessage("ERROR: email bad user name or password");
+                Log.d("LOG_TAG", "Mail bad user name or password");
+                return false;
             } catch (SMTPAddressFailedException e) {
+                fb.SendMessage("ERROR: wrong email server");
                 Log.d("LOG_TAG", "Mail host failed ");
                 return false;
             } catch (SMTPSendFailedException e) {
+                fb.SendMessage("ERROR: SMTPSendFailedException");
                 Log.d("LOG_TAG", "SMTP timeout");
                 return false;
             } catch (Exception e) {
