@@ -137,11 +137,18 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
             tvInfo.setTypeface(Typeface.MONOSPACE);
-            tvInfo.setTextColor(Color.rgb(190, 190, 190));
+
+            if ( fb.error_message ) {
+                tvInfo.setTextColor(Color.rgb(190, 0, 0));
+            } else {
+                tvInfo.setTextColor(Color.rgb(190, 190, 190));
+            }
 
             Log.d(LOG_TAG, reportDate + ": " + message);
 
             tvInfo.setText(fb.log);
+
+            fb.error_message = false;
 
             n = msg.what;
             if (msg.what == STATUS_STOPPED) btnStart.setText("Play");

@@ -127,18 +127,23 @@ public class Mail extends javax.mail.Authenticator {
                 Log.d("LOG_TAG", "Transport passed");
                 return true;
             } catch (AuthenticationFailedException e) {
+                fb.error_message = true;
                 fb.SendMessage("ERROR: email bad user name or password");
                 Log.d("LOG_TAG", "Mail bad user name or password");
                 return false;
             } catch (SMTPAddressFailedException e) {
+                fb.error_message = true;
                 fb.SendMessage("ERROR: wrong email server");
                 Log.d("LOG_TAG", "Mail host failed ");
                 return false;
             } catch (SMTPSendFailedException e) {
+                fb.error_message = true;
                 fb.SendMessage("ERROR: SMTPSendFailedException");
                 Log.d("LOG_TAG", "SMTP timeout");
                 return false;
             } catch (Exception e) {
+                fb.error_message = true;
+                fb.SendMessage("ERROR: problem with connecting to email server");
                 Log.d("LOG_TAG", "Transport.send exception");
                 e.printStackTrace();
                 StringWriter sw = new StringWriter();
