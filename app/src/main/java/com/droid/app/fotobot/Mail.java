@@ -18,8 +18,11 @@ import javax.activation.FileDataSource;
 import javax.activation.MailcapCommandMap;
 import javax.mail.AuthenticationFailedException;
 import javax.mail.BodyPart;
+import javax.mail.MethodNotSupportedException;
 import javax.mail.Multipart;
+import javax.mail.NoSuchProviderException;
 import javax.mail.PasswordAuthentication;
+import javax.mail.SendFailedException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -133,12 +136,27 @@ public class Mail extends javax.mail.Authenticator {
                 return false;
             } catch (SMTPAddressFailedException e) {
                 fb.error_message = true;
-                fb.SendMessage("ERROR: wrong email server");
+                fb.SendMessage("ERROR: SMTPAddressFailedException");
                 Log.d("LOG_TAG", "Mail host failed ");
                 return false;
             } catch (SMTPSendFailedException e) {
                 fb.error_message = true;
                 fb.SendMessage("ERROR: SMTPSendFailedException");
+                Log.d("LOG_TAG", "SMTP timeout");
+                return false;
+            } catch (SendFailedException e) {
+                fb.error_message = true;
+                fb.SendMessage("ERROR: SendFailedException");
+                Log.d("LOG_TAG", "SMTP timeout");
+                return false;
+            } catch (MethodNotSupportedException e) {
+                fb.error_message = true;
+                fb.SendMessage("ERROR: MethodNotSupportedException");
+                Log.d("LOG_TAG", "SMTP timeout");
+                return false;
+            } catch (NoSuchProviderException e) {
+                fb.error_message = true;
+                fb.SendMessage("ERROR: NoSuchProviderException");
                 Log.d("LOG_TAG", "SMTP timeout");
                 return false;
             } catch (Exception e) {

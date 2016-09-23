@@ -142,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 tvInfo.setTextColor(Color.rgb(190, 0, 0));
             } else {
                 tvInfo.setTextColor(Color.rgb(190, 190, 190));
+            tvInfo.setTextColor(Color.rgb(0, 0, 190));
             }
 
             Log.d(LOG_TAG, reportDate + ": " + message);

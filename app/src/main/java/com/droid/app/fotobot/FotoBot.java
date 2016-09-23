@@ -337,7 +337,7 @@ public class FotoBot extends Application {
     public int short_pause = 1;
     public int long_pause = 5;
 
-    public Boolean error_message = false;
+    public Boolean error_message = true;
 
     /**
      * Возвращает текущее состояние FotoBot'а, сейчас не пользуюсь этим
