@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             String reportDate = dateformat.format(today);
 
             String message = (String) msg.obj; //Extract the string from the Message
-            fb.log = reportDate + ": " + message + "\n\n" + fb.log;
+
 
 // string length
 
@@ -138,16 +138,17 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
             tvInfo.setTypeface(Typeface.MONOSPACE);
 
+            tvInfo.setTextColor(Color.rgb(190, 190, 190));
+
             if ( fb.error_message ) {
-                tvInfo.setTextColor(Color.rgb(190, 0, 0));
+                fb.log = reportDate + ": " + "<font color=red>" + message + "</font>" + "<br>" + fb.log;
             } else {
-                tvInfo.setTextColor(Color.rgb(190, 190, 190));
-            tvInfo.setTextColor(Color.rgb(0, 0, 190));
+                fb.log = reportDate + ": " + message + "<br>" + fb.log;
             }
 
             Log.d(LOG_TAG, reportDate + ": " + message);
 
-            tvInfo.setText(fb.log);
+            tvInfo.setText(Html.fromHtml(fb.log));
 
             fb.error_message = false;
 
@@ -539,7 +540,7 @@ Button startButton;
 
        // fb.log = fb.log + "\n" + "Autofocus: " + fb.autofocus + "\n\n\n\n\n";
 
-        tvInfo.setText(fb.log);
+        tvInfo.setText(Html.fromHtml(fb.log));
 
         Button button = (Button) findViewById(R.id.log);
 
