@@ -139,17 +139,20 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             tvInfo.setTypeface(Typeface.MONOSPACE);
 
             tvInfo.setTextColor(Color.rgb(190, 190, 190));
-
-            if ( fb.error_message ) {
-                fb.log = reportDate + ": " + "<font color=red>" + message + "</font>" + "<br>" + fb.log;
+            if ( fb.done_message ) {
+                fb.log = reportDate + ": " + "<font color=lightblue><b>" + message + "</b></font>" + "<br>" + fb.log;
+            } else if ( fb.error_message ) {
+                fb.log = reportDate + ": " + "<font color=red><b>" + message + "</b></font>" + "<br>" + fb.log;
             } else {
-                fb.log = reportDate + ": " + message + "<br>" + fb.log;
+                fb.log = reportDate + ": " + message + "<br><br>" + fb.log;
             }
 
             Log.d(LOG_TAG, reportDate + ": " + message);
 
             tvInfo.setText(Html.fromHtml(fb.log));
 
+            fb.done_message = false;
+            fb.debug_message = false;
             fb.error_message = false;
 
             n = msg.what;
@@ -791,7 +794,7 @@ Button startButton;
                         wakeLock.acquire();
 
 
-
+                        fb.done_message = true;
                         fb.SendMessage(getResources().getString(R.string.start_message));
 
 //                        fb.SendMessage("Android SDK: " + Build.VERSION.SDK_INT);
@@ -888,6 +891,7 @@ Button startButton;
                                         mCamera = null;
                                     }
                                     fb.thread_stopped = true;
+                                    fb.done_message = true;
                                     fb.SendMessage(h, getResources().getString(R.string.stop_message));
                                     return;
                                 }
@@ -1008,6 +1012,7 @@ Button startButton;
 
                                 try {
                                     mCamera.takePicture(null, null, mCall);
+                                    fb.done_message = true;
                                     fb.SendMessage(getResources().getString(R.string.photo_has_been_taken));
                                 } catch (Exception e) {
                                     fb.SendMessage("Problem with picture taking.");
@@ -1097,6 +1102,7 @@ Button startButton;
                                         mCamera = null;
                                     }
                                     fb.thread_stopped = true;
+                                    fb.done_message = true;
                                     fb.SendMessage(h, getResources().getString(R.string.stop_message));
                                     return;
                                 }
@@ -1532,7 +1538,7 @@ Button startButton;
         tvInfo.setTypeface(Typeface.MONOSPACE);
         tvInfo.setTextColor(Color.rgb(190, 190, 190));
 
-        tvInfo.setText(fb.log);
+        tvInfo.setText(Html.fromHtml(fb.log));
 
         findViewById(R.id.play).setEnabled(true);
         findViewById(R.id.stop).setEnabled(false);

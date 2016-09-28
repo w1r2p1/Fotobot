@@ -337,7 +337,9 @@ public class FotoBot extends Application {
     public int short_pause = 1;
     public int long_pause = 5;
 
-    public Boolean error_message = true;
+    public Boolean done_message = false;
+    public Boolean debug_message = false;
+    public Boolean error_message = false;
 
     /**
      * Возвращает текущее состояние FotoBot'а, сейчас не пользуюсь этим
@@ -961,7 +963,8 @@ public class FotoBot extends Application {
             if ( fileExists ) {
 
             } else {
-                SendMessage("Image doesn't exist.");
+                error_message = true;
+                SendMessage("ERROR: image doesn't exist for attaching to email.");
             }
         }
 
@@ -974,7 +977,8 @@ public class FotoBot extends Application {
             if (front_camera && fc_fileExists && Use_Fc) {
 
             } else {
-                SendMessage("Front Camera image doesn't exist.");
+                error_message = true;
+                SendMessage("ERROR: front famera image doesn't exist for attaching to email.");
             }
         }
 
@@ -985,7 +989,8 @@ public class FotoBot extends Application {
             if (fileExists) {
 
             } else {
-                SendMessage("Log doesn't exist.");
+                error_message = true;
+                SendMessage("ERROR: log doesn't exist for attaching to email.");
             }
 
         }
@@ -1010,7 +1015,8 @@ public class FotoBot extends Application {
                 SaveSettings();
 
             } else {
-                SendMessage("Письмо не было отправлено");
+                error_message = true;
+                SendMessage("ERROR: письмо не было отправлено");
             }
         } catch (Exception e) {
             SendMessage("Could not send email");
