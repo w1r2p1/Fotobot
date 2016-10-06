@@ -337,9 +337,10 @@ public class FotoBot extends Application {
     public int short_pause = 1;
     public int long_pause = 5;
 
-    public Boolean done_message = false;
+    public Boolean success_message = false;
     public Boolean debug_message = false;
     public Boolean error_message = false;
+    public Boolean aux_message = false;
 
     /**
      * Возвращает текущее состояние FotoBot'а, сейчас не пользуюсь этим
@@ -399,6 +400,7 @@ public class FotoBot extends Application {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        fbpause(h,3);
 
         if (netInfo != null && netInfo.isConnected()) {
 //            SendMessage(getResources().getString(R.string.Internet_connection_is_already_created));
@@ -547,11 +549,20 @@ public class FotoBot extends Application {
 
     public boolean MakeInternetConnection() {
 
+        if (isOnline()) {
+            SendMessage(getResources().getString(R.string.Internet_connection_is_already_created));
+            return true;
+        }
+
         int connect_attempt;
+
+        fbpause(h,1);
 
         for (connect_attempt = 0; connect_attempt < 3; connect_attempt++) {
 
             SendMessage(getResources().getString(R.string.connection_attempt) + " " + (connect_attempt + 1));
+
+            fbpause(h,3);
 
             if (Network_Channel.contains("Wi-Fi")) {
                 SendMessage(getResources().getString(R.string.connection_channel_wifi));
@@ -629,7 +640,9 @@ public class FotoBot extends Application {
     public void fbpause(final Handler h, final int delay) {
 
         if ( delay > 3 ) {
-            SendMessage(getResources().getString(R.string.pause) + delay + getResources().getString(R.string.sec));
+            //SendMessage(getResources().getString(R.string.pause) + delay + getResources().getString(R.string.sec));
+            debug_message = true;
+            SendMessage(".");
         }
 
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
@@ -1010,6 +1023,7 @@ public class FotoBot extends Application {
             fbpause(h, process_delay);
 
             if (m.send()) {
+                success_message = true;
                 SendMessage(h, getResources().getString(R.string.foto_sent));
 
                 SaveSettings();
@@ -1019,6 +1033,7 @@ public class FotoBot extends Application {
                 SendMessage("ERROR: письмо не было отправлено");
             }
         } catch (Exception e) {
+            error_message = true;
             SendMessage("Could not send email");
             Log.e("MailApp", "Could not send email", e);
         }

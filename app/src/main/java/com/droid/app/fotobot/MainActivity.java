@@ -139,10 +139,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             tvInfo.setTypeface(Typeface.MONOSPACE);
 
             tvInfo.setTextColor(Color.rgb(190, 190, 190));
-            if ( fb.done_message ) {
-                fb.log = reportDate + ": " + "<font color=lightblue><b>" + message + "</b></font>" + "<br>" + fb.log;
+            if ( fb.success_message ) {
+                fb.log = reportDate + ": " + "<font color=aqua><b>" + message + "</b></font>" + "<br><br>" + fb.log;
             } else if ( fb.error_message ) {
-                fb.log = reportDate + ": " + "<font color=red><b>" + message + "</b></font>" + "<br>" + fb.log;
+                fb.log = reportDate + ": " + "<font color=red><b>" + message + "</b></font>" + "<br><br>" + fb.log;
             } else {
                 fb.log = reportDate + ": " + message + "<br><br>" + fb.log;
             }
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             tvInfo.setText(Html.fromHtml(fb.log));
 
-            fb.done_message = false;
+            fb.success_message = false;
             fb.debug_message = false;
             fb.error_message = false;
 
@@ -794,7 +794,8 @@ Button startButton;
                         wakeLock.acquire();
 
 
-                        fb.done_message = true;
+                        fb.success_message = true;
+                        fb.log = "";
                         fb.SendMessage(getResources().getString(R.string.start_message));
 
 //                        fb.SendMessage("Android SDK: " + Build.VERSION.SDK_INT);
@@ -891,7 +892,7 @@ Button startButton;
                                         mCamera = null;
                                     }
                                     fb.thread_stopped = true;
-                                    fb.done_message = true;
+                                    fb.debug_message = true;
                                     fb.SendMessage(h, getResources().getString(R.string.stop_message));
                                     return;
                                 }
@@ -1012,7 +1013,7 @@ Button startButton;
 
                                 try {
                                     mCamera.takePicture(null, null, mCall);
-                                    fb.done_message = true;
+                                    fb.success_message = true;
                                     fb.SendMessage(getResources().getString(R.string.photo_has_been_taken));
                                 } catch (Exception e) {
                                     fb.SendMessage("Problem with picture taking.");
@@ -1055,7 +1056,7 @@ Button startButton;
 // *************************************************************************************
 
 
-                                fb.fbpause(h, 3);
+                            /////////////////////////////////    fb.fbpause(h, 3);
 
                                 fb.fbpause(h, fb.process_delay);
 
@@ -1102,7 +1103,7 @@ Button startButton;
                                         mCamera = null;
                                     }
                                     fb.thread_stopped = true;
-                                    fb.done_message = true;
+                                    fb.debug_message = true;
                                     fb.SendMessage(h, getResources().getString(R.string.stop_message));
                                     return;
                                 }
@@ -1160,6 +1161,7 @@ Button startButton;
                                         mCamera = Camera.open(fb.fcId);
 //                                        fb.SendMessage("Front camera has been initialized for parameters setting.");
                                     } catch (Exception e) {
+                                        fb.error_message = true;
                                         fb.SendMessage("Problem with camera initialization in main cycle.");
 
                                     }
@@ -1169,6 +1171,7 @@ Button startButton;
                                     try {
                                         mCamera.stopPreview();
                                     } catch (Exception e) {
+                                        fb.error_message = true;
                                         fb.SendMessage("Preview couldn't be stopped in the main cycle.");
 
                                     }
@@ -1185,6 +1188,7 @@ Button startButton;
                                 try {
                                     mCamera.setParameters(parameters);
                                 } catch (Exception e) {
+                                    fb.error_message = true;
                                     fb.SendMessage("Camera parameters have not been changed in the main cycle.");
 
                                     e.printStackTrace();
@@ -1199,6 +1203,7 @@ Button startButton;
                                         mCamera.startPreview();
                                         preview_stopped = false;
                                     } catch (Exception e) {
+                                        fb.error_message = true;
                                         fb.SendMessage("Problem with preview starting after camera initialization in the main cycle.");
 
                                     }
@@ -1211,6 +1216,7 @@ Button startButton;
                                     mCamera.takePicture(null, null, mCall);
                                     fb.SendMessage(getResources().getString(R.string.photo_has_been_taken));
                                 } catch (Exception e) {
+                                    fb.error_message = true;
                                     fb.SendMessage("Problem with picture taking.");
 
                                 }
@@ -1237,6 +1243,7 @@ Button startButton;
                                 if (logcat2file()) {
 
                                 } else {
+                                    fb.error_message = true;
                                     fb.SendMessage("Проблема с доступом к logcat");
                                 }
 
@@ -1299,6 +1306,7 @@ Button startButton;
                                     if (imgfile.delete()) {
                                         fb.SendMessage("Файл " + fb.Image_Name + " был удален");
                                     } else {
+                                        fb.error_message = true;
                                         fb.SendMessage("Проблема с удалением фото: " + fb.Image_Name);
 //                                    fb.SendMessage("Попробуйте поменять разрешение для фото в настройках");
 
@@ -1310,6 +1318,7 @@ Button startButton;
                                     if (fc_imgfile.delete()) {
                                         fb.SendMessage("Файл " + fb.fc_Image_Name + " был удален");
                                     } else {
+                                        fb.error_message = true;
                                         fb.SendMessage("Проблема с удалением фото: " + fb.fc_Image_Name);
 //                                    fb.SendMessage("Попробуйте поменять разрешение для фото в настройках");
 
@@ -1452,6 +1461,7 @@ Button startButton;
                 try {
                     mCamera.stopPreview();
                 } catch (Exception e) {
+                    fb.error_message = true;
                     fb.SendMessage("Preview couldn't be stopped in the main cycle.");
 
                 }
