@@ -1263,11 +1263,11 @@ Button startButton;
                                 }
                             }
 
-                            fb.SendMessage("-----------------------------");
+                            fb.SendMessage("------------------------");
 
                             fb.SendMessage(getResources().getString(R.string.pause_between_photos) + " " + fb.Photo_Frequency + "sec");
 
-                            fb.SendMessage("-----------------------------");
+                            fb.SendMessage("------------------------");
                             fb.SendMessage("");
 
                             if (mCamera != null) {
