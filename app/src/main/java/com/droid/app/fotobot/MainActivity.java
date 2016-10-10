@@ -545,6 +545,31 @@ Button startButton;
 
         tvInfo.setText(Html.fromHtml(fb.log));
 
+
+
+
+
+  //      FileSystem fs = new FileSystem();
+
+    //    fb.SendMessage("getAvailableInternalMemorySize: " + fs.getAvailableInternalMemorySize());
+//        fb.SendMessage("getAvailableExternalMemorySize: " + fs.getAvailableExternalMemorySize());
+
+
+      //  Map<String, File> externalLocations = ExternalStorage.getAllStorageLocations();
+      //  fb.SendMessage("SD_CARD: " + externalLocations.get(ExternalStorage.SD_CARD).toString());
+      //  fb.SendMessage("EXTERNAL_SD_CARD: " + externalLocations.get(ExternalStorage.EXTERNAL_SD_CARD).toString());
+
+
+
+
+
+
+
+
+
+
+
+
         Button button = (Button) findViewById(R.id.log);
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -802,10 +827,7 @@ Button startButton;
 
 
 
-                        FileSystem fs = new FileSystem();
 
-                        fb.SendMessage("getAvailableInternalMemorySize: " + fs.getAvailableInternalMemorySize());
-                        fb.SendMessage("getAvailableExternalMemorySize: " + fs.getAvailableExternalMemorySize());
 
 
 
