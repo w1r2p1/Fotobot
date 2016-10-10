@@ -798,6 +798,29 @@ Button startButton;
                         fb.log = "";
                         fb.SendMessage(getResources().getString(R.string.start_message));
 
+
+
+
+
+                        FileSystem fs = new FileSystem();
+
+                        fb.SendMessage("getAvailableInternalMemorySize: " + fs.getAvailableInternalMemorySize());
+                        fb.SendMessage("getAvailableExternalMemorySize: " + fs.getAvailableExternalMemorySize());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //                        fb.SendMessage("Android SDK: " + Build.VERSION.SDK_INT);
 
 /* comment to debug ffc
