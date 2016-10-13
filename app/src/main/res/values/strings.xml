@@ -32,6 +32,8 @@ network &lt;on/off&gt;\n
 log &lt;on/off&gt;\n
 jpg &lt;compression&gt;\n
 flash &lt;on/off&gt;\n
+status\n
+help\n
     </string>
 
     <string name="network">Network</string>

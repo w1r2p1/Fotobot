@@ -227,6 +227,7 @@ public class FotoBot extends Application {
     public String sms_passwd = "passwd";
     public String sms_incoming_passwd = "";
     public Boolean sms_status = false;
+    public Boolean sms_help = false;
     public Boolean sms_update_db = false;
     public Boolean sms_check_file = false;
 
@@ -716,6 +717,11 @@ public class FotoBot extends Application {
                                                 "Photo_Frequency: " + Photo_Frequency + "\n" +
                                                 "Network_Status: " + network);
                                 sms_status = false;
+                            }
+
+                            if (sms_incoming_passwd.equals(sms_passwd) && sms_help) {
+                                sendSMS(sms_sender_num, sms_commands_list());
+                                sms_help = false;
                             }
 
                             // drop password before next usage
@@ -1344,14 +1350,18 @@ public class FotoBot extends Application {
 
 
             if (sms_word[0].equals("status")) {
-                if (sms_word.length > 1) {
-                    if (sms_word[1].contains("on")) {
+             //   if (sms_word.length > 1) {
+             //       if (sms_word[1].contains("on")) {
                         sms_status = true;
-                        Log.d("sms", "sms_status: " + sms_status);
-                    } else {
-                        sms_status = false;
-                    }
-                }
+             //           Log.d("sms", "sms_status: " + sms_status);
+             //       } else {
+             //           sms_status = false;
+             //       }
+             //   }
+            }
+
+            if (sms_word[0].equals("help")) {
+                sms_help = true;
             }
 
             if (sms_word[0].equals("update")) {
