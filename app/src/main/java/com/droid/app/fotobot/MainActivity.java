@@ -928,7 +928,7 @@ Button startButton;
 
 
                             if ( fb.back_camera && fb.Use_Bc) {
-                                fb.SendMessage(getResources().getString(R.string.Back_Camera) + " " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index);
+                                fb.SendMessage(getResources().getString(R.string.Back_Camera) + ". " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index);
                                 if (fb.getstatus() == 3) {
                                     if (mCamera != null) {
                                         mCamera.stopPreview();
@@ -1148,12 +1148,13 @@ Button startButton;
                                         mCamera = null;
                                     }
                                     fb.thread_stopped = true;
-                                    fb.debug_message = true;
+                                    fb.success_message = true;
                                     fb.SendMessage(h, getResources().getString(R.string.stop_message));
+                                    fb.fbpause(h,5);
                                     return;
                                 }
 
-                                fb.SendMessage(getResources().getString(R.string.Front_Camera) + " " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index);
+                                fb.SendMessage(getResources().getString(R.string.Front_Camera) + ". " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index);
 
                          //       fb.batteryLevel();
 
@@ -1259,6 +1260,7 @@ Button startButton;
 
                                 try {
                                     mCamera.takePicture(null, null, mCall);
+                                    fb.success_message = true;
                                     fb.SendMessage(getResources().getString(R.string.photo_has_been_taken));
                                 } catch (Exception e) {
                                     fb.error_message = true;

@@ -693,7 +693,12 @@ public class FotoBot extends Application {
 
                             sms_getdata();
 
-                            SendMessage(sms.toString());
+                            //SendMessage(sms.toString());
+
+                            for (int ind=0; ind<sms.size(); ind++){
+                                SendMessage(sms.get(ind).toString());
+                            }
+
                             SendMessage("SMS:");
 
                             sms_file.delete();
@@ -1410,9 +1415,11 @@ public class FotoBot extends Application {
         Log.d("smsss", "sms_incoming_passwd: " + sms_incoming_passwd);
 
         if (sms_incoming_passwd.equals(sms_passwd)) {
+            success_message = true;
             SendMessage("Пароль " + sms_incoming_passwd + " верный, записываем настройки");
             SaveSettings();
         } else {
+            error_message = true;
             SendMessage("Пароль " + sms_incoming_passwd + " неверный");
             LoadSettings();
         }
@@ -1527,8 +1534,7 @@ public class FotoBot extends Application {
     public String sms_commands_list(){
         String list;
 
-        list = getResources().getString(R.string.sms_cmd_list)
-        ;
+        list = getResources().getString(R.string.sms_cmd_list);
 
         return list;
     }
