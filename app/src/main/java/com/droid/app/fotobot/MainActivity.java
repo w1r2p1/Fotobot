@@ -546,6 +546,11 @@ Button startButton;
         tvInfo.setText(Html.fromHtml(fb.log));
 
 
+       // String str = getResources().getString(R.string.update);
+      //  fb.log = Html.fromHtml(str).toString();
+
+
+        fb.SendMessage(getString(R.string.update));
 
 
 
