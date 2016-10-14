@@ -21,6 +21,10 @@
         телефон в точку наблюдения. Fotobot начнет делать фото каждые 5 минут
         фронтальной камерой и камерой на задней панели телефона и складывать фото в папку: </string>
 
+    <!-- http://stackoverflow.com/questions/2667319/html-in-string-resource -->
+
+    <!-- http://daniel-codes.blogspot.ru/2011/04/html-in-textviews.html -->
+
     <string name="update"><![CDATA[<b>Версия 2.8.3</b><br>
         1) расширенная обработка ошибок;<br>
         2) косметические улучшения в интерфейсе (добавлен цвет шрифта);<br>
@@ -28,6 +32,7 @@
         4) в SMS команде <i>status</i> убраны параметры on/off;<br>
         5) добавлена SMS команды <i>help</i> (придет SMS со списком допустимых команд);<br>
         <br>
+        Подробная информация здесь: <a href=http://v-and-f.ru/fotobot283>http://v-and-f.ru/fotobot283</a><br>
         --------------------------]]></string>
 
     <string name="Camera_Name">Название камеры</string>
