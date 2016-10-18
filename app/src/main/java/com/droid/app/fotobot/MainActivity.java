@@ -396,8 +396,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 //                    Html.fromHtml(getResources().getString(R.string.update)).toString();
 
             fb.show_start_tip = false;
+
+            fb.SaveSettings();
+
         }
 
+
+/*
             if (savedInstanceState == null)   // приложение запущено впервые
         {
             Log.d(LOG_TAG, "************************************************************************************* MainActivity: onCreate started first time");
@@ -416,6 +421,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 Log.d(LOG_TAG, "************************************************************************************* clean log");
             }
         }
+*/
 
         Display display = getWindowManager().getDefaultDisplay();
         screenWidth = display.getWidth();
@@ -532,7 +538,6 @@ Button startButton;
         tvInfo.setTextColor(Color.rgb(190, 190, 190));
 
         tvInfo.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
-//        tvInfo.setText(fb.log);
 
         h = new Handler(hc);
 
@@ -541,18 +546,19 @@ Button startButton;
          */
         fb.h = h;
 
-       // fb.log = fb.log + "\n" + "Autofocus: " + fb.autofocus + "\n\n\n\n\n";
-
         tvInfo.setText(Html.fromHtml(fb.log));
 
 
-       // String str = getResources().getString(R.string.update);
-      //  fb.log = Html.fromHtml(str).toString();
 
-
-        fb.SendMessage(getString(R.string.update));
-
-
+        if (fb.clean_log) {
+            fb.log = "";
+            fb.clean_log = false;
+            tvInfo.setText(Html.fromHtml(fb.log));
+            Log.d(LOG_TAG, "************************************************************************************* clean log");
+        } else {
+            tvInfo.setText(Html.fromHtml(fb.log));
+            fb.SendMessage(getString(R.string.update));
+        }
 
   //      FileSystem fs = new FileSystem();
 

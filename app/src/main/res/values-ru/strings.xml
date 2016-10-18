@@ -25,7 +25,7 @@
 
     <!-- http://daniel-codes.blogspot.ru/2011/04/html-in-textviews.html -->
 
-    <string name="update"><![CDATA[<b>Версия 2.8.3</b><br>
+    <string name="update"><![CDATA[<b><u>Версия 2.8.3</u></b><br>
         1) расширенная обработка ошибок;<br>
         2) косметические улучшения в интерфейсе (добавлен цвет шрифта);<br>
         3) исправление ошибок;<br>
@@ -33,7 +33,7 @@
         5) добавлена SMS команды <i>help</i> (придет SMS со списком допустимых команд);<br>
         <br>
         Подробная информация здесь: <a href=http://v-and-f.ru/fotobot283>http://v-and-f.ru/fotobot283</a><br>
-        --------------------------]]></string>
+        ]]></string>
 
     <string name="Camera_Name">Название камеры</string>
     <string name="Camera_Name_description">Название камеры будет добавлено к заголовку письма, что позволит легче сортировать почту</string>

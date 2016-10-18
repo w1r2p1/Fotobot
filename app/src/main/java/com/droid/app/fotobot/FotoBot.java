@@ -1120,6 +1120,8 @@ public class FotoBot extends Application {
 
         Photo_Post_Processing_Method = pref.getString("Photo_Post_Processing_Method", "Software");
 
+        show_start_tip = pref.getBoolean("Show_Start_Tip",true);
+
         SMTP_Host = pref.getString("SMTP_Host", "smtp.gmail.com");
 
         SMTP_Port = pref.getString("SMTP_Port", "465");
@@ -1176,6 +1178,7 @@ public class FotoBot extends Application {
         editor.putString("SMTP_Host", SMTP_Host);
         editor.putString("SMTP_Port", SMTP_Port);
         editor.putString("EMail_Recepient", EMail_Recepient);
+        editor.putBoolean("Show_Start_Tip", show_start_tip);
         editor.putInt("Network_Up_Delay", network_up_delay);
         editor.putString("Photo_Post_Processing_Method", Photo_Post_Processing_Method);
         editor.putInt("JPEG_Compression", JPEG_Compression);
