@@ -343,6 +343,10 @@ public class FotoBot extends Application {
     public Boolean error_message = false;
     public Boolean aux_message = false;
 
+    public Boolean Tab_Main_Activity_activated = false;
+    public Boolean Tab_Network_Activity_activated = false;
+    public Boolean Tab_Foto_Activity_activated = false;
+
     /**
      * Возвращает текущее состояние FotoBot'а, сейчас не пользуюсь этим
      *

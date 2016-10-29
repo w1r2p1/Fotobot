@@ -555,7 +555,7 @@ Button startButton;
             fb.clean_log = false;
             tvInfo.setText(Html.fromHtml(fb.log));
             Log.d(LOG_TAG, "************************************************************************************* clean log");
-        } else {
+        } else if (!fb.Tab_Foto_Activity_activated && !fb.Tab_Main_Activity_activated && !fb.Tab_Network_Activity_activated){
             tvInfo.setText(Html.fromHtml(fb.log));
             fb.SendMessage(getString(R.string.update));
         }

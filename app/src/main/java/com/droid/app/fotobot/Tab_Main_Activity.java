@@ -863,6 +863,7 @@ public class Tab_Main_Activity extends Activity {
         btn_mp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent;
+                fb.Tab_Main_Activity_activated = true;
                 intent = new Intent(v.getContext(), MainActivity.class);
                 startActivity(intent);
 
