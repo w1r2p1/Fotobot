@@ -491,37 +491,6 @@ public class Tab_Foto_Activity extends Activity {
 
         });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Buttons
 
 // Container
