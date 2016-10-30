@@ -445,8 +445,6 @@ public class Tab_Foto_Activity extends Activity {
 
         linLayout_Autofocus.addView(tv_Time_for_Focusing);
 
-
-
         // Ввод данных
         editText_Autofocus = new EditText(this);
         editText_Autofocus.setText(Integer.toString(fb.time_for_focusing));
