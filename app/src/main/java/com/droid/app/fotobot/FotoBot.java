@@ -188,7 +188,6 @@ public class FotoBot extends Application {
     public int Log_Font_Size = 14;
 
     public int Working_Area_Height = 240;
-
     public int menuheight;
 
     public String Image_Name;
