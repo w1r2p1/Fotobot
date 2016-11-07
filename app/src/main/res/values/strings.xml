@@ -15,7 +15,7 @@
     <string name="fast_start">If you do not want to study all settings and want to start Fotobot as soon as possible
         just press START button. Fotobot will take a picture every 5 minute by front and back camera and store photos into: </string>
 
-    <string name="update">Version 2.8.3:\n
+    <string name="update">Version 2.8.4:\n
         1) extended exceptions;\n
         2) added fonts color;\n
         3) bugs fixing;\n
@@ -35,6 +35,15 @@
 passwd &lt;passwd&gt;\n
 update &lt;interval sec&gt;\n
 network &lt;on/off&gt;\n
+netchannel &lt;wf/md&gt;\n
+email &lt;user@mail.ru&gt;\n
+emails &lt;fotobot@gmail.com&gt;\n
+emailsp &lt;pass_W_d&gt;\n
+smtphost &lt;smtp.gmail.com&gt;\n
+smtpport &lt;465&gt;\n
+fc &lt;on/off&gt;\n
+bc &lt;on/off&gt;\n
+delf &lt;on/off&gt;\n
 log &lt;on/off&gt;\n
 jpg &lt;compression&gt;\n
 flash &lt;on/off&gt;\n

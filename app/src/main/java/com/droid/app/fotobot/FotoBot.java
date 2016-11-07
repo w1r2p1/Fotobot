@@ -1426,6 +1426,86 @@ public class FotoBot extends Application {
                 }
             }
 
+            if (sms_word[0].equals("netch"))
+            {
+                if (sms_word.length > 1) {
+                    if (sms_word[1].contains("wf")) {
+                        Network_Channel = "Wi-Fi";
+                    }
+                    if (sms_word[1].contains("md")) {
+                        Network_Channel = "Mobile Data";
+                    }
+                }
+            }
+
+            if (sms_word[0].equals("email"))
+            {
+                if (sms_word.length > 1) {
+                    EMail_Recepient = sms_word[1];
+                }
+            }
+
+            if (sms_word[0].equals("emails"))
+            {
+                if (sms_word.length > 1) {
+                    EMail_Sender = sms_word[1];
+                }
+            }
+
+            if (sms_word[0].equals("emailsp"))
+            {
+                if (sms_word.length > 1) {
+                    EMail_Sender_Password = sms_word[1];
+                }
+            }
+
+            if (sms_word[0].equals("smtphost"))
+            {
+                if (sms_word.length > 1) {
+                    SMTP_Host = sms_word[1];
+                }
+            }
+
+            if (sms_word[0].equals("smtpport"))
+            {
+                if (sms_word.length > 1) {
+                    SMTP_Port = sms_word[1];
+                }
+            }
+
+            if (sms_word[0].equals("fc")) {
+                if (sms_word.length > 1) {
+                    if (sms_word[1].contains("on")) {
+                        front_camera = true;
+                    }
+                    if (sms_word[1].contains("off")) {
+                        front_camera = false;
+                    }
+                }
+            }
+
+            if (sms_word[0].equals("bc")) {
+                if (sms_word.length > 1) {
+                    if (sms_word[1].contains("on")) {
+                        back_camera = true;
+                    }
+                    if (sms_word[1].contains("off")) {
+                        back_camera = false;
+                    }
+                }
+            }
+
+            if (sms_word[0].equals("delf")) {
+                if (sms_word.length > 1) {
+                    if (sms_word[1].contains("on")) {
+                        delete_foto = true;
+                    }
+                    if (sms_word[1].contains("off")) {
+                        delete_foto = false;
+                    }
+                }
+            }
+
         }
         Log.d("smsss", "sms_passwd: " + sms_passwd);
         Log.d("smsss", "sms_incoming_passwd: " + sms_incoming_passwd);

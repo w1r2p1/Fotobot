@@ -25,7 +25,7 @@
 
     <!-- http://daniel-codes.blogspot.ru/2011/04/html-in-textviews.html -->
 
-    <string name="update"><![CDATA[<b><u>Версия 2.8.3</u></b><br>
+    <string name="update"><![CDATA[<b><u>Версия 2.8.4</u></b><br>
         1) расширенная обработка ошибок;<br>
         2) косметические улучшения в интерфейсе (добавлен цвет шрифта);<br>
         3) исправление ошибок;<br>
