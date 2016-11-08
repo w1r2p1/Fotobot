@@ -1476,10 +1476,10 @@ public class FotoBot extends Application {
             if (sms_word[0].equals("fc")) {
                 if (sms_word.length > 1) {
                     if (sms_word[1].contains("on")) {
-                        front_camera = true;
+                        Use_Fc = true;
                     }
                     if (sms_word[1].contains("off")) {
-                        front_camera = false;
+                        Use_Fc = false;
                     }
                 }
             }
@@ -1487,10 +1487,10 @@ public class FotoBot extends Application {
             if (sms_word[0].equals("bc")) {
                 if (sms_word.length > 1) {
                     if (sms_word[1].contains("on")) {
-                        back_camera = true;
+                        Use_Bc = true;
                     }
                     if (sms_word[1].contains("off")) {
-                        back_camera = false;
+                        Use_Bc = false;
                     }
                 }
             }
