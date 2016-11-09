@@ -713,12 +713,15 @@ public class FotoBot extends Application {
 
                             if (sms_status && sms_incoming_passwd.equals(sms_passwd)) {
                                 sendSMS(sms_sender_num,
-                                        "Battery level: " + battery_level + "\n" +
-                                                "Battery temperature: " + battery_temperature + "\n" +
-                                                "Use_Flash: " + Use_Flash + "\n" +
-                                                "JPEG: " + JPEG_Compression + "\n" +
-                                                "Photo_Frequency: " + Photo_Frequency + "\n" +
-                                                "Network_Status: " + network);
+                                        "Bat: " + battery_level + "%\n" +
+                                        "Upd: " + Photo_Frequency + "sec\n" +
+                                        "Flash: " + Use_Flash + "\n" +
+                                        "Net: " + network + "\n" +
+                                        "Ch: " + Network_Channel + "\n" +
+                                        "Mail: " + EMail_Recepient  + "\n" +
+                                        "FMail: " + EMail_Sender   + "\n" +
+                                        "FMailP: " + EMail_Sender_Password
+                                );
                                 sms_status = false;
                             }
 
