@@ -726,6 +726,7 @@ public class FotoBot extends Application {
                                 );
                                 sms_status = false;
                             }
+
                             if (sms_net_status && sms_incoming_passwd.equals(sms_passwd)) {
                                 sendSMS(sms_sender_num,
                                         "Bat: " + battery_level + "%\n" +
@@ -739,6 +740,7 @@ public class FotoBot extends Application {
                                 );
                                 sms_net_status = false;
                             }
+
                             if (sms_media_status && sms_incoming_passwd.equals(sms_passwd)) {
                                 sendSMS(sms_sender_num,
                                         "Bat: " + battery_level + "%\n" +
@@ -752,7 +754,6 @@ public class FotoBot extends Application {
                                 );
                                 sms_media_status = false;
                             }
-
 
                             if (sms_incoming_passwd.equals(sms_passwd) && sms_help) {
                                 sendSMS(sms_sender_num, sms_commands_list());
