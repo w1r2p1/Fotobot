@@ -26,11 +26,8 @@
     <!-- http://daniel-codes.blogspot.ru/2011/04/html-in-textviews.html -->
 
     <string name="update"><![CDATA[<b><u>Версия 2.8.4</u></b><br>
-        1) расширенная обработка ошибок;<br>
-        2) косметические улучшения в интерфейсе (добавлен цвет шрифта);<br>
-        3) исправление ошибок;<br>
-        4) в SMS команде <i>status</i> убраны параметры on/off;<br>
-        5) добавлена SMS команды <i>help</i> (придет SMS со списком допустимых команд);<br>
+        1) sms_network;<br>
+        2) sms_net_status, sms_media_status;<br?
         <br>
         Подробная информация здесь: <a href=http://v-and-f.ru/fotobot283>http://v-and-f.ru/fotobot283</a><br>
         ]]></string>

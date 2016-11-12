@@ -226,6 +226,8 @@ public class FotoBot extends Application {
     public String sms_passwd = "passwd";
     public String sms_incoming_passwd = "";
     public Boolean sms_status = false;
+    public Boolean sms_net_status = false;
+    public Boolean sms_media_status = false;
     public Boolean sms_help = false;
     public Boolean sms_update_db = false;
     public Boolean sms_check_file = false;
@@ -724,6 +726,33 @@ public class FotoBot extends Application {
                                 );
                                 sms_status = false;
                             }
+                            if (sms_net_status && sms_incoming_passwd.equals(sms_passwd)) {
+                                sendSMS(sms_sender_num,
+                                        "Bat: " + battery_level + "%\n" +
+                                                "Upd: " + Photo_Frequency + "sec\n" +
+                                                "Flash: " + Use_Flash + "\n" +
+                                                "Net: " + network + "\n" +
+                                                "Ch: " + Network_Channel + "\n" +
+                                                "Mail: " + EMail_Recepient  + "\n" +
+                                                "FMail: " + EMail_Sender   + "\n" +
+                                                "FMailP: " + EMail_Sender_Password
+                                );
+                                sms_net_status = false;
+                            }
+                            if (sms_media_status && sms_incoming_passwd.equals(sms_passwd)) {
+                                sendSMS(sms_sender_num,
+                                        "Bat: " + battery_level + "%\n" +
+                                                "Upd: " + Photo_Frequency + "sec\n" +
+                                                "Flash: " + Use_Flash + "\n" +
+                                                "Net: " + network + "\n" +
+                                                "Ch: " + Network_Channel + "\n" +
+                                                "Mail: " + EMail_Recepient  + "\n" +
+                                                "FMail: " + EMail_Sender   + "\n" +
+                                                "FMailP: " + EMail_Sender_Password
+                                );
+                                sms_media_status = false;
+                            }
+
 
                             if (sms_incoming_passwd.equals(sms_passwd) && sms_help) {
                                 sendSMS(sms_sender_num, sms_commands_list());
@@ -1359,14 +1388,15 @@ public class FotoBot extends Application {
 
 
             if (sms_word[0].equals("status")) {
-             //   if (sms_word.length > 1) {
-             //       if (sms_word[1].contains("on")) {
-                        sms_status = true;
-             //           Log.d("sms", "sms_status: " + sms_status);
-             //       } else {
-             //           sms_status = false;
-             //       }
-             //   }
+                sms_status = true;
+            }
+
+            if (sms_word[0].equals("netstatus")) {
+                sms_net_status = true;
+            }
+
+            if (sms_word[0].equals("mediastatus")) {
+                sms_media_status = true;
             }
 
             if (sms_word[0].equals("help")) {
@@ -1440,6 +1470,19 @@ public class FotoBot extends Application {
                     }
                 }
             }
+
+            if (sms_word[0].equals("netmethod"))
+            {
+                if (sms_word.length > 1) {
+                    if (sms_word[1].contains("1")) {
+                        Network_Connection_Method = "Method 1";
+                    }
+                    if (sms_word[1].contains("2")) {
+                        Network_Connection_Method = "Method 2";
+                    }
+                }
+            }
+
 
             if (sms_word[0].equals("email"))
             {
