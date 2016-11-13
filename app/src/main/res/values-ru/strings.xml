@@ -26,10 +26,9 @@
     <!-- http://daniel-codes.blogspot.ru/2011/04/html-in-textviews.html -->
 
     <string name="update"><![CDATA[<b><u>Версия 2.8.4</u></b><br>
-        1) sms_network;<br>
-        2) sms_net_status, sms_media_status;<br?
+        1) добавлены sms-команды;<br>
         <br>
-        Подробная информация здесь: <a href=http://v-and-f.ru/fotobot283>http://v-and-f.ru/fotobot283</a><br>
+        Полный список sms-команд: <a href=http://v-and-f.ru/fotobot#SMS>http://v-and-f.ru/fotobot#SMS</a><br>
         ]]></string>
 
     <string name="Camera_Name">Название камеры</string>
