@@ -59,11 +59,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     ActivityManager actvityManager;
 
-  //  public class MainActivity extends AppCompatActivity {
     private int screenWidth, screenHeight;
     public static final int UNKNOW_CODE = 99;
     final String LOG_TAG = "Logs";
- //   final String HANDLER = "MainActivity";
     final int STATUS_STOPPED = 333;
 
     private static final int LOW_DPI_STATUS_BAR_HEIGHT = 19;
@@ -80,28 +78,27 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     Button btnStop;
     Handler h = null;
     TextView tvInfo;
-// adopted for ffc
-//    boolean preview_stopped = false;
+
     boolean preview_stopped = true;
     AudioManager mgr = null;
-    Camera.PictureCallback mPicture = new Camera.PictureCallback(){
+    Camera.PictureCallback mPicture = new Camera.PictureCallback() {
         @Override
-        public void onPictureTaken(byte[] data, Camera camera){
-            File pictureFile = new File("/storage/sdcard0/"+"img.jpg");
+        public void onPictureTaken(byte[] data, Camera camera) {
+            File pictureFile = new File("/storage/sdcard0/" + "img.jpg");
 
-            if(pictureFile == null){
+            if (pictureFile == null) {
                 Log.d("TEST", "Error creating media file, check storage permissions");
                 return;
             }
 
-            try{
+            try {
                 FileOutputStream fos = new FileOutputStream(pictureFile);
                 fos.write(data);
                 fos.close();
-            }catch(FileNotFoundException e){
-                Log.d("TEST","File not found: "+e.getMessage());
-            } catch (IOException e){
-                Log.d("TEST","Error accessing file: "+e.getMessage());
+            } catch (FileNotFoundException e) {
+                Log.d("TEST", "File not found: " + e.getMessage());
+            } catch (IOException e) {
+                Log.d("TEST", "Error accessing file: " + e.getMessage());
             }
         }
     };
@@ -121,13 +118,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             wakeLock.acquire();
 
-
             DateFormat dateformat = new SimpleDateFormat("HH:mm:ss");
             Date today = Calendar.getInstance().getTime();
             String reportDate = dateformat.format(today);
 
             String message = (String) msg.obj; //Extract the string from the Message
-
 
 // string length
 
@@ -139,9 +134,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             tvInfo.setTypeface(Typeface.MONOSPACE);
 
             tvInfo.setTextColor(Color.rgb(190, 190, 190));
-            if ( fb.success_message ) {
+            if (fb.success_message) {
                 fb.log = reportDate + ": " + "<font color=aqua><b>" + message + "</b></font>" + "<br><br>" + fb.log;
-            } else if ( fb.error_message ) {
+            } else if (fb.error_message) {
                 fb.log = reportDate + ": " + "<font color=red><b>" + message + "</b></font>" + "<br><br>" + fb.log;
             } else {
                 fb.log = reportDate + ": " + message + "<br><br>" + fb.log;
@@ -173,8 +168,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 fb.thread_stopped = false;
 
             }
-
-            //  wakeLock.release();
 
             return false;
 
@@ -281,8 +274,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             bmp = null;
 
-            //   wakeLock.release();
-
         }
 
     };
@@ -337,13 +328,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         Log.d(LOG_TAG, "MainActivity: onCreate");
 
         actvityManager = (ActivityManager)
-                this.getSystemService( ACTIVITY_SERVICE );
+                this.getSystemService(ACTIVITY_SERVICE);
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
         fb.LoadSettings();
 
-        if ( fb.launched_first_time ) {
+        if (fb.launched_first_time) {
             fb.set_default_storage();
             fb.launched_first_time = false;
 
@@ -354,7 +345,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         }
 
         PackageManager pm = getPackageManager();
-        if(pm.hasSystemFeature(PackageManager.FEATURE_CAMERA) && pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_AUTOFOCUS)){
+        if (pm.hasSystemFeature(PackageManager.FEATURE_CAMERA) && pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_AUTOFOCUS)) {
             fb.autofocus = true;
             Log.d(LOG_TAG, "Autofocus is available");
         } else {
@@ -362,66 +353,17 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             Log.d(LOG_TAG, "Autofocus is not available");
         }
 
-//        fb.LoadSettings();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//        fb.log = Html.fromHtml(getResources().getString(R.string.Fotobot)) + "\n\n" +
-//                 "---------------------" + "\n\n" +
-//                getResources().getString(R.string.fast_start) + "\n\n" +
-//                fb.work_dir + "\n\n" +
-//                getResources().getString(R.string.update);
-
         fb.work_dir_init();
 
-        if ( fb.show_start_tip ) {
+        if (fb.show_start_tip) {
             String str = getResources().getString(R.string.Fotobot);
             fb.log = Html.fromHtml(str).toString();
-//                    "---------------------" + "\n\n" +
-//                    getResources().getString(R.string.fast_start) + "\n\n" +
-//                    fb.work_dir + "\n\n" +
-//                    Html.fromHtml(getResources().getString(R.string.update)).toString();
 
             fb.show_start_tip = false;
 
             fb.SaveSettings();
 
         }
-
-
-/*
-            if (savedInstanceState == null)   // приложение запущено впервые
-        {
-            Log.d(LOG_TAG, "************************************************************************************* MainActivity: onCreate started first time");
-
-            if (fb.clean_log) {
-                fb.log = "";
-                fb.clean_log = false;
-                Log.d(LOG_TAG, "************************************************************************************* clean log");
-            }
-        } else // приложение восстановлено из памяти
-        {
-            Log.d(LOG_TAG, "************************************************************************************* MainActivity: onCreate restored");
-            if (fb.clean_log) {
-                fb.log = "";
-                fb.clean_log = false;
-                Log.d(LOG_TAG, "************************************************************************************* clean log");
-            }
-        }
-*/
 
         Display display = getWindowManager().getDefaultDisplay();
         screenWidth = display.getWidth();
@@ -466,15 +408,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         WorkSpace.setMinimumWidth(screenWidth);
 
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
-       // LogWidget.setBackgroundColor(Color.rgb(34, 58, 95));
+        // LogWidget.setBackgroundColor(Color.rgb(34, 58, 95));
         LogWidget.setBackgroundColor(Color.rgb(51, 51, 51));
         LogWidget.setMinimumWidth(screenWidth);
 
 
-Button startButton;
-
-      //  startButton = (Button) findViewById(R.id.play);
-     //   startButton.setBackgroundColor(Color.rgb(21,76,177));
+        Button startButton;
 
         final Button btnHelp = (Button) findViewById(R.id.help);
         btnHelp.setOnTouchListener(new View.OnTouchListener() {
@@ -521,12 +460,6 @@ Button startButton;
 
         });
 
-
-    //    Button btnStart = (Button) findViewById(R.id.play);
-
-    //    btnStart.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
-
-
         sv = (SurfaceView) findViewById(R.id.surfaceView);
         sHolder = sv.getHolder();
         sHolder.addCallback(this);
@@ -549,36 +482,15 @@ Button startButton;
         tvInfo.setText(Html.fromHtml(fb.log));
 
 
-
         if (fb.clean_log) {
             fb.log = "";
             fb.clean_log = false;
             tvInfo.setText(Html.fromHtml(fb.log));
             Log.d(LOG_TAG, "************************************************************************************* clean log");
-        } else if (!fb.Tab_Foto_Activity_activated && !fb.Tab_Main_Activity_activated && !fb.Tab_Network_Activity_activated){
+        } else if (!fb.Tab_Foto_Activity_activated && !fb.Tab_Main_Activity_activated && !fb.Tab_Network_Activity_activated) {
             tvInfo.setText(Html.fromHtml(fb.log));
             fb.SendMessage(getString(R.string.update));
         }
-
-  //      FileSystem fs = new FileSystem();
-
-    //    fb.SendMessage("getAvailableInternalMemorySize: " + fs.getAvailableInternalMemorySize());
-//        fb.SendMessage("getAvailableExternalMemorySize: " + fs.getAvailableExternalMemorySize());
-
-
-      //  Map<String, File> externalLocations = ExternalStorage.getAllStorageLocations();
-      //  fb.SendMessage("SD_CARD: " + externalLocations.get(ExternalStorage.SD_CARD).toString());
-      //  fb.SendMessage("EXTERNAL_SD_CARD: " + externalLocations.get(ExternalStorage.EXTERNAL_SD_CARD).toString());
-
-
-
-
-
-
-
-
-
-
 
 
         Button button = (Button) findViewById(R.id.log);
@@ -625,11 +537,9 @@ Button startButton;
             }
 
 
-
-
         });
 
-        }
+    }
 
     protected void onDestroy() {
         final FotoBot fb = (FotoBot) getApplicationContext();
@@ -665,16 +575,7 @@ Button startButton;
         wakeLock.acquire();
 
         Log.d(LOG_TAG, "MainActivity: onResume");
-/* commented to debug ffc
-        mCamera = Camera.open(1);
-        try {
-            mCamera.setPreviewDisplay(holder);
 
-        } catch (IOException exception) {
-            mCamera.release();
-            mCamera = null;
-        }
-*/
         final FotoBot fb = (FotoBot) getApplicationContext();
         Log.d(LOG_TAG, "MainActivity: onResume");
         Log.d(LOG_TAG, "MainActivity: fb.getstatus()" + fb.getstatus());
@@ -690,7 +591,6 @@ Button startButton;
             btnStart.setText(getResources().getString(R.string.start_button));
 
             btnStart.setEnabled(true);
-
 
 
             btnStop.setEnabled(false);
@@ -802,7 +702,6 @@ Button startButton;
         final FotoBot fb = (FotoBot) getApplicationContext();
 
 
-
         fb.LoadSettings();
 
         fb.work_dir_init();
@@ -835,40 +734,9 @@ Button startButton;
                         fb.SendMessage(getResources().getString(R.string.start_message));
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//                        fb.SendMessage("Android SDK: " + Build.VERSION.SDK_INT);
-
-/* comment to debug ffc
-// Добавлено в Andorid 5. Без этого не работает. Не понятно, как раньше работало.
-                        if (mCamera == null) {
-                            mCamera = Camera.open(1);
-                        }
-*/
-//                        fb.Camera_Properties = mCamera.getParameters().flatten();
-
-
                         mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-                        // mgr.setStreamMute(AudioManager.STREAM_SYSTEM, true);
 
-                        if (Build.VERSION.SDK_INT >= 23){
+                        if (Build.VERSION.SDK_INT >= 23) {
                             mgr.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
                             savedStreamMuted = true;
                         } else {
@@ -876,7 +744,6 @@ Button startButton;
                             mgr.setStreamMute(AudioManager.STREAM_SYSTEM, true);
                             mgr.setRingerMode(AudioManager.RINGER_MODE_SILENT);
                         }
-
 
 
                         for (int i = 1; i <= 1000000000; i++) {
@@ -888,7 +755,7 @@ Button startButton;
                             }
 
 // method1 соединяемся с сетью
-                            if ( fb.network && !(fb.Method1_activated) ) {
+                            if (fb.network && !(fb.Method1_activated)) {
                                 if (fb.Network_Connection_Method.contains("Method 1")) {
                                     if (android.os.Build.VERSION.SDK_INT <= 21) {
 
@@ -899,7 +766,7 @@ Button startButton;
                             }
 
 // method1 рарзрываем соединение с сетью
-                            if ( !(fb.network) && fb.Method1_activated ) {
+                            if (!(fb.network) && fb.Method1_activated) {
                                 if (fb.Network_Connection_Method.contains("Method 1")) {
                                     if (android.os.Build.VERSION.SDK_INT <= 21) {
 
@@ -927,7 +794,6 @@ Button startButton;
                             fb.Image_Index = i;
 
 
-
                             fb.batteryLevel();
 
                             if (fb.network) {
@@ -937,8 +803,7 @@ Button startButton;
                             }
 
 
-
-                            if ( fb.back_camera && fb.Use_Bc) {
+                            if (fb.back_camera && fb.Use_Bc) {
                                 fb.SendMessage(getResources().getString(R.string.Back_Camera) + ". " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index);
                                 if (fb.getstatus() == 3) {
                                     if (mCamera != null) {
@@ -972,11 +837,8 @@ Button startButton;
 
                                 if (mCamera == null) {
 
-                                    //   fb.SendMessage("Camera is not initialized.");
-
                                     try {
                                         mCamera = Camera.open(fb.bcId);
-                                        //      fb.SendMessage("Camera has been initialized for parameters setting.");
                                     } catch (Exception e) {
                                         fb.SendMessage("Problem with camera initialization in main cycle.");
 
@@ -999,10 +861,6 @@ Button startButton;
                                     parameters.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
                                 }
 
-
-
-
-
                                 if (fb.Photo_Post_Processing_Method.contains("Software")) {
                                     parameters.setPictureSize(Integer.parseInt(width), Integer.parseInt(height));
                                 }
@@ -1023,17 +881,7 @@ Button startButton;
                                         mCamera.setPreviewDisplay(fb.holder);
                                         mCamera.startPreview();
 
-
-
-
-
-
-
-
-
                                         if (fb.autofocus && fb.use_autofocus) {
-
-
 
                                             parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
 
@@ -1041,21 +889,12 @@ Button startButton;
 
                                                 public void onAutoFocus(boolean success, Camera camera) {
 
-
-                                                }});
+                                                }
+                                            });
 
                                             fb.fbpause(h, fb.time_for_focusing);
 
                                         }
-
-
-
-
-
-
-
-
-
 
                                         preview_stopped = false;
                                     } catch (Exception e) {
@@ -1076,43 +915,6 @@ Button startButton;
 
                                 }
 
-
-// *************************************** FFC *****************************************
-/*                            if (mCamera != null) {
-                                mCamera.stopPreview();
-                                mCamera.setPreviewCallback(null);
-                                mCamera.release();
-                                mCamera = null;
-                            }
-
-                            Camera camera;
-                            camera = Camera.open(1);
-                            String camera_Properties = camera.getParameters().flatten();
-                            try {
-                                camera.setPreviewDisplay(fb.holder);
-                            } catch (Exception e) {
-                                Log.d(LOG_TAG,"setPreviewDisplay failed for ffc");
-                            }
-
-                            try {
-                                camera.startPreview();
-                            } catch (Exception e) {
-                                Log.d(LOG_TAG,"startPreview failed for ffc");
-                            }
-
-                            camera.takePicture(null,null,mPicture);
-
-                            if (camera != null) {
-                             //   camera.stopPreview();
-                             //   camera.setPreviewCallback(null);
-                                camera.release();
-                                camera = null;
-                            }
-*/
-// *************************************************************************************
-
-
-                            /////////////////////////////////    fb.fbpause(h, 3);
 
                                 fb.fbpause(h, fb.process_delay);
 
@@ -1141,15 +943,14 @@ Button startButton;
 
                                 }
 
-                                //releaseCamera();
                                 mCamera.release();
                                 mCamera = null;
 
                             }
 
-                            fb.fbpause(h,5);
+                            fb.fbpause(h, 5);
 
-                            if ( fb.front_camera && fb.Use_Fc) {
+                            if (fb.front_camera && fb.Use_Fc) {
 
                                 if (fb.getstatus() == 3) {
                                     if (mCamera != null) {
@@ -1161,13 +962,11 @@ Button startButton;
                                     fb.thread_stopped = true;
                                     fb.success_message = true;
                                     fb.SendMessage(h, getResources().getString(R.string.stop_message));
-                                    fb.fbpause(h,5);
+                                    fb.fbpause(h, 5);
                                     return;
                                 }
 
                                 fb.SendMessage(getResources().getString(R.string.Front_Camera) + ". " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index);
-
-                         //       fb.batteryLevel();
 
                                 String str1 = null;
                                 String str2 = null;
@@ -1182,25 +981,6 @@ Button startButton;
 
                                 fb.fc_Image_Name = fb.Image_Name;
                                 fb.fc_Image_Name_Full_Path = fb.Image_Name_Full_Path;
-
-
-
-                            /*    fb.LoadSettings();
-
-                                if (fb.network) {
-                                    if ((fb.Network_Connection_Method.contains("Method 2")) && (Build.VERSION.SDK_INT <= 21)) {
-                                        fb.MakeInternetConnection();
-                                    }
-                                }
-*/
-                           /*     mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                                    mgr.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
-                                } else {
-                                    mgr.setStreamMute(AudioManager.STREAM_MUSIC, true);
-                                } */
-
 
                                 // Camera.Parameters params;
                                 String string = fb.fc_Image_Size;
@@ -1280,7 +1060,6 @@ Button startButton;
                                 }
 
 
-
                                 fb.fbpause(h, fb.process_delay);
 
 
@@ -1296,7 +1075,7 @@ Button startButton;
 
                             long start = System.currentTimeMillis();
 
-                            if ( fb.attach_log && fb.network) {
+                            if (fb.attach_log && fb.network) {
 
                                 if (logcat2file()) {
 
@@ -1307,7 +1086,7 @@ Button startButton;
 
                             }
 
-                            if ( fb.network) {
+                            if (fb.network) {
                                 fb.fbpause(h, 1);
 
                                 fb.SendMail(h, fb.bc_Image_Name_Full_Path, fb.fc_Image_Name_Full_Path);
@@ -1349,16 +1128,16 @@ Button startButton;
                             boolean fileExists = logcat_file.isFile();
                             // если размер лога превышает 50 kb, то чистим его
                             if (fileExists) {
-                                if ( logcat_file.length() / 1000 > fb.log_size ) {
+                                if (logcat_file.length() / 1000 > fb.log_size) {
                                     clearLog();
                                 }
                             } else {
                                 // fb.SendMessage(h, "logfile.txt doesn't exist.");
                             }
 
-                            if ( fb.delete_foto ) {
+                            if (fb.delete_foto) {
 
-                                if ( fb.Use_Bc) {
+                                if (fb.Use_Bc) {
                                     File imgfile = new File(fb.Image_Name_Full_Path);
 
                                     if (imgfile.delete()) {
@@ -1370,7 +1149,7 @@ Button startButton;
 
                                     }
                                 }
-                                if ( fb.Use_Fc ) {
+                                if (fb.Use_Fc) {
                                     File fc_imgfile = new File(fb.fc_Image_Name_Full_Path);
 
                                     if (fc_imgfile.delete()) {
@@ -1416,7 +1195,7 @@ Button startButton;
 
         fb.SendMessage(getResources().getString(R.string.request_for_stopping));
 
-        if (Build.VERSION.SDK_INT >= 23){
+        if (Build.VERSION.SDK_INT >= 23) {
             if (savedStreamMuted) {
                 mgr.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_UNMUTE, 0);
                 savedStreamMuted = false;
@@ -1432,16 +1211,6 @@ Button startButton;
     @Override
     public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
 
-/* commented to debug ffc
-// Camera
-
-        //get camera parameters
-        parameters = mCamera.getParameters();
-
-        //set camera parameters
-        mCamera.setParameters(parameters);
-        mCamera.startPreview();
-*/
     }
 
     @Override
@@ -1451,26 +1220,15 @@ Button startButton;
         Camera.Parameters params;
 
 
-
         fb.numberOfCameras = Camera.getNumberOfCameras();
         Camera.CameraInfo ci = new Camera.CameraInfo();
 
-        for(int i = 0; i < fb.numberOfCameras; i++){
-            Camera.getCameraInfo(i,ci);
-            if(ci.facing == Camera.CameraInfo.CAMERA_FACING_FRONT){
+        for (int i = 0; i < fb.numberOfCameras; i++) {
+            Camera.getCameraInfo(i, ci);
+            if (ci.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
                 fb.fcId = i;
                 fb.front_camera = true;
                 mCamera = Camera.open(fb.fcId);
-
-       /*
-       try {
-            mCamera.setPreviewDisplay(holder);
-
-        } catch (IOException exception) {
-            mCamera.release();
-            mCamera = null;
-        }
-        */
 
                 fb.fc_Camera_Properties = mCamera.getParameters().flatten();
 
@@ -1481,7 +1239,7 @@ Button startButton;
                 mCamera.release();
                 mCamera = null;
             }
-            if(ci.facing == Camera.CameraInfo.CAMERA_FACING_BACK){
+            if (ci.facing == Camera.CameraInfo.CAMERA_FACING_BACK) {
                 fb.bcId = i;
                 mCamera = Camera.open(fb.bcId);
 
@@ -1506,8 +1264,7 @@ Button startButton;
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-// adopted for ffc
-//        releaseCamera();
+
     }
 
     private void releaseCamera() {
@@ -1515,7 +1272,7 @@ Button startButton;
         final FotoBot fb = (FotoBot) getApplicationContext();
 
         if (mCamera != null) {
-            if ( !preview_stopped) {
+            if (!preview_stopped) {
                 try {
                     mCamera.stopPreview();
                 } catch (Exception e) {
@@ -1727,7 +1484,7 @@ Button startButton;
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
-        Toast.makeText(this,"generating report", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "generating report", Toast.LENGTH_LONG).show();
 
         File logfile = new File(fb.work_dir + "/logfile.txt");
 
@@ -1737,7 +1494,7 @@ Button startButton;
             fb.SendMessage("Проблема с доступом к logcat");
         }
 
- //       fb.fbpause(fb.h, 1);
+        //       fb.fbpause(fb.h, 1);
 
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
         LogWidget.setBackgroundColor(Color.rgb(54, 54, 54));
@@ -1768,7 +1525,7 @@ Button startButton;
      */
     public void help(View v) {
         final FotoBot fb = (FotoBot) getApplicationContext();
-     //   fb.Show_Help = true;
+        //   fb.Show_Help = true;
 
 
         InputStream is = getResources().openRawResource(R.raw.file);
@@ -1794,7 +1551,8 @@ Button startButton;
         findViewById(R.id.stop).setEnabled(false);
 
     }
-    public void clearLog(){
+
+    public void clearLog() {
         try {
             Process process = new ProcessBuilder()
                     .command("logcat", "-c")
@@ -1804,20 +1562,20 @@ Button startButton;
         }
     }
 
-    static String getExternalStorage(){
-        String exts =  Environment.getExternalStorageDirectory().getPath();
+    static String getExternalStorage() {
+        String exts = Environment.getExternalStorageDirectory().getPath();
         try {
             FileReader fr = new FileReader(new File("/proc/mounts"));
             BufferedReader br = new BufferedReader(fr);
-            String sdCard=null;
+            String sdCard = null;
             String line;
-            while((line = br.readLine())!=null){
-                if(line.contains("secure") || line.contains("asec")) continue;
-                if(line.contains("fat")){
+            while ((line = br.readLine()) != null) {
+                if (line.contains("secure") || line.contains("asec")) continue;
+                if (line.contains("fat")) {
                     String[] pars = line.split("\\s");
-                    if(pars.length<2) continue;
-                    if(pars[1].equals(exts)) continue;
-                    sdCard =pars[1];
+                    if (pars.length < 2) continue;
+                    if (pars[1].equals(exts)) continue;
+                    sdCard = pars[1];
                     break;
                 }
             }
