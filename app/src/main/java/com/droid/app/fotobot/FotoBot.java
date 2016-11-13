@@ -64,15 +64,29 @@ public class FotoBot extends Application {
     public boolean back_camera = true;
     public boolean front_camera = false;
 
+    /**
+     * id фронтальной камеры
+     */
     int fcId = -1;
+
+    /**
+     * id камеры на задней панели
+     */
     int bcId = -1;
 
     public String versionName = "";
 
+    /**
+     * Будет использоваться в теме письма. Если Fotobot установлен на несколько телефонов,
+     * то эта переменная поможет отсортировать письма.
+     */
     public String Camera_Name = "default";
 
     final String LOG_TAG = "FotoBot";
 
+    /**
+     * Если приложение запускается впервые на телефоне, то выскочит вступительная информация
+     */
     public boolean launched_first_time = true;
 
     /**
@@ -95,9 +109,19 @@ public class FotoBot extends Application {
      */
     public boolean Use_Flash;
 
+    /**
+     * использовать или нет фронтальную камеру
+     */
     public boolean Use_Fc = false;
+
+    /**
+     * использовать или нет камеру на задней панели телефона
+     */
     public boolean Use_Bc = true;
 
+    /**
+     * уровент заряда аккумулятора в %
+     */
     public int battery_level;
 
     /**
@@ -116,9 +140,13 @@ public class FotoBot extends Application {
     public int Image_Index = 0;
 
     /**
-     * Размер изображения в пикселях
+     * Размер изображения в пикселях по умолчанию для камеры на задней панели телефона
      */
     public String Image_Size = "1024x768";
+
+    /**
+     * Размер изображения в пикселях по умолчанию для фронтальой камеры
+     */
     public String fc_Image_Size = "320x240";
 
     /**
@@ -141,7 +169,14 @@ public class FotoBot extends Application {
      */
     public String EMail_Recepient = "recipient@mail.ru";
 
+    /**
+     * почтовый сервер
+     */
     public String SMTP_Host = "smtp.gmail.com";
+
+    /**
+     * порт для отправки писем не почтовом сервере
+     */
     public String SMTP_Port = "465";
 
     public String Network_Channel = "Both";
@@ -173,7 +208,7 @@ public class FotoBot extends Application {
 
     public String Top;
 
- //   public SurfaceHolder sHolder = null;
+    //   public SurfaceHolder sHolder = null;
 
     public boolean frame_delay = false;
 
@@ -217,7 +252,12 @@ public class FotoBot extends Application {
      */
     public int log_size = 50;
 
-    public String check_web_page = "http://www.android.com";
+    /**
+     * присылать фото на почту или не присылать
+     */
+    public Boolean network = false;
+
+    public Boolean Method1_activated = false;
 
     public boolean attach_log = false;
 
@@ -263,22 +303,6 @@ public class FotoBot extends Application {
 
     List<String> sms = new ArrayList<String>();
 
-    /**
-     * Документация
-     */
-    public String Main_Help = "<h1><font color=white>Фотобот<br>Руководство пользователя</font></h1>" +
-            "Это простое Android приложение предназначено для фотографирования и отправки фото по электронной почте " +
-            "через заданные промежутки времени." +
-            "Все что нужно сделать - это завести почтовый ящик для Fotobot с которого он будет присылать фото." +
-            "Подробную инструкцию по установке и настройке " +
-            "этого приложения вы найдете на <a href=http://v-and-f.ru/fotobot>http://v-and-f.ru/fotobot</a>";
-
-    /**
-     * Если  Show_Help = false, то выводится timestamp для логов,
-     * если  Show_Help = true, ты выводится документация.
-     */
-    public Boolean Show_Help = false;
-
     public Boolean advanced_settings = false;
 
     public Boolean autofocus = false;
@@ -293,34 +317,15 @@ public class FotoBot extends Application {
     public String usedMemory;
 
     /**
-     * Батарейка
+     * Температура аккумулятора
      */
-  //  int battery_health;
-  //  int battery_icon_small;
-  //  int battery_charge;
- //   int battery_plugged;
- //   boolean battery_present;
- //   int battery_scale;
- //   int battery_status;
- //   String battery_technology;
     float battery_temperature;
- //   int battery_voltage;
 
     /**
      * Логфайл
      */
-  //  public String logpath = "";
-  //  public String logfile = "Fotobot.txt";
-
-  //  FileHandler fh = null;
-
-  //  boolean init_logger = false;
-
     public int log_line_number = 150;
 
-    public Boolean network = false;
-
-    public Boolean Method1_activated = false;
 
     /**
      * Строка на экран
@@ -343,7 +348,6 @@ public class FotoBot extends Application {
     public Boolean success_message = false;
     public Boolean debug_message = false;
     public Boolean error_message = false;
-    public Boolean aux_message = false;
 
     public Boolean Tab_Main_Activity_activated = false;
     public Boolean Tab_Network_Activity_activated = false;
@@ -374,29 +378,14 @@ public class FotoBot extends Application {
         return str;
     }
 
-  /*  public void setstr(String fb_str) {
-
-        str = fb_str;
-    }
-*/
     /**
      * В конструкторе проводим инициализацию объекта посредством считывания всех свойств из SharedPreferences.
      */
     public void FotoBot() {
 
-     //   LoadSettings();
         show_start_tip = true;
     }
 
-  /*  public void Init() {
-
-    }
-*/
-/*
-    public void WriteData() {
-
-    }
-*/
     /**
      * isOnline - Check if there is a NetworkConnection
      *
@@ -407,102 +396,14 @@ public class FotoBot extends Application {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        fbpause(h,3);
+        fbpause(h, 3);
 
         if (netInfo != null && netInfo.isConnected()) {
-//            SendMessage(getResources().getString(R.string.Internet_connection_is_already_created));
             return true;
         } else {
-//            SendMessage(getResources().getString(R.string.no_Internet_connection));
             return false;
         }
 
-    }
-
-    /**
-     * Для проверки соединения выкачивает страницу из Internet
-     */
-
-    public boolean getPage() {
-
-        BufferedReader rd = null;
-        StringBuilder sb = null;
-        String line = null;
-
-        InputStream is = null;
-
-        HttpURLConnection urlc = null;
-        URL serverAddress = null;
-
-        try {
-            serverAddress = new URL(check_web_page);
-            //set up out communications stuff
-            urlc = null;
-
-            //Set up the initial connection
-            urlc = (HttpURLConnection) serverAddress.openConnection();
-            urlc.setRequestMethod("GET");
-            urlc.setDoOutput(true);
-            urlc.setReadTimeout(60000);
-
-            urlc.connect();
-//read the result from the server
-            rd = new BufferedReader(new InputStreamReader(urlc.getInputStream()));
-            sb = new StringBuilder();
-
-            while ((line = rd.readLine()) != null) {
-                sb.append(line + '\n');
-            }
-
-            SendMessage(check_web_page + " загружена " + sb.toString().length() / 1000 + "Kb");
-
-            urlc.disconnect();
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-            StringWriter sw = new StringWriter();
-            PrintWriter pw = new PrintWriter(sw);
-            e.printStackTrace(pw);
-            String str = sw.toString();
-            SendMessage(str);
-            return false;
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-            e.printStackTrace();
-            StringWriter sw = new StringWriter();
-            PrintWriter pw = new PrintWriter(sw);
-            SendMessage(sw.toString().toUpperCase());
-            return false;
-        } catch (IOException e) {
-            e.printStackTrace();
-            e.printStackTrace();
-            StringWriter sw = new StringWriter();
-            PrintWriter pw = new PrintWriter(sw);
-            SendMessage(sw.toString().toUpperCase());
-            return false;
-        } catch (Exception e) {
-            e.printStackTrace();
-            StringWriter sw = new StringWriter();
-            PrintWriter pw = new PrintWriter(sw);
-            SendMessage(sw.toString().toUpperCase());
-        } finally {
-            //close the connection, set all objects to null
-            //    urlc.disconnect();
-            rd = null;
-            sb = null;
-            urlc = null;
-        }
-
-        return true;
-    }
-
-    // Reads an InputStream and converts it to a String.
-    public String readIt(InputStream stream, int len) throws IOException, UnsupportedEncodingException {
-        Reader reader = null;
-        reader = new InputStreamReader(stream, "UTF-8");
-        char[] buffer = new char[len];
-        reader.read(buffer);
-        return new String(buffer);
     }
 
     /**
@@ -563,13 +464,13 @@ public class FotoBot extends Application {
 
         int connect_attempt;
 
-        fbpause(h,1);
+        fbpause(h, 1);
 
         for (connect_attempt = 0; connect_attempt < 3; connect_attempt++) {
 
             SendMessage(getResources().getString(R.string.connection_attempt) + " " + (connect_attempt + 1));
 
-            fbpause(h,3);
+            fbpause(h, 3);
 
             if (Network_Channel.contains("Wi-Fi")) {
                 SendMessage(getResources().getString(R.string.connection_channel_wifi));
@@ -646,8 +547,7 @@ public class FotoBot extends Application {
      */
     public void fbpause(final Handler h, final int delay) {
 
-        if ( delay > 3 ) {
-            //SendMessage(getResources().getString(R.string.pause) + delay + getResources().getString(R.string.sec));
+        if (delay > 3) {
             debug_message = true;
             SendMessage(".");
         }
@@ -669,8 +569,8 @@ public class FotoBot extends Application {
 
                 int n = 5;
 
-                if (delay >= wake_up_interval ) {
-                    n = (int)( delay - ((delay / wake_up_interval) * long_pause * 2) );
+                if (delay >= wake_up_interval) {
+                    n = (int) (delay - ((delay / wake_up_interval) * long_pause * 2));
                 }
 
                 for (int i = 1; i <= n; i++) {
@@ -702,7 +602,7 @@ public class FotoBot extends Application {
 
                             //SendMessage(sms.toString());
 
-                            for (int ind=0; ind<sms.size(); ind++){
+                            for (int ind = 0; ind < sms.size(); ind++) {
                                 SendMessage(sms.get(ind).toString());
                             }
 
@@ -717,34 +617,30 @@ public class FotoBot extends Application {
                             if (sms_status && sms_incoming_passwd.equals(sms_passwd)) {
                                 sendSMS(sms_sender_num,
                                         "Bat: " + battery_level + "%\n" +
-                                        "Upd: " + Photo_Frequency + "sec\n" +
-                                        "Flash: " + Use_Flash + "\n" +
-                                        "Net: " + network
+                                                "Upd: " + Photo_Frequency + "sec\n" +
+                                                "Flash: " + Use_Flash + "\n" +
+                                                "Net: " + network
                                 );
                                 sms_status = false;
                             }
 
                             if (sms_net_status && sms_incoming_passwd.equals(sms_passwd)) {
                                 sendSMS(sms_sender_num,
-                                                "Net: " + network + "\n" +
+                                        "Net: " + network + "\n" +
                                                 "Ch: " + Network_Channel + "\n" +
                                                 "Method: " + Network_Connection_Method + "\n" +
-                                                "Mail: " + EMail_Recepient  + "\n"
-                                             //   "FMail: " + EMail_Sender   + "\n" +
-                                             //   "FMailP: " + EMail_Sender_Password + "\n" +
-                                             //   "SMTPHost: " + SMTP_Host + "\n" +
-                                             //   "SMTPPort: " + SMTP_Port + "\n"
+                                                "Mail: " + EMail_Recepient + "\n"
                                 );
                                 sms_net_status = false;
                             }
 
                             if (sms_email_status && sms_incoming_passwd.equals(sms_passwd)) {
                                 sendSMS(sms_sender_num,
-                                        "Mail: " + EMail_Recepient  + "\n" +
-                                           "FMail: " + EMail_Sender   + "\n" +
-                                           "FMailP: " + EMail_Sender_Password + "\n" +
-                                           "SMTPHost: " + SMTP_Host + "\n" +
-                                           "SMTPPort: " + SMTP_Port + "\n"
+                                        "Mail: " + EMail_Recepient + "\n" +
+                                                "FMail: " + EMail_Sender + "\n" +
+                                                "FMailP: " + EMail_Sender_Password + "\n" +
+                                                "SMTPHost: " + SMTP_Host + "\n" +
+                                                "SMTPPort: " + SMTP_Port + "\n"
                                 );
                                 sms_email_status = false;
                             }
@@ -752,10 +648,10 @@ public class FotoBot extends Application {
 
                             if (sms_media_status && sms_incoming_passwd.equals(sms_passwd)) {
                                 sendSMS(sms_sender_num,
-                                                "Flash: " + Use_Flash + "\n" +
+                                        "Flash: " + Use_Flash + "\n" +
                                                 "JPEG: " + JPEG_Compression + "\n" +
                                                 "Fc: " + Use_Fc + "\n" +
-                                                "Bc: " + Use_Bc  + "\n"
+                                                "Bc: " + Use_Bc + "\n"
                                 );
                                 sms_media_status = false;
                             }
@@ -777,8 +673,6 @@ public class FotoBot extends Application {
                     }
 
                     if (i % wake_up_interval == 0 && frame_delay) {
-
-                     //   File logfile = null;
 
                         String cmd = null;
 
@@ -954,16 +848,16 @@ public class FotoBot extends Application {
         m.setFrom(EMail_Sender);
         m.setSubject("Fotobot v" + versionName + " " + Camera_Name);
 
-        String email_body="";
+        String email_body = "";
 
 
-                email_body = "Fotobot v" + versionName + "\n" +
+        email_body = "Fotobot v" + versionName + "\n" +
                 "---------------------------------------------\n" +
                 "Camera Name" + ": " + Camera_Name + "\n" +
                 getResources().getString(R.string.battery_charge) + ": " + battery_level + "%" + "\n" +
                 getResources().getString(R.string.battery_temperature) + ": " + battery_temperature + "C" + "\n";
 
-        if ( Attached_Info_Detailisation.equals("Normal") || Attached_Info_Detailisation.equals("Detailed")) {
+        if (Attached_Info_Detailisation.equals("Normal") || Attached_Info_Detailisation.equals("Detailed")) {
 
             email_body = email_body + getResources().getString(R.string.gsm) + ": " + GSM_Signal + "ASU    " + (2.0 * GSM_Signal - 113) + "dBm" + "\n" +
                     "-50 -82 dbm   -   very good" + "\n" +
@@ -1009,7 +903,7 @@ public class FotoBot extends Application {
                     "Available SMS commands: " + "\n" +
                     sms_commands_list() + "\n";
             ;
-            if ( Attached_Info_Detailisation.equals("Detailed")) {
+            if (Attached_Info_Detailisation.equals("Detailed")) {
                 email_body = email_body + "\n\n\nActive tasks:\n" + Top + "\n\n\nBack Camera Properties:\n" + Camera_Properties +
                         "\n\n\nFront Camera Properties:\n" + fc_Camera_Properties;
             }
@@ -1020,12 +914,12 @@ public class FotoBot extends Application {
 
         File attach_file;
 
-        if ( Use_Bc ) {
+        if (Use_Bc) {
 
             attach_file = new File(str);
             boolean fileExists = attach_file.isFile();
 
-            if ( fileExists ) {
+            if (fileExists) {
 
             } else {
                 error_message = true;
@@ -1034,7 +928,7 @@ public class FotoBot extends Application {
         }
 
 
-        if ( front_camera && Use_Fc ) {
+        if (front_camera && Use_Fc) {
 
             attach_file = new File(fc_str);
             boolean fc_fileExists = attach_file.isFile();
@@ -1061,11 +955,11 @@ public class FotoBot extends Application {
         }
         try {
 
-            if ( Use_Bc) {
+            if (Use_Bc) {
                 m.addAttachment(str);
             }
 
-            if ( front_camera && Use_Fc ) {
+            if (front_camera && Use_Fc) {
                 m.addAttachment(fc_str);
             }
 
@@ -1118,85 +1012,44 @@ public class FotoBot extends Application {
         SharedPreferences.Editor editor = pref.edit();
 
         Network_Channel = pref.getString("Network_Channel", "Both");
-
         Network_Connection_Method = pref.getString("Network_Connection_Method", "Method 1");
-
         Use_WiFi = pref.getBoolean("Use_WiFi", true);         // getting boolean
-
         Use_Mobile_Data = pref.getBoolean("Use_Mobile_Data", true);         // getting boolean
-
         Use_Flash = pref.getBoolean("Use_Flash", false);
-
         Use_Fc = pref.getBoolean("Use_Fc", false);
-
         Use_Bc = pref.getBoolean("Use_Bc", true);
-
         JPEG_Compression = pref.getInt("JPEG_Compression", 50);
-
         use_autofocus = pref.getBoolean("Use_Autofocus", true);
-
         time_for_focusing = pref.getInt("Time_For_Focusing", 1);
-
         Camera_Name = pref.getString("Camera_Name", "default");
-
         Photo_Frequency = pref.getInt("Photo_Frequency", 300);
-
         process_delay = pref.getInt("process_delay", 5);
-
         Image_Scale = pref.getString("Image_Scale", "1");
-
         Image_Size = pref.getString("Image_Size", "1024x768");
-
         fc_Image_Size = pref.getString("fc_Image_Size", "320x240");
-
         EMail_Sender = pref.getString("EMail_Sender", "fotobot@gmail.com");
-
         EMail_Sender_Password = pref.getString("EMail_Sender_Password", "passwd");
-
         EMail_Recepient = pref.getString("EMail_Recepient", "recipient@mail.ru");
-
         Log_Font_Size = pref.getInt("Log_Font_Size", 12);
-
         Config_Font_Size = pref.getInt("Config_Font_Size", 14);
-
         Photo_Post_Processing_Method = pref.getString("Photo_Post_Processing_Method", "Software");
-
-        show_start_tip = pref.getBoolean("Show_Start_Tip",true);
-
+        show_start_tip = pref.getBoolean("Show_Start_Tip", true);
         SMTP_Host = pref.getString("SMTP_Host", "smtp.gmail.com");
-
         SMTP_Port = pref.getString("SMTP_Port", "465");
-
         loglength = pref.getInt("Log_Length", 1024);
-
         log_line_number = pref.getInt("FLog_Length", 150);
-
         wake_up_interval = pref.getInt("Wake_Up_Interval", 60);
-
-        check_web_page = pref.getString("Check_Web_Page", "http://www.android.com");
-
         network_up_delay = pref.getInt("Network_Up_Delay", 15);
-
         attach_log = pref.getBoolean("Attach_Log", false);
-
         Attached_Info_Detailisation = pref.getString("Attached_Info_Detailisation", "Normal");
-
         log_size = pref.getInt("Log_Size", 50);
-
         work_dir = pref.getString("Work_Dir", "/data/data/com.droid.app.fotobot/files");
-
         storage_type = pref.getString("Storage_Type", "Internal");
-
         network = pref.getBoolean("Network", false);
-
         launched_first_time = pref.getBoolean("Launched_First_Time", true);
-
         sms_passwd = pref.getString("SMS_Password", "passwd");
-
         advanced_settings = pref.getBoolean("Advanced_Settings", false);
-
         delete_foto = pref.getBoolean("Delete_Foto", false);
-
     }
 
     public void SaveSettings() {
@@ -1338,7 +1191,6 @@ public class FotoBot extends Application {
         }
 
         BufferedReader bufferedReader = new BufferedReader(fileReader);
-        //  List<String> lines = new ArrayList<String>();
         String line = null;
 
         try {
@@ -1425,9 +1277,9 @@ public class FotoBot extends Application {
                     if (sms_word[1].contains("on")) {
                         attach_log = true;
                         Log.d("sms", "attach_log: " + attach_log);
-                       // if (sms_word.length > 2) {
-                       //     log_size = Integer.parseInt(sms_word[2]);
-                       // }
+                        // if (sms_word.length > 2) {
+                        //     log_size = Integer.parseInt(sms_word[2]);
+                        // }
                     }
                     if (sms_word[1].contains("off")) {
                         attach_log = false;
@@ -1469,8 +1321,7 @@ public class FotoBot extends Application {
                 }
             }
 
-            if (sms_word[0].equals("netch"))
-            {
+            if (sms_word[0].equals("netch")) {
                 if (sms_word.length > 1) {
                     if (sms_word[1].contains("wf")) {
                         Network_Channel = "Wi-Fi";
@@ -1481,8 +1332,7 @@ public class FotoBot extends Application {
                 }
             }
 
-            if (sms_word[0].equals("netmethod"))
-            {
+            if (sms_word[0].equals("netmethod")) {
                 if (sms_word.length > 1) {
                     if (sms_word[1].contains("1")) {
                         Network_Connection_Method = "Method 1";
@@ -1494,36 +1344,31 @@ public class FotoBot extends Application {
             }
 
 
-            if (sms_word[0].equals("email"))
-            {
+            if (sms_word[0].equals("email")) {
                 if (sms_word.length > 1) {
                     EMail_Recepient = sms_word[1];
                 }
             }
 
-            if (sms_word[0].equals("emails"))
-            {
+            if (sms_word[0].equals("emails")) {
                 if (sms_word.length > 1) {
                     EMail_Sender = sms_word[1];
                 }
             }
 
-            if (sms_word[0].equals("emailsp"))
-            {
+            if (sms_word[0].equals("emailsp")) {
                 if (sms_word.length > 1) {
                     EMail_Sender_Password = sms_word[1];
                 }
             }
 
-            if (sms_word[0].equals("smtphost"))
-            {
+            if (sms_word[0].equals("smtphost")) {
                 if (sms_word.length > 1) {
                     SMTP_Host = sms_word[1];
                 }
             }
 
-            if (sms_word[0].equals("smtpport"))
-            {
+            if (sms_word[0].equals("smtpport")) {
                 if (sms_word.length > 1) {
                     SMTP_Port = sms_word[1];
                 }
@@ -1579,15 +1424,11 @@ public class FotoBot extends Application {
     }
 
 
-
     public void work_dir_init() {
-
-//        work_dir = getApplicationContext().getFilesDir().toString();
 
         File sms_file = null;
 
         sms_file = new File((getApplicationContext().getFilesDir().toString() + "/sms.txt"));
-      //  sms_file = new File( work_dir + "/sms.txt");
 
         if (sms_file.isFile()) {
 
@@ -1618,31 +1459,25 @@ public class FotoBot extends Application {
 
         String path;
 
-        path = Environment.getExternalStorageDirectory()+File.separator+"Fotobot";
+        path = Environment.getExternalStorageDirectory() + File.separator + "Fotobot";
 
         File appDir = new File(path);
 
-        if(!appDir.exists() && !appDir.isDirectory())
-        {
+        if (!appDir.exists() && !appDir.isDirectory()) {
             // create empty directory
-            if (appDir.mkdirs())
-            {
-             //   SendMessage("Fotobot создал папку " + path);
-                Log.i("CreateDir","App dir created");
+            if (appDir.mkdirs()) {
+                //   SendMessage("Fotobot создал папку " + path);
+                Log.i("CreateDir", "App dir created");
+            } else {
+                SendMessage("Fotobot не может создать папку " + path);
+                Log.w("CreateDir", "Unable to create app dir!");
             }
-            else
-            {
-                SendMessage("Fotobot не может создать папку "  + path);
-                Log.w("CreateDir","Unable to create app dir!");
-            }
-        }
-        else
-        {
-         //   SendMessage( path + "такая папка уже существует");
-            Log.i("CreateDir","App dir already exists");
+        } else {
+            //   SendMessage( path + "такая папка уже существует");
+            Log.i("CreateDir", "App dir already exists");
         }
 
-       // SendMessage("Проверяем папку на запись файла");
+        // SendMessage("Проверяем папку на запись файла");
 
         File file = new File(path + File.separator + "file.txt");
 
@@ -1654,21 +1489,17 @@ public class FotoBot extends Application {
 
         OutputStream fo;
 
-        byte[] data1={1,1,1};
+        byte[] data1 = {1, 1, 1};
 //write the bytes in file
-        if(file.exists())
-        {
+        if (file.exists()) {
             try {
                 fo = new FileOutputStream(file);
                 fo.write(data1);
                 fo.close();
-           //     SendMessage("Файл " + file + " записан");
 //deleting the file
                 file.delete();
-          //      SendMessage("Файл удален");
 
                 work_dir = path;
-
 
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
@@ -1683,7 +1514,7 @@ public class FotoBot extends Application {
 
     }
 
-    public String sms_commands_list(){
+    public String sms_commands_list() {
         String list;
 
         list = getResources().getString(R.string.sms_cmd_list);

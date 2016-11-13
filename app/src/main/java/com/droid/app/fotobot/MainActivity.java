@@ -1768,7 +1768,7 @@ Button startButton;
      */
     public void help(View v) {
         final FotoBot fb = (FotoBot) getApplicationContext();
-        fb.Show_Help = true;
+     //   fb.Show_Help = true;
 
 
         InputStream is = getResources().openRawResource(R.raw.file);
