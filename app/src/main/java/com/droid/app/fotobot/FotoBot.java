@@ -227,6 +227,7 @@ public class FotoBot extends Application {
     public String sms_incoming_passwd = "";
     public Boolean sms_status = false;
     public Boolean sms_net_status = false;
+    public Boolean sms_email_status = false;
     public Boolean sms_media_status = false;
     public Boolean sms_help = false;
     public Boolean sms_update_db = false;
@@ -718,39 +719,43 @@ public class FotoBot extends Application {
                                         "Bat: " + battery_level + "%\n" +
                                         "Upd: " + Photo_Frequency + "sec\n" +
                                         "Flash: " + Use_Flash + "\n" +
-                                        "Net: " + network + "\n" +
-                                        "Ch: " + Network_Channel + "\n" +
-                                        "Mail: " + EMail_Recepient  + "\n" +
-                                        "FMail: " + EMail_Sender   + "\n" +
-                                        "FMailP: " + EMail_Sender_Password
+                                        "Net: " + network
                                 );
                                 sms_status = false;
                             }
 
                             if (sms_net_status && sms_incoming_passwd.equals(sms_passwd)) {
                                 sendSMS(sms_sender_num,
-                                        "Bat: " + battery_level + "%\n" +
-                                                "Upd: " + Photo_Frequency + "sec\n" +
-                                                "Flash: " + Use_Flash + "\n" +
                                                 "Net: " + network + "\n" +
                                                 "Ch: " + Network_Channel + "\n" +
-                                                "Mail: " + EMail_Recepient  + "\n" +
-                                                "FMail: " + EMail_Sender   + "\n" +
-                                                "FMailP: " + EMail_Sender_Password
+                                                "Method: " + Network_Connection_Method + "\n" +
+                                                "Mail: " + EMail_Recepient  + "\n"
+                                             //   "FMail: " + EMail_Sender   + "\n" +
+                                             //   "FMailP: " + EMail_Sender_Password + "\n" +
+                                             //   "SMTPHost: " + SMTP_Host + "\n" +
+                                             //   "SMTPPort: " + SMTP_Port + "\n"
                                 );
                                 sms_net_status = false;
                             }
 
+                            if (sms_email_status && sms_incoming_passwd.equals(sms_passwd)) {
+                                sendSMS(sms_sender_num,
+                                        "Mail: " + EMail_Recepient  + "\n" +
+                                           "FMail: " + EMail_Sender   + "\n" +
+                                           "FMailP: " + EMail_Sender_Password + "\n" +
+                                           "SMTPHost: " + SMTP_Host + "\n" +
+                                           "SMTPPort: " + SMTP_Port + "\n"
+                                );
+                                sms_email_status = false;
+                            }
+
+
                             if (sms_media_status && sms_incoming_passwd.equals(sms_passwd)) {
                                 sendSMS(sms_sender_num,
-                                        "Bat: " + battery_level + "%\n" +
-                                                "Upd: " + Photo_Frequency + "sec\n" +
                                                 "Flash: " + Use_Flash + "\n" +
-                                                "Net: " + network + "\n" +
-                                                "Ch: " + Network_Channel + "\n" +
-                                                "Mail: " + EMail_Recepient  + "\n" +
-                                                "FMail: " + EMail_Sender   + "\n" +
-                                                "FMailP: " + EMail_Sender_Password
+                                                "JPEG: " + JPEG_Compression + "\n" +
+                                                "Fc: " + Use_Fc + "\n" +
+                                                "Bc: " + Use_Bc  + "\n"
                                 );
                                 sms_media_status = false;
                             }
@@ -1394,6 +1399,10 @@ public class FotoBot extends Application {
 
             if (sms_word[0].equals("netstatus")) {
                 sms_net_status = true;
+            }
+
+            if (sms_word[0].equals("emailstatus")) {
+                sms_email_status = true;
             }
 
             if (sms_word[0].equals("mediastatus")) {

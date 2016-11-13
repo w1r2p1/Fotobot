@@ -36,6 +36,7 @@ passwd &lt;passwd&gt;\n
 update &lt;interval sec&gt;\n
 network &lt;on/off&gt;\n
 netchannel &lt;wf/md&gt;\n
+netmethod &lt;1/2&gt;\n
 email &lt;user@mail.ru&gt;\n
 emails &lt;fotobot@gmail.com&gt;\n
 emailsp &lt;pass_W_d&gt;\n
@@ -48,6 +49,9 @@ log &lt;on/off&gt;\n
 jpg &lt;compression&gt;\n
 flash &lt;on/off&gt;\n
 status\n
+netstatus\n
+emailstatus\n
+mediastatus\n
 help\n
     </string>
 
