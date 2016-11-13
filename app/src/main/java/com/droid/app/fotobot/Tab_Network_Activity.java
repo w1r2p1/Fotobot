@@ -386,7 +386,7 @@ public class Tab_Network_Activity extends Activity {
 // Адрес сервера для проверки связи
         editText_Check_Web_Page = new EditText(this);
         editText_Check_Web_Page.setSingleLine(true);
-        editText_Check_Web_Page.setText(fb.check_web_page);
+        editText_Check_Web_Page.setText("http://www.android.com");
         editText_Check_Web_Page.setTextColor(Color.rgb(50, 100, 150));
         lpView_Check_Web_Page_m.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, editText_Check_Web_Page.getId());
         editText_Check_Web_Page.setLayoutParams(lpView_Check_Web_Page_m);

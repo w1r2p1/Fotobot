@@ -52,7 +52,6 @@ status\n
 netstatus\n
 emailstatus\n
 mediastatus\n
-help\n
     </string>
 
     <string name="network">Network</string>

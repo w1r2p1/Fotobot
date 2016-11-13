@@ -1261,10 +1261,6 @@ public class FotoBot extends Application {
                 sms_media_status = true;
             }
 
-            if (sms_word[0].equals("help")) {
-                sms_help = true;
-            }
-
             if (sms_word[0].equals("update")) {
                 if (sms_word.length > 1) {
                     Photo_Frequency = Integer.parseInt(sms_word[1]);
