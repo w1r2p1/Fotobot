@@ -11,6 +11,8 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.hardware.Camera;
 import android.media.AudioManager;
+import android.media.CamcorderProfile;
+import android.media.MediaRecorder;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -81,6 +83,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     boolean preview_stopped = true;
     AudioManager mgr = null;
+
+    /*
     Camera.PictureCallback mPicture = new Camera.PictureCallback() {
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
@@ -102,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
         }
     };
-
+*/
     /**
      * Печатает сообщения на экран телефона, нужен для того чтобы получать данные из потока в котором работает FotoBot
      */
@@ -758,7 +762,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             if (fb.network && !(fb.Method1_activated)) {
                                 if (fb.Network_Connection_Method.contains("Method 1")) {
                                     if (android.os.Build.VERSION.SDK_INT <= 21) {
-
                                         fb.MakeInternetConnection();
                                     }
                                     fb.Method1_activated = true;
@@ -769,7 +772,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             if (!(fb.network) && fb.Method1_activated) {
                                 if (fb.Network_Connection_Method.contains("Method 1")) {
                                     if (android.os.Build.VERSION.SDK_INT <= 21) {
-
                                         fb.CloseInternetConnection();
                                     }
                                     fb.Method1_activated = false;
@@ -785,14 +787,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             log_file = new File((fb.work_dir + "/logfile.txt"));
 
                             if (log_file.isFile()) {
-
                                 log_file.delete();
                                 Log.d(LOG_TAG, "logcat file has been deleted");
                             }
 
-// подготавливаем камеру для фото
                             fb.Image_Index = i;
-
 
                             fb.batteryLevel();
 
@@ -804,7 +803,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 
                             if (fb.back_camera && fb.Use_Bc) {
+
                                 fb.SendMessage(getResources().getString(R.string.Back_Camera) + ". " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index);
+
                                 if (fb.getstatus() == 3) {
                                     if (mCamera != null) {
                                         mCamera.stopPreview();
@@ -812,6 +813,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                         mCamera.release();
                                         mCamera = null;
                                     }
+
                                     fb.thread_stopped = true;
                                     fb.debug_message = true;
                                     fb.SendMessage(h, getResources().getString(R.string.stop_message));
@@ -836,12 +838,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 // start and set camera parameters
 
                                 if (mCamera == null) {
-
                                     try {
                                         mCamera = Camera.open(fb.bcId);
                                     } catch (Exception e) {
                                         fb.SendMessage("Problem with camera initialization in main cycle.");
-
                                     }
                                 }
 
@@ -850,12 +850,34 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                         mCamera.stopPreview();
                                     } catch (Exception e) {
                                         fb.SendMessage("Preview couldn't be stopped in the main cycle.");
-
                                     }
                                     preview_stopped = true;
                                 }
 
                                 Camera.Parameters parameters = mCamera.getParameters();
+
+// get Camera parameters
+                                Camera.Parameters params = mCamera.getParameters();
+// set the focus mode
+                                params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+// set Camera parameters
+                                mCamera.setParameters(params);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                                 if (fb.Use_Flash) {
                                     parameters.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
@@ -874,6 +896,28 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 }
 
                                 fb.fbpause(h, 3);
+
+
+
+                       //         fb.fbpause(h, 3);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                                 if (preview_stopped) {
 
@@ -898,22 +942,119 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                                         preview_stopped = false;
                                     } catch (Exception e) {
-                                        fb.SendMessage("Problem with preview starting after camera initialization in the main cycle.");
+                                        fb.SendMessage("Problem with preview starting after camera initialization in the main cycle.\n\n\n" + e.toString());
 
                                     }
                                 }
 
-                                fb.fbpause(h, 3);
 
 
+
+
+                                MediaRecorder mMediaRecorder = new MediaRecorder();
+
+                                mCamera.unlock();
+
+                                mMediaRecorder.setCamera(mCamera);
+
+                                mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
+                                mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
+
+                                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_LOW));
+
+                                mMediaRecorder.setOutputFile(fb.work_dir + "/" + df.format(new Date()) + ".mp4");
+
+                                mMediaRecorder.setPreviewDisplay(fb.holder.getSurface());
+
+
+
+
+
+
+
+
+                               mMediaRecorder.setMaxDuration(15000);
+
+                                try {
+                                    mMediaRecorder.prepare();
+                                } catch (IllegalStateException e) {
+
+                                    if (mMediaRecorder != null) {
+                                        mMediaRecorder.reset();   // clear recorder configuration
+                                        mMediaRecorder.release(); // release the recorder object
+                                        mMediaRecorder = null;
+                                    }
+
+                                    fb.SendMessage(e.toString());
+
+
+                                } catch (IOException e) {
+
+                                    if (mMediaRecorder != null) {
+                                        mMediaRecorder.reset();   // clear recorder configuration
+                                        mMediaRecorder.release(); // release the recorder object
+                                        mMediaRecorder = null;
+                                    }
+                                    fb.SendMessage(e.toString());
+
+                                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /* No Photo just Video
                                 try {
                                     mCamera.takePicture(null, null, mCall);
                                     fb.success_message = true;
                                     fb.SendMessage(getResources().getString(R.string.photo_has_been_taken));
                                 } catch (Exception e) {
                                     fb.SendMessage("Problem with picture taking.");
-
                                 }
+*/
+
+                               try
+                                {
+                                  //  mCamera.unlock();
+                                    mMediaRecorder.start();
+                                    fb.fbpause(h,19);
+                                    mMediaRecorder.stop();
+                                } catch (Exception e)
+                                {
+                                    fb.SendMessage(e.toString());
+                                }
+
 
 
                                 fb.fbpause(h, fb.process_delay);
@@ -991,16 +1132,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 // start and set camera parameters
 
                                 if (mCamera == null) {
-
-                                    //   fb.SendMessage("Camera is not initialized.");
-
                                     try {
                                         mCamera = Camera.open(fb.fcId);
-//                                        fb.SendMessage("Front camera has been initialized for parameters setting.");
                                     } catch (Exception e) {
                                         fb.error_message = true;
                                         fb.SendMessage("Problem with camera initialization in main cycle.");
-
                                     }
                                 }
 
@@ -1059,11 +1195,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                                 }
 
-
                                 fb.fbpause(h, fb.process_delay);
 
-
-                                //releaseCamera();
                                 mCamera.release();
                                 mCamera = null;
 
@@ -1145,8 +1278,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     } else {
                                         fb.error_message = true;
                                         fb.SendMessage("Проблема с удалением фото: " + fb.Image_Name);
-//                                    fb.SendMessage("Попробуйте поменять разрешение для фото в настройках");
-
                                     }
                                 }
                                 if (fb.Use_Fc) {
@@ -1157,8 +1288,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     } else {
                                         fb.error_message = true;
                                         fb.SendMessage("Проблема с удалением фото: " + fb.fc_Image_Name);
-//                                    fb.SendMessage("Попробуйте поменять разрешение для фото в настройках");
-
                                     }
                                 }
 
@@ -1254,8 +1383,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         }
 
         fb.holder = holder;
-        // The Surface has been created, acquire the camera and tell it where
-        // to draw the preview.
+
         mUnexpectedTerminationHelper.init();
 
 // adopted for ffc
@@ -1356,7 +1484,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         final FotoBot fb = (FotoBot) getApplicationContext();
 
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
-        //LogWidget.setBackgroundColor(Color.rgb(34, 58, 95));
+
         LogWidget.setBackgroundColor(Color.rgb(51, 51, 51));
 
         tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
