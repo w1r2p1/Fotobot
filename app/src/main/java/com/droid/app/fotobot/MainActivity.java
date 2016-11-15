@@ -839,8 +839,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                                 if (mCamera == null) {
                                     try {
-//                                        mCamera = Camera.open(fb.bcId);
-                                        mCamera = Camera.open(fb.fcId);
+                                        mCamera = Camera.open(fb.bcId);
+                                        //mCamera = Camera.open(fb.fcId);
                                     } catch (Exception e) {
                                         fb.SendMessage("Problem with camera initialization in main cycle.");
                                     }
@@ -972,17 +972,20 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     }
 
                                 });
+                                mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
 
                                 mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
+                                //mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
                                 mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
 
-                                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_QVGA));
+                          //      mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_QVGA));
+                                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
 
                                 mMediaRecorder.setOutputFile(fb.work_dir + "/" + df.format(new Date()) + ".mp4");
 
                                 mMediaRecorder.setPreviewDisplay(fb.holder.getSurface());
 
-                                mMediaRecorder.setMaxDuration(28000);
+                                mMediaRecorder.setMaxDuration(5000);
 
                                 try {
                                     mMediaRecorder.prepare();
@@ -1059,7 +1062,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     mMediaRecorder.start();
 
                                     try {
-                                        TimeUnit.SECONDS.sleep(35);
+                                        TimeUnit.SECONDS.sleep(9);
                                     } catch (InterruptedException e) {
                                         e.printStackTrace();
                                     }
