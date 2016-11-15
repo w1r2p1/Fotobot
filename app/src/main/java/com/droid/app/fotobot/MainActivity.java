@@ -949,8 +949,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 }
 
 
+                               /* Camera.Parameters mParameters = mCamera.getParameters();
+                                if ( mParameters == null ) {
+                                    fb.SendMessage("Error reading camera parameters");
+                                    return;
+                                }
 
+                                mParameters.set( "cam_mode", 1 ); */
 
+                                mCamera.stopPreview();
 
                                 MediaRecorder mMediaRecorder = new MediaRecorder();
 
@@ -966,26 +973,42 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                         if (what == MediaRecorder.MEDIA_RECORDER_INFO_MAX_DURATION_REACHED)
                                         {
                                             fb.SendMessage("MEDIA_RECORDER_INFO_MAX_DURATION_REACHED");
-                                            //mediaRecorder.stop();
+                                        //    mediaRecorder.stop();
                                         }
 
                                     }
 
                                 });
-                                mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+                            //    mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
 
                                 mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
                                 //mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
                                 mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
 
                           //      mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_QVGA));
+
+                          /*      CamcorderProfile profile = CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH);
+                                fb.SendMessage("QUALITY_HIGH");
+                                fb.SendMessage(profile.toString());
+                                fb.SendMessage("------------------");
+
+                                profile = CamcorderProfile.get(CamcorderProfile.QUALITY_LOW);
+                                fb.SendMessage("QUALITY_LOW");
+                                fb.SendMessage(profile.toString());
+                                fb.SendMessage("------------------");
+
+                                profile = CamcorderProfile.get(CamcorderProfile.QUALITY_CIF);
+                                fb.SendMessage("QUALITY_CIF)");
+                                fb.SendMessage(profile.toString());
+                                fb.SendMessage("------------------");
+*/
                                 mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
 
                                 mMediaRecorder.setOutputFile(fb.work_dir + "/" + df.format(new Date()) + ".mp4");
 
                                 mMediaRecorder.setPreviewDisplay(fb.holder.getSurface());
 
-                                mMediaRecorder.setMaxDuration(5000);
+                                mMediaRecorder.setMaxDuration(15000);
 
                                 try {
                                     mMediaRecorder.prepare();
@@ -1062,20 +1085,28 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     mMediaRecorder.start();
 
                                     try {
-                                        TimeUnit.SECONDS.sleep(9);
+                                        TimeUnit.SECONDS.sleep(20);
                                     } catch (InterruptedException e) {
                                         e.printStackTrace();
                                     }
 
-                                    mMediaRecorder.stop();
-                                    fb.SendMessage("Запись видео остановлена");
+
 
                                 } catch (Exception e)
                                 {
                                     fb.SendMessage(e.toString());
                                 }
 
-
+                                try {
+                                    mMediaRecorder.stop();
+                                    fb.SendMessage("Запись видео остановлена");
+                                    mMediaRecorder.reset();   // clear recorder configuration
+                                    mMediaRecorder.release(); // release the recorder object
+                                    mMediaRecorder = null;
+                                } catch (Exception e)
+                                {
+                                    fb.SendMessage(e.toString());
+                                }
 
                                 fb.fbpause(h, fb.process_delay);
 
