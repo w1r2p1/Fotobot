@@ -957,6 +957,21 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                                 mMediaRecorder.setCamera(mCamera);
 
+                                mMediaRecorder.setOnInfoListener(new MediaRecorder.OnInfoListener() {
+                                    @Override
+
+                                    public void onInfo(MediaRecorder mediaRecorder, int what, int extra)
+                                    {
+                                        if (what == MediaRecorder.MEDIA_RECORDER_INFO_MAX_DURATION_REACHED)
+                                        {
+                                            fb.SendMessage("MEDIA_RECORDER_INFO_MAX_DURATION_REACHED");
+                                            //mediaRecorder.stop();
+                                        }
+
+                                    }
+
+                                });
+
                                 mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
                                 mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
 
@@ -966,14 +981,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                                 mMediaRecorder.setPreviewDisplay(fb.holder.getSurface());
 
-
-
-
-
-
-
-
-                               mMediaRecorder.setMaxDuration(15000);
+                                mMediaRecorder.setMaxDuration(15000);
 
                                 try {
                                     mMediaRecorder.prepare();
@@ -1048,8 +1056,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 {
                                   //  mCamera.unlock();
                                     mMediaRecorder.start();
-                                    fb.fbpause(h,19);
+
+                                    try {
+                                        TimeUnit.SECONDS.sleep(19);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+
                                     mMediaRecorder.stop();
+
                                 } catch (Exception e)
                                 {
                                     fb.SendMessage(e.toString());
@@ -1313,6 +1328,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 break;
         }
     }
+
+
 
     public void stopFotobot(View v) {
         h = new Handler(hc);
