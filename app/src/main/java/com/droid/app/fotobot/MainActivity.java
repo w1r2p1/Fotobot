@@ -839,7 +839,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                                 if (mCamera == null) {
                                     try {
-                                        mCamera = Camera.open(fb.bcId);
+//                                        mCamera = Camera.open(fb.bcId);
+                                        mCamera = Camera.open(fb.fcId);
                                     } catch (Exception e) {
                                         fb.SendMessage("Problem with camera initialization in main cycle.");
                                     }
@@ -858,8 +859,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 // get Camera parameters
                                 Camera.Parameters params = mCamera.getParameters();
-// set the focus mode
-                                params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+// set the focus mode (for bc camera)
+//                                params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
 // set Camera parameters
                                 mCamera.setParameters(params);
 
@@ -975,13 +976,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
                                 mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
 
-                                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_LOW));
+                                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_QVGA));
 
                                 mMediaRecorder.setOutputFile(fb.work_dir + "/" + df.format(new Date()) + ".mp4");
 
                                 mMediaRecorder.setPreviewDisplay(fb.holder.getSurface());
 
-                                mMediaRecorder.setMaxDuration(15000);
+                                mMediaRecorder.setMaxDuration(28000);
 
                                 try {
                                     mMediaRecorder.prepare();
@@ -1058,12 +1059,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     mMediaRecorder.start();
 
                                     try {
-                                        TimeUnit.SECONDS.sleep(19);
+                                        TimeUnit.SECONDS.sleep(35);
                                     } catch (InterruptedException e) {
                                         e.printStackTrace();
                                     }
 
                                     mMediaRecorder.stop();
+                                    fb.SendMessage("Запись видео остановлена");
 
                                 } catch (Exception e)
                                 {
