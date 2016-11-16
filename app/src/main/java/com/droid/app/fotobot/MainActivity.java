@@ -1518,6 +1518,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         mMediaRecorder.setCamera(mCamera);
 
+        buildVideoName(cameraType);
+
         mMediaRecorder.setOnInfoListener(new MediaRecorder.OnInfoListener() {
             @Override
 
@@ -1542,9 +1544,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 
         if(cameraType.equals("Bc")) {
-            mMediaRecorder.setOutputFile(fb.bc_Image_Name_Full_Path);
+            mMediaRecorder.setOutputFile(fb.bc_Video_Name_Full_Path);
         } else {
-            mMediaRecorder.setOutputFile(fb.fc_Image_Name_Full_Path);
+            mMediaRecorder.setOutputFile(fb.fc_Video_Name_Full_Path);
         }
 
         mMediaRecorder.setPreviewDisplay(fb.holder.getSurface());
