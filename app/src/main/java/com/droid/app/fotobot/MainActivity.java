@@ -497,32 +497,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
         getAvailableVideoProfiles();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         Button button = (Button) findViewById(R.id.log);
@@ -777,13 +752,22 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             mgr.setRingerMode(AudioManager.RINGER_MODE_SILENT);
                         }
 
+                        int i = 0; //Image counter
+//                        for (int i = 1; i <= 1000000000; i++) {
+                        while (true) {
 
-                        for (int i = 1; i <= 1000000000; i++) {
+// заполняем список активных процессов
+                            getActiveProcesses();
 
-                            List<ActivityManager.RunningAppProcessInfo> procInfos = actvityManager.getRunningAppProcesses();
+// не было ли команды на остановку Fotobot'а
+                            if (fb.getstatus() == 3) {
+                                if (stopFotobot())
+                                {
+                                    return;
+                                } else {
+                                    fb.SendMessage("Проблема с остановкой Fotobot'а");
+                                }
 
-                            for (int idx = 0; idx < procInfos.size(); idx++) {
-                                fb.Top = fb.Top + procInfos.get(idx).processName + "\n";
                             }
 
 // method1 соединяемся с сетью
@@ -810,43 +794,25 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             fb.LoadSettings();
 
 // на каждом шаге удаляем логфайл, чтобы не забить память
-                            File log_file = null;
+                            deleteLogFile();
 
-                            log_file = new File((fb.work_dir + "/logfile.txt"));
+// счетчик кадров
+                            fb.Image_Index = i + 1;
 
-                            if (log_file.isFile()) {
-                                log_file.delete();
-                                Log.d(LOG_TAG, "logcat file has been deleted");
-                            }
-
-                            fb.Image_Index = i;
-
+// на каждом шаге измеряем уровень заряда батареии
                             fb.batteryLevel();
 
+// соединяемся с сетью если Android < 5
                             if (fb.network) {
                                 if ((fb.Network_Connection_Method.contains("Method 2")) && (Build.VERSION.SDK_INT <= 21)) {
                                     fb.MakeInternetConnection();
                                 }
                             }
 
-
+// делаем фото камерой на задней панели телефона
                             if (fb.back_camera && fb.Use_Bc) {
 
                                 fb.SendMessage(getResources().getString(R.string.Back_Camera) + ". " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index);
-
-                                if (fb.getstatus() == 3) {
-                                    if (mCamera != null) {
-                                        mCamera.stopPreview();
-                                        mCamera.setPreviewCallback(null);
-                                        mCamera.release();
-                                        mCamera = null;
-                                    }
-
-                                    fb.thread_stopped = true;
-                                    fb.debug_message = true;
-                                    fb.SendMessage(h, getResources().getString(R.string.stop_message));
-                                    return;
-                                }
 
                                 DateFormat df = new SimpleDateFormat("MM-dd-yy_HH-mm-ss-SSS");
                                 fb.Image_Name = df.format(new Date()) + ".jpg";
@@ -893,21 +859,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 mCamera.setParameters(params);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                                 if (fb.Use_Flash) {
                                     parameters.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
                                 }
@@ -927,25 +878,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 fb.fbpause(h, 3);
 
 
-
-                       //         fb.fbpause(h, 3);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                                //         fb.fbpause(h, 3);
 
 
                                 if (preview_stopped) {
@@ -988,33 +921,29 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 mMediaRecorder.setOnInfoListener(new MediaRecorder.OnInfoListener() {
                                     @Override
 
-                                    public void onInfo(MediaRecorder mediaRecorder, int what, int extra)
-                                    {
-                                        if (what == MediaRecorder.MEDIA_RECORDER_INFO_MAX_DURATION_REACHED)
-                                        {
+                                    public void onInfo(MediaRecorder mediaRecorder, int what, int extra) {
+                                        if (what == MediaRecorder.MEDIA_RECORDER_INFO_MAX_DURATION_REACHED) {
                                             fb.SendMessage("MEDIA_RECORDER_INFO_MAX_DURATION_REACHED");
-                                        //    mediaRecorder.stop();
+                                            //    mediaRecorder.stop();
                                         }
 
                                     }
 
                                 });
-                            //    mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+                                //    mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
 
                                 mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
                                 //mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
                                 mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
 
-                          //      mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_QVGA));
-
+                                //      mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_QVGA));
 
 
 //                                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
 
                                 if (fb.video_profile.contains("QUALITY_QVGA")) {
                                     mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
-                                } else
-                                {
+                                } else {
                                     mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_LOW));
                                 }
 
@@ -1094,9 +1023,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 }
 */
 
-                               try
-                                {
-                                  //  mCamera.unlock();
+                                try {
+                                    //  mCamera.unlock();
                                     mMediaRecorder.start();
 
                                     try {
@@ -1106,9 +1034,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     }
 
 
-
-                                } catch (Exception e)
-                                {
+                                } catch (Exception e) {
                                     fb.SendMessage(e.toString());
                                 }
 
@@ -1118,8 +1044,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     mMediaRecorder.reset();   // clear recorder configuration
                                     mMediaRecorder.release(); // release the recorder object
                                     mMediaRecorder = null;
-                                } catch (Exception e)
-                                {
+                                } catch (Exception e) {
                                     fb.SendMessage(e.toString());
                                 }
 
@@ -1379,7 +1304,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 break;
         }
     }
-
 
 
     public void stopFotobot(View v) {
@@ -1787,7 +1711,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     }
 
 
-    public void getAvailableVideoProfiles(){
+    public void getAvailableVideoProfiles() {
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
@@ -1797,8 +1721,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             profile = CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH);
             fb.video_profile.add("QUALITY_HIGH");
             fb.SendMessage("Можно использовать профиль QUALITY_HIGH");
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             fb.SendMessage("Камера не поддерживает профиль QUALITY_HIGH");
         }
 
@@ -1806,8 +1729,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             profile = CamcorderProfile.get(CamcorderProfile.QUALITY_LOW);
             fb.video_profile.add("QUALITY_LOW");
             fb.SendMessage("Можно использовать профиль QUALITY_LOW");
-            } catch (Exception e)
-        {
+        } catch (Exception e) {
             fb.SendMessage("Камера не поддерживает профиль QUALITY_LOW");
         }
 
@@ -1815,8 +1737,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             profile = CamcorderProfile.get(CamcorderProfile.QUALITY_CIF);
             fb.video_profile.add("QUALITY_CIF");
             fb.SendMessage("Можно использовать профиль QUALITY_CIF)");
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             fb.SendMessage("Камера не поддерживает профиль QUALITY_CIF");
         }
 
@@ -1824,8 +1745,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             profile = CamcorderProfile.get(CamcorderProfile.QUALITY_QCIF);
             fb.video_profile.add("QUALITY_QCIF");
             fb.SendMessage("Можно использовать профиль QUALITY_QCIF)");
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             fb.SendMessage("Камера не поддерживает профиль QUALITY_QCIF");
         }
 
@@ -1833,11 +1753,50 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             profile = CamcorderProfile.get(CamcorderProfile.QUALITY_QVGA);
             fb.video_profile.add("QUALITY_QVGA");
             fb.SendMessage("Можно использовать профиль QUALITY_QVGA)");
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             fb.SendMessage("Камера не поддерживает профиль QUALITY_QVGA");
         }
 
+    }
+
+    public void getActiveProcesses() {
+        final FotoBot fb = (FotoBot) getApplicationContext();
+
+        List<ActivityManager.RunningAppProcessInfo> procInfos = actvityManager.getRunningAppProcesses();
+
+        for (int idx = 0; idx < procInfos.size(); idx++) {
+            fb.Top = fb.Top + procInfos.get(idx).processName + "\n";
+        }
+    }
+
+    public void deleteLogFile() {
+        final FotoBot fb = (FotoBot) getApplicationContext();
+
+        File log_file = null;
+
+        log_file = new File((fb.work_dir + "/logfile.txt"));
+
+        if (log_file.isFile()) {
+            log_file.delete();
+            Log.d(LOG_TAG, "logcat file has been deleted");
+        }
+    }
+
+    public boolean stopFotobot()
+    {
+        final FotoBot fb = (FotoBot) getApplicationContext();
+
+        if (mCamera != null) {
+            mCamera.stopPreview();
+            mCamera.setPreviewCallback(null);
+            mCamera.release();
+            mCamera = null;
+        }
+
+        fb.thread_stopped = true;
+        fb.debug_message = true;
+        fb.SendMessage(h, getResources().getString(R.string.stop_message));
+        return true;
     }
 
 }
