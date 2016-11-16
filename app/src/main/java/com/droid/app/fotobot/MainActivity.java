@@ -761,8 +761,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 // не было ли команды на остановку Fotobot'а
                             if (fb.getstatus() == 3) {
-                                if (stopFotobot())
-                                {
+                                if (stopFotobot()) {
                                     return;
                                 } else {
                                     fb.SendMessage("Проблема с остановкой Fotobot'а");
@@ -809,396 +808,22 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 }
                             }
 
-// делаем фото камерой на задней панели телефона
-                            if (fb.back_camera && fb.Use_Bc) {
-
-                                fb.SendMessage(getResources().getString(R.string.Back_Camera) + ". " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index);
-
-                                DateFormat df = new SimpleDateFormat("MM-dd-yy_HH-mm-ss-SSS");
-                                fb.Image_Name = df.format(new Date()) + ".jpg";
-                                fb.Image_Name_Full_Path = fb.work_dir + "/" + fb.Image_Name;
-
-                                fb.bc_Image_Name = fb.Image_Name;
-                                fb.bc_Image_Name_Full_Path = fb.Image_Name_Full_Path;
-
-                                fb.LoadSettings();
-
-                                // Camera.Parameters params;
-                                String string = fb.Image_Size;
-                                String[] parts = string.split("x");
-                                String width = parts[0];
-                                String height = parts[1];
-
-// start and set camera parameters
-
-                                if (mCamera == null) {
-                                    try {
-                                        mCamera = Camera.open(fb.bcId);
-                                        //mCamera = Camera.open(fb.fcId);
-                                    } catch (Exception e) {
-                                        fb.SendMessage("Problem with camera initialization in main cycle.");
-                                    }
-                                }
-
-                                if (!preview_stopped) {
-                                    try {
-                                        mCamera.stopPreview();
-                                    } catch (Exception e) {
-                                        fb.SendMessage("Preview couldn't be stopped in the main cycle.");
-                                    }
-                                    preview_stopped = true;
-                                }
-
-                                Camera.Parameters parameters = mCamera.getParameters();
-
-// get Camera parameters
-                                Camera.Parameters params = mCamera.getParameters();
-// set the focus mode (for bc camera)
-//                                params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
-// set Camera parameters
-                                mCamera.setParameters(params);
-
-
-                                if (fb.Use_Flash) {
-                                    parameters.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
-                                }
-
-                                if (fb.Photo_Post_Processing_Method.contains("Software")) {
-                                    parameters.setPictureSize(Integer.parseInt(width), Integer.parseInt(height));
-                                }
-
-                                try {
-                                    mCamera.setParameters(parameters);
-                                } catch (Exception e) {
-                                    fb.SendMessage("Camera parameters have not been changed in the main cycle.");
-
-                                    e.printStackTrace();
-                                }
-
-                                fb.fbpause(h, 3);
-
-
-                                //         fb.fbpause(h, 3);
-
-
-                                if (preview_stopped) {
-
-                                    try {
-                                        mCamera.setPreviewDisplay(fb.holder);
-                                        mCamera.startPreview();
-
-                                        if (fb.autofocus && fb.use_autofocus) {
-
-                                            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
-
-                                            mCamera.autoFocus(new Camera.AutoFocusCallback() {
-
-                                                public void onAutoFocus(boolean success, Camera camera) {
-
-                                                }
-                                            });
-
-                                            fb.fbpause(h, fb.time_for_focusing);
-
-                                        }
-
-                                        preview_stopped = false;
-                                    } catch (Exception e) {
-                                        fb.SendMessage("Problem with preview starting after camera initialization in the main cycle.\n\n\n" + e.toString());
-
-                                    }
-                                }
-
-
-                                mCamera.stopPreview();
-
-                                MediaRecorder mMediaRecorder = new MediaRecorder();
-
-                                mCamera.unlock();
-
-                                mMediaRecorder.setCamera(mCamera);
-
-                                mMediaRecorder.setOnInfoListener(new MediaRecorder.OnInfoListener() {
-                                    @Override
-
-                                    public void onInfo(MediaRecorder mediaRecorder, int what, int extra) {
-                                        if (what == MediaRecorder.MEDIA_RECORDER_INFO_MAX_DURATION_REACHED) {
-                                            fb.SendMessage("MEDIA_RECORDER_INFO_MAX_DURATION_REACHED");
-                                            //    mediaRecorder.stop();
-                                        }
-
-                                    }
-
-                                });
-                                //    mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-
-                                mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
-                                //mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-                                mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
-
-                                //      mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_QVGA));
-
-
-//                                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
-
-                                if (fb.video_profile.contains("QUALITY_QVGA")) {
-                                    mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
-                                } else {
-                                    mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_LOW));
-                                }
-
-
-                                mMediaRecorder.setOutputFile(fb.work_dir + "/" + df.format(new Date()) + ".mp4");
-
-                                mMediaRecorder.setPreviewDisplay(fb.holder.getSurface());
-
-                                mMediaRecorder.setMaxDuration(15000);
-
-                                try {
-                                    mMediaRecorder.prepare();
-                                } catch (IllegalStateException e) {
-
-                                    if (mMediaRecorder != null) {
-                                        mMediaRecorder.reset();   // clear recorder configuration
-                                        mMediaRecorder.release(); // release the recorder object
-                                        mMediaRecorder = null;
-                                    }
-
-                                    fb.SendMessage(e.toString());
-
-
-                                } catch (IOException e) {
-
-                                    if (mMediaRecorder != null) {
-                                        mMediaRecorder.reset();   // clear recorder configuration
-                                        mMediaRecorder.release(); // release the recorder object
-                                        mMediaRecorder = null;
-                                    }
-                                    fb.SendMessage(e.toString());
-
-                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- /* No Photo just Video
-                                try {
-                                    mCamera.takePicture(null, null, mCall);
-                                    fb.success_message = true;
-                                    fb.SendMessage(getResources().getString(R.string.photo_has_been_taken));
-                                } catch (Exception e) {
-                                    fb.SendMessage("Problem with picture taking.");
-                                }
-*/
-
-                                try {
-                                    //  mCamera.unlock();
-                                    mMediaRecorder.start();
-
-                                    try {
-                                        TimeUnit.SECONDS.sleep(20);
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                    }
-
-
-                                } catch (Exception e) {
-                                    fb.SendMessage(e.toString());
-                                }
-
-                                try {
-                                    mMediaRecorder.stop();
-                                    fb.SendMessage("Запись видео остановлена");
-                                    mMediaRecorder.reset();   // clear recorder configuration
-                                    mMediaRecorder.release(); // release the recorder object
-                                    mMediaRecorder = null;
-                                } catch (Exception e) {
-                                    fb.SendMessage(e.toString());
-                                }
-
-                                fb.fbpause(h, fb.process_delay);
-
-                                if (fb.Use_Flash) {
-                                    try {
-                                        mCamera.stopPreview();
-                                        preview_stopped = true;
-                                        fb.fbpause(h, 1);
-                                    } catch (Exception e) {
-                                        fb.SendMessage("FLASH OFF: problem with stopping of preview.");
-
-                                    }
-
-                                    parameters = mCamera.getParameters();
-
-                                    fb.fbpause(h, fb.process_delay);
-
-                                    parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-
-                                    try {
-                                        mCamera.setParameters(parameters);
-                                    } catch (Exception e) {
-                                        fb.SendMessage("setParameters error");
-
-                                    }
-
-                                }
-
-                                mCamera.release();
-                                mCamera = null;
-
+// делаем фото и видео камерой на задней панели телефона
+                            if (fb.back_camera && fb.Use_Bc)
+                            {
+                                useCamera("Bc");
                             }
 
-                            fb.fbpause(h, 5);
+                                fb.fbpause(h, 5);
 
-                            if (fb.front_camera && fb.Use_Fc) {
-
-                                if (fb.getstatus() == 3) {
-                                    if (mCamera != null) {
-                                        mCamera.stopPreview();
-                                        mCamera.setPreviewCallback(null);
-                                        mCamera.release();
-                                        mCamera = null;
-                                    }
-                                    fb.thread_stopped = true;
-                                    fb.success_message = true;
-                                    fb.SendMessage(h, getResources().getString(R.string.stop_message));
-                                    fb.fbpause(h, 5);
-                                    return;
+                                if (fb.front_camera && fb.Use_Fc) {
+                                    useCamera("Fc");
                                 }
 
-                                fb.SendMessage(getResources().getString(R.string.Front_Camera) + ". " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index);
-
-                                String str1 = null;
-                                String str2 = null;
-
-                                DateFormat df = new SimpleDateFormat("MM-dd-yy_HH-mm-ss-SSS");
-
-                                str1 = fb.Image_Name;
-                                str2 = fb.Image_Name_Full_Path;
-
-                                fb.Image_Name = "fc_" + df.format(new Date()) + ".jpg";
-                                fb.Image_Name_Full_Path = fb.work_dir + "/" + fb.Image_Name;
-
-                                fb.fc_Image_Name = fb.Image_Name;
-                                fb.fc_Image_Name_Full_Path = fb.Image_Name_Full_Path;
-
-                                // Camera.Parameters params;
-                                String string = fb.fc_Image_Size;
-                                String[] fc_parts = string.split("x");
-                                String fc_width = fc_parts[0];
-                                String fc_height = fc_parts[1];
-
-// start and set camera parameters
-
-                                if (mCamera == null) {
-                                    try {
-                                        mCamera = Camera.open(fb.fcId);
-                                    } catch (Exception e) {
-                                        fb.error_message = true;
-                                        fb.SendMessage("Problem with camera initialization in main cycle.");
-                                    }
-                                }
-
-                                if (!preview_stopped) {
-                                    try {
-                                        mCamera.stopPreview();
-                                    } catch (Exception e) {
-                                        fb.error_message = true;
-                                        fb.SendMessage("Preview couldn't be stopped in the main cycle.");
-
-                                    }
-                                    preview_stopped = true;
-                                }
-
-                                Camera.Parameters parameters = mCamera.getParameters();
-
-
-                                if (fb.Photo_Post_Processing_Method.contains("Software")) {
-                                    parameters.setPictureSize(Integer.parseInt(fc_width), Integer.parseInt(fc_height));
-                                }
-
-                                try {
-                                    mCamera.setParameters(parameters);
-                                } catch (Exception e) {
-                                    fb.error_message = true;
-                                    fb.SendMessage("Camera parameters have not been changed in the main cycle.");
-
-                                    e.printStackTrace();
-                                }
-
-                                fb.fbpause(h, 3);
-
-                                if (preview_stopped) {
-
-                                    try {
-                                        mCamera.setPreviewDisplay(fb.holder);
-                                        mCamera.startPreview();
-                                        preview_stopped = false;
-                                    } catch (Exception e) {
-                                        fb.error_message = true;
-                                        fb.SendMessage("Problem with preview starting after camera initialization in the main cycle.");
-
-                                    }
-                                }
-
-                                fb.fbpause(h, 3);
-
-
-                                try {
-                                    mCamera.takePicture(null, null, mCall);
-                                    fb.success_message = true;
-                                    fb.SendMessage(getResources().getString(R.string.photo_has_been_taken));
-                                } catch (Exception e) {
-                                    fb.error_message = true;
-                                    fb.SendMessage("Problem with picture taking.");
-
-                                }
-
-                                fb.fbpause(h, fb.process_delay);
-
-                                mCamera.release();
-                                mCamera = null;
-
-// эти строки нельзя передвигать выше, иначе callback не поспевает
-                                fb.Image_Name = str1;
-                                fb.Image_Name_Full_Path = str2;
-
-                            }
-
+// засекаем время для отправки письма
                             long start = System.currentTimeMillis();
 
+// готовим лог к отправке
                             if (fb.attach_log && fb.network) {
 
                                 if (logcat2file()) {
@@ -1210,6 +835,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             }
 
+// отправляем письмо с фото и видео
                             if (fb.network) {
                                 fb.fbpause(h, 1);
 
@@ -1246,42 +872,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             fb.sms_check_file = true;
 
-                            File logcat_file;
-                            logcat_file = new File(fb.work_dir + "/logfile.txt");
 
-                            boolean fileExists = logcat_file.isFile();
-                            // если размер лога превышает 50 kb, то чистим его
-                            if (fileExists) {
-                                if (logcat_file.length() / 1000 > fb.log_size) {
-                                    clearLog();
-                                }
-                            } else {
-                                // fb.SendMessage(h, "logfile.txt doesn't exist.");
-                            }
+// если размер лога превышает 50 kb, то чистим его
+                            cleanLogFile();
 
-                            if (fb.delete_foto) {
-
-                                if (fb.Use_Bc) {
-                                    File imgfile = new File(fb.Image_Name_Full_Path);
-
-                                    if (imgfile.delete()) {
-                                        fb.SendMessage("Файл " + fb.Image_Name + " был удален");
-                                    } else {
-                                        fb.error_message = true;
-                                        fb.SendMessage("Проблема с удалением фото: " + fb.Image_Name);
-                                    }
-                                }
-                                if (fb.Use_Fc) {
-                                    File fc_imgfile = new File(fb.fc_Image_Name_Full_Path);
-
-                                    if (fc_imgfile.delete()) {
-                                        fb.SendMessage("Файл " + fb.fc_Image_Name + " был удален");
-                                    } else {
-                                        fb.error_message = true;
-                                        fb.SendMessage("Проблема с удалением фото: " + fb.fc_Image_Name);
-                                    }
-                                }
-
+// удаляем фото с телефона
+                            if (fb.delete_foto)
+                            {
+                                deletePhoto();
                             }
 
                             fb.fbpause(h, fb.Photo_Frequency);
@@ -1782,8 +1380,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         }
     }
 
-    public boolean stopFotobot()
-    {
+    public boolean stopFotobot() {
         final FotoBot fb = (FotoBot) getApplicationContext();
 
         if (mCamera != null) {
@@ -1798,5 +1395,457 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         fb.SendMessage(h, getResources().getString(R.string.stop_message));
         return true;
     }
+
+    public void useCamera(String cameraType)
+    {
+        final FotoBot fb = (FotoBot) getApplicationContext();
+
+        fb.SendMessage(getResources().getString(R.string.Back_Camera) + ". " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index);
+
+        DateFormat df = new SimpleDateFormat("MM-dd-yy_HH-mm-ss-SSS");
+        fb.Image_Name = df.format(new Date()) + ".jpg";
+        fb.Image_Name_Full_Path = fb.work_dir + "/" + fb.Image_Name;
+
+        fb.bc_Image_Name = fb.Image_Name;
+        fb.bc_Image_Name_Full_Path = fb.Image_Name_Full_Path;
+
+        fb.LoadSettings();
+
+        // Camera.Parameters params;
+        String string = fb.Image_Size;
+        String[] parts = string.split("x");
+        String width = parts[0];
+        String height = parts[1];
+
+// start and set camera parameters
+
+        if (mCamera == null) {
+            try {
+                mCamera = Camera.open(fb.bcId);
+                //mCamera = Camera.open(fb.fcId);
+            } catch (Exception e) {
+                fb.SendMessage("Problem with camera initialization in main cycle.");
+            }
+        }
+
+        if (!preview_stopped) {
+            try {
+                mCamera.stopPreview();
+            } catch (Exception e) {
+                fb.SendMessage("Preview couldn't be stopped in the main cycle.");
+            }
+            preview_stopped = true;
+        }
+
+        Camera.Parameters parameters = mCamera.getParameters();
+
+// get Camera parameters
+        Camera.Parameters params = mCamera.getParameters();
+// set the focus mode (for bc camera)
+//                                params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+// set Camera parameters
+        mCamera.setParameters(params);
+
+
+        if (fb.Use_Flash) {
+            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
+        }
+
+        if (fb.Photo_Post_Processing_Method.contains("Software")) {
+            parameters.setPictureSize(Integer.parseInt(width), Integer.parseInt(height));
+        }
+
+        try {
+            mCamera.setParameters(parameters);
+        } catch (Exception e) {
+            fb.SendMessage("Camera parameters have not been changed in the main cycle.");
+
+            e.printStackTrace();
+        }
+
+        fb.fbpause(h, 3);
+
+
+        //         fb.fbpause(h, 3);
+
+
+        if (preview_stopped) {
+
+            try {
+                mCamera.setPreviewDisplay(fb.holder);
+                mCamera.startPreview();
+
+                if (fb.autofocus && fb.use_autofocus) {
+
+                    parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+
+                    mCamera.autoFocus(new Camera.AutoFocusCallback() {
+
+                        public void onAutoFocus(boolean success, Camera camera) {
+
+                        }
+                    });
+
+                    fb.fbpause(h, fb.time_for_focusing);
+
+                }
+
+                preview_stopped = false;
+            } catch (Exception e) {
+                fb.SendMessage("Problem with preview starting after camera initialization in the main cycle.\n\n\n" + e.toString());
+
+            }
+        }
+
+
+        mCamera.stopPreview();
+
+        MediaRecorder mMediaRecorder = new MediaRecorder();
+
+        mCamera.unlock();
+
+        mMediaRecorder.setCamera(mCamera);
+
+        mMediaRecorder.setOnInfoListener(new MediaRecorder.OnInfoListener() {
+            @Override
+
+            public void onInfo(MediaRecorder mediaRecorder, int what, int extra) {
+                if (what == MediaRecorder.MEDIA_RECORDER_INFO_MAX_DURATION_REACHED) {
+                    fb.SendMessage("MEDIA_RECORDER_INFO_MAX_DURATION_REACHED");
+                    //    mediaRecorder.stop();
+                }
+
+            }
+
+        });
+        //    mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+
+        mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
+        //mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
+
+        //      mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_QVGA));
+
+
+//                                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
+
+        if (fb.video_profile.contains("QUALITY_QVGA")) {
+            mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
+        } else {
+            mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_LOW));
+        }
+
+
+        mMediaRecorder.setOutputFile(fb.work_dir + "/" + df.format(new Date()) + ".mp4");
+
+        mMediaRecorder.setPreviewDisplay(fb.holder.getSurface());
+
+        mMediaRecorder.setMaxDuration(15000);
+
+        try {
+            mMediaRecorder.prepare();
+        } catch (IllegalStateException e) {
+
+            if (mMediaRecorder != null) {
+                mMediaRecorder.reset();   // clear recorder configuration
+                mMediaRecorder.release(); // release the recorder object
+                mMediaRecorder = null;
+            }
+
+            fb.SendMessage(e.toString());
+
+
+        } catch (IOException e) {
+
+            if (mMediaRecorder != null) {
+                mMediaRecorder.reset();   // clear recorder configuration
+                mMediaRecorder.release(); // release the recorder object
+                mMediaRecorder = null;
+            }
+            fb.SendMessage(e.toString());
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /* No Photo just Video
+                                try {
+                                    mCamera.takePicture(null, null, mCall);
+                                    fb.success_message = true;
+                                    fb.SendMessage(getResources().getString(R.string.photo_has_been_taken));
+                                } catch (Exception e) {
+                                    fb.SendMessage("Problem with picture taking.");
+                                }
+*/
+
+        try {
+            //  mCamera.unlock();
+            mMediaRecorder.start();
+
+            try {
+                TimeUnit.SECONDS.sleep(20);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+
+        } catch (Exception e) {
+            fb.SendMessage(e.toString());
+        }
+
+        try {
+            mMediaRecorder.stop();
+            fb.SendMessage("Запись видео остановлена");
+            mMediaRecorder.reset();   // clear recorder configuration
+            mMediaRecorder.release(); // release the recorder object
+            mMediaRecorder = null;
+        } catch (Exception e) {
+            fb.SendMessage(e.toString());
+        }
+
+        fb.fbpause(h, fb.process_delay);
+
+        if (fb.Use_Flash) {
+            try {
+                mCamera.stopPreview();
+                preview_stopped = true;
+                fb.fbpause(h, 1);
+            } catch (Exception e) {
+                fb.SendMessage("FLASH OFF: problem with stopping of preview.");
+
+            }
+
+            parameters = mCamera.getParameters();
+
+            fb.fbpause(h, fb.process_delay);
+
+            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+
+            try {
+                mCamera.setParameters(parameters);
+            } catch (Exception e) {
+                fb.SendMessage("setParameters error");
+
+            }
+
+        }
+
+        mCamera.release();
+        mCamera = null;
+
+
+
+
+        // Fc
+/*        if (fb.getstatus() == 3) {
+            if (mCamera != null) {
+                mCamera.stopPreview();
+                mCamera.setPreviewCallback(null);
+                mCamera.release();
+                mCamera = null;
+            }
+            fb.thread_stopped = true;
+            fb.success_message = true;
+            fb.SendMessage(h, getResources().getString(R.string.stop_message));
+            fb.fbpause(h, 5);
+            return;
+        }
+
+        fb.SendMessage(getResources().getString(R.string.Front_Camera) + ". " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index);
+
+        String str1 = null;
+        String str2 = null;
+
+        DateFormat df = new SimpleDateFormat("MM-dd-yy_HH-mm-ss-SSS");
+
+        str1 = fb.Image_Name;
+        str2 = fb.Image_Name_Full_Path;
+
+        fb.Image_Name = "fc_" + df.format(new Date()) + ".jpg";
+        fb.Image_Name_Full_Path = fb.work_dir + "/" + fb.Image_Name;
+
+        fb.fc_Image_Name = fb.Image_Name;
+        fb.fc_Image_Name_Full_Path = fb.Image_Name_Full_Path;
+
+        // Camera.Parameters params;
+        String string = fb.fc_Image_Size;
+        String[] fc_parts = string.split("x");
+        String fc_width = fc_parts[0];
+        String fc_height = fc_parts[1];
+
+// start and set camera parameters
+
+        if (mCamera == null) {
+            try {
+                mCamera = Camera.open(fb.fcId);
+            } catch (Exception e) {
+                fb.error_message = true;
+                fb.SendMessage("Problem with camera initialization in main cycle.");
+            }
+        }
+
+        if (!preview_stopped) {
+            try {
+                mCamera.stopPreview();
+            } catch (Exception e) {
+                fb.error_message = true;
+                fb.SendMessage("Preview couldn't be stopped in the main cycle.");
+
+            }
+            preview_stopped = true;
+        }
+
+        Camera.Parameters parameters = mCamera.getParameters();
+
+
+        if (fb.Photo_Post_Processing_Method.contains("Software")) {
+            parameters.setPictureSize(Integer.parseInt(fc_width), Integer.parseInt(fc_height));
+        }
+
+        try {
+            mCamera.setParameters(parameters);
+        } catch (Exception e) {
+            fb.error_message = true;
+            fb.SendMessage("Camera parameters have not been changed in the main cycle.");
+
+            e.printStackTrace();
+        }
+
+        fb.fbpause(h, 3);
+
+        if (preview_stopped) {
+
+            try {
+                mCamera.setPreviewDisplay(fb.holder);
+                mCamera.startPreview();
+                preview_stopped = false;
+            } catch (Exception e) {
+                fb.error_message = true;
+                fb.SendMessage("Problem with preview starting after camera initialization in the main cycle.");
+
+            }
+        }
+
+        fb.fbpause(h, 3);
+
+
+        try {
+            mCamera.takePicture(null, null, mCall);
+            fb.success_message = true;
+            fb.SendMessage(getResources().getString(R.string.photo_has_been_taken));
+        } catch (Exception e) {
+            fb.error_message = true;
+            fb.SendMessage("Problem with picture taking.");
+
+        }
+
+        fb.fbpause(h, fb.process_delay);
+
+        mCamera.release();
+        mCamera = null;
+
+// эти строки нельзя передвигать выше, иначе callback не поспевает
+        fb.Image_Name = str1;
+        fb.Image_Name_Full_Path = str2;
+
+    }*/
+
+
+
+
+
+
+
+
+
+
+    }
+
+
+    public void cleanLogFile()
+    {
+        final FotoBot fb = (FotoBot) getApplicationContext();
+
+        File logcat_file;
+        logcat_file = new File(fb.work_dir + "/logfile.txt");
+
+        boolean fileExists = logcat_file.isFile();
+
+        if (fileExists) {
+            if (logcat_file.length() / 1000 > fb.log_size) {
+                clearLog();
+            }
+        } else {
+            // fb.SendMessage(h, "logfile.txt doesn't exist.");
+        }
+    }
+
+
+
+
+
+    public void deletePhoto()
+    {
+        final FotoBot fb = (FotoBot) getApplicationContext();
+
+        if (fb.Use_Bc) {
+            File imgfile = new File(fb.Image_Name_Full_Path);
+
+            if (imgfile.delete()) {
+                fb.SendMessage("Файл " + fb.Image_Name + " был удален");
+            } else {
+                fb.error_message = true;
+                fb.SendMessage("Проблема с удалением фото: " + fb.Image_Name);
+            }
+        }
+        if (fb.Use_Fc) {
+            File fc_imgfile = new File(fb.fc_Image_Name_Full_Path);
+
+            if (fc_imgfile.delete()) {
+                fb.SendMessage("Файл " + fb.fc_Image_Name + " был удален");
+            } else {
+                fb.error_message = true;
+                fb.SendMessage("Проблема с удалением фото: " + fb.fc_Image_Name);
+            }
+        }
+    }
+
+
+
+
+
 
 }
