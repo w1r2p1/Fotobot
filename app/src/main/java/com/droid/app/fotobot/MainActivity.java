@@ -851,9 +851,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             }
 
                             fb.SendMessage("------------------------");
-
                             fb.SendMessage(getResources().getString(R.string.pause_between_photos) + " " + fb.Photo_Frequency + "sec");
-
                             fb.SendMessage("------------------------");
                             fb.SendMessage("");
 
