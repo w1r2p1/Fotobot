@@ -196,6 +196,8 @@ public class FotoBot extends Application {
     List<Camera.Size> camera_resolutions;
     List<Camera.Size> fc_camera_resolutions;
 
+    List<String> video_profile = new ArrayList<String>();
+
     public int process_delay = 3;
 
     public int status = 1;
