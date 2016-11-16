@@ -1025,7 +1025,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 releaseCamera();
 */
                 if (mOldUncaughtExceptionHandler != null) {
-                    // it displays the "force close" dialog
                     mOldUncaughtExceptionHandler.uncaughtException(thread, ex);
                 }
             }
