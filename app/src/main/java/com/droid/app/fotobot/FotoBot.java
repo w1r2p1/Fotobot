@@ -230,10 +230,14 @@ public class FotoBot extends Application {
     public String Image_Name;
     public String fc_Image_Name;
     public String bc_Image_Name;
+    public String fc_Video_Name;
+    public String bc_Video_Name;
 
     public String Image_Name_Full_Path;
     public String fc_Image_Name_Full_Path;
     public String bc_Image_Name_Full_Path;
+    public String fc_Video_Name_Full_Path;
+    public String bc_Video_Name_Full_Path;
 
     public String Attached_Info_Detailisation = "Normal";
 

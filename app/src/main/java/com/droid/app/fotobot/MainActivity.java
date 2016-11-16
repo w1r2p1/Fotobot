@@ -809,16 +809,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             }
 
 // делаем фото и видео камерой на задней панели телефона
-                            if (fb.back_camera && fb.Use_Bc)
-                            {
+                            if (fb.back_camera && fb.Use_Bc) {
                                 useCamera("Bc");
                             }
 
-                                fb.fbpause(h, 5);
+                            fb.fbpause(h, 5);
 
-                                if (fb.front_camera && fb.Use_Fc) {
-                                    useCamera("Fc");
-                                }
+                            if (fb.front_camera && fb.Use_Fc) {
+                                useCamera("Fc");
+                            }
 
 // засекаем время для отправки письма
                             long start = System.currentTimeMillis();
@@ -878,8 +877,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             cleanLogFile();
 
 // удаляем фото с телефона
-                            if (fb.delete_foto)
-                            {
+                            if (fb.delete_foto) {
                                 deletePhoto();
                             }
 
@@ -1396,18 +1394,20 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         return true;
     }
 
-    public void useCamera(String cameraType)
-    {
+    public void useCamera(String cameraType) {
         final FotoBot fb = (FotoBot) getApplicationContext();
+
+        int cameraId = -1;
+
+        if (cameraType.equals("Bc")) {
+            cameraId = fb.bcId;
+        } else {
+            cameraId = fb.fcId;
+        }
 
         fb.SendMessage(getResources().getString(R.string.Back_Camera) + ". " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index);
 
-        DateFormat df = new SimpleDateFormat("MM-dd-yy_HH-mm-ss-SSS");
-        fb.Image_Name = df.format(new Date()) + ".jpg";
-        fb.Image_Name_Full_Path = fb.work_dir + "/" + fb.Image_Name;
-
-        fb.bc_Image_Name = fb.Image_Name;
-        fb.bc_Image_Name_Full_Path = fb.Image_Name_Full_Path;
+        buildImageName(cameraType);
 
         fb.LoadSettings();
 
@@ -1417,35 +1417,20 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         String width = parts[0];
         String height = parts[1];
 
-// start and set camera parameters
-
+// Step 1
         if (mCamera == null) {
             try {
-                mCamera = Camera.open(fb.bcId);
-                //mCamera = Camera.open(fb.fcId);
+                mCamera = Camera.open(cameraId);
             } catch (Exception e) {
-                fb.SendMessage("Problem with camera initialization in main cycle.");
+                fb.error_message = true;
+                fb.SendMessage("Проблема с доступом к " + cameraType + " камере\n\n\n" + e.toString());
             }
         }
 
-        if (!preview_stopped) {
-            try {
-                mCamera.stopPreview();
-            } catch (Exception e) {
-                fb.SendMessage("Preview couldn't be stopped in the main cycle.");
-            }
-            preview_stopped = true;
-        }
-
+// Step 2
         Camera.Parameters parameters = mCamera.getParameters();
 
-// get Camera parameters
-        Camera.Parameters params = mCamera.getParameters();
-// set the focus mode (for bc camera)
-//                                params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
-// set Camera parameters
-        mCamera.setParameters(params);
-
+        parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO); // для video закомментировать
 
         if (fb.Use_Flash) {
             parameters.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
@@ -1458,19 +1443,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         try {
             mCamera.setParameters(parameters);
         } catch (Exception e) {
-            fb.SendMessage("Camera parameters have not been changed in the main cycle.");
-
-            e.printStackTrace();
+            fb.error_message = true;
+            fb.SendMessage("Проблема с установкой параметров для " + cameraType + " камеры\n\n\n" + e.toString());
         }
 
-        fb.fbpause(h, 3);
+//        fb.fbpause(h, 1);
 
-
-        //         fb.fbpause(h, 3);
-
+// Step 3
 
         if (preview_stopped) {
-
             try {
                 mCamera.setPreviewDisplay(fb.holder);
                 mCamera.startPreview();
@@ -1492,14 +1473,45 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                 preview_stopped = false;
             } catch (Exception e) {
-                fb.SendMessage("Problem with preview starting after camera initialization in the main cycle.\n\n\n" + e.toString());
+                fb.error_message = true;
+                fb.SendMessage("Проблема запуска preview для " + cameraType + " камеры\n\n\n" + e.toString());
 
             }
         }
 
+// Step 4
+        try {
+            mCamera.takePicture(null, null, mCall);
+            fb.success_message = true;
+            fb.SendMessage(getResources().getString(R.string.photo_has_been_taken));
+        } catch (Exception e) {
+            fb.error_message = true;
+            fb.SendMessage("Проблема с takePicture для " + cameraType + " камеры");
+        }
 
-        mCamera.stopPreview();
+// Step 5
+        if (!preview_stopped) {
+            mCamera.stopPreview();
+        }
 
+        if (fb.Use_Flash) {
+
+            parameters = mCamera.getParameters();
+
+            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+
+            try {
+                mCamera.setParameters(parameters);
+            } catch (Exception e) {
+                fb.SendMessage("Проблема выключения вспышки для " + cameraType + " камеры\n\n\n" + e.toString());
+
+            }
+
+        }
+
+        fb.fbpause(h,5);
+
+// Теперь записываем видео
         MediaRecorder mMediaRecorder = new MediaRecorder();
 
         mCamera.unlock();
@@ -1518,29 +1530,26 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
 
         });
-        //    mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
 
         mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
-        //mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
 
-        //      mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_QVGA));
-
-
-//                                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
-
         if (fb.video_profile.contains("QUALITY_QVGA")) {
-            mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
+            mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_QVGA));
         } else {
             mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_LOW));
         }
 
 
-        mMediaRecorder.setOutputFile(fb.work_dir + "/" + df.format(new Date()) + ".mp4");
+        if(cameraType.equals("Bc")) {
+            mMediaRecorder.setOutputFile(fb.bc_Image_Name_Full_Path);
+        } else {
+            mMediaRecorder.setOutputFile(fb.fc_Image_Name_Full_Path);
+        }
 
         mMediaRecorder.setPreviewDisplay(fb.holder.getSurface());
 
-        mMediaRecorder.setMaxDuration(15000);
+        mMediaRecorder.setMaxDuration(5000);
 
         try {
             mMediaRecorder.prepare();
@@ -1552,7 +1561,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 mMediaRecorder = null;
             }
 
-            fb.SendMessage(e.toString());
+            fb.error_message = true;
+            fb.SendMessage("Mediarecorder prepare problem\n\n\n" + e.toString());
 
 
         } catch (IOException e) {
@@ -1562,61 +1572,19 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 mMediaRecorder.release(); // release the recorder object
                 mMediaRecorder = null;
             }
+
+            fb.SendMessage("Mediarecorder prepare problem\n\n\n" + e.toString());
             fb.SendMessage(e.toString());
 
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- /* No Photo just Video
-                                try {
-                                    mCamera.takePicture(null, null, mCall);
-                                    fb.success_message = true;
-                                    fb.SendMessage(getResources().getString(R.string.photo_has_been_taken));
-                                } catch (Exception e) {
-                                    fb.SendMessage("Problem with picture taking.");
-                                }
-*/
-
         try {
-            //  mCamera.unlock();
+            //  mCamera.unlock();                 здесь скорей всего надо проверять на версии Android
             mMediaRecorder.start();
 
             try {
-                TimeUnit.SECONDS.sleep(20);
+                TimeUnit.SECONDS.sleep(9);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -1637,34 +1605,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         }
 
         fb.fbpause(h, fb.process_delay);
-
-        if (fb.Use_Flash) {
-            try {
-                mCamera.stopPreview();
-                preview_stopped = true;
-                fb.fbpause(h, 1);
-            } catch (Exception e) {
-                fb.SendMessage("FLASH OFF: problem with stopping of preview.");
-
-            }
-
-            parameters = mCamera.getParameters();
-
-            fb.fbpause(h, fb.process_delay);
-
-            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-
-            try {
-                mCamera.setParameters(parameters);
-            } catch (Exception e) {
-                fb.SendMessage("setParameters error");
-
-            }
-
-        }
-
-        mCamera.release();
-        mCamera = null;
 
 
 
@@ -1783,20 +1723,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     }*/
 
-
-
-
-
-
-
-
-
+// Здесь нужно пreleas'нуть камеру, чтобы батарейка не расходовалась
 
     }
 
 
-    public void cleanLogFile()
-    {
+    public void cleanLogFile() {
         final FotoBot fb = (FotoBot) getApplicationContext();
 
         File logcat_file;
@@ -1814,11 +1746,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     }
 
 
-
-
-
-    public void deletePhoto()
-    {
+    public void deletePhoto() {
         final FotoBot fb = (FotoBot) getApplicationContext();
 
         if (fb.Use_Bc) {
@@ -1844,8 +1772,34 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     }
 
 
+    public void buildImageName(String cameraType) {
+        final FotoBot fb = (FotoBot) getApplicationContext();
 
+        DateFormat df = new SimpleDateFormat("MM-dd-yy_HH-mm-ss-SSS");
 
+        if (cameraType.equals("Bc")) {
+            fb.bc_Image_Name = df.format(new Date()) + ".jpg";
+            fb.bc_Image_Name_Full_Path = fb.work_dir + "/" + fb.bc_Image_Name;
+        } else if (cameraType.equals("Fc")) {
+            fb.fc_Image_Name = "fc_" + df.format(new Date()) + ".jpg";
+            fb.fc_Image_Name_Full_Path = fb.work_dir + "/" + fb.fc_Image_Name;
+        }
 
+    }
+
+    public void buildVideoName(String cameraType) {
+        final FotoBot fb = (FotoBot) getApplicationContext();
+
+        DateFormat df = new SimpleDateFormat("MM-dd-yy_HH-mm-ss-SSS");
+
+        if (cameraType.equals("Bc")) {
+            fb.bc_Video_Name = df.format(new Date()) + ".mp4";
+            fb.bc_Video_Name_Full_Path = fb.work_dir + "/" + fb.bc_Video_Name;
+        } else if (cameraType.equals("Fc")) {
+            fb.fc_Video_Name = "fc_" + df.format(new Date()) + ".mp4";
+            fb.fc_Video_Name_Full_Path = fb.work_dir + "/" + fb.fc_Video_Name;
+        }
+
+    }
 
 }
