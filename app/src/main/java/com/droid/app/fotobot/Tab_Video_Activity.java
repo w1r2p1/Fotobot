@@ -399,14 +399,14 @@ public class Tab_Video_Activity extends Activity {
         tv_Flash.setTypeface(Typeface.DEFAULT_BOLD);
         tv_Flash.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Flash.setTextColor(Color.BLACK);
-//        linLayout_Flash.addView(tv_Flash);
-        linLayout_camera.addView(tv_Flash);
+
+//        linLayout_camera.addView(tv_Flash);
 
 // CheckBox
         checkBox_Flash = new CheckBox(this);
         checkBox_Flash.setChecked(fb.Use_Flash);
-//        linLayout_Flash.addView(checkBox_Flash);
-        linLayout_camera.addView(checkBox_Flash);
+
+//        linLayout_camera.addView(checkBox_Flash);
 
 // ------------------------------------------------------------------------------------------------
 // Autofocus
