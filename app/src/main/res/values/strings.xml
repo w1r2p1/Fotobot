@@ -91,6 +91,7 @@ mediastatus\n
     <string name="connection_channel_wifimobiledata_message">No connection via Wi-Fi, is switching to Mobile Data</string>
     <string name="connection_attempt">Fotobot is connecting to Internet, attempt  </string>
     <string name="starting_to_make_photo">Fotobot is starting to make photo </string>
+    <string name="starting_to_make_video">Fotobot is starting to make video </string>
     <string name="Internet_connection_is_closed">Internet connection has been closed</string>
     <string name="request_for_stopping">Request for stop has been sent. Wait for stopping message on the screen, after that Fotobot will be stopped correctly.</string>
     <string name="settings_tab_1">Behavior</string>

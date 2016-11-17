@@ -226,7 +226,7 @@ public class Tab_Foto_Activity extends Activity {
 
 // CheckBox
         checkBox_bc = new CheckBox(this);
-        checkBox_bc.setChecked(fb.Use_Bc);
+        checkBox_bc.setChecked(fb.make_photo_bc);
         linLayout_camera.addView(checkBox_bc);
 
 // ------------------------------------------------------------------------------------------------
@@ -302,7 +302,7 @@ public class Tab_Foto_Activity extends Activity {
 
 // CheckBox
             checkBox_fc = new CheckBox(this);
-            checkBox_fc.setChecked(fb.Use_Fc);
+            checkBox_fc.setChecked(fb.make_photo_fc);
             linLayout_fc.addView(checkBox_fc);
         }
 

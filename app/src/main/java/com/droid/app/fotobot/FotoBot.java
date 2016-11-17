@@ -110,14 +110,24 @@ public class FotoBot extends Application {
     public boolean Use_Flash;
 
     /**
-     * использовать или нет фронтальную камеру
+     * делать фото фронтальной камерой
      */
-    public boolean Use_Fc = false;
+    public boolean make_photo_fc = false;
 
     /**
-     * использовать или нет камеру на задней панели телефона
+     * делать фото камерой на задней панели телефона
      */
-    public boolean Use_Bc = true;
+    public boolean make_photo_bc = true;
+
+    /**
+     * делать видео фронтальной камерой
+     */
+    public boolean make_video_fc = true;
+
+    /**
+     * делать видео камерой на задней панели телефона
+     */
+    public boolean make_video_bc = true;
 
     /**
      * уровент заряда аккумулятора в %
@@ -656,8 +666,8 @@ public class FotoBot extends Application {
                                 sendSMS(sms_sender_num,
                                         "Flash: " + Use_Flash + "\n" +
                                                 "JPEG: " + JPEG_Compression + "\n" +
-                                                "Fc: " + Use_Fc + "\n" +
-                                                "Bc: " + Use_Bc + "\n"
+                                                "Fc: " + make_photo_fc + "\n" +
+                                                "Bc: " + make_photo_bc + "\n"
                                 );
                                 sms_media_status = false;
                             }
@@ -920,7 +930,7 @@ public class FotoBot extends Application {
 
         File attach_file;
 
-        if (Use_Bc) {
+        if (make_photo_bc) {
 
             attach_file = new File(str);
             boolean fileExists = attach_file.isFile();
@@ -934,12 +944,12 @@ public class FotoBot extends Application {
         }
 
 
-        if (front_camera && Use_Fc) {
+        if (front_camera && make_photo_fc) {
 
             attach_file = new File(fc_str);
             boolean fc_fileExists = attach_file.isFile();
 
-            if (front_camera && fc_fileExists && Use_Fc) {
+            if (front_camera && fc_fileExists && make_photo_fc) {
 
             } else {
                 error_message = true;
@@ -961,11 +971,11 @@ public class FotoBot extends Application {
         }
         try {
 
-            if (Use_Bc) {
+            if (make_photo_bc) {
                 m.addAttachment(str);
             }
 
-            if (front_camera && Use_Fc) {
+            if (front_camera && make_photo_fc) {
                 m.addAttachment(fc_str);
             }
 
@@ -1022,8 +1032,8 @@ public class FotoBot extends Application {
         Use_WiFi = pref.getBoolean("Use_WiFi", true);         // getting boolean
         Use_Mobile_Data = pref.getBoolean("Use_Mobile_Data", true);         // getting boolean
         Use_Flash = pref.getBoolean("Use_Flash", false);
-        Use_Fc = pref.getBoolean("Use_Fc", false);
-        Use_Bc = pref.getBoolean("Use_Bc", true);
+        make_photo_fc = pref.getBoolean("Use_Fc", false);
+        make_photo_bc = pref.getBoolean("Use_Bc", true);
         JPEG_Compression = pref.getInt("JPEG_Compression", 50);
         use_autofocus = pref.getBoolean("Use_Autofocus", true);
         time_for_focusing = pref.getInt("Time_For_Focusing", 1);
@@ -1088,8 +1098,8 @@ public class FotoBot extends Application {
         editor.putString("Image_Size", Image_Size);
         editor.putString("fc_Image_Size", fc_Image_Size);
         editor.putBoolean("Use_Flash", Use_Flash);
-        editor.putBoolean("Use_Fc", Use_Fc);
-        editor.putBoolean("Use_Bc", Use_Bc);
+        editor.putBoolean("Use_Fc", make_photo_fc);
+        editor.putBoolean("Use_Bc", make_photo_bc);
         editor.putBoolean("Attach_Log", attach_log);
         editor.putString("Attached_Info_Detailisation", Attached_Info_Detailisation);
         editor.putInt("Log_Size", log_size);
@@ -1379,10 +1389,10 @@ public class FotoBot extends Application {
             if (sms_word[0].equals("fc")) {
                 if (sms_word.length > 1) {
                     if (sms_word[1].contains("on")) {
-                        Use_Fc = true;
+                        make_photo_fc = true;
                     }
                     if (sms_word[1].contains("off")) {
-                        Use_Fc = false;
+                        make_photo_fc = false;
                     }
                 }
             }
@@ -1390,10 +1400,10 @@ public class FotoBot extends Application {
             if (sms_word[0].equals("bc")) {
                 if (sms_word.length > 1) {
                     if (sms_word[1].contains("on")) {
-                        Use_Bc = true;
+                        make_photo_bc = true;
                     }
                     if (sms_word[1].contains("off")) {
-                        Use_Bc = false;
+                        make_photo_bc = false;
                     }
                 }
             }

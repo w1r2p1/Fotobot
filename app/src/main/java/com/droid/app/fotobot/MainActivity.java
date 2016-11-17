@@ -753,7 +753,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                         }
 
                         int i = 0; //Image counter
-//                        for (int i = 1; i <= 1000000000; i++) {
+
                         while (true) {
 
 // заполняем список активных процессов
@@ -809,15 +809,29 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             }
 
 // делаем фото и видео камерой на задней панели телефона
-                            if (fb.back_camera && fb.Use_Bc) {
-                                useCamera("Bc");
+                            if (fb.back_camera && fb.make_photo_bc) {
+                                makePhoto("Bc");
                             }
 
-                            fb.fbpause(h, 5);
+                            fb.fbpause(h, 3);
 
-                            if (fb.front_camera && fb.Use_Fc) {
-                                useCamera("Fc");
+                            if (fb.front_camera && fb.make_photo_fc) {
+                                makePhoto("Fc");
                             }
+
+                            fb.fbpause(h, 3);
+
+                            if (fb.back_camera && fb.make_video_bc) {
+                                makeVideo("Bc");
+                            }
+
+                            fb.fbpause(h, 3);
+
+                            if (fb.front_camera && fb.make_video_fc) {
+                                makeVideo("Fc");
+                            }
+
+
 
 // засекаем время для отправки письма
                             long start = System.currentTimeMillis();
@@ -1392,7 +1406,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         return true;
     }
 
-    public void useCamera(String cameraType) {
+    public void makePhoto(String cameraType) {
         final FotoBot fb = (FotoBot) getApplicationContext();
 
         int cameraId = -1;
@@ -1455,11 +1469,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 mCamera.startPreview();
 
                 if (fb.autofocus && fb.use_autofocus) {
-
                     parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
-
                     mCamera.autoFocus(new Camera.AutoFocusCallback() {
-
                         public void onAutoFocus(boolean success, Camera camera) {
 
                         }
@@ -1487,11 +1498,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             fb.SendMessage("Проблема с takePicture для " + cameraType + " камеры");
         }
 
-        fb.fbpause(h,3);
+        fb.fbpause(h, 3);
 
 // Step 5
         if (!preview_stopped) {
             mCamera.stopPreview();
+            preview_stopped = true;
         }
 
         if (fb.Use_Flash) {
@@ -1505,16 +1517,50 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
         }
 
-        fb.fbpause(h,5);
+        if (mCamera != null) {
+            try {
+                mCamera.release();
+                mCamera = null;
+            } catch (Exception e)
+            {
+                fb.SendMessage("ERROR: mCamera.release() " + e.toString());
+            }
+        }
+    }
 
-// Теперь записываем видео
+
+    public void makeVideo(String cameraType) {
+        final FotoBot fb = (FotoBot) getApplicationContext();
+
+        int cameraId = -1;
+
+        if (cameraType.equals("Bc")) {
+            cameraId = fb.bcId;
+        } else {
+            cameraId = fb.fcId;
+        }
+
+        fb.SendMessage(getResources().getString(R.string.Back_Camera) + ". " + getResources().getString(R.string.starting_to_make_video) + " " + fb.Image_Index);
+
+        buildVideoName(cameraType);
+
+        fb.LoadSettings();
+
+// Step 1
+        if (mCamera == null) {
+            try {
+                mCamera = Camera.open(cameraId);
+            } catch (Exception e) {
+                fb.error_message = true;
+                fb.SendMessage("Проблема с доступом к " + cameraType + " камере\n\n\n" + e.toString());
+            }
+        }
+
         MediaRecorder mMediaRecorder = new MediaRecorder();
 
         mCamera.unlock();
 
         mMediaRecorder.setCamera(mCamera);
-
-        buildVideoName(cameraType);
 
         mMediaRecorder.setOnInfoListener(new MediaRecorder.OnInfoListener() {
             @Override
@@ -1592,7 +1638,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         try {
             mMediaRecorder.stop();
-            fb.SendMessage("Запись видео остановлена");
+            fb.SendMessage("Видео записано");
             mMediaRecorder.reset();   // clear recorder configuration
             mMediaRecorder.release(); // release the recorder object
             mMediaRecorder = null;
@@ -1600,126 +1646,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             fb.SendMessage(e.toString());
         }
 
-        fb.fbpause(h, fb.process_delay);
-
-
-
-
-        // Fc
-/*        if (fb.getstatus() == 3) {
-            if (mCamera != null) {
-                mCamera.stopPreview();
-                mCamera.setPreviewCallback(null);
+        if (mCamera != null) {
+            try {
                 mCamera.release();
                 mCamera = null;
-            }
-            fb.thread_stopped = true;
-            fb.success_message = true;
-            fb.SendMessage(h, getResources().getString(R.string.stop_message));
-            fb.fbpause(h, 5);
-            return;
-        }
-
-        fb.SendMessage(getResources().getString(R.string.Front_Camera) + ". " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index);
-
-        String str1 = null;
-        String str2 = null;
-
-        DateFormat df = new SimpleDateFormat("MM-dd-yy_HH-mm-ss-SSS");
-
-        str1 = fb.Image_Name;
-        str2 = fb.Image_Name_Full_Path;
-
-        fb.Image_Name = "fc_" + df.format(new Date()) + ".jpg";
-        fb.Image_Name_Full_Path = fb.work_dir + "/" + fb.Image_Name;
-
-        fb.fc_Image_Name = fb.Image_Name;
-        fb.fc_Image_Name_Full_Path = fb.Image_Name_Full_Path;
-
-        // Camera.Parameters params;
-        String string = fb.fc_Image_Size;
-        String[] fc_parts = string.split("x");
-        String fc_width = fc_parts[0];
-        String fc_height = fc_parts[1];
-
-// start and set camera parameters
-
-        if (mCamera == null) {
-            try {
-                mCamera = Camera.open(fb.fcId);
-            } catch (Exception e) {
-                fb.error_message = true;
-                fb.SendMessage("Problem with camera initialization in main cycle.");
+            } catch (Exception e)
+            {
+                fb.SendMessage("ERROR: mCamera.release() " + e.toString());
             }
         }
-
-        if (!preview_stopped) {
-            try {
-                mCamera.stopPreview();
-            } catch (Exception e) {
-                fb.error_message = true;
-                fb.SendMessage("Preview couldn't be stopped in the main cycle.");
-
-            }
-            preview_stopped = true;
-        }
-
-        Camera.Parameters parameters = mCamera.getParameters();
-
-
-        if (fb.Photo_Post_Processing_Method.contains("Software")) {
-            parameters.setPictureSize(Integer.parseInt(fc_width), Integer.parseInt(fc_height));
-        }
-
-        try {
-            mCamera.setParameters(parameters);
-        } catch (Exception e) {
-            fb.error_message = true;
-            fb.SendMessage("Camera parameters have not been changed in the main cycle.");
-
-            e.printStackTrace();
-        }
-
-        fb.fbpause(h, 3);
-
-        if (preview_stopped) {
-
-            try {
-                mCamera.setPreviewDisplay(fb.holder);
-                mCamera.startPreview();
-                preview_stopped = false;
-            } catch (Exception e) {
-                fb.error_message = true;
-                fb.SendMessage("Problem with preview starting after camera initialization in the main cycle.");
-
-            }
-        }
-
-        fb.fbpause(h, 3);
-
-
-        try {
-            mCamera.takePicture(null, null, mCall);
-            fb.success_message = true;
-            fb.SendMessage(getResources().getString(R.string.photo_has_been_taken));
-        } catch (Exception e) {
-            fb.error_message = true;
-            fb.SendMessage("Problem with picture taking.");
-
-        }
-
-        fb.fbpause(h, fb.process_delay);
-
-        mCamera.release();
-        mCamera = null;
-
-// эти строки нельзя передвигать выше, иначе callback не поспевает
-        fb.Image_Name = str1;
-        fb.Image_Name_Full_Path = str2;
-
-    }*/
-
-// Здесь нужно пreleas'нуть камеру, чтобы батарейка не расходовалась
 
     }
 
@@ -1745,7 +1680,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     public void deletePhoto() {
         final FotoBot fb = (FotoBot) getApplicationContext();
 
-        if (fb.Use_Bc) {
+        if (fb.make_photo_bc) {
             File imgfile = new File(fb.Image_Name_Full_Path);
 
             if (imgfile.delete()) {
@@ -1755,7 +1690,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 fb.SendMessage("Проблема с удалением фото: " + fb.Image_Name);
             }
         }
-        if (fb.Use_Fc) {
+        if (fb.make_photo_fc) {
             File fc_imgfile = new File(fb.fc_Image_Name_Full_Path);
 
             if (fc_imgfile.delete()) {
