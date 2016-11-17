@@ -1487,7 +1487,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             fb.SendMessage("Проблема с takePicture для " + cameraType + " камеры");
         }
 
-        fb.fbpause(h,5);
+        fb.fbpause(h,3);
 
 // Step 5
         if (!preview_stopped) {
@@ -1495,18 +1495,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         }
 
         if (fb.Use_Flash) {
-
             parameters = mCamera.getParameters();
-
             parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
 
             try {
                 mCamera.setParameters(parameters);
             } catch (Exception e) {
                 fb.SendMessage("Проблема выключения вспышки для " + cameraType + " камеры\n\n\n" + e.toString());
-
             }
-
         }
 
         fb.fbpause(h,5);
@@ -1528,9 +1524,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                     fb.SendMessage("MEDIA_RECORDER_INFO_MAX_DURATION_REACHED");
                     //    mediaRecorder.stop();
                 }
-
             }
-
         });
 
         mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
@@ -1782,9 +1776,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         if (cameraType.equals("Bc")) {
             fb.bc_Image_Name = df.format(new Date()) + ".jpg";
             fb.bc_Image_Name_Full_Path = fb.work_dir + "/" + fb.bc_Image_Name;
+            fb.Image_Name = fb.bc_Image_Name;
         } else if (cameraType.equals("Fc")) {
             fb.fc_Image_Name = "fc_" + df.format(new Date()) + ".jpg";
             fb.fc_Image_Name_Full_Path = fb.work_dir + "/" + fb.fc_Image_Name;
+            fb.Image_Name = fb.fc_Image_Name;
         }
 
     }
