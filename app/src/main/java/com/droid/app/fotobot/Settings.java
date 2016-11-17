@@ -80,6 +80,19 @@ public class Settings extends TabActivity {
         TabHost.TabSpec spec3 = mTabHost.newTabSpec("Tab3").setIndicator(view3).setContent(intent);
         mTabHost.addTab(spec3);
 
+//Видео
+        View view4 = LayoutInflater.from(mTabHost.getContext()).inflate(R.layout.tabs_bg, null);
+        TextView tv4 = (TextView) view4.findViewById(R.id.tabsText);
+
+        tv4.setTypeface(Typeface.DEFAULT_BOLD);
+        tv4.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        tv4.setTextColor(Color.WHITE);
+
+        tv4.setText(getResources().getString(R.string.settings_tab_4));
+        intent = new Intent(this, Tab_Video_Activity.class);
+        TabHost.TabSpec spec4 = mTabHost.newTabSpec("Tab4").setIndicator(view4).setContent(intent);
+        mTabHost.addTab(spec4);
+
     }
 
     /**

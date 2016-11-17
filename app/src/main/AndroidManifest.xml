@@ -71,6 +71,10 @@
             android:name=".Tab_Foto_Activity"
             android:label="@string/title_foto_activity_settings" >
         </activity>
+        <activity
+            android:name=".Tab_Video_Activity"
+            android:label="@string/title_video_activity_settings" >
+        </activity>
     </application>
 
 </manifest>

@@ -97,6 +97,7 @@ mediastatus\n
     <string name="settings_tab_1">Behavior</string>
     <string name="settings_tab_2">Network</string>
     <string name="settings_tab_3">Foto</string>
+    <string name="settings_tab_4">Video</string>
 
     <string name="main_help">&lt;h2&gt;&lt;font color=white&gt;User Manual&lt;/font&gt;&lt;/h2&gt;
             This is simple Android application designed for taking and sending of pictures to user e-mail. Simple scheduler is used for this.
@@ -204,6 +205,7 @@ mediastatus\n
     <string name="title_main_activity_settings">Main Settings</string>
     <string name="title_network_activity_settings">Network Settings</string>
     <string name="title_foto_activity_settings">Photo Settings</string>
+    <string name="title_Video_activity_settings">Video Settings</string>
     <string name="title_activity_status">Status</string>
     <string name="text_tab1">text_tab1</string>
     <string name="text_tab2">text_tab2</string>

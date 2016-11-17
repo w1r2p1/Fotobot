@@ -95,6 +95,7 @@
     <string name="settings_tab_1">Поведение</string>
     <string name="settings_tab_2">Сеть</string>
     <string name="settings_tab_3">Фото</string>
+    <string name="settings_tab_4">Видео</string>
 
     <string name="main_help">&lt;h2&gt;&lt;font color=white&gt;&lt;br&gt;Руководство пользователя&lt;/font&gt;&lt;/h2&gt;
             Fotobot предназначен для фотографирования и отправки фото по электронной почте
@@ -196,6 +197,7 @@
     <string name="title_main_activity_settings">Main Settings</string>
     <string name="title_network_activity_settings">Network Settings</string>
     <string name="title_foto_activity_settings">Photo Settings</string>
+    <string name="title_video_activity_settings">Video Settings</string>
     <string name="title_activity_status">Status</string>
     <string name="text_tab1">text_tab1</string>
     <string name="text_tab2">text_tab2</string>
