@@ -1487,6 +1487,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             fb.SendMessage("Проблема с takePicture для " + cameraType + " камеры");
         }
 
+        fb.fbpause(h,5);
+
 // Step 5
         if (!preview_stopped) {
             mCamera.stopPreview();
