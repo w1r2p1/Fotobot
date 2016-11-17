@@ -1417,7 +1417,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             cameraId = fb.fcId;
         }
 
-        fb.SendMessage(getResources().getString(R.string.Back_Camera) + ". " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index);
+        fb.SendMessage(cameraType + ". " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index);
 
         buildImageName(cameraType);
 
@@ -1540,7 +1540,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             cameraId = fb.fcId;
         }
 
-        fb.SendMessage(getResources().getString(R.string.Back_Camera) + ". " + getResources().getString(R.string.starting_to_make_video) + " " + fb.Image_Index);
+        fb.SendMessage(cameraType + ". " + getResources().getString(R.string.starting_to_make_video) + " " + fb.Image_Index);
 
         buildVideoName(cameraType);
 
