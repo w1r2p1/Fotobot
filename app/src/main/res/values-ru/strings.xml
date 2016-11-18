@@ -25,10 +25,8 @@
 
     <!-- http://daniel-codes.blogspot.ru/2011/04/html-in-textviews.html -->
 
-    <string name="update"><![CDATA[<b><u>Версия 2.8.4</u></b><br>
-        1) добавлены sms-команды;<br>
-        <br>
-        Полный список sms-команд: <a href=http://v-and-f.ru/fotobot#SMS>http://v-and-f.ru/fotobot#SMS</a><br>
+    <string name="update"><![CDATA[<b><u>Версия 3.0.0</u></b><br>
+        1) добавлена возможность снимать видео;<br>
         ]]></string>
 
     <string name="Camera_Name">Название камеры</string>
@@ -85,6 +83,9 @@
     <string name="starting_to_make_photo">начинаем делать фото</string>
     <string name="starting_to_make_video">начинаем записывать видео</string>
     <string name="video_recording_time">Время записи видео (сек)</string>
+
+    <string name="video_profile">В данной версии доступны только 2 профиля (LOW and HIGH). LOW - минимальное разршение для камеры, HIGH - максимальное.</string>
+
     <string name="request_for_stopping">Запрос на остановку Fotobot\'а отправлен, дождитесь корректного завершения и соответствующей надписи на экране</string>
 
     <string name="connection_channel_wifimobiledata">Метод подключения Wi-Fi и Mobile Data</string>

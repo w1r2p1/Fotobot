@@ -206,7 +206,7 @@ public class Tab_Video_Activity extends Activity {
         tv_Photo_Size_s_note.setTypeface(null, Typeface.NORMAL);
         tv_Photo_Size_s_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Photo_Size_s_note.setTextColor(Color.BLACK);
-        tv_Photo_Size_s_note.setText(getResources().getString(R.string.photo_resolution));
+        tv_Photo_Size_s_note.setText(getResources().getString(R.string.video_profile));
         linLayout_camera.addView(tv_Photo_Size_s_note);
 
 // Использовать камеру
