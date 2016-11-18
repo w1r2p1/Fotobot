@@ -1059,6 +1059,8 @@ public class FotoBot extends Application {
         Use_Flash = pref.getBoolean("Use_Flash", false);
         make_photo_fc = pref.getBoolean("Use_Fc", false);
         make_photo_bc = pref.getBoolean("Use_Bc", true);
+        make_video_fc = pref.getBoolean("Make_Video_Fc", false);
+        make_video_bc = pref.getBoolean("Make_Video_Bc", false);
         JPEG_Compression = pref.getInt("JPEG_Compression", 50);
         use_autofocus = pref.getBoolean("Use_Autofocus", true);
         time_for_focusing = pref.getInt("Time_For_Focusing", 1);
@@ -1131,6 +1133,8 @@ public class FotoBot extends Application {
         editor.putBoolean("Use_Flash", Use_Flash);
         editor.putBoolean("Use_Fc", make_photo_fc);
         editor.putBoolean("Use_Bc", make_photo_bc);
+        editor.putBoolean("Make_Video_Fc", make_video_fc);
+        editor.putBoolean("Make_Video_Bc", make_video_bc);
         editor.putBoolean("Attach_Log", attach_log);
         editor.putString("Attached_Info_Detailisation", Attached_Info_Detailisation);
         editor.putInt("Log_Size", log_size);

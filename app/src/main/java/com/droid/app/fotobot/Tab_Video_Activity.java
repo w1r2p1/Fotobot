@@ -523,16 +523,16 @@ public class Tab_Video_Activity extends Activity {
 
                 if (fb.front_camera) {
                     if (checkBox_fc.isChecked()) {
-                        editor.putBoolean("Use_Fc", true);
+                        editor.putBoolean("Make_Video_Fc", true);
                     } else {
-                        editor.putBoolean("Use_Fc", false);
+                        editor.putBoolean("Make_Video_Fc", false);
                     }
                 }
 
                 if (checkBox_bc.isChecked()) {
-                    editor.putBoolean("Use_Bc", true);
+                    editor.putBoolean("Make_Video_Bc", true);
                 } else {
-                    editor.putBoolean("Use_Bc", false);
+                    editor.putBoolean("Make_Video_Bc", false);
                 }
 
                 if (checkBox_Autofocus.isChecked()) {
