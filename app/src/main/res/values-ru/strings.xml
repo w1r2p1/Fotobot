@@ -84,6 +84,7 @@
     <string name="connection_attempt">Соединяемся с Internet, попытка  </string>
     <string name="starting_to_make_photo">Начинаем делать фото</string>
     <string name="starting_to_make_video">Начинаем записывать видео</string>
+    <string name="video_recording_time">Время записи видео (сек)</string>
     <string name="request_for_stopping">Запрос на остановку Fotobot\'а отправлен, дождитесь корректного завершения и соответствующей надписи на экране</string>
 
     <string name="connection_channel_wifimobiledata">Метод подключения Wi-Fi и Mobile Data</string>

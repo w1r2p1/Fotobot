@@ -12,7 +12,6 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.View;
@@ -94,13 +93,13 @@ public class Tab_Video_Activity extends Activity {
         tv_JPEG_Compression.setTypeface(Typeface.DEFAULT_BOLD);
         tv_JPEG_Compression.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_JPEG_Compression.setTextColor(Color.BLACK);
-        tv_JPEG_Compression.setText(getResources().getString(R.string.jpeg_compression));
+        tv_JPEG_Compression.setText(getResources().getString(R.string.video_recording_time));
         tv_JPEG_Compression.setTypeface(Typeface.DEFAULT_BOLD);
         linLayout_JPEG_Compression.addView(tv_JPEG_Compression);
 
 // Ввод данных
         editText_JPEG_Compression = new EditText(this);
-        String jpg = Integer.toString(fb.JPEG_Compression);
+        String jpg = Integer.toString(fb.video_recording_time);
         editText_JPEG_Compression.setText(jpg);
         editText_JPEG_Compression.setTextColor(Color.rgb(50, 100, 150));
         linLayout_JPEG_Compression.addView(editText_JPEG_Compression);
@@ -111,7 +110,7 @@ public class Tab_Video_Activity extends Activity {
         tv_JPEG_Compression_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_JPEG_Compression_note.setTextColor(Color.BLACK);
         tv_JPEG_Compression_note.setText(getResources().getString(R.string.jpeg_compression_description));
-        linLayout_JPEG_Compression.addView(tv_JPEG_Compression_note);
+       // linLayout_JPEG_Compression.addView(tv_JPEG_Compression_note);
 
 // ------------------------------------------------------------------------------------------------
 
@@ -188,15 +187,8 @@ public class Tab_Video_Activity extends Activity {
 
         fe_z = (float) fe_w / (float) fe_h;
 
-        for (Camera.Size size : fb.camera_resolutions) {
-            fe_w = (int) size.width;
-            fe_h = (int) size.height;
-            fe_s = (float) fe_w / (float) fe_h;
-
-            //   if (Math.abs(fe_s - fe_z) < 0.01f) {
-            spinnerArray.add(size.width + "x" + size.height);
-            //   }
-
+        for (String profile : fb.bc_video_profile) {
+            spinnerArray.add(profile);
         }
 
         spinner_Software = new Spinner(this);
@@ -206,7 +198,7 @@ public class Tab_Video_Activity extends Activity {
         spinner_Software.setAdapter(new Tab_Video_Activity.MyAdapter(this, R.layout.spinner_item, spinnerArray));
         // spinner_Software.setAdapter(customAdapter);
         //  spinner_Software.setAdapter(spinnerArrayAdapter1);
-        spinner_Software.setSelection(getIndex(spinner_Software, fb.Image_Size));
+        spinner_Software.setSelection(getIndex(spinner_Software, fb.bc_current_video_profile));
         linLayout_camera.addView(spinner_Software);
 
 // Заметка для Software
@@ -228,7 +220,7 @@ public class Tab_Video_Activity extends Activity {
 
 // CheckBox
         checkBox_bc = new CheckBox(this);
-        checkBox_bc.setChecked(fb.make_photo_bc);
+        checkBox_bc.setChecked(fb.make_video_bc);
         linLayout_camera.addView(checkBox_bc);
 
 // ------------------------------------------------------------------------------------------------
@@ -275,21 +267,14 @@ public class Tab_Video_Activity extends Activity {
 
             fc_fe_z = (float) fc_fe_w / (float) fc_fe_h;
 
-            for (Camera.Size size : fb.fc_camera_resolutions) {
-                fc_fe_w = (int) size.width;
-                fc_fe_h = (int) size.height;
-                fc_fe_s = (float) fc_fe_w / (float) fc_fe_h;
-
-                //   if (Math.abs(fc_fe_s - fc_fe_z) < 0.01f) {
-                fc_spinnerArray.add(size.width + "x" + size.height);
-                //   }
-
+            for (String profile : fb.fc_video_profile) {
+                fc_spinnerArray.add(profile);
             }
 
             fc_spinner_Software = new Spinner(this);
             fc_spinnerArrayAdapter1 = new ArrayAdapter<String>(this, R.layout.spinner_item, fc_spinnerArray);
             fc_spinner_Software.setAdapter(fc_spinnerArrayAdapter1);
-            fc_spinner_Software.setSelection(getIndex(fc_spinner_Software, fb.fc_Image_Size));
+            fc_spinner_Software.setSelection(getIndex(fc_spinner_Software, fb.fc_current_video_profile));
 
             linLayout_fc.addView(fc_spinner_Software);
 
@@ -304,7 +289,7 @@ public class Tab_Video_Activity extends Activity {
 
 // CheckBox
             checkBox_fc = new CheckBox(this);
-            checkBox_fc.setChecked(fb.make_photo_fc);
+            checkBox_fc.setChecked(fb.make_video_fc);
             linLayout_fc.addView(checkBox_fc);
         }
 
@@ -558,16 +543,16 @@ public class Tab_Video_Activity extends Activity {
 
                 String input = editText_JPEG_Compression.getText().toString();
                 editor.putString("Photo_Post_Processing_Method", spinner_ppm.getSelectedItem().toString());
-                editor.putInt("JPEG_Compression", Integer.parseInt(editText_JPEG_Compression.getText().toString()));
+                editor.putInt("Video_Recording_Time", Integer.parseInt(editText_JPEG_Compression.getText().toString()));
 
                 if (fb.autofocus) {
                     editor.putInt("Time_For_Focusing", Integer.parseInt(editText_Autofocus.getText().toString()));
                 }
 
                 editor.putString("Image_Scale", spinner_Hardware.getSelectedItem().toString());
-                editor.putString("Image_Size", spinner_Software.getSelectedItem().toString());
+                editor.putString("Bc_Current_Video_Profile", spinner_Software.getSelectedItem().toString());
                 if (fb.front_camera) {
-                    editor.putString("fc_Image_Size", fc_spinner_Software.getSelectedItem().toString());
+                    editor.putString("Fc_Current_Video_Profile", fc_spinner_Software.getSelectedItem().toString());
                 }
 
 // Save the changes in SharedPreferences
@@ -626,7 +611,7 @@ public class Tab_Video_Activity extends Activity {
         }
 
 
-        //    FullFrame.addView(linLayout_JPEG_Compression);
+        FullFrame.addView(linLayout_JPEG_Compression);
 
         FullFrame.addView(linLayout_Buttons);
 
@@ -662,7 +647,7 @@ public class Tab_Video_Activity extends Activity {
         super.onPause();
         final FotoBot fb = (FotoBot) getApplicationContext();
         fb.LoadSettings();
-        editText_JPEG_Compression.setText(Integer.toString(fb.JPEG_Compression));
+        editText_JPEG_Compression.setText(Integer.toString(fb.video_recording_time));
         spinner_Software.setSelection(getIndex(spinner_Software, fb.Image_Size));
         checkBox_Flash.setChecked(fb.Use_Flash);
         Log.d(LOG_TAG, "Tab3: onPause");
@@ -695,7 +680,7 @@ public class Tab_Video_Activity extends Activity {
             super(context, textViewResourceId, objects);
         }
 
-
+/*
         @Override
         public View getDropDownView(int position, View convertView, ViewGroup parent) {
             return getCustomView(position, convertView, parent);
@@ -711,8 +696,11 @@ public class Tab_Video_Activity extends Activity {
             LayoutInflater inflater = getLayoutInflater();
             View row = inflater.inflate(R.layout.spinner_item, parent, false);
             TextView label = (TextView) row.findViewById(R.id.textView1);
+
             String str = spinnerArray.get(position);
+
             String[] parts = str.split("x");
+
             int width = Integer.parseInt(parts[0]);
             int height = Integer.parseInt(parts[1]);
             float diff = Math.abs((float) width / (float) height - 4.0f / 3.0f);
@@ -731,5 +719,9 @@ public class Tab_Video_Activity extends Activity {
             return row;
 
         }
+
+ */
+
+
     }
 }

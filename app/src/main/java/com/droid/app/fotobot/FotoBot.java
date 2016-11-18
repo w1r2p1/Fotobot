@@ -203,10 +203,35 @@ public class FotoBot extends Application {
 
     public int GSM_Signal = 0;
 
+    /**
+     * доступные разрешения (в пикселах) для камеры
+     */
     List<Camera.Size> camera_resolutions;
+
+    /**
+     * доступные разрешения (в пикселах) для фронтальной камеры
+     */
     List<Camera.Size> fc_camera_resolutions;
 
-    List<String> video_profile = new ArrayList<String>();
+
+    /**
+     * доступные видеопрофили для камеры
+     */
+    List<String> bc_video_profile = new ArrayList<String>();
+
+    /**
+     * время записи видео
+     */
+    public int video_recording_time = 5;
+
+    /**
+     * доступные видеопрофили для фронтальной камеры
+     */
+    List<String> fc_video_profile = new ArrayList<String>();
+
+
+    public String bc_current_video_profile = "QUALITY_LOW";
+    public String fc_current_video_profile = "QUALITY_LOW";
 
     public int process_delay = 3;
 
@@ -1039,6 +1064,9 @@ public class FotoBot extends Application {
         time_for_focusing = pref.getInt("Time_For_Focusing", 1);
         Camera_Name = pref.getString("Camera_Name", "default");
         Photo_Frequency = pref.getInt("Photo_Frequency", 300);
+        video_recording_time = pref.getInt("Video_Recording_Time", 5);
+        bc_current_video_profile = pref.getString("Bc_Current_Video_Profile", "QUALITY_LOW");
+        fc_current_video_profile = pref.getString("Fc_Current_Video_Profile", "QUALITY_LOW");
         process_delay = pref.getInt("process_delay", 5);
         Image_Scale = pref.getString("Image_Scale", "1");
         Image_Size = pref.getString("Image_Size", "1024x768");
@@ -1075,6 +1103,9 @@ public class FotoBot extends Application {
 
         editor.putString("Camera_Name", Camera_Name);
         editor.putInt("Photo_Frequency", Photo_Frequency);
+        editor.putInt("Video_Recording_Time", video_recording_time);
+        editor.putString("Bc_Current_Video_Profile", bc_current_video_profile);
+        editor.putString("Fc_Current_Video_Profile", fc_current_video_profile);
         editor.putInt("Wake_Up", wake_up_interval);
         editor.putInt("process_delay", process_delay);
         editor.putInt("Config_Font_Size", Config_Font_Size);
