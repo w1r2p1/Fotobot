@@ -544,6 +544,7 @@ public class Tab_Video_Activity extends Activity {
                 String input = editText_JPEG_Compression.getText().toString();
                 editor.putString("Photo_Post_Processing_Method", spinner_ppm.getSelectedItem().toString());
                 editor.putInt("Video_Recording_Time", Integer.parseInt(editText_JPEG_Compression.getText().toString()));
+                fb.video_recording_time = Integer.parseInt(editText_JPEG_Compression.getText().toString());
 
                 if (fb.autofocus) {
                     editor.putInt("Time_For_Focusing", Integer.parseInt(editText_Autofocus.getText().toString()));
@@ -551,8 +552,10 @@ public class Tab_Video_Activity extends Activity {
 
                 editor.putString("Image_Scale", spinner_Hardware.getSelectedItem().toString());
                 editor.putString("Bc_Current_Video_Profile", spinner_Software.getSelectedItem().toString());
+                fb.bc_current_video_profile = spinner_Software.getSelectedItem().toString();
                 if (fb.front_camera) {
                     editor.putString("Fc_Current_Video_Profile", fc_spinner_Software.getSelectedItem().toString());
+                    fb.fc_current_video_profile = fc_spinner_Software.getSelectedItem().toString();
                 }
 
 // Save the changes in SharedPreferences

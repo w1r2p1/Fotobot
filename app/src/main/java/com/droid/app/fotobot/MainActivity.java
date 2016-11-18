@@ -892,6 +892,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             fb.sms_check_file = false;
                             fb.frame_delay = false;
 
+                            i = i + 1;
+
                         }
 
                     }
@@ -1330,7 +1332,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         } catch (Exception e) {
         }
 
-        try {
+/*        try {
             profile = CamcorderProfile.get(CamcorderProfile.QUALITY_2160P);
             fb.bc_video_profile.add("QUALITY_2160P");
         } catch (Exception e) {
@@ -1370,7 +1372,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             profile = CamcorderProfile.get(CamcorderProfile.QUALITY_QCIF);
             fb.bc_video_profile.add("QUALITY_QCIF");
         } catch (Exception e) {
-        }
+        } */
 
         try {
             profile = CamcorderProfile.get(CamcorderProfile.QUALITY_LOW);
@@ -1392,7 +1394,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         } catch (Exception e) {
         }
 
-        try {
+/*        try {
             profile = CamcorderProfile.get(CamcorderProfile.QUALITY_2160P);
             fb.fc_video_profile.add("QUALITY_2160P");
         } catch (Exception e) {
@@ -1432,7 +1434,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             profile = CamcorderProfile.get(CamcorderProfile.QUALITY_QCIF);
             fb.fc_video_profile.add("QUALITY_QCIF");
         } catch (Exception e) {
-        }
+        } */
 
         try {
             profile = CamcorderProfile.get(CamcorderProfile.QUALITY_LOW);
@@ -1486,13 +1488,17 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         int cameraId = -1;
 
+        String str="";
+
         if (cameraType.equals("Bc")) {
             cameraId = fb.bcId;
+            str = "back_cam";
         } else {
             cameraId = fb.fcId;
+            str = "front_cam";
         }
 
-        fb.SendMessage(cameraType + ". " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index);
+        fb.SendMessage(str + ": " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index);
 
         buildImageName(cameraType);
 
@@ -1608,13 +1614,17 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         int cameraId = -1;
 
+        String str = "";
+
         if (cameraType.equals("Bc")) {
             cameraId = fb.bcId;
+            str = "back_cam";
         } else {
             cameraId = fb.fcId;
+            str = "front_cam";
         }
 
-        fb.SendMessage(cameraType + ". " + getResources().getString(R.string.starting_to_make_video) + " " + fb.Image_Index);
+        fb.SendMessage(str + ": " + getResources().getString(R.string.starting_to_make_video) + " " + fb.Image_Index);
 
         buildVideoName(cameraType);
 
@@ -1641,7 +1651,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             public void onInfo(MediaRecorder mediaRecorder, int what, int extra) {
                 if (what == MediaRecorder.MEDIA_RECORDER_INFO_MAX_DURATION_REACHED) {
-                    fb.SendMessage("MEDIA_RECORDER_INFO_MAX_DURATION_REACHED");
+                  //  fb.SendMessage("MEDIA_RECORDER_INFO_MAX_DURATION_REACHED");
                     //    mediaRecorder.stop();
                 }
             }
@@ -1650,8 +1660,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
         mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
 
-        if (fb.bc_video_profile.contains("QUALITY_QVGA")) {
-            mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_QVGA));
+        if (fb.bc_video_profile.contains("QUALITY_HIGH")) {
+            mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
         } else {
             mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_LOW));
         }
@@ -1665,7 +1675,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         mMediaRecorder.setPreviewDisplay(fb.holder.getSurface());
 
-        mMediaRecorder.setMaxDuration(fb.video_recording_time);
+        mMediaRecorder.setMaxDuration(fb.video_recording_time * 1000);
 
         try {
             mMediaRecorder.prepare();
@@ -1712,6 +1722,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         try {
             mMediaRecorder.stop();
+            fb.success_message = true;
             fb.SendMessage("Видео записано");
             mMediaRecorder.reset();   // clear recorder configuration
             mMediaRecorder.release(); // release the recorder object
