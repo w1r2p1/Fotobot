@@ -1665,7 +1665,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         mMediaRecorder.setPreviewDisplay(fb.holder.getSurface());
 
-        mMediaRecorder.setMaxDuration(5000);
+        mMediaRecorder.setMaxDuration(fb.video_recording_time);
 
         try {
             mMediaRecorder.prepare();
@@ -1700,7 +1700,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             mMediaRecorder.start();
 
             try {
-                TimeUnit.SECONDS.sleep(9);
+                TimeUnit.SECONDS.sleep(fb.video_recording_time + 5);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
