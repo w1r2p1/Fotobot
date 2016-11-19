@@ -1759,7 +1759,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 
         } catch (Exception e) {
-            fb.SendMessage(e.toString());
+            fb.SendMessage("Проблема с записью видео " + cameraType + " камерой\n\n\n" + e.toString());
         }
 
         try {
