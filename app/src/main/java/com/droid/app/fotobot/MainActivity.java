@@ -1527,7 +1527,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         save_camera_parameters = parameters;
 
-        parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO); // для video закомментировать
+  //      parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO); // для video закомментировать
 
         if (fb.Use_Flash) {
             parameters.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
@@ -1602,10 +1602,21 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
         }
 
-        try {
+      /*  try {
             mCamera.setParameters(save_camera_parameters);
         } catch (Exception e) {
             fb.SendMessage("Проблема восстановления параметров " + cameraType + " камеры\n\n\n" + e.toString());
+        }*/
+
+        if (fb.autofocus && fb.use_autofocus) {
+            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_INFINITY);
+        }
+
+        try {
+            mCamera.setParameters(parameters);
+        } catch (Exception e) {
+            fb.error_message = true;
+            fb.SendMessage("Проблема с восстановлением параметров для " + cameraType + " камеры\n\n\n" + e.toString());
         }
 
         if (mCamera != null) {
@@ -1654,7 +1665,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         save_camera_parameters = parameters;
 
-   /*     if (fb.autofocus && fb.use_autofocus) {
+     /*   if (fb.autofocus && fb.use_autofocus) {
             parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
             mCamera.autoFocus(new Camera.AutoFocusCallback() {
                 public void onAutoFocus(boolean success, Camera camera) {
@@ -1669,8 +1680,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             mCamera.setParameters(parameters);
         } catch (Exception e) {
             fb.SendMessage("Проблема установки автофокуса для " + cameraType + " камеры\n\n\n" + e.toString());
-        }*/
-
+        }
+*/
         MediaRecorder mMediaRecorder = new MediaRecorder();
 
         mCamera.unlock();
@@ -1762,11 +1773,16 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             fb.SendMessage(e.toString());
         }
 
-        try {
-            mCamera.setParameters(save_camera_parameters);
-        } catch (Exception e) {
-            fb.SendMessage("Проблема восстановления параметров " + cameraType + " камеры\n\n\n" + e.toString());
+  /*      if (fb.autofocus && fb.use_autofocus) {
+            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_INFINITY);
         }
+
+        try {
+            mCamera.setParameters(parameters);
+        } catch (Exception e) {
+            fb.error_message = true;
+            fb.SendMessage("Проблема с восстановлением параметров для " + cameraType + " камеры\n\n\n" + e.toString());
+        }*/
 
         if (mCamera != null) {
             try {
