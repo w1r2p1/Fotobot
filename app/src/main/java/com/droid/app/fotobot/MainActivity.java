@@ -1778,7 +1778,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 e.printStackTrace();
             }
 
-
         } catch (Exception e) {
             fb.SendMessage("Проблема с записью видео " + cameraType + " камерой\n\n\n" + e.toString());
         }
