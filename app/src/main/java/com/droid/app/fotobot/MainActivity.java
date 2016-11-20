@@ -807,21 +807,24 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 // делаем фото и видео камерой на задней панели телефона
                             if (fb.back_camera && fb.make_photo_bc) {
                                 makePhoto("Bc");
+                                fb.fbpause(h, 3);
                             }
 
-                            fb.fbpause(h, 3);
+
 
                             if (fb.front_camera && fb.make_photo_fc) {
                                 makePhoto("Fc");
+                                fb.fbpause(h, 3);
                             }
 
-                            fb.fbpause(h, 3);
+
 
                             if (fb.back_camera && fb.make_video_bc) {
                                 makeVideo("Bc");
+                                fb.fbpause(h, 3);
                             }
 
-                            fb.fbpause(h, 3);
+
 
                             if (fb.front_camera && fb.make_video_fc) {
                                 makeVideo("Fc");
@@ -1655,15 +1658,16 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         if (mCamera == null) {
             try {
                 mCamera = Camera.open(cameraId);
+               // fb.SendMessage(cameraType + " камера успешно открыта");
             } catch (Exception e) {
                 fb.error_message = true;
                 fb.SendMessage("Проблема с доступом к " + cameraType + " камере\n\n\n" + e.toString());
             }
         }
 
-        Camera.Parameters parameters = mCamera.getParameters();
+     //   Camera.Parameters parameters = mCamera.getParameters();
 
-        save_camera_parameters = parameters;
+       // save_camera_parameters = parameters;
 
      /*   if (fb.autofocus && fb.use_autofocus) {
             parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
@@ -1693,8 +1697,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             public void onInfo(MediaRecorder mediaRecorder, int what, int extra) {
                 if (what == MediaRecorder.MEDIA_RECORDER_INFO_MAX_DURATION_REACHED) {
-                  //  fb.SendMessage("MEDIA_RECORDER_INFO_MAX_DURATION_REACHED");
-                    //    mediaRecorder.stop();
+                    fb.SendMessage("MEDIA_RECORDER_INFO_MAX_DURATION_REACHED");
+                   //     mediaRecorder.stop();
                 }
             }
         });
@@ -1702,16 +1706,28 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
         mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
 
-        if (fb.bc_video_profile.contains("QUALITY_HIGH")) {
-            mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
+    /*   if (cameraType.equals("Bc")) {
+            if (fb.bc_video_profile.contains("QUALITY_HIGH")) {
+                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
+            } else {
+                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_LOW));
+            }
         } else {
-            mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_LOW));
-        }
+            if (fb.fc_video_profile.contains("QUALITY_HIGH")) {
+                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
+            } else {
+                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_LOW));
+            }
+        } */
 
+        mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_LOW));
+
+   //     mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);
 
         if (cameraType.equals("Bc")) {
             mMediaRecorder.setOutputFile(fb.bc_Video_Name_Full_Path);
         } else {
+            fb.SendMessage("fc_Video_Name_Full_Path: " + fb.fc_Video_Name_Full_Path);
             mMediaRecorder.setOutputFile(fb.fc_Video_Name_Full_Path);
         }
 
@@ -1746,13 +1762,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         }
 
-
         try {
             //  mCamera.unlock();                 здесь скорей всего надо проверять на версии Android
             mMediaRecorder.start();
 
             try {
-                TimeUnit.SECONDS.sleep(fb.video_recording_time + 5);
+                TimeUnit.SECONDS.sleep(fb.video_recording_time  + 5);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
