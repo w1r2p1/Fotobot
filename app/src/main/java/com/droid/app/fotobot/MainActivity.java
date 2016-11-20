@@ -491,7 +491,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             fb.clean_log = false;
             tvInfo.setText(Html.fromHtml(fb.log));
             Log.d(LOG_TAG, "************************************************************************************* clean log");
-        } else if (!fb.Tab_Foto_Activity_activated && !fb.Tab_Main_Activity_activated && !fb.Tab_Network_Activity_activated) {
+        } else if (!fb.Tab_Foto_Activity_activated && !fb.Tab_Main_Activity_activated && !fb.Tab_Network_Activity_activated && !fb.Tab_Video_Activity_activated) {
             tvInfo.setText(Html.fromHtml(fb.log));
             fb.SendMessage(getString(R.string.update));
         }
@@ -1329,11 +1329,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         CamcorderProfile profile;
 
-        try {
-            profile = CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH);
-            fb.bc_video_profile.add("QUALITY_HIGH");
-        } catch (Exception e) {
-        }
+        if (!fb.bc_video_profile_initialized) {
+
+            try {
+                profile = CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH);
+                fb.bc_video_profile.add("QUALITY_HIGH");
+            } catch (Exception e) {
+            }
 
 /*        try {
             profile = CamcorderProfile.get(CamcorderProfile.QUALITY_2160P);
@@ -1377,12 +1379,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         } catch (Exception e) {
         } */
 
-        try {
-            profile = CamcorderProfile.get(CamcorderProfile.QUALITY_LOW);
-            fb.bc_video_profile.add("QUALITY_LOW");
-        } catch (Exception e) {
+            try {
+                profile = CamcorderProfile.get(CamcorderProfile.QUALITY_LOW);
+                fb.bc_video_profile.add("QUALITY_LOW");
+            } catch (Exception e) {
+            }
+        fb.bc_video_profile_initialized = true;
         }
-
     }
 
     public void getFcAvailableVideoProfiles() {
@@ -1391,11 +1394,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         CamcorderProfile profile;
 
-        try {
-            profile = CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH);
-            fb.fc_video_profile.add("QUALITY_HIGH");
-        } catch (Exception e) {
-        }
+        if (!fb.fc_video_profile_initialized) {
+
+            try {
+                profile = CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH);
+                fb.fc_video_profile.add("QUALITY_HIGH");
+            } catch (Exception e) {
+            }
 
 /*        try {
             profile = CamcorderProfile.get(CamcorderProfile.QUALITY_2160P);
@@ -1439,12 +1444,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         } catch (Exception e) {
         } */
 
-        try {
-            profile = CamcorderProfile.get(CamcorderProfile.QUALITY_LOW);
-            fb.fc_video_profile.add("QUALITY_LOW");
-        } catch (Exception e) {
+            try {
+                profile = CamcorderProfile.get(CamcorderProfile.QUALITY_LOW);
+                fb.fc_video_profile.add("QUALITY_LOW");
+            } catch (Exception e) {
+            }
+        fb.fc_video_profile_initialized = true;
         }
-
     }
 
     public void getActiveProcesses() {
@@ -1697,7 +1703,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             public void onInfo(MediaRecorder mediaRecorder, int what, int extra) {
                 if (what == MediaRecorder.MEDIA_RECORDER_INFO_MAX_DURATION_REACHED) {
-                    fb.SendMessage("MEDIA_RECORDER_INFO_MAX_DURATION_REACHED");
+                   // fb.SendMessage("MEDIA_RECORDER_INFO_MAX_DURATION_REACHED");
                    //     mediaRecorder.stop();
                 }
             }

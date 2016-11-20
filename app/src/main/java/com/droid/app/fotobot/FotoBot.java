@@ -219,6 +219,8 @@ public class FotoBot extends Application {
      */
     List<String> bc_video_profile = new ArrayList<String>();
 
+    public boolean bc_video_profile_initialized = false;
+
     /**
      * время записи видео
      */
@@ -228,6 +230,8 @@ public class FotoBot extends Application {
      * доступные видеопрофили для фронтальной камеры
      */
     List<String> fc_video_profile = new ArrayList<String>();
+
+    public boolean fc_video_profile_initialized = false;
 
 
     public String bc_current_video_profile = "QUALITY_LOW";
@@ -393,6 +397,7 @@ public class FotoBot extends Application {
     public Boolean Tab_Main_Activity_activated = false;
     public Boolean Tab_Network_Activity_activated = false;
     public Boolean Tab_Foto_Activity_activated = false;
+    public Boolean Tab_Video_Activity_activated = false;
 
     /**
      * Возвращает текущее состояние FotoBot'а, сейчас не пользуюсь этим

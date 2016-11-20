@@ -44,6 +44,7 @@ public class Tab_Video_Activity extends Activity {
     EditText editText_Autofocus;
     Spinner spinner_Hardware, spinner_ppm, spinner_Software;
     Spinner fc_spinner_Software;
+    ArrayAdapter<String> CustomAdapter;
     ArrayAdapter<String> spinnerArrayAdapter1, spinnerArrayAdapter_Hardware;
     ArrayAdapter<String> spinnerArrayAdapter2;
     ArrayAdapter<String> fc_spinnerArrayAdapter1;
@@ -110,7 +111,7 @@ public class Tab_Video_Activity extends Activity {
         tv_JPEG_Compression_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_JPEG_Compression_note.setTextColor(Color.BLACK);
         tv_JPEG_Compression_note.setText(getResources().getString(R.string.jpeg_compression_description));
-       // linLayout_JPEG_Compression.addView(tv_JPEG_Compression_note);
+        // linLayout_JPEG_Compression.addView(tv_JPEG_Compression_note);
 
 // ------------------------------------------------------------------------------------------------
 
@@ -179,25 +180,13 @@ public class Tab_Video_Activity extends Activity {
 // Доступные разрешения
         spinnerArray = new ArrayList<String>();
 
-        Camera.Size mSize = null;
-
-        int fe_w = (int) fb.camera_resolutions.get(0).width;
-        int fe_h = (int) fb.camera_resolutions.get(0).height;
-        float fe_s, fe_z;
-
-        fe_z = (float) fe_w / (float) fe_h;
-
         for (String profile : fb.bc_video_profile) {
             spinnerArray.add(profile);
         }
 
         spinner_Software = new Spinner(this);
-        //      spinnerArrayAdapter1 = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray);
-        //  CustomAdapter customAdapter=new CustomAdapter(this, R.layout.spinner_item, spinnerArray);
-        //Spinner mySpinner = (Spinner)findViewById(R.id.spinner);
-        spinner_Software.setAdapter(new Tab_Video_Activity.MyAdapter(this, R.layout.spinner_item, spinnerArray));
-        // spinner_Software.setAdapter(customAdapter);
-        //  spinner_Software.setAdapter(spinnerArrayAdapter1);
+        spinnerArrayAdapter1 = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray);
+        spinner_Software.setAdapter(spinnerArrayAdapter1);
         spinner_Software.setSelection(getIndex(spinner_Software, fb.bc_current_video_profile));
         linLayout_camera.addView(spinner_Software);
 
@@ -294,183 +283,6 @@ public class Tab_Video_Activity extends Activity {
         }
 
 
-// Метод обработки фото
-
-// Контейнер для метода
-        LinearLayout linLayout_Photo_Processing_Method = new LinearLayout(this);
-        linLayout_Photo_Processing_Method.setOrientation(LinearLayout.VERTICAL);
-        linLayout_Photo_Processing_Method.setPadding(5, 9, 5, 9);
-        linLayout_Photo_Processing_Method.setBackgroundColor(Color.rgb(208, 208, 208));
-
-// Название
-        TextView tv_Photo_Processing_Method = new TextView(this);
-        tv_Photo_Processing_Method.setTypeface(Typeface.DEFAULT_BOLD);
-        tv_Photo_Processing_Method.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
-        tv_Photo_Processing_Method.setTextColor(Color.BLACK);
-        tv_Photo_Processing_Method.setText(getResources().getString(R.string.photo_processing_method));
-        tv_Photo_Processing_Method.setTypeface(Typeface.DEFAULT_BOLD);
-        linLayout_Photo_Processing_Method.addView(tv_Photo_Processing_Method);
-
-// Список
-        spinnerArray_ppm = new ArrayList<String>();
-        spinnerArray_ppm.add("Hardware");
-        spinnerArray_ppm.add("Software");
-
-        spinner_ppm = new Spinner(this);
-        ArrayAdapter<String> spinnerArrayAdapter_ppm = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray_ppm);
-        spinner_ppm.setAdapter(spinnerArrayAdapter_ppm);
-        spinner_ppm.setSelection(getIndex(spinner_ppm, fb.Photo_Post_Processing_Method));
-        spinner_ppm.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            public void onItemSelected(AdapterView<?> adapterView,
-                                       View view, int i, long l) {
-
-                if (spinnerArray_ppm.get(i) == "Hardware") {
-                    fb.Photo_Post_Processing_Method = "Hardware";
-                    tv_Photo_Size_s.setVisibility(View.GONE);
-                    spinner_Software.setVisibility(View.GONE);
-                    tv_Photo_Size_s_note.setVisibility(View.GONE);
-                    tv_Photo_Size_h.setVisibility(View.VISIBLE);
-                    spinner_Hardware.setVisibility(View.VISIBLE);
-                    tv_Photo_Size_h_note.setVisibility(View.VISIBLE);
-                    if (fb.front_camera) {
-                        fc_spinner_Software.setVisibility(View.GONE);
-                    }
-                } else {
-                    fb.Photo_Post_Processing_Method = "Software";
-                    tv_Photo_Size_s.setVisibility(View.VISIBLE);
-                    spinner_Software.setVisibility(View.VISIBLE);
-                    tv_Photo_Size_s_note.setVisibility(View.VISIBLE);
-                    tv_Photo_Size_h.setVisibility(View.GONE);
-                    spinner_Hardware.setVisibility(View.GONE);
-                    tv_Photo_Size_h_note.setVisibility(View.GONE);
-                    if (fb.front_camera) {
-                        fc_spinner_Software.setVisibility(View.VISIBLE);
-                    }
-                }
-
-            }
-
-            // If no option selected
-            public void onNothingSelected(AdapterView<?> arg0) {
-                // TODO Auto-generated method stub
-
-            }
-
-        });
-
-        linLayout_Photo_Processing_Method.addView(spinner_ppm);
-
-// Заметка для метода
-        TextView tv_Photo_Processing_Method_note = new TextView(this);
-        tv_Photo_Processing_Method_note.setTypeface(null, Typeface.NORMAL);
-        tv_Photo_Processing_Method_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
-        tv_Photo_Processing_Method_note.setTextColor(Color.BLACK);
-        tv_Photo_Processing_Method_note.setText(getResources().getString(R.string.photo_processing_method_dscription));
-        linLayout_Photo_Processing_Method.addView(tv_Photo_Processing_Method_note);
-
-// Вспышка
-
-// Flash Container
-        LinearLayout linLayout_Flash = new LinearLayout(this);
-        linLayout_Flash.setOrientation(LinearLayout.VERTICAL);
-        linLayout_Flash.setPadding(5, 9, 5, 9);
-        linLayout_Flash.setBackgroundColor(Color.rgb(208, 208, 208));
-
-// Flash TextView
-        TextView tv_Flash = new TextView(this);
-        tv_Flash.setText(getResources().getString(R.string.flash));
-        tv_Flash.setWidth((screenWidth - padding) / 100 * 90);
-        tv_Flash.setTypeface(Typeface.DEFAULT_BOLD);
-        tv_Flash.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
-        tv_Flash.setTextColor(Color.BLACK);
-
-//        linLayout_camera.addView(tv_Flash);
-
-// CheckBox
-        checkBox_Flash = new CheckBox(this);
-        checkBox_Flash.setChecked(fb.Use_Flash);
-
-//        linLayout_camera.addView(checkBox_Flash);
-
-// ------------------------------------------------------------------------------------------------
-// Autofocus
-
-// Autofocus Container
-        LinearLayout linLayout_Autofocus = new LinearLayout(this);
-        linLayout_Autofocus.setOrientation(LinearLayout.VERTICAL);
-        linLayout_Autofocus.setPadding(5, 9, 5, 9);
-        linLayout_Autofocus.setBackgroundColor(Color.rgb(192, 192, 192));
-
-// Autofocus TextView
-        TextView tv_Autofocus = new TextView(this);
-        tv_Autofocus.setText(getResources().getString(R.string.Autofocus));
-        tv_Autofocus.setWidth((screenWidth - padding) / 100 * 90);
-        tv_Autofocus.setTypeface(Typeface.DEFAULT_BOLD);
-        tv_Autofocus.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
-        tv_Autofocus.setTextColor(Color.BLACK);
-
-        linLayout_Autofocus.addView(tv_Autofocus);
-
-// CheckBox
-        checkBox_Autofocus = new CheckBox(this);
-        checkBox_Autofocus.setChecked(fb.use_autofocus);
-        linLayout_Autofocus.addView(checkBox_Autofocus);
-
-// Time for focusing
-        final TextView tv_Time_for_Focusing = new TextView(this);
-        tv_Time_for_Focusing.setText(getResources().getString(R.string.Time_for_Focusing));
-        tv_Time_for_Focusing.setWidth((screenWidth - padding) / 100 * 90);
-        tv_Time_for_Focusing.setTypeface(Typeface.DEFAULT_BOLD);
-        tv_Time_for_Focusing.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
-        tv_Time_for_Focusing.setTextColor(Color.BLACK);
-
-        linLayout_Autofocus.addView(tv_Time_for_Focusing);
-
-        // Ввод данных
-        editText_Autofocus = new EditText(this);
-        editText_Autofocus.setText(Integer.toString(fb.time_for_focusing));
-        editText_Autofocus.setTextColor(Color.rgb(50, 100, 150));
-
-        // if (fb.use_autofocus) {
-        linLayout_Autofocus.addView(editText_Autofocus);
-        // }
-
-        //   linLayout_Autofocus.addView(tv_Time_for_Focusing);
-
-        if (fb.use_autofocus) {
-            tv_Time_for_Focusing.setVisibility(View.VISIBLE);
-            editText_Autofocus.setVisibility(View.VISIBLE);
-        } else {
-            tv_Time_for_Focusing.setVisibility(View.GONE);
-            editText_Autofocus.setVisibility(View.GONE);
-        }
-
-        checkBox_Autofocus.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                if (checkBox_Autofocus.isChecked()) {
-                    fb.use_autofocus = true;
-                    tv_Time_for_Focusing.setVisibility(View.VISIBLE);
-                    editText_Autofocus.setVisibility(View.VISIBLE);
-                } else {
-                    fb.use_autofocus = false;
-                    tv_Time_for_Focusing.setVisibility(View.GONE);
-                    editText_Autofocus.setVisibility(View.GONE);
-                }
-
-            }
-
-            // If no option selected
-            public void onNothingSelected(AdapterView<?> arg0) {
-                // TODO Auto-generated method stub
-
-            }
-
-        });
-
 // Buttons
 
 // Container
@@ -515,11 +327,6 @@ public class Tab_Video_Activity extends Activity {
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
 
-                if (checkBox_Flash.isChecked()) {
-                    editor.putBoolean("Use_Flash", true);
-                } else {
-                    editor.putBoolean("Use_Flash", false);
-                }
 
                 if (fb.front_camera) {
                     if (checkBox_fc.isChecked()) {
@@ -535,24 +342,15 @@ public class Tab_Video_Activity extends Activity {
                     editor.putBoolean("Make_Video_Bc", false);
                 }
 
-                if (checkBox_Autofocus.isChecked()) {
-                    editor.putBoolean("Use_Autofocus", true);
-                } else {
-                    editor.putBoolean("Use_Autofocus", false);
-                }
 
-                String input = editText_JPEG_Compression.getText().toString();
-                editor.putString("Photo_Post_Processing_Method", spinner_ppm.getSelectedItem().toString());
+             //   String input = editText_JPEG_Compression.getText().toString();
+
                 editor.putInt("Video_Recording_Time", Integer.parseInt(editText_JPEG_Compression.getText().toString()));
                 fb.video_recording_time = Integer.parseInt(editText_JPEG_Compression.getText().toString());
 
-                if (fb.autofocus) {
-                    editor.putInt("Time_For_Focusing", Integer.parseInt(editText_Autofocus.getText().toString()));
-                }
-
-                editor.putString("Image_Scale", spinner_Hardware.getSelectedItem().toString());
                 editor.putString("Bc_Current_Video_Profile", spinner_Software.getSelectedItem().toString());
                 fb.bc_current_video_profile = spinner_Software.getSelectedItem().toString();
+
                 if (fb.front_camera) {
                     editor.putString("Fc_Current_Video_Profile", fc_spinner_Software.getSelectedItem().toString());
                     fb.fc_current_video_profile = fc_spinner_Software.getSelectedItem().toString();
@@ -588,7 +386,7 @@ public class Tab_Video_Activity extends Activity {
         btn_mp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent;
-                fb.Tab_Foto_Activity_activated = true;
+                fb.Tab_Video_Activity_activated = true;
                 intent = new Intent(v.getContext(), MainActivity.class);
                 startActivity(intent);
             }
@@ -598,16 +396,8 @@ public class Tab_Video_Activity extends Activity {
         linLayout_Buttons.addView(btn_mp, lpViewbutton2);
 
 
-        //     FullFrame.addView(linLayout_Photo_Processing_Method);
-      //  FullFrame.addView(linLayout_Photo_Size);
-        //     FullFrame.addView(linLayout_Flash);
-
-
         FullFrame.addView(linLayout_camera);
 
-        //     if ( fb.autofocus ) {
-        //        FullFrame.addView(linLayout_Autofocus);
-        //    }
 
         if (fb.front_camera) {
             FullFrame.addView(linLayout_fc);
@@ -632,7 +422,9 @@ public class Tab_Video_Activity extends Activity {
     protected void onResume(SurfaceHolder holder) {
         final FotoBot fb = (FotoBot) getApplicationContext();
         fb.LoadSettings();
-        editText_JPEG_Compression.setText(Integer.toString(fb.JPEG_Compression));
+        editText_JPEG_Compression.setText(Integer.toString(fb.video_recording_time));
+        spinner_Software.setSelection(getIndex(spinner_Software, fb.bc_current_video_profile));
+        fc_spinner_Software.setSelection(getIndex(fc_spinner_Software, fb.fc_current_video_profile));
         Log.d(LOG_TAG, "Tab3: onResume");
     }
 
@@ -651,8 +443,9 @@ public class Tab_Video_Activity extends Activity {
         final FotoBot fb = (FotoBot) getApplicationContext();
         fb.LoadSettings();
         editText_JPEG_Compression.setText(Integer.toString(fb.video_recording_time));
-        spinner_Software.setSelection(getIndex(spinner_Software, fb.Image_Size));
-        checkBox_Flash.setChecked(fb.Use_Flash);
+        spinner_Software.setSelection(getIndex(spinner_Software, fb.bc_current_video_profile));
+        fc_spinner_Software.setSelection(getIndex(fc_spinner_Software, fb.fc_current_video_profile));
+
         Log.d(LOG_TAG, "Tab3: onPause");
     }
 
