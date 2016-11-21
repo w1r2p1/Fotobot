@@ -863,7 +863,7 @@ public class FotoBot extends Application {
      * @param h
      * @param str
      */
-    public void SendMail(Handler h, String str, String fc_str) {
+    public void SendMail(Handler h, String str, String fc_str, String bc_video, String fc_video) {
 
 //        final FotoBot fb = (FotoBot) getApplicationContext();
 
@@ -973,6 +973,20 @@ public class FotoBot extends Application {
             }
         }
 
+        if (make_video_bc) {
+
+            attach_file = new File(bc_video);
+            boolean fileExists = attach_file.isFile();
+
+            if (fileExists) {
+
+            } else {
+                error_message = true;
+                SendMessage("ERROR: video " + bc_video + " doesn't exist for attaching to email.");
+            }
+        }
+
+
 
         if (front_camera && make_photo_fc) {
 
@@ -983,9 +997,23 @@ public class FotoBot extends Application {
 
             } else {
                 error_message = true;
-                SendMessage("ERROR: front famera image doesn't exist for attaching to email.");
+                SendMessage("ERROR: front camera image doesn't exist for attaching to email.");
             }
         }
+
+        if (front_camera && make_video_fc) {
+
+            attach_file = new File(fc_video);
+            boolean fc_fileExists = attach_file.isFile();
+
+            if (front_camera && fc_fileExists && make_photo_fc) {
+
+            } else {
+                error_message = true;
+                SendMessage("ERROR: video " + fc_video + " doesn't exist for attaching to email.");
+            }
+        }
+
 
         if (attach_log) {
             attach_file = new File((work_dir + "/logfile.txt"));
