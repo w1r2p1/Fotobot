@@ -1899,13 +1899,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         final FotoBot fb = (FotoBot) getApplicationContext();
 
         if (fb.make_photo_bc) {
-            File imgfile = new File(fb.Image_Name_Full_Path);
+            File imgfile = new File(fb.bc_Image_Name_Full_Path);
 
             if (imgfile.delete()) {
-                fb.SendMessage("Файл " + fb.Image_Name + " был удален");
+                fb.SendMessage("Файл " + fb.bc_Image_Name + " был удален");
             } else {
                 fb.error_message = true;
-                fb.SendMessage("Проблема с удалением фото: " + fb.Image_Name);
+                fb.SendMessage("Проблема с удалением фото: " + fb.bc_Image_Name);
             }
         }
         if (fb.make_photo_fc) {

@@ -1037,6 +1037,14 @@ public class FotoBot extends Application {
                 m.addAttachment(fc_str);
             }
 
+            if (make_video_bc) {
+                m.addAttachment(bc_video);
+            }
+
+            if (front_camera && make_video_fc) {
+                m.addAttachment(fc_video);
+            }
+
             if (attach_log) {
                 m.addAttachment(work_dir + "/logfile.txt");
             }
