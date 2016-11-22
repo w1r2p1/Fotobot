@@ -38,6 +38,8 @@ public class Tab_Foto_Activity extends Activity {
     CheckBox checkBox_bc;
     CheckBox checkBox_fc;
     CheckBox checkBox_Autofocus;
+    CheckBox checkBox_Attach;
+    CheckBox checkBox_fc_Attach;
     EditText editText_JPEG_Compression;
     EditText editText_Autofocus;
     Spinner spinner_Hardware, spinner_ppm, spinner_Software;
@@ -304,6 +306,33 @@ public class Tab_Foto_Activity extends Activity {
             checkBox_fc = new CheckBox(this);
             checkBox_fc.setChecked(fb.make_photo_fc);
             linLayout_fc.addView(checkBox_fc);
+
+// ------------------------------------------------------------------------------------------------
+// Присоединить изображение к письму
+
+// Attach Container
+            LinearLayout linLayout_fc_Attach = new LinearLayout(this);
+            linLayout_fc_Attach.setOrientation(LinearLayout.VERTICAL);
+            linLayout_fc_Attach.setPadding(5, 9, 5, 9);
+            linLayout_fc_Attach.setBackgroundColor(Color.rgb(208, 208, 208));
+
+// Attach TextView
+            TextView tv_fc_Attach = new TextView(this);
+            tv_fc_Attach.setText(getResources().getString(R.string.attach_image));
+            tv_fc_Attach.setWidth((screenWidth - padding) / 100 * 90);
+            tv_fc_Attach.setTypeface(Typeface.DEFAULT_BOLD);
+            tv_fc_Attach.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+            tv_fc_Attach.setTextColor(Color.BLACK);
+//        linLayout_Flash.addView(tv_Flash);
+            linLayout_fc.addView(tv_fc_Attach);
+
+// CheckBox
+            checkBox_fc_Attach = new CheckBox(this);
+            checkBox_fc_Attach.setChecked(fb.fc_image_attach);
+//        linLayout_Flash.addView(checkBox_Flash);
+            linLayout_fc.addView(checkBox_fc_Attach);
+
+
         }
 
 
@@ -487,6 +516,34 @@ public class Tab_Foto_Activity extends Activity {
 
         });
 
+// ------------------------------------------------------------------------------------------------
+// Присоединить изображение к письму
+
+// Attach Container
+        LinearLayout linLayout_Attach = new LinearLayout(this);
+        linLayout_Attach.setOrientation(LinearLayout.VERTICAL);
+        linLayout_Attach.setPadding(5, 9, 5, 9);
+        linLayout_Attach.setBackgroundColor(Color.rgb(208, 208, 208));
+
+// Attach TextView
+        TextView tv_Attach = new TextView(this);
+        tv_Attach.setText(getResources().getString(R.string.attach_image));
+        tv_Attach.setWidth((screenWidth - padding) / 100 * 90);
+        tv_Attach.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Attach.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Attach.setTextColor(Color.BLACK);
+//        linLayout_Flash.addView(tv_Flash);
+        linLayout_camera.addView(tv_Attach);
+
+// CheckBox
+        checkBox_Attach = new CheckBox(this);
+        checkBox_Attach.setChecked(fb.bc_image_attach);
+//        linLayout_Flash.addView(checkBox_Flash);
+        linLayout_camera.addView(checkBox_Attach);
+
+// ------------------------------------------------------------------------------------------------
+
+
 // Buttons
 
 // Container
@@ -543,12 +600,28 @@ public class Tab_Foto_Activity extends Activity {
                     } else {
                         editor.putBoolean("Use_Fc", false);
                     }
+
+                    if (checkBox_fc_Attach.isChecked()){
+                        editor.putBoolean("Fc_Image_Attach", true);
+                        fb.fc_image_attach = true;
+                    } else {
+                        editor.putBoolean("Fc_Image_Attach", false);
+                        fb.fc_image_attach = false;
+                    }
                 }
 
                 if (checkBox_bc.isChecked()) {
                     editor.putBoolean("Use_Bc", true);
                 } else {
                     editor.putBoolean("Use_Bc", false);
+                }
+
+                if (checkBox_Attach.isChecked()){
+                    editor.putBoolean("Bc_Image_Attach", true);
+                    fb.bc_image_attach = true;
+                } else {
+                    editor.putBoolean("Bc_Image_Attach", false);
+                    fb.bc_image_attach = false;
                 }
 
                 if (checkBox_Autofocus.isChecked()) {

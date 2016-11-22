@@ -16,7 +16,6 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -424,7 +423,9 @@ public class Tab_Video_Activity extends Activity {
         fb.LoadSettings();
         editText_JPEG_Compression.setText(Integer.toString(fb.video_recording_time));
         spinner_Software.setSelection(getIndex(spinner_Software, fb.bc_current_video_profile));
-        fc_spinner_Software.setSelection(getIndex(fc_spinner_Software, fb.fc_current_video_profile));
+        if (fb.front_camera) {
+            fc_spinner_Software.setSelection(getIndex(fc_spinner_Software, fb.fc_current_video_profile));
+        }
         Log.d(LOG_TAG, "Tab3: onResume");
     }
 
@@ -444,7 +445,9 @@ public class Tab_Video_Activity extends Activity {
         fb.LoadSettings();
         editText_JPEG_Compression.setText(Integer.toString(fb.video_recording_time));
         spinner_Software.setSelection(getIndex(spinner_Software, fb.bc_current_video_profile));
-        fc_spinner_Software.setSelection(getIndex(fc_spinner_Software, fb.fc_current_video_profile));
+        if (fb.front_camera) {
+            fc_spinner_Software.setSelection(getIndex(fc_spinner_Software, fb.fc_current_video_profile));
+        }
 
         Log.d(LOG_TAG, "Tab3: onPause");
     }

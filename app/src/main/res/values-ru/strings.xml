@@ -33,6 +33,7 @@
     <string name="Camera_Name_description">Название камеры будет добавлено к заголовку письма, что позволит легче сортировать почту</string>
     <string name="Front_Camera">Фронтальная камера</string>
     <string name="Back_Camera">Камера на задней панели телефона</string>
+    <string name="attach_image">Присоединить фото  к письму</string>
 
     <string name="SMS_Password">SMS пароль</string>
     <string name="SMS_Password_description">Пароль для управления через SMS (если пароль не совпадает с заданным, то SMS будет игнорироваться)</string>
