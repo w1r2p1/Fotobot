@@ -40,7 +40,9 @@ public class Tab_Video_Activity extends Activity {
     CheckBox checkBox_fc;
     CheckBox checkBox_Autofocus;
     CheckBox checkBox_Attach;
+    CheckBox checkBox_Delete;
     CheckBox checkBox_fc_Attach;
+    CheckBox checkBox_fc_Delete;
     EditText editText_JPEG_Compression;
     EditText editText_Autofocus;
     Spinner spinner_Hardware, spinner_ppm, spinner_Software;
@@ -239,6 +241,29 @@ public class Tab_Video_Activity extends Activity {
         linLayout_camera.addView(checkBox_Attach);
 
 // ------------------------------------------------------------------------------------------------
+// Удалить изображение после отправки на почту
+
+// Delete Container
+        LinearLayout linLayout_Delete = new LinearLayout(this);
+        linLayout_Delete.setOrientation(LinearLayout.VERTICAL);
+        linLayout_Delete.setPadding(5, 9, 5, 9);
+        linLayout_Delete.setBackgroundColor(Color.rgb(208, 208, 208));
+
+// Delete TextView
+        TextView tv_Delete = new TextView(this);
+        tv_Delete.setText(getResources().getString(R.string.delete_image));
+        tv_Delete.setWidth((screenWidth - padding) / 100 * 90);
+        tv_Delete.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Delete.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Delete.setTextColor(Color.BLACK);
+        linLayout_camera.addView(tv_Delete);
+
+// CheckBox
+        checkBox_Delete = new CheckBox(this);
+        checkBox_Delete.setChecked(fb.bc_image_delete);
+        linLayout_camera.addView(checkBox_Delete);
+
+// ------------------------------------------------------------------------------------------------
 
 // Фронтальная камера
 // Контейнер для фронтальной камеры
@@ -323,16 +348,35 @@ public class Tab_Video_Activity extends Activity {
             tv_fc_Attach.setTypeface(Typeface.DEFAULT_BOLD);
             tv_fc_Attach.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
             tv_fc_Attach.setTextColor(Color.BLACK);
-//        linLayout_Flash.addView(tv_Flash);
             linLayout_fc.addView(tv_fc_Attach);
 
 // CheckBox
             checkBox_fc_Attach = new CheckBox(this);
             checkBox_fc_Attach.setChecked(fb.fc_video_attach);
-//        linLayout_Flash.addView(checkBox_Flash);
             linLayout_fc.addView(checkBox_fc_Attach);
 
+// ------------------------------------------------------------------------------------------------
+// Удалить изображение после отправки на почту
 
+// Delete Container
+            LinearLayout linLayout_fc_Delete = new LinearLayout(this);
+            linLayout_fc_Delete.setOrientation(LinearLayout.VERTICAL);
+            linLayout_fc_Delete.setPadding(5, 9, 5, 9);
+            linLayout_fc_Delete.setBackgroundColor(Color.rgb(208, 208, 208));
+
+// Delete TextView
+            TextView tv_fc_Delete = new TextView(this);
+            tv_fc_Delete.setText(getResources().getString(R.string.delete_image));
+            tv_fc_Delete.setWidth((screenWidth - padding) / 100 * 90);
+            tv_fc_Delete.setTypeface(Typeface.DEFAULT_BOLD);
+            tv_fc_Delete.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+            tv_fc_Delete.setTextColor(Color.BLACK);
+            linLayout_fc.addView(tv_fc_Delete);
+
+// CheckBox
+            checkBox_fc_Delete = new CheckBox(this);
+            checkBox_fc_Delete.setChecked(fb.fc_image_delete);
+            linLayout_fc.addView(checkBox_fc_Delete);
 
         }
 
@@ -397,6 +441,14 @@ public class Tab_Video_Activity extends Activity {
                         fb.fc_video_attach = false;
                     }
 
+                    if (checkBox_fc_Delete.isChecked()){
+                        editor.putBoolean("Fc_Video_Delete", true);
+                        fb.fc_video_delete = true;
+                    } else {
+                        editor.putBoolean("Fc_Video_Delete", false);
+                        fb.fc_video_delete = false;
+                    }
+
                 }
 
                 if (checkBox_bc.isChecked()) {
@@ -413,6 +465,13 @@ public class Tab_Video_Activity extends Activity {
                     fb.bc_video_attach = false;
                 }
 
+                if (checkBox_Delete.isChecked()){
+                    editor.putBoolean("Bc_Video_Delete", true);
+                    fb.bc_video_delete = true;
+                } else {
+                    editor.putBoolean("Bc_Video_Delete", false);
+                    fb.bc_video_delete = false;
+                }
 
              //   String input = editText_JPEG_Compression.getText().toString();
 

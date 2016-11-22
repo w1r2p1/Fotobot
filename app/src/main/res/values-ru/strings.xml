@@ -34,6 +34,7 @@
     <string name="Front_Camera">Фронтальная камера</string>
     <string name="Back_Camera">Камера на задней панели телефона</string>
     <string name="attach_image">Присоединить фото к письму</string>
+    <string name="delete_image">Удалить фото после отправки на почту</string>
     <string name="attach_video">Присоединить видео к письму</string>
 
     <string name="SMS_Password">SMS пароль</string>

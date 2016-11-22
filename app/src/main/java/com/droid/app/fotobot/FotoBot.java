@@ -277,6 +277,11 @@ public class FotoBot extends Application {
     public boolean bc_video_attach = true;
     public boolean fc_video_attach = true;
 
+    public boolean bc_image_delete = false;
+    public boolean fc_image_delete = false;
+    public boolean bc_video_delete = false;
+    public boolean fc_video_delete = false;
+
     public String Image_Name_Full_Path;
     public String fc_Image_Name_Full_Path;
     public String bc_Image_Name_Full_Path;
@@ -965,7 +970,7 @@ public class FotoBot extends Application {
 
         File attach_file;
 
-        if (make_photo_bc) {
+        if (make_photo_bc && bc_image_attach) {
 
             attach_file = new File(str);
             boolean fileExists = attach_file.isFile();
@@ -978,7 +983,7 @@ public class FotoBot extends Application {
             }
         }
 
-        if (make_video_bc) {
+        if (make_video_bc && bc_video_attach) {
 
             attach_file = new File(bc_video);
             boolean fileExists = attach_file.isFile();
@@ -993,7 +998,7 @@ public class FotoBot extends Application {
 
 
 
-        if (front_camera && make_photo_fc) {
+        if (front_camera && make_photo_fc && fc_image_attach) {
 
             attach_file = new File(fc_str);
             boolean fc_fileExists = attach_file.isFile();
@@ -1006,7 +1011,7 @@ public class FotoBot extends Application {
             }
         }
 
-        if (front_camera && make_video_fc) {
+        if (front_camera && make_video_fc && fc_video_attach) {
 
             attach_file = new File(fc_video);
             boolean fc_fileExists = attach_file.isFile();
@@ -1034,19 +1039,19 @@ public class FotoBot extends Application {
         }
         try {
 
-            if (make_photo_bc) {
+            if (make_photo_bc && bc_image_attach) {
                 m.addAttachment(str);
             }
 
-            if (front_camera && make_photo_fc) {
+            if (front_camera && make_photo_fc && fc_image_attach) {
                 m.addAttachment(fc_str);
             }
 
-            if (make_video_bc) {
+            if (make_video_bc && bc_image_attach) {
                 m.addAttachment(bc_video);
             }
 
-            if (front_camera && make_video_fc) {
+            if (front_camera && make_video_fc && fc_image_attach) {
                 m.addAttachment(fc_video);
             }
 
@@ -1109,6 +1114,10 @@ public class FotoBot extends Application {
         fc_image_attach = pref.getBoolean("Fc_Image_Attach", true);
         bc_video_attach = pref.getBoolean("Bc_Video_Attach", true);
         fc_video_attach = pref.getBoolean("Fc_Video_Attach", true);
+        bc_image_delete = pref.getBoolean("Bc_Image_Delete", false);
+        fc_image_delete = pref.getBoolean("Fc_Image_Delete", false);
+        bc_video_delete = pref.getBoolean("Bc_Video_Delete", false);
+        fc_video_delete = pref.getBoolean("Fc_Video_Delete", false);
         make_video_fc = pref.getBoolean("Make_Video_Fc", false);
         make_video_bc = pref.getBoolean("Make_Video_Bc", false);
         JPEG_Compression = pref.getInt("JPEG_Compression", 50);
@@ -1189,6 +1198,10 @@ public class FotoBot extends Application {
         editor.putBoolean("Fc_Image_Attach", fc_image_attach);
         editor.putBoolean("Bc_Video_Attach", bc_video_attach);
         editor.putBoolean("Fc_Video_Attach", fc_video_attach);
+        editor.putBoolean("Bc_Image_Delete", bc_image_delete);
+        editor.putBoolean("Fc_Image_Delete", fc_image_delete);
+        editor.putBoolean("Bc_Video_Delete", bc_video_delete);
+        editor.putBoolean("Fc_Video_Delete", fc_video_delete);
         editor.putBoolean("Attach_Log", attach_log);
         editor.putString("Attached_Info_Detailisation", Attached_Info_Detailisation);
         editor.putInt("Log_Size", log_size);

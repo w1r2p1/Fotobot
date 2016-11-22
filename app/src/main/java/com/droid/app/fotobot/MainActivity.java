@@ -1898,7 +1898,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     public void deletePhoto() {
         final FotoBot fb = (FotoBot) getApplicationContext();
 
-        if (fb.make_photo_bc) {
+        if (fb.make_photo_bc && fb.bc_image_delete) {
             File imgfile = new File(fb.bc_Image_Name_Full_Path);
 
             if (imgfile.delete()) {
@@ -1908,7 +1908,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 fb.SendMessage("Проблема с удалением фото: " + fb.bc_Image_Name);
             }
         }
-        if (fb.make_photo_fc) {
+        if (fb.make_photo_fc && fb.fc_image_delete) {
             File fc_imgfile = new File(fb.fc_Image_Name_Full_Path);
 
             if (fc_imgfile.delete()) {
@@ -1923,20 +1923,20 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     public void deleteVideo() {
         final FotoBot fb = (FotoBot) getApplicationContext();
 
-        if (fb.make_video_bc) {
-            File imgfile = new File(fb.bc_Video_Name_Full_Path);
+        if (fb.make_video_bc && fb.bc_video_delete) {
+            File videofile = new File(fb.bc_Video_Name_Full_Path);
 
-            if (imgfile.delete()) {
+            if (videofile.delete()) {
                 fb.SendMessage("Файл " + fb.bc_Video_Name_Full_Path + " был удален");
             } else {
                 fb.error_message = true;
                 fb.SendMessage("Проблема с удалением видео: " + fb.bc_Video_Name_Full_Path);
             }
         }
-        if (fb.make_video_fc) {
-            File fc_imgfile = new File(fb.fc_Video_Name_Full_Path);
+        if (fb.make_video_fc && fb.fc_video_delete) {
+            File fc_videofile = new File(fb.fc_Video_Name_Full_Path);
 
-            if (fc_imgfile.delete()) {
+            if (fc_videofile.delete()) {
                 fb.SendMessage("Файл " + fb.fc_Video_Name_Full_Path + " был удален");
             } else {
                 fb.error_message = true;
