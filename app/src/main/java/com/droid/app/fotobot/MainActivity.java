@@ -1539,7 +1539,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
   //      parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO); // для video закомментировать
 
-        if (fb.Use_Flash) {
+        if (fb.Use_Flash && cameraType.equals("Bc")) {
             parameters.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
         }
 
@@ -1601,7 +1601,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             preview_stopped = true;
         }
 
-        if (fb.Use_Flash) {
+        if (fb.Use_Flash && cameraType.equals("Bc")) {
             parameters = mCamera.getParameters();
             parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
 
