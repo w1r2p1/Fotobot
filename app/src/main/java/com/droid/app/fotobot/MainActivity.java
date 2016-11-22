@@ -887,10 +887,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             cleanLogFile();
 
 // удаляем фото с телефона
-                            if (fb.delete_foto) {
+                          //  if (fb.delete_foto) {
                                 deletePhoto();
                                 deleteVideo();
-                            }
+                          //  }
 
                             fb.fbpause(h, fb.Photo_Frequency);
                             fb.sms_check_file = false;
