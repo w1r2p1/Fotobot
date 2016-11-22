@@ -174,7 +174,7 @@ public class Tab_Video_Activity extends Activity {
 // Название
         TextView tv_bc = new TextView(this);
         tv_bc.setTypeface(Typeface.DEFAULT_BOLD);
-        tv_bc.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_bc.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size + 4);
         tv_bc.setTextColor(Color.BLACK);
         tv_bc.setText("Камера");
         tv_bc.setTypeface(Typeface.DEFAULT_BOLD);
@@ -276,7 +276,7 @@ public class Tab_Video_Activity extends Activity {
 // Название
             TextView tv_fc = new TextView(this);
             tv_fc.setTypeface(Typeface.DEFAULT_BOLD);
-            tv_fc.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+            tv_fc.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size + 4);
             tv_fc.setTextColor(Color.BLACK);
             tv_fc.setText("Фронтальная камера");
             tv_fc.setTypeface(Typeface.DEFAULT_BOLD);
