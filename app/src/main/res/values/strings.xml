@@ -48,10 +48,17 @@ smtphost &lt;smtp.gmail.com&gt;\n
 smtpport &lt;465&gt;\n
 fc &lt;on/off&gt;\n
 bc &lt;on/off&gt;\n
-delf &lt;on/off&gt;\n
 log &lt;on/off&gt;\n
 jpg &lt;compression&gt;\n
 flash &lt;on/off&gt;\n
+attachbci &lt;on/off&gt;\n
+attachfci &lt;on/off&gt;\n
+attachbcv &lt;on/off&gt;\n
+attachfcv &lt;on/off&gt;\n
+delbci &lt;on/off&gt;\n
+delfci &lt;on/off&gt;\n
+delbcv &lt;on/off&gt;\n
+delfcv &lt;on/off&gt;\n
 status\n
 netstatus\n
 emailstatus\n

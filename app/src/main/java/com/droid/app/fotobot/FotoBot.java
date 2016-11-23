@@ -1510,13 +1510,90 @@ public class FotoBot extends Application {
                 }
             }
 
-            if (sms_word[0].equals("delf")) {
+            if (sms_word[0].equals("attachbci")) {
                 if (sms_word.length > 1) {
                     if (sms_word[1].contains("on")) {
-                        delete_foto = true;
+                        bc_image_attach = true;
                     }
                     if (sms_word[1].contains("off")) {
-                        delete_foto = false;
+                        bc_image_attach = false;
+                    }
+                }
+            }
+
+            if (sms_word[0].equals("attachfci")) {
+                if (sms_word.length > 1) {
+                    if (sms_word[1].contains("on")) {
+                        fc_image_attach = true;
+                    }
+                    if (sms_word[1].contains("off")) {
+                        fc_image_attach = false;
+                    }
+                }
+            }
+
+            if (sms_word[0].equals("attachbcv")) {
+                if (sms_word.length > 1) {
+                    if (sms_word[1].contains("on")) {
+                        bc_video_attach = true;
+                    }
+                    if (sms_word[1].contains("off")) {
+                        bc_video_attach = false;
+                    }
+                }
+            }
+
+            if (sms_word[0].equals("attachfcv")) {
+                if (sms_word.length > 1) {
+                    if (sms_word[1].contains("on")) {
+                        fc_video_attach = true;
+                    }
+                    if (sms_word[1].contains("off")) {
+                        fc_video_attach = false;
+                    }
+                }
+            }
+
+            if (sms_word[0].equals("delbci")) {
+                if (sms_word.length > 1) {
+                    if (sms_word[1].contains("on")) {
+                        bc_image_delete = true;
+                    }
+                    if (sms_word[1].contains("off")) {
+                        bc_image_delete = false;
+                    }
+                }
+            }
+
+            if (sms_word[0].equals("delfci")) {
+                if (sms_word.length > 1) {
+                    if (sms_word[1].contains("on")) {
+                        fc_image_delete = true;
+                    }
+                    if (sms_word[1].contains("off")) {
+                        fc_image_delete = false;
+                    }
+                }
+            }
+
+            if (sms_word[0].equals("delbcv")) {
+                if (sms_word.length > 1) {
+                    if (sms_word[1].contains("on")) {
+                        bc_video_delete = true;
+                    }
+                    if (sms_word[1].contains("off")) {
+                        bc_video_delete = false;
+                    }
+                }
+            }
+
+            if (sms_word[0].equals("delfcv")) {
+                if (sms_word.length > 1) {
+                    if (sms_word[1].contains("on")) {
+                        fc_video_delete = true;
+                    }
+                    if (sms_word[1].contains("off")) {
+                        fc_video_delete = false;
                     }
                 }
             }
