@@ -1495,8 +1495,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     public void makePhoto(String cameraType) {
         final FotoBot fb = (FotoBot) getApplicationContext();
-
-        Camera.Parameters save_camera_parameters = null;
+        String width;
+        String height;
 
         int cameraId = -1;
 
@@ -1516,11 +1516,16 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         fb.LoadSettings();
 
-        // Camera.Parameters params;
-        String string = fb.Image_Size;
-        String[] parts = string.split("x");
-        String width = parts[0];
-        String height = parts[1];
+// set camera resolution
+        if (cameraType.equals("Bc")) {
+            String[] parts = fb.Image_Size.split("x");
+            width = parts[0];
+            height = parts[1];
+        } else {
+            String[] parts = fb.fc_Image_Size.split("x");
+            width = parts[0];
+            height = parts[1];
+        }
 
 // Step 1
         if (mCamera == null) {
@@ -1534,10 +1539,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 // Step 2
         Camera.Parameters parameters = mCamera.getParameters();
-
-        save_camera_parameters = parameters;
-
-  //      parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO); // для video закомментировать
 
         if (fb.Use_Flash && cameraType.equals("Bc")) {
             parameters.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
@@ -1553,8 +1554,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             fb.error_message = true;
             fb.SendMessage("Проблема с установкой параметров для " + cameraType + " камеры\n\n\n" + e.toString());
         }
-
-//        fb.fbpause(h, 1);
 
 // Step 3
 
@@ -1612,12 +1611,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 fb.SendMessage("Проблема выключения вспышки для " + cameraType + " камеры\n\n\n" + e.toString());
             }
         }
-
-      /*  try {
-            mCamera.setParameters(save_camera_parameters);
-        } catch (Exception e) {
-            fb.SendMessage("Проблема восстановления параметров " + cameraType + " камеры\n\n\n" + e.toString());
-        }*/
 
         if (fb.autofocus && fb.use_autofocus && cameraType.equals("Bc")) {
 
