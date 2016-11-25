@@ -1667,27 +1667,35 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
         }
 
-     //   Camera.Parameters parameters = mCamera.getParameters();
-
-       // save_camera_parameters = parameters;
-
-     /*   if (fb.autofocus && fb.use_autofocus) {
-            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
-            mCamera.autoFocus(new Camera.AutoFocusCallback() {
-                public void onAutoFocus(boolean success, Camera camera) {
-
-                }
-            });
-
-            fb.fbpause(h, fb.time_for_focusing);
+// DEBUG
+// стартуем preview и сразу же останавливаем
+/*        fb.fbpause(h,1);
+        if (preview_stopped) {
+            fb.SendMessage("на данный момент preview не запущено, поэтому запускаем preview");
+            try {
+                mCamera.setPreviewDisplay(fb.holder);
+                mCamera.startPreview();
+                preview_stopped = false;
+                fb.SendMessage("preview запущено");
+            } catch (Exception e) {
+                fb.error_message = true;
+                fb.SendMessage("Проблема запуска preview для " + cameraType + " камеры\n\n\n" + e.toString());
+            }
         }
 
-        try {
-            mCamera.setParameters(parameters);
-        } catch (Exception e) {
-            fb.SendMessage("Проблема установки автофокуса для " + cameraType + " камеры\n\n\n" + e.toString());
-        }
-*/
+        fb.fbpause(h,1);
+        if (!preview_stopped) {
+            fb.SendMessage("preview уже запущено, пробуем его остановить");
+            try {
+                mCamera.stopPreview();
+                preview_stopped = true;
+                fb.SendMessage("preview остановлено");
+            } catch (Exception e){
+                fb.SendMessage("Проблема с остановкой preview " + e.toString());
+            }
+        }*/
+// END DEBUG
+
         MediaRecorder mMediaRecorder = new MediaRecorder();
 
         mCamera.unlock();
@@ -1791,6 +1799,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         mMediaRecorder.setMaxDuration(fb.video_recording_time * 1000);
 
+//DEBUG
+       // mMediaRecorder.setVideoSize(352, 288);
+     //   mMediaRecorder.setVideoFrameRate(30);
+//END DEBUG
+
         try {
             mMediaRecorder.prepare();
         } catch (IllegalStateException e) {
@@ -1844,7 +1857,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             mMediaRecorder.release(); // release the recorder object
             mMediaRecorder = null;
         } catch (Exception e) {
-            fb.SendMessage(e.toString());
+            fb.error_message = true;
+            fb.SendMessage("Проблема с остановкой записи видео\n" +e.toString());
         }
 
   /*      if (fb.autofocus && fb.use_autofocus) {

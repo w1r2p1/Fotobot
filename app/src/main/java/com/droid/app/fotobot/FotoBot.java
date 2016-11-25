@@ -351,6 +351,9 @@ public class FotoBot extends Application {
      */
     public String Camera_Properties;
 
+    public int bc_video_width = 320;
+    public int bc_video_height = 240;
+
     /**
      * FC Camera properties
      */
