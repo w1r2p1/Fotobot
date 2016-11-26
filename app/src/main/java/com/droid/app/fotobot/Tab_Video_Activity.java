@@ -241,7 +241,7 @@ public class Tab_Video_Activity extends Activity {
         linLayout_camera.addView(checkBox_Attach);
 
 // ------------------------------------------------------------------------------------------------
-// Удалить изображение после отправки на почту
+// Удалить видео после отправки на почту
 
 // Delete Container
         LinearLayout linLayout_Delete = new LinearLayout(this);
@@ -251,7 +251,7 @@ public class Tab_Video_Activity extends Activity {
 
 // Delete TextView
         TextView tv_Delete = new TextView(this);
-        tv_Delete.setText(getResources().getString(R.string.delete_image));
+        tv_Delete.setText(getResources().getString(R.string.delete_video));
         tv_Delete.setWidth((screenWidth - padding) / 100 * 90);
         tv_Delete.setTypeface(Typeface.DEFAULT_BOLD);
         tv_Delete.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
@@ -260,7 +260,7 @@ public class Tab_Video_Activity extends Activity {
 
 // CheckBox
         checkBox_Delete = new CheckBox(this);
-        checkBox_Delete.setChecked(fb.bc_image_delete);
+        checkBox_Delete.setChecked(fb.bc_video_delete);
         linLayout_camera.addView(checkBox_Delete);
 
 // ------------------------------------------------------------------------------------------------
@@ -356,7 +356,7 @@ public class Tab_Video_Activity extends Activity {
             linLayout_fc.addView(checkBox_fc_Attach);
 
 // ------------------------------------------------------------------------------------------------
-// Удалить изображение после отправки на почту
+// Удалить видео после отправки на почту
 
 // Delete Container
             LinearLayout linLayout_fc_Delete = new LinearLayout(this);
@@ -366,7 +366,7 @@ public class Tab_Video_Activity extends Activity {
 
 // Delete TextView
             TextView tv_fc_Delete = new TextView(this);
-            tv_fc_Delete.setText(getResources().getString(R.string.delete_image));
+            tv_fc_Delete.setText(getResources().getString(R.string.delete_video));
             tv_fc_Delete.setWidth((screenWidth - padding) / 100 * 90);
             tv_fc_Delete.setTypeface(Typeface.DEFAULT_BOLD);
             tv_fc_Delete.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
@@ -375,7 +375,7 @@ public class Tab_Video_Activity extends Activity {
 
 // CheckBox
             checkBox_fc_Delete = new CheckBox(this);
-            checkBox_fc_Delete.setChecked(fb.fc_image_delete);
+            checkBox_fc_Delete.setChecked(fb.fc_video_delete);
             linLayout_fc.addView(checkBox_fc_Delete);
 
         }

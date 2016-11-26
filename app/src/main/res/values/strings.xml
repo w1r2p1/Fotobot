@@ -30,6 +30,7 @@
     <string name="attach_image">Attach image to e-mail</string>
     <string name="delete_image">Delete image after sending to e-mail</string>
     <string name="attach_video">Attach video to e-mail</string>
+    <string name="delete_video">Delete video after sending to e-mail</string>
     <string name="video_profile">This version limited by 2 profiles (LOW and HIGH)</string>
 
     <string name="SMS_Password">SMS Password</string>
