@@ -15,9 +15,8 @@
     <string name="fast_start">If you do not want to study all settings and want to start Fotobot as soon as possible
         just press START button. Fotobot will take a picture every 5 minute by front and back camera and store photos into: </string>
 
-    <string name="update"><![CDATA[<b><u>Version 3.0.1</u></b><br>
-        1) video recording was added.<br>
-             ]]>
+    <string name="update">Version 3.0.1
+        1) video recording was added.
     </string>
 
     <string name="Camera_Name">Camera Name</string>
@@ -215,7 +214,7 @@ mediastatus\n
     <string name="title_main_activity_settings">Main Settings</string>
     <string name="title_network_activity_settings">Network Settings</string>
     <string name="title_foto_activity_settings">Photo Settings</string>
-    <string name="title_Video_activity_settings">Video Settings</string>
+    <string name="title_video_activity_settings">Video Settings</string>
     <string name="title_activity_status">Status</string>
     <string name="text_tab1">text_tab1</string>
     <string name="text_tab2">text_tab2</string>
