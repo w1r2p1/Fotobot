@@ -553,6 +553,7 @@ public class FotoBot extends Application {
 
             if (isOnline()) {
                 //  if (getPage()) {
+                error_message = true;
                 SendMessage(getResources().getString(R.string.Internet_connection));
                 return true;
                 //    }
