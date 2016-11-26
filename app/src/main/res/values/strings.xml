@@ -15,12 +15,9 @@
     <string name="fast_start">If you do not want to study all settings and want to start Fotobot as soon as possible
         just press START button. Fotobot will take a picture every 5 minute by front and back camera and store photos into: </string>
 
-    <string name="update">Version 2.8.4:\n
-        1) extended exceptions;\n
-        2) added fonts color;\n
-        3) bugs fixing;\n
-        4) parameters were removed from SMS command "status";\n
-        5) SMS command "help" was added;\n
+    <string name="update"><![CDATA[<b><u>Version 3.0.1</u></b><br>
+        1) video recording was added.<br>
+             ]]>
     </string>
 
     <string name="Camera_Name">Camera Name</string>
