@@ -237,7 +237,7 @@ public class Tab_Network_Activity extends Activity {
         tv_Fotobot_Password_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Fotobot_Password_note.setTextColor(Color.BLACK);
         tv_Fotobot_Password_note.setText("Пароль.");
-        linLayout_Fotobot_Password.addView(tv_Fotobot_Password_note);
+      //  linLayout_Fotobot_Password.addView(tv_Fotobot_Password_note);
 
 // ------------------------------------------------------------------------------------------------
 
@@ -270,7 +270,7 @@ public class Tab_Network_Activity extends Activity {
         tv_Fotobot_Recipient_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_Fotobot_Recipient_note.setTextColor(Color.BLACK);
         tv_Fotobot_Recipient_note.setText("Получатель писем с фото");
-        linLayout_Fotobot_Recipient.addView(tv_Fotobot_Recipient_note);
+      //  linLayout_Fotobot_Recipient.addView(tv_Fotobot_Recipient_note);
 
 // ------------------------------------------------------------------------------------------------
 

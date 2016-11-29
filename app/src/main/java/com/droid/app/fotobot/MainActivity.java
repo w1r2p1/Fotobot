@@ -1858,8 +1858,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             mMediaRecorder = null;
         } catch (Exception e) {
             fb.error_message = true;
-            fb.SendMessage("Проблема с остановкой записи видео. Видео начало записываться но по каким-то причинам смартфон" +
-                    "не смог корректно остановить запись. Чаще всего это из-за неправильного видео профился. Попробуйте выбрать другой профиль в настройках.\n" +e.toString());
+            fb.SendMessage("Проблема с остановкой записи видео. Видео начало записываться но по каким-то причинам Fotobot" +
+                    "не смог корректно остановить запись. Чаще всего это из-за неправильного видео профиля. Попробуйте выбрать другой профиль в настройках.\n" +e.toString());
         }
 
   /*      if (fb.autofocus && fb.use_autofocus) {

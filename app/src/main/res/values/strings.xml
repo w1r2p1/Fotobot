@@ -15,14 +15,17 @@
     <string name="fast_start">If you do not want to study all settings and want to start Fotobot as soon as possible
         just press START button. Fotobot will take a picture every 5 minute by front and back camera and store photos into: </string>
 
-    <string name="update">Version 3.0.1
-        1) video recording was added.
+    <string name="update"><![CDATA[<b><u>Version 3.0.2</u></b><br>
+        1) updating of English resources.<br>
+        ]]>
     </string>
 
     <string name="Camera_Name">Camera Name</string>
     <string name="Camera_Name_description">Camera Name will be added to emails title, it will help to sort out mails in Inbox</string>
     <string name="Front_Camera">Front camera</string>
     <string name="Back_Camera">Back camera</string>
+    <string name="use_fc_camera">Use front camera</string>
+    <string name="use_bc_camera">Use back camera</string>
     <string name="attach_image">Attach image to e-mail</string>
     <string name="delete_image">Delete image after sending to e-mail</string>
     <string name="attach_video">Attach video to e-mail</string>
@@ -162,7 +165,7 @@ mediastatus\n
     <string name="email_server_description">SMTP server address (f.e. smtp.google.com for Google Mail)</string>
 
     <string name="email_server_port">Fotobots SMTP server port</string>
-    <string name="email_server_port_description">SMTP server port number, usually equal 465</string>
+    <string name="email_server_port_description">SMTP server port number, usually equals 465</string>
 
     <string name="Check_Web_Page">Web page for connection checking</string>
     <string name="Check_Web_Page_description">Please use non-https servers (http://www.server.com)</string>

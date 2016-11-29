@@ -25,16 +25,16 @@
 
     <!-- http://daniel-codes.blogspot.ru/2011/04/html-in-textviews.html -->
 
-    <string name="update"><![CDATA[<b><u>Версия 3.0.1</u></b><br>
-        1) добавлена возможность снимать видео;<br>
-        2) фото и видео можно аттачить к письму по отдельности;<br>
-        3) исправление ошибок.
+    <string name="update"><![CDATA[<b><u>Версия 3.0.2</u></b><br>
+        1) перевод с русского на английский;<br>
         ]]></string>
 
     <string name="Camera_Name">Название камеры</string>
     <string name="Camera_Name_description">Название камеры будет добавлено к заголовку письма, что позволит легче сортировать почту</string>
     <string name="Front_Camera">Фронтальная камера</string>
     <string name="Back_Camera">Камера на задней панели телефона</string>
+    <string name="use_fc_camera">использовать фронтальную камеру</string>
+    <string name="use_bc_camera">использовать камеру</string>
     <string name="attach_image">Присоединить фото к письму</string>
     <string name="delete_image">Удалить фото после отправки на почту</string>
     <string name="attach_video">Присоединить видео к письму</string>
