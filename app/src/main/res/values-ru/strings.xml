@@ -73,7 +73,7 @@
     <string name="AttachedInfo_description">Brief - только информация о зарядке и температуре батареи.
     Normal - Brief + GSM сигнал + текущие настройки Fotobotа;
     Detailed - Brief + Normal + список запущенных процессов + информация по камерам</string>
-    <string name="foto_sent">Фото выслано на почту</string>
+    <string name="foto_sent">Письмо выслано на почту</string>
 
     <string name="connection_channel_wifi">Метод подключения Wi-Fi</string>
     <string name="turning_on_wifi">Включаем Wi-Fi</string>
@@ -89,7 +89,7 @@
     <string name="starting_to_make_photo">начинаем делать фото</string>
     <string name="starting_to_make_video">начинаем записывать видео</string>
     <string name="video_recording_time">Время записи видео (сек)</string>
-
+    <string name="video_recorded">видео записано</string>
     <string name="video_profile">Алгоритм автоматического определения видеопрофиля в этой версии не реализован. Поддерживаемый профиль можно найти вручную. Для этого выбираете, а затем запускаете Fotobot и смотрите ругнется он или нет:-)</string>
 
     <string name="request_for_stopping">Запрос на остановку Fotobot\'а отправлен, дождитесь корректного завершения и соответствующей надписи на экране</string>
@@ -213,4 +213,17 @@
     <string name="text_tab_header">text_tab_header</string>
     <string name="text_activity1">Это первое Activity</string>
     <string name="text_activity2">Это второе Activity</string>
+
+    <string name="str_profile">Профиль </string>
+    <string name="str_supported"> поддерживается </string>
+    <string name="str_camera"> камерой</string>
+
+    <string name="str_is_not_supported"> не поддерживается </string>
+    <string name="str_please_select"> , пожалуйста выберите другой видеопрофиль для этой камеры. </string>
+    <string name="str_stop_video">Проблема с остановкой записи видео. Видео начало записываться но по каким-то причинам Fotobot не смог корректно остановить запись. Чаще всего это из-за неправильного видео профиля. Попробуйте выбрать другой профиль в настройках.</string>
+
+    <string name="str_file">Файл</string>
+    <string name="str_was_deleted"> был удален</string>
+    <string name="str_problem_with_deleting">Проблема с удалением: </string>
+
 </resources>

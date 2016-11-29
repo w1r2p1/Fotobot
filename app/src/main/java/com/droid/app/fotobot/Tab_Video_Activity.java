@@ -176,7 +176,7 @@ public class Tab_Video_Activity extends Activity {
         tv_bc.setTypeface(Typeface.DEFAULT_BOLD);
         tv_bc.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size + 4);
         tv_bc.setTextColor(Color.BLACK);
-        tv_bc.setText("Камера");
+        tv_bc.setText(getResources().getString(R.string.Back_Camera));
         tv_bc.setTypeface(Typeface.DEFAULT_BOLD);
         linLayout_camera.addView(tv_bc);
 
@@ -203,7 +203,7 @@ public class Tab_Video_Activity extends Activity {
 
 // Использовать камеру
         TextView tv_use_bc = new TextView(this);
-        tv_use_bc.setText("Использовать камеру");
+        tv_use_bc.setText(getResources().getString(R.string.use_bc_camera));
         tv_use_bc.setWidth((screenWidth - padding) / 100 * 90);
         tv_use_bc.setTypeface(Typeface.DEFAULT_BOLD);
         tv_use_bc.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
@@ -278,7 +278,7 @@ public class Tab_Video_Activity extends Activity {
             tv_fc.setTypeface(Typeface.DEFAULT_BOLD);
             tv_fc.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size + 4);
             tv_fc.setTextColor(Color.BLACK);
-            tv_fc.setText("Фронтальная камера");
+            tv_fc.setText(getResources().getString(R.string.Front_Camera));
             tv_fc.setTypeface(Typeface.DEFAULT_BOLD);
             linLayout_fc.addView(tv_fc);
 
@@ -320,7 +320,7 @@ public class Tab_Video_Activity extends Activity {
 
 // Использовать фронтальную камеру
             TextView tv_use_fc = new TextView(this);
-            tv_use_fc.setText("Использовать фронтальную камеру");
+            tv_use_fc.setText(getResources().getString(R.string.use_fc_camera));
             tv_use_fc.setWidth((screenWidth - padding) / 100 * 90);
             tv_use_fc.setTypeface(Typeface.DEFAULT_BOLD);
             tv_use_fc.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);

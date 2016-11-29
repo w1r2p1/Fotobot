@@ -1834,9 +1834,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             //  mCamera.unlock();                 здесь скорей всего надо проверять на версии Android
             mMediaRecorder.start();
             if (cameraType.equals("Bc")) {
-                fb.SendMessage("Профиль " + fb.bc_current_video_profile + " поддерживается " + str + " камерой");
+                fb.SendMessage(getResources().getString(R.string.str_profile) + " " +  fb.bc_current_video_profile + " " + getResources().getString(R.string.str_supported) + " " + str + " " + getResources().getString(R.string.str_camera));
             } else {
-                fb.SendMessage("Профиль " + fb.fc_current_video_profile + " поддерживается " + str + " камерой");
+                fb.SendMessage(getResources().getString(R.string.str_profile) + " " + fb.fc_current_video_profile + " " + getResources().getString(R.string.str_supported) + " " + str + " " + getResources().getString(R.string.str_camera));
             }
             try {
                 TimeUnit.SECONDS.sleep(fb.video_recording_time  + 5);
@@ -1846,20 +1846,19 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         } catch (Exception e) {
             fb.error_message = true;
-            fb.SendMessage(str + " не поддерживает профиль " + fb.fc_current_video_profile + ", пожалуйста выберите другой видеопрофиль для этой камеры.");
+            fb.SendMessage(str + getResources().getString(R.string.str_is_not_supported) + " " + fb.fc_current_video_profile + " " + getResources().getString(R.string.str_please_select));
         }
 
         try {
             mMediaRecorder.stop();
             fb.success_message = true;
-            fb.SendMessage("Видео записано");
+            fb.SendMessage(getResources().getString(R.string.video_recorded));
             mMediaRecorder.reset();   // clear recorder configuration
             mMediaRecorder.release(); // release the recorder object
             mMediaRecorder = null;
         } catch (Exception e) {
             fb.error_message = true;
-            fb.SendMessage("Проблема с остановкой записи видео. Видео начало записываться но по каким-то причинам Fotobot" +
-                    "не смог корректно остановить запись. Чаще всего это из-за неправильного видео профиля. Попробуйте выбрать другой профиль в настройках.\n" +e.toString());
+            fb.SendMessage(getResources().getString(R.string.str_stop_video) + "\n" + e.toString());
         }
 
   /*      if (fb.autofocus && fb.use_autofocus) {
@@ -1910,20 +1909,20 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             File imgfile = new File(fb.bc_Image_Name_Full_Path);
 
             if (imgfile.delete()) {
-                fb.SendMessage("Файл " + fb.bc_Image_Name + " был удален");
+                fb.SendMessage(getResources().getString(R.string.str_file) + " " + fb.bc_Image_Name + " " + getResources().getString(R.string.str_was_deleted));
             } else {
                 fb.error_message = true;
-                fb.SendMessage("Проблема с удалением фото: " + fb.bc_Image_Name);
+                fb.SendMessage(getResources().getString(R.string.str_problem_with_deleting) + " " + fb.bc_Image_Name);
             }
         }
         if (fb.make_photo_fc && fb.fc_image_delete) {
             File fc_imgfile = new File(fb.fc_Image_Name_Full_Path);
 
             if (fc_imgfile.delete()) {
-                fb.SendMessage("Файл " + fb.fc_Image_Name + " был удален");
+                fb.SendMessage(getResources().getString(R.string.str_file) + " " + fb.fc_Image_Name + " " + getResources().getString(R.string.str_was_deleted));
             } else {
                 fb.error_message = true;
-                fb.SendMessage("Проблема с удалением фото: " + fb.fc_Image_Name);
+                fb.SendMessage(getResources().getString(R.string.str_problem_with_deleting) + " " + fb.fc_Image_Name);
             }
         }
     }
@@ -1935,20 +1934,20 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             File videofile = new File(fb.bc_Video_Name_Full_Path);
 
             if (videofile.delete()) {
-                fb.SendMessage("Файл " + fb.bc_Video_Name_Full_Path + " был удален");
+                fb.SendMessage(getResources().getString(R.string.str_file) + " " + fb.bc_Video_Name_Full_Path + " " + getResources().getString(R.string.str_was_deleted));
             } else {
                 fb.error_message = true;
-                fb.SendMessage("Проблема с удалением видео: " + fb.bc_Video_Name_Full_Path);
+                fb.SendMessage(getResources().getString(R.string.str_problem_with_deleting) + " " + fb.bc_Video_Name_Full_Path);
             }
         }
         if (fb.make_video_fc && fb.fc_video_delete) {
             File fc_videofile = new File(fb.fc_Video_Name_Full_Path);
 
             if (fc_videofile.delete()) {
-                fb.SendMessage("Файл " + fb.fc_Video_Name_Full_Path + " был удален");
+                fb.SendMessage(getResources().getString(R.string.str_file) + " " + fb.fc_Video_Name_Full_Path + " " + getResources().getString(R.string.str_was_deleted));
             } else {
                 fb.error_message = true;
-                fb.SendMessage("Проблема с удалением видео: " + fb.fc_Video_Name_Full_Path);
+                fb.SendMessage(getResources().getString(R.string.str_problem_with_deleting) + " " + fb.fc_Video_Name_Full_Path);
             }
         }
     }

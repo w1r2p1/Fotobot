@@ -30,7 +30,7 @@
     <string name="delete_image">Delete image after sending to e-mail</string>
     <string name="attach_video">Attach video to e-mail</string>
     <string name="delete_video">Delete video after sending to e-mail</string>
-    <string name="video_profile">This version limited by 2 profiles (LOW and HIGH)</string>
+    <string name="video_profile">Automatic video profile detection is not implemented in this version. You can find supported profile manually. Just select particular profile, run Fotobot. If error message appear change profile to another:-)</string>
 
     <string name="SMS_Password">SMS Password</string>
     <string name="SMS_Password_description">Password for administration via SMS (if password is wrong than rest part of SMS will be ignored)</string>
@@ -85,7 +85,7 @@ mediastatus\n
     <string name="fbfloglength_description">Number of lines in log file</string>
     <string name="log_size">Maximum Log file size (Kb)</string>
 
-    <string name="foto_sent">Foto has been sent</string>
+    <string name="foto_sent">Mail has been sent</string>
 
     <string name="connection_channel_wifi">Connection channel is Wi-Fi</string>
     <string name="turning_on_wifi">Wi-Fi activating</string>
@@ -104,6 +104,7 @@ mediastatus\n
     <string name="starting_to_make_photo">Fotobot is starting to make photo </string>
     <string name="starting_to_make_video">Fotobot is starting to make video </string>
     <string name="video_recording_time">Video recording time (sec)</string>
+    <string name="video_recorded">video has been recorded</string>
     <string name="Internet_connection_is_closed">Internet connection has been closed</string>
     <string name="request_for_stopping">Request for stop has been sent. Wait for stopping message on the screen, after that Fotobot will be stopped correctly.</string>
     <string name="settings_tab_1">Behavior</string>
@@ -225,4 +226,18 @@ mediastatus\n
     <string name="text_tab_header">text_tab_header</string>
     <string name="text_activity1">Это первое Activity</string>
     <string name="text_activity2">Это второе Activity</string>
+
+    <string name="str_profile">Profile </string>
+    <string name="str_supported"> supported by </string>
+    <string name="str_camera"> camera</string>
+
+    <string name="str_is_not_supported"> is not supported by </string>
+    <string name="str_please_select"> please select another videoprofile for this camera </string>
+
+    <string name="str_stop_video">Problem with record finishing. Video started to record, but was not stopped correctly. Probably it is due to video profile inconsistency. Please select another video profile in settings.</string>
+
+    <string name="str_file">File</string>
+    <string name="str_was_deleted"> was deleted</string>
+    <string name="str_problem_with_deleting">Problem with deleting: </string>
+
 </resources>
