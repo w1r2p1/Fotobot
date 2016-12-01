@@ -226,4 +226,8 @@
     <string name="str_was_deleted"> был удален</string>
     <string name="str_problem_with_deleting">Проблема с удалением: </string>
 
+    <string name="str_log">Размер журнала превысил</string>
+    <string name="str_log_clean">журнал был очищен</string>
+    <string name="str_log_clean_error">Проблема с очисткой журнала</string>
+
 </resources>

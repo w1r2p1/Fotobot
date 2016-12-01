@@ -1892,12 +1892,17 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         boolean fileExists = logcat_file.isFile();
 
+        try {
         if (fileExists) {
             if (logcat_file.length() / 1000 > fb.log_size) {
                 clearLog();
+                fb.SendMessage(getResources().getString(R.string.str_log) + " " + fb.log_size + "Kb, " + getResources().getString(R.string.str_log));
             }
-        } else {
-            // fb.SendMessage(h, "logfile.txt doesn't exist.");
+        }
+        } catch (Exception e)
+            {
+                fb.error_message = true;
+                fb.SendMessage(getResources().getString(R.string.str_log_clean_error) + e.toString());
         }
     }
 
