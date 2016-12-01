@@ -760,7 +760,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 if (stopFotobot()) {
                                     return;
                                 } else {
-                                    fb.SendMessage("Проблема с остановкой Fotobot'а");
+                                    fb.SendMessage(getResources().getString(R.string.stop_problem));
                                 }
 
                             }
@@ -810,21 +810,45 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 fb.fbpause(h, 3);
                             }
 
+// не было ли команды на остановку Fotobot'а
+                            if (fb.getstatus() == 3) {
+                                if (stopFotobot()) {
+                                    return;
+                                } else {
+                                    fb.SendMessage(getResources().getString(R.string.stop_problem));
+                                }
 
+                            }
 
                             if (fb.front_camera && fb.make_photo_fc) {
                                 makePhoto("Fc");
                                 fb.fbpause(h, 3);
                             }
 
+// не было ли команды на остановку Fotobot'а
+                            if (fb.getstatus() == 3) {
+                                if (stopFotobot()) {
+                                    return;
+                                } else {
+                                    fb.SendMessage(getResources().getString(R.string.stop_problem));
+                                }
 
+                            }
 
                             if (fb.back_camera && fb.make_video_bc) {
                                 makeVideo("Bc");
                                 fb.fbpause(h, 3);
                             }
 
+// не было ли команды на остановку Fotobot'а
+                            if (fb.getstatus() == 3) {
+                                if (stopFotobot()) {
+                                    return;
+                                } else {
+                                    fb.SendMessage(getResources().getString(R.string.stop_problem));
+                                }
 
+                            }
 
                             if (fb.front_camera && fb.make_video_fc) {
                                 makeVideo("Fc");
@@ -883,7 +907,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             fb.sms_check_file = true;
 
 
-// если размер лога превышает 50 kb, то чистим его
+// чистим лог
                             cleanLogFile();
 
 // удаляем фото с телефона
@@ -891,6 +915,16 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 deletePhoto();
                                 deleteVideo();
                           //  }
+
+// не было ли команды на остановку Fotobot'а
+                            if (fb.getstatus() == 3) {
+                                if (stopFotobot()) {
+                                    return;
+                                } else {
+                                    fb.SendMessage(getResources().getString(R.string.stop_problem));
+                                }
+
+                            }
 
                             fb.fbpause(h, fb.Photo_Frequency);
                             fb.sms_check_file = false;
@@ -1481,15 +1515,23 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         final FotoBot fb = (FotoBot) getApplicationContext();
 
         if (mCamera != null) {
+//        try {
             mCamera.stopPreview();
             mCamera.setPreviewCallback(null);
+  //      } catch (Exception e){
+
+    //    }
+      //  try {
             mCamera.release();
             mCamera = null;
+        //} catch (Exception e){
+
+        //}
         }
 
         fb.thread_stopped = true;
         fb.debug_message = true;
-        fb.SendMessage(h, getResources().getString(R.string.stop_message));
+        fb.SendMessage(getResources().getString(R.string.stop_message));
         return true;
     }
 
@@ -1894,6 +1936,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         try {
         if (fileExists) {
+            fb.SendMessage("Log: " + logcat_file.length() / 1000 + "Kb");
             if (logcat_file.length() / 1000 > fb.log_size) {
                 clearLog();
                 fb.SendMessage(getResources().getString(R.string.str_log) + " " + fb.log_size + "Kb, " + getResources().getString(R.string.str_log));

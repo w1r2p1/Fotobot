@@ -227,6 +227,8 @@ mediastatus\n
     <string name="text_activity1">Это первое Activity</string>
     <string name="text_activity2">Это второе Activity</string>
 
+    <string name="stop_problem">Problem with Fotobot stopping</string>
+
     <string name="str_profile">Profile </string>
     <string name="str_supported"> supported by </string>
     <string name="str_camera"> camera</string>
