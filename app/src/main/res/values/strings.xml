@@ -26,6 +26,7 @@
     <string name="Back_Camera">Back camera</string>
     <string name="use_fc_camera">Use front camera</string>
     <string name="use_bc_camera">Use back camera</string>
+    <string name="camera_open_error">An error occuried while opening a camera. May be camera still occupied by another application. Try to reboot your phone to release the camera.</string>
     <string name="attach_image">Attach image to e-mail</string>
     <string name="delete_image">Delete image after sending to e-mail</string>
     <string name="attach_video">Attach video to e-mail</string>

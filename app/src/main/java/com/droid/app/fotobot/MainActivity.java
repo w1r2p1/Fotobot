@@ -984,8 +984,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         Camera.Parameters params;
 
-
         fb.numberOfCameras = Camera.getNumberOfCameras();
+
         Camera.CameraInfo ci = new Camera.CameraInfo();
 
         for (int i = 0; i < fb.numberOfCameras; i++) {
@@ -993,33 +993,45 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             if (ci.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
                 fb.fcId = i;
                 fb.front_camera = true;
-                mCamera = Camera.open(fb.fcId);
 
-                fb.fc_Camera_Properties = mCamera.getParameters().flatten();
+                try {
+                    mCamera = Camera.open(fb.fcId);
+                    fb.fc_Camera_Properties = mCamera.getParameters().flatten();
 
-                params = mCamera.getParameters();
-                fb.fc_camera_resolutions = params.getSupportedPictureSizes();
+                    params = mCamera.getParameters();
+                    fb.fc_camera_resolutions = params.getSupportedPictureSizes();
 
-                getFcAvailableVideoProfiles();
+                    getFcAvailableVideoProfiles();
 
-                mCamera.release();
-                mCamera = null;
+                    mCamera.release();
+                    mCamera = null;
+                } catch (Exception e){
+                    fb.error_message = true;
+                    fb.SendMessage(getResources().getString(R.string.camera_open_error) + " " + e.toString());
+                }
+
             }
+
             if (ci.facing == Camera.CameraInfo.CAMERA_FACING_BACK) {
                 fb.bcId = i;
+                try {
                 mCamera = Camera.open(fb.bcId);
+                    fb.Camera_Properties = mCamera.getParameters().flatten();
 
-                fb.Camera_Properties = mCamera.getParameters().flatten();
+                    params = mCamera.getParameters();
+                    fb.camera_resolutions = params.getSupportedPictureSizes();
 
-                params = mCamera.getParameters();
-                fb.camera_resolutions = params.getSupportedPictureSizes();
+                    getBcAvailableVideoProfiles();
 
-                getBcAvailableVideoProfiles();
-
-                mCamera.release();
-                mCamera = null;
+                    mCamera.release();
+                    mCamera = null;
+                } catch (Exception e){
+                    fb.error_message = true;
+                    fb.SendMessage(getResources().getString(R.string.camera_open_error) + " " + e.toString());
+                }
 
             }
+
         }
 
         fb.holder = holder;
