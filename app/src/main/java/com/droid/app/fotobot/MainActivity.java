@@ -529,6 +529,18 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                 findViewById(R.id.play).setEnabled(false);
                 findViewById(R.id.stop).setEnabled(false);
+// camera error
+                if (!fb.bc_camera_init){
+                    fb.error_message = true;
+                    fb.SendMessage(fb.bc_camera_init_msg);
+                }
+
+                if (!fb.bc_camera_init){
+                    fb.error_message = true;
+                    fb.SendMessage(fb.bc_camera_init_msg);
+                }
+
+
 
                 try {
                     logfile.delete();
@@ -1005,8 +1017,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                     mCamera.release();
                     mCamera = null;
+
+                    fb.bc_camera_init = true;
                 } catch (Exception e){
-                    Log.d(LOG_TAG,getResources().getString(R.string.camera_open_error) + " " + e.toString());
+                    fb.bc_camera_init_msg = getResources().getString(R.string.camera_open_error) + " " + e.toString();
+                    Log.d(LOG_TAG,fb.bc_camera_init_msg);
+                    fb.bc_camera_init = false;
+
                 }
 
             }
@@ -1024,8 +1041,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                     mCamera.release();
                     mCamera = null;
+
+                    fb.fc_camera_init = true;
                 } catch (Exception e){
-                    Log.d(LOG_TAG,getResources().getString(R.string.camera_open_error) + " " + e.toString());
+                    fb.fc_camera_init_msg = getResources().getString(R.string.camera_open_error) + " " + e.toString();
+                    Log.d(LOG_TAG,fb.bc_camera_init_msg);
+                    fb.fc_camera_init = false;
                 }
 
             }

@@ -221,6 +221,11 @@ public class FotoBot extends Application {
 
     public boolean bc_video_profile_initialized = false;
 
+    public boolean bc_camera_init = false;
+    public boolean fc_camera_init = false;
+    public String bc_camera_init_msg = null;
+    public String fc_camera_init_msg = null;
+
     /**
      * время записи видео
      */

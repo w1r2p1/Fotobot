@@ -182,32 +182,14 @@ public class Tab_Foto_Activity extends Activity {
 // Доступные разрешения
         spinnerArray = new ArrayList<String>();
 
-        Camera.Size mSize = null;
-
-        int fe_w = (int) fb.camera_resolutions.get(0).width;
-        int fe_h = (int) fb.camera_resolutions.get(0).height;
-        float fe_s, fe_z;
-
-        fe_z = (float) fe_w / (float) fe_h;
-
         for (Camera.Size size : fb.camera_resolutions) {
-            fe_w = (int) size.width;
-            fe_h = (int) size.height;
-            fe_s = (float) fe_w / (float) fe_h;
-
-         //   if (Math.abs(fe_s - fe_z) < 0.01f) {
-                spinnerArray.add(size.width + "x" + size.height);
-         //   }
-
+            spinnerArray.add(size.width + "x" + size.height);
         }
 
         spinner_Software = new Spinner(this);
-  //      spinnerArrayAdapter1 = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray);
-      //  CustomAdapter customAdapter=new CustomAdapter(this, R.layout.spinner_item, spinnerArray);
-        //Spinner mySpinner = (Spinner)findViewById(R.id.spinner);
+
         spinner_Software.setAdapter(new MyAdapter(this, R.layout.spinner_item, spinnerArray));
-       // spinner_Software.setAdapter(customAdapter);
-      //  spinner_Software.setAdapter(spinnerArrayAdapter1);
+
         spinner_Software.setSelection(getIndex(spinner_Software, fb.Image_Size));
         linLayout_camera.addView(spinner_Software);
 
@@ -269,23 +251,8 @@ public class Tab_Foto_Activity extends Activity {
 // Доступные разрешения
             ArrayList<String> fc_spinnerArray = new ArrayList<String>();
 
-            Camera.Size fc_mSize = null;
-
-            int fc_fe_w = (int) fb.fc_camera_resolutions.get(0).width;
-            int fc_fe_h = (int) fb.fc_camera_resolutions.get(0).height;
-            float fc_fe_s, fc_fe_z;
-
-            fc_fe_z = (float) fc_fe_w / (float) fc_fe_h;
-
             for (Camera.Size size : fb.fc_camera_resolutions) {
-                fc_fe_w = (int) size.width;
-                fc_fe_h = (int) size.height;
-                fc_fe_s = (float) fc_fe_w / (float) fc_fe_h;
-
-             //   if (Math.abs(fc_fe_s - fc_fe_z) < 0.01f) {
-                    fc_spinnerArray.add(size.width + "x" + size.height);
-             //   }
-
+                fc_spinnerArray.add(size.width + "x" + size.height);
             }
 
             fc_spinner_Software = new Spinner(this);
@@ -355,8 +322,6 @@ public class Tab_Foto_Activity extends Activity {
         checkBox_fc_Delete.setChecked(fb.fc_image_delete);
         linLayout_fc.addView(checkBox_fc_Delete);
     }
-
-
 
 
 // Метод обработки фото
