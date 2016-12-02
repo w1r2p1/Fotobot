@@ -1006,8 +1006,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                     mCamera.release();
                     mCamera = null;
                 } catch (Exception e){
-                    fb.error_message = true;
-                    fb.SendMessage(getResources().getString(R.string.camera_open_error) + " " + e.toString());
+                    Log.d(LOG_TAG,getResources().getString(R.string.camera_open_error) + " " + e.toString());
                 }
 
             }
@@ -1026,8 +1025,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                     mCamera.release();
                     mCamera = null;
                 } catch (Exception e){
-                    fb.error_message = true;
-                    fb.SendMessage(getResources().getString(R.string.camera_open_error) + " " + e.toString());
+                    Log.d(LOG_TAG,getResources().getString(R.string.camera_open_error) + " " + e.toString());
                 }
 
             }

@@ -455,7 +455,6 @@ public class FotoBot extends Application {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        fbpause(h, 3);
 
         if (netInfo != null && netInfo.isConnected()) {
             return true;
@@ -527,9 +526,13 @@ public class FotoBot extends Application {
 
         for (connect_attempt = 0; connect_attempt < 3; connect_attempt++) {
 
+            if (getstatus() == 3) {
+                return false;
+            }
+
             SendMessage(getResources().getString(R.string.connection_attempt) + " " + (connect_attempt + 1));
 
-            fbpause(h, 3);
+            fbpause(h, 1);
 
             if (Network_Channel.contains("Wi-Fi")) {
                 SendMessage(getResources().getString(R.string.connection_channel_wifi));
@@ -552,11 +555,9 @@ public class FotoBot extends Application {
             }
 
             if (isOnline()) {
-                //  if (getPage()) {
                 success_message = true;
                 SendMessage(getResources().getString(R.string.Internet_connection));
                 return true;
-                //    }
             }
 
             SendMessage(getResources().getString(R.string.pause_between_connections) + " 15 sec");
