@@ -321,6 +321,8 @@ public class FotoBot extends Application {
 
     public boolean attach_log = false;
 
+    public boolean automatic_mode = false;
+
     public Integer sms_number_of_strings;
     public String sms_sender_num;
     public String sms_passwd = "passwd";

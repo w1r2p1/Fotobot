@@ -529,18 +529,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                 findViewById(R.id.play).setEnabled(false);
                 findViewById(R.id.stop).setEnabled(false);
-// camera error
-                if (!fb.bc_camera_init){
-                    fb.error_message = true;
-                    fb.SendMessage(fb.bc_camera_init_msg);
-                }
-
-                if (!fb.bc_camera_init){
-                    fb.error_message = true;
-                    fb.SendMessage(fb.bc_camera_init_msg);
-                }
-
-
 
                 try {
                     logfile.delete();
@@ -553,6 +541,21 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 
         });
+
+// camera error
+        if (!fb.bc_camera_init){
+            fb.error_message = true;
+            fb.SendMessage(fb.bc_camera_init_msg);
+        }
+
+        if (!fb.bc_camera_init){
+            fb.error_message = true;
+            fb.SendMessage(fb.bc_camera_init_msg);
+        }
+
+
+
+
 
     }
 
@@ -658,6 +661,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             e.printStackTrace();
         }
 
+        fb.automatic_mode = true;
+        if (fb.automatic_mode) {
+            Button button = (Button)findViewById(R.id.play);
+            button.performClick();
+        }
+
     }
 
     protected void onStop() {
@@ -706,6 +715,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
      * @param v
      */
     public void startFotobot(View v) {
+    //    public void startFotobot() {
 
 // Wakelock 5
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
