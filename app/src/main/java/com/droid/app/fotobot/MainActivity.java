@@ -543,16 +543,16 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         });
 
 // camera error
-/*        if (!fb.bc_camera_init){
+      /*  if (!fb.bc_camera_init){
             fb.error_message = true;
             fb.SendMessage(fb.bc_camera_init_msg);
         }
 
-        if (!fb.bc_camera_init){
+        if (!fb.fc_camera_init){
             fb.error_message = true;
-            fb.SendMessage(fb.bc_camera_init_msg);
-        }
-*/
+            fb.SendMessage(fb.fc_camera_init_msg);
+        }*/
+
     }
 
     protected void onDestroy() {
@@ -660,6 +660,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         fb.automatic_mode = true;
         if (fb.automatic_mode) {
             Button button = (Button)findViewById(R.id.play);
+            fb.fbpause(h,3);
             button.performClick();
         }
 
@@ -1616,8 +1617,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
         }
 
+        fb.fbpause(h,3);
+
 // Step 2
-        Camera.Parameters parameters = mCamera.getParameters();
+        try {
+            Camera.Parameters parameters = mCamera.getParameters();
+        } catch (Exception e){
+            fb.error_message = true;
+            fb.SendMessage("Problem with mCamera.getParameters()" + e.toString());
+        }
 
         if (fb.Use_Flash && cameraType.equals("Bc")) {
             parameters.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
