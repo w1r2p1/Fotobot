@@ -543,7 +543,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         });
 
 // camera error
-        if (!fb.bc_camera_init){
+/*        if (!fb.bc_camera_init){
             fb.error_message = true;
             fb.SendMessage(fb.bc_camera_init_msg);
         }
@@ -552,11 +552,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             fb.error_message = true;
             fb.SendMessage(fb.bc_camera_init_msg);
         }
-
-
-
-
-
+*/
     }
 
     protected void onDestroy() {
