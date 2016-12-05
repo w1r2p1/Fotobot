@@ -992,6 +992,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         mUnexpectedTerminationHelper.init();
 
+    //    fb.automatic_mode = true;
+    //    if (fb.automatic_mode) {
+            Button button = (Button)findViewById(R.id.play);
+            fb.fbpause(h,3);
+            button.performClick();
+    //    }
+
+
 // adopted for ffc
 
     }
