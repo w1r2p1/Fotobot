@@ -775,6 +775,16 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 }
                             }
 
+// не было ли команды на остановку Fotobot'а
+                            if (fb.getstatus() == 3) {
+                                if (stopFotobot()) {
+                                    return;
+                                } else {
+                                    fb.SendMessage("Проблема с остановкой Fotobot'а");
+                                }
+
+                            }
+
 // method1 рарзрываем соединение с сетью
                             if (!(fb.network) && fb.Method1_activated) {
                                 if (fb.Network_Connection_Method.contains("Method 1")) {
@@ -783,6 +793,16 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     }
                                     fb.Method1_activated = false;
                                 }
+                            }
+
+// не было ли команды на остановку Fotobot'а
+                            if (fb.getstatus() == 3) {
+                                if (stopFotobot()) {
+                                    return;
+                                } else {
+                                    fb.SendMessage("Проблема с остановкой Fotobot'а");
+                                }
+
                             }
 
 // загружаем настройки из реестра
@@ -804,32 +824,75 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 }
                             }
 
+// не было ли команды на остановку Fotobot'а
+                            if (fb.getstatus() == 3) {
+                                if (stopFotobot()) {
+                                    return;
+                                } else {
+                                    fb.SendMessage("Проблема с остановкой Fotobot'а");
+                                }
+
+                            }
+
 // делаем фото и видео камерой на задней панели телефона
                             if (fb.back_camera && fb.make_photo_bc) {
                                 makePhoto("Bc");
                                 fb.fbpause(h, 3);
                             }
 
+// не было ли команды на остановку Fotobot'а
+                            if (fb.getstatus() == 3) {
+                                if (stopFotobot()) {
+                                    return;
+                                } else {
+                                    fb.SendMessage("Проблема с остановкой Fotobot'а");
+                                }
 
+                            }
 
                             if (fb.front_camera && fb.make_photo_fc) {
                                 makePhoto("Fc");
                                 fb.fbpause(h, 3);
                             }
 
+// не было ли команды на остановку Fotobot'а
+                            if (fb.getstatus() == 3) {
+                                if (stopFotobot()) {
+                                    return;
+                                } else {
+                                    fb.SendMessage("Проблема с остановкой Fotobot'а");
+                                }
 
+                            }
 
                             if (fb.back_camera && fb.make_video_bc) {
                                 makeVideo("Bc");
                                 fb.fbpause(h, 3);
                             }
 
+// не было ли команды на остановку Fotobot'а
+                            if (fb.getstatus() == 3) {
+                                if (stopFotobot()) {
+                                    return;
+                                } else {
+                                    fb.SendMessage("Проблема с остановкой Fotobot'а");
+                                }
 
+                            }
 
                             if (fb.front_camera && fb.make_video_fc) {
                                 makeVideo("Fc");
                             }
 
+// не было ли команды на остановку Fotobot'а
+                            if (fb.getstatus() == 3) {
+                                if (stopFotobot()) {
+                                    return;
+                                } else {
+                                    fb.SendMessage("Проблема с остановкой Fotobot'а");
+                                }
+
+                            }
 
 // засекаем время для отправки письма
                             long start = System.currentTimeMillis();
@@ -992,7 +1055,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         mUnexpectedTerminationHelper.init();
 
-        if (fb.automatic_mode) {
+        if (fb.automatic_mode && !fb.Tab_Foto_Activity_activated && !fb.Tab_Main_Activity_activated && !fb.Tab_Network_Activity_activated && !fb.Tab_Video_Activity_activated) {
             Button button = (Button)findViewById(R.id.play);
             fb.fbpause(h,1);
             button.performClick();
