@@ -412,6 +412,8 @@ public class FotoBot extends Application {
     public Boolean Tab_Foto_Activity_activated = false;
     public Boolean Tab_Video_Activity_activated = false;
 
+    public boolean automatic_mode = false;
+
     /**
      * Возвращает текущее состояние FotoBot'а, сейчас не пользуюсь этим
      *
@@ -1158,6 +1160,7 @@ public class FotoBot extends Application {
         launched_first_time = pref.getBoolean("Launched_First_Time", true);
         sms_passwd = pref.getString("SMS_Password", "passwd");
         advanced_settings = pref.getBoolean("Advanced_Settings", false);
+        automatic_mode = pref.getBoolean("Automatic_Mode", false);
         delete_foto = pref.getBoolean("Delete_Foto", false);
     }
 
@@ -1212,6 +1215,7 @@ public class FotoBot extends Application {
         editor.putString("Work_Dir", work_dir);
         editor.putString("SMS_Password", sms_passwd);
         editor.putBoolean("Advanced_Settings", advanced_settings);
+        editor.putBoolean("Automatic_Mode", automatic_mode);
         editor.putString("Storage_Type", storage_type);
         editor.putBoolean("Network", network);
         editor.putBoolean("Launched_First_Time", launched_first_time);

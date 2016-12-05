@@ -8,6 +8,8 @@
     <string name="help_button">Помощь</string>
     <string name="apply_button">ПРИМЕНИТЬ</string>
     <string name="back_button">НА ГЛАВНУЮ</string>
+    <string name="automatic_mode">Автозапуск</string>
+    <string name="automatic_mode_description">Fotobot сразу начнет работать (без нажатия кнопки ПУСК)</string>
 
     <string name="Fotobot">Fotobot приветствует Вас!\n\nДанное приложение поможет Вам установить контроль за местом, находящимся за многие километры.
         Вы будете получать фотоотчеты через заданные промежутки времени, а так же сможете менять настройки Fotobot\'а, посредством отправки SMS с управляющими командами.

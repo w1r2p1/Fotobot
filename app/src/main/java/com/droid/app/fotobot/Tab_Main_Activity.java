@@ -44,6 +44,7 @@ public class Tab_Main_Activity extends Activity {
     CheckBox checkBox_Clean_Text;
     CheckBox checkBox_Attach_Log;
     CheckBox checkBox_Adv_Settings;
+    CheckBox checkBox_Automatic_Mode;
     CheckBox checkBox_Delete_Foto;
     EditText Photo_Frequency;
     EditText Config_Font_Size;
@@ -70,6 +71,7 @@ public class Tab_Main_Activity extends Activity {
     LinearLayout linLayout_config_font_size;
     LinearLayout linLayout_log_font_size;
     LinearLayout linLayout_Wake_Up;
+    LinearLayout linLayout_Automatic_Mode;
 
     LinearLayout linLayout_AttachedInfo;
 
@@ -582,6 +584,40 @@ public class Tab_Main_Activity extends Activity {
         tv_Attach_Log_notes.setPadding(1, 5, 5, 5);
         linLayout_Attach_Log.addView(tv_Attach_Log_notes);
 
+// ------------------------------------------------------------------------------------------------
+
+// Автозапуск
+
+// Attach Log Container
+        linLayout_Automatic_Mode = new LinearLayout(this);
+        linLayout_Automatic_Mode.setOrientation(LinearLayout.VERTICAL);
+        linLayout_Automatic_Mode.setPadding(5, 9, 5, 9);
+        linLayout_Automatic_Mode.setBackgroundColor(Color.rgb(240, 150, 150));
+
+// Attach Log TextView
+        TextView tv_Automatic_Mode = new TextView(this);
+        tv_Automatic_Mode.setText(getResources().getString(R.string.automatic_mode));
+        tv_Automatic_Mode.setWidth((screenWidth - padding) / 100 * 90);
+        tv_Automatic_Mode.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Automatic_Mode.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Automatic_Mode.setTextColor(Color.BLACK);
+        linLayout_Automatic_Mode.addView(tv_Automatic_Mode);
+
+// CheckBox
+        checkBox_Automatic_Mode = new CheckBox(this);
+        checkBox_Automatic_Mode.setChecked(fb.automatic_mode);
+        linLayout_Automatic_Mode.addView(checkBox_Automatic_Mode);
+
+        // Wake Up (notes)
+        TextView tv_Automatic_Mode_notes = new TextView(this);
+        tv_Automatic_Mode_notes.setTypeface(null, Typeface.NORMAL);
+        tv_Automatic_Mode_notes.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_Automatic_Mode_notes.setTextColor(Color.BLACK);
+        tv_Automatic_Mode_notes.setText(getResources().getString(R.string.automatic_mode_description));
+        tv_Automatic_Mode_notes.setWidth((screenWidth - padding) / 100 * 99);
+        tv_Automatic_Mode_notes.setPadding(1, 5, 5, 5);
+        linLayout_Automatic_Mode.addView(tv_Automatic_Mode_notes);
+
 
 // ------------------------------------------------------------------------------------------------
 
@@ -657,6 +693,7 @@ public class Tab_Main_Activity extends Activity {
                     linLayout_log_font_size.setVisibility(View.VISIBLE);
                     linLayout_Wake_Up.setVisibility(View.VISIBLE);
                     linLayout_AttachedInfo.setVisibility(View.VISIBLE);
+                    linLayout_Automatic_Mode.setVisibility(View.VISIBLE);
                 } else {
                     fb.advanced_settings = false;
                     linLayout_process_delay.setVisibility(View.GONE);
@@ -669,6 +706,7 @@ public class Tab_Main_Activity extends Activity {
                     linLayout_log_font_size.setVisibility(View.GONE);
                     linLayout_Wake_Up.setVisibility(View.GONE);
                     linLayout_AttachedInfo.setVisibility(View.GONE);
+                    linLayout_Automatic_Mode.setVisibility(View.GONE);
                 }
 
             }
@@ -788,6 +826,14 @@ public class Tab_Main_Activity extends Activity {
                     editor.putBoolean("Attach_Log", false);
                 }
 
+                if (checkBox_Automatic_Mode.isChecked()) {
+                    fb.automatic_mode = true;
+                    editor.putBoolean("Automatic_Mode", true);
+                } else {
+                    fb.automatic_mode = false;
+                    editor.putBoolean("Automatic_Mode", false);
+                }
+
                 if (checkBox_Delete_Foto.isChecked()) {
 
                     fb.delete_foto = true;
@@ -896,6 +942,7 @@ public class Tab_Main_Activity extends Activity {
         FullFrame.addView(linLayout_config_font_size);
         FullFrame.addView(linLayout_log_font_size);
         FullFrame.addView(linLayout_Wake_Up);
+        FullFrame.addView(linLayout_Automatic_Mode);
 
         if ( !fb.advanced_settings ) {
             linLayout_process_delay.setVisibility(View.GONE);
@@ -908,6 +955,7 @@ public class Tab_Main_Activity extends Activity {
             linLayout_config_font_size.setVisibility(View.GONE);
             linLayout_log_font_size.setVisibility(View.GONE);
             linLayout_Wake_Up.setVisibility(View.GONE);
+            linLayout_Automatic_Mode.setVisibility(View.GONE);
         }
 
         FullFrame.addView(linLayout_Buttons);
