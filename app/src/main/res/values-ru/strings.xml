@@ -27,8 +27,8 @@
 
     <!-- http://daniel-codes.blogspot.ru/2011/04/html-in-textviews.html -->
 
-    <string name="update"><![CDATA[<b><u>Версия 3.0.2</u></b><br>
-        1) перевод с русского на английский;<br>
+    <string name="update"><![CDATA[<b><u>Версия 3.1.1</u></b><br>
+        1) добавлен автозапуск;<br>
         ]]></string>
 
     <string name="Camera_Name">Название камеры</string>

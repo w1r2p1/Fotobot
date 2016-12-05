@@ -994,7 +994,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         if (fb.automatic_mode) {
             Button button = (Button)findViewById(R.id.play);
-            fb.fbpause(h,3);
+            fb.fbpause(h,1);
             button.performClick();
         }
 
