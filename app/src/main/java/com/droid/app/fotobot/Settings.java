@@ -93,6 +93,7 @@ public class Settings extends TabActivity {
         TabHost.TabSpec spec4 = mTabHost.newTabSpec("Tab4").setIndicator(view4).setContent(intent);
         mTabHost.addTab(spec4);
 
+
     }
 
     /**

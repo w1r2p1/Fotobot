@@ -891,6 +891,7 @@ public class Tab_Main_Activity extends Activity {
         btn_mp.setBackgroundColor(Color.rgb(90, 89, 91));
         btn_mp.setTextColor(Color.rgb(250, 250, 250));
         btn_mp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        btn_mp.setId(R.id.behavior_back_button);
 
         btn_mp.setOnTouchListener(new View.OnTouchListener() {
 
