@@ -466,6 +466,8 @@ public class Tab_Network_Activity extends Activity {
             spinner_ppm.setSelection(getIndex(spinner_ppm, "off"));
         }
 
+        spinner_ppm.setId(R.id.spinner_network_status);
+
         spinner_ppm.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             public void onItemSelected(AdapterView<?> adapterView,

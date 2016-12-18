@@ -12,6 +12,7 @@ import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withSpinnerText;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 
@@ -58,5 +59,11 @@ public class simpleTest extends ActivityInstrumentationTestCase2<MainActivity> {
         }
         onView(withText("Behavior")).perform(click());
         onView(withId(R.id.behavior_back_button)).perform(scrollTo(),click());
+    }
+
+    public void testNetworkStatus() throws Exception {
+        onView(withId(R.id.config)).perform(click());
+        onView(withText("Network")).perform(click());
+        onView(withId(R.id.spinner_network_status)).check(matches(withSpinnerText("on")));
     }
 }
