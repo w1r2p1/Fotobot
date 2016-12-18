@@ -14,6 +14,7 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withSpinnerText;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.allOf;
 
 
 /**
@@ -35,9 +36,7 @@ public class simpleTest extends ActivityInstrumentationTestCase2<MainActivity> {
         onView(withId(R.id.config)).perform(click());
       //  onView(withId(R.id.camera_name)).check(matches(withText("default")));
         onView(withId(R.id.camera_name)).perform(clearText(),typeText("Espresso_cam"));
-        onView(withText("APPLY")).perform(scrollTo(),click());
-        onView(withText("MAIN WINDOW")).perform(scrollTo(),click());
-        onView(withId(R.id.config)).perform(click());
+
         onView(withId(R.id.camera_name)).check(matches(withText("Espresso_cam")));
 
         //intended(hasComponent(Settings.class.getName()));
@@ -50,7 +49,9 @@ public class simpleTest extends ActivityInstrumentationTestCase2<MainActivity> {
         onView(withId(R.id.config)).perform(click());
         onView(withText("Network")).perform(click());
         onView(withText("Foto")).perform(click());
-        onView(withText("Video")).perform(click());
+        onView(withText("onView(withText(\"APPLY\")).perform(scrollTo(),click());\n" +
+                "        onView(withText(\"MAIN WINDOW\")).perform(scrollTo(),click());\n" +
+                "        onView(withId(R.id.config)).perform(click());Video")).perform(click());
 
         try {
             TimeUnit.SECONDS.sleep(1);
@@ -62,6 +63,18 @@ public class simpleTest extends ActivityInstrumentationTestCase2<MainActivity> {
     }
 
     public void testNetworkStatus() throws Exception {
+        onView(withId(R.id.config)).perform(click());
+        onView(withText("Network")).perform(click());
+        onView(withId(R.id.spinner_network_status)).check(matches(withSpinnerText("on")));
+    }
+
+    public void testChangeNetworkStatus() throws Exception {
+        onView(withId(R.id.config)).perform(click());
+        onView(withText("Network")).perform(click());
+        onView(withId(R.id.spinner_network_status)).perform(click());
+        onView(allOf(withId(R.id.spinner_network_status), withText("on"))).perform(click());
+        onView(withText("APPLY")).perform(scrollTo(),click());
+        onView(withText("MAIN WINDOW")).perform(scrollTo(),click());
         onView(withId(R.id.config)).perform(click());
         onView(withText("Network")).perform(click());
         onView(withId(R.id.spinner_network_status)).check(matches(withSpinnerText("on")));
