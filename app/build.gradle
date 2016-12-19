@@ -20,6 +20,9 @@ android {
             debuggable false
       //      testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         }
+        debug {
+            testCoverageEnabled true
+        }
     }
 }
 
