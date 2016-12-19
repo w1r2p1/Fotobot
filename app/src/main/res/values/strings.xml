@@ -8,6 +8,8 @@
     <string name="help_button">Help</string>
     <string name="apply_button">APPLY</string>
     <string name="back_button">MAIN WINDOW</string>
+
+
     <string name="automatic_mode">Automatic Mode</string>
     <string name="automatic_mode_description">Next time Fotobot starts immediately (no need to press START button)</string>
 
@@ -244,5 +246,14 @@ mediastatus\n
 
     <item name="behavior_back_button" type="id" />
     <item name="spinner_network_status" type="id" />
+
+    <item name="network_back_button" type="id" />
+    <item name="network_apply_button" type="id" />
+
+    <item name="foto_back_button" type="id" />
+    <item name="foto_apply_button" type="id" />
+
+    <item name="video_back_button" type="id" />
+    <item name="video_apply_button" type="id" />
 
 </resources>

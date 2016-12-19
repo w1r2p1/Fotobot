@@ -420,6 +420,8 @@ public class Tab_Video_Activity extends Activity {
 
         });
 
+        btn.setId(R.id.video_apply_button);
+
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
@@ -512,6 +514,8 @@ public class Tab_Video_Activity extends Activity {
             }
 
         });
+
+        btn_mp.setId(R.id.video_back_button);
 
         btn_mp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
