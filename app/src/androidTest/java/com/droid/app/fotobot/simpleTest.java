@@ -18,7 +18,6 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.allOf;
 
-
 /**
  * Created by voran on 6/27/16.
  */
