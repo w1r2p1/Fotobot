@@ -70,7 +70,7 @@ public class simpleTest extends ActivityInstrumentationTestCase2<MainActivity> {
     }
 
     /*
-    Test netstatus
+    Test network status
      */
     public void testNetworkStatus() throws Exception {
         onView(withId(R.id.config)).perform(click());
@@ -79,7 +79,7 @@ public class simpleTest extends ActivityInstrumentationTestCase2<MainActivity> {
     }
 
     /*
-    Change Network status from off to on
+    Change network status from off to on
      */
     public void testChangeNetworkStatus() throws Exception {
         onView(withId(R.id.config)).perform(click());
