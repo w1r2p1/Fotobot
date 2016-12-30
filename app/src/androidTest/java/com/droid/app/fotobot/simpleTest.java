@@ -48,7 +48,7 @@ public class simpleTest extends ActivityInstrumentationTestCase2<MainActivity> {
     }
 
     /*
-    Test netsettings
+    Test network settings
      */
     public void testNetworkSettings() throws Exception {
         onView(withId(R.id.config)).perform(click());
