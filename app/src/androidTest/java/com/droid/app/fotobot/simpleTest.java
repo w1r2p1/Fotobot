@@ -64,6 +64,9 @@ public class simpleTest extends ActivityInstrumentationTestCase2<MainActivity> {
         onView(withId(R.id.behavior_back_button)).perform(scrollTo(),click());
     }
 
+    /*
+    Test netstatus
+     */
     public void testNetworkStatus() throws Exception {
         onView(withId(R.id.config)).perform(click());
         onView(withText("Network")).perform(click());
