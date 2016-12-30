@@ -70,6 +70,9 @@ public class simpleTest extends ActivityInstrumentationTestCase2<MainActivity> {
         onView(withId(R.id.spinner_network_status)).check(matches(withSpinnerText("on")));
     }
 
+    /*
+    Change Network status
+     */
     public void testChangeNetworkStatus() throws Exception {
         onView(withId(R.id.config)).perform(click());
         onView(withText("Network")).perform(click());
