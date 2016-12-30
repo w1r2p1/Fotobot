@@ -33,6 +33,9 @@ public class simpleTest extends ActivityInstrumentationTestCase2<MainActivity> {
         getActivity();
     }
 
+    /*
+    Test enter name
+     */
     public void testEnterName() throws Exception {
         //  Intents.init();
         onView(withId(R.id.config)).perform(click());
