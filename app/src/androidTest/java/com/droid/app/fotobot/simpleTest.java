@@ -71,7 +71,7 @@ public class simpleTest extends ActivityInstrumentationTestCase2<MainActivity> {
     }
 
     /*
-    Change Network status
+    Change Network status from off to on
      */
     public void testChangeNetworkStatus() throws Exception {
         onView(withId(R.id.config)).perform(click());
