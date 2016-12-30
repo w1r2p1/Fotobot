@@ -47,6 +47,9 @@ public class simpleTest extends ActivityInstrumentationTestCase2<MainActivity> {
         // onView(withId(R.id.textViewInfo)).check(matches(withText("Hello Barsik")));
     }
 
+    /*
+    Test netsettings
+     */
     public void testNetworkSettings() throws Exception {
         onView(withId(R.id.config)).perform(click());
         onView(withText("Network")).perform(click());
