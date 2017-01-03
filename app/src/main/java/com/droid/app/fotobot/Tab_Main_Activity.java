@@ -3,9 +3,13 @@ package com.droid.app.fotobot;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
@@ -30,6 +34,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 
 public class Tab_Main_Activity extends Activity {
 
@@ -1025,8 +1031,65 @@ public class Tab_Main_Activity extends Activity {
 
         boolean exists = dir.exists();
 
+
+
+
+
+        if (Build.VERSION.SDK_INT >= 23)
+        {
+            if (checkPermission())
+            {
+                // Code for above or equal 23 API Oriented Device
+                // Create a common Method for both
+            } else {
+                requestPermission();
+            }
+        }
+        else
+        {
+
+            // Code for Below 23 API Oriented Device
+            // Create a common Method for both
+        }
+
+
+
+
+
+
         return exists;
 
+    }
+
+    private boolean checkPermission() {
+        int result = ContextCompat.checkSelfPermission(Tab_Main_Activity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (result == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void requestPermission() {
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(Tab_Main_Activity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            Toast.makeText(Tab_Main_Activity.this, "Write External Storage permission allows us to do store images. Please allow this permission in App Settings.", Toast.LENGTH_LONG).show();
+        } else {
+            ActivityCompat.requestPermissions(Tab_Main_Activity.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case READ_EXTERNAL_STORAGE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.e("value", "Permission Granted, Now you can use local drive .");
+                } else {
+                    Log.e("value", "Permission Denied, You cannot use local drive .");
+                }
+                break;
+        }
     }
 
 }
