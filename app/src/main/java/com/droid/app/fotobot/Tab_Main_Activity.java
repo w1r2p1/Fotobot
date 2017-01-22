@@ -1072,16 +1072,16 @@ public class Tab_Main_Activity extends Activity {
 
     private void requestPermission() {
 
-        if (ActivityCompat.shouldShowRequestPermissionRationale(Tab_Main_Activity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+    /*    if (ActivityCompat.shouldShowRequestPermissionRationale(Tab_Main_Activity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             Toast.makeText(Tab_Main_Activity.this, "Write External Storage permission allows us to do store images. Please allow this permission in App Settings.", Toast.LENGTH_LONG).show();
         } else {
             ActivityCompat.requestPermissions(Tab_Main_Activity.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
-        }
+        }*/
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
+      /* switch (requestCode) {
             case READ_EXTERNAL_STORAGE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Log.e("value", "Permission Granted, Now you can use local drive .");
@@ -1089,7 +1089,7 @@ public class Tab_Main_Activity extends Activity {
                     Log.e("value", "Permission Denied, You cannot use local drive .");
                 }
                 break;
-        }
+        }*/
     }
 
 }
