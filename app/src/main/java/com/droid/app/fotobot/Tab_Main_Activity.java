@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.util.TypedValue;
@@ -34,8 +33,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 
 public class Tab_Main_Activity extends Activity {
 
@@ -1041,7 +1038,9 @@ public class Tab_Main_Activity extends Activity {
             {
                 // Code for above or equal 23 API Oriented Device
                 // Create a common Method for both
+                Toast.makeText(Tab_Main_Activity.this,"Запись на внешнюю карту памяти разрешена", Toast.LENGTH_LONG).show();
             } else {
+                Toast.makeText(Tab_Main_Activity.this,"Запись запрещена", Toast.LENGTH_LONG).show();
                 requestPermission();
             }
         }
@@ -1051,11 +1050,6 @@ public class Tab_Main_Activity extends Activity {
             // Code for Below 23 API Oriented Device
             // Create a common Method for both
         }
-
-
-
-
-
 
         return exists;
 
@@ -1071,8 +1065,8 @@ public class Tab_Main_Activity extends Activity {
     }
 
     private void requestPermission() {
-
-    /*    if (ActivityCompat.shouldShowRequestPermissionRationale(Tab_Main_Activity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+// http://stackoverflow.com/questions/35484767/activitycompat-requestpermissions-not-showing-dialog-box
+/*        if (ActivityCompat.shouldShowRequestPermissionRationale(Tab_Main_Activity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             Toast.makeText(Tab_Main_Activity.this, "Write External Storage permission allows us to do store images. Please allow this permission in App Settings.", Toast.LENGTH_LONG).show();
         } else {
             ActivityCompat.requestPermissions(Tab_Main_Activity.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
@@ -1081,7 +1075,7 @@ public class Tab_Main_Activity extends Activity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-      /* switch (requestCode) {
+/*       switch (requestCode) {
             case READ_EXTERNAL_STORAGE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Log.e("value", "Permission Granted, Now you can use local drive .");
