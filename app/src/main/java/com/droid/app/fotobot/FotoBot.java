@@ -418,6 +418,7 @@ public class FotoBot extends Application {
     public boolean automatic_mode = false;
 
     DropboxAPI<AndroidAuthSession> mApi;
+    public Boolean mLoggedIn = false;
 
     /**
      * Возвращает текущее состояние FotoBot'а, сейчас не пользуюсь этим
@@ -1167,6 +1168,7 @@ public class FotoBot extends Application {
         advanced_settings = pref.getBoolean("Advanced_Settings", false);
         automatic_mode = pref.getBoolean("Automatic_Mode", false);
         delete_foto = pref.getBoolean("Delete_Foto", false);
+        mLoggedIn = pref.getBoolean("Dropbox_Logged", false);
     }
 
     public void SaveSettings() {
@@ -1225,6 +1227,7 @@ public class FotoBot extends Application {
         editor.putBoolean("Network", network);
         editor.putBoolean("Launched_First_Time", launched_first_time);
         editor.putBoolean("Delete_Foto", delete_foto);
+        editor.putBoolean("Dropbox_Logged", mLoggedIn);
         editor.commit();
 
     }

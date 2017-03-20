@@ -88,23 +88,19 @@ public class Tab_Network_Activity extends Activity {
         final FotoBot fb = (FotoBot) getApplicationContext();
         fb.LoadSettings();
 
-
-
 // Dropbox
         AndroidAuthSession session = buildSession();
         fb.mApi = new DropboxAPI<AndroidAuthSession>(session);
         checkAppKeySetup();
 
-        if (mLoggedIn) {
-            logOut();
-        } else {
-            // Start the remote authentication
-            if (USE_OAUTH1) {
-                mApi.getSession().startAuthentication(DBRoulette.this);
-            } else {
-                mApi.getSession().startOAuth2Authentication(DBRoulette.this);
-            }
+        if (!fb.mLoggedIn) {
+            fb.mApi.getSession().startAuthentication(Tab_Network_Activity.this);
+            fb.mLoggedIn  = true;
         }
+
+        fb.SaveSettings();
+
+ //               fb.mApi.getSession().startOAuth2Authentication(Tab_Network_Activity.this);
 
         Display display = getWindowManager().getDefaultDisplay();
         screenWidth = display.getWidth();
@@ -682,11 +678,15 @@ public class Tab_Network_Activity extends Activity {
     }
 
     public void Apply(View v) {
+        final FotoBot fb = (FotoBot) getApplicationContext();
+
         Spinner spinner = (Spinner) findViewById(R.id.spinner_connect_method);
         String spinner_value = spinner.getSelectedItem().toString();
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
+
+        editor.putBoolean("Dropbox_Logged", fb.mLoggedIn);
 
         switch (spinner_value) {
             case "Wi-Fi":
