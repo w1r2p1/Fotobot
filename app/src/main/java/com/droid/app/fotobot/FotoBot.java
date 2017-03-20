@@ -1727,6 +1727,12 @@ public class FotoBot extends Application {
 Загрузить в сеть новую ветку
 git push -u origin branch
 
+Выкачать файл из rmote repo
+git checkout path/to/file
+
+Откатиться на определенный commit
+git checkout <hashnum>
+
 Восстановление ветки из сетевого репозитария
 git fetch --all
 git reset --hard origin/master
