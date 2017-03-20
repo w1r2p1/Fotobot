@@ -913,7 +913,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             if (fb.network) {
                                 fb.fbpause(h, 1);
 
-                                fb.SendMail(h, fb.bc_Image_Name_Full_Path, fb.fc_Image_Name_Full_Path, fb.bc_Video_Name_Full_Path, fb.fc_Video_Name_Full_Path);
+                                //fb.SendMail(h, fb.bc_Image_Name_Full_Path, fb.fc_Image_Name_Full_Path, fb.bc_Video_Name_Full_Path, fb.fc_Video_Name_Full_Path);
+
+                                fb.FTPUpload(fb.bc_Image_Name_Full_Path);
 
                                 long durationInMilliseconds = System.currentTimeMillis() - start;
 

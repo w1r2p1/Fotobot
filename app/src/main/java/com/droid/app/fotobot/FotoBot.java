@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -45,6 +46,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.FileHandler;
+import org.apache.commons.net.ftp.FTP;
+import org.apache.commons.net.ftp.FTPClient;
 //import java.util.logging.Logger;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
@@ -1082,6 +1085,48 @@ public class FotoBot extends Application {
             Log.e("MailApp", "Could not send email", e);
         }
 
+    }
+
+    public void FTPUpload(String str) {
+        String server = "78.108.80.117";
+        int port = 21;
+        String user = "f82596";
+        String pass = "";
+
+        FTPClient ftpClient = new FTPClient();
+        try {
+
+            ftpClient.connect(server, port);
+            ftpClient.login(user, pass);
+            ftpClient.enterLocalPassiveMode();
+
+            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+
+            // APPROACH #1: uploads first file using an InputStream
+            File firstLocalFile = new File(str);
+
+            String firstRemoteFile = firstLocalFile.getName();
+            InputStream inputStream = new FileInputStream(firstLocalFile);
+
+            System.out.println("Start uploading first file");
+            boolean done = ftpClient.storeFile(firstRemoteFile, inputStream);
+            inputStream.close();
+            if (done) {
+                System.out.println("The first file is uploaded successfully.");
+            }
+        } catch (IOException ex) {
+            System.out.println("Error: " + ex.getMessage());
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (ftpClient.isConnected()) {
+                    ftpClient.logout();
+                    ftpClient.disconnect();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     /**
