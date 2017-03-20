@@ -24,6 +24,9 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.widget.Toast;
 
+import com.dropbox.client2.DropboxAPI;
+import com.dropbox.client2.android.AndroidAuthSession;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -413,6 +416,8 @@ public class FotoBot extends Application {
     public Boolean Tab_Video_Activity_activated = false;
 
     public boolean automatic_mode = false;
+
+    DropboxAPI<AndroidAuthSession> mApi;
 
     /**
      * Возвращает текущее состояние FotoBot'а, сейчас не пользуюсь этим

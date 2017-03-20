@@ -41,6 +41,11 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dropbox.client2.DropboxAPI;
+import com.dropbox.client2.android.AndroidAuthSession;
+import com.dropbox.client2.session.AccessTokenPair;
+import com.dropbox.client2.session.AppKeyPair;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -60,6 +65,10 @@ import java.util.concurrent.TimeUnit;
 public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
     ActivityManager actvityManager;
+
+
+
+
 
     private int screenWidth, screenHeight;
     public static final int UNKNOW_CODE = 99;
@@ -328,6 +337,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
+
 
         Log.d(LOG_TAG, "MainActivity: onCreate");
 
@@ -2054,5 +2065,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         }
 
     }
+
+
 
 }

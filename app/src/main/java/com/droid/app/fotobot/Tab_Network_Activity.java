@@ -24,6 +24,12 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.dropbox.client2.DropboxAPI;
+import com.dropbox.client2.android.AndroidAuthSession;
+import com.dropbox.client2.session.AccessTokenPair;
+import com.dropbox.client2.session.AppKeyPair;
 
 import java.util.ArrayList;
 
@@ -65,12 +71,40 @@ public class Tab_Network_Activity extends Activity {
     private int screenWidth, screenHeight;
     private int padding = 5;
 
+    // Dropbox
+    private static final String APP_KEY = "pbzt6tzpran9oil";
+    private static final String APP_SECRET = "pk53kqbm581o64z";
+    private static final String ACCOUNT_PREFS_NAME = "prefs";
+    private static final String ACCESS_KEY_NAME = "ACCESS_KEY";
+    private static final String ACCESS_SECRET_NAME = "ACCESS_SECRET";
+    private static final boolean USE_OAUTH1 = false;
+    private boolean mLoggedIn;
+    private final String PHOTO_DIR = "/Photos/";
+
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
 
         final FotoBot fb = (FotoBot) getApplicationContext();
         fb.LoadSettings();
+
+
+
+// Dropbox
+        AndroidAuthSession session = buildSession();
+        fb.mApi = new DropboxAPI<AndroidAuthSession>(session);
+        checkAppKeySetup();
+
+        if (mLoggedIn) {
+            logOut();
+        } else {
+            // Start the remote authentication
+            if (USE_OAUTH1) {
+                mApi.getSession().startAuthentication(DBRoulette.this);
+            } else {
+                mApi.getSession().startOAuth2Authentication(DBRoulette.this);
+            }
+        }
 
         Display display = getWindowManager().getDefaultDisplay();
         screenWidth = display.getWidth();
@@ -710,5 +744,48 @@ public class Tab_Network_Activity extends Activity {
             }
         }
         return index;
+    }
+
+    private AndroidAuthSession buildSession() {
+        AppKeyPair appKeyPair = new AppKeyPair(APP_KEY, APP_SECRET);
+
+        AndroidAuthSession session = new AndroidAuthSession(appKeyPair);
+        loadAuth(session);
+        return session;
+    }
+
+    /**
+     * Shows keeping the access keys returned from Trusted Authenticator in a local
+     * store, rather than storing user name & password, and re-authenticating each
+     * time (which is not to be done, ever).
+     */
+    private void loadAuth(AndroidAuthSession session) {
+        SharedPreferences prefs = getSharedPreferences(ACCOUNT_PREFS_NAME, 0);
+        String key = prefs.getString(ACCESS_KEY_NAME, null);
+        String secret = prefs.getString(ACCESS_SECRET_NAME, null);
+        if (key == null || secret == null || key.length() == 0 || secret.length() == 0) return;
+
+        if (key.equals("oauth2:")) {
+            // If the key is set to "oauth2:", then we can assume the token is for OAuth 2.
+            session.setOAuth2AccessToken(secret);
+        } else {
+            // Still support using old OAuth 1 tokens.
+            session.setAccessTokenPair(new AccessTokenPair(key, secret));
+        }
+    }
+
+    private void checkAppKeySetup() {
+        // Check to make sure that we have a valid app key
+        if (APP_KEY.startsWith("CHANGE") ||
+                APP_SECRET.startsWith("CHANGE")) {
+            showToast("You must apply for an app key and secret from developers.dropbox.com, and add them to the DBRoulette ap before trying it.");
+            finish();
+            return;
+        }
+    }
+
+    private void showToast(String msg) {
+        Toast error = Toast.makeText(this, msg, Toast.LENGTH_LONG);
+        error.show();
     }
 }
