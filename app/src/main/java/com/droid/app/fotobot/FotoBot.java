@@ -67,6 +67,8 @@ public class FotoBot extends Application {
     public boolean back_camera = true;
     public boolean front_camera = false;
 
+    public boolean useFTP = true;
+
     /**
      * id фронтальной камеры
      */
@@ -1088,10 +1090,10 @@ public class FotoBot extends Application {
     }
 
     public void FTPUpload(String str) {
-        String server = "78.108.80.117";
+        String server = "f17-preview.awardspace.net";
         int port = 21;
-        String user = "f82596";
-        String pass = "";
+        String user = "2324179";
+        String pass = "superclass151515";
 
         FTPClient ftpClient = new FTPClient();
         try {
@@ -1108,23 +1110,26 @@ public class FotoBot extends Application {
             String firstRemoteFile = firstLocalFile.getName();
             InputStream inputStream = new FileInputStream(firstLocalFile);
 
-            System.out.println("Start uploading first file");
+            SendMessage("Start uploading " + str);
             boolean done = ftpClient.storeFile(firstRemoteFile, inputStream);
             inputStream.close();
             if (done) {
-                System.out.println("The first file is uploaded successfully.");
+                SendMessage(str + " is uploaded successfully.");
             }
         } catch (IOException ex) {
-            System.out.println("Error: " + ex.getMessage());
+            SendMessage("Problem with " + str + " uploading: " + ex.getMessage());
             ex.printStackTrace();
         } finally {
             try {
                 if (ftpClient.isConnected()) {
                     ftpClient.logout();
                     ftpClient.disconnect();
+                    SendMessage("FTP connection has been closed");
+                    fbpause(h,5);
                 }
             } catch (IOException ex) {
                 ex.printStackTrace();
+                SendMessage("Problem with closing FTP connection");
             }
         }
     }
