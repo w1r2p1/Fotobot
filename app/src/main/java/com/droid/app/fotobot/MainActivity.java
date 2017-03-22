@@ -9,6 +9,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LevelListDrawable;
 import android.hardware.Camera;
 import android.media.AudioManager;
 import android.media.CamcorderProfile;
@@ -57,7 +59,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 // commented to debug ffc
-public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback {
+public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback, Html.ImageGetter {
 
     ActivityManager actvityManager;
 
@@ -148,7 +150,29 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             Log.d(LOG_TAG, reportDate + ": " + message);
 
-            tvInfo.setText(Html.fromHtml(fb.log));
+         //   fb.log = "<img src='ic_fotobot.png'";
+
+            tvInfo.setText(Html.fromHtml(fb.log, new Html.ImageGetter() {
+                @Override
+                public Drawable getDrawable(String arg0) {
+                    // TODO Auto-generated method stub
+                    int id = 0;
+
+                    if(arg0.equals("ic_fotobot.png")){
+                        id = R.drawable.ic_fotobot;
+                    }
+
+//        if(arg0.equals("tu1.png")){
+//            id = R.drawable.tu1;
+//        }
+                    LevelListDrawable d = new LevelListDrawable();
+                    Drawable empty = getResources().getDrawable(id);
+                    d.addLevel(0, 0, empty);
+                    d.setBounds(0, 0, empty.getIntrinsicWidth(), empty.getIntrinsicHeight());
+
+                    return d;
+                }
+            }, null));
 
             fb.success_message = false;
             fb.debug_message = false;
@@ -359,7 +383,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         fb.work_dir_init();
 
-        if (fb.show_start_tip) {
+      //  fb.SendMessage("<img src=ic_fotobot.png");
+
+      //  if (fb.show_start_tip) {
             String str = getResources().getString(R.string.Fotobot);
             fb.log = Html.fromHtml(str).toString();
 
@@ -367,7 +393,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             fb.SaveSettings();
 
-        }
+//        }
 
         Display display = getWindowManager().getDefaultDisplay();
         screenWidth = display.getWidth();
@@ -2071,6 +2097,26 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             fb.fc_Video_Name_Full_Path = fb.work_dir + "/" + fb.fc_Video_Name;
         }
 
+    }
+
+    @Override
+    public Drawable getDrawable(String arg0) {
+        // TODO Auto-generated method stub
+        int id = 0;
+
+        if(arg0.equals("ic_fotobot.png")){
+            id = R.drawable.ic_fotobot;
+        }
+
+//        if(arg0.equals("tu1.png")){
+//            id = R.drawable.tu1;
+//        }
+        LevelListDrawable d = new LevelListDrawable();
+        Drawable empty = getResources().getDrawable(id);
+        d.addLevel(0, 0, empty);
+        d.setBounds(0, 0, empty.getIntrinsicWidth(), empty.getIntrinsicHeight());
+
+        return d;
     }
 
 }
