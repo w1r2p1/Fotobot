@@ -27,7 +27,7 @@
 
     <!-- http://daniel-codes.blogspot.ru/2011/04/html-in-textviews.html -->
 
-    <string name="update"><![CDATA[<b><u>Версия 3.1.1</u></b><br>
+    <string name="update"><![CDATA[<br><img src=fotobot320_227px.jpg><br><b><u>Версия 3.1.1</u></b><br>
         1) добавлен автозапуск;<br>
         ]]></string>
 
