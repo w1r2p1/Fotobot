@@ -59,7 +59,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 // commented to debug ffc
-public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback, Html.ImageGetter {
+public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
     ActivityManager actvityManager;
 
@@ -158,8 +158,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                     // TODO Auto-generated method stub
                     int id = 0;
 
-                    if(arg0.equals("ic_fotobot.png")){
-                        id = R.drawable.ic_fotobot;
+                    if(arg0.equals("fotobot320_227px.jpg")){
+                        id = R.drawable.fotobot320_227px;
                     }
 
 //        if(arg0.equals("tu1.png")){
@@ -2097,26 +2097,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             fb.fc_Video_Name_Full_Path = fb.work_dir + "/" + fb.fc_Video_Name;
         }
 
-    }
-
-    @Override
-    public Drawable getDrawable(String arg0) {
-        // TODO Auto-generated method stub
-        int id = 0;
-
-        if(arg0.equals("ic_fotobot.png")){
-            id = R.drawable.ic_fotobot;
-        }
-
-//        if(arg0.equals("tu1.png")){
-//            id = R.drawable.tu1;
-//        }
-        LevelListDrawable d = new LevelListDrawable();
-        Drawable empty = getResources().getDrawable(id);
-        d.addLevel(0, 0, empty);
-        d.setBounds(0, 0, empty.getIntrinsicWidth(), empty.getIntrinsicHeight());
-
-        return d;
     }
 
 }
