@@ -1,4 +1,7 @@
 <h2>User Manual</h2>
+<br><img src=fotobot320_227px.jpg><br>
+<br><img src=phone_on_tripod.jpg><br>
+<br><img src=tripod_on_the_grass.jpg><br>
 
 Fotobot is powerful photo server which is running on your device.<br>
 <br>
