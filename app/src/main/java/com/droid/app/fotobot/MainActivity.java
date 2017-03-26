@@ -56,6 +56,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 // commented to debug ffc
@@ -158,13 +159,17 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                     // TODO Auto-generated method stub
                     int id = 0;
 
+                    String str = Locale.getDefault().getLanguage();
+
                     if (arg0.equals("fotobot320_227px.jpg")) {
-                        id = R.drawable.fotobot320_227px;
+                        if (str.contains("ru")) {
+                            id = R.drawable.fotobot320_227px_ru;
+                        } else {
+                            id = R.drawable.fotobot320_227px_en;
+                        }
                     }
 
-//        if(arg0.equals("tu1.png")){
-//            id = R.drawable.tu1;
-//        }
+
                     LevelListDrawable d = new LevelListDrawable();
                     Drawable empty = getResources().getDrawable(id);
                     d.addLevel(0, 0, empty);
@@ -1210,7 +1215,30 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         tvInfo.setTypeface(Typeface.MONOSPACE);
         tvInfo.setTextColor(Color.rgb(190, 190, 190));
 
-        tvInfo.setText(Html.fromHtml(fb.log));
+        tvInfo.setText(Html.fromHtml(fb.log, new Html.ImageGetter() {
+            @Override
+            public Drawable getDrawable(String arg0) {
+                // TODO Auto-generated method stub
+                int id = 0;
+
+                String str = Locale.getDefault().getLanguage();
+
+                if (arg0.equals("fotobot320_227px.jpg")) {
+                    if (str.contains("ru")) {
+                        id = R.drawable.fotobot320_227px_ru;
+                    } else {
+                        id = R.drawable.fotobot320_227px_en;
+                    }
+                }
+
+                LevelListDrawable d = new LevelListDrawable();
+                Drawable empty = getResources().getDrawable(id);
+                d.addLevel(0, 0, empty);
+                d.setBounds(0, 0, empty.getIntrinsicWidth(), empty.getIntrinsicHeight());
+
+                return d;
+            }
+        }, null));
 
         findViewById(R.id.play).setEnabled(true);
         findViewById(R.id.stop).setEnabled(false);
@@ -1399,8 +1427,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 // TODO Auto-generated method stub
                 int id = 0;
 
+                String str = Locale.getDefault().getLanguage();
+
                 if (arg0.equals("fotobot320_227px.jpg")) {
-                    id = R.drawable.fotobot320_227px;
+                    if (str.contains("ru")) {
+                        id = R.drawable.fotobot320_227px_ru;
+                    } else {
+                        id = R.drawable.fotobot320_227px_en;
+                    }
                 }
 
                 if (arg0.equals("phone_on_tripod.jpg")) {
