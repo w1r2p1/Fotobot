@@ -39,6 +39,11 @@
     <string name="SMS_Password">SMS Password</string>
     <string name="SMS_Password_description">Password for administration via SMS (if password is wrong than rest part of SMS will be ignored)</string>
 
+    <string name="Fotobot_FTP_server">FTP server</string>
+    <string name="Fotobot_FTP_port">FTP port</string>
+    <string name="Fotobot_FTP_username">FTP username</string>
+    <string name="Fotobot_FTP_password">FTP password</string>
+
     <string name="sms_cmd_list">
 passwd &lt;passwd&gt;\n
 update &lt;interval sec&gt;\n

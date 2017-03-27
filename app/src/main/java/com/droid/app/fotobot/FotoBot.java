@@ -282,6 +282,11 @@ public class FotoBot extends Application {
     public boolean bc_video_attach = true;
     public boolean fc_video_attach = true;
 
+    public boolean bc_image_ftp_upload = true;
+    public boolean fc_image_ftp_upload = true;
+    public boolean bc_video_ftp_upload = true;
+    public boolean fc_video_ftp_upload = true;
+
     public boolean bc_image_delete = false;
     public boolean fc_image_delete = false;
     public boolean bc_video_delete = false;
@@ -418,6 +423,11 @@ public class FotoBot extends Application {
     public Boolean Tab_Video_Activity_activated = false;
 
     public boolean automatic_mode = false;
+
+    public String FTP_server = "";
+    public int FTP_port = 21;
+    public String FTP_username = "";
+    public String FTP_password = "";
 
     /**
      * Возвращает текущее состояние FotoBot'а, сейчас не пользуюсь этим
@@ -1166,10 +1176,17 @@ public class FotoBot extends Application {
         Use_Flash = pref.getBoolean("Use_Flash", false);
         make_photo_fc = pref.getBoolean("Use_Fc", false);
         make_photo_bc = pref.getBoolean("Use_Bc", true);
+
         bc_image_attach = pref.getBoolean("Bc_Image_Attach", true);
         fc_image_attach = pref.getBoolean("Fc_Image_Attach", true);
         bc_video_attach = pref.getBoolean("Bc_Video_Attach", true);
         fc_video_attach = pref.getBoolean("Fc_Video_Attach", true);
+
+        bc_image_ftp_upload = pref.getBoolean("Bc_Image_FTP_Upload", true);
+        fc_image_ftp_upload = pref.getBoolean("Fc_Image_FTP_Upload", true);
+        bc_video_ftp_upload = pref.getBoolean("Bc_Video_FTP_Upload", true);
+        fc_video_ftp_upload = pref.getBoolean("Fc_Video_FTP_Upload", true);
+
         bc_image_delete = pref.getBoolean("Bc_Image_Delete", false);
         fc_image_delete = pref.getBoolean("Fc_Image_Delete", false);
         bc_video_delete = pref.getBoolean("Bc_Video_Delete", false);
@@ -1251,10 +1268,17 @@ public class FotoBot extends Application {
         editor.putBoolean("Use_Bc", make_photo_bc);
         editor.putBoolean("Make_Video_Fc", make_video_fc);
         editor.putBoolean("Make_Video_Bc", make_video_bc);
+
         editor.putBoolean("Bc_Image_Attach", bc_image_attach);
         editor.putBoolean("Fc_Image_Attach", fc_image_attach);
         editor.putBoolean("Bc_Video_Attach", bc_video_attach);
         editor.putBoolean("Fc_Video_Attach", fc_video_attach);
+
+        editor.putBoolean("Bc_Image_FTP_Upload", bc_image_ftp_upload);
+        editor.putBoolean("Fc_Image_FTP_Upload", fc_image_ftp_upload);
+        editor.putBoolean("Bc_Video_FTP_Upload", bc_video_ftp_upload);
+        editor.putBoolean("Fc_Video_FTP_Upload", fc_video_ftp_upload);
+
         editor.putBoolean("Bc_Image_Delete", bc_image_delete);
         editor.putBoolean("Fc_Image_Delete", fc_image_delete);
         editor.putBoolean("Bc_Video_Delete", bc_video_delete);

@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -49,6 +50,11 @@ public class Tab_Network_Activity extends Activity {
     EditText editText_SMTP_Port;
     EditText editText_Check_Web_Page;
     EditText editText_Network_Up_Delay;
+    EditText editText_Fotobot_FTP_server;
+    EditText editText_Fotobot_FTP_port;
+    EditText editText_Fotobot_FTP_username;
+    EditText editText_Fotobot_FTP_password;
+
     LinearLayout linLayout_Channels;
     LinearLayout linLayout_Connection_Method;
     LinearLayout linLayout_Fotobot_Email;
@@ -56,9 +62,12 @@ public class Tab_Network_Activity extends Activity {
     LinearLayout linLayout_Fotobot_Recipient;
     LinearLayout linLayout_SMTP_Host;
     LinearLayout linLayout_SMTP_Port;
+    LinearLayout linLayout_Fotobot_FTP;
 
     Button btn, btn_mp;
     Spinner spinner_ppm;
+
+    CheckBox checkBox_mail;
 
     ArrayList<String> spinnerArray_ppm;
 
@@ -172,6 +181,72 @@ public class Tab_Network_Activity extends Activity {
 
 // ------------------------------------------------------------------------------------------------
 
+// FTP Container
+        linLayout_Fotobot_FTP = new LinearLayout(this);
+        linLayout_Fotobot_FTP.setOrientation(LinearLayout.VERTICAL);
+        linLayout_Fotobot_FTP.setPadding(5, 9, 5, 9);
+        linLayout_Fotobot_FTP.setBackgroundColor(Color.rgb(208, 208, 208));
+
+// FTP server
+        TextView tv_Fotobot_FTP_server = new TextView(this);
+        tv_Fotobot_FTP_server.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Fotobot_FTP_server.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Fotobot_FTP_server.setTextColor(Color.BLACK);
+        tv_Fotobot_FTP_server.setText(getResources().getString(R.string.Fotobot_FTP_server));
+        linLayout_Fotobot_FTP.addView(tv_Fotobot_FTP_server);
+
+        editText_Fotobot_FTP_server = new EditText(this);
+        editText_Fotobot_FTP_server.setSingleLine(true);
+        editText_Fotobot_FTP_server.setText(fb.FTP_server);
+        editText_Fotobot_FTP_server.setTextColor(Color.rgb(50, 100, 150));
+        linLayout_Fotobot_FTP.addView(editText_Fotobot_FTP_server);
+
+// FTP port
+        TextView tv_Fotobot_FTP_port = new TextView(this);
+        tv_Fotobot_FTP_port.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Fotobot_FTP_port.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Fotobot_FTP_port.setTextColor(Color.BLACK);
+        tv_Fotobot_FTP_port.setText(getResources().getString(R.string.Fotobot_FTP_port));
+        linLayout_Fotobot_FTP.addView(tv_Fotobot_FTP_port);
+
+        editText_Fotobot_FTP_port = new EditText(this);
+        String jpg = Integer.toString(fb.FTP_port);
+        editText_Fotobot_FTP_port.setText(jpg);
+        editText_Fotobot_FTP_port.setTextColor(Color.rgb(50, 100, 150));
+        linLayout_Fotobot_FTP.addView(editText_Fotobot_FTP_port);
+
+// FTP username
+        TextView tv_Fotobot_FTP_username = new TextView(this);
+        tv_Fotobot_FTP_username.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Fotobot_FTP_username.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Fotobot_FTP_username.setTextColor(Color.BLACK);
+        tv_Fotobot_FTP_username.setText(getResources().getString(R.string.Fotobot_FTP_username));
+        linLayout_Fotobot_FTP.addView(tv_Fotobot_FTP_username);
+
+        editText_Fotobot_FTP_username = new EditText(this);
+        editText_Fotobot_FTP_username.setSingleLine(true);
+        editText_Fotobot_FTP_username.setText(fb.FTP_username);
+        editText_Fotobot_FTP_username.setTextColor(Color.rgb(50, 100, 150));
+        linLayout_Fotobot_FTP.addView(editText_Fotobot_FTP_username);
+
+// FTP password
+
+        TextView tv_Fotobot_FTP_password = new TextView(this);
+        tv_Fotobot_FTP_password.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Fotobot_FTP_password.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Fotobot_FTP_password.setTextColor(Color.BLACK);
+        tv_Fotobot_FTP_password.setText(getResources().getString(R.string.Fotobot_FTP_password));
+        linLayout_Fotobot_FTP.addView(tv_Fotobot_FTP_password);
+
+        editText_Fotobot_FTP_password = new EditText(this);
+        editText_Fotobot_FTP_password.setSingleLine(true);
+        editText_Fotobot_FTP_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        editText_Fotobot_FTP_password.setText(fb.FTP_password);
+        editText_Fotobot_FTP_password.setTextColor(Color.rgb(50, 100, 150));
+        linLayout_Fotobot_FTP.addView(editText_Fotobot_FTP_password);
+
+// ------------------------------------------------------------------------------------------------
+
 // Fotobot's e-mail
 
 // E-Mail Container
@@ -187,6 +262,7 @@ public class Tab_Network_Activity extends Activity {
         tv_Fotobot_Email.setTextColor(Color.BLACK);
         tv_Fotobot_Email.setText(getResources().getString(R.string.Fotobot_email));
         linLayout_Fotobot_Email.addView(tv_Fotobot_Email);
+
 
 // Почтовый адрес
         editText_Fotobot_Email = new EditText(this);
