@@ -1,9 +1,7 @@
 <h2>User Manual</h2>
 <br><img src=fotobot320_227px.jpg><br>
-<br><img src=phone_on_tripod.jpg><br>
-<br><img src=tripod_on_the_grass.jpg><br>
 
-Fotobot is powerful photo server which is running on your device.<br>
+Fotobot is a good solution for time laps photography.<br>
 <br>
 Below are main features of Fotobot:<br>
 <br>
@@ -32,11 +30,11 @@ Launch Fotobot and make some important settings<br>
 <br>
 <u><b>Settings/Behaviour</b></u><br>
 <br>
-<b>Camera Name</b> (f.e. Fazenda), helps to sort out email in Inbox.<br>
+<b>Camera Name</b> (f.e. Sunrise), helps to sort out email in Inbox.<br>
 <br>
 <b>Storage Type</b><br>
 <br>
-<b>Pause between frames (sec)</b><br>
+<b>Pause between time laps frames (sec)</b><br>
 Do not use numbers less than 30sec, cause old phones do not have powerfull CPU for image processing.<br>
 <br>
 <u><b>Settings/Network</b></u><br>
@@ -68,7 +66,6 @@ passwd pass <br>
 update 300 <br>
 network on <br>
 log on <br>
-flash on <br>
 jpg 50 <br>
 status on <br>
 <br>
