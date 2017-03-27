@@ -1187,6 +1187,11 @@ public class FotoBot extends Application {
         bc_video_ftp_upload = pref.getBoolean("Bc_Video_FTP_Upload", true);
         fc_video_ftp_upload = pref.getBoolean("Fc_Video_FTP_Upload", true);
 
+        FTP_server = pref.getString("FTP_Server","ftp.server.com");
+        FTP_port = pref.getInt("FTP_Port",21);
+        FTP_username = pref.getString("FTP_Username","login");
+        FTP_password = pref.getString("FTP_Password","passwd");
+
         bc_image_delete = pref.getBoolean("Bc_Image_Delete", false);
         fc_image_delete = pref.getBoolean("Fc_Image_Delete", false);
         bc_video_delete = pref.getBoolean("Bc_Video_Delete", false);
@@ -1249,6 +1254,12 @@ public class FotoBot extends Application {
         editor.putInt("FLog_Length", log_line_number);
         editor.putString("Network_Channel", Network_Channel);
         editor.putString("Network_Connection_Method", Network_Connection_Method);
+
+        editor.putString("FTP_Server", FTP_server);
+        editor.putInt("FTP_Port", FTP_port);
+        editor.putString("FTP_Username", FTP_username);
+        editor.putString("FTP_Password", FTP_password);
+
         editor.putString("EMail_Sender", EMail_Sender);
         editor.putString("EMail_Sender_Password", EMail_Sender_Password);
         editor.putString("SMTP_Host", SMTP_Host);

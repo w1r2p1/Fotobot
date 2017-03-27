@@ -552,6 +552,7 @@ public class Tab_Network_Activity extends Activity {
                 if (spinnerArray_ppm.get(i) == "on") {
                     linLayout_Channels.setVisibility(View.VISIBLE);
                     linLayout_Connection_Method.setVisibility(View.VISIBLE);
+                    linLayout_Fotobot_FTP.setVisibility(View.VISIBLE);
                     linLayout_Fotobot_Email.setVisibility(View.VISIBLE);
                     linLayout_Fotobot_Password.setVisibility(View.VISIBLE);
                     linLayout_SMTP_Host.setVisibility(View.VISIBLE);
@@ -560,6 +561,7 @@ public class Tab_Network_Activity extends Activity {
                 } else {
                     linLayout_Channels.setVisibility(View.GONE);
                     linLayout_Connection_Method.setVisibility(View.GONE);
+                    linLayout_Fotobot_FTP.setVisibility(View.GONE);
                     linLayout_Fotobot_Email.setVisibility(View.GONE);
                     linLayout_Fotobot_Password.setVisibility(View.GONE);
                     linLayout_SMTP_Host.setVisibility(View.GONE);
@@ -637,6 +639,12 @@ public class Tab_Network_Activity extends Activity {
 
                 editor.putString("Network_Channel", spinner_Channels.getSelectedItem().toString());
                 editor.putString("Network_Connection_Method", spinner_Connection_Method.getSelectedItem().toString());
+
+                editor.putString("FTP_Server", editText_Fotobot_FTP_server.getText().toString());
+                editor.putInt("FTP_Port", Integer.parseInt(editText_Fotobot_FTP_port.getText().toString()));
+                editor.putString("FTP_Username", editText_Fotobot_FTP_username.getText().toString());
+                editor.putString("FTP_Password", editText_Fotobot_FTP_password.getText().toString());
+
                 editor.putString("EMail_Sender", editText_Fotobot_Email.getText().toString());
                 editor.putString("EMail_Sender_Password", editText_Fotobot_Password.getText().toString());
                 editor.putString("SMTP_Host", editText_SMTP_Host.getText().toString());
@@ -705,6 +713,7 @@ public class Tab_Network_Activity extends Activity {
             FullFrame.addView(linLayout_Connection_Method);
         }
 
+        FullFrame.addView(linLayout_Fotobot_FTP);
         FullFrame.addView(linLayout_Fotobot_Email);
         FullFrame.addView(linLayout_Fotobot_Password);
         FullFrame.addView(linLayout_SMTP_Host);
