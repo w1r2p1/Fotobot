@@ -8,8 +8,8 @@ android {
         applicationId "com.droid.app.fotobot"
         minSdkVersion 9
         targetSdkVersion 10
-        versionCode 32
-        versionName "3.1.1"
+        versionCode 34
+        versionName "3.1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -19,6 +19,9 @@ android {
             testCoverageEnabled = true
             debuggable false
       //      testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        }
+        debug {
+            debuggable false
         }
     }
 }
