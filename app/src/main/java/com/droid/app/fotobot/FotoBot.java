@@ -137,7 +137,7 @@ public class FotoBot extends Application {
     /**
      * заряжается ли от сети
      */
-    public boolean acCharge;
+    public boolean isCharging;
 
     /**
      * Степень JPEG сжатия
@@ -641,6 +641,7 @@ public class FotoBot extends Application {
                 }
 
                 for (int i = 1; i <= n; i++) {
+                    SendMessage("isCharging: " + isCharging);
                     Message msg = Message.obtain(); // Creates an new Message instance
 
                     // we make 1 sec for each n
@@ -1237,9 +1238,6 @@ public class FotoBot extends Application {
         BroadcastReceiver batteryLevelReceiver = new BroadcastReceiver() {
             public void onReceive(Context context, Intent intent) {
                 //context.unregisterReceiver(this);
-
-                int chargePlug = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
-                acCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_AC;
 
                 int rawlevel = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
                 int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
