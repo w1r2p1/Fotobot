@@ -135,6 +135,11 @@ public class FotoBot extends Application {
     public int battery_level;
 
     /**
+     * заряжается ли от сети
+     */
+    public boolean acCharge;
+
+    /**
      * Степень JPEG сжатия
      */
     public int JPEG_Compression = 90;
@@ -1232,6 +1237,10 @@ public class FotoBot extends Application {
         BroadcastReceiver batteryLevelReceiver = new BroadcastReceiver() {
             public void onReceive(Context context, Intent intent) {
                 //context.unregisterReceiver(this);
+
+                int chargePlug = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
+                acCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_AC;
+
                 int rawlevel = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
                 int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
                 battery_temperature = ((float) intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, -1)) / 10.0f;
