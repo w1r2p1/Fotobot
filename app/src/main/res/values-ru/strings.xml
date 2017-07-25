@@ -227,5 +227,33 @@
     <string name="str_file">Файл</string>
     <string name="str_was_deleted"> был удален</string>
     <string name="str_problem_with_deleting">Проблема с удалением: </string>
-
+    <string name="sms_cmd_list">
+passwd &lt;passwd&gt;\n
+update &lt;interval sec&gt;\n
+network &lt;on/off&gt;\n
+netchannel &lt;wf/md&gt;\n
+netmethod &lt;1/2&gt;\n
+email &lt;user@mail.ru&gt;\n
+emails &lt;fotobot@gmail.com&gt;\n
+emailsp &lt;pass_W_d&gt;\n
+smtphost &lt;smtp.gmail.com&gt;\n
+smtpport &lt;465&gt;\n
+fc &lt;on/off&gt;\n
+bc &lt;on/off&gt;\n
+log &lt;on/off&gt;\n
+jpg &lt;compression&gt;\n
+flash &lt;on/off&gt;\n
+attachbci &lt;on/off&gt;\n
+attachfci &lt;on/off&gt;\n
+attachbcv &lt;on/off&gt;\n
+attachfcv &lt;on/off&gt;\n
+delbci &lt;on/off&gt;\n
+delfci &lt;on/off&gt;\n
+delbcv &lt;on/off&gt;\n
+delfcv &lt;on/off&gt;\n
+status\n
+netstatus\n
+emailstatus\n
+mediastatus\n
+    </string>
 </resources>
