@@ -365,6 +365,7 @@ public class FotoBot extends Application {
     public String fc_Camera_Properties;
 
     List<String> sms = new ArrayList<String>();
+    List<String> powerinfo = new ArrayList<String>();
 
     public Boolean advanced_settings = false;
 
@@ -658,13 +659,16 @@ public class FotoBot extends Application {
                     if (i % 5 == 0 && sms_check_file) {
 // checking for sms file each 5 seconds during big pause between photos
                         File sms_file = null;
+                        File powerinfo_file = null;
 
                         sms_file = new File((getApplicationContext().getFilesDir().toString() + "/sms.txt"));
                         //sms_file = new File( work_dir + "/sms.txt");
 
+
+
                         if (sms_file.isFile()) {
 
-                            file2array(sms_file.toString());
+                            sms = file2array(sms_file.toString());
 
                             sms_getdata();
 
@@ -738,6 +742,22 @@ public class FotoBot extends Application {
 
                         }
 
+                        powerinfo_file = new File((getApplicationContext().getFilesDir().toString() + "/powerinfo.txt"));
+
+                        if (powerinfo_file.isFile()) {
+
+                            powerinfo = file2array(powerinfo_file.toString());
+
+                            for (int ind = 0; ind < powerinfo.size(); ind++) {
+                                SendMessage(powerinfo.get(ind).toString());
+                            }
+
+                            SendMessage("Powerinfo:");
+
+                            powerinfo_file.delete();
+
+                            powerinfo.clear();
+                        }
                     }
 
                     if (i % wake_up_interval == 0 && frame_delay) {
@@ -1314,7 +1334,9 @@ public class FotoBot extends Application {
         sms.sendTextMessage(phoneNumber, null, message, sentPI, deliveredPI);
     }
 
-    public void file2array(String filename) {
+    public List<String> file2array(String filename) {
+
+        List<String> array= new ArrayList<String>();
 
         FileReader fileReader = null;
         try {
@@ -1329,7 +1351,7 @@ public class FotoBot extends Application {
         try {
             Integer i = 0;
             while ((line = bufferedReader.readLine()) != null) {
-                sms.add(line);
+                array.add(line);
                 i++;
             }
             Log.d("sms", "i=" + i);
@@ -1345,6 +1367,7 @@ public class FotoBot extends Application {
         }
 
         // return lines.toArray(new String[lines.size()]);
+        return array;
     }
 
     public void sms_getdata() {
