@@ -12,10 +12,10 @@ import android.os.BatteryManager;
 public class PowerConnectionReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        final FotoBot fb = (FotoBot) context;
+   //     final FotoBot fb = (FotoBot) context;
 
         int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
-        fb.isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
+        boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
                 status == BatteryManager.BATTERY_STATUS_FULL;
 
         int chargePlug = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
