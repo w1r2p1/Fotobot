@@ -1,8 +1,10 @@
 package com.droid.app.fotobot;
 
 import android.app.ActivityManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -13,6 +15,7 @@ import android.hardware.Camera;
 import android.media.AudioManager;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
+import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -646,12 +649,16 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             e.printStackTrace();
         }
 
+        registerReceiver(onBatteryChanged,
+                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+
     }
 
     protected void onStop() {
         final FotoBot fb = (FotoBot) getApplicationContext();
         super.onStop();
         Log.d(LOG_TAG, "MainActivity: onStop");
+        unregisterReceiver(onBatteryChanged);
     }
 
     @Override
@@ -2054,5 +2061,34 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         }
 
     }
+
+    BroadcastReceiver onBatteryChanged=new BroadcastReceiver() {
+        public void onReceive(Context context, Intent intent) {
+            final FotoBot fb = (FotoBot) getApplicationContext();
+            int pct=100*intent.getIntExtra("level", 1)/intent.getIntExtra("scale", 1);
+
+            switch(intent.getIntExtra("status", -1)) {
+                case BatteryManager.BATTERY_STATUS_CHARGING:
+
+                    break;
+
+                case BatteryManager.BATTERY_STATUS_FULL:
+                    int plugged=intent.getIntExtra("plugged", -1);
+
+                    if (plugged==BatteryManager.BATTERY_PLUGGED_AC ||
+                            plugged==BatteryManager.BATTERY_PLUGGED_USB) {
+fb.battery_plugged = true;
+                    }
+                    else {
+                        fb.battery_plugged = false;
+                    }
+                    break;
+
+                default:
+                    fb.battery_plugged = false;
+                    break;
+            }
+        }
+    };
 
 }

@@ -134,6 +134,8 @@ public class FotoBot extends Application {
      */
     public int battery_level;
 
+    public boolean battery_plugged = false;
+
     /**
      * заряжается ли от сети
      */
@@ -642,7 +644,7 @@ public class FotoBot extends Application {
                 }
 
                 for (int i = 1; i <= n; i++) {
-                    SendMessage("isCharging: " + isCharging);
+                    SendMessage("battery_plugged: " + battery_plugged);
                     Message msg = Message.obtain(); // Creates an new Message instance
 
                     // we make 1 sec for each n
@@ -742,7 +744,7 @@ public class FotoBot extends Application {
 
                         }
 
-                        powerinfo_file = new File((getApplicationContext().getFilesDir().toString() + "/powerinfo.txt"));
+/*                       powerinfo_file = new File((getApplicationContext().getFilesDir().toString() + "/powerinfo.txt"));
 
                         if (powerinfo_file.isFile()) {
 
@@ -757,7 +759,7 @@ public class FotoBot extends Application {
                             powerinfo_file.delete();
 
                             powerinfo.clear();
-                        }
+                        } */
                     }
 
                     if (i % wake_up_interval == 0 && frame_delay) {
@@ -1266,6 +1268,13 @@ public class FotoBot extends Application {
                 if (rawlevel >= 0 && scale > 0) {
                     battery_level = (rawlevel * 100) / scale;
                 }
+
+             //   int plugged = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
+              //  isPlugged = plugged == BatteryManager.BATTERY_PLUGGED_AC || plugged == BatteryManager.BATTERY_PLUGGED_USB;
+             //   if (VERSION.SDK_INT > VERSION_CODES.JELLY_BEAN) {
+             //       isPlugged = isPlugged || plugged == BatteryManager.BATTERY_PLUGGED_WIRELESS;
+             //   }
+
             }
         };
 
@@ -1273,6 +1282,19 @@ public class FotoBot extends Application {
         registerReceiver(batteryLevelReceiver, batteryLevelFilter);
 
     }
+
+/*    public static boolean isPlugged(Context context) {
+        boolean isPlugged= false;
+        Intent intent = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+
+        int plugged = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
+        isPlugged = plugged == BatteryManager.BATTERY_PLUGGED_AC || plugged == BatteryManager.BATTERY_PLUGGED_USB;
+        if (VERSION.SDK_INT > VERSION_CODES.JELLY_BEAN) {
+            isPlugged = isPlugged || plugged == BatteryManager.BATTERY_PLUGGED_WIRELESS;
+        }
+        return isPlugged;
+    } */
+
 
     public void sendSMS(String phoneNumber, String message) {
         String SENT = "SMS_SENT";
