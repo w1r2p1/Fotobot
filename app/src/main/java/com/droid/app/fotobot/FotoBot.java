@@ -652,6 +652,9 @@ public class FotoBot extends Application {
                             } else {
                                 SendMessage("Пропало напряжение в сети");
                             }
+
+                            isCharging_before = isCharging;
+
                         }
                     }
 
