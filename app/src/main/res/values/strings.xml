@@ -242,6 +242,9 @@ mediastatus\n
     <string name="str_was_deleted"> was deleted</string>
     <string name="str_problem_with_deleting">Problem with deleting: </string>
 
+    <string name="sms_voltage">House circuit status(SMS)</string>
+    <string name="sms_voltage_note">You will receive SMS if voltage on or off</string>
+
     <string name="no_voltage">No voltage</string>
     <string name="voltage_restored">Voltage restored</string>
 

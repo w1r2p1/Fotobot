@@ -256,6 +256,10 @@ netstatus\n
 emailstatus\n
 mediastatus\n
     </string>
+
+    <string name="sms_voltage">Статус электросети (SMS)</string>
+    <string name="sms_voltage_note">Если пропадет/появится напряжение, то придет SMS (телефон должен быть на зарядке)</string>
+
     <string name="no_voltage">Пропало напряжение в сети</string>
     <string name="voltage_restored">Напряжение в сети восстановлено</string>
 </resources>

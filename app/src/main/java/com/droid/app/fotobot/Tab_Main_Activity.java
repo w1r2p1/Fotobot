@@ -44,6 +44,7 @@ public class Tab_Main_Activity extends Activity {
     CheckBox checkBox_Clean_Text;
     CheckBox checkBox_Attach_Log;
     CheckBox checkBox_Adv_Settings;
+    CheckBox checkBox_SMS_Voltage;
     CheckBox checkBox_Automatic_Mode;
     CheckBox checkBox_Delete_Foto;
     EditText Photo_Frequency;
@@ -178,6 +179,31 @@ public class Tab_Main_Activity extends Activity {
         tv_SMS_Password_note.setText(getResources().getString(R.string.SMS_Password_description));
         tv_SMS_Password_note.setPadding(5, 9, 5, 9);
         linLayout_SMS_Password.addView(tv_SMS_Password_note);
+
+// ------------------------------------------------------------------------------------------------
+// Voltage status
+
+// Clean SystemLog TextView
+        TextView tv_SMS_Voltage = new TextView(this);
+        tv_SMS_Voltage.setText(getResources().getString(R.string.sms_voltage));
+        tv_SMS_Voltage.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_SMS_Voltage.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_SMS_Voltage.setTextColor(Color.BLACK);
+        linLayout_SMS_Password.addView(tv_SMS_Voltage);
+
+// CheckBox
+        checkBox_SMS_Voltage = new CheckBox(this);
+        checkBox_SMS_Voltage.setChecked(false);
+        linLayout_SMS_Password.addView(checkBox_SMS_Voltage);
+
+// Заметка для метода
+        TextView tv_SMS_Voltage_note = new TextView(this);
+        tv_SMS_Voltage_note.setTypeface(null, Typeface.NORMAL);
+        tv_SMS_Voltage_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_SMS_Voltage_note.setTextColor(Color.BLACK);
+        tv_SMS_Voltage_note.setText(getResources().getString(R.string.sms_voltage_note));
+        linLayout_SMS_Password.addView(tv_SMS_Voltage_note);
+
 
 // ------------------------------------------------------------------------------------------------
 
@@ -852,6 +878,14 @@ public class Tab_Main_Activity extends Activity {
                 } else {
                     fb.advanced_settings = false;
                     editor.putBoolean("Advanced_Settings", false);
+                }
+
+                if (checkBox_SMS_Voltage.isChecked()) {
+                    fb.isCharging_sms = true;
+                    editor.putBoolean("IsCharging_SMS", true);
+                } else {
+                    fb.isCharging_sms = false;
+                    editor.putBoolean("IsCharging_SMS", false);
                 }
 
                 editor.putString("Camera_Name", editText_Fotobot_Camera_Name.getText().toString());
