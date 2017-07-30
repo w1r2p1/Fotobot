@@ -645,7 +645,7 @@ public class FotoBot extends Application {
 
                 for (int i = 1; i <= n; i++) {
 
-                    if (i%3 == 0) SendMessage("battery_plugged: " + battery_plugged);
+                    if (i%3 == 0) SendMessage("phone plugged: " + battery_plugged);
 
 
                     Message msg = Message.obtain(); // Creates an new Message instance
