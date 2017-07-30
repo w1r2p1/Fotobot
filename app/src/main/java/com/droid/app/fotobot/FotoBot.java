@@ -139,6 +139,7 @@ public class FotoBot extends Application {
      */
     public boolean isCharging_before = false;
     public boolean isCharging = false;
+    public boolean isCharging_sms = false;
 
     /**
      * Степень JPEG сжатия
@@ -648,9 +649,11 @@ public class FotoBot extends Application {
                         if ( isCharging_before != isCharging) {
 
                             if (isCharging ) {
-                                SendMessage("Напряжение в сети восстановлено");
+                                SendMessage(getResources().getString(R.string.voltage_restored));
+                                if (isCharging_sms) sendSMS(sms_sender_num, getResources().getString(R.string.voltage_restored));
                             } else {
-                                SendMessage("Пропало напряжение в сети");
+                                SendMessage(getResources().getString(R.string.no_voltage));
+                                if (isCharging_sms) sendSMS(sms_sender_num, getResources().getString(R.string.no_voltage));
                             }
 
                             isCharging_before = isCharging;
@@ -1203,6 +1206,7 @@ public class FotoBot extends Application {
         advanced_settings = pref.getBoolean("Advanced_Settings", false);
         automatic_mode = pref.getBoolean("Automatic_Mode", false);
         delete_foto = pref.getBoolean("Delete_Foto", false);
+        isCharging_sms = pref.getBoolean("IsCharging_SMS", false);
     }
 
     public void SaveSettings() {
@@ -1261,6 +1265,7 @@ public class FotoBot extends Application {
         editor.putBoolean("Network", network);
         editor.putBoolean("Launched_First_Time", launched_first_time);
         editor.putBoolean("Delete_Foto", delete_foto);
+        editor.putBoolean("IsCharging_SMS", isCharging_sms);
         editor.commit();
 
     }

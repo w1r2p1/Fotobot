@@ -256,4 +256,6 @@ netstatus\n
 emailstatus\n
 mediastatus\n
     </string>
+    <string name="no_voltage">Пропало напряжение в сети</string>
+    <string name="voltage_restored">Напряжение в сети восстановлено</string>
 </resources>
