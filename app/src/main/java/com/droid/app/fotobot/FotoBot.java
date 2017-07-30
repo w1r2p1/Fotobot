@@ -644,7 +644,10 @@ public class FotoBot extends Application {
                 }
 
                 for (int i = 1; i <= n; i++) {
-                    SendMessage("battery_plugged: " + battery_plugged);
+
+                    if (i%3 == 0) SendMessage("battery_plugged: " + battery_plugged);
+
+
                     Message msg = Message.obtain(); // Creates an new Message instance
 
                     // we make 1 sec for each n
@@ -1799,4 +1802,9 @@ git branch -r
 git log
 git log --pretty=format:"%h %s" --graph
 
+C:\Users\Andrey\AppData\Local\Android\sdk2\platform-tools\adb.exe shell
+$su
+mount -o rw,remount rootfs /
+chmod 777 /mnt/sdcard
+exit
 */

@@ -2065,31 +2065,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     BroadcastReceiver onBatteryChanged=new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             final FotoBot fb = (FotoBot) getApplicationContext();
+            IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+            Intent batteryStatus = context.registerReceiver(null, ifilter);
 
-            int pct=100*intent.getIntExtra("level", 1)/intent.getIntExtra("scale", 1);
-
-            switch(intent.getIntExtra("status", -1)) {
-                case BatteryManager.BATTERY_STATUS_CHARGING:
-
-                    break;
-
-                case BatteryManager.BATTERY_STATUS_FULL:
-                    int plugged=intent.getIntExtra("plugged", -1);
-
-                    if (plugged==BatteryManager.BATTERY_PLUGGED_AC ||
-                            plugged==BatteryManager.BATTERY_PLUGGED_USB) {
-fb.battery_plugged = true;
-                    }
-                    else {
-                        fb.battery_plugged = false;
-                    }
-                    break;
-
-                default:
-                    fb.battery_plugged = false;
-                    break;
-            }
+            // Are we charging / charged?
+            int status = batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+            fb.battery_plugged = status == BatteryManager.BATTERY_STATUS_CHARGING ||
+                    status == BatteryManager.BATTERY_STATUS_FULL;
         }
+
     };
 
 }
