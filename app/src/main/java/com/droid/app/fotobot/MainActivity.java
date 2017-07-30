@@ -2065,6 +2065,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     BroadcastReceiver onBatteryChanged=new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             final FotoBot fb = (FotoBot) getApplicationContext();
+
             IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
             Intent batteryStatus = context.registerReceiver(null, ifilter);
 
