@@ -647,7 +647,6 @@ public class FotoBot extends Application {
 
                     if (i%3 == 0) SendMessage("phone plugged: " + battery_plugged);
 
-
                     Message msg = Message.obtain(); // Creates an new Message instance
 
                     // we make 1 sec for each n
