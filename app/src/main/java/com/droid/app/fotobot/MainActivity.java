@@ -2066,12 +2066,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         public void onReceive(Context context, Intent intent) {
             final FotoBot fb = (FotoBot) getApplicationContext();
 
+            fb.isCharging_before = fb.isCharging;
+
             IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
             Intent batteryStatus = context.registerReceiver(null, ifilter);
 
             // Are we charging / charged?
             int status = batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
-            fb.battery_plugged = status == BatteryManager.BATTERY_STATUS_CHARGING ||
+            fb.isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
                     status == BatteryManager.BATTERY_STATUS_FULL;
         }
 

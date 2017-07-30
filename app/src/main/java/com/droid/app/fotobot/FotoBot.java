@@ -134,12 +134,11 @@ public class FotoBot extends Application {
      */
     public int battery_level;
 
-    public boolean battery_plugged = false;
-
     /**
      * заряжается ли от сети
      */
-    public boolean isCharging;
+    public boolean isCharging_before = false;
+    public boolean isCharging = false;
 
     /**
      * Степень JPEG сжатия
@@ -645,7 +644,16 @@ public class FotoBot extends Application {
 
                 for (int i = 1; i <= n; i++) {
 
-                    if (i%3 == 0) SendMessage("phone plugged: " + battery_plugged);
+                    if (i%3 == 0) {
+                        if ( isCharging_before != isCharging) {
+
+                            if (isCharging ) {
+                                SendMessage("Напряжение в сети восстановлено");
+                            } else {
+                                SendMessage("Пропало напряжение в сети");
+                            }
+                        }
+                    }
 
                     Message msg = Message.obtain(); // Creates an new Message instance
 
