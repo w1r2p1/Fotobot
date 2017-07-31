@@ -258,11 +258,13 @@ mediastatus\n
     </string>
 
     <string name="sms_voltage">Статус электросети (SMS)</string>
-    <string name="sms_voltage_note">Если пропадет/появится напряжение, то придет SMS (телефон должен быть на зарядке)</string>
+    <string name="sms_voltage_note">Если пропадет/появится напряжение, то будет отправлено SMS (для того, чтобы определялся статус электросети телефон должен быть на зарядке)</string>
 
     <string name="no_voltage">Пропало напряжение в сети</string>
     <string name="voltage_restored">Напряжение в сети восстановлено</string>
 
     <string name="SMS_Voltage_Alert_Number">Номер для отправки SMS</string>
+
+    <string name="SMS_Voltage_Alert_Number_note">Номер, на который будут приходить SMS о состоянии электросети (пароль не требуется).</string>
 
 </resources>

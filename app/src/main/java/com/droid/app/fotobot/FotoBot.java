@@ -652,10 +652,10 @@ public class FotoBot extends Application {
 
                             if (isCharging ) {
                                 SendMessage(getResources().getString(R.string.voltage_restored));
-                                if (isCharging_sms) sendSMS(sms_sender_num, getResources().getString(R.string.voltage_restored));
+                                if (isCharging_sms) sendSMS(sms_voltage_alert_number, getResources().getString(R.string.voltage_restored));
                             } else {
                                 SendMessage(getResources().getString(R.string.no_voltage));
-                                if (isCharging_sms) sendSMS(sms_sender_num, getResources().getString(R.string.no_voltage));
+                                if (isCharging_sms) sendSMS(sms_voltage_alert_number, getResources().getString(R.string.no_voltage));
                             }
 
                             isCharging_before = isCharging;

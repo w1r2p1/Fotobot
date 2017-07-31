@@ -235,7 +235,7 @@ public class Tab_Main_Activity extends Activity {
 
 // CheckBox
         checkBox_SMS_Voltage = new CheckBox(this);
-        checkBox_SMS_Voltage.setChecked(false);
+        checkBox_SMS_Voltage.setChecked(fb.sms_voltage_alert);
         linLayout_Voltage_Status.addView(checkBox_SMS_Voltage);
 
 // Заметка для метода
@@ -948,14 +948,15 @@ public class Tab_Main_Activity extends Activity {
 
                 if (checkBox_SMS_Voltage.isChecked()) {
                     fb.sms_voltage_alert = true;
-                    editor.putBoolean("IsCharging_SMS", true);
+                    editor.putBoolean("SMS_Voltage_Alert", true);
                 } else {
                     fb.sms_voltage_alert = false;
-                    editor.putBoolean("IsCharging_SMS", false);
+                    editor.putBoolean("SMS_Voltage_Alert", false);
                 }
 
                 editor.putString("Camera_Name", editText_Fotobot_Camera_Name.getText().toString());
                 editor.putString("SMS_Password", editText_SMS_Password.getText().toString());
+                editor.putString("SMS_Voltage_Alert_Nmuber", editText_SMS_Voltage_Alert_Number.getText().toString());
 
                 fb.Photo_Frequency = Integer.parseInt(Photo_Frequency.getText().toString());
                 editor.putInt("Photo_Frequency", fb.Photo_Frequency);

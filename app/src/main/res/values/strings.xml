@@ -249,4 +249,5 @@ mediastatus\n
     <string name="voltage_restored">Voltage restored</string>
 
     <string name="SMS_Voltage_Alert_Number">Phone number for voltage alert SMS</string>
+    <string name="SMS_Voltage_Alert_Number_note">Phone numbers for SMS voltage alerts. Password is not required.</string>
     </resources>
