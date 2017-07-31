@@ -140,6 +140,8 @@ public class FotoBot extends Application {
     public boolean isCharging_before = false;
     public boolean isCharging = false;
     public boolean isCharging_sms = false;
+    public boolean sms_voltage_alert = false;
+    public String sms_voltage_alert_number = "+11234567890";
 
     /**
      * Степень JPEG сжатия
@@ -1207,6 +1209,8 @@ public class FotoBot extends Application {
         automatic_mode = pref.getBoolean("Automatic_Mode", false);
         delete_foto = pref.getBoolean("Delete_Foto", false);
         isCharging_sms = pref.getBoolean("IsCharging_SMS", false);
+        sms_voltage_alert = pref.getBoolean("SMS_Voltage_Alert", false);
+        sms_voltage_alert_number = pref.getString("SMS_Voltage_Alert_Nmuber", "+11234567890");
     }
 
     public void SaveSettings() {
@@ -1266,6 +1270,8 @@ public class FotoBot extends Application {
         editor.putBoolean("Launched_First_Time", launched_first_time);
         editor.putBoolean("Delete_Foto", delete_foto);
         editor.putBoolean("IsCharging_SMS", isCharging_sms);
+        editor.putBoolean("SMS_Voltage_Alert", sms_voltage_alert);
+        editor.putString("SMS_Voltage_Alert_Number", sms_voltage_alert_number);
         editor.commit();
 
     }

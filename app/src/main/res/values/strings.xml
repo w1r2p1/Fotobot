@@ -248,4 +248,5 @@ mediastatus\n
     <string name="no_voltage">No voltage</string>
     <string name="voltage_restored">Voltage restored</string>
 
-</resources>
+    <string name="SMS_Voltage_Alert_Number">Phone number for voltage alert SMS</string>
+    </resources>

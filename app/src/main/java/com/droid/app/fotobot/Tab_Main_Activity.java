@@ -57,6 +57,7 @@ public class Tab_Main_Activity extends Activity {
     EditText Wake_Up;
     EditText editText_Work_Dir;
     EditText editText_SMS_Password;
+    EditText editText_SMS_Voltage_Alert_Number;
     Spinner spinner_ppm;
     Spinner spinner_Channels;
     //   ArrayAdapter<String> spinnerArrayAdapter1, spinnerArrayAdapter_Hardware;
@@ -73,6 +74,7 @@ public class Tab_Main_Activity extends Activity {
     LinearLayout linLayout_log_font_size;
     LinearLayout linLayout_Wake_Up;
     LinearLayout linLayout_Automatic_Mode;
+    LinearLayout linLayout_SMS_Voltage_Alert_Number;
 
     LinearLayout linLayout_AttachedInfo;
 
@@ -181,7 +183,47 @@ public class Tab_Main_Activity extends Activity {
         linLayout_SMS_Password.addView(tv_SMS_Password_note);
 
 // ------------------------------------------------------------------------------------------------
+// SMS voltage alert number
+
+// SMS voltage alert number Container
+        linLayout_SMS_Voltage_Alert_Number = new LinearLayout(this);
+        linLayout_SMS_Voltage_Alert_Number.setOrientation(LinearLayout.VERTICAL);
+        linLayout_SMS_Voltage_Alert_Number.setPadding(5, 9, 5, 9);
+        linLayout_SMS_Voltage_Alert_Number.setBackgroundColor(Color.rgb(208, 208, 208));
+
+// Название
+        TextView tv_SMS_Voltage_Alert_Number = new TextView(this);
+        tv_SMS_Voltage_Alert_Number.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_SMS_Voltage_Alert_Number.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_SMS_Voltage_Alert_Number.setTextColor(Color.BLACK);
+        tv_SMS_Voltage_Alert_Number.setText(getResources().getString(R.string.SMS_Voltage_Alert_Number));
+        linLayout_SMS_Voltage_Alert_Number.addView(tv_SMS_Voltage_Alert_Number);
+
+// phone number
+        editText_SMS_Voltage_Alert_Number = new EditText(this);
+        editText_SMS_Voltage_Alert_Number.setSingleLine(true);
+        editText_SMS_Voltage_Alert_Number.setText(fb.sms_voltage_alert_number);
+        editText_SMS_Voltage_Alert_Number.setTextColor(Color.rgb(50, 100, 150));
+        linLayout_SMS_Voltage_Alert_Number.addView(editText_SMS_Voltage_Alert_Number);
+
+// SMS voltage alert number note
+        TextView tv_SMS_Voltage_Alert_Number_note = new TextView(this);
+        tv_SMS_Voltage_Alert_Number_note.setTypeface(null, Typeface.NORMAL);
+        tv_SMS_Voltage_Alert_Number_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_SMS_Voltage_Alert_Number_note.setTextColor(Color.BLACK);
+        tv_SMS_Voltage_Alert_Number_note.setText(getResources().getString(R.string.SMS_Voltage_Alert_Number_note));
+        tv_SMS_Voltage_Alert_Number_note.setPadding(5, 9, 5, 9);
+        linLayout_SMS_Voltage_Alert_Number.addView(tv_SMS_Voltage_Alert_Number_note);
+
+
+// ------------------------------------------------------------------------------------------------
 // Voltage status
+
+// Voltage status Container
+        LinearLayout linLayout_Voltage_Status = new LinearLayout(this);
+        linLayout_Voltage_Status.setOrientation(LinearLayout.VERTICAL);
+        linLayout_Voltage_Status.setPadding(5, 9, 5, 9);
+        linLayout_Voltage_Status.setBackgroundColor(Color.rgb(208, 208, 208));
 
 // Clean SystemLog TextView
         TextView tv_SMS_Voltage = new TextView(this);
@@ -189,12 +231,12 @@ public class Tab_Main_Activity extends Activity {
         tv_SMS_Voltage.setTypeface(Typeface.DEFAULT_BOLD);
         tv_SMS_Voltage.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_SMS_Voltage.setTextColor(Color.BLACK);
-        linLayout_SMS_Password.addView(tv_SMS_Voltage);
+        linLayout_Voltage_Status.addView(tv_SMS_Voltage);
 
 // CheckBox
         checkBox_SMS_Voltage = new CheckBox(this);
         checkBox_SMS_Voltage.setChecked(false);
-        linLayout_SMS_Password.addView(checkBox_SMS_Voltage);
+        linLayout_Voltage_Status.addView(checkBox_SMS_Voltage);
 
 // Заметка для метода
         TextView tv_SMS_Voltage_note = new TextView(this);
@@ -202,10 +244,34 @@ public class Tab_Main_Activity extends Activity {
         tv_SMS_Voltage_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
         tv_SMS_Voltage_note.setTextColor(Color.BLACK);
         tv_SMS_Voltage_note.setText(getResources().getString(R.string.sms_voltage_note));
-        linLayout_SMS_Password.addView(tv_SMS_Voltage_note);
+        linLayout_Voltage_Status.addView(tv_SMS_Voltage_note);
+
+        checkBox_SMS_Voltage.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                if (checkBox_SMS_Voltage.isChecked()) {
+                   // fb.advanced_settings = true;
+                    linLayout_SMS_Voltage_Alert_Number.setVisibility(View.VISIBLE);
+                } else {
+                   // fb.advanced_settings = false;
+                    linLayout_SMS_Voltage_Alert_Number.setVisibility(View.GONE);
+                }
+
+            }
+
+            // If no option selected
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+
+        });
 
 
 // ------------------------------------------------------------------------------------------------
+
 
 // 1. Интервал между фото (Horizontal LinearLayout контейнер)
         LinearLayout linLayout1 = new LinearLayout(this);
@@ -881,10 +947,10 @@ public class Tab_Main_Activity extends Activity {
                 }
 
                 if (checkBox_SMS_Voltage.isChecked()) {
-                    fb.isCharging_sms = true;
+                    fb.sms_voltage_alert = true;
                     editor.putBoolean("IsCharging_SMS", true);
                 } else {
-                    fb.isCharging_sms = false;
+                    fb.sms_voltage_alert = false;
                     editor.putBoolean("IsCharging_SMS", false);
                 }
 
@@ -904,8 +970,8 @@ public class Tab_Main_Activity extends Activity {
                 editor.putString("Attached_Info_Detailisation", spinner_Channels.getSelectedItem().toString());
 
                 editor.putString("Storage_Type", spinner_ppm.getSelectedItem().toString());
-         //       editor.putBoolean("Launched_First_Time", fb.launched_first_time);
 
+                editor.putString("SMS_Voltage_Alert_Number", editText_SMS_Voltage_Alert_Number.getText().toString());
 
 // Save the changes in SharedPreferences
                 editor.commit();
@@ -958,13 +1024,17 @@ public class Tab_Main_Activity extends Activity {
 
 // Расставляем контейнеры (порядок важен)
         FullFrame.addView(linLayout_Fotobot_Camera_Name);
+        FullFrame.addView(linLayout_Voltage_Status);
+        FullFrame.addView(linLayout_SMS_Voltage_Alert_Number);
         FullFrame.addView(linLayout_SMS_Password);
       //  FullFrame.addView(linLayout_Storage);
         FullFrame.addView(linLayout_Work_Dir);
         FullFrame.addView(linLayout1);
     //    FullFrame.addView(linLayout_Delete_Foto);
         FullFrame.addView(linLayout_Adv_Settings_Log);
-
+if (!fb.sms_voltage_alert) {
+    linLayout_SMS_Voltage_Alert_Number.setVisibility(View.GONE);
+}
 
         FullFrame.addView(linLayout_process_delay);
         FullFrame.addView(linLayout_fbloglength);

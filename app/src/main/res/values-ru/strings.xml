@@ -262,4 +262,7 @@ mediastatus\n
 
     <string name="no_voltage">Пропало напряжение в сети</string>
     <string name="voltage_restored">Напряжение в сети восстановлено</string>
+
+    <string name="SMS_Voltage_Alert_Number">Номер для отправки SMS</string>
+
 </resources>
