@@ -250,4 +250,8 @@ mediastatus\n
 
     <string name="SMS_Voltage_Alert_Number">Phone number for voltage alert SMS</string>
     <string name="SMS_Voltage_Alert_Number_note">Phone numbers for SMS voltage alerts. Password is not required.</string>
+
+    <string name="sound_mute">Mute sound</string>
+    <string name="sound_mute_note">All phone sounds will be muted (sms, camera, incoming calls, notifications and others)</string>
+
     </resources>

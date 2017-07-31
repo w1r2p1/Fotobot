@@ -743,16 +743,17 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                         fb.log = "";
                         fb.SendMessage(getResources().getString(R.string.start_message));
 
+                        if (fb.sound_mute) {
+                            mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
-                        mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-
-                        if (Build.VERSION.SDK_INT >= 23) {
-                            mgr.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
-                            savedStreamMuted = true;
-                        } else {
-                            mgr.setStreamMute(AudioManager.STREAM_MUSIC, true);
-                            mgr.setStreamMute(AudioManager.STREAM_SYSTEM, true);
-                            mgr.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                            if (Build.VERSION.SDK_INT >= 23) {
+                                mgr.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
+                                savedStreamMuted = true;
+                            } else {
+                                mgr.setStreamMute(AudioManager.STREAM_MUSIC, true);
+                                mgr.setStreamMute(AudioManager.STREAM_SYSTEM, true);
+                                mgr.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                            }
                         }
 
                         int i = 0; //Image counter
@@ -996,17 +997,19 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         fb.SendMessage(getResources().getString(R.string.request_for_stopping));
 
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (savedStreamMuted) {
-                mgr.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_UNMUTE, 0);
-                savedStreamMuted = false;
+        if (fb.sound_mute) {
+            if (Build.VERSION.SDK_INT >= 23) {
+                if (savedStreamMuted) {
+                    mgr.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_UNMUTE, 0);
+                    savedStreamMuted = false;
+                }
+            } else {
+                mgr.setStreamMute(AudioManager.STREAM_MUSIC, false);
+                mgr.setStreamMute(AudioManager.STREAM_SYSTEM, false);
+                mgr.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
             }
-        } else {
-            mgr.setStreamMute(AudioManager.STREAM_MUSIC, false);
-            mgr.setStreamMute(AudioManager.STREAM_SYSTEM, false);
-            mgr.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-        }
 
+        }
     }
 
     @Override

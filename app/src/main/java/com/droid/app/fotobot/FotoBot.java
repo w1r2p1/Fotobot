@@ -61,6 +61,8 @@ public class FotoBot extends Application {
 
     public int numberOfCameras = 1;
 
+    public boolean sound_mute = false;
+
     public boolean back_camera = true;
     public boolean front_camera = false;
 
@@ -1155,6 +1157,7 @@ public class FotoBot extends Application {
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
 
+        sound_mute = pref.getBoolean("Sound_Mute", false);
         Network_Channel = pref.getString("Network_Channel", "Both");
         Network_Connection_Method = pref.getString("Network_Connection_Method", "Method 1");
         Use_WiFi = pref.getBoolean("Use_WiFi", true);         // getting boolean
@@ -1218,6 +1221,7 @@ public class FotoBot extends Application {
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
 
+        editor.putBoolean("Sound_Mute", sound_mute);
         editor.putString("Camera_Name", Camera_Name);
         editor.putInt("Photo_Frequency", Photo_Frequency);
         editor.putInt("Video_Recording_Time", video_recording_time);

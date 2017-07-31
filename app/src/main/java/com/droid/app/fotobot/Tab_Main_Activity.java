@@ -47,6 +47,7 @@ public class Tab_Main_Activity extends Activity {
     CheckBox checkBox_SMS_Voltage;
     CheckBox checkBox_Automatic_Mode;
     CheckBox checkBox_Delete_Foto;
+    CheckBox checkBox_Sound_Mute;
     EditText Photo_Frequency;
     EditText Config_Font_Size;
     EditText Log_Font_Size;
@@ -115,6 +116,36 @@ public class Tab_Main_Activity extends Activity {
         //  View baseView = FullFrame.getRootView();
         //  baseView.setBackgroundColor(Color.rgb(0,0,90));
 
+
+// ------------------------------------------------------------------------------------------------
+// Sound Mute
+// Sound Mute Container
+        LinearLayout linLayout_Sound_Mute = new LinearLayout(this);
+        linLayout_Sound_Mute.setOrientation(LinearLayout.VERTICAL);
+        linLayout_Sound_Mute.setPadding(5, 9, 5, 9);
+        linLayout_Sound_Mute.setBackgroundColor(Color.rgb(208, 208, 208));
+
+// Sound Mute TextView
+        TextView tv_Sound_Mute = new TextView(this);
+        tv_Sound_Mute.setText(getResources().getString(R.string.sound_mute));
+        tv_Sound_Mute.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Sound_Mute.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Sound_Mute.setTextColor(Color.BLACK);
+        linLayout_Sound_Mute.addView(tv_Sound_Mute);
+
+// CheckBox
+        checkBox_Sound_Mute = new CheckBox(this);
+        checkBox_Sound_Mute.setChecked(fb.sound_mute);
+        linLayout_Sound_Mute.addView(checkBox_Sound_Mute);
+
+// Заметка для метода
+        TextView tv_Sound_Mute_note = new TextView(this);
+        tv_Sound_Mute_note.setTypeface(null, Typeface.NORMAL);
+        tv_Sound_Mute_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_Sound_Mute_note.setTextColor(Color.BLACK);
+        tv_Sound_Mute_note.setText(getResources().getString(R.string.sound_mute_note));
+        linLayout_Sound_Mute.addView(tv_Sound_Mute_note);
+
 // ------------------------------------------------------------------------------------------------
 // Camera name
 
@@ -156,7 +187,7 @@ public class Tab_Main_Activity extends Activity {
         LinearLayout linLayout_SMS_Password = new LinearLayout(this);
         linLayout_SMS_Password.setOrientation(LinearLayout.VERTICAL);
         linLayout_SMS_Password.setPadding(5, 9, 5, 9);
-        linLayout_SMS_Password.setBackgroundColor(Color.rgb(208, 208, 208));
+        linLayout_SMS_Password.setBackgroundColor(Color.rgb(192, 192, 192));
 
 // Название
         TextView tv_SMS_Password = new TextView(this);
@@ -374,7 +405,7 @@ public class Tab_Main_Activity extends Activity {
         linLayout_Work_Dir = new LinearLayout(this);
         linLayout_Work_Dir.setOrientation(LinearLayout.VERTICAL);
         linLayout_Work_Dir.setPadding(5, 9, 5, 9);
-        linLayout_Work_Dir.setBackgroundColor(Color.rgb(192, 192, 192));
+        linLayout_Work_Dir.setBackgroundColor(Color.rgb(208, 208, 208));
 
 // Название
         TextView tv_Work_Dir = new TextView(this);
@@ -906,6 +937,14 @@ public class Tab_Main_Activity extends Activity {
 
                 }
 
+                if (checkBox_Sound_Mute.isChecked()) {
+                    fb.sound_mute = true;
+                    editor.putBoolean("Sound_Mute", true);
+                } else {
+                    fb.sound_mute = false;
+                    editor.putBoolean("Sound_Mute", false);
+                }
+
                 if (checkBox_Clean_Text.isChecked()) {
                     fb.clean_log = true;
                 }
@@ -1024,6 +1063,7 @@ public class Tab_Main_Activity extends Activity {
 // ------------------------------------------------------------------------------------------------
 
 // Расставляем контейнеры (порядок важен)
+        FullFrame.addView(linLayout_Sound_Mute);
         FullFrame.addView(linLayout_Fotobot_Camera_Name);
         FullFrame.addView(linLayout_Voltage_Status);
         FullFrame.addView(linLayout_SMS_Voltage_Alert_Number);

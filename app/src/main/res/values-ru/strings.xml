@@ -267,4 +267,7 @@ mediastatus\n
 
     <string name="SMS_Voltage_Alert_Number_note">Номер, на который будут приходить SMS о состоянии электросети (пароль не требуется).</string>
 
+    <string name="sound_mute">Выключить звук</string>
+    <string name="sound_mute_note">Все звуки будут выключены (sms, фото/видео камера, входящие звонки, оповещения и другие).</string>
+
 </resources>
