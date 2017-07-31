@@ -7,7 +7,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-//import android.content.Loader;
 import android.content.SharedPreferences;
 import android.hardware.Camera;
 import android.net.ConnectivityManager;
@@ -18,11 +17,13 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
-//import android.provider.Browser;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.widget.Toast;
+
+import org.apache.commons.net.ftp.FTP;
+import org.apache.commons.net.ftp.FTPClient;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -31,23 +32,16 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.io.Reader;
-import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.FileHandler;
-//import java.util.logging.Logger;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
+
+//import android.content.Loader;
+//import android.provider.Browser;
+//import java.util.logging.Logger;
 
 /**
  * <h1>FotoBot</h1>
@@ -105,6 +99,8 @@ public class FotoBot extends Application {
      * Нужно ли использовать 3G (2G) для выхода в Internet
      */
     public boolean Use_Mobile_Data;
+
+    public boolean useFTP = true;
 
     /**
      * Делать фото со вспышкой
@@ -283,6 +279,11 @@ public class FotoBot extends Application {
     public String fc_Video_Name;
     public String bc_Video_Name;
 
+    public boolean bc_image_ftp_upload = true;
+    public boolean fc_image_ftp_upload = true;
+    public boolean bc_video_ftp_upload = true;
+    public boolean fc_video_ftp_upload = true;
+
     public boolean bc_image_attach = true;
     public boolean fc_image_attach = true;
     public boolean bc_video_attach = true;
@@ -326,6 +327,11 @@ public class FotoBot extends Application {
     public Boolean Method1_activated = false;
 
     public boolean attach_log = false;
+
+    public String FTP_server = "";
+    public int FTP_port = 21;
+    public String FTP_username = "";
+    public String FTP_password = "";
 
     public Integer sms_number_of_strings;
     public String sms_sender_num;
@@ -1214,6 +1220,14 @@ public class FotoBot extends Application {
         isCharging_sms = pref.getBoolean("IsCharging_SMS", false);
         sms_voltage_alert = pref.getBoolean("SMS_Voltage_Alert", false);
         sms_voltage_alert_number = pref.getString("SMS_Voltage_Alert_Nmuber", "+11234567890");
+        bc_image_ftp_upload = pref.getBoolean("Bc_Image_FTP_Upload", true);
+        fc_image_ftp_upload = pref.getBoolean("Fc_Image_FTP_Upload", true);
+        bc_video_ftp_upload = pref.getBoolean("Bc_Video_FTP_Upload", true);
+        fc_video_ftp_upload = pref.getBoolean("Fc_Video_FTP_Upload", true);
+        FTP_server = pref.getString("FTP_Server","ftp.server.com");
+        FTP_port = pref.getInt("FTP_Port",21);
+        FTP_username = pref.getString("FTP_Username","login");
+        FTP_password = pref.getString("FTP_Password","passwd");
     }
 
     public void SaveSettings() {
@@ -1240,6 +1254,10 @@ public class FotoBot extends Application {
         editor.putString("SMTP_Host", SMTP_Host);
         editor.putString("SMTP_Port", SMTP_Port);
         editor.putString("EMail_Recepient", EMail_Recepient);
+        editor.putString("FTP_Server", FTP_server);
+        editor.putInt("FTP_Port", FTP_port);
+        editor.putString("FTP_Username", FTP_username);
+        editor.putString("FTP_Password", FTP_password);
         editor.putBoolean("Show_Start_Tip", show_start_tip);
         editor.putInt("Network_Up_Delay", network_up_delay);
         editor.putString("Photo_Post_Processing_Method", Photo_Post_Processing_Method);
@@ -1258,6 +1276,10 @@ public class FotoBot extends Application {
         editor.putBoolean("Fc_Image_Attach", fc_image_attach);
         editor.putBoolean("Bc_Video_Attach", bc_video_attach);
         editor.putBoolean("Fc_Video_Attach", fc_video_attach);
+        editor.putBoolean("Bc_Image_FTP_Upload", bc_image_ftp_upload);
+        editor.putBoolean("Fc_Image_FTP_Upload", fc_image_ftp_upload);
+        editor.putBoolean("Bc_Video_FTP_Upload", bc_video_ftp_upload);
+        editor.putBoolean("Fc_Video_FTP_Upload", fc_video_ftp_upload);
         editor.putBoolean("Bc_Image_Delete", bc_image_delete);
         editor.putBoolean("Fc_Image_Delete", fc_image_delete);
         editor.putBoolean("Bc_Video_Delete", bc_video_delete);
@@ -1799,6 +1821,51 @@ public class FotoBot extends Application {
         list = getResources().getString(R.string.sms_cmd_list);
 
         return list;
+    }
+
+    public void FTPUpload(String str) {
+        String server = "f17-preview.awardspace.net";
+        int port = 21;
+        String user = "2324179";
+        String pass = "superclass151515";
+
+        FTPClient ftpClient = new FTPClient();
+        try {
+
+            ftpClient.connect(server, port);
+            ftpClient.login(user, pass);
+            ftpClient.enterLocalPassiveMode();
+
+            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+
+            // APPROACH #1: uploads first file using an InputStream
+            File firstLocalFile = new File(str);
+
+            String firstRemoteFile = firstLocalFile.getName();
+            InputStream inputStream = new FileInputStream(firstLocalFile);
+
+            SendMessage("Start uploading " + str);
+            boolean done = ftpClient.storeFile(firstRemoteFile, inputStream);
+            inputStream.close();
+            if (done) {
+                SendMessage(str + " is uploaded successfully.");
+            }
+        } catch (IOException ex) {
+            SendMessage("Problem with " + str + " uploading: " + ex.getMessage());
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (ftpClient.isConnected()) {
+                    ftpClient.logout();
+                    ftpClient.disconnect();
+                    SendMessage("FTP connection has been closed");
+                    fbpause(h,5);
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                SendMessage("Problem with closing FTP connection");
+            }
+        }
     }
 
 }
