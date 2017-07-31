@@ -100,6 +100,7 @@ public class FotoBot extends Application {
      */
     public boolean Use_Mobile_Data;
 
+    public boolean useMail = false;
     public boolean useFTP = true;
 
     /**
@@ -1828,7 +1829,6 @@ public class FotoBot extends Application {
         int port = 21;
         String user = "2324179";
         String pass = "superclass151515";
-
         FTPClient ftpClient = new FTPClient();
         try {
 
