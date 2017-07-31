@@ -270,4 +270,8 @@ mediastatus\n
     <string name="sound_mute">Выключить звук</string>
     <string name="sound_mute_note">Все звуки будут выключены (sms, фото/видео камера, входящие звонки, оповещения и другие).</string>
 
+    <string name="upload_method">Выгрузка данных в сеть</string>
+    <string name="upload_method_note">Выберите способ загрузки фото, видео и логов в сеть</string>
+
+
 </resources>

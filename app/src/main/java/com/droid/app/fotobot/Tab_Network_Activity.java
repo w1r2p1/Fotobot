@@ -56,9 +56,11 @@ public class Tab_Network_Activity extends Activity {
     LinearLayout linLayout_Fotobot_Recipient;
     LinearLayout linLayout_SMTP_Host;
     LinearLayout linLayout_SMTP_Port;
+    LinearLayout linLayout_Upload_Method;
 
     Button btn, btn_mp;
     Spinner spinner_ppm;
+    Spinner spinner_Upload_Method;
 
     ArrayList<String> spinnerArray_ppm;
 
@@ -169,6 +171,84 @@ public class Tab_Network_Activity extends Activity {
         tv_Connection_Method_note.setTextColor(Color.BLACK);
         tv_Connection_Method_note.setText(getResources().getString(R.string.connection_method_description));
         linLayout_Connection_Method.addView(tv_Connection_Method_note);
+
+// ------------------------------------------------------------------------------------------------
+// Выгрузка данных
+
+// Контейнер для выгрузки данных
+        linLayout_Upload_Method = new LinearLayout(this);
+        linLayout_Upload_Method.setOrientation(LinearLayout.VERTICAL);
+        linLayout_Upload_Method.setPadding(5, 9, 5, 9);
+        linLayout_Upload_Method.setBackgroundColor(Color.rgb(192, 192, 192));
+
+// Название
+        TextView tv_Upload_Method = new TextView(this);
+        tv_Upload_Method.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Upload_Method.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Upload_Method.setTextColor(Color.BLACK);
+        tv_Upload_Method.setText(getResources().getString(R.string.upload_method));
+        linLayout_Upload_Method.addView(tv_Upload_Method);
+
+// Список
+        final ArrayList<String> spinnerArray_Upload_Method = new ArrayList<String>();
+        spinnerArray_Upload_Method.add("FTP");
+        spinnerArray_Upload_Method.add("E-Mail");
+
+        spinner_Upload_Method = new Spinner(this);
+        ArrayAdapter<String> spinnerArrayAdapter_Upload_Method = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray_Upload_Method);
+        spinner_Upload_Method.setAdapter(spinnerArrayAdapter_Upload_Method);
+        spinner_Upload_Method.setSelection(getIndex(spinner_Upload_Method, fb.Upload_Method));
+        linLayout_Upload_Method.addView(spinner_Upload_Method);
+
+// Заметка для каналов связи
+        TextView tv_Upload_Method_note = new TextView(this);
+        tv_Upload_Method_note.setTypeface(null, Typeface.NORMAL);
+        tv_Upload_Method_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_Upload_Method_note.setTextColor(Color.BLACK);
+        tv_Upload_Method_note.setText(getResources().getString(R.string.upload_method_note));
+        linLayout_Upload_Method.addView(tv_Upload_Method_note);
+
+        if (fb.network) {
+            spinner_Upload_Method.setSelection(getIndex(spinner_Upload_Method, "FTP"));
+        } else {
+            spinner_Upload_Method.setSelection(getIndex(spinner_Upload_Method, "E-Mail"));
+        }
+
+        spinner_Upload_Method.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            public void onItemSelected(AdapterView<?> adapterView,
+                                       View view, int i, long l) {
+
+                if (spinnerArray_Upload_Method.get(i) == "E-Mail") {
+                    linLayout_Channels.setVisibility(View.VISIBLE);
+                    linLayout_Connection_Method.setVisibility(View.VISIBLE);
+                    linLayout_Upload_Method.setVisibility(View.VISIBLE);
+                    linLayout_Fotobot_Email.setVisibility(View.VISIBLE);
+                    linLayout_Fotobot_Password.setVisibility(View.VISIBLE);
+                    linLayout_SMTP_Host.setVisibility(View.VISIBLE);
+                    linLayout_SMTP_Port.setVisibility(View.VISIBLE);
+                    linLayout_Fotobot_Recipient.setVisibility(View.VISIBLE);
+                } else {
+                    linLayout_Channels.setVisibility(View.GONE);
+                    linLayout_Connection_Method.setVisibility(View.GONE);
+                    linLayout_Upload_Method.setVisibility(View.GONE);
+                    linLayout_Fotobot_Email.setVisibility(View.GONE);
+                    linLayout_Fotobot_Password.setVisibility(View.GONE);
+                    linLayout_SMTP_Host.setVisibility(View.GONE);
+                    linLayout_SMTP_Port.setVisibility(View.GONE);
+                    linLayout_Fotobot_Recipient.setVisibility(View.GONE);
+                }
+
+            }
+
+            // If no option selected
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+
+        });
+
 
 // ------------------------------------------------------------------------------------------------
 
@@ -472,21 +552,24 @@ public class Tab_Network_Activity extends Activity {
                                        View view, int i, long l) {
 
                 if (spinnerArray_ppm.get(i) == "on") {
+
                     linLayout_Channels.setVisibility(View.VISIBLE);
                     linLayout_Connection_Method.setVisibility(View.VISIBLE);
-                    linLayout_Fotobot_Email.setVisibility(View.VISIBLE);
+                    linLayout_Upload_Method.setVisibility(View.VISIBLE);
+/*                    linLayout_Fotobot_Email.setVisibility(View.VISIBLE);
                     linLayout_Fotobot_Password.setVisibility(View.VISIBLE);
                     linLayout_SMTP_Host.setVisibility(View.VISIBLE);
                     linLayout_SMTP_Port.setVisibility(View.VISIBLE);
-                    linLayout_Fotobot_Recipient.setVisibility(View.VISIBLE);
+                    linLayout_Fotobot_Recipient.setVisibility(View.VISIBLE); */
                 } else {
                     linLayout_Channels.setVisibility(View.GONE);
                     linLayout_Connection_Method.setVisibility(View.GONE);
-                    linLayout_Fotobot_Email.setVisibility(View.GONE);
+                    linLayout_Upload_Method.setVisibility(View.GONE);
+/*                    linLayout_Fotobot_Email.setVisibility(View.GONE);
                     linLayout_Fotobot_Password.setVisibility(View.GONE);
                     linLayout_SMTP_Host.setVisibility(View.GONE);
                     linLayout_SMTP_Port.setVisibility(View.GONE);
-                    linLayout_Fotobot_Recipient.setVisibility(View.GONE);
+                    linLayout_Fotobot_Recipient.setVisibility(View.GONE); */
                 }
 
             }
@@ -622,7 +705,7 @@ public class Tab_Network_Activity extends Activity {
             FullFrame.addView(linLayout_Channels);
             FullFrame.addView(linLayout_Connection_Method);
         }
-
+        FullFrame.addView(linLayout_Upload_Method);
         FullFrame.addView(linLayout_Fotobot_Email);
         FullFrame.addView(linLayout_Fotobot_Password);
         FullFrame.addView(linLayout_SMTP_Host);

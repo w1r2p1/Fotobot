@@ -326,6 +326,8 @@ public class FotoBot extends Application {
      */
     public Boolean network = false;
 
+    public String Upload_Method = "FTP";
+
     public Boolean Method1_activated = false;
 
     public boolean attach_log = false;
@@ -1230,6 +1232,7 @@ public class FotoBot extends Application {
         FTP_port = pref.getInt("FTP_Port",21);
         FTP_username = pref.getString("FTP_Username","login");
         FTP_password = pref.getString("FTP_Password","passwd");
+        Upload_Method = pref.getString("Upload_Method", "FTP");
     }
 
     public void SaveSettings() {
@@ -1300,6 +1303,7 @@ public class FotoBot extends Application {
         editor.putBoolean("IsCharging_SMS", isCharging_sms);
         editor.putBoolean("SMS_Voltage_Alert", sms_voltage_alert);
         editor.putString("SMS_Voltage_Alert_Number", sms_voltage_alert_number);
+        editor.putString("Upload_Method", Upload_Method);
         editor.commit();
 
     }
