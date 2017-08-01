@@ -226,6 +226,7 @@ public class Tab_Network_Activity extends Activity {
                                        View view, int i, long l) {
 
                 if (spinnerArray_Upload_Method.get(i) == "E-Mail" && fb.network) {
+                    fb.Upload_Method = "E-Mail";
                     linLayout_Upload_Method.setVisibility(View.VISIBLE);
                     linLayout_Fotobot_Email.setVisibility(View.VISIBLE);
                     linLayout_Fotobot_Password.setVisibility(View.VISIBLE);
@@ -234,6 +235,7 @@ public class Tab_Network_Activity extends Activity {
                     linLayout_Fotobot_Recipient.setVisibility(View.VISIBLE);
                     linLayout_FTP.setVisibility(View.GONE);
                 } else if (spinnerArray_Upload_Method.get(i) == "FTP" && fb.network) {
+                    fb.Upload_Method = "FTP";
                     linLayout_FTP.setVisibility(View.VISIBLE);
                     linLayout_Fotobot_Email.setVisibility(View.GONE);
                     linLayout_Fotobot_Password.setVisibility(View.GONE);
@@ -622,7 +624,7 @@ public class Tab_Network_Activity extends Activity {
                                        View view, int i, long l) {
 
                 if (spinnerArray_ppm.get(i) == "on") {
-
+                    fb.network = true;
                     linLayout_Channels.setVisibility(View.VISIBLE);
                     linLayout_Connection_Method.setVisibility(View.VISIBLE);
                     linLayout_Upload_Method.setVisibility(View.VISIBLE);
@@ -646,6 +648,7 @@ public class Tab_Network_Activity extends Activity {
 
 
                 } else {
+                    fb.network = false;
                     linLayout_Channels.setVisibility(View.GONE);
                     linLayout_Connection_Method.setVisibility(View.GONE);
                     linLayout_Upload_Method.setVisibility(View.GONE);
