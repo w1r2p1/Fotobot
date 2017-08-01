@@ -102,7 +102,7 @@ public class FotoBot extends Application {
     public boolean Use_Mobile_Data;
 
     public boolean useMail = false;
-    public boolean useFTP = true;
+    public boolean useFTP = false;
 
     /**
      * Делать фото со вспышкой
@@ -1233,6 +1233,8 @@ public class FotoBot extends Application {
         FTP_username = pref.getString("FTP_Username","login");
         FTP_password = pref.getString("FTP_Password","passwd");
         Upload_Method = pref.getString("Upload_Method", "FTP");
+        useMail = pref.getBoolean("Use_Mail", false);
+        useFTP = pref.getBoolean("Use_FTP", false);
     }
 
     public void SaveSettings() {
@@ -1304,6 +1306,8 @@ public class FotoBot extends Application {
         editor.putBoolean("SMS_Voltage_Alert", sms_voltage_alert);
         editor.putString("SMS_Voltage_Alert_Number", sms_voltage_alert_number);
         editor.putString("Upload_Method", Upload_Method);
+        editor.putBoolean("Use_Mail", useMail);
+        editor.putBoolean("Use_FTP", useFTP);
         editor.commit();
 
     }
@@ -1830,10 +1834,16 @@ public class FotoBot extends Application {
     }
 
     public void FTPUpload(String str) {
-        String server = "f17-preview.awardspace.net";
-        int port = 21;
-        String user = "2324179";
-        String pass = "superclass151515";
+        String server;
+        int port;
+        String user;
+        String pass;
+
+        server = FTP_server;
+        port = Integer.parseInt(FTP_port);
+        user = FTP_username;
+        pass = FTP_password;
+
         FTPClient ftpClient = new FTPClient();
         try {
 

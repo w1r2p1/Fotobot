@@ -226,6 +226,8 @@ public class Tab_Network_Activity extends Activity {
                                        View view, int i, long l) {
 
                 if (spinnerArray_Upload_Method.get(i) == "E-Mail" && fb.network) {
+                    fb.useMail = true;
+                    fb.useFTP = false;
                     fb.Upload_Method = "E-Mail";
                     linLayout_Upload_Method.setVisibility(View.VISIBLE);
                     linLayout_Fotobot_Email.setVisibility(View.VISIBLE);
@@ -235,6 +237,8 @@ public class Tab_Network_Activity extends Activity {
                     linLayout_Fotobot_Recipient.setVisibility(View.VISIBLE);
                     linLayout_FTP.setVisibility(View.GONE);
                 } else if (spinnerArray_Upload_Method.get(i) == "FTP" && fb.network) {
+                    fb.useFTP = true;
+                    fb.useMail = false;
                     fb.Upload_Method = "FTP";
                     linLayout_FTP.setVisibility(View.VISIBLE);
                     linLayout_Fotobot_Email.setVisibility(View.GONE);
@@ -758,6 +762,8 @@ public class Tab_Network_Activity extends Activity {
                     editor.putString("Upload_Method", "E-Mail");
                 }
 
+                editor.putBoolean("Use_Mail", fb.useMail);
+                editor.putBoolean("Use_FTP", fb.useFTP);
 
 // Save the changes in SharedPreferences
                 editor.commit(); // commit changes
