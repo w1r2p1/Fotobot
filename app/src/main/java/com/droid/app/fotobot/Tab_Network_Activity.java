@@ -232,7 +232,16 @@ public class Tab_Network_Activity extends Activity {
                     linLayout_SMTP_Host.setVisibility(View.VISIBLE);
                     linLayout_SMTP_Port.setVisibility(View.VISIBLE);
                     linLayout_Fotobot_Recipient.setVisibility(View.VISIBLE);
+                    linLayout_FTP.setVisibility(View.GONE);
+                } else if (spinnerArray_Upload_Method.get(i) == "FTP" && fb.network) {
+                    linLayout_FTP.setVisibility(View.VISIBLE);
+                    linLayout_Fotobot_Email.setVisibility(View.GONE);
+                    linLayout_Fotobot_Password.setVisibility(View.GONE);
+                    linLayout_SMTP_Host.setVisibility(View.GONE);
+                    linLayout_SMTP_Port.setVisibility(View.GONE);
+                    linLayout_Fotobot_Recipient.setVisibility(View.GONE);
                 } else {
+                    linLayout_FTP.setVisibility(View.GONE);
                     linLayout_Fotobot_Email.setVisibility(View.GONE);
                     linLayout_Fotobot_Password.setVisibility(View.GONE);
                     linLayout_SMTP_Host.setVisibility(View.GONE);
@@ -623,10 +632,16 @@ public class Tab_Network_Activity extends Activity {
                         linLayout_SMTP_Host.setVisibility(View.VISIBLE);
                         linLayout_SMTP_Port.setVisibility(View.VISIBLE);
                         linLayout_Fotobot_Recipient.setVisibility(View.VISIBLE);
+                        linLayout_FTP.setVisibility(View.GONE);
                     }
 
                     if (fb.Upload_Method.contains("FTP")) {
                         linLayout_FTP.setVisibility(View.VISIBLE);
+                        linLayout_Fotobot_Email.setVisibility(View.GONE);
+                        linLayout_Fotobot_Password.setVisibility(View.GONE);
+                        linLayout_SMTP_Host.setVisibility(View.GONE);
+                        linLayout_SMTP_Port.setVisibility(View.GONE);
+                        linLayout_Fotobot_Recipient.setVisibility(View.GONE);
                     }
 
 
