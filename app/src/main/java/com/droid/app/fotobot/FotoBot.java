@@ -1859,25 +1859,28 @@ public class FotoBot extends Application {
             String firstRemoteFile = firstLocalFile.getName();
             InputStream inputStream = new FileInputStream(firstLocalFile);
 
-            SendMessage("Start uploading " + str);
+            SendMessage("Начинаем загрузку " + str);
             boolean done = ftpClient.storeFile(firstRemoteFile, inputStream);
             inputStream.close();
             if (done) {
-                SendMessage(str + " is uploaded successfully.");
+                SendMessage(str + " загружен успешно.");
             }
         } catch (IOException ex) {
-            SendMessage("Problem with " + str + " uploading: " + ex.getMessage());
+            error_message = true;
+            SendMessage("Проблема с загрузкой " + str + "\n" + ex.getMessage() + "\n" +
+            "Проверьте правильно ли заполнены параметры FTP в настройках.");
             ex.printStackTrace();
         } finally {
             try {
                 if (ftpClient.isConnected()) {
                     ftpClient.logout();
                     ftpClient.disconnect();
-                    SendMessage("FTP connection has been closed");
+                    SendMessage("FTP сессия закрыта");
                     fbpause(h,5);
                 }
             } catch (IOException ex) {
                 ex.printStackTrace();
+                error_message = true;
                 SendMessage("Problem with closing FTP connection");
             }
         }

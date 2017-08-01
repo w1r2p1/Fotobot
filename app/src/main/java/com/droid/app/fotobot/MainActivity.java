@@ -941,6 +941,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                     if (fb.make_video_fc && fb.fc_video_attach) {
                                         fb.FTPUpload(fb.fc_Video_Name_Full_Path);
                                     }
+
+                                    if (fb.attach_log) {
+                                        fb.FTPUpload(fb.work_dir + "/logfile.txt");
+                                    }
+
                                 }
 
                                 long durationInMilliseconds = System.currentTimeMillis() - start;

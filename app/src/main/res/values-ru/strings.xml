@@ -27,20 +27,20 @@
 
     <!-- http://daniel-codes.blogspot.ru/2011/04/html-in-textviews.html -->
 
-    <string name="update"><![CDATA[<b><u>Версия 3.1.1</u></b><br>
+    <string name="update"><![CDATA[<b><u>Версия 3.2.0</u></b><br>
         1) добавлен автозапуск;<br>
         ]]></string>
 
     <string name="Camera_Name">Название камеры</string>
-    <string name="Camera_Name_description">Название камеры будет добавлено к заголовку письма, что позволит легче сортировать почту</string>
+    <string name="Camera_Name_description">Название камеры будет добавлено к имени фото, видео и лог-файла, что позволит легче сортировать данные</string>
     <string name="Front_Camera">Фронтальная камера</string>
     <string name="Back_Camera">Камера на задней панели телефона</string>
     <string name="use_fc_camera">использовать фронтальную камеру</string>
     <string name="use_bc_camera">использовать камеру</string>
-    <string name="attach_image">Присоединить фото к письму</string>
-    <string name="delete_image">Удалить фото после отправки на почту</string>
-    <string name="attach_video">Присоединить видео к письму</string>
-    <string name="delete_video">Удалить видео после отправки на почту</string>
+    <string name="attach_image">Загрузить фото в сеть</string>
+    <string name="delete_image">Удалить фото после загрузки в сеть</string>
+    <string name="attach_video">Загрузить видео в сеть</string>
+    <string name="delete_video">Удалить видео после загрузки в сеть</string>
 
     <string name="SMS_Password">SMS пароль</string>
     <string name="SMS_Password_description">Пароль для управления через SMS (если пароль не совпадает с заданным, то SMS будет игнорироваться)</string>
@@ -54,7 +54,7 @@
 
     <string name="Delete_Foto">Удалить фото</string>
     <string name="Delete_Foto_description">Выберите эту опцию если хотите удалить фото с телефона
-        после отправки фото на почту. Держите ее включенной если записываете фото во внутреннюю память
+        после загрузки фото в сеть. Держите ее включенной если записываете фото во внутреннюю память
         телефона (Internal) иначе фотографии забьют память телефона.
     Если же записываете фото на SD карту, то можно их не удалять.</string>
 
@@ -127,11 +127,11 @@
 
     <string name="pause_between_frames">Интервал между фото(сек)</string>
     <string name="pause_between_frames_description">Фактически это самый главный параметр,
-        частота с которой будут делаться фото и отправляться на почту.
+        частота с которой будут делаться фото и видео.
         Не используйте слишком малые значения этого параметра - это может
     привести к зависанию телефона.</string>
     <string name="network">Сеть</string>
-    <string name="network_description">on - фото будут сохраняться на телефоне и будут высланы на почту, off - фото будут сохранены на телефоне, но отправляться на почту не будут</string>
+    <string name="network_description">on - фото будут сохраняться на телефоне и будут загружаться в сеть, off - фото будут сохранены на телефоне, но отправляться на почту не будут</string>
     <string name="pause_between_processes">Интервал между процессами(сек)</string>
     <string name="pause_between_processes_description">Необходим для того, чтобы слабый процессор телефона успел обработать данные, рекомендуется 5-9 секунд.</string>
 
@@ -142,7 +142,7 @@
     <string name="Internet_connection_channel_description">Выберите способ подключения к Internet (мобильные данные, wi-fi или оба).</string>
     <string name="connection_method">Метод подключения</string>
     <string name="connection_method_description">Выберите режим установки связи с Internet. Method 1 - связь будет установлена сразу и телефон не будет отключаться от сети.
-                Method 2 - соедение с Internet будет устонавливаться перед тем, как сделать фото, затем, после отправки фото на почту фотобот отключится от Internet.</string>
+                Method 2 - соедение с Internet будет устонавливаться перед тем, как сделать фото, затем, после загрузки фото или видео в сеть фотобот отключится от Internet.</string>
 
     <string name="Fotobot_email">Почтовый адрес Фотобота</string>
     <string name="Fotobot_email_description">С этого адреса Фотобот будет рассылать письма.</string>
@@ -199,7 +199,7 @@
 
     <string name="network_up_delay">Время на подключение к Internet</string>
     <string name="network_up_delay_description">Время (сек) на поднятие сетевого интерфейса (Wi-Fi или Mobile Data)</string>
-    <string name="attach_log">Присоединить журнал к письму</string>
+    <string name="attach_log">Загрузить журнал в сеть</string>
     <string name="attach_log_description">Журнал может помочь в отладке нестандартных ситуаций</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
