@@ -273,5 +273,9 @@ mediastatus\n
     <string name="upload_method">Выгрузка данных в сеть</string>
     <string name="upload_method_note">Выберите способ загрузки фото, видео и логов в сеть</string>
 
+    <string name="ftp_server">FTP Server</string>
+    <string name="ftp_port">FTP Port</string>
+    <string name="ftp_user">FTP User</string>
+    <string name="ftp_password">FTP Password</string>
 
 </resources>

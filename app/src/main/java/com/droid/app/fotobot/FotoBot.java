@@ -333,7 +333,7 @@ public class FotoBot extends Application {
     public boolean attach_log = false;
 
     public String FTP_server = "";
-    public int FTP_port = 21;
+    public String FTP_port = "21";
     public String FTP_username = "";
     public String FTP_password = "";
 
@@ -1229,7 +1229,7 @@ public class FotoBot extends Application {
         bc_video_ftp_upload = pref.getBoolean("Bc_Video_FTP_Upload", true);
         fc_video_ftp_upload = pref.getBoolean("Fc_Video_FTP_Upload", true);
         FTP_server = pref.getString("FTP_Server","ftp.server.com");
-        FTP_port = pref.getInt("FTP_Port",21);
+        FTP_port = pref.getString("FTP_Port","21");
         FTP_username = pref.getString("FTP_Username","login");
         FTP_password = pref.getString("FTP_Password","passwd");
         Upload_Method = pref.getString("Upload_Method", "FTP");
@@ -1260,7 +1260,7 @@ public class FotoBot extends Application {
         editor.putString("SMTP_Port", SMTP_Port);
         editor.putString("EMail_Recepient", EMail_Recepient);
         editor.putString("FTP_Server", FTP_server);
-        editor.putInt("FTP_Port", FTP_port);
+        editor.putString("FTP_Port", FTP_port);
         editor.putString("FTP_Username", FTP_username);
         editor.putString("FTP_Password", FTP_password);
         editor.putBoolean("Show_Start_Tip", show_start_tip);

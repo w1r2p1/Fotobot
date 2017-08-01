@@ -257,5 +257,10 @@ mediastatus\n
     <string name="upload_method">Data upload method</string>
     <string name="upload_method_note">Select a way how to upload data to network</string>
 
+    <string name="ftp_server">FTP Server</string>
+    <string name="ftp_port">FTP Port</string>
+    <string name="ftp_user">FTP User</string>
+    <string name="ftp_password">FTP Password</string>
+
     </resources>
 

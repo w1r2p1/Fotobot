@@ -49,6 +49,11 @@ public class Tab_Network_Activity extends Activity {
     EditText editText_SMTP_Port;
     EditText editText_Check_Web_Page;
     EditText editText_Network_Up_Delay;
+    EditText editText_FTP_Host;
+    EditText editText_FTP_Port;
+    EditText editText_FTP_User;
+    EditText editText_FTP_Password;
+
     LinearLayout linLayout_Channels;
     LinearLayout linLayout_Connection_Method;
     LinearLayout linLayout_Fotobot_Email;
@@ -57,6 +62,7 @@ public class Tab_Network_Activity extends Activity {
     LinearLayout linLayout_SMTP_Host;
     LinearLayout linLayout_SMTP_Port;
     LinearLayout linLayout_Upload_Method;
+    LinearLayout linLayout_FTP;
 
     Button btn, btn_mp;
     Spinner spinner_ppm;
@@ -244,6 +250,66 @@ public class Tab_Network_Activity extends Activity {
 
         });
 
+
+// ------------------------------------------------------------------------------------------------
+// FTP
+        linLayout_FTP = new LinearLayout(this);
+        linLayout_FTP.setOrientation(LinearLayout.VERTICAL);
+        linLayout_FTP.setPadding(5, 9, 5, 9);
+        linLayout_FTP.setBackgroundColor(Color.rgb(208, 208, 208));
+// server
+        TextView tv_FTP_Server = new TextView(this);
+        tv_FTP_Server.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_FTP_Server.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_FTP_Server.setTextColor(Color.BLACK);
+        tv_FTP_Server.setText(getResources().getString(R.string.ftp_server));
+        linLayout_FTP.addView(tv_FTP_Server);
+
+        editText_FTP_Host = new EditText(this);
+        editText_FTP_Host.setSingleLine(true);
+        editText_FTP_Host.setText(fb.FTP_server);
+        editText_FTP_Host.setTextColor(Color.rgb(50, 100, 150));
+        linLayout_FTP.addView(editText_FTP_Host);
+// port
+        TextView tv_FTP_Port = new TextView(this);
+        tv_FTP_Port.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_FTP_Port.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_FTP_Port.setTextColor(Color.BLACK);
+        tv_FTP_Port.setText(getResources().getString(R.string.ftp_port));
+        linLayout_FTP.addView(tv_FTP_Port);
+
+        editText_FTP_Port = new EditText(this);
+        editText_FTP_Port.setSingleLine(true);
+        editText_FTP_Port.setText(fb.FTP_port);
+        editText_FTP_Port.setTextColor(Color.rgb(50, 100, 150));
+        linLayout_FTP.addView(editText_FTP_Port);
+// username
+        TextView tv_FTP_Username = new TextView(this);
+        tv_FTP_Username.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_FTP_Username.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_FTP_Username.setTextColor(Color.BLACK);
+        tv_FTP_Username.setText(getResources().getString(R.string.ftp_user));
+        linLayout_FTP.addView(tv_FTP_Username);
+
+        editText_FTP_User = new EditText(this);
+        editText_FTP_User.setSingleLine(true);
+        editText_FTP_User.setText(fb.FTP_username);
+        editText_FTP_User.setTextColor(Color.rgb(50, 100, 150));
+        linLayout_FTP.addView(editText_FTP_User);
+// password
+        TextView tv_FTP_Password = new TextView(this);
+        tv_FTP_Password.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_FTP_Password.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_FTP_Password.setTextColor(Color.BLACK);
+        tv_FTP_Password.setText(getResources().getString(R.string.ftp_password));
+        linLayout_FTP.addView(tv_FTP_Password);
+
+        editText_FTP_Password = new EditText(this);
+        editText_FTP_Password.setSingleLine(true);
+        editText_FTP_Password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        editText_FTP_Password.setText(fb.FTP_password);
+        editText_FTP_Password.setTextColor(Color.rgb(50, 100, 150));
+        linLayout_FTP.addView(editText_FTP_Password);
 
 // ------------------------------------------------------------------------------------------------
 
@@ -558,6 +624,12 @@ public class Tab_Network_Activity extends Activity {
                         linLayout_SMTP_Port.setVisibility(View.VISIBLE);
                         linLayout_Fotobot_Recipient.setVisibility(View.VISIBLE);
                     }
+
+                    if (fb.Upload_Method.contains("FTP")) {
+                        linLayout_FTP.setVisibility(View.VISIBLE);
+                    }
+
+
                 } else {
                     linLayout_Channels.setVisibility(View.GONE);
                     linLayout_Connection_Method.setVisibility(View.GONE);
@@ -567,6 +639,7 @@ public class Tab_Network_Activity extends Activity {
                     linLayout_SMTP_Host.setVisibility(View.GONE);
                     linLayout_SMTP_Port.setVisibility(View.GONE);
                     linLayout_Fotobot_Recipient.setVisibility(View.GONE);
+                    linLayout_FTP.setVisibility(View.GONE);
                 }
 
             }
@@ -642,6 +715,12 @@ public class Tab_Network_Activity extends Activity {
                 editor.putString("SMTP_Host", editText_SMTP_Host.getText().toString());
                 editor.putString("SMTP_Port", editText_SMTP_Port.getText().toString());
                 editor.putString("EMail_Recepient", editText_Fotobot_Recipient.getText().toString());
+
+                editor.putString("FTP_Server", editText_FTP_Host.getText().toString());
+                editor.putString("FTP_Port", editText_FTP_Port.getText().toString());
+                editor.putString("FTP_Username", editText_FTP_User.getText().toString());
+                editor.putString("FTP_Password", editText_FTP_Password.getText().toString());
+
                 editor.putString("Check_Web_Page", editText_Check_Web_Page.getText().toString());
                 editor.putInt("Network_Up_Delay", Integer.parseInt(editText_Network_Up_Delay.getText().toString()));
 
@@ -714,6 +793,9 @@ public class Tab_Network_Activity extends Activity {
         FullFrame.addView(linLayout_SMTP_Host);
         FullFrame.addView(linLayout_SMTP_Port);
         FullFrame.addView(linLayout_Fotobot_Recipient);
+        FullFrame.addView(linLayout_FTP);
+
+
         FullFrame.addView(linLayout_Buttons);
 
         ScrollView m_Scroll = new ScrollView(this);
