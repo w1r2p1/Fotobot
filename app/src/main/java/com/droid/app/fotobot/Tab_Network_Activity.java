@@ -208,7 +208,7 @@ public class Tab_Network_Activity extends Activity {
         tv_Upload_Method_note.setText(getResources().getString(R.string.upload_method_note));
         linLayout_Upload_Method.addView(tv_Upload_Method_note);
 
-        if (fb.network) {
+        if (fb.Upload_Method.contains("FTP")) {
             spinner_Upload_Method.setSelection(getIndex(spinner_Upload_Method, "FTP"));
         } else {
             spinner_Upload_Method.setSelection(getIndex(spinner_Upload_Method, "E-Mail"));
@@ -219,9 +219,7 @@ public class Tab_Network_Activity extends Activity {
             public void onItemSelected(AdapterView<?> adapterView,
                                        View view, int i, long l) {
 
-                if (spinnerArray_Upload_Method.get(i) == "E-Mail") {
-                    linLayout_Channels.setVisibility(View.VISIBLE);
-                    linLayout_Connection_Method.setVisibility(View.VISIBLE);
+                if (spinnerArray_Upload_Method.get(i) == "E-Mail" && fb.network) {
                     linLayout_Upload_Method.setVisibility(View.VISIBLE);
                     linLayout_Fotobot_Email.setVisibility(View.VISIBLE);
                     linLayout_Fotobot_Password.setVisibility(View.VISIBLE);
@@ -229,9 +227,6 @@ public class Tab_Network_Activity extends Activity {
                     linLayout_SMTP_Port.setVisibility(View.VISIBLE);
                     linLayout_Fotobot_Recipient.setVisibility(View.VISIBLE);
                 } else {
-                    linLayout_Channels.setVisibility(View.GONE);
-                    linLayout_Connection_Method.setVisibility(View.GONE);
-                    linLayout_Upload_Method.setVisibility(View.GONE);
                     linLayout_Fotobot_Email.setVisibility(View.GONE);
                     linLayout_Fotobot_Password.setVisibility(View.GONE);
                     linLayout_SMTP_Host.setVisibility(View.GONE);
@@ -556,20 +551,22 @@ public class Tab_Network_Activity extends Activity {
                     linLayout_Channels.setVisibility(View.VISIBLE);
                     linLayout_Connection_Method.setVisibility(View.VISIBLE);
                     linLayout_Upload_Method.setVisibility(View.VISIBLE);
-/*                    linLayout_Fotobot_Email.setVisibility(View.VISIBLE);
-                    linLayout_Fotobot_Password.setVisibility(View.VISIBLE);
-                    linLayout_SMTP_Host.setVisibility(View.VISIBLE);
-                    linLayout_SMTP_Port.setVisibility(View.VISIBLE);
-                    linLayout_Fotobot_Recipient.setVisibility(View.VISIBLE); */
+                    if (fb.Upload_Method.contains("E-Mail")) {
+                        linLayout_Fotobot_Email.setVisibility(View.VISIBLE);
+                        linLayout_Fotobot_Password.setVisibility(View.VISIBLE);
+                        linLayout_SMTP_Host.setVisibility(View.VISIBLE);
+                        linLayout_SMTP_Port.setVisibility(View.VISIBLE);
+                        linLayout_Fotobot_Recipient.setVisibility(View.VISIBLE);
+                    }
                 } else {
                     linLayout_Channels.setVisibility(View.GONE);
                     linLayout_Connection_Method.setVisibility(View.GONE);
                     linLayout_Upload_Method.setVisibility(View.GONE);
-/*                    linLayout_Fotobot_Email.setVisibility(View.GONE);
+                    linLayout_Fotobot_Email.setVisibility(View.GONE);
                     linLayout_Fotobot_Password.setVisibility(View.GONE);
                     linLayout_SMTP_Host.setVisibility(View.GONE);
                     linLayout_SMTP_Port.setVisibility(View.GONE);
-                    linLayout_Fotobot_Recipient.setVisibility(View.GONE); */
+                    linLayout_Fotobot_Recipient.setVisibility(View.GONE);
                 }
 
             }
@@ -656,6 +653,12 @@ public class Tab_Network_Activity extends Activity {
                         fb.CloseInternetConnection();
                     }
 
+                }
+
+                if (spinner_Upload_Method.getSelectedItem().toString().contains("FTP")) {
+                    editor.putString("Upload_Method", "FTP");
+                } else {
+                    editor.putString("Upload_Method", "E-Mail");
                 }
 
 
