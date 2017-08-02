@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPReply;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -1846,8 +1847,24 @@ public class FotoBot extends Application {
 
         FTPClient ftpClient = new FTPClient();
         try {
+            int reply;
 
             ftpClient.connect(server, port);
+            System.out.println("Connected to " + server + ".");
+            System.out.print(ftpClient.getReplyString());
+            reply = ftpClient.getReplyCode();
+
+            if(!FTPReply.isPositiveCompletion(reply)) {
+                ftpClient.disconnect();
+                System.err.println("FTP server refused connection.");
+                SendMessage("FTP отказал в соединении");
+            }
+
+
+
+
+
+
             ftpClient.login(user, pass);
             ftpClient.enterLocalPassiveMode();
 
@@ -1862,12 +1879,22 @@ public class FotoBot extends Application {
             SendMessage("Начинаем загрузку " + str);
             boolean done = ftpClient.storeFile(firstRemoteFile, inputStream);
             inputStream.close();
+            reply = ftpClient.getReplyCode();
+
+            if(!FTPReply.isPositiveCompletion(reply)) {
+                error_message = true;
+                SendMessage("Проблема с авторизацией на FTP сервере, проверьте правильно ли заполнены параметры FTP в настройках.");
+            }
+
             if (done) {
                 SendMessage(str + " загружен успешно.");
             }
         } catch (IOException ex) {
             error_message = true;
-            SendMessage("Проблема с загрузкой " + str + "\n" + ex.getMessage() + "\n" +
+            SendMessage("Проблема с загрузкой " + str + "\n" + "\n" +
+                    ftpClient.getReplyCode() + "\n" +
+                    ftpClient.getReplyString() + "\n" +
+                    ex.getMessage() + "\n" +
             "Проверьте правильно ли заполнены параметры FTP в настройках.");
             ex.printStackTrace();
         } finally {
