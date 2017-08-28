@@ -8,18 +8,86 @@
     <string name="help_button">Help</string>
     <string name="apply_button">APPLY</string>
     <string name="back_button">MAIN WINDOW</string>
+    <string name="automatic_mode">Automatic Mode</string>
+    <string name="automatic_mode_description">Next time Fotobot starts immediately (no need to press START button)</string>
 
-    <string name="Fotobot">Welcome to Fotobot!</string>
+    <string name="Fotobot">Welcome to Fotobot! This application will help you to control remote places thrue thousands of miles. You will receive photo-reports periodically after predefined interval of time.
+    You will be able to change Fotobot\'s settings remotely via SMS. Detailed instructions can be found there:
+            &lt;a href=http://v-and-f.ru/fotobot&gt;http://v-and-f.ru/fotobot&lt;/a&gt;</string>
+    <string name="fast_start">If you do not want to study all settings and want to start Fotobot as soon as possible
+        just press START button. Fotobot will take a picture every 5 minute by front and back camera and store photos into: </string>
+
+    <string name="update"><![CDATA[<b><u>Version 3.1.1</u></b><br>
+        1) AutoStart has been added.<br>
+        ]]>
+    </string>
 
     <string name="Camera_Name">Camera Name</string>
-    <string name="Camera_Name_description">Give name for you device</string>
+    <string name="Camera_Name_description">Camera Name will be added to emails title, it will help to sort out mails in Inbox</string>
+    <string name="Front_Camera">Front camera</string>
+    <string name="Back_Camera">Back camera</string>
+    <string name="use_fc_camera">Use front camera</string>
+    <string name="use_bc_camera">Use back camera</string>
+    <string name="attach_image">Attach image to e-mail</string>
+    <string name="delete_image">Delete image after sending to e-mail</string>
+    <string name="attach_video">Attach video to e-mail</string>
+    <string name="delete_video">Delete video after sending to e-mail</string>
+    <string name="video_profile">Automatic video profile detection is not implemented in this version. You can find supported profile manually. Just select particular profile, run Fotobot. If error message appear change profile to another:-)</string>
+
+    <string name="SMS_Password">SMS Password</string>
+    <string name="SMS_Password_description">Password for administration via SMS (if password is wrong than rest part of SMS will be ignored)</string>
+
+    <string name="sms_cmd_list">
+passwd &lt;passwd&gt;\n
+update &lt;interval sec&gt;\n
+network &lt;on/off&gt;\n
+netchannel &lt;wf/md&gt;\n
+netmethod &lt;1/2&gt;\n
+email &lt;user@mail.ru&gt;\n
+emails &lt;fotobot@gmail.com&gt;\n
+emailsp &lt;pass_W_d&gt;\n
+smtphost &lt;smtp.gmail.com&gt;\n
+smtpport &lt;465&gt;\n
+fc &lt;on/off&gt;\n
+bc &lt;on/off&gt;\n
+log &lt;on/off&gt;\n
+jpg &lt;compression&gt;\n
+flash &lt;on/off&gt;\n
+attachbci &lt;on/off&gt;\n
+attachfci &lt;on/off&gt;\n
+attachbcv &lt;on/off&gt;\n
+attachfcv &lt;on/off&gt;\n
+delbci &lt;on/off&gt;\n
+delfci &lt;on/off&gt;\n
+delbcv &lt;on/off&gt;\n
+delfcv &lt;on/off&gt;\n
+status\n
+netstatus\n
+emailstatus\n
+mediastatus\n
+    </string>
+
+    <string name="network">Network</string>
+    <string name="network_description">Select network mode: on (photos will be saved on phone and sent to email), off (photos will be saved on phone without of mail sending )</string>
+
+    <string name="advanced_settings">Show advanced settings</string>
+
+    <string name="Work_Dir">Working Folder</string>
+    <string name="Work_Dir_description">Absolute path to folder with photos</string>
+    <string name="Work_Dir_error1">No such folder for images</string>
+    <string name="Work_Dir_error2">Please check \"Working Folder\" field.</string>
+
+
+    <string name="Delete_Foto">Delete Foto</string>
+    <string name="Delete_Foto_description">Check this box to delete foto after sending to email</string>
 
     <string name="fbloglength">Log Length in main screen (bytes)</string>
-    <string name="fbloglength_description">Define the length of the log</string>
+    <string name="fbloglength_description">Define the length of the text output in Main Window</string>
     <string name="fbfloglength">Log Length in file (lines)</string>
     <string name="fbfloglength_description">Number of lines in log file</string>
+    <string name="log_size">Maximum Log file size (Kb)</string>
 
-    <string name="foto_sent">Foto has been sent</string>
+    <string name="foto_sent">Mail has been sent</string>
 
     <string name="connection_channel_wifi">Connection channel is Wi-Fi</string>
     <string name="turning_on_wifi">Wi-Fi activating</string>
@@ -31,13 +99,20 @@
     <string name="connection_channel_mobiledata">Connection channel is Mobile Data</string>
     <string name="turning_on_mobiledata">Mobile Data activating</string>
     <string name="connection_channel_wifimobiledata">Connection channel is Wi-Fi and Mobile Data</string>
+    <string name="connection_channel_wifimobiledata_wifi">Wi-Fi is up</string>
+    <string name="connection_channel_wifimobiledata_mobiledata">Mobile Data is up</string>
     <string name="connection_channel_wifimobiledata_message">No connection via Wi-Fi, is switching to Mobile Data</string>
-
+    <string name="connection_attempt">Fotobot is connecting to Internet, attempt  </string>
+    <string name="starting_to_make_photo">Fotobot is starting to make photo </string>
+    <string name="starting_to_make_video">Fotobot is starting to make video </string>
+    <string name="video_recording_time">Video recording time (sec)</string>
+    <string name="video_recorded">video has been recorded</string>
     <string name="Internet_connection_is_closed">Internet connection has been closed</string>
-
+    <string name="request_for_stopping">Request for stop has been sent. Wait for stopping message on the screen, after that Fotobot will be stopped correctly.</string>
     <string name="settings_tab_1">Behavior</string>
     <string name="settings_tab_2">Network</string>
     <string name="settings_tab_3">Foto</string>
+    <string name="settings_tab_4">Video</string>
 
     <string name="main_help">&lt;h2&gt;&lt;font color=white&gt;User Manual&lt;/font&gt;&lt;/h2&gt;
             This is simple Android application designed for taking and sending of pictures to user e-mail. Simple scheduler is used for this.
@@ -60,10 +135,17 @@
     <string name="pause_between_processes">Pause between processes(sec)</string>
     <string name="pause_between_processes_description">Time delay between processes. Very important for old devices. Default
         values are 5-15sec.</string>
+    <string name="pause_between_connections">Pause before making of another attempt to connect to Internet</string>
 
     <string name="wake_up">Wake Up frequency</string>
 
     <string name="attach_log">Attach Log to email</string>
+    <string name="AttachedInfo">E-Mail attached info detalization</string>
+    <string name="AttachedInfo_description">Brief - current status;\n Normal - current status + active settings;\n Detailed - current status + active settings + hardware information </string>
+    <string name="attach_log_description">Log wil help to debug some situations with Fotobot</string>
+
+    <string name="storage">Storage type</string>
+    <string name="storage_description">Select memory type for photo</string>
 
     <string name="wake_up_description">Need to keep Fotobot in memory (to avoid kicking by Android)</string>
     <string name="settings_font">Font size for settings window</string>
@@ -73,20 +155,20 @@
     <string name="Internet_connection_channel_description">Select Internet connection (Mobile Data, Wi-Fi or Both)</string>
     <string name="connection_method">Connection method</string>
     <string name="connection_method_description">Select method for Internet connection. Method 1 - connection will be opened before Fotobot starts.
-                "Method 2 - connection will be opened before taking of picture and Fotobot disconnects from Internet after sending of picture.</string>
+                "Method 2 - connection will be opened before taking of picture and closed after sending picture to email.</string>
 
     <string name="Fotobot_email">Fotobots email</string>
-    <string name="Fotobot_email_description">This is aux email address for mail sending.</string>
+    <string name="Fotobot_email_description">Fotobot uses this account for mail sending.</string>
 
     <string name="Fotobot_email_password">Fotobots email password</string>
 
     <string name="Recipient_email">Recipients email address</string>
 
     <string name="email_server">Fotobots SMTP server</string>
-    <string name="email_server_description">SMTP server address (f.e. smtp.google.com)</string>
+    <string name="email_server_description">SMTP server address (f.e. smtp.google.com for Google Mail)</string>
 
     <string name="email_server_port">Fotobots SMTP server port</string>
-    <string name="email_server_port_description">SMTP server port number, usually equal 465</string>
+    <string name="email_server_port_description">SMTP server port number, usually equals 465</string>
 
     <string name="Check_Web_Page">Web page for connection checking</string>
     <string name="Check_Web_Page_description">Please use non-https servers (http://www.server.com)</string>
@@ -96,25 +178,31 @@
 
     <string name="jpeg_compression">JPEG compression</string>
     <string name="jpeg_compression_description">100 - highest qualty</string>
+    <string name="Autofocus">Autofocus</string>
+    <string name="Time_for_Focusing">Time for focusing(sec)</string>
 
     <string name="photo_processing_method">Foto processing method</string>
     <string name="photo_processing_method_dscription">Select method for image processing.
-    Method1 - get RAW from sensor and convert it to JPEG.
-    Method2 - get JPEG from camera.</string>
+    Hardware - RAW from sensor and convert it to JPEG. Software - JPEG from camera.</string>
 
-    <string name="photo_scale">Foto scale</string>
+    <string name="photo_scale">Foto scale: 1-full size image, 1/2-image will be reduced 2 times along both directions, 1/4-4 times</string>
 
-    <string name="photo_resolution">Foto resolution</string>
+    <string name="photo_resolution">Foto resolution (width x height) in pixels. Blue: width/height = 4/3, Red = 16/9 </string>
 
-    <string name="flash">Use flash</string>
+    <string name="flash">Flash</string>
 
     <string name="pause_between_photos">"Pause for"</string>
-
-    <string name="clean_log">Clean Log</string>
-    <string name="clean_log_note">Check this and press APPLY button, after that log will be cleaned</string>
+    <string name="pause">"pause "</string>
+    <string name="sec">"sec"</string>
 
     <string name="clean_text">Clean text</string>
     <string name="clean_text_note">Check this and press APPLY button, after that text in main window will be cleaned</string>
+
+    <string name="clean_log">Flush Logger</string>
+    <string name="clean_log_note">Check this and press APPLY button, after that logger will be reseted</string>
+
+    <string name="clean_systemlog">Clean Log</string>
+    <string name="clean_systemlog_note">Check this and press APPLY button, after that log will be cleaned</string>
 
     <string name="battery_charge">Battery charge</string>
     <string name="battery_temperature">Battery temperature</string>
@@ -132,6 +220,7 @@
     <string name="title_main_activity_settings">Main Settings</string>
     <string name="title_network_activity_settings">Network Settings</string>
     <string name="title_foto_activity_settings">Photo Settings</string>
+    <string name="title_video_activity_settings">Video Settings</string>
     <string name="title_activity_status">Status</string>
     <string name="text_tab1">text_tab1</string>
     <string name="text_tab2">text_tab2</string>
@@ -139,4 +228,39 @@
     <string name="text_tab_header">text_tab_header</string>
     <string name="text_activity1">Это первое Activity</string>
     <string name="text_activity2">Это второе Activity</string>
-</resources>
+
+    <string name="str_profile">Profile </string>
+    <string name="str_supported"> supported by </string>
+    <string name="str_camera"> camera</string>
+
+    <string name="str_is_not_supported"> is not supported by </string>
+    <string name="str_please_select"> please select another videoprofile for this camera </string>
+
+    <string name="str_stop_video">Problem with record finishing. Video started to record, but was not stopped correctly. Probably it is due to video profile inconsistency. Please select another video profile in settings.</string>
+
+    <string name="str_file">File</string>
+    <string name="str_was_deleted"> was deleted</string>
+    <string name="str_problem_with_deleting">Problem with deleting: </string>
+
+    <string name="sms_voltage">House circuit status(SMS)</string>
+    <string name="sms_voltage_note">You will receive SMS if voltage on or off</string>
+
+    <string name="no_voltage">No voltage</string>
+    <string name="voltage_restored">Voltage restored</string>
+
+    <string name="SMS_Voltage_Alert_Number">Phone number for voltage alert SMS</string>
+    <string name="SMS_Voltage_Alert_Number_note">Phone numbers for SMS voltage alerts. Password is not required.</string>
+
+    <string name="sound_mute">Mute sound</string>
+    <string name="sound_mute_note">All phone sounds will be muted (sms, camera, incoming calls, notifications and others)</string>
+
+    <string name="upload_method">Data upload method</string>
+    <string name="upload_method_note">Select a way how to upload data to network</string>
+
+    <string name="ftp_server">FTP Server</string>
+    <string name="ftp_port">FTP Port</string>
+    <string name="ftp_user">FTP User</string>
+    <string name="ftp_password">FTP Password</string>
+
+    </resources>
+

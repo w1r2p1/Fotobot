@@ -54,22 +54,6 @@ Handler h;
         }
     }
 
-
-
-     //   String str1 = getIntent().getExtras().getString("var1");
-     //   text.setText(str1);
-
-/*       h = new Handler() {
-            public void handleMessage(android.os.Message msg) {
-                // обновляем TextView
-                text.setText("Закачано файлов: " + msg.what);
-              //  if (msg.what == 10) btnStart.setEnabled(true);
-            }
-        };
-*/
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -111,10 +95,6 @@ Handler h;
 
         text.setText("");
 
-//        Intent intent = new Intent(this, Status.class);
- //       finish();
- //       startActivity(intent);
-
     }
 
     public void reloadLogs(View view) {
@@ -138,15 +118,11 @@ Handler h;
                 s +=readstring;
             }
             InputRead.close();
-            //   Toast.makeText(getBaseContext(), s,Toast.LENGTH_SHORT).show();
             text.setText(s);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-    //    Intent intent = new Intent(this, Status.class);
-     //   finish();
-     //   startActivity(intent);
 
     }
 

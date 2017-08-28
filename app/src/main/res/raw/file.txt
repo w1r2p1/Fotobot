@@ -1,44 +1,83 @@
-<h2>Руководство пользователя</h2>
+<h2>User Manual</h2>
 
-После установки Fotobot’а, телефон превращается в робота (не обделенного интеллектом), который может фотографировать окружающую местность, а затем присылать фото на почту. Казалось бы, таких приложений на маркете много, зачем было выдумывать еще одно? Все дело в жестких требованиях, которые выдвигались к Fotobot’у с которыми справлялись не все приложения.
-Что умеет Fotobot помимо фотографирования и отправки на почту:<br>
+Fotobot is powerful photo server which is running on your device.<br>
 <br>
-1) соединяться с сетью через Wi-Fi или Mobile Data, если через Wi-Fi не получилось, то автоматически переключиться на Mobile Data;<br>
+Below are main features of Fotobot:<br>
 <br>
-2) не давать системе выкинуть приложение из памяти (Android частенько делает так);<br>
+1) connect to Internet via Wi-Fi or MobileData;<br>
 <br>
-3) работать на всех устройствах, начиная с Android 2.3;<br>
+2) stays running (doesn't allow Android to kick out from memory);<br>
 <br>
-4) установочный пакет должен занимать мало места на диске (у старых телефонов мало дисковой памяти);<br>
+3) works on all devices starting from Android 2.3;<br>
 <br>
-5) для телефонов со слабым CPU предусмотрен параметр, который дает время, чтобы телефон обработал фото (тайминг). Можно было сделать через синхронизацию процессов, но тайминг был вынесен, как отдельный параметр, чтобы пользователь мог сам все настроить;<br>
+4) installation package less than 1MB (important for old phones with small amount of internal storage);<br>
 <br>
-6) исчерпывающая информация о текущем состоянии телефона (уровень сигнала сети, заряд и температура батареи, свободное место в телефоне), которая приходим в письме;<br>
+5) can be adjusted for slow-CPU devices (has an option for timing between processes).<br>
 <br>
-7) управление через SMS и Internet (в версии 2.2.0);<br>
+6) detailed reports in email (signal strength (db), battery charge(%), battery temperature (C), free space (MB));<br>
 <br>
-8) фото со вспышкой.<br>
+7) can be controlled via SMS;<br>
 <br>
-Стандартный способ работы с Fotobot'ом выглядит следующим образом.
-Запускаем Fotobot.<br>
-Идем в настройки, закладка "Поведение":
-Название камеры - например, "Fazenda". Когда у вас несколько камер, то по названию можно легко отсортировать.
-Интервал между фото - с таким интервалом камера телефона будет делать снимки, а затем они будут отсылаться на почту. Не рекомендуется ставить меньше 60 секунд, иначе старые модели телефонов могут не справиться.
-Интервал между процессами - процессор телефона переходит от задания к заданию не последовательно. Грубо говоря, сделав фото, телефон должен перейти к отправке его на почту. Но в большинстве случаев возникает ситуация, когда фото после камеры еще не записалось на флэшку, а почтовая программа требует ее, чтобы приаттачить к письму и отправить. Вот для этого и нужен интервал между процессами, он позволяет программе успеть доделать предыдущее, прежде чем переходить к следующему. В большинстве случаев хватает 5 секундной задержки.
+8) camera flash;<br>
 <br>
-Настраиваем "Сеть".<br>
-Связь с Internet - тут все понятно, нужно выбрать метод выхода в Internet, либо по Wi-Fi, либо по 3G, либо использовать комбинированный метод (если не получилось по Wi-Fi, то Fotobot будет пытаться соединиться через 3G).
-Это одна из главных возможностей Fotobot'а. Если нет связи или связь была медленная на предыдущем сеансе отправке письма, то Fotobot попытается подсоединиться заново, может провайдер выдаст socket со связью побыстрее  (в версии 2.4.0).
+9) internla/external(SD) storage;<br>
 <br>
-Метод подключения - Method1 цепляемся к Internet сразу и не разрываем связь; Method2 цепляемся к Internet, отсылаем фото, отцепляемся от Internet. Сразу предупреждаю, что этот режим не экономит батарейку.
-Method2 нужен для поддержания связи с Internet на медленных сетях.
+10) offline mode (no emails, just saving photos into storage);<br>
 <br>
-Почтовый адрес Fotobot'а - как это не странно звучит, но Fotobot'у нужен свой почтовый аккаунт с которого он будет рассылать письма с фото на почту пользователя. Конечно можно было бы избежать
-этого шага и рассылать фото напрямую из Fotobot'а, но тогда было бы возможно просматривать ваши письма. Поэтому не поленитесь и заведите почтовый ящик (например на gmail), только не используйте двухуровневую
-идентификацию (типа по SMS).
+<h1>Typical workflow (fast start)</h1>
+Launch Fotobot and make some important settings<br>
 <br>
-На этом основной этап конфигурации закончен, можно выходить из настроек и нажимать кнопку пуск.
+<u><b>Settings/Behaviour</b></u><br>
 <br>
+<b>Camera Name</b> (f.e. Fazenda), helps to sort out email in Inbox.<br>
+<br>
+<b>Storage Type</b><br>
+<br>
+<b>Pause between frames (sec)</b><br>
+Do not use numbers less than 30sec, cause old phones do not have powerfull CPU for image processing.<br>
+<br>
+<u><b>Settings/Network</b></u><br>
+<br>
+<b>Network</b><br>
+on - photos will be sent to email;<br>
+off - photos will be written to SD-card;<br>
+<br>
+<b>Internet connection</b><br>
+Select Wi-Fi, Mobile Data or both<br>
+<br>
+<b>Fotobots email</b><br>
+It sounds strange, but Fotobot has to have it's own email address (use email account with one level authentication (without SMS confirmation)).<br>
+<br>
+<b>Fotobots password</b><br>
+Password for Fotobots email account.<br>
+<br>
+SMTP server and port are very important too. If you cretaed email account for Fotobot on Google Mail leave this fields unchanged.<br>
+<br>
+That's all for fast start, go to main window and press START button, after that Fotobot will start to make photos.<br>
+<br>
+Control via SMS:<br>
+1) password required in settings;<br>
+2) launch Fotobot by pressing START (Fotobot checks for SMS only when started);<br>
+3) send SMS to phone with started Fotobot:<br>
+<br>
+[SMS body]<br>
+passwd pass <br>
+update 300 <br>
+network on <br>
+log on <br>
+flash on <br>
+jpg 50 <br>
+status on <br>
+<br>
+Description:<br>
+passwd - password <br>
+update 300 - make photo each 300sec<br>
+network on - photo to email and storage, network off - photo to storage<br>
+log on - log will be attached to email<br>
+log on 50 - log will be attached to email (size of log is 50Kb)<br>
+flash on - photo with flash<br>
+jpg 50 - JPEG quality<br>
+status on - after that you will receive SMS with report.<br>
 <br>
 <br>
 <br>

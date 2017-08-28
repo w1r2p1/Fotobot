@@ -8,21 +8,76 @@
     <string name="help_button">Помощь</string>
     <string name="apply_button">ПРИМЕНИТЬ</string>
     <string name="back_button">НА ГЛАВНУЮ</string>
+    <string name="automatic_mode">Автозапуск</string>
+    <string name="automatic_mode_description">При следующем запуске Fotobot сразу начнет работать (без нажатия кнопки ПУСК)</string>
 
-    <string name="Fotobot">Фотобот приветствует Вас!</string>
+    <string name="Fotobot">Fotobot приветствует Вас!\n\nДанное приложение поможет Вам установить контроль за местом, находящимся за многие километры.
+        Вы будете получать фото.видео отчеты через заданные промежутки времени, а так же сможете менять настройки Fotobot\'а, посредством отправки SMS с управляющими командами.
+    Адаптированный для старых телефонов (работает на моделях начиная с Android 2.3) Fotobot поможет Вам задействовать старый телефон, как еще один уровень для обеспечения безопасности.
+    &lt;a href=https://andreyv.ru/fotobot&gt;https://andreyv.ru/fotobot&lt;/a&gt;&lt;br&gt;
+        &lt;hr&gt;
+    </string>
+
+     <string name="fast_start">Если лень выставлять все настройки и хочется быстрей попробовать
+        Fotobot в деле нажмите кнопку пуск, выключите дисплей телефона и поставьте
+        телефон в точку контроля. Fotobot начнет делать фото каждые 5 минут
+        фронтальной камерой и камерой на задней панели телефона и складывать фото в папку: </string>
+
+    <!-- http://stackoverflow.com/questions/2667319/html-in-string-resource -->
+
+    <!-- http://daniel-codes.blogspot.ru/2011/04/html-in-textviews.html -->
+
+    <string name="update"><![CDATA[<b><u>Версия 3.2.0</u></b><br>
+        1) добавлено SMS о пропаже/восстановлении напряжения в сети;<br>
+        2) добавлена возможность загружать файлы на FTP;<br>
+        3) добавлен флажок вкл/выкл звук (sms, фото/видео камера, входящие звонки, оповещения и другие), по умолчанию звук включен.
+        ]]></string>
 
     <string name="Camera_Name">Название камеры</string>
-    <string name="Camera_Name_description">Дайте название камере, чтобы потом было проще искать письма</string>
+    <string name="Camera_Name_description">Название камеры будет добавлено к имени фото, видео и лог-файла, что позволит легче сортировать данные</string>
+    <string name="Front_Camera">Фронтальная камера</string>
+    <string name="Back_Camera">Камера на задней панели телефона</string>
+    <string name="use_fc_camera">использовать фронтальную камеру</string>
+    <string name="use_bc_camera">использовать камеру</string>
+    <string name="attach_image">Загрузить фото в сеть</string>
+    <string name="delete_image">Удалить фото после загрузки в сеть</string>
+    <string name="attach_video">Загрузить видео в сеть</string>
+    <string name="delete_video">Удалить видео после загрузки в сеть</string>
 
-    <string name="fbloglength">Длина лога в главном окне (в байтах)</string>
-    <string name="fbloglength_description">Задайте ограничитель на количество выводимых символов</string>
+    <string name="SMS_Password">SMS пароль</string>
+    <string name="SMS_Password_description">Пароль для управления через SMS (если пароль не совпадает с заданным, то SMS будет игнорироваться)</string>
+
+    <string name="Work_Dir">Папка для фотографий</string>
+    <string name="Work_Dir_description">Полный путь к папке с фотографиями.
+        Можете изменить ее. Воспользуйтесь любым менеджером файлов для получения полного пути к папке.
+    По умолчанию Fotobot предлагает складывать фото во внутреннюю память телефона.</string>
+    <string name="Work_Dir_error1">Нет директории для записи фото</string>
+    <string name="Work_Dir_error2">Пожалуйста проверьте поле \"Папка для фотографий\"</string>
+
+    <string name="Delete_Foto">Удалить фото</string>
+    <string name="Delete_Foto_description">Выберите эту опцию если хотите удалить фото с телефона
+        после загрузки фото в сеть. Держите ее включенной если записываете фото во внутреннюю память
+        телефона (Internal) иначе фотографии забьют память телефона.
+    Если же записываете фото на SD карту, то можно их не удалять.</string>
+
+    <string name="fbloglength">Длина выдачи в главном окне (в байтах)</string>
+    <string name="fbloglength_description">Для того, чтобы буфер текста не переполнился и телефон не стал тормозить задайте ограничитель на количество выводимых символов в главном окне</string>
     <string name="fbfloglength">Длина журнала в строках</string>
     <string name="fbfloglength_description">Количество строк в журнале</string>
+    <string name="log_size">Размер присоединяемого к письму журнала (Kb)</string>
 
-    <string name="wake_up">Защита от засыпания</string>
-    <string name="wake_up_description">Необходим, чтобы приложение было активно. По умолчанию, каждые 60 секунд делается обращение к камере (фото при этом не делается).</string>
+    <string name="wake_up">Защита от засыпания (сек)</string>
+    <string name="wake_up_description">Необходим, чтобы приложение было активно.</string>
 
-    <string name="foto_sent">Фото выслано на почту</string>
+    <string name="pause">"пауза "</string>
+    <string name="sec">"сек"</string>
+
+    <string name="advanced_settings">Показать расширенные настройки</string>
+    <string name="AttachedInfo">Уровень детализации информации в письме</string>
+    <string name="AttachedInfo_description">Brief - только информация о зарядке и температуре батареи.
+    Normal - Brief + GSM сигнал + текущие настройки Fotobotа;
+    Detailed - Brief + Normal + список запущенных процессов + информация по камерам</string>
+    <string name="foto_sent">Письмо выслано на почту</string>
 
     <string name="connection_channel_wifi">Метод подключения Wi-Fi</string>
     <string name="turning_on_wifi">Включаем Wi-Fi</string>
@@ -30,17 +85,29 @@
     <string name="Internet_connection">Связь с Internet появилась</string>
     <string name="Internet_connection_is_already_created">есть соединение с Internet</string>
     <string name="no_Internet_connection">нет соединения с Internet</string>
+    <string name="pause_between_connections">Пауза перед следующей попыткой подсоединения к сети </string>
 
     <string name="connection_channel_mobiledata">Метод подключения Mobile Data</string>
     <string name="turning_on_mobiledata">включаем Mobile Data</string>
+    <string name="connection_attempt">Соединяемся с Internet, попытка  </string>
+    <string name="starting_to_make_photo">начинаем делать фото</string>
+    <string name="starting_to_make_video">начинаем записывать видео</string>
+    <string name="video_recording_time">Время записи видео (сек)</string>
+    <string name="video_recorded">видео записано</string>
+    <string name="video_profile">Алгоритм автоматического определения видеопрофиля в этой версии не реализован. Поддерживаемый профиль можно найти вручную. Для этого выбираете, а затем запускаете Fotobot и смотрите ругнется он или нет:-)</string>
+
+    <string name="request_for_stopping">Запрос на остановку Fotobot\'а отправлен, дождитесь корректного завершения и соответствующей надписи на экране</string>
 
     <string name="connection_channel_wifimobiledata">Метод подключения Wi-Fi и Mobile Data</string>
+    <string name="connection_channel_wifimobiledata_wifi">Подключилиись через Wi-Fi</string>
+    <string name="connection_channel_wifimobiledata_mobiledata">Подключились через Mobile Data</string>
     <string name="connection_channel_wifimobiledata_message">По Wi-Fi нет связи, включаем Mobile Data</string>
     <string name="Internet_connection_is_closed">Соединение с Internet завершено</string>
 
     <string name="settings_tab_1">Поведение</string>
     <string name="settings_tab_2">Сеть</string>
     <string name="settings_tab_3">Фото</string>
+    <string name="settings_tab_4">Видео</string>
 
     <string name="main_help">&lt;h2&gt;&lt;font color=white&gt;&lt;br&gt;Руководство пользователя&lt;/font&gt;&lt;/h2&gt;
             Fotobot предназначен для фотографирования и отправки фото по электронной почте
@@ -50,29 +117,34 @@
             этого приложения вы найдете на &lt;a href=http://v-and-f.ru/fotobot&gt;http://v-and-f.ru/fotobot&lt;/a&gt;</string>
 
     <string name="welcome_to_fotobot">Фотобот приветствует Вас!
-                Если Вы здесь впервые, то ознакомьтесь пожалуйста с документацией (кнопка Помощь внизу экрана).</string>
+            Если Вы здесь впервые, то ознакомьтесь пожалуйста с документацией (кнопка Помощь внизу экрана).</string>
 
     <string name="start_message">Фотобот начал свою работу</string>
     <string name="stop_message">Фотобот остановлен</string>
 
     <string name="photo_has_been_taken">Фото сделано</string>
 
-    <string name="pause_between_frames">Интервал между фото(сек)</string>
-    <string name="pause_between_frames_description">Не используйте слишком малые значения этого параметра - это может
-    привести к зависанию телефона. Для моделей телефона с Android 2 значения этого параметра меньше 30сек могут
-    привести к зависанию телефона.</string>
+    <string name="storage">Место для фото</string>
+    <string name="storage_description">Выберите место для хранения фото (Internal - внутренняя память, External - SD карта)</string>
 
+    <string name="pause_between_frames">Интервал между фото(сек)</string>
+    <string name="pause_between_frames_description">Фактически это самый главный параметр,
+        частота с которой будут делаться фото и видео.
+        Не используйте слишком малые значения этого параметра - это может
+    привести к зависанию телефона.</string>
+    <string name="network">Сеть</string>
+    <string name="network_description">on - фото будут сохраняться на телефоне и будут загружаться в сеть, off - фото будут сохранены на телефоне, но отправляться на почту не будут</string>
     <string name="pause_between_processes">Интервал между процессами(сек)</string>
-    <string name="pause_between_processes_description">Необходим для того, чтобы слабый процессор телефона успел обработать данные. Подбирается экспериментальным путем, примерно > 5 секунд.</string>
+    <string name="pause_between_processes_description">Необходим для того, чтобы слабый процессор телефона успел обработать данные, рекомендуется 5-9 секунд.</string>
 
     <string name="settings_font">Размер шрифта в настройках</string>
-    <string name="log_font">Размер шрифта в логах</string>
+    <string name="log_font">Размер шрифта в выдаче</string>
 
     <string name="Internet_connection_channel">Связь с Internet</string>
     <string name="Internet_connection_channel_description">Выберите способ подключения к Internet (мобильные данные, wi-fi или оба).</string>
     <string name="connection_method">Метод подключения</string>
-    <string name="connection_method_description">Выберите режим установки связи с Internet. В начале работы - связь будет установлена сразу и не будет отключаться от сети.
-                На кажом шаге - соедение с Internet будет устонавливаться перед тем, как сделать фото, затем фотобот отключится от Internet.</string>
+    <string name="connection_method_description">Выберите режим установки связи с Internet. Method 1 - связь будет установлена сразу и телефон не будет отключаться от сети.
+                Method 2 - соедение с Internet будет устонавливаться перед тем, как сделать фото, затем, после загрузки фото или видео в сеть фотобот отключится от Internet.</string>
 
     <string name="Fotobot_email">Почтовый адрес Фотобота</string>
     <string name="Fotobot_email_description">С этого адреса Фотобот будет рассылать письма.</string>
@@ -83,7 +155,7 @@
 
     <string name="email_server">Почтовый сервер</string>
     <string name="email_server_description">Адрес почтового сервера для Фотобота, например можно использовать
-                smtp.gmail.com или smtp.mail.ru</string>
+                smtp.gmail.com для Google Mail или smtp.mail.ru для почты Mail.ru</string>
 
     <string name="email_server_port">Номер порта почтового сервера</string>
     <string name="email_server_port_description">Номер порта почтового сервера, для почты Google и Mail.ru номер порта 465</string>
@@ -94,23 +166,28 @@
     <string name="jpeg_compression">JPEG сжатие</string>
     <string name="jpeg_compression_description">Степень сжатия изображения, чем ближе к 100 тем выше качество изображения.</string>
 
-    <string name="photo_processing_method">Метод обработки фото.</string>
-    <string name="photo_processing_method_dscription">Выберите метод дляпостобработки фото:
-    Method1 - получаем от камеры RAW массив и конвертирем его в JPEG.
-    Method2 - получаем с камеры готовый JPEG.</string>
+    <string name="Autofocus">Автофокус</string>
+    <string name="Time_for_Focusing">Время для фокусировки(сек)</string>
 
-    <string name="photo_scale">Масштаб фото</string>
+    <string name="photo_processing_method">Метод обработки фото</string>
+    <string name="photo_processing_method_dscription">Выберите метод для постобработки фото:
+    Hardware - получаем от камеры RAW массив и конвертирем его в JPEG. Software - получаем с камеры готовый JPEG</string>
 
-    <string name="photo_resolution">Разрешение в пикселях</string>
+    <string name="photo_scale">Масштаб фото: 1-полноразмерное изображение, 1/2-фото будет уменьшено в 2 раза по обеим сторонам, 1/4-в 4 раза</string>
 
-    <string name="flash">Использовать вспышку</string>
+    <string name="photo_resolution">Разрешение в пикселях. Синим цветом выделены разрешения с соотношением сторон 4/3 (рекомендуется), красным - 16/9.</string>
+
+    <string name="flash">Вспышка</string>
     <string name="pause_between_photos">"Пауза"</string>
 
-    <string name="clean_log">Почистить журнал</string>
-    <string name="clean_log_note">Поставьте галочку в квадратике и нажмите ПРИМЕНИТЬ после этого журнал будет очищен</string>
+    <string name="clean_text">Почистить вывод информации в главном окне</string>
+    <string name="clean_text_note">Поставьте галочку в квадратике и нажмите ПРИМЕНИТЬ после этого весь текст, выведенный в главном окне, будет очищен</string>
 
-    <string name="clean_text">Почистить вывод информации</string>
-    <string name="clean_text_note">Поставьте галочку в квадратике и нажмите ПРИМЕНИТЬ после этого весь текст будет очищен</string>
+    <string name="clean_log">Почистить журнал логгера</string>
+    <string name="clean_log_note">Поставьте галочку в квадратике и нажмите ПРИМЕНИТЬ после этого весь журнал логгера будет сброшен</string>
+
+    <string name="clean_systemlog">Почистить журнал</string>
+    <string name="clean_systemlog_note">Поставьте галочку в квадратике и нажмите ПРИМЕНИТЬ после этого весь журнал будет очищен</string>
 
     <string name="battery_charge">Заряд батареи</string>
     <string name="battery_temperature">Температура батареи</string>
@@ -124,14 +201,15 @@
 
     <string name="network_up_delay">Время на подключение к Internet</string>
     <string name="network_up_delay_description">Время (сек) на поднятие сетевого интерфейса (Wi-Fi или Mobile Data)</string>
-    <string name="attach_log">Приаттачить журнал к письму</string>
-
+    <string name="attach_log">Загрузить журнал в сеть</string>
+    <string name="attach_log_description">Журнал может помочь в отладке нестандартных ситуаций</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_settings">Settings</string>
     <string name="title_main_activity_settings">Main Settings</string>
     <string name="title_network_activity_settings">Network Settings</string>
     <string name="title_foto_activity_settings">Photo Settings</string>
+    <string name="title_video_activity_settings">Video Settings</string>
     <string name="title_activity_status">Status</string>
     <string name="text_tab1">text_tab1</string>
     <string name="text_tab2">text_tab2</string>
@@ -139,4 +217,67 @@
     <string name="text_tab_header">text_tab_header</string>
     <string name="text_activity1">Это первое Activity</string>
     <string name="text_activity2">Это второе Activity</string>
+
+    <string name="str_profile">Профиль </string>
+    <string name="str_supported"> поддерживается </string>
+    <string name="str_camera"> камерой</string>
+
+    <string name="str_is_not_supported"> не поддерживается </string>
+    <string name="str_please_select"> , пожалуйста выберите другой видеопрофиль для этой камеры. </string>
+    <string name="str_stop_video">Проблема с остановкой записи видео. Видео начало записываться но по каким-то причинам Fotobot не смог корректно остановить запись. Чаще всего это из-за неправильного видео профиля. Попробуйте выбрать другой профиль в настройках.</string>
+
+    <string name="str_file">Файл</string>
+    <string name="str_was_deleted"> был удален</string>
+    <string name="str_problem_with_deleting">Проблема с удалением: </string>
+    <string name="sms_cmd_list">
+passwd &lt;passwd&gt;\n
+update &lt;interval sec&gt;\n
+network &lt;on/off&gt;\n
+netchannel &lt;wf/md&gt;\n
+netmethod &lt;1/2&gt;\n
+email &lt;user@mail.ru&gt;\n
+emails &lt;fotobot@gmail.com&gt;\n
+emailsp &lt;pass_W_d&gt;\n
+smtphost &lt;smtp.gmail.com&gt;\n
+smtpport &lt;465&gt;\n
+fc &lt;on/off&gt;\n
+bc &lt;on/off&gt;\n
+log &lt;on/off&gt;\n
+jpg &lt;compression&gt;\n
+flash &lt;on/off&gt;\n
+attachbci &lt;on/off&gt;\n
+attachfci &lt;on/off&gt;\n
+attachbcv &lt;on/off&gt;\n
+attachfcv &lt;on/off&gt;\n
+delbci &lt;on/off&gt;\n
+delfci &lt;on/off&gt;\n
+delbcv &lt;on/off&gt;\n
+delfcv &lt;on/off&gt;\n
+status\n
+netstatus\n
+emailstatus\n
+mediastatus\n
+    </string>
+
+    <string name="sms_voltage">Статус электросети (SMS)</string>
+    <string name="sms_voltage_note">Если пропадет/появится напряжение, то будет отправлено SMS (для того, чтобы определялся статус электросети телефон должен быть на зарядке)</string>
+
+    <string name="no_voltage">Пропало напряжение в сети</string>
+    <string name="voltage_restored">Напряжение в сети восстановлено</string>
+
+    <string name="SMS_Voltage_Alert_Number">Номер для отправки SMS</string>
+
+    <string name="SMS_Voltage_Alert_Number_note">Номер, на который будут приходить SMS о состоянии электросети (пароль не требуется).</string>
+
+    <string name="sound_mute">Выключить звук</string>
+    <string name="sound_mute_note">Все звуки будут выключены (sms, фото/видео камера, входящие звонки, оповещения и другие).</string>
+
+    <string name="upload_method">Выгрузка данных в сеть</string>
+    <string name="upload_method_note">Выберите способ загрузки фото, видео и логов в сеть</string>
+
+    <string name="ftp_server">FTP Server</string>
+    <string name="ftp_port">FTP Port</string>
+    <string name="ftp_user">FTP User</string>
+    <string name="ftp_password">FTP Password</string>
+
 </resources>
