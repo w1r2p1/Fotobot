@@ -141,12 +141,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             tvInfo.setTypeface(Typeface.MONOSPACE);
 
             tvInfo.setTextColor(Color.rgb(190, 190, 190));
+String status="";
             if (fb.success_message) {
                 fb.log = reportDate + ": " + "<font color=aqua><b>" + message + "</b></font>" + "<br><br>" + fb.log;
+                status = "<font color=green>Ok</font>";
             } else if (fb.error_message) {
                 fb.log = reportDate + ": " + "<font color=red><b>" + message + "</b></font>" + "<br><br>" + fb.log;
+                status = "<font color=red>Error</font>";
             } else {
-                fb.log = reportDate + ": " + message + "<br><br>" + fb.log;
+                fb.log = reportDate + ": " + message + "[" + status + "]" + "<br><br>" + fb.log;
             }
 
             Log.d(LOG_TAG, reportDate + ": " + message);
@@ -411,12 +414,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         WorkSpace = (RelativeLayout) findViewById(R.id.workspace);
         WorkSpace.setBackgroundColor(Color.rgb(64, 98, 125));
+//        WorkSpace.setBackgroundColor(Color.rgb(0, 0, 0));
         WorkSpace.setMinimumHeight(screenHeight);
         WorkSpace.setMinimumWidth(screenWidth);
 
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
         // LogWidget.setBackgroundColor(Color.rgb(34, 58, 95));
-        LogWidget.setBackgroundColor(Color.rgb(51, 51, 51));
+//        LogWidget.setBackgroundColor(Color.rgb(51, 51, 51));
+        LogWidget.setBackgroundColor(Color.rgb(0, 0, 0));
         LogWidget.setMinimumWidth(screenWidth);
 
 
@@ -1195,7 +1200,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
 
-        LogWidget.setBackgroundColor(Color.rgb(51, 51, 51));
+//        LogWidget.setBackgroundColor(Color.rgb(51, 51, 51));
+        LogWidget.setBackgroundColor(Color.rgb(0, 0, 0));
 
         tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
         tvInfo.setTypeface(Typeface.MONOSPACE);
