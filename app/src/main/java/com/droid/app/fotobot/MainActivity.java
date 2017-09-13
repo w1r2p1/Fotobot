@@ -87,6 +87,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     boolean preview_stopped = true;
     AudioManager mgr = null;
 
+    int mainWindowColor = Color.rgb(0,0,0);
+
     /*
     Camera.PictureCallback mPicture = new Camera.PictureCallback() {
         @Override
@@ -140,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
             tvInfo.setTypeface(Typeface.MONOSPACE);
 
-            tvInfo.setTextColor(Color.rgb(190, 190, 190));
+            tvInfo.setTextColor(Color.rgb(140, 140, 140));
 String status="";
             if (fb.success_message) {
                 fb.log = reportDate + ": " + "<font color=aqua><b>" + message + "</b></font>" + "<br><br>" + fb.log;
@@ -421,7 +423,7 @@ String status="";
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
         // LogWidget.setBackgroundColor(Color.rgb(34, 58, 95));
 //        LogWidget.setBackgroundColor(Color.rgb(51, 51, 51));
-        LogWidget.setBackgroundColor(Color.rgb(0, 0, 0));
+        LogWidget.setBackgroundColor(mainWindowColor);
         LogWidget.setMinimumWidth(screenWidth);
 
 
