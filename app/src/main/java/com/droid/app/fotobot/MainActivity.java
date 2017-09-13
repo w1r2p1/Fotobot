@@ -88,6 +88,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     AudioManager mgr = null;
 
     int mainWindowColor = Color.rgb(0,0,0);
+    int logWindowColor = Color.rgb(54,54,54);
+    int helpWindowColor = Color.rgb(26, 54, 60);
 
     /*
     Camera.PictureCallback mPicture = new Camera.PictureCallback() {
@@ -415,7 +417,8 @@ String status="";
         text = (TextView) findViewById(R.id.textView);
 
         WorkSpace = (RelativeLayout) findViewById(R.id.workspace);
-        WorkSpace.setBackgroundColor(Color.rgb(64, 98, 125));
+//        WorkSpace.setBackgroundColor(Color.rgb(64, 98, 125));
+        WorkSpace.setBackgroundColor(Color.rgb(0, 0, 128));
 //        WorkSpace.setBackgroundColor(Color.rgb(0, 0, 0));
         WorkSpace.setMinimumHeight(screenHeight);
         WorkSpace.setMinimumWidth(screenWidth);
@@ -1203,7 +1206,7 @@ String status="";
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
 
 //        LogWidget.setBackgroundColor(Color.rgb(51, 51, 51));
-        LogWidget.setBackgroundColor(Color.rgb(0, 0, 0));
+        LogWidget.setBackgroundColor(mainWindowColor);
 
         tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
         tvInfo.setTypeface(Typeface.MONOSPACE);
@@ -1253,7 +1256,7 @@ String status="";
         String contentsOfFile = strBuilder.toString();
 
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
-        LogWidget.setBackgroundColor(Color.rgb(54, 54, 54));
+        LogWidget.setBackgroundColor(logWindowColor);
 
         tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
         tvInfo.setTypeface(Typeface.MONOSPACE);
@@ -1343,7 +1346,7 @@ String status="";
         //       fb.fbpause(fb.h, 1);
 
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
-        LogWidget.setBackgroundColor(Color.rgb(54, 54, 54));
+        LogWidget.setBackgroundColor(logWindowColor);
 
         tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
         tvInfo.setTypeface(Typeface.MONOSPACE);
@@ -1389,7 +1392,7 @@ String status="";
         }
 
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
-        LogWidget.setBackgroundColor(Color.rgb(26, 54, 60));
+        LogWidget.setBackgroundColor(helpWindowColor);
 
         tvInfo.setText(Html.fromHtml("<h1>Fotobot " + fb.versionName + "</h1>" + str));
 
