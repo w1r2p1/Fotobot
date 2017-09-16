@@ -91,29 +91,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     int logWindowColor = Color.rgb(54,54,54);
     int helpWindowColor = Color.rgb(26, 54, 60);
 
-    /*
-    Camera.PictureCallback mPicture = new Camera.PictureCallback() {
-        @Override
-        public void onPictureTaken(byte[] data, Camera camera) {
-            File pictureFile = new File("/storage/sdcard0/" + "img.jpg");
-
-            if (pictureFile == null) {
-                Log.d("TEST", "Error creating media file, check storage permissions");
-                return;
-            }
-
-            try {
-                FileOutputStream fos = new FileOutputStream(pictureFile);
-                fos.write(data);
-                fos.close();
-            } catch (FileNotFoundException e) {
-                Log.d("TEST", "File not found: " + e.getMessage());
-            } catch (IOException e) {
-                Log.d("TEST", "Error accessing file: " + e.getMessage());
-            }
-        }
-    };
-*/
     /**
      * Печатает сообщения на экран телефона, нужен для того чтобы получать данные из потока в котором работает FotoBot
      */
@@ -137,15 +114,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 // string length
 
-            if (fb.log.length() > fb.loglength) {
-                fb.log = fb.log.substring(0, fb.loglength);
-            }
+            if (fb.log.length() > fb.loglength) fb.log = fb.log.substring(0, fb.loglength);
 
             tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
             tvInfo.setTypeface(Typeface.MONOSPACE);
 
             tvInfo.setTextColor(Color.rgb(140, 140, 140));
-String status="";
+
+            String status="";
+
             if (fb.success_message) {
                 fb.log = reportDate + ": " + "<font color=aqua><b>" + message + "</b></font>" + "<br><br>" + fb.log;
                 status = "<font color=green>Ok</font>";
@@ -168,19 +145,13 @@ String status="";
             if (msg.what == STATUS_STOPPED) btnStart.setText("Play");
 
             if (fb.getstatus() == 3 && fb.thread_stopped) {
-
                 findViewById(R.id.play).setEnabled(true);
                 findViewById(R.id.stop).setEnabled(false);
                 findViewById(R.id.config).setEnabled(true);
-
                 findViewById(R.id.help).setEnabled(true);
-
                 findViewById(R.id.log).setEnabled(true);
-
                 findViewById(R.id.mainw).setEnabled(true);
-
                 fb.thread_stopped = false;
-
             }
 
             return false;
