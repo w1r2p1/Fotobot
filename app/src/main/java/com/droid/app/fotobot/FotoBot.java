@@ -1751,7 +1751,11 @@ public class FotoBot extends Application {
         File logfile = new File(work_dir + "/logfile.txt");
         try {
             logfile.createNewFile();
+          //  success_message = true;
+         //   SendMessage("logfile.txt has been created" );
         } catch (IOException e) {
+        //    error_message = true;
+          //  SendMessage("logfile.txt couldn't be created");
             e.printStackTrace();
         }
 
