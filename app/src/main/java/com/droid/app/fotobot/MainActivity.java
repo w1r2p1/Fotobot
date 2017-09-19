@@ -168,19 +168,13 @@ String status="";
             if (msg.what == STATUS_STOPPED) btnStart.setText("Play");
 
             if (fb.getstatus() == 3 && fb.thread_stopped) {
-
                 findViewById(R.id.play).setEnabled(true);
                 findViewById(R.id.stop).setEnabled(false);
                 findViewById(R.id.config).setEnabled(true);
-
                 findViewById(R.id.help).setEnabled(true);
-
                 findViewById(R.id.log).setEnabled(true);
-
                 findViewById(R.id.mainw).setEnabled(true);
-
                 fb.thread_stopped = false;
-
             }
 
             return false;
@@ -1256,7 +1250,7 @@ String status="";
         String contentsOfFile = strBuilder.toString();
 
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
-        LogWidget.setBackgroundColor(logWindowColor);
+        LogWidget.setBackgroundColor(Color.rgb(0,0,128));
 
         tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
         tvInfo.setTypeface(Typeface.MONOSPACE);
@@ -1346,7 +1340,7 @@ String status="";
         //       fb.fbpause(fb.h, 1);
 
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
-        LogWidget.setBackgroundColor(logWindowColor);
+        LogWidget.setBackgroundColor(Color.rgb(0,0,128));
 
         tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
         tvInfo.setTypeface(Typeface.MONOSPACE);
