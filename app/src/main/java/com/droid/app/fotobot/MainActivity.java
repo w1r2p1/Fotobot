@@ -1062,7 +1062,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             button.performClick();
         }
 
-
 // adopted for ffc
 
     }
