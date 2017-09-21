@@ -1944,6 +1944,7 @@ git log
 git log --pretty=format:"%h %s" --graph
 
 C:\Users\Andrey\AppData\Local\Android\sdk2\platform-tools\adb.exe shell
+/home/voran/Android/Sdk/platform-tools/adb shell
 $su
 mount -o rw,remount rootfs /
 chmod 777 /mnt/sdcard
