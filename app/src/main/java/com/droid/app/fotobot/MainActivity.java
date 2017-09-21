@@ -18,7 +18,6 @@ import android.media.MediaRecorder;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
@@ -89,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     int mainWindowColor = Color.rgb(0,0,0);
     int logWindowColor = Color.rgb(0,54,54);
+    int mainFontColor = Color.rgb(210,210,210);
     int helpWindowColor = Color.rgb(26, 54, 60);
 
     /**
@@ -118,19 +118,18 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
             tvInfo.setTypeface(Typeface.MONOSPACE);
-
-            tvInfo.setTextColor(Color.rgb(140, 140, 140));
+            tvInfo.setTextColor(mainFontColor);
 
             String status="";
 
             if (fb.success_message) {
-                fb.log = reportDate + ": " + "<font color=aqua><b>" + message + "</b></font>" + "<br><br>" + fb.log;
                 status = "<font color=green>Ok</font>";
+                fb.log = reportDate + ": " + message + " [" + status + "]" + "<br><br>" + fb.log;
             } else if (fb.error_message) {
-                fb.log = reportDate + ": " + "<font color=red><b>" + message + "</b></font>" + "<br><br>" + fb.log;
                 status = "<font color=red>Error</font>";
+                fb.log = reportDate + ": " + message + " [" + status + "]" + "<br><br>" + fb.log;
             } else {
-                fb.log = reportDate + ": " + message + "[" + status + "]" + "<br><br>" + fb.log;
+                fb.log = reportDate + ": " + message + "<br><br>" + fb.log;
             }
 
             Log.d(LOG_TAG, reportDate + ": " + message);
@@ -142,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             fb.error_message = false;
 
             n = msg.what;
+
             if (msg.what == STATUS_STOPPED) btnStart.setText("Play");
 
             if (fb.getstatus() == 3 && fb.thread_stopped) {
@@ -296,9 +296,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             fb.usedMemory = String.format("%.2f", (float) usedMemory / 1000000) + "MB";
 
         } catch (Exception e) {
-
             e.printStackTrace();
-
         }
 
         return usedMemory;
@@ -388,17 +386,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         text = (TextView) findViewById(R.id.textView);
 
         WorkSpace = (RelativeLayout) findViewById(R.id.workspace);
-//        WorkSpace.setBackgroundColor(Color.rgb(64, 98, 125));
         WorkSpace.setBackgroundColor(Color.rgb(0, 0, 128));
-//        WorkSpace.setBackgroundColor(Color.rgb(0, 0, 0));
         WorkSpace.setMinimumHeight(screenHeight);
         WorkSpace.setMinimumWidth(screenWidth);
 
         LogWidget = (ScrollView) findViewById(R.id.scrollView);
         LogWidget.setBackgroundColor(mainWindowColor);
         LogWidget.setMinimumWidth(screenWidth);
-
-        Button startButton;
 
         final Button btnHelp = (Button) findViewById(R.id.help);
         btnHelp.setOnTouchListener(new View.OnTouchListener() {
@@ -1169,55 +1163,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     }
 
-    /**
-     * FotoBots log window
-     *
-     * @param v
-     */
-/*    public void log_m(View v) {
-
-        final FotoBot fb = (FotoBot) getApplicationContext();
-
-        BufferedReader fileReader = null;
-        try {
-            fileReader = new BufferedReader(new FileReader(fb.work_dir + "/fblog.txt"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        StringBuilder strBuilder = new StringBuilder();
-
-        String line;
-        try {
-            while ((line = fileReader.readLine()) != null) {
-                strBuilder.insert(0, line);
-                strBuilder.insert(0, "\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            fileReader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        String contentsOfFile = strBuilder.toString();
-
-        LogWidget = (ScrollView) findViewById(R.id.scrollView);
-        LogWidget.setBackgroundColor(Color.rgb(0,0,128));
-
-        tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
-        tvInfo.setTypeface(Typeface.MONOSPACE);
-        tvInfo.setTextColor(Color.rgb(190, 190, 190));
-
-        tvInfo.setText(contentsOfFile);
-
-        Log.d(LOG_TAG, "reverse: " + contentsOfFile);
-
-    }
-*/
     private boolean logcat2file() {
 
         final FotoBot fb = (FotoBot) getApplicationContext();
@@ -1279,44 +1224,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         return contentsOfFile;
     }
 
-/*    public void logcat(View v) {
-
-        final FotoBot fb = (FotoBot) getApplicationContext();
-
-        Toast.makeText(this, "generating report", Toast.LENGTH_LONG).show();
-
-        File logfile = new File(fb.work_dir + "/logfile.txt");
-
-        if (logcat2file()) {
-            //fb.SendMessage("Заполнили файл данными из logcat");
-        } else {
-            fb.SendMessage("Проблема с доступом к logcat");
-        }
-
-        //       fb.fbpause(fb.h, 1);
-
-        LogWidget = (ScrollView) findViewById(R.id.scrollView);
-        LogWidget.setBackgroundColor(Color.rgb(0,0,128));
-
-        tvInfo.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Log_Font_Size);
-        tvInfo.setTypeface(Typeface.MONOSPACE);
-        tvInfo.setTextColor(Color.rgb(190, 190, 190));
-
-        tvInfo.setText(file2string());
-
-        findViewById(R.id.play).setEnabled(false);
-        findViewById(R.id.stop).setEnabled(false);
-
-        try {
-            logfile.delete();
-            //  fb.SendMessage("Logfile from catlog has been deleted");
-        } catch (Exception e) {
-            fb.SendMessage("Problem with deleting of Logfile from catlog");
-        }
-
-    }
-*/
-
     /**
      * FotoBots help window
      *
@@ -1359,35 +1266,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         } catch (IOException e) {
         }
     }
-
-/*    static String getExternalStorage() {
-        String exts = Environment.getExternalStorageDirectory().getPath();
-        try {
-            FileReader fr = new FileReader(new File("/proc/mounts"));
-            BufferedReader br = new BufferedReader(fr);
-            String sdCard = null;
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (line.contains("secure") || line.contains("asec")) continue;
-                if (line.contains("fat")) {
-                    String[] pars = line.split("\\s");
-                    if (pars.length < 2) continue;
-                    if (pars[1].equals(exts)) continue;
-                    sdCard = pars[1];
-                    break;
-                }
-            }
-            fr.close();
-            br.close();
-            return sdCard;
-
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return null;
-    }
-*/
 
     public void getBcAvailableVideoProfiles() {
 
@@ -1575,7 +1453,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             str = "front_cam";
         }
 
-        fb.SendMessage(str + ": " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index);
+        fb.SendMessage(str + " " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index);
 
         buildImageName(cameraType);
 
@@ -1715,7 +1593,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             str = "front_cam";
         }
 
-        fb.SendMessage(str + ": " + getResources().getString(R.string.starting_to_make_video) + " " + fb.Image_Index);
+        fb.SendMessage(str + " " + getResources().getString(R.string.starting_to_make_video) + " " + fb.Image_Index);
 
         buildVideoName(cameraType);
 
