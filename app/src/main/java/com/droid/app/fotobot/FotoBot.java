@@ -1039,8 +1039,7 @@ public class FotoBot extends Application {
             if (fileExists) {
 
             } else {
-                error_message = true;
-                SendMessage("ERROR: image doesn't exist for attaching to email.");
+                SendMessage("ERROR: image doesn't exist for attaching to email.",MSG_FAIL);
             }
         }
 
@@ -1052,8 +1051,7 @@ public class FotoBot extends Application {
             if (fileExists) {
 
             } else {
-                error_message = true;
-                SendMessage("ERROR: video " + bc_video + " doesn't exist for attaching to email.");
+                SendMessage("ERROR: video " + bc_video + " doesn't exist for attaching to email.", MSG_FAIL);
             }
         }
 
@@ -1067,8 +1065,7 @@ public class FotoBot extends Application {
             if (front_camera && fc_fileExists && make_photo_fc) {
 
             } else {
-                error_message = true;
-                SendMessage("ERROR: front camera image doesn't exist for attaching to email.");
+                SendMessage("ERROR: front camera image doesn't exist for attaching to email.", MSG_FAIL);
             }
         }
 
@@ -1080,8 +1077,7 @@ public class FotoBot extends Application {
             if (front_camera && fc_fileExists && make_photo_fc) {
 
             } else {
-                error_message = true;
-                SendMessage("ERROR: video " + fc_video + " doesn't exist for attaching to email.");
+                SendMessage("ERROR: video " + fc_video + " doesn't exist for attaching to email.",MSG_FAIL);
             }
         }
 
@@ -1093,8 +1089,7 @@ public class FotoBot extends Application {
             if (fileExists) {
 
             } else {
-                error_message = true;
-                SendMessage("ERROR: log doesn't exist for attaching to email.");
+                SendMessage("ERROR: log doesn't exist for attaching to email.",MSG_FAIL);
             }
 
         }
@@ -1122,18 +1117,16 @@ public class FotoBot extends Application {
             fbpause(h, process_delay);
 
             if (m.send()) {
-                success_message = true;
-                SendMessage(h, getResources().getString(R.string.foto_sent));
+
+                SendMessage(getResources().getString(R.string.foto_sent), MSG_PASS);
 
                 SaveSettings();
 
             } else {
-                error_message = true;
-                SendMessage("ERROR: письмо не было отправлено");
+                SendMessage("ERROR: письмо не было отправлено", MSG_FAIL);
             }
         } catch (Exception e) {
-            error_message = true;
-            SendMessage("Could not send email");
+            SendMessage("Could not send email",MSG_FAIL);
             Log.e("MailApp", "Could not send email", e);
         }
 
@@ -1720,12 +1713,10 @@ public class FotoBot extends Application {
         Log.d("smsss", "sms_incoming_passwd: " + sms_incoming_passwd);
 
         if (sms_incoming_passwd.equals(sms_passwd)) {
-            success_message = true;
-            SendMessage("Пароль " + sms_incoming_passwd + " верный, записываем настройки");
+            SendMessage("Пароль " + sms_incoming_passwd + " верный, записываем настройки", MSG_PASS);
             SaveSettings();
         } else {
-            error_message = true;
-            SendMessage("Пароль " + sms_incoming_passwd + " неверный");
+            SendMessage("Пароль " + sms_incoming_passwd + " неверный", MSG_FAIL);
             LoadSettings();
         }
 
@@ -1860,11 +1851,6 @@ public class FotoBot extends Application {
                 SendMessage("FTP отказал в соединении");
             }
 
-
-
-
-
-
             ftpClient.login(user, pass);
             ftpClient.enterLocalPassiveMode();
 
@@ -1882,20 +1868,18 @@ public class FotoBot extends Application {
             reply = ftpClient.getReplyCode();
 
             if(!FTPReply.isPositiveCompletion(reply)) {
-                error_message = true;
-                SendMessage("Проблема с авторизацией на FTP сервере, проверьте правильно ли заполнены параметры FTP в настройках.");
+                SendMessage("Проблема с авторизацией на FTP сервере, проверьте правильно ли заполнены параметры FTP в настройках.", MSG_FAIL);
             }
 
             if (done) {
                 SendMessage(str + " загружен успешно.");
             }
         } catch (IOException ex) {
-            error_message = true;
             SendMessage("Проблема с загрузкой " + str + "\n" + "\n" +
                     ftpClient.getReplyCode() + "\n" +
                     ftpClient.getReplyString() + "\n" +
                     ex.getMessage() + "\n" +
-            "Проверьте правильно ли заполнены параметры FTP в настройках.");
+            "Проверьте правильно ли заполнены параметры FTP в настройках.", MSG_FAIL);
             ex.printStackTrace();
         } finally {
             try {
@@ -1907,8 +1891,7 @@ public class FotoBot extends Application {
                 }
             } catch (IOException ex) {
                 ex.printStackTrace();
-                error_message = true;
-                SendMessage("Problem with closing FTP connection");
+                SendMessage("Problem with closing FTP connection", MSG_FAIL);
             }
         }
     }
