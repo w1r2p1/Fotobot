@@ -53,6 +53,10 @@ import static android.os.Environment.getExternalStoragePublicDirectory;
  */
 public class FotoBot extends Application {
 
+    public static final String MSG_PASS = "pass";
+    public static final String MSG_FAIL = "fail";
+    public static final String MSG_INFO = "info";
+
     Camera camera = null;
 
     public int numberOfCameras = 1;
@@ -426,9 +430,11 @@ public class FotoBot extends Application {
     public int short_pause = 1;
     public int long_pause = 5;
 
-    public Boolean success_message = false;
-    public Boolean debug_message = false;
-    public Boolean error_message = false;
+//    public Boolean success_message = false;
+//    public Boolean debug_message = false;
+//    public Boolean error_message = false;
+
+    public String msg_status = "";
 
     public Boolean Tab_Main_Activity_activated = false;
     public Boolean Tab_Network_Activity_activated = false;
@@ -542,7 +548,7 @@ public class FotoBot extends Application {
     public boolean MakeInternetConnection() {
 
         if (isOnline()) {
-            SendMessage(getResources().getString(R.string.Internet_connection_is_already_created));
+            SendMessage(getResources().getString(R.string.Internet_connection_is_already_created), MSG_PASS);
             return true;
         }
 
@@ -557,12 +563,12 @@ public class FotoBot extends Application {
             fbpause(h, 3);
 
             if (Network_Channel.contains("Wi-Fi")) {
-                SendMessage(getResources().getString(R.string.connection_channel_wifi));
+                SendMessage(getResources().getString(R.string.connection_channel_wifi), MSG_PASS);
                 enable_WiFi();
             }
 
             if (Network_Channel.contains("Mobile Data")) {
-                SendMessage(getResources().getString(R.string.connection_channel_mobiledata));
+                SendMessage(getResources().getString(R.string.connection_channel_mobiledata), MSG_PASS);
                 enable_MobileData();
             }
 
@@ -577,14 +583,11 @@ public class FotoBot extends Application {
             }
 
             if (isOnline()) {
-                //  if (getPage()) {
-                success_message = true;
-                SendMessage(getResources().getString(R.string.Internet_connection));
+                SendMessage(getResources().getString(R.string.Internet_connection), MSG_PASS);
                 return true;
-                //    }
             }
 
-            SendMessage(getResources().getString(R.string.pause_between_connections) + " 15 sec");
+            SendMessage(getResources().getString(R.string.pause_between_connections) + " 15 sec", MSG_INFO);
 
             fbpause(h, 15);
 
@@ -612,13 +615,13 @@ public class FotoBot extends Application {
 // http://stackoverflow.com/questions/29340150/android-l-5-x-turn-on-off-mobile-data-programmatically
             md.setMobileDataEnabled(getApplicationContext(), false);
         } catch (Exception e) {
-            SendMessage("Couldn't turn off Mobile Data.");
+            SendMessage("Couldn't turn off Mobile Data.", MSG_FAIL);
         }
 
         try {
             WiFi wf = new WiFi();
             wf.setWiFiEnabled(getApplicationContext(), false);
-            SendMessage(getResources().getString(R.string.Internet_connection_is_closed));
+            SendMessage(getResources().getString(R.string.Internet_connection_is_closed), MSG_PASS);
         } catch (Exception e) {
             SendMessage("Couldn't turn off WiFi.");
         }
@@ -633,8 +636,7 @@ public class FotoBot extends Application {
     public void fbpause(final Handler h, final int delay) {
 
         if (delay > 3) {
-            debug_message = true;
-            SendMessage(".");
+            SendMessage(".", MSG_INFO);
         }
 
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
@@ -692,12 +694,8 @@ public class FotoBot extends Application {
                     if (i % 5 == 0 && sms_check_file) {
 // checking for sms file each 5 seconds during big pause between photos
                         File sms_file = null;
-                        File powerinfo_file = null;
 
                         sms_file = new File((getApplicationContext().getFilesDir().toString() + "/sms.txt"));
-                        //sms_file = new File( work_dir + "/sms.txt");
-
-
 
                         if (sms_file.isFile()) {
 
@@ -705,13 +703,11 @@ public class FotoBot extends Application {
 
                             sms_getdata();
 
-                            //SendMessage(sms.toString());
-
                             for (int ind = 0; ind < sms.size(); ind++) {
-                                SendMessage(sms.get(ind).toString());
+                                SendMessage(sms.get(ind).toString(), MSG_INFO);
                             }
 
-                            SendMessage("SMS:");
+                            SendMessage("SMS:", MSG_PASS);
 
                             sms_file.delete();
 
@@ -775,22 +771,6 @@ public class FotoBot extends Application {
 
                         }
 
-/*                       powerinfo_file = new File((getApplicationContext().getFilesDir().toString() + "/powerinfo.txt"));
-
-                        if (powerinfo_file.isFile()) {
-
-                            powerinfo = file2array(powerinfo_file.toString());
-
-                            for (int ind = 0; ind < powerinfo.size(); ind++) {
-                                SendMessage(powerinfo.get(ind).toString());
-                            }
-
-                            SendMessage("Powerinfo:");
-
-                            powerinfo_file.delete();
-
-                            powerinfo.clear();
-                        } */
                     }
 
                     if (i % wake_up_interval == 0 && frame_delay) {
@@ -927,6 +907,22 @@ public class FotoBot extends Application {
 
         Message msg = Message.obtain(); // Creates an new Message instance
         msg.obj = str; // Put the string into Message, into "obj" field.
+        msg.setTarget(h); // Set the Handler
+        msg.sendToTarget(); //Send the message
+
+    }
+
+    /**
+     * Печатаем сообщение на экран
+     *
+     * @param str текст сообщения
+     * @param status статус сообщения
+     */
+    public void SendMessage(String str, String status) {
+
+        Message msg = Message.obtain(); // Creates an new Message instance
+        msg.obj = str; // Put the string into Message, into "obj" field.
+        msg_status = status;
         msg.setTarget(h); // Set the Handler
         msg.sendToTarget(); //Send the message
 
