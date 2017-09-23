@@ -130,38 +130,31 @@ public class Mail extends javax.mail.Authenticator {
                 Log.d("LOG_TAG", "Transport passed");
                 return true;
             } catch (AuthenticationFailedException e) {
-                fb.error_message = true;
-                fb.SendMessage("ERROR: email bad user name or password");
+                fb.SendMessage("ERROR: email bad user name or password", fb.MSG_FAIL);
                 Log.d("LOG_TAG", "Mail bad user name or password");
                 return false;
             } catch (SMTPAddressFailedException e) {
-                fb.error_message = true;
-                fb.SendMessage("ERROR: SMTPAddressFailedException");
+                fb.SendMessage("ERROR: SMTPAddressFailedException", fb.MSG_FAIL);
                 Log.d("LOG_TAG", "Mail host failed ");
                 return false;
             } catch (SMTPSendFailedException e) {
-                fb.error_message = true;
-                fb.SendMessage("ERROR: SMTPSendFailedException");
+                fb.SendMessage("ERROR: SMTPSendFailedException", fb.MSG_FAIL);
                 Log.d("LOG_TAG", "SMTP timeout");
                 return false;
             } catch (SendFailedException e) {
-                fb.error_message = true;
-                fb.SendMessage("ERROR: SendFailedException");
+                fb.SendMessage("ERROR: SendFailedException", fb.MSG_FAIL);
                 Log.d("LOG_TAG", "SMTP timeout");
                 return false;
             } catch (MethodNotSupportedException e) {
-                fb.error_message = true;
-                fb.SendMessage("ERROR: MethodNotSupportedException");
+                fb.SendMessage("ERROR: MethodNotSupportedException", fb.MSG_FAIL);
                 Log.d("LOG_TAG", "SMTP timeout");
                 return false;
             } catch (NoSuchProviderException e) {
-                fb.error_message = true;
-                fb.SendMessage("ERROR: NoSuchProviderException");
+                fb.SendMessage("ERROR: NoSuchProviderException", fb.MSG_FAIL);
                 Log.d("LOG_TAG", "SMTP timeout");
                 return false;
             } catch (Exception e) {
-                fb.error_message = true;
-                fb.SendMessage("ERROR: problem with connecting to email server");
+                fb.SendMessage("ERROR: problem with connecting to email server", fb.MSG_FAIL);
                 Log.d("LOG_TAG", "Transport.send exception");
                 e.printStackTrace();
                 StringWriter sw = new StringWriter();
