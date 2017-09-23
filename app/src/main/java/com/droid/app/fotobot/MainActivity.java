@@ -121,11 +121,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             tvInfo.setTextColor(mainFontColor);
 
             if (fb.msg_status.equals(fb.MSG_PASS)) {
-                fb.log = reportDate + ": " + message + " [" + "<font color=green>Ok</font>" + "]" + "<br><br>" + fb.log;
+                fb.log = reportDate + ": " + message + " [" + "<font color=green>Ok</font>" + "]" + "<br>" + fb.log;
             } else if (fb.msg_status.equals(fb.MSG_FAIL)) {
-                fb.log = reportDate + ": " + message + " [" + "<font color=red>Error</font>" + "]" + "<br><br>" + fb.log;
+                fb.log = reportDate + ": " + message + " [" + "<font color=red>Error</font>" + "]" + "<br>" + fb.log;
             } else {
-                fb.log = reportDate + ": " + message + "<br><br>" + fb.log;
+                fb.log = "<font color=grey>" + reportDate + ": " + message + "</font><br>" + fb.log;
             }
 
             Log.d(LOG_TAG, reportDate + ": " + message);
