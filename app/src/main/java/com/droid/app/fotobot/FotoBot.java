@@ -1854,6 +1854,14 @@ public class FotoBot extends Application {
             ftpClient.login(user, pass);
             ftpClient.enterLocalPassiveMode();
 
+            // chdir
+            if (ftpClient.changeWorkingDirectory("/upload")) {
+                System.out.println("Successfully changed working directory.");
+            } else {
+                System.out.println("Failed to change working directory.");
+            }
+
+
             ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 
             // APPROACH #1: uploads first file using an InputStream
