@@ -1861,7 +1861,6 @@ public class FotoBot extends Application {
                 System.out.println("Failed to change working directory.");
             }
 
-
             ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 
             // APPROACH #1: uploads first file using an InputStream
