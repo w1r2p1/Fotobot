@@ -332,7 +332,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             Log.d(LOG_TAG, "Autofocus is not available");
         }
 
-        fb.work_dir_init();
+//        fb.work_dir_init();
 
         if (fb.show_start_tip) {
             String str = getResources().getString(R.string.Fotobot);
@@ -726,6 +726,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 }
 
                             }
+
+                            fb.print_status();
 
 // method1 соединяемся с сетью
                             if (fb.network && !(fb.Method1_activated)) {

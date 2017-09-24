@@ -1903,6 +1903,29 @@ public class FotoBot extends Application {
         }
     }
 
+    public void print_status(){
+        if (network) {
+            SendMessage("Send photos to Internet: Yes", MSG_INFO);
+
+            if (Network_Connection_Method.equals("Method1")) {
+                SendMessage("Connect once at the beginning", MSG_INFO);
+            } else {
+                SendMessage("Disconnect after photo uploading", MSG_INFO);
+
+            }
+
+        } else {
+            SendMessage("Send photos to Internet: No", MSG_INFO);
+        }
+
+
+        if (isOnline()) {
+            SendMessage("Connected to Internet now: Yes", MSG_INFO);
+        } else {
+            SendMessage("Connected to Internet now: No", MSG_INFO);
+        }
+    }
+
 }
 
 /*
