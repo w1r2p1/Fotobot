@@ -1855,7 +1855,7 @@ public class FotoBot extends Application {
             ftpClient.enterLocalPassiveMode();
 
             // chdir
-            if (ftpClient.changeWorkingDirectory("/upload")) {
+            if (ftpClient.changeWorkingDirectory("/upload/img")) {
                 System.out.println("Successfully changed working directory.");
             } else {
                 System.out.println("Failed to change working directory.");

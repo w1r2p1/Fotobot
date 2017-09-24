@@ -807,10 +807,11 @@ public class Tab_Network_Activity extends Activity {
 
         FullFrame.addView(linLayout_Net_Stat);
 
-        if (Build.VERSION.SDK_INT <= 21) {
+        //if (Build.VERSION.SDK_INT <= 21) {
             FullFrame.addView(linLayout_Channels);
             FullFrame.addView(linLayout_Connection_Method);
-        }
+        //}
+
         FullFrame.addView(linLayout_Upload_Method);
         FullFrame.addView(linLayout_Fotobot_Email);
         FullFrame.addView(linLayout_Fotobot_Password);

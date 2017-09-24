@@ -730,9 +730,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 // method1 соединяемся с сетью
                             if (fb.network && !(fb.Method1_activated)) {
                                 if (fb.Network_Connection_Method.contains("Method 1")) {
-                                    if (android.os.Build.VERSION.SDK_INT <= 21) {
+                                  //  if (android.os.Build.VERSION.SDK_INT <= 21) {
                                         fb.MakeInternetConnection();
-                                    }
+                                 //   }
                                     fb.Method1_activated = true;
                                 }
                             }
