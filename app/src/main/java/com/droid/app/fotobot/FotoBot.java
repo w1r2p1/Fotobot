@@ -1865,8 +1865,10 @@ public class FotoBot extends Application {
             // chdir
             if (ftp_folder.length() > 1 ) {
                 if (ftpClient.changeWorkingDirectory(ftp_folder)) {
+                    SendMessage("FTP переход в " + ftp_folder, MSG_PASS);
                     System.out.println("Successfully changed working directory.");
                 } else {
+                    SendMessage("FTP переход в " + ftp_folder, MSG_FAIL);
                     System.out.println("Failed to change working directory.");
                 }
             }
@@ -1879,7 +1881,7 @@ public class FotoBot extends Application {
             String firstRemoteFile = firstLocalFile.getName();
             InputStream inputStream = new FileInputStream(firstLocalFile);
 
-            SendMessage("Начинаем загрузку " + str);
+            SendMessage("Начинаем загрузку " + str.substring(str.lastIndexOf("/")), MSG_PASS);
             boolean done = ftpClient.storeFile(firstRemoteFile, inputStream);
             inputStream.close();
             reply = ftpClient.getReplyCode();
@@ -1889,10 +1891,10 @@ public class FotoBot extends Application {
             }
 
             if (done) {
-                SendMessage(str + " загружен успешно.");
+                SendMessage(str.substring(str.lastIndexOf("/")) + " загружен успешно.", MSG_PASS);
             }
         } catch (IOException ex) {
-            SendMessage("Проблема с загрузкой " + str + "\n" + "\n" +
+            SendMessage("Проблема с загрузкой " + str.substring(str.lastIndexOf("/")) + "\n" + "\n" +
                     ftpClient.getReplyCode() + "\n" +
                     ftpClient.getReplyString() + "\n" +
                     ex.getMessage() + "\n" +
