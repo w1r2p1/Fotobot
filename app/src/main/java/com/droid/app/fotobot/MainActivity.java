@@ -707,7 +707,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             }
                         }
 
-                        fb.print_status();
+                  //      fb.print_status();
 
                         int i = 0; //Image counter
 
