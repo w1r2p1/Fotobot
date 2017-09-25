@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             if (fb.msg_status.equals(fb.MSG_PASS)) {
                 fb.log = reportDate + ": " + message + " [" + "<font color=green>Ok</font>" + "]" + "<br>" + fb.log;
             } else if (fb.msg_status.equals(fb.MSG_FAIL)) {
-                fb.log = reportDate + ": " + message + " [" + "<font color=red>Error</font>" + "]" + "<br>" + fb.log;
+                fb.log = "<font color=red>" + reportDate + ": " + message + "</font>" + " [" + "<font color=red>Error</font>" + "]" + "<br>" + fb.log;
             } else {
                 fb.log = "<font color=grey>" + reportDate + ": " + message + "</font><br>" + fb.log;
             }
@@ -131,10 +131,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             Log.d(LOG_TAG, reportDate + ": " + message);
 
             tvInfo.setText(Html.fromHtml(fb.log));
-
-//            fb.success_message = false;
-//            fb.debug_message = false;
-//            fb.error_message = false;
 
             n = msg.what;
 
@@ -695,6 +691,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                         wakeLock.acquire();
 
                         fb.log = "";
+
                         fb.SendMessage(getResources().getString(R.string.start_message), fb.MSG_PASS);
 
                         if (fb.sound_mute) {
@@ -709,6 +706,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 mgr.setRingerMode(AudioManager.RINGER_MODE_SILENT);
                             }
                         }
+
+                        fb.print_status();
 
                         int i = 0; //Image counter
 
@@ -726,8 +725,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 }
 
                             }
-
-                            fb.print_status();
 
 // method1 соединяемся с сетью
                             if (fb.network && !(fb.Method1_activated)) {
@@ -752,9 +749,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 // method1 рарзрываем соединение с сетью
                             if (!(fb.network) && fb.Method1_activated) {
                                 if (fb.Network_Connection_Method.contains("Method 1")) {
-                                    if (android.os.Build.VERSION.SDK_INT <= 21) {
+                              //      if (android.os.Build.VERSION.SDK_INT <= 21) {
                                         fb.CloseInternetConnection();
-                                    }
+                              //      }
                                     fb.Method1_activated = false;
                                 }
                             }
@@ -783,9 +780,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 // соединяемся с сетью если Android < 5
                             if (fb.network) {
-                                if ((fb.Network_Connection_Method.contains("Method 2")) && (Build.VERSION.SDK_INT <= 21)) {
+                            //    if ((fb.Network_Connection_Method.contains("Method 2")) && (Build.VERSION.SDK_INT <= 21)) {
                                     fb.MakeInternetConnection();
-                                }
+                            //    }
                             }
 
 // не было ли команды на остановку Fotobot'а
@@ -908,14 +905,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 fb.email_sending_time = durationInMilliseconds / 1000;
 
 // если используется метод 2, то отсоединяемся от сети в конце шага
-                                if ((fb.Network_Connection_Method.contains("Method 2") && (Build.VERSION.SDK_INT <= 21))) {
+                               // if ((fb.Network_Connection_Method.contains("Method 2") && (Build.VERSION.SDK_INT <= 21))) {
+                               if (fb.Network_Connection_Method.contains("Method 2")) {
                                     fb.CloseInternetConnection();
                                 }
                             }
 
-                            fb.SendMessage("------------------");
+                            fb.SendMessage("------------------", fb.MSG_INFO);
                             fb.SendMessage(getResources().getString(R.string.pause_between_photos) + " " + fb.Photo_Frequency + "sec", fb.MSG_INFO);
-                            fb.SendMessage("------------------");
+                            fb.SendMessage("------------------", fb.MSG_INFO);
                             fb.SendMessage("");
 
                             if (mCamera != null) {
@@ -938,10 +936,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             cleanLogFile();
 
 // удаляем фото с телефона
-                          //  if (fb.delete_foto) {
+                            if (fb.delete_foto) {
                                 deletePhoto();
                                 deleteVideo();
-                          //  }
+                            }
 
                             fb.fbpause(h, fb.Photo_Frequency);
                             fb.sms_check_file = false;
@@ -1589,7 +1587,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         if (mCamera == null) {
             try {
                 mCamera = Camera.open(cameraId);
-               // fb.SendMessage(cameraType + " камера успешно открыта");
             } catch (Exception e) {
                 fb.SendMessage("Проблема с доступом к " + cameraType + " камере\n\n\n" + e.toString(), fb.MSG_FAIL);
             }
@@ -1606,8 +1603,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             public void onInfo(MediaRecorder mediaRecorder, int what, int extra) {
                 if (what == MediaRecorder.MEDIA_RECORDER_INFO_MAX_DURATION_REACHED) {
-                   // fb.SendMessage("MEDIA_RECORDER_INFO_MAX_DURATION_REACHED");
-                   //     mediaRecorder.stop();
+
                 }
             }
         });

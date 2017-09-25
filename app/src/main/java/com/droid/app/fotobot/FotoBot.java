@@ -509,14 +509,14 @@ public class FotoBot extends Application {
         try {
 
             WiFi wf = new WiFi();
-            SendMessage(h, getResources().getString(R.string.turning_on_wifi));
+            SendMessage(getResources().getString(R.string.turning_on_wifi), MSG_INFO);
             wf.setWiFiEnabled(getApplicationContext(), true);
             fbpause(h, network_up_delay);
 
             return true;
 
         } catch (Exception e) {
-
+            SendMessage("Couldn't turn on Wi-Fi", MSG_FAIL);
             e.printStackTrace();
 
         }
@@ -1831,6 +1831,14 @@ public class FotoBot extends Application {
         String user;
         String pass;
 
+        String ftp_folder="";
+
+        try {
+            ftp_folder = str.substring(str.indexOf("/", 1));
+        } catch (Exception e) {
+
+        }
+
         server = FTP_server;
         port = Integer.parseInt(FTP_port);
         user = FTP_username;
@@ -1855,10 +1863,12 @@ public class FotoBot extends Application {
             ftpClient.enterLocalPassiveMode();
 
             // chdir
-            if (ftpClient.changeWorkingDirectory("/upload/img")) {
-                System.out.println("Successfully changed working directory.");
-            } else {
-                System.out.println("Failed to change working directory.");
+            if (ftp_folder.length() > 1 ) {
+                if (ftpClient.changeWorkingDirectory(ftp_folder)) {
+                    System.out.println("Successfully changed working directory.");
+                } else {
+                    System.out.println("Failed to change working directory.");
+                }
             }
 
             ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
@@ -1904,6 +1914,7 @@ public class FotoBot extends Application {
     }
 
     public void print_status(){
+
         if (network) {
             SendMessage("Send photos to Internet: Yes", MSG_INFO);
 
@@ -1918,12 +1929,7 @@ public class FotoBot extends Application {
             SendMessage("Send photos to Internet: No", MSG_INFO);
         }
 
-
-        if (isOnline()) {
-            SendMessage("Connected to Internet now: Yes", MSG_INFO);
-        } else {
-            SendMessage("Connected to Internet now: No", MSG_INFO);
-        }
+        SendMessage("Режим работы", MSG_INFO);
     }
 
 }
