@@ -263,7 +263,7 @@ mediastatus\n
     <string name="sms_voltage_note">Если пропадет/появится напряжение, то будет отправлено SMS (для того, чтобы определялся статус электросети телефон должен быть на зарядке)</string>
 
     <string name="no_voltage">Нет напряжения в сети</string>
-    <string name="voltage_restored">Напряжение восстановлено</string>
+    <string name="voltage_restored">Напряжение 220V</string>
 
     <string name="SMS_Voltage_Alert_Number">Номер для отправки SMS</string>
 

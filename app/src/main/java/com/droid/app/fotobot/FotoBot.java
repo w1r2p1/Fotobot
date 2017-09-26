@@ -1831,18 +1831,27 @@ public class FotoBot extends Application {
         String user;
         String pass;
 
-        String ftp_folder="";
+        String FTP_folder="";
 
-        try {
-            ftp_folder = str.substring(str.indexOf("/", 1));
-        } catch (Exception e) {
+        if (FTP_server.contains("/")) {
 
+            FTP_folder = FTP_server.substring(FTP_server.indexOf("/", 1));
+            FTP_folder = FTP_folder.substring(1);
+
+            server = FTP_server.substring(0, FTP_server.indexOf("/", 1));
         }
+            else {
 
-        server = FTP_server;
+            server = FTP_server;
+            }
+
         port = Integer.parseInt(FTP_port);
         user = FTP_username;
         pass = FTP_password;
+
+        SendMessage("FTP user: " + user, MSG_PASS);
+        SendMessage("FTP folder: " + FTP_folder, MSG_PASS);
+        SendMessage("FTP server: " + server, MSG_PASS);
 
         FTPClient ftpClient = new FTPClient();
         try {
@@ -1863,12 +1872,12 @@ public class FotoBot extends Application {
             ftpClient.enterLocalPassiveMode();
 
             // chdir
-            if (ftp_folder.length() > 1 ) {
-                if (ftpClient.changeWorkingDirectory(ftp_folder)) {
-                    SendMessage("FTP переход в " + ftp_folder, MSG_PASS);
+            if (FTP_folder.length() > 1 ) {
+                if (ftpClient.changeWorkingDirectory(FTP_folder)) {
+                    SendMessage("FTP переход в " + FTP_folder, MSG_PASS);
                     System.out.println("Successfully changed working directory.");
                 } else {
-                    SendMessage("FTP переход в " + ftp_folder, MSG_FAIL);
+                    SendMessage("FTP переход в " + FTP_folder, MSG_FAIL);
                     System.out.println("Failed to change working directory.");
                 }
             }
@@ -1881,7 +1890,7 @@ public class FotoBot extends Application {
             String firstRemoteFile = firstLocalFile.getName();
             InputStream inputStream = new FileInputStream(firstLocalFile);
 
-            SendMessage("Начинаем загрузку " + str.substring(str.lastIndexOf("/")), MSG_PASS);
+            SendMessage("Начинаем загрузку", MSG_PASS);
             boolean done = ftpClient.storeFile(firstRemoteFile, inputStream);
             inputStream.close();
             reply = ftpClient.getReplyCode();
@@ -1891,13 +1900,13 @@ public class FotoBot extends Application {
             }
 
             if (done) {
-                SendMessage(str.substring(str.lastIndexOf("/")) + " загружен успешно.", MSG_PASS);
+                SendMessage("Файл загружен", MSG_PASS);
             }
         } catch (IOException ex) {
-            SendMessage("Проблема с загрузкой " + str.substring(str.lastIndexOf("/")) + "\n" + "\n" +
+            SendMessage("Проблема с загрузкой файла" + "\n" + "\n" +
                     ftpClient.getReplyCode() + "\n" +
                     ftpClient.getReplyString() + "\n" +
-                    ex.getMessage() + "\n" +
+                    ex.getMessage() + "\n" + "\n" +
             "Проверьте правильно ли заполнены параметры FTP в настройках.", MSG_FAIL);
             ex.printStackTrace();
         } finally {
@@ -1905,12 +1914,12 @@ public class FotoBot extends Application {
                 if (ftpClient.isConnected()) {
                     ftpClient.logout();
                     ftpClient.disconnect();
-                    SendMessage("FTP сессия закрыта");
+                    SendMessage("FTP сессия закрыта", MSG_PASS);
                     fbpause(h,5);
                 }
             } catch (IOException ex) {
                 ex.printStackTrace();
-                SendMessage("Problem with closing FTP connection", MSG_FAIL);
+                SendMessage("FTP сессия закрыта", MSG_FAIL);
             }
         }
     }

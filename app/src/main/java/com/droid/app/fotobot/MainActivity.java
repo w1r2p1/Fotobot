@@ -86,9 +86,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     boolean preview_stopped = true;
     AudioManager mgr = null;
 
-    int mainWindowColor = Color.rgb(0,0,0);
-    int logWindowColor = Color.rgb(0,54,54);
-    int mainFontColor = Color.rgb(210,210,210);
+    int mainWindowColor = Color.rgb(0, 0, 0);
+    int logWindowColor = Color.rgb(0, 54, 54);
+    int mainFontColor = Color.rgb(210, 210, 210);
     int helpWindowColor = Color.rgb(26, 54, 60);
 
     /**
@@ -707,7 +707,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             }
                         }
 
-                  //      fb.print_status();
+                        //      fb.print_status();
 
                         int i = 0; //Image counter
 
@@ -728,10 +728,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 // method1 соединяемся с сетью
                             if (fb.network && !(fb.Method1_activated)) {
-                                if (fb.Network_Connection_Method.contains("Method 1")) {
-                                  //  if (android.os.Build.VERSION.SDK_INT <= 21) {
-                                        fb.MakeInternetConnection();
-                                 //   }
+                                if (fb.Network_Connection_Method.equals("Method 1")) {
+                                    //  if (android.os.Build.VERSION.SDK_INT <= 21) {
+                                    fb.MakeInternetConnection();
+                                    //   }
                                     fb.Method1_activated = true;
                                 }
                             }
@@ -748,10 +748,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 // method1 рарзрываем соединение с сетью
                             if (!(fb.network) && fb.Method1_activated) {
-                                if (fb.Network_Connection_Method.contains("Method 1")) {
-                              //      if (android.os.Build.VERSION.SDK_INT <= 21) {
-                                        fb.CloseInternetConnection();
-                              //      }
+                                if (fb.Network_Connection_Method.equals("Method 1")) {
+                                    //      if (android.os.Build.VERSION.SDK_INT <= 21) {
+                                    fb.CloseInternetConnection();
+                                    //      }
                                     fb.Method1_activated = false;
                                 }
                             }
@@ -779,11 +779,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             fb.batteryLevel();
 
 // соединяемся с сетью если Android < 5
-                            if (fb.network) {
-                            //    if ((fb.Network_Connection_Method.contains("Method 2")) && (Build.VERSION.SDK_INT <= 21)) {
+                            if (fb.network && fb.Network_Connection_Method.equals("Method 2")) {
                                     fb.MakeInternetConnection();
-                            //    }
-                            }
+                                }
 
 // не было ли команды на остановку Fotobot'а
                             if (fb.getstatus() == 3) {
@@ -905,8 +903,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 fb.email_sending_time = durationInMilliseconds / 1000;
 
 // если используется метод 2, то отсоединяемся от сети в конце шага
-                               // if ((fb.Network_Connection_Method.contains("Method 2") && (Build.VERSION.SDK_INT <= 21))) {
-                               if (fb.Network_Connection_Method.contains("Method 2")) {
+                                // if ((fb.Network_Connection_Method.contains("Method 2") && (Build.VERSION.SDK_INT <= 21))) {
+                                if (fb.Network_Connection_Method.equals("Method 2")) {
                                     fb.CloseInternetConnection();
                                 }
                             }
@@ -914,7 +912,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             fb.SendMessage("------------------", fb.MSG_INFO);
                             fb.SendMessage(getResources().getString(R.string.pause_between_photos) + " " + fb.Photo_Frequency + "sec", fb.MSG_INFO);
                             fb.SendMessage("------------------", fb.MSG_INFO);
-                            fb.SendMessage("");
+                            fb.SendMessage("", fb.MSG_INFO);
 
                             if (mCamera != null) {
 
@@ -1044,8 +1042,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         mUnexpectedTerminationHelper.init();
 
         if (fb.automatic_mode && !fb.Tab_Foto_Activity_activated && !fb.Tab_Main_Activity_activated && !fb.Tab_Network_Activity_activated && !fb.Tab_Video_Activity_activated) {
-            Button button = (Button)findViewById(R.id.play);
-            fb.fbpause(h,1);
+            Button button = (Button) findViewById(R.id.play);
+            fb.fbpause(h, 1);
             button.performClick();
         }
 
@@ -1273,54 +1271,54 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             } catch (Exception e) {
             }
 
-        try {
-            profile = CamcorderProfile.get(CamcorderProfile.QUALITY_2160P);
-            fb.bc_video_profile.add("QUALITY_2160P");
-        } catch (Exception e) {
-        }
+            try {
+                profile = CamcorderProfile.get(CamcorderProfile.QUALITY_2160P);
+                fb.bc_video_profile.add("QUALITY_2160P");
+            } catch (Exception e) {
+            }
 
-        try {
-            profile = CamcorderProfile.get(CamcorderProfile.QUALITY_1080P);
-            fb.bc_video_profile.add("QUALITY_1080P");
-        } catch (Exception e) {
-        }
+            try {
+                profile = CamcorderProfile.get(CamcorderProfile.QUALITY_1080P);
+                fb.bc_video_profile.add("QUALITY_1080P");
+            } catch (Exception e) {
+            }
 
-        try {
-            profile = CamcorderProfile.get(CamcorderProfile.QUALITY_720P);
-            fb.bc_video_profile.add("QUALITY_720P");
-        } catch (Exception e) {
-        }
+            try {
+                profile = CamcorderProfile.get(CamcorderProfile.QUALITY_720P);
+                fb.bc_video_profile.add("QUALITY_720P");
+            } catch (Exception e) {
+            }
 
-        try {
-            profile = CamcorderProfile.get(CamcorderProfile.QUALITY_480P);
-            fb.bc_video_profile.add("QUALITY_480P");
-        } catch (Exception e) {
-        }
+            try {
+                profile = CamcorderProfile.get(CamcorderProfile.QUALITY_480P);
+                fb.bc_video_profile.add("QUALITY_480P");
+            } catch (Exception e) {
+            }
 
-        try {
-            profile = CamcorderProfile.get(CamcorderProfile.QUALITY_CIF);
-            fb.bc_video_profile.add("QUALITY_CIF");
-        } catch (Exception e) {
-        }
+            try {
+                profile = CamcorderProfile.get(CamcorderProfile.QUALITY_CIF);
+                fb.bc_video_profile.add("QUALITY_CIF");
+            } catch (Exception e) {
+            }
 
-        try {
-            profile = CamcorderProfile.get(CamcorderProfile.QUALITY_QVGA);
-            fb.bc_video_profile.add("QUALITY_QVGA");
-        } catch (Exception e) {
-        }
+            try {
+                profile = CamcorderProfile.get(CamcorderProfile.QUALITY_QVGA);
+                fb.bc_video_profile.add("QUALITY_QVGA");
+            } catch (Exception e) {
+            }
 
-        try {
-            profile = CamcorderProfile.get(CamcorderProfile.QUALITY_QCIF);
-            fb.bc_video_profile.add("QUALITY_QCIF");
-        } catch (Exception e) {
-        }
+            try {
+                profile = CamcorderProfile.get(CamcorderProfile.QUALITY_QCIF);
+                fb.bc_video_profile.add("QUALITY_QCIF");
+            } catch (Exception e) {
+            }
 
             try {
                 profile = CamcorderProfile.get(CamcorderProfile.QUALITY_LOW);
                 fb.bc_video_profile.add("QUALITY_LOW");
             } catch (Exception e) {
             }
-        fb.bc_video_profile_initialized = true;
+            fb.bc_video_profile_initialized = true;
         }
     }
 
@@ -1338,54 +1336,54 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             } catch (Exception e) {
             }
 
-        try {
-            profile = CamcorderProfile.get(CamcorderProfile.QUALITY_2160P);
-            fb.fc_video_profile.add("QUALITY_2160P");
-        } catch (Exception e) {
-        }
+            try {
+                profile = CamcorderProfile.get(CamcorderProfile.QUALITY_2160P);
+                fb.fc_video_profile.add("QUALITY_2160P");
+            } catch (Exception e) {
+            }
 
-        try {
-            profile = CamcorderProfile.get(CamcorderProfile.QUALITY_1080P);
-            fb.fc_video_profile.add("QUALITY_1080P");
-        } catch (Exception e) {
-        }
+            try {
+                profile = CamcorderProfile.get(CamcorderProfile.QUALITY_1080P);
+                fb.fc_video_profile.add("QUALITY_1080P");
+            } catch (Exception e) {
+            }
 
-        try {
-            profile = CamcorderProfile.get(CamcorderProfile.QUALITY_720P);
-            fb.fc_video_profile.add("QUALITY_720P");
-        } catch (Exception e) {
-        }
+            try {
+                profile = CamcorderProfile.get(CamcorderProfile.QUALITY_720P);
+                fb.fc_video_profile.add("QUALITY_720P");
+            } catch (Exception e) {
+            }
 
-        try {
-            profile = CamcorderProfile.get(CamcorderProfile.QUALITY_480P);
-            fb.fc_video_profile.add("QUALITY_480P");
-        } catch (Exception e) {
-        }
+            try {
+                profile = CamcorderProfile.get(CamcorderProfile.QUALITY_480P);
+                fb.fc_video_profile.add("QUALITY_480P");
+            } catch (Exception e) {
+            }
 
-        try {
-            profile = CamcorderProfile.get(CamcorderProfile.QUALITY_CIF);
-            fb.fc_video_profile.add("QUALITY_CIF");
-        } catch (Exception e) {
-        }
+            try {
+                profile = CamcorderProfile.get(CamcorderProfile.QUALITY_CIF);
+                fb.fc_video_profile.add("QUALITY_CIF");
+            } catch (Exception e) {
+            }
 
-        try {
-            profile = CamcorderProfile.get(CamcorderProfile.QUALITY_QVGA);
-            fb.fc_video_profile.add("QUALITY_QVGA");
-        } catch (Exception e) {
-        }
+            try {
+                profile = CamcorderProfile.get(CamcorderProfile.QUALITY_QVGA);
+                fb.fc_video_profile.add("QUALITY_QVGA");
+            } catch (Exception e) {
+            }
 
-        try {
-            profile = CamcorderProfile.get(CamcorderProfile.QUALITY_QCIF);
-            fb.fc_video_profile.add("QUALITY_QCIF");
-        } catch (Exception e) {
-        }
+            try {
+                profile = CamcorderProfile.get(CamcorderProfile.QUALITY_QCIF);
+                fb.fc_video_profile.add("QUALITY_QCIF");
+            } catch (Exception e) {
+            }
 
             try {
                 profile = CamcorderProfile.get(CamcorderProfile.QUALITY_LOW);
                 fb.fc_video_profile.add("QUALITY_LOW");
             } catch (Exception e) {
             }
-        fb.fc_video_profile_initialized = true;
+            fb.fc_video_profile_initialized = true;
         }
     }
 
@@ -1434,7 +1432,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         int cameraId = -1;
 
-        String str="";
+        String str = "";
 
         if (cameraType.equals("Bc")) {
             cameraId = fb.bcId;
@@ -1466,7 +1464,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             try {
                 mCamera = Camera.open(cameraId);
             } catch (Exception e) {
-                fb.SendMessage("Проблема с доступом к " + cameraType + " камере\n\n\n" + e.toString(),fb.MSG_FAIL);
+                fb.SendMessage("Проблема с доступом к " + cameraType + " камере\n\n\n" + e.toString(), fb.MSG_FAIL);
             }
         }
 
@@ -1484,7 +1482,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         try {
             mCamera.setParameters(parameters);
         } catch (Exception e) {
-            fb.SendMessage("Проблема с установкой параметров для " + cameraType + " камеры\n\n\n" + e.toString(),fb.MSG_FAIL);
+            fb.SendMessage("Проблема с установкой параметров для " + cameraType + " камеры\n\n\n" + e.toString(), fb.MSG_FAIL);
         }
 
 // Step 3
@@ -1508,7 +1506,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                 preview_stopped = false;
             } catch (Exception e) {
-                fb.SendMessage("Проблема запуска preview для " + cameraType + " камеры\n\n\n" + e.toString(),fb.MSG_FAIL);
+                fb.SendMessage("Проблема запуска preview для " + cameraType + " камеры\n\n\n" + e.toString(), fb.MSG_FAIL);
 
             }
         }
@@ -1611,82 +1609,82 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
         mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
 
-       if (cameraType.equals("Bc")) {
-          // try {
-               if (fb.bc_current_video_profile.contains("QUALITY_HIGH")) {
-                   mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
-               }
-               if (fb.bc_current_video_profile.contains("QUALITY_2160P")) {
-                   mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_2160P));
-               }
-               if (fb.bc_current_video_profile.contains("QUALITY_1080P")) {
-                   mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_1080P));
-               }
-               if (fb.bc_current_video_profile.contains("QUALITY_720P")) {
-                   mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_720P));
-               }
-               if (fb.bc_current_video_profile.contains("QUALITY_480P")) {
-                   mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_480P));
-               }
-               if (fb.bc_current_video_profile.contains("QUALITY_CIF")) {
-                   mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_CIF));
-               }
-               if (fb.bc_current_video_profile.contains("QUALITY_QCIF")) {
-                   mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_QCIF));
-               }
-               if (fb.bc_current_video_profile.contains("QUALITY_QVGA")) {
-                   mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_QVGA));
-               }
-               if (fb.bc_current_video_profile.contains("QUALITY_LOW")) {
-                   mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_LOW));
-               }
-         //  } catch (Exception e){
-         //      fb.error_message = true;
-        //       fb.SendMessage(str + " не поддерживает профиль " + fb.fc_current_video_profile + ", пожалуйста выберите другой видеопрофиль для этой камеры.");
-        ///   }
+        if (cameraType.equals("Bc")) {
+            // try {
+            if (fb.bc_current_video_profile.contains("QUALITY_HIGH")) {
+                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
+            }
+            if (fb.bc_current_video_profile.contains("QUALITY_2160P")) {
+                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_2160P));
+            }
+            if (fb.bc_current_video_profile.contains("QUALITY_1080P")) {
+                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_1080P));
+            }
+            if (fb.bc_current_video_profile.contains("QUALITY_720P")) {
+                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_720P));
+            }
+            if (fb.bc_current_video_profile.contains("QUALITY_480P")) {
+                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_480P));
+            }
+            if (fb.bc_current_video_profile.contains("QUALITY_CIF")) {
+                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_CIF));
+            }
+            if (fb.bc_current_video_profile.contains("QUALITY_QCIF")) {
+                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_QCIF));
+            }
+            if (fb.bc_current_video_profile.contains("QUALITY_QVGA")) {
+                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_QVGA));
+            }
+            if (fb.bc_current_video_profile.contains("QUALITY_LOW")) {
+                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_LOW));
+            }
+            //  } catch (Exception e){
+            //      fb.error_message = true;
+            //       fb.SendMessage(str + " не поддерживает профиль " + fb.fc_current_video_profile + ", пожалуйста выберите другой видеопрофиль для этой камеры.");
+            ///   }
 
 
         } else {
-         //  try {
-               if (fb.fc_current_video_profile.contains("QUALITY_HIGH")) {
-                   mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
-               }
-               if (fb.fc_current_video_profile.contains("QUALITY_2160P")) {
-                   mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_2160P));
-               }
-               if (fb.fc_current_video_profile.contains("QUALITY_1080P")) {
-                   mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_1080P));
-               }
-               if (fb.fc_current_video_profile.contains("QUALITY_720P")) {
-                   mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_720P));
-               }
-               if (fb.fc_current_video_profile.contains("QUALITY_480P")) {
-                   mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_480P));
-               }
-               if (fb.fc_current_video_profile.contains("QUALITY_CIF")) {
-                   mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_CIF));
-               }
-               if (fb.fc_current_video_profile.contains("QUALITY_QCIF")) {
-                   mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_QCIF));
-               }
-               if (fb.fc_current_video_profile.contains("QUALITY_QVGA")) {
-                   mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_QVGA));
-               }
-               if (fb.fc_current_video_profile.contains("QUALITY_LOW")) {
-                   mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_LOW));
-               }
-           //} catch (Exception e){
-             //  fb.error_message = true;
-             //  fb.SendMessage(str + " не поддерживает профиль " + fb.fc_current_video_profile + ", пожалуйста выберите другой видеопрофиль для этой камеры.");
-          // }
+            //  try {
+            if (fb.fc_current_video_profile.contains("QUALITY_HIGH")) {
+                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
+            }
+            if (fb.fc_current_video_profile.contains("QUALITY_2160P")) {
+                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_2160P));
+            }
+            if (fb.fc_current_video_profile.contains("QUALITY_1080P")) {
+                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_1080P));
+            }
+            if (fb.fc_current_video_profile.contains("QUALITY_720P")) {
+                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_720P));
+            }
+            if (fb.fc_current_video_profile.contains("QUALITY_480P")) {
+                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_480P));
+            }
+            if (fb.fc_current_video_profile.contains("QUALITY_CIF")) {
+                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_CIF));
+            }
+            if (fb.fc_current_video_profile.contains("QUALITY_QCIF")) {
+                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_QCIF));
+            }
+            if (fb.fc_current_video_profile.contains("QUALITY_QVGA")) {
+                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_QVGA));
+            }
+            if (fb.fc_current_video_profile.contains("QUALITY_LOW")) {
+                mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_LOW));
+            }
+            //} catch (Exception e){
+            //  fb.error_message = true;
+            //  fb.SendMessage(str + " не поддерживает профиль " + fb.fc_current_video_profile + ", пожалуйста выберите другой видеопрофиль для этой камеры.");
+            // }
         }
 
-      //  mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_LOW));
+        //  mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_LOW));
 
         if (cameraType.equals("Bc")) {
             mMediaRecorder.setOutputFile(fb.bc_Video_Name_Full_Path);
         } else {
-           // fb.SendMessage("fc_Video_Name_Full_Path: " + fb.fc_Video_Name_Full_Path);
+            // fb.SendMessage("fc_Video_Name_Full_Path: " + fb.fc_Video_Name_Full_Path);
             mMediaRecorder.setOutputFile(fb.fc_Video_Name_Full_Path);
         }
 
@@ -1721,12 +1719,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             //  mCamera.unlock();                 здесь скорей всего надо проверять на версии Android
             mMediaRecorder.start();
             if (cameraType.equals("Bc")) {
-                fb.SendMessage(getResources().getString(R.string.str_profile) + " " +  fb.bc_current_video_profile + " " + getResources().getString(R.string.str_supported) + " " + str + " " + getResources().getString(R.string.str_camera), fb.MSG_INFO);
+                fb.SendMessage(getResources().getString(R.string.str_profile) + " " + fb.bc_current_video_profile + " " + getResources().getString(R.string.str_supported) + " " + str + " " + getResources().getString(R.string.str_camera), fb.MSG_INFO);
             } else {
                 fb.SendMessage(getResources().getString(R.string.str_profile) + " " + fb.fc_current_video_profile + " " + getResources().getString(R.string.str_supported) + " " + str + " " + getResources().getString(R.string.str_camera), fb.MSG_INFO);
             }
             try {
-                TimeUnit.SECONDS.sleep(fb.video_recording_time  + 5);
+                TimeUnit.SECONDS.sleep(fb.video_recording_time + 5);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -1854,7 +1852,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     }
 
-    BroadcastReceiver onBatteryChanged=new BroadcastReceiver() {
+    BroadcastReceiver onBatteryChanged = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             final FotoBot fb = (FotoBot) getApplicationContext();
 
