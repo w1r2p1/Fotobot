@@ -1865,7 +1865,7 @@ public class FotoBot extends Application {
             if(!FTPReply.isPositiveCompletion(reply)) {
                 ftpClient.disconnect();
                 System.err.println("FTP server refused connection.");
-                SendMessage("FTP отказал в соединении");
+                SendMessage("FTP отказал в соединении", MSG_FAIL);
             }
 
             ftpClient.login(user, pass);

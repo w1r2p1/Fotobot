@@ -971,7 +971,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         fb.setstatus(3);
         Log.d(LOG_TAG, "stopFotobot: STOP_FOTOBOT" + STOP_FOTOBOT);
 
-        fb.SendMessage(getResources().getString(R.string.request_for_stopping));
+        fb.SendMessage(getResources().getString(R.string.request_for_stopping), FotoBot.MSG_INFO);
 
         if (fb.sound_mute) {
             if (Build.VERSION.SDK_INT >= 23) {
@@ -1442,7 +1442,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             str = "front_cam";
         }
 
-        fb.SendMessage(str + " " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index);
+        fb.SendMessage(str + " " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index, FotoBot.MSG_PASS);
 
         buildImageName(cameraType);
 
@@ -1554,7 +1554,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 mCamera.release();
                 mCamera = null;
             } catch (Exception e) {
-                fb.SendMessage("ERROR: mCamera.release() " + e.toString());
+                fb.SendMessage("ERROR: mCamera.release() " + e.toString(), FotoBot.MSG_FAIL);
             }
         }
     }
@@ -1710,7 +1710,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 mMediaRecorder = null;
             }
 
-            fb.SendMessage("Mediarecorder prepare problem\n\n\n" + e.toString());
+            fb.SendMessage("Mediarecorder prepare problem\n\n\n" + e.toString(), FotoBot.MSG_FAIL);
             fb.SendMessage(e.toString());
 
         }
@@ -1719,9 +1719,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             //  mCamera.unlock();                 здесь скорей всего надо проверять на версии Android
             mMediaRecorder.start();
             if (cameraType.equals("Bc")) {
-                fb.SendMessage(getResources().getString(R.string.str_profile) + " " + fb.bc_current_video_profile + " " + getResources().getString(R.string.str_supported) + " " + str + " " + getResources().getString(R.string.str_camera), fb.MSG_INFO);
+                fb.SendMessage(str + " " + fb.bc_current_video_profile + " ", fb.MSG_PASS);
             } else {
-                fb.SendMessage(getResources().getString(R.string.str_profile) + " " + fb.fc_current_video_profile + " " + getResources().getString(R.string.str_supported) + " " + str + " " + getResources().getString(R.string.str_camera), fb.MSG_INFO);
+                fb.SendMessage(str + " " + fb.fc_current_video_profile + " ", fb.MSG_PASS);
             }
             try {
                 TimeUnit.SECONDS.sleep(fb.video_recording_time + 5);
@@ -1730,7 +1730,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
 
         } catch (Exception e) {
-            fb.SendMessage(str + getResources().getString(R.string.str_is_not_supported) + " " + fb.fc_current_video_profile + " " + getResources().getString(R.string.str_please_select), fb.MSG_FAIL);
+            fb.SendMessage(str + " " + fb.bc_current_video_profile + " ", fb.MSG_FAIL);
         }
 
         try {
@@ -1748,7 +1748,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 mCamera.release();
                 mCamera = null;
             } catch (Exception e) {
-                fb.SendMessage("ERROR: mCamera.release() " + e.toString());
+                fb.SendMessage("ERROR: mCamera.release() " + e.toString(), fb.MSG_FAIL);
             }
         }
 
@@ -1780,7 +1780,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             File imgfile = new File(fb.bc_Image_Name_Full_Path);
 
             if (imgfile.delete()) {
-                fb.SendMessage(getResources().getString(R.string.str_file) + " " + fb.bc_Image_Name + " " + getResources().getString(R.string.str_was_deleted), fb.MSG_PASS);
+                fb.SendMessage(getResources().getString(R.string.str_file) + " " + getResources().getString(R.string.str_was_deleted), fb.MSG_PASS);
             } else {
                 fb.SendMessage(getResources().getString(R.string.str_problem_with_deleting) + " " + fb.bc_Image_Name, fb.MSG_FAIL);
             }
@@ -1789,7 +1789,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             File fc_imgfile = new File(fb.fc_Image_Name_Full_Path);
 
             if (fc_imgfile.delete()) {
-                fb.SendMessage(getResources().getString(R.string.str_file) + " " + fb.fc_Image_Name + " " + getResources().getString(R.string.str_was_deleted), fb.MSG_PASS);
+                fb.SendMessage(getResources().getString(R.string.str_file) + " " + " " + getResources().getString(R.string.str_was_deleted), fb.MSG_PASS);
             } else {
                 fb.SendMessage(getResources().getString(R.string.str_problem_with_deleting) + " " + fb.fc_Image_Name, fb.MSG_FAIL);
             }
@@ -1803,7 +1803,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             File videofile = new File(fb.bc_Video_Name_Full_Path);
 
             if (videofile.delete()) {
-                fb.SendMessage(getResources().getString(R.string.str_file) + " " + fb.bc_Video_Name_Full_Path + " " + getResources().getString(R.string.str_was_deleted), fb.MSG_PASS);
+                fb.SendMessage(getResources().getString(R.string.str_file) + " " + " " + getResources().getString(R.string.str_was_deleted), fb.MSG_PASS);
             } else {
                 fb.SendMessage(getResources().getString(R.string.str_problem_with_deleting) + " " + fb.bc_Video_Name_Full_Path, fb.MSG_FAIL);
             }
@@ -1812,7 +1812,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             File fc_videofile = new File(fb.fc_Video_Name_Full_Path);
 
             if (fc_videofile.delete()) {
-                fb.SendMessage(getResources().getString(R.string.str_file) + " " + fb.fc_Video_Name_Full_Path + " " + getResources().getString(R.string.str_was_deleted), fb.MSG_PASS);
+                fb.SendMessage(getResources().getString(R.string.str_file) + " " + " " + getResources().getString(R.string.str_was_deleted), fb.MSG_PASS);
             } else {
                 fb.SendMessage(getResources().getString(R.string.str_problem_with_deleting) + " " + fb.fc_Video_Name_Full_Path, fb.MSG_FAIL);
             }

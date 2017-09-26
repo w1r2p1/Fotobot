@@ -144,7 +144,7 @@
     <string name="Internet_connection_channel_description">Выберите способ подключения к Internet (мобильные данные, wi-fi или оба).</string>
     <string name="connection_method">Метод подключения</string>
     <string name="connection_method_description">Выберите режим установки связи с Internet. Method 1 - связь будет установлена сразу и телефон не будет отключаться от сети.
-                Method 2 - соедение с Internet будет устонавливаться перед тем, как сделать фото, затем, после загрузки фото или видео в сеть фотобот отключится от Internet.</string>
+                Method 2 - соедение с Internet будет устонавливаться перед тем, как сделать фото, затем, после загрузки фото или видео в сеть фотобот отключится от Internet (Android &lt; v5).</string>
 
     <string name="Fotobot_email">Почтовый адрес Фотобота</string>
     <string name="Fotobot_email_description">С этого адреса Фотобот будет рассылать письма.</string>
