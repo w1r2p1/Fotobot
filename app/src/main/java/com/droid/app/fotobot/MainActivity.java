@@ -712,6 +712,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                         int i = 0; //Image counter
 
                         while (true) {
+// запускаем сервис
+                            startService(new Intent(MainActivity.this, UploadSrv.class));
 
 // заполняем список активных процессов
                             getActiveProcesses();
@@ -964,6 +966,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 
     public void stopFotobot(View v) {
+// останавливаем сервис
+        stopService(
+                new Intent(MainActivity.this, UploadSrv.class));
+
         h = new Handler(hc);
         final FotoBot fb = (FotoBot) getApplicationContext();
 
