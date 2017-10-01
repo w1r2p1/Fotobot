@@ -711,9 +711,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                         int i = 0; //Image counter
 
-                        while (true) {
-// запускаем сервис
+                        if (fb.network) {
+                            // запускаем сервис
                             startService(new Intent(MainActivity.this, UploadSrv.class));
+                        }
+
+                        while (true) {
 
 // заполняем список активных процессов
                             getActiveProcesses();
