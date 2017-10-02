@@ -26,10 +26,9 @@
 
     <!-- http://daniel-codes.blogspot.ru/2011/04/html-in-textviews.html -->
 
-    <string name="update"><![CDATA[<b><u>Версия 3.2.0</u></b><br>
-        1) добавлено SMS о пропаже/восстановлении напряжения в сети;<br>
-        2) добавлена возможность загружать файлы на FTP;<br>
-        3) добавлен флажок вкл/выкл звук (sms, фото/видео камера, входящие звонки, оповещения и другие), по умолчанию звук включен.
+    <string name="update"><![CDATA[<b><u>Версия 3.3.0</u></b><br>
+        1) FTP - поддержка директорий;<br>
+        2) изменен внешний вид главного окна.
         ]]></string>
 
     <string name="Camera_Name">Название камеры</string>
@@ -113,12 +112,12 @@
             через заданные промежутки времени.
             Все что нужно сделать - это завести почтовый ящик для Fotobot с которого он будет присылать фото.
             Подробную инструкцию по установке и настройке
-            этого приложения вы найдете на &lt;a href=http://v-and-f.ru/fotobot&gt;http://v-and-f.ru/fotobot&lt;/a&gt;</string>
+            этого приложения вы найдете на &lt;a href=https://andreyv.ru/fotobot&gt;http://v-and-f.ru/fotobot&lt;/a&gt;</string>
 
     <string name="welcome_to_fotobot">Фотобот приветствует Вас!
             Если Вы здесь впервые, то ознакомьтесь пожалуйста с документацией (кнопка Помощь внизу экрана).</string>
 
-    <string name="start_message">Фотобот начал свою работу</string>
+    <string name="start_message">Фотобот стартовал</string>
     <string name="stop_message">Фотобот остановлен</string>
 
     <string name="photo_has_been_taken">Фото сделано</string>
@@ -143,7 +142,7 @@
     <string name="Internet_connection_channel_description">Выберите способ подключения к Internet (мобильные данные, wi-fi или оба).</string>
     <string name="connection_method">Метод подключения</string>
     <string name="connection_method_description">Выберите режим установки связи с Internet. Method 1 - связь будет установлена сразу и телефон не будет отключаться от сети.
-                Method 2 - соедение с Internet будет устонавливаться перед тем, как сделать фото, затем, после загрузки фото или видео в сеть фотобот отключится от Internet (Android &lt; v5).</string>
+                Method 2(в разработке) - соедение с Internet будет устонавливаться перед тем, как сделать фото, затем, после загрузки фото или видео в сеть фотобот отключится от Internet (Android &lt; v5).</string>
 
     <string name="Fotobot_email">Почтовый адрес Фотобота</string>
     <string name="Fotobot_email_description">С этого адреса Фотобот будет рассылать письма.</string>
@@ -275,6 +274,7 @@ mediastatus\n
     <string name="upload_method_note">Выберите способ загрузки фото, видео и логов в сеть</string>
 
     <string name="ftp_server">FTP Server</string>
+    <string name="ftp_server_note">ftp.server.com/folder/subfolder</string>
     <string name="ftp_port">FTP Port</string>
     <string name="ftp_user">FTP User</string>
     <string name="ftp_password">FTP Password</string>

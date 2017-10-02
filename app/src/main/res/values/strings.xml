@@ -17,8 +17,8 @@
     <string name="fast_start">If you do not want to study all settings and want to start Fotobot as soon as possible
         just press START button. Fotobot will take a picture every 5 minute by front and back camera and store photos into: </string>
 
-    <string name="update"><![CDATA[<b><u>Version 3.1.1</u></b><br>
-        1) AutoStart has been added.<br>
+    <string name="update"><![CDATA[<b><u>Version 3.3.0</u></b><br>
+        1) FTP - folders support.<br>
         ]]>
     </string>
 
@@ -258,6 +258,7 @@ mediastatus\n
     <string name="upload_method_note">Select a way how to upload data to network</string>
 
     <string name="ftp_server">FTP Server</string>
+    <string name="ftp_server_note">ftp.server.com/folder/subfolder</string>
     <string name="ftp_port">FTP Port</string>
     <string name="ftp_user">FTP User</string>
     <string name="ftp_password">FTP Password</string>

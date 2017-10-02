@@ -285,6 +285,14 @@ public class Tab_Network_Activity extends Activity {
         editText_FTP_Host.setText(fb.FTP_server);
         editText_FTP_Host.setTextColor(Color.rgb(50, 100, 150));
         linLayout_FTP.addView(editText_FTP_Host);
+
+        // Заметка для сервера FTP
+        TextView tv_FTP_Server_note = new TextView(this);
+        tv_FTP_Server_note.setTypeface(null, Typeface.NORMAL);
+        tv_FTP_Server_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_FTP_Server_note.setTextColor(Color.BLACK);
+        tv_FTP_Server_note.setText(getResources().getString(R.string.ftp_server_note));
+        linLayout_FTP.addView(tv_FTP_Server_note);
 // port
         TextView tv_FTP_Port = new TextView(this);
         tv_FTP_Port.setTypeface(Typeface.DEFAULT_BOLD);
