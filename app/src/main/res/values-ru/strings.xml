@@ -90,8 +90,8 @@
     <string name="connection_channel_mobiledata">Метод Mobile Data</string>
     <string name="turning_on_mobiledata">включаем Mobile Data</string>
     <string name="connection_attempt">Internet, попытка  </string>
-    <string name="starting_to_make_photo">начинаем делать фото</string>
-    <string name="starting_to_make_video">начинаем записывать видео</string>
+    <string name="starting_to_make_photo">фото</string>
+    <string name="starting_to_make_video">видео</string>
     <string name="video_recording_time">Время записи видео (сек)</string>
     <string name="video_recorded">видео записано</string>
     <string name="video_profile">Алгоритм автоматического определения видеопрофиля в этой версии не реализован. Поддерживаемый профиль можно найти вручную. Для этого выбираете, а затем запускаете Fotobot и смотрите ругнется он или нет:-)</string>
