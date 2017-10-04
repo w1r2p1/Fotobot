@@ -307,10 +307,18 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         final FotoBot fb = (FotoBot) getApplicationContext();
 
-        fb.LoadSettings();
+        try {
+            fb.LoadSettings();
+        } catch (Exception e){
+            Log.d(LOG_TAG, "Error: loadSettings()" + e.toString());
+        }
 
         if (fb.launched_first_time) {
-            fb.set_default_storage();
+            try {
+                fb.set_default_storage();
+            } catch (Exception e) {
+                Log.d(LOG_TAG, "Error: set_default_storage()" + e.toString());
+            }
             fb.launched_first_time = false;
 
             SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
