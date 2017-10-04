@@ -1451,7 +1451,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             str = "front_cam";
         }
 
-        fb.SendMessage(str + " " + getResources().getString(R.string.starting_to_make_photo) + " " + fb.Image_Index, FotoBot.MSG_PASS);
+        fb.SendMessage(str + " " + getResources().getString(R.string.starting_to_make_photo) + " N " + fb.Image_Index, FotoBot.MSG_PASS);
 
         buildImageName(cameraType);
 

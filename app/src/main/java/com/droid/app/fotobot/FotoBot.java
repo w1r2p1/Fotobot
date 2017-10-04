@@ -1909,19 +1909,20 @@ public class FotoBot extends Application {
                     ex.getMessage() + "\n" + "\n" +
             "Проверьте правильно ли заполнены параметры FTP в настройках.", MSG_FAIL);
             ex.printStackTrace();
-        } finally {
+        }
+  //      finally {
             try {
                 if (ftpClient.isConnected()) {
                     ftpClient.logout();
                     ftpClient.disconnect();
                     SendMessage("FTP сессия закрыта", MSG_PASS);
-                    fbpause(h,5);
+                    fbpause(h,3);
                 }
             } catch (IOException ex) {
                 ex.printStackTrace();
                 SendMessage("FTP сессия закрыта", MSG_FAIL);
             }
-        }
+//        }
     }
 
     public void print_status(){
