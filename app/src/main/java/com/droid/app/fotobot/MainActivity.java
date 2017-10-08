@@ -727,8 +727,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                         while (true) {
 
 // заполняем список активных процессов
-                            getActiveProcesses();
-
+                            try {
+                                getActiveProcesses();
+                            } catch (Exception e){
+                                fb.SendMessage("Ошибка при заполнении списка активных процессоа" + e.toString(), fb.MSG_FAIL);
+                            }
 // не было ли команды на остановку Fotobot'а
                             if (fb.getstatus() == 3) {
                                 if (stopFotobot()) {
