@@ -695,7 +695,8 @@ public class FotoBot extends Application {
 // checking for sms file each 5 seconds during big pause between photos
                         File sms_file = null;
 
-                        sms_file = new File((getApplicationContext().getFilesDir().toString() + "/sms.txt"));
+//                        sms_file = new File((getApplicationContext().getFilesDir().toString() + "/sms.txt"));
+                        sms_file = new File( work_dir + "/sms.txt");
 
                         if (sms_file.isFile()) {
 
@@ -1727,7 +1728,8 @@ public class FotoBot extends Application {
 
         File sms_file = null;
 
-        sms_file = new File((getApplicationContext().getFilesDir().toString() + "/sms.txt"));
+//        sms_file = new File((getApplicationContext().getFilesDir().toString() + "/sms.txt"));
+        sms_file = new File(work_dir + "/sms.txt");
 
         if (sms_file.isFile()) {
 
@@ -1738,11 +1740,7 @@ public class FotoBot extends Application {
         File logfile = new File(work_dir + "/logfile.txt");
         try {
             logfile.createNewFile();
-          //  success_message = true;
-         //   SendMessage("logfile.txt has been created" );
         } catch (IOException e) {
-        //    error_message = true;
-          //  SendMessage("logfile.txt couldn't be created");
             e.printStackTrace();
         }
 
@@ -1758,7 +1756,7 @@ public class FotoBot extends Application {
         }
     }
 
-    public void set_default_storage() {
+    public String set_default_storage() {
 
         String path;
 
@@ -1769,18 +1767,14 @@ public class FotoBot extends Application {
         if (!appDir.exists() && !appDir.isDirectory()) {
             // create empty directory
             if (appDir.mkdirs()) {
-                //   SendMessage("Fotobot создал папку " + path);
                 Log.i("CreateDir", "App dir created");
             } else {
                 SendMessage("Fotobot не может создать папку " + path);
                 Log.w("CreateDir", "Unable to create app dir!");
             }
         } else {
-            //   SendMessage( path + "такая папка уже существует");
             Log.i("CreateDir", "App dir already exists");
         }
-
-        // SendMessage("Проверяем папку на запись файла");
 
         File file = new File(path + File.separator + "file.txt");
 
@@ -1802,18 +1796,22 @@ public class FotoBot extends Application {
 //deleting the file
                 file.delete();
 
-                work_dir = path;
+
 
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
                 editor.putString("Work_Dir", work_dir);
                 editor.commit();
 
+                return path;
+
             } catch (Exception e) {
                 Log.d(LOG_TAG, e.toString());
             }
 
         }
+
+        return null;
 
     }
 

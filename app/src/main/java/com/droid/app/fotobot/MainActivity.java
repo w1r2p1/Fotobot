@@ -314,11 +314,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         }
 
         if (fb.launched_first_time) {
-            try {
-                fb.set_default_storage();
-            } catch (Exception e) {
-                Log.d(LOG_TAG, "Error: set_default_storage()" + e.toString());
-            }
+
+            fb.work_dir = fb.set_default_storage();
+
             fb.launched_first_time = false;
 
             SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
@@ -944,7 +942,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             fb.frame_delay = true;
 
                             fb.sms_check_file = true;
-
 
 // если размер лога превышает 50 kb, то чистим его
                             cleanLogFile();
