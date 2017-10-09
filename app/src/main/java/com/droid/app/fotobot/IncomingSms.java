@@ -17,8 +17,19 @@ public class IncomingSms extends BroadcastReceiver {
 
     // Get the object of SmsManager
     final SmsManager sms = SmsManager.getDefault();
+    public String sms_file="";
 
     public void onReceive(Context context, Intent intent) {
+
+        String action = intent.getAction();
+
+        Log.i("Receiver", "Broadcast received: " + action);
+
+        if(action.equals("workdir")){
+            sms_file = intent.getExtras().getString("workdir");
+            Log.i("Receiver", "sms_file: " + sms_file);
+        }
+
 
        // Retrieves a map of extended data from the intent.
         final Bundle bundle = intent.getExtras();
@@ -53,7 +64,7 @@ public class IncomingSms extends BroadcastReceiver {
 
 public void sms2file(Context context, String sms_message_body) {
 
-    File file = new File(context.getFilesDir().toString() + "/sms.txt");
+    File file = new File(sms_file + "/sms.txt");
 
     FileOutputStream fos = null;
 

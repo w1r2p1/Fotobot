@@ -39,6 +39,7 @@
         <receiver android:name=".IncomingSms">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+                <action android:name="workdir" />
             </intent-filter>
         </receiver>
 

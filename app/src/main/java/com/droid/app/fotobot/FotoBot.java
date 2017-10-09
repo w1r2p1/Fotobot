@@ -695,8 +695,8 @@ public class FotoBot extends Application {
 // checking for sms file each 5 seconds during big pause between photos
                         File sms_file = null;
 
-//                        sms_file = new File((getApplicationContext().getFilesDir().toString() + "/sms.txt"));
-                        sms_file = new File( work_dir + "/sms.txt");
+                        sms_file = new File((getApplicationContext().getFilesDir().toString() + "/sms.txt"));
+//                        sms_file = new File( work_dir + "/sms.txt");
 
                         if (sms_file.isFile()) {
 
@@ -1728,8 +1728,8 @@ public class FotoBot extends Application {
 
         File sms_file = null;
 
-//        sms_file = new File((getApplicationContext().getFilesDir().toString() + "/sms.txt"));
-        sms_file = new File(work_dir + "/sms.txt");
+        sms_file = new File((getApplicationContext().getFilesDir().toString() + "/sms.txt"));
+//        sms_file = new File(work_dir + "/sms.txt");
 
         if (sms_file.isFile()) {
 

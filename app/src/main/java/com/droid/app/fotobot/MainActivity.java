@@ -325,6 +325,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             editor.commit();
         }
 
+// Посылаем broadcast наобум, может какой-нибудь сервис и поймает его (мы то знаем, что у нас есть SMS servise)
+        Intent intent = new Intent("my.action.string");
+        intent.putExtra("workdir", fb.work_dir);
+        sendBroadcast(intent);
+
+
+
+
         PackageManager pm = getPackageManager();
         if (pm.hasSystemFeature(PackageManager.FEATURE_CAMERA) && pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_AUTOFOCUS)) {
             fb.autofocus = true;
@@ -609,6 +617,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
+
+        registerReceiver(onBatteryChanged,
+                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
         registerReceiver(onBatteryChanged,
                 new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
@@ -1883,5 +1894,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         }
 
     };
+
 
 }
