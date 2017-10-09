@@ -326,7 +326,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         }
 
 // Посылаем broadcast наобум, может какой-нибудь сервис и поймает его (мы то знаем, что у нас есть SMS servise)
-        Intent intent = new Intent("my.action.string");
+        Intent intent = new Intent("workdir_intent");
         intent.putExtra("workdir", fb.work_dir);
         sendBroadcast(intent);
 

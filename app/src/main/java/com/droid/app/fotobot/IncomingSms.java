@@ -17,7 +17,7 @@ public class IncomingSms extends BroadcastReceiver {
 
     // Get the object of SmsManager
     final SmsManager sms = SmsManager.getDefault();
-    public String sms_file="";
+    public static String sms_file="";
 
     public void onReceive(Context context, Intent intent) {
 
@@ -25,7 +25,7 @@ public class IncomingSms extends BroadcastReceiver {
 
         Log.i("Receiver", "Broadcast received: " + action);
 
-        if(action.equals("workdir")){
+        if(action.equals("workdir_intent")){
             sms_file = intent.getExtras().getString("workdir");
             Log.i("Receiver", "sms_file: " + sms_file);
         }
@@ -63,6 +63,8 @@ public class IncomingSms extends BroadcastReceiver {
     }
 
 public void sms2file(Context context, String sms_message_body) {
+
+  //  final FotoBot fb = (FotoBot) context;
 
     File file = new File(sms_file + "/sms.txt");
 
