@@ -1449,7 +1449,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         }
 
         fb.thread_stopped = true;
-        fb.SendMessage(getResources().getString(R.string.stop_message), fb.MSG_INFO);
+        fb.SendMessage(getResources().getString(R.string.stop_message), fb.MSG_PASS);
         return true;
     }
 

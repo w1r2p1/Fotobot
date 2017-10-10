@@ -695,8 +695,8 @@ public class FotoBot extends Application {
 // checking for sms file each 5 seconds during big pause between photos
                         File sms_file = null;
 
-                        sms_file = new File((getApplicationContext().getFilesDir().toString() + "/sms.txt"));
-//                        sms_file = new File( work_dir + "/sms.txt");
+//                        sms_file = new File((getApplicationContext().getFilesDir().toString() + "/sms.txt"));
+                        sms_file = new File( work_dir + "/sms.txt");
 
                         if (sms_file.isFile()) {
 
@@ -704,11 +704,17 @@ public class FotoBot extends Application {
 
                             sms_getdata();
 
+                            try {
+                                TimeUnit.SECONDS.sleep(3);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+
                             for (int ind = 0; ind < sms.size(); ind++) {
                                 SendMessage(sms.get(ind).toString(), MSG_INFO);
                             }
 
-                            SendMessage("SMS:", MSG_PASS);
+                            SendMessage("SMS:", MSG_INFO);
 
                             sms_file.delete();
 
@@ -814,17 +820,17 @@ public class FotoBot extends Application {
                             SendMessage("logfile.txt doesn't exist.");
                         }
 
-                        SendMessage(".");
+                        SendMessage(".", MSG_INFO);
 
                         if (camera == null) {
                             Log.d(LOG_TAG, "camera == null");
-                            SendMessage("..");
+                            SendMessage("..", MSG_INFO);
                             try {
                                 camera = Camera.open();
-                                SendMessage(".");
+                                SendMessage(".", MSG_INFO);
                                 Log.d(LOG_TAG, "Camera has been successfully opened");
                             } catch (Exception e) {
-                                SendMessage("...");
+                                SendMessage("...", MSG_INFO);
                                 Log.d(LOG_TAG, "Problem with camera opening");
                                 e.printStackTrace();
                             }
@@ -833,11 +839,11 @@ public class FotoBot extends Application {
                         try {
                             camera.setPreviewDisplay(holder);
                             camera.startPreview();
-                            SendMessage(".");
+                            SendMessage(".", MSG_INFO);
                             Log.d(LOG_TAG, "Preview started");
                         } catch (Exception e) {
                             e.printStackTrace();
-                            SendMessage("...");
+                            SendMessage("...", MSG_INFO);
                             Log.d(LOG_TAG, "Problem with starting of preview");
                         }
 
@@ -855,7 +861,7 @@ public class FotoBot extends Application {
                                 camera = null;
                                 Log.d(LOG_TAG, "Camera unlocked");
                             } catch (Exception e) {
-                                SendMessage("...");
+                                SendMessage("...", MSG_INFO);
                             }
 
                         }
@@ -1728,8 +1734,8 @@ public class FotoBot extends Application {
 
         File sms_file = null;
 
-        sms_file = new File((getApplicationContext().getFilesDir().toString() + "/sms.txt"));
-//        sms_file = new File(work_dir + "/sms.txt");
+//        sms_file = new File((getApplicationContext().getFilesDir().toString() + "/sms.txt"));
+        sms_file = new File(work_dir + "/sms.txt");
 
         if (sms_file.isFile()) {
 
@@ -1769,7 +1775,7 @@ public class FotoBot extends Application {
             if (appDir.mkdirs()) {
                 Log.i("CreateDir", "App dir created");
             } else {
-                SendMessage("Fotobot не может создать папку " + path);
+                SendMessage("Fotobot не может создать папку " + path, MSG_FAIL);
                 Log.w("CreateDir", "Unable to create app dir!");
             }
         } else {
