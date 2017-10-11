@@ -1234,7 +1234,8 @@ if (!fb.sms_voltage_alert) {
     private boolean checkPermission() {
         int result = ContextCompat.checkSelfPermission(Tab_Main_Activity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if (result == PackageManager.PERMISSION_GRANTED) {
-            return true;
+            //return true;
+            return false;
         } else {
             return false;
         }
