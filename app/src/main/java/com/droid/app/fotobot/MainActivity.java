@@ -64,7 +64,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     ActivityManager actvityManager;
 
     private int screenWidth, screenHeight;
+
     public static final int UNKNOW_CODE = 99;
+
     final String LOG_TAG = "Logs";
     final int STATUS_STOPPED = 333;
 
@@ -84,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     TextView tvInfo;
 
     boolean preview_stopped = true;
+
     AudioManager mgr = null;
 
     int mainWindowColor = Color.rgb(0, 0, 0);
@@ -661,6 +664,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
      * Called when the user clicks the Settings button
      */
     public void showSettings(View view) {
+
         Intent intent = new Intent(this, Settings.class);
         startActivity(intent);
     }
