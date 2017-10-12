@@ -73,7 +73,7 @@ mediastatus\n
     <string name="advanced_settings">Show advanced settings</string>
 
     <string name="Work_Dir">Working Folder</string>
-    <string name="Work_Dir_description">Absolute path to folder with photos</string>
+    <string name="Work_Dir_description">Absolute path to folder with photos (external SD may not work for Android &gt; 6.0)</string>
     <string name="Work_Dir_error1">No such folder for images</string>
     <string name="Work_Dir_error2">Please check \"Working Folder\" field.</string>
 
