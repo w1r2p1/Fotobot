@@ -991,6 +991,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     }
 
 
+
     public void stopFotobot(View v) {
 // останавливаем сервис
         stopService(
