@@ -1829,7 +1829,12 @@ public class FotoBot extends Application {
         return list;
     }
 
-    public void FTPUpload(String str) {
+    public void FTPUpload(String str){
+
+
+    }
+
+    public boolean file_to_ftp(String str) {
         String server;
         int port;
         String user;
