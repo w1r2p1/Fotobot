@@ -53,6 +53,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -905,24 +906,31 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                                 }
 
                                 if (fb.useFTP) {
+                                    ArrayList<String> FTP_files = new ArrayList();
+                                    FTP_files = null;
+
                                     if (fb.make_photo_bc && fb.bc_image_attach) {
-                                        fb.FTPUpload(fb.bc_Image_Name_Full_Path);
+                                        FTP_files.add(fb.bc_Image_Name_Full_Path);
                                     }
 
                                     if (fb.make_photo_fc && fb.fc_image_attach) {
-                                        fb.FTPUpload(fb.fc_Image_Name_Full_Path);
+                                        FTP_files.add(fb.fc_Image_Name_Full_Path);
                                     }
 
                                     if (fb.make_video_bc && fb.bc_video_attach) {
-                                        fb.FTPUpload(fb.bc_Video_Name_Full_Path);
+                                        FTP_files.add(fb.bc_Video_Name_Full_Path);
                                     }
 
                                     if (fb.make_video_fc && fb.fc_video_attach) {
-                                        fb.FTPUpload(fb.fc_Video_Name_Full_Path);
+                                        FTP_files.add(fb.fc_Video_Name_Full_Path);
                                     }
 
                                     if (fb.attach_log) {
-                                        fb.FTPUpload(fb.work_dir + "/logfile.txt");
+                                        FTP_files.add(fb.work_dir + "/logfile.txt");
+                                    }
+
+                                    if (FTP_files.size() > 0) {
+                                        fb.FTPUpload(FTP_files);
                                     }
 
                                 }

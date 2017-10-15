@@ -1829,12 +1829,19 @@ public class FotoBot extends Application {
         return list;
     }
 
-    public void FTPUpload(String str){
-
+    public void FTPUpload(List<String> FTP_files){
+        if (files_to_ftp(FTP_files)){
+            SendMessage("files were uploaded to ftp from 1-st attempt");
+        } else {
+            fbpause(h,15);
+            if (files_to_ftp(FTP_files)) {
+                SendMessage("files were uploaded to ftp from 2-nd attempt");
+            }
+        }
 
     }
 
-    public boolean file_to_ftp(String str) {
+    public boolean files_to_ftp(List<String> FTP_files) {
         String server;
         int port;
         String user;
