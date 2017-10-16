@@ -35,7 +35,7 @@
     <string name="video_profile">Automatic video profile detection is not implemented in this version. You can find supported profile manually. Just select particular profile, run Fotobot. If error message appear change profile to another:-)</string>
 
     <string name="SMS_Password">SMS Password</string>
-    <string name="SMS_Password_description">Password for administration via SMS (if password is wrong than rest part of SMS will be ignored)</string>
+    <string name="SMS_Password_description">Password for administration via SMS (if password is wrong than rest part of SMS will be ignored). If phone has 2 SIM cards make one of them default (phone should not ask about which SIM card to use).</string>
 
     <string name="sms_cmd_list">
 passwd &lt;passwd&gt;\n
@@ -249,7 +249,7 @@ mediastatus\n
     <string name="voltage_restored">Voltage restored</string>
 
     <string name="SMS_Voltage_Alert_Number">Phone number for voltage alert SMS</string>
-    <string name="SMS_Voltage_Alert_Number_note">Phone numbers for SMS voltage alerts. Password is not required.</string>
+    <string name="SMS_Voltage_Alert_Number_note">Phone numbers for SMS voltage alerts. Password is not required. If phone has 2 SIM cards make one of them default (phone should not ask about which SIM card to use).</string>
 
     <string name="sound_mute">Mute sound</string>
     <string name="sound_mute_note">All phone sounds will be muted (sms, camera, incoming calls, notifications and others)</string>

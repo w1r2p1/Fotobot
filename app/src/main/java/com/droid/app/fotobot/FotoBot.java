@@ -1828,7 +1828,7 @@ public class FotoBot extends Application {
             SendMessage("FTP перевод в BINARY_FILE_TYPE", MSG_FAIL);
             System.out.println("Failed to change to BINARY_FILE_TYPE.");
             return false;
-            }
+        }
 
         // APPROACH #1: uploads first file using an InputStream
 

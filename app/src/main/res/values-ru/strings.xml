@@ -44,7 +44,7 @@
     <string name="delete_video">Удалить видео после загрузки в сеть</string>
 
     <string name="SMS_Password">SMS пароль</string>
-    <string name="SMS_Password_description">Пароль для управления через SMS (если пароль не совпадает с заданным, то SMS будет игнорироваться)</string>
+    <string name="SMS_Password_description">Пароль для управления через SMS (если пароль не совпадает с заданным, то SMS будет игнорироваться). Если телефон работает с 2-мя СИМ картами, то отключите запрос на отправку через конкретную симку.</string>
 
     <string name="Work_Dir">Папка для фотографий</string>
     <string name="Work_Dir_description">Полный путь к папке с фотографиями.
@@ -266,7 +266,7 @@ mediastatus\n
 
     <string name="SMS_Voltage_Alert_Number">Номер для отправки SMS</string>
 
-    <string name="SMS_Voltage_Alert_Number_note">Номер, на который будут приходить SMS о состоянии электросети (пароль не требуется).</string>
+    <string name="SMS_Voltage_Alert_Number_note">Номер, на который будут приходить SMS о состоянии электросети (пароль не требуется). Если телефон работает с 2-мя СИМ картами, то отключите запрос на отправку через конкретную симку.</string>
 
     <string name="sound_mute">Выключить звук</string>
     <string name="sound_mute_note">Все звуки будут выключены (sms, фото/видео камера, входящие звонки, оповещения и другие).</string>
