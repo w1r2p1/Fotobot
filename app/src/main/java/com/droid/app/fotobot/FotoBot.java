@@ -56,89 +56,61 @@ public class FotoBot extends Application {
     public static final String MSG_PASS = "pass";
     public static final String MSG_FAIL = "fail";
     public static final String MSG_INFO = "info";
-
-    Camera camera = null;
-
+    final String LOG_TAG = "FotoBot";
     public int numberOfCameras = 1;
 
     public boolean sound_mute = false;
 
     public boolean back_camera = true;
     public boolean front_camera = false;
-
-    /**
-     * id фронтальной камеры
-     */
-    int fcId = -1;
-
-    /**
-     * id камеры на задней панели
-     */
-    int bcId = -1;
-
     public String versionName = "";
-
     /**
      * Будет использоваться в теме письма. Если Fotobot установлен на несколько телефонов,
      * то эта переменная поможет отсортировать письма.
      */
     public String Camera_Name = "default";
-
-    final String LOG_TAG = "FotoBot";
-
     /**
      * Если приложение запускается впервые на телефоне, то выскочит вступительная информация
      */
     public boolean launched_first_time = true;
-
     /**
      * Интервал фотографирования (в секундах)
      */
     public int Photo_Frequency = 300;
-
     /**
      * Нужно ли использовать Wi-Fi для выхода в Internet
      */
     public boolean Use_WiFi;
-
     /**
      * Нужно ли использовать 3G (2G) для выхода в Internet
      */
     public boolean Use_Mobile_Data;
-
     public boolean useMail = false;
     public boolean useFTP = false;
-
     /**
      * Делать фото со вспышкой
      */
     public boolean Use_Flash;
-
     /**
      * делать фото фронтальной камерой
      */
     public boolean make_photo_fc = false;
-
     /**
      * делать фото камерой на задней панели телефона
      */
     public boolean make_photo_bc = true;
-
     /**
      * делать видео фронтальной камерой
      */
     public boolean make_video_fc = true;
-
     /**
      * делать видео камерой на задней панели телефона
      */
     public boolean make_video_bc = true;
-
     /**
      * уровент заряда аккумулятора в %
      */
     public int battery_level;
-
     /**
      * заряжается ли от сети
      */
@@ -147,201 +119,134 @@ public class FotoBot extends Application {
     public boolean isCharging_sms = false;
     public boolean sms_voltage_alert = false;
     public String sms_voltage_alert_number = "+11234567890";
-
     /**
      * Степень JPEG сжатия
      */
     public int JPEG_Compression = 90;
-
     /**
      * Коэффициент масштабирования фото (1/4,1/2,1)
      */
     public String Image_Scale = "1/4";
-
     /**
      * Номер изображения в текущей сессии
      */
     public int Image_Index = 0;
-
     /**
      * Размер изображения в пикселях по умолчанию для камеры на задней панели телефона
      */
     public String Image_Size = "1024x768";
-
     /**
      * Размер изображения в пикселях по умолчанию для фронтальой камеры
      */
     public String fc_Image_Size = "320x240";
-
     /**
      * Размер изображения в килобайтах
      */
     public int File_Size;
-
     /**
      * вспомогательная почта для отправки писем
      */
     public String EMail_Sender = "user@gmail.com";
-
     /**
      * пароль для вспомогательной почты
      */
     public String EMail_Sender_Password = "passwd";
-
     /**
      * кому отправлять письма с фотками
      */
     public String EMail_Recepient = "recipient@mail.ru";
-
     /**
      * почтовый сервер
      */
     public String SMTP_Host = "smtp.gmail.com";
-
     /**
      * порт для отправки писем не почтовом сервере
      */
     public String SMTP_Port = "465";
-
     public String Network_Channel = "Both";
-
     /**
      * Соединятся с Internet один раз (Method1) или на каждом шаге (Method2)
      */
     public String Network_Connection_Method = "Method 1";
-
     /**
      * Метод обработки фото (Hardaware или Software)
      */
     public String Photo_Post_Processing_Method = "Software";
-
     public int GSM_Signal = 0;
-
-    /**
-     * доступные разрешения (в пикселах) для камеры
-     */
-    List<Camera.Size> camera_resolutions;
-
-    /**
-     * доступные разрешения (в пикселах) для фронтальной камеры
-     */
-    List<Camera.Size> fc_camera_resolutions;
-
-
-    /**
-     * доступные видеопрофили для камеры
-     */
-    List<String> bc_video_profile = new ArrayList<String>();
-
     public boolean bc_video_profile_initialized = false;
-
     /**
      * время записи видео
      */
     public int video_recording_time = 5;
-
-    /**
-     * доступные видеопрофили для фронтальной камеры
-     */
-    List<String> fc_video_profile = new ArrayList<String>();
-
     public boolean fc_video_profile_initialized = false;
-
-
     public String bc_current_video_profile = "QUALITY_LOW";
     public String fc_current_video_profile = "QUALITY_LOW";
-
     public int process_delay = 3;
-
     public int status = 1;
-
     public SurfaceHolder holder;
-
     public String str = "";
-
     public Handler h;
-
     public String Top;
-
-    //   public SurfaceHolder sHolder = null;
-
     public boolean frame_delay = false;
-
     /**
      * Размер шрифта в настройках (sp)
      */
     public int Config_Font_Size = 20;
-
     /**
      * Размер шрифта в логе (sp)
      */
     public int Log_Font_Size = 14;
-
     public int Working_Area_Height = 240;
     public int menuheight;
-
     public String Image_Name;
     public String fc_Image_Name;
+
+    //   public SurfaceHolder sHolder = null;
     public String bc_Image_Name;
     public String fc_Video_Name;
     public String bc_Video_Name;
-
     public boolean bc_image_ftp_upload = true;
     public boolean fc_image_ftp_upload = true;
     public boolean bc_video_ftp_upload = true;
     public boolean fc_video_ftp_upload = true;
-
     public boolean bc_image_attach = true;
     public boolean fc_image_attach = true;
     public boolean bc_video_attach = true;
     public boolean fc_video_attach = true;
-
     public boolean bc_image_delete = false;
     public boolean fc_image_delete = false;
     public boolean bc_video_delete = false;
     public boolean fc_video_delete = false;
-
     public String Image_Name_Full_Path;
     public String fc_Image_Name_Full_Path;
     public String bc_Image_Name_Full_Path;
     public String fc_Video_Name_Full_Path;
     public String bc_Video_Name_Full_Path;
-
     public String Attached_Info_Detailisation = "Normal";
-
     public Boolean show_start_tip = true;
-
     /**
      * Длина лога в главном окне
      */
     public int loglength = 1024;
-
     /**
      * Длина лога в файле
      */
     public int floglength = 1024;
-
     /**
      * Размера лога для команды logcat
      */
     public int log_size = 50;
-
     /**
      * присылать фото на почту или не присылать
      */
     public Boolean network = false;
-
     public String Upload_Method = "FTP";
-
     public Boolean Method1_activated = false;
-
     public boolean attach_log = false;
-
     public String FTP_server = "";
     public String FTP_port = "21";
     public String FTP_username = "";
     public String FTP_password = "";
-
     public Integer sms_number_of_strings;
     public String sms_sender_num;
     public String sms_passwd = "passwd";
@@ -353,95 +258,98 @@ public class FotoBot extends Application {
     public Boolean sms_help = false;
     public Boolean sms_update_db = false;
     public Boolean sms_check_file = false;
-
     public String storage_type;
     public String work_dir = "";
-
     public Boolean delete_foto = false;
-
     /**
      * Время (сек) необходимое на поднятие сетевого интерфейса
      */
     public int network_up_delay = 15;
-
     /**
      * Частота с которой Fotobot обращается к камере и стартует preview,
      * необходима для того, чтобы приложение не было выброшено из памяти
      */
     public int wake_up_interval = 60;
-
     public boolean thread_stopped = false;
-
     /**
      * Camera properties
      */
     public String Camera_Properties;
-
     public int bc_video_width = 320;
     public int bc_video_height = 240;
-
     /**
      * FC Camera properties
      */
     public String fc_Camera_Properties;
-
-    List<String> sms = new ArrayList<String>();
-    List<String> powerinfo = new ArrayList<String>();
-
     public Boolean advanced_settings = false;
-
     public Boolean autofocus = false;
     public Boolean use_autofocus = true;
     public int time_for_focusing = 1;
-
     /**
      * Память в телефоне
      */
     public String freeMemory;
     public String totalMemory;
     public String usedMemory;
-
-    /**
-     * Температура аккумулятора
-     */
-    float battery_temperature;
-
     /**
      * Логфайл
      */
     public int log_line_number = 150;
-
-
     /**
      * Строка на экран
      */
     public String log = "";
-
     public boolean clean_log = false;
-
     /**
      * Длительность отправки предыдущего письма
      */
     public long email_sending_time;
-
     /**
      * Паузы для fbpause
      */
     public int short_pause = 1;
     public int long_pause = 5;
-
-//    public Boolean success_message = false;
-//    public Boolean debug_message = false;
-//    public Boolean error_message = false;
-
     public String msg_status = "";
-
     public Boolean Tab_Main_Activity_activated = false;
     public Boolean Tab_Network_Activity_activated = false;
     public Boolean Tab_Foto_Activity_activated = false;
     public Boolean Tab_Video_Activity_activated = false;
-
     public boolean automatic_mode = false;
+    Camera camera = null;
+    /**
+     * id фронтальной камеры
+     */
+    int fcId = -1;
+    /**
+     * id камеры на задней панели
+     */
+    int bcId = -1;
+    /**
+     * доступные разрешения (в пикселах) для камеры
+     */
+    List<Camera.Size> camera_resolutions;
+
+//    public Boolean success_message = false;
+//    public Boolean debug_message = false;
+//    public Boolean error_message = false;
+    /**
+     * доступные разрешения (в пикселах) для фронтальной камеры
+     */
+    List<Camera.Size> fc_camera_resolutions;
+    /**
+     * доступные видеопрофили для камеры
+     */
+    List<String> bc_video_profile = new ArrayList<String>();
+    /**
+     * доступные видеопрофили для фронтальной камеры
+     */
+    List<String> fc_video_profile = new ArrayList<String>();
+    List<String> sms = new ArrayList<String>();
+    List<String> powerinfo = new ArrayList<String>();
+    /**
+     * Температура аккумулятора
+     */
+    float battery_temperature;
 
     /**
      * Возвращает текущее состояние FotoBot'а, сейчас не пользуюсь этим
@@ -1831,11 +1739,14 @@ public class FotoBot extends Application {
 
     public void FTPUpload(List<String> FTP_files){
         if (files_to_ftp(FTP_files)){
-            SendMessage("files were uploaded to ftp from 1-st attempt");
+            SendMessage("files were uploaded to ftp", MSG_PASS);
         } else {
             fbpause(h,15);
             if (files_to_ftp(FTP_files)) {
                 SendMessage("files were uploaded to ftp from 2-nd attempt");
+            }
+            else {
+                SendMessage("FTP problems", MSG_FAIL);
             }
         }
 
@@ -1847,7 +1758,7 @@ public class FotoBot extends Application {
         String user;
         String pass;
 
-        String FTP_folder="";
+        String FTP_folder = "";
 
         if (FTP_server.contains("/")) {
 
@@ -1855,11 +1766,9 @@ public class FotoBot extends Application {
             FTP_folder = FTP_folder.substring(1);
 
             server = FTP_server.substring(0, FTP_server.indexOf("/", 1));
-        }
-            else {
-
+        } else {
             server = FTP_server;
-            }
+        }
 
         port = Integer.parseInt(FTP_port);
         user = FTP_username;
@@ -1870,6 +1779,7 @@ public class FotoBot extends Application {
         SendMessage("FTP server: " + server, MSG_PASS);
 
         FTPClient ftpClient = new FTPClient();
+
         try {
             int reply;
 
@@ -1878,67 +1788,91 @@ public class FotoBot extends Application {
             System.out.print(ftpClient.getReplyString());
             reply = ftpClient.getReplyCode();
 
-            if(!FTPReply.isPositiveCompletion(reply)) {
+            if (!FTPReply.isPositiveCompletion(reply)) {
                 ftpClient.disconnect();
                 System.err.println("FTP server refused connection.");
                 SendMessage("FTP отказал в соединении", MSG_FAIL);
+                return false;
             }
+        } catch (Exception e) {
+        }
 
+        try {
             ftpClient.login(user, pass);
             ftpClient.enterLocalPassiveMode();
+            if (!FTPReply.isPositiveCompletion(ftpClient.getReplyCode())) {
+                SendMessage("Проблема с авторизацией на FTP сервере, проверьте правильно ли заполнены параметры FTP в настройках.", MSG_FAIL);
+                return false;
+            }
+        } catch (Exception e) {
 
-            // chdir
-            if (FTP_folder.length() > 1 ) {
-                if (ftpClient.changeWorkingDirectory(FTP_folder)) {
-                    SendMessage("FTP переход в " + FTP_folder, MSG_PASS);
-                    System.out.println("Successfully changed working directory.");
-                } else {
-                    SendMessage("FTP переход в " + FTP_folder, MSG_FAIL);
-                    System.out.println("Failed to change working directory.");
-                }
+        }
+
+        // chdir
+
+        if (FTP_folder.length() > 1) {
+            try {
+                ftpClient.changeWorkingDirectory(FTP_folder);
+                SendMessage("FTP переход в " + FTP_folder, MSG_PASS);
+                System.out.println("Successfully changed working directory.");
+            } catch (Exception e) {
+                SendMessage("FTP переход в " + FTP_folder, MSG_FAIL);
+                System.out.println("Failed to change working directory.");
+                return false;
+            }
+        }
+
+        try {
+            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+        } catch (Exception e) {
+            SendMessage("FTP перевод в BINARY_FILE_TYPE", MSG_FAIL);
+            System.out.println("Failed to change to BINARY_FILE_TYPE.");
+            return false;
             }
 
-            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+        // APPROACH #1: uploads first file using an InputStream
 
-            // APPROACH #1: uploads first file using an InputStream
+        for (String str : FTP_files) {
             File firstLocalFile = new File(str);
 
             String firstRemoteFile = firstLocalFile.getName();
+
+            try {
             InputStream inputStream = new FileInputStream(firstLocalFile);
 
             SendMessage("Начинаем загрузку", MSG_PASS);
             boolean done = ftpClient.storeFile(firstRemoteFile, inputStream);
             inputStream.close();
-            reply = ftpClient.getReplyCode();
-
-            if(!FTPReply.isPositiveCompletion(reply)) {
-                SendMessage("Проблема с авторизацией на FTP сервере, проверьте правильно ли заполнены параметры FTP в настройках.", MSG_FAIL);
-            }
 
             if (done) {
-                SendMessage("Файл загружен", MSG_PASS);
+                SendMessage("Файл " + "\n" + str + "\n" +  " загружен", MSG_PASS);
             }
-        } catch (IOException ex) {
-            SendMessage("Проблема с загрузкой файла" + "\n" + "\n" +
+        } catch(IOException ex){
+            SendMessage("Проблема с загрузкой файла" + "\n" + str + "\n" + "\n" +
                     ftpClient.getReplyCode() + "\n" +
                     ftpClient.getReplyString() + "\n" +
                     ex.getMessage() + "\n" + "\n" +
-            "Проверьте правильно ли заполнены параметры FTP в настройках.", MSG_FAIL);
+                    "Проверьте правильно ли заполнены параметры FTP в настройках.", MSG_FAIL);
             ex.printStackTrace();
         }
-  //      finally {
+
+    }
+
             try {
                 if (ftpClient.isConnected()) {
                     ftpClient.logout();
                     ftpClient.disconnect();
                     SendMessage("FTP сессия закрыта", MSG_PASS);
-                    fbpause(h,3);
+                    fbpause(h, 3);
+                    return true;
                 }
             } catch (IOException ex) {
                 ex.printStackTrace();
                 SendMessage("FTP сессия закрыта", MSG_FAIL);
             }
-//        }
+
+            return false;
+
     }
 
     public void print_status(){

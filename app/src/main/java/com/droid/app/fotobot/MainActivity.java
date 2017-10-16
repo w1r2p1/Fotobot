@@ -907,7 +907,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                                 if (fb.useFTP) {
                                     ArrayList<String> FTP_files = new ArrayList();
-                                    FTP_files = null;
 
                                     if (fb.make_photo_bc && fb.bc_image_attach) {
                                         FTP_files.add(fb.bc_Image_Name_Full_Path);
