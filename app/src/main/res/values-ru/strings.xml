@@ -26,10 +26,8 @@
 
     <!-- http://daniel-codes.blogspot.ru/2011/04/html-in-textviews.html -->
 
-    <string name="update"><![CDATA[<b><u>Версия 3.3.0</u></b><br>
-        1) FTP - поддержка директорий;<br>
-        2) изменен внешний вид главного окна;<br>
-        3) если версия Android > 6.0, то отключите режим энергосбережения и добавьте Fotobot в список приложений не экономящих заряд.
+    <string name="update"><![CDATA[<b><u>Версия 3.3.2</u></b><br>
+        1) исправление ошибок;<br>
         ]]></string>
 
     <string name="Camera_Name">Название камеры</string>
