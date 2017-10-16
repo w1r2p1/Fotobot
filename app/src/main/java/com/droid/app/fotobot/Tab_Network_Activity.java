@@ -766,12 +766,15 @@ public class Tab_Network_Activity extends Activity {
 
                 if (spinner_Upload_Method.getSelectedItem().toString().contains("FTP")) {
                     editor.putString("Upload_Method", "FTP");
+                    editor.putBoolean("Use_Mail", false);
+                    editor.putBoolean("Use_FTP", true);
                 } else {
                     editor.putString("Upload_Method", "E-Mail");
+                    editor.putBoolean("Use_Mail", true);
+                    editor.putBoolean("Use_FTP", false);
                 }
 
-                editor.putBoolean("Use_Mail", fb.useMail);
-                editor.putBoolean("Use_FTP", fb.useFTP);
+
 
 // Save the changes in SharedPreferences
                 editor.commit(); // commit changes

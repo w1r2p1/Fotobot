@@ -358,6 +358,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         }
 
+
+
+
+
+
+
         Display display = getWindowManager().getDefaultDisplay();
         screenWidth = display.getWidth();
         screenHeight = display.getHeight();
@@ -688,6 +694,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         fb.LoadSettings();
 
+        fb.SendMessage("fb.network: " + fb.network);
+        fb.SendMessage("fb.useMail: " + fb.useMail);
+        fb.SendMessage("fb.useFTP: " + fb.useFTP);
+
         fb.work_dir_init();
 
         switch (v.getId()) {
@@ -900,7 +910,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                             }
 
-// отправляем письмо с фото и видео
+// отправляем письмо или загружаем на FTP с фото и видео
+
                             if (fb.network) {
                                 fb.fbpause(h, 1);
 
