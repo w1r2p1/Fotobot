@@ -738,6 +738,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             startService(new Intent(MainActivity.this, UploadSrv.class));
                         }
 
+                        fb.fbpause(h, 5);
+
                         while (true) {
 
 // заполняем список активных процессов
@@ -760,6 +762,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             if (fb.network && !(fb.Method1_activated)) {
                                 if (fb.Network_Connection_Method.equals("Method 1")) {
                                     //  if (android.os.Build.VERSION.SDK_INT <= 21) {
+                                    fb.SendMessage("Подключаемся к Internet", fb.MSG_PASS);
                                     fb.MakeInternetConnection();
                                     //   }
                                     fb.Method1_activated = true;
