@@ -1739,10 +1739,15 @@ public class FotoBot extends Application {
 
     public void FTPUpload(List<String> FTP_files){
         if (files_to_ftp(FTP_files)){
-            SendMessage("files were uploaded to ftp", MSG_PASS);
+            try {
+                TimeUnit.SECONDS.sleep(3);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            SendMessage("Файлы загружены на FTP", MSG_PASS);
             return;
         } else {
-            SendMessage("Сделаем еще попытку через 15сек", MSG_INFO);
+            SendMessage("<br>Сделаем еще попытку через 15сек<br>", MSG_INFO);
             try {
                 TimeUnit.SECONDS.sleep(15);
             } catch (InterruptedException e) {
@@ -1786,9 +1791,9 @@ public class FotoBot extends Application {
         user = FTP_username;
         pass = FTP_password;
 
-        SendMessage("FTP user: " + "&lt;br&gt;" + user, MSG_PASS);
-        SendMessage("FTP folder: " + "&lt;br&gt;" + FTP_folder, MSG_PASS);
-        SendMessage("FTP server: " + "&lt;br&gt;" + server, MSG_PASS);
+        SendMessage("FTP user: " + "<br>" + user, MSG_PASS);
+        SendMessage("FTP folder: " + "<br>" + FTP_folder, MSG_PASS);
+        SendMessage("FTP server: " + "<br>" + server, MSG_PASS);
 
         FTPClient ftpClient = new FTPClient();
 
@@ -1830,10 +1835,10 @@ public class FotoBot extends Application {
         if (FTP_folder.length() > 1) {
             try {
                 ftpClient.changeWorkingDirectory(FTP_folder);
-                SendMessage("FTP переход в " + FTP_folder, MSG_PASS);
+                SendMessage("FTP переход в <br>" + FTP_folder, MSG_PASS);
                 System.out.println("Successfully changed working directory.");
             } catch (Exception e) {
-                SendMessage("FTP переход в " + FTP_folder, MSG_FAIL);
+                SendMessage("FTP переход в <br>" + FTP_folder, MSG_FAIL);
                 System.out.println("Failed to change working directory.");
                 return false;
             }
@@ -1862,7 +1867,7 @@ public class FotoBot extends Application {
             inputStream.close();
 
             if (done) {
-                SendMessage("Файл " + "\n" + str + "\n" +  " загружен", MSG_PASS);
+                SendMessage("Файл " + "<br>" + str + "<br>" +  " загружен", MSG_PASS);
             }
         } catch(IOException ex){
                 try {
@@ -1870,10 +1875,10 @@ public class FotoBot extends Application {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            SendMessage("Проблема с загрузкой файла" + "\n" + str + "\n" + "\n" +
+            SendMessage("Проблема с загрузкой файла" + "<br>" + str + "<br>" +
                     ftpClient.getReplyCode() + "\n" +
                     ftpClient.getReplyString() + "\n" +
-                    ex.getMessage() + "\n" + "\n" +
+                    ex.getMessage() + "<br>" +
                     "Проверьте правильно ли заполнены параметры FTP в настройках.", MSG_FAIL);
             ex.printStackTrace();
         }

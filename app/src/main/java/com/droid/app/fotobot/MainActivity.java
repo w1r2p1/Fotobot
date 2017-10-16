@@ -694,10 +694,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         fb.LoadSettings();
 
-        fb.SendMessage("fb.network: " + fb.network);
-        fb.SendMessage("fb.useMail: " + fb.useMail);
-        fb.SendMessage("fb.useFTP: " + fb.useFTP);
-
         fb.work_dir_init();
 
         switch (v.getId()) {
@@ -725,6 +721,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                         fb.log = "";
 
                         fb.SendMessage(getResources().getString(R.string.start_message), fb.MSG_PASS);
+
+                        fb.fbpause(h, 1);
 
                         if (fb.sound_mute) {
                             mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
