@@ -1051,42 +1051,51 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         Camera.Parameters params;
 
+        try {
+            fb.numberOfCameras = Camera.getNumberOfCameras();
+        } catch (Exception e) {
+            Log.d(LOG_TAG, e.toString());
+        }
 
-        fb.numberOfCameras = Camera.getNumberOfCameras();
-        Camera.CameraInfo ci = new Camera.CameraInfo();
 
-        for (int i = 0; i < fb.numberOfCameras; i++) {
-            Camera.getCameraInfo(i, ci);
-            if (ci.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
-                fb.fcId = i;
-                fb.front_camera = true;
-                mCamera = Camera.open(fb.fcId);
+        try {
+            Camera.CameraInfo ci = new Camera.CameraInfo();
 
-                fb.fc_Camera_Properties = mCamera.getParameters().flatten();
+            for (int i = 0; i < fb.numberOfCameras; i++) {
+                Camera.getCameraInfo(i, ci);
+                if (ci.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+                    fb.fcId = i;
+                    fb.front_camera = true;
+                    mCamera = Camera.open(fb.fcId);
 
-                params = mCamera.getParameters();
-                fb.fc_camera_resolutions = params.getSupportedPictureSizes();
+                    fb.fc_Camera_Properties = mCamera.getParameters().flatten();
 
-                getFcAvailableVideoProfiles();
+                    params = mCamera.getParameters();
+                    fb.fc_camera_resolutions = params.getSupportedPictureSizes();
 
-                mCamera.release();
-                mCamera = null;
+                    getFcAvailableVideoProfiles();
+
+                    mCamera.release();
+                    mCamera = null;
+                }
+                if (ci.facing == Camera.CameraInfo.CAMERA_FACING_BACK) {
+                    fb.bcId = i;
+                    mCamera = Camera.open(fb.bcId);
+
+                    fb.Camera_Properties = mCamera.getParameters().flatten();
+
+                    params = mCamera.getParameters();
+                    fb.camera_resolutions = params.getSupportedPictureSizes();
+
+                    getBcAvailableVideoProfiles();
+
+                    mCamera.release();
+                    mCamera = null;
+
+                }
             }
-            if (ci.facing == Camera.CameraInfo.CAMERA_FACING_BACK) {
-                fb.bcId = i;
-                mCamera = Camera.open(fb.bcId);
-
-                fb.Camera_Properties = mCamera.getParameters().flatten();
-
-                params = mCamera.getParameters();
-                fb.camera_resolutions = params.getSupportedPictureSizes();
-
-                getBcAvailableVideoProfiles();
-
-                mCamera.release();
-                mCamera = null;
-
-            }
+        } catch (Exception e) {
+            Log.d(LOG_TAG, e.toString());
         }
 
         fb.holder = holder;
@@ -1171,15 +1180,27 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             final FotoBot fb = (FotoBot) getApplicationContext();
             super.onSignalStrengthsChanged(signalStrength);
 
-            if (null != signalStrength && signalStrength.getGsmSignalStrength() != UNKNOW_CODE) {
-                fb.GSM_Signal = calculateSignalStrengthInPercent(signalStrength.getGsmSignalStrength());
+            try {
+                if (null != signalStrength && signalStrength.getGsmSignalStrength() != UNKNOW_CODE) {
+                    fb.GSM_Signal = calculateSignalStrengthInPercent(signalStrength.getGsmSignalStrength());
 
+                }
+            } catch (Exception e){
+                Log.d(LOG_TAG, e.toString());
             }
         }
     }
 
     public static float pxFromDp(final Context context, final float dp) {
-        return dp * context.getResources().getDisplayMetrics().density;
+        float v = 0.0f;
+
+        try {
+            v = dp * context.getResources().getDisplayMetrics().density;
+        } catch (Exception e) {
+
+        }
+
+        return v;
     }
 
     /**
