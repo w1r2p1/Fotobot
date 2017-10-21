@@ -1835,10 +1835,28 @@ public class FotoBot extends Application {
         if (FTP_folder.length() > 1) {
             try {
                 ftpClient.changeWorkingDirectory(FTP_folder);
+
+                if (!FTPReply.isPositiveCompletion(ftpClient.getReplyCode())) {
+                    ftpClient.disconnect();
+                    try {
+                        TimeUnit.SECONDS.sleep(3);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.err.println("FTP chdir error");
+                    SendMessage("FTP проблема с переходом в директорию <br>" + FTP_folder, MSG_FAIL);
+                    return false;
+                }
+
                 SendMessage("FTP переход в <br>" + FTP_folder, MSG_PASS);
                 System.out.println("Successfully changed working directory.");
             } catch (Exception e) {
-                SendMessage("FTP переход в <br>" + FTP_folder, MSG_FAIL);
+                try {
+                    TimeUnit.SECONDS.sleep(3);
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
+                SendMessage("FTP проблема с переходом в директорию <br>" + FTP_folder, MSG_FAIL);
                 System.out.println("Failed to change working directory.");
                 return false;
             }
