@@ -57,6 +57,9 @@ public class Tab_Foto_Activity extends Activity {
     TextView tv_Photo_Size_h_note;
     TextView tv_Photo_Size_s_note;
 
+    LinearLayout linLayout_fc;
+    LinearLayout linLayout_camera;
+
     protected void onCreate(Bundle savedInstanceState) {
         final FotoBot fb = (FotoBot) getApplicationContext();
         super.onCreate(savedInstanceState);
@@ -166,7 +169,7 @@ public class Tab_Foto_Activity extends Activity {
 
 // камера
 // Контейнер для камеры
-        LinearLayout linLayout_camera = new LinearLayout(this);
+        linLayout_camera = new LinearLayout(this);
         linLayout_camera.setOrientation(LinearLayout.VERTICAL);
         linLayout_camera.setPadding(5, 9, 5, 9);
         linLayout_camera.setBackgroundColor(Color.rgb(192, 192, 192));
@@ -233,11 +236,36 @@ public class Tab_Foto_Activity extends Activity {
         checkBox_bc.setChecked(fb.make_photo_bc);
         linLayout_camera.addView(checkBox_bc);
 
+        checkBox_bc.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                if (checkBox_bc.isChecked()) {
+                    fb.make_photo_bc = true;
+                    linLayout_camera.setVisibility(View.VISIBLE);
+
+                } else {
+                    fb.make_photo_bc = false;
+                    linLayout_camera.setVisibility(View.GONE);
+
+                }
+
+            }
+
+            // If no option selected
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+
+        });
+
 // ------------------------------------------------------------------------------------------------
 
 // Фронтальная камера
 // Контейнер для фронтальной камеры
-        LinearLayout linLayout_fc = new LinearLayout(this);
+        linLayout_fc = new LinearLayout(this);
         linLayout_fc.setOrientation(LinearLayout.VERTICAL);
         linLayout_fc.setPadding(5, 9, 5, 9);
         linLayout_fc.setBackgroundColor(Color.rgb(208, 208, 208));
@@ -308,6 +336,31 @@ public class Tab_Foto_Activity extends Activity {
             checkBox_fc = new CheckBox(this);
             checkBox_fc.setChecked(fb.make_photo_fc);
             linLayout_fc.addView(checkBox_fc);
+
+            checkBox_bc.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                    if (checkBox_fc.isChecked()) {
+                        fb.make_photo_fc = true;
+                        linLayout_fc.setVisibility(View.VISIBLE);
+
+                    } else {
+                        fb.make_photo_fc = false;
+                        linLayout_fc.setVisibility(View.GONE);
+
+                    }
+
+                }
+
+                // If no option selected
+                public void onNothingSelected(AdapterView<?> arg0) {
+                    // TODO Auto-generated method stub
+
+                }
+
+            });
 
 // ------------------------------------------------------------------------------------------------
 // Присоединить изображение к письму
