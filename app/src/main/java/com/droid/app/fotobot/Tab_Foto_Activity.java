@@ -57,6 +57,11 @@ public class Tab_Foto_Activity extends Activity {
     TextView tv_Photo_Size_h_note;
     TextView tv_Photo_Size_s_note;
 
+    LinearLayout linLayout_Flash;
+    LinearLayout linLayout_Autofocus;
+    LinearLayout linLayout_Attach;
+    LinearLayout linLayout_Delete;
+
     LinearLayout linLayout_fc;
     LinearLayout linLayout_camera;
     LinearLayout linLayout_fc_Attach;
@@ -246,12 +251,16 @@ public class Tab_Foto_Activity extends Activity {
 
                 if (checkBox_bc.isChecked()) {
                     fb.make_photo_bc = true;
-                    linLayout_camera.setVisibility(View.VISIBLE);
-
+                    linLayout_Flash.setVisibility(View.VISIBLE);
+                    linLayout_Autofocus.setVisibility(View.VISIBLE);
+                    linLayout_Attach.setVisibility(View.VISIBLE);
+                    linLayout_Delete.setVisibility(View.VISIBLE);
                 } else {
                     fb.make_photo_bc = false;
-                    linLayout_camera.setVisibility(View.GONE);
-
+                    linLayout_Flash.setVisibility(View.GONE);
+                    linLayout_Autofocus.setVisibility(View.GONE);
+                    linLayout_Attach.setVisibility(View.GONE);
+                    linLayout_Delete.setVisibility(View.GONE);
                 }
 
             }
@@ -263,6 +272,155 @@ public class Tab_Foto_Activity extends Activity {
             }
 
         });
+
+// Вспышка
+
+// Flash Container
+        linLayout_Flash = new LinearLayout(this);
+        linLayout_Flash.setOrientation(LinearLayout.VERTICAL);
+        linLayout_Flash.setPadding(5, 9, 5, 9);
+        linLayout_Flash.setBackgroundColor(Color.rgb(208, 208, 208));
+
+// Flash TextView
+        TextView tv_Flash = new TextView(this);
+        tv_Flash.setText(getResources().getString(R.string.flash));
+        tv_Flash.setWidth((screenWidth - padding) / 100 * 90);
+        tv_Flash.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Flash.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Flash.setTextColor(Color.BLACK);
+        linLayout_Flash.addView(tv_Flash);
+//        linLayout_camera.addView(tv_Flash);
+
+// CheckBox
+        checkBox_Flash = new CheckBox(this);
+        checkBox_Flash.setChecked(fb.Use_Flash);
+        linLayout_Flash.addView(checkBox_Flash);
+//        linLayout_camera.addView(checkBox_Flash);
+
+// ------------------------------------------------------------------------------------------------
+// Autofocus
+
+// Autofocus Container
+        linLayout_Autofocus = new LinearLayout(this);
+        linLayout_Autofocus.setOrientation(LinearLayout.VERTICAL);
+        linLayout_Autofocus.setPadding(5, 9, 5, 9);
+        linLayout_Autofocus.setBackgroundColor(Color.rgb(192,192,192));
+
+// Autofocus TextView
+        TextView tv_Autofocus = new TextView(this);
+        tv_Autofocus.setText(getResources().getString(R.string.Autofocus));
+        tv_Autofocus.setWidth((screenWidth - padding) / 100 * 90);
+        tv_Autofocus.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Autofocus.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Autofocus.setTextColor(Color.BLACK);
+
+        linLayout_Autofocus.addView(tv_Autofocus);
+
+// CheckBox
+        checkBox_Autofocus = new CheckBox(this);
+        checkBox_Autofocus.setChecked(fb.use_autofocus);
+        linLayout_Autofocus.addView(checkBox_Autofocus);
+
+// Time for focusing
+        final TextView tv_Time_for_Focusing = new TextView(this);
+        tv_Time_for_Focusing.setText(getResources().getString(R.string.Time_for_Focusing));
+        tv_Time_for_Focusing.setWidth((screenWidth - padding) / 100 * 90);
+        tv_Time_for_Focusing.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Time_for_Focusing.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Time_for_Focusing.setTextColor(Color.BLACK);
+
+        linLayout_Autofocus.addView(tv_Time_for_Focusing);
+
+        // Ввод данных
+        editText_Autofocus = new EditText(this);
+        editText_Autofocus.setText(Integer.toString(fb.time_for_focusing));
+        editText_Autofocus.setTextColor(Color.rgb(50, 100, 150));
+
+        // if (fb.use_autofocus) {
+        linLayout_Autofocus.addView(editText_Autofocus);
+        // }
+
+        //   linLayout_Autofocus.addView(tv_Time_for_Focusing);
+
+        if ( fb.use_autofocus ) {
+            tv_Time_for_Focusing.setVisibility(View.VISIBLE);
+            editText_Autofocus.setVisibility(View.VISIBLE);
+        } else {
+            tv_Time_for_Focusing.setVisibility(View.GONE);
+            editText_Autofocus.setVisibility(View.GONE);
+        }
+
+        checkBox_Autofocus.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                if (checkBox_Autofocus.isChecked()) {
+                    fb.use_autofocus = true;
+                    tv_Time_for_Focusing.setVisibility(View.VISIBLE);
+                    editText_Autofocus.setVisibility(View.VISIBLE);
+                } else {
+                    fb.use_autofocus = false;
+                    tv_Time_for_Focusing.setVisibility(View.GONE);
+                    editText_Autofocus.setVisibility(View.GONE);
+                }
+
+            }
+
+            // If no option selected
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+
+        });
+
+// ------------------------------------------------------------------------------------------------
+// Присоединить изображение к письму
+
+// Attach Container
+        linLayout_Attach = new LinearLayout(this);
+        linLayout_Attach.setOrientation(LinearLayout.VERTICAL);
+        linLayout_Attach.setPadding(5, 9, 5, 9);
+        linLayout_Attach.setBackgroundColor(Color.rgb(208, 208, 208));
+
+// Attach TextView
+        TextView tv_Attach = new TextView(this);
+        tv_Attach.setText(getResources().getString(R.string.attach_image));
+        tv_Attach.setWidth((screenWidth - padding) / 100 * 90);
+        tv_Attach.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Attach.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Attach.setTextColor(Color.BLACK);
+        linLayout_Attach.addView(tv_Attach);
+
+// CheckBox
+        checkBox_Attach = new CheckBox(this);
+        checkBox_Attach.setChecked(fb.bc_image_attach);
+        linLayout_Attach.addView(checkBox_Attach);
+
+// ------------------------------------------------------------------------------------------------
+// Удалить изображение после отправки на почту
+
+// Delete Container
+        linLayout_Delete = new LinearLayout(this);
+        linLayout_Delete.setOrientation(LinearLayout.VERTICAL);
+        linLayout_Delete.setPadding(5, 9, 5, 9);
+        linLayout_Delete.setBackgroundColor(Color.rgb(208, 208, 208));
+
+// Delete TextView
+        TextView tv_Delete = new TextView(this);
+        tv_Delete.setText(getResources().getString(R.string.delete_image));
+        tv_Delete.setWidth((screenWidth - padding) / 100 * 90);
+        tv_Delete.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_Delete.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+        tv_Delete.setTextColor(Color.BLACK);
+        linLayout_Delete.addView(tv_Delete);
+
+// CheckBox
+        checkBox_Delete = new CheckBox(this);
+        checkBox_Delete.setChecked(fb.bc_image_delete);
+        linLayout_Delete.addView(checkBox_Delete);
+
 
 // ------------------------------------------------------------------------------------------------
 
@@ -418,11 +576,7 @@ public class Tab_Foto_Activity extends Activity {
             //linLayout_fc.addView(checkBox_fc_Attach);
             linLayout_fc_Attach.addView(checkBox_fc_Attach);
 
-
-
-
-
-
+// ------------------------------------------------------------------
 
 // Метод обработки фото
 
@@ -499,155 +653,8 @@ public class Tab_Foto_Activity extends Activity {
         tv_Photo_Processing_Method_note.setText(getResources().getString(R.string.photo_processing_method_dscription));
         linLayout_Photo_Processing_Method.addView(tv_Photo_Processing_Method_note);
 
-// Вспышка
+// -------------------------------------------------------------------------------
 
-// Flash Container
-        LinearLayout linLayout_Flash = new LinearLayout(this);
-        linLayout_Flash.setOrientation(LinearLayout.VERTICAL);
-        linLayout_Flash.setPadding(5, 9, 5, 9);
-        linLayout_Flash.setBackgroundColor(Color.rgb(208, 208, 208));
-
-// Flash TextView
-        TextView tv_Flash = new TextView(this);
-        tv_Flash.setText(getResources().getString(R.string.flash));
-        tv_Flash.setWidth((screenWidth - padding) / 100 * 90);
-        tv_Flash.setTypeface(Typeface.DEFAULT_BOLD);
-        tv_Flash.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
-        tv_Flash.setTextColor(Color.BLACK);
-//        linLayout_Flash.addView(tv_Flash);
-        linLayout_camera.addView(tv_Flash);
-
-// CheckBox
-        checkBox_Flash = new CheckBox(this);
-        checkBox_Flash.setChecked(fb.Use_Flash);
-//        linLayout_Flash.addView(checkBox_Flash);
-        linLayout_camera.addView(checkBox_Flash);
-
-// ------------------------------------------------------------------------------------------------
-// Autofocus
-
-// Autofocus Container
-        LinearLayout linLayout_Autofocus = new LinearLayout(this);
-        linLayout_Autofocus.setOrientation(LinearLayout.VERTICAL);
-        linLayout_Autofocus.setPadding(5, 9, 5, 9);
-        linLayout_Autofocus.setBackgroundColor(Color.rgb(192,192,192));
-
-// Autofocus TextView
-        TextView tv_Autofocus = new TextView(this);
-        tv_Autofocus.setText(getResources().getString(R.string.Autofocus));
-        tv_Autofocus.setWidth((screenWidth - padding) / 100 * 90);
-        tv_Autofocus.setTypeface(Typeface.DEFAULT_BOLD);
-        tv_Autofocus.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
-        tv_Autofocus.setTextColor(Color.BLACK);
-
-        linLayout_Autofocus.addView(tv_Autofocus);
-
-// CheckBox
-        checkBox_Autofocus = new CheckBox(this);
-        checkBox_Autofocus.setChecked(fb.use_autofocus);
-        linLayout_Autofocus.addView(checkBox_Autofocus);
-
-// Time for focusing
-        final TextView tv_Time_for_Focusing = new TextView(this);
-        tv_Time_for_Focusing.setText(getResources().getString(R.string.Time_for_Focusing));
-        tv_Time_for_Focusing.setWidth((screenWidth - padding) / 100 * 90);
-        tv_Time_for_Focusing.setTypeface(Typeface.DEFAULT_BOLD);
-        tv_Time_for_Focusing.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
-        tv_Time_for_Focusing.setTextColor(Color.BLACK);
-
-        linLayout_Autofocus.addView(tv_Time_for_Focusing);
-
-        // Ввод данных
-        editText_Autofocus = new EditText(this);
-        editText_Autofocus.setText(Integer.toString(fb.time_for_focusing));
-        editText_Autofocus.setTextColor(Color.rgb(50, 100, 150));
-
-       // if (fb.use_autofocus) {
-            linLayout_Autofocus.addView(editText_Autofocus);
-       // }
-
-     //   linLayout_Autofocus.addView(tv_Time_for_Focusing);
-
-        if ( fb.use_autofocus ) {
-            tv_Time_for_Focusing.setVisibility(View.VISIBLE);
-            editText_Autofocus.setVisibility(View.VISIBLE);
-        } else {
-            tv_Time_for_Focusing.setVisibility(View.GONE);
-            editText_Autofocus.setVisibility(View.GONE);
-        }
-
-        checkBox_Autofocus.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                if (checkBox_Autofocus.isChecked()) {
-                    fb.use_autofocus = true;
-                    tv_Time_for_Focusing.setVisibility(View.VISIBLE);
-                    editText_Autofocus.setVisibility(View.VISIBLE);
-                } else {
-                    fb.use_autofocus = false;
-                    tv_Time_for_Focusing.setVisibility(View.GONE);
-                    editText_Autofocus.setVisibility(View.GONE);
-                }
-
-            }
-
-            // If no option selected
-            public void onNothingSelected(AdapterView<?> arg0) {
-                // TODO Auto-generated method stub
-
-            }
-
-        });
-
-// ------------------------------------------------------------------------------------------------
-// Присоединить изображение к письму
-
-// Attach Container
-        LinearLayout linLayout_Attach = new LinearLayout(this);
-        linLayout_Attach.setOrientation(LinearLayout.VERTICAL);
-        linLayout_Attach.setPadding(5, 9, 5, 9);
-        linLayout_Attach.setBackgroundColor(Color.rgb(208, 208, 208));
-
-// Attach TextView
-        TextView tv_Attach = new TextView(this);
-        tv_Attach.setText(getResources().getString(R.string.attach_image));
-        tv_Attach.setWidth((screenWidth - padding) / 100 * 90);
-        tv_Attach.setTypeface(Typeface.DEFAULT_BOLD);
-        tv_Attach.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
-        tv_Attach.setTextColor(Color.BLACK);
-//        linLayout_Flash.addView(tv_Flash);
-        linLayout_camera.addView(tv_Attach);
-
-// CheckBox
-        checkBox_Attach = new CheckBox(this);
-        checkBox_Attach.setChecked(fb.bc_image_attach);
-//        linLayout_Flash.addView(checkBox_Flash);
-        linLayout_camera.addView(checkBox_Attach);
-
-// ------------------------------------------------------------------------------------------------
-// Удалить изображение после отправки на почту
-
-// Delete Container
-        LinearLayout linLayout_Delete = new LinearLayout(this);
-        linLayout_Delete.setOrientation(LinearLayout.VERTICAL);
-        linLayout_Delete.setPadding(5, 9, 5, 9);
-        linLayout_Delete.setBackgroundColor(Color.rgb(208, 208, 208));
-
-// Delete TextView
-        TextView tv_Delete = new TextView(this);
-        tv_Delete.setText(getResources().getString(R.string.delete_image));
-        tv_Delete.setWidth((screenWidth - padding) / 100 * 90);
-        tv_Delete.setTypeface(Typeface.DEFAULT_BOLD);
-        tv_Delete.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
-        tv_Delete.setTextColor(Color.BLACK);
-        linLayout_camera.addView(tv_Delete);
-
-// CheckBox
-        checkBox_Delete = new CheckBox(this);
-        checkBox_Delete.setChecked(fb.bc_image_delete);
-        linLayout_camera.addView(checkBox_Delete);
 
 // Buttons
 
@@ -808,14 +815,23 @@ public class Tab_Foto_Activity extends Activity {
 
         FullFrame.addView(linLayout_Photo_Processing_Method);
         FullFrame.addView(linLayout_Photo_Size);
-        FullFrame.addView(linLayout_Flash);
+
 
 
 
         FullFrame.addView(linLayout_camera);
-
+        FullFrame.addView(linLayout_Flash);
         if ( fb.autofocus ) {
             FullFrame.addView(linLayout_Autofocus);
+        }
+        FullFrame.addView(linLayout_Attach);
+        FullFrame.addView(linLayout_Delete);
+
+        if ( !fb.make_photo_bc ) {
+            linLayout_Flash.setVisibility(View.GONE);
+            linLayout_Autofocus.setVisibility(View.GONE);
+            linLayout_Attach.setVisibility(View.GONE);
+            linLayout_Delete.setVisibility(View.GONE);
         }
 
         if ( fb.front_camera ) {
