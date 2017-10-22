@@ -59,6 +59,9 @@ public class Tab_Foto_Activity extends Activity {
 
     LinearLayout linLayout_fc;
     LinearLayout linLayout_camera;
+    LinearLayout linLayout_fc_Attach;
+
+    LinearLayout linLayout_fc_Delete;
 
     protected void onCreate(Bundle savedInstanceState) {
         final FotoBot fb = (FotoBot) getApplicationContext();
@@ -323,6 +326,32 @@ public class Tab_Foto_Activity extends Activity {
 
             linLayout_fc.addView(fc_spinner_Software);
 
+            // ------------------------------------------------------------------------------------------------
+// Удалить изображение после отправки на почту
+
+// Delete Container
+            linLayout_fc_Delete = new LinearLayout(this);
+            linLayout_fc_Delete.setOrientation(LinearLayout.VERTICAL);
+            linLayout_fc_Delete.setPadding(5, 9, 5, 9);
+            linLayout_fc_Delete.setBackgroundColor(Color.rgb(208, 208, 208));
+
+// Delete TextView
+            TextView tv_fc_Delete = new TextView(this);
+            tv_fc_Delete.setText(getResources().getString(R.string.delete_image));
+            tv_fc_Delete.setWidth((screenWidth - padding) / 100 * 90);
+            tv_fc_Delete.setTypeface(Typeface.DEFAULT_BOLD);
+            tv_fc_Delete.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
+            tv_fc_Delete.setTextColor(Color.BLACK);
+            //linLayout_fc.addView(tv_fc_Delete);
+            linLayout_fc_Delete.addView(tv_fc_Delete);
+
+// CheckBox
+            checkBox_fc_Delete = new CheckBox(this);
+            checkBox_fc_Delete.setChecked(fb.fc_image_delete);
+            //linLayout_fc.addView(checkBox_fc_Delete);
+            linLayout_fc_Delete.addView(checkBox_fc_Delete);
+        }
+
 // Использовать фронтальную камеру
             TextView tv_use_fc = new TextView(this);
             tv_use_fc.setText(getResources().getString(R.string.use_fc_camera));
@@ -337,18 +366,20 @@ public class Tab_Foto_Activity extends Activity {
             checkBox_fc.setChecked(fb.make_photo_fc);
             linLayout_fc.addView(checkBox_fc);
 
-            checkBox_bc.setOnClickListener(new View.OnClickListener() {
+            checkBox_fc.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
 
                     if (checkBox_fc.isChecked()) {
                         fb.make_photo_fc = true;
-                        linLayout_fc.setVisibility(View.VISIBLE);
+                        linLayout_fc_Attach.setVisibility(View.VISIBLE);
+                        linLayout_fc_Delete.setVisibility(View.VISIBLE);
 
                     } else {
                         fb.make_photo_fc = false;
-                        linLayout_fc.setVisibility(View.GONE);
+                        linLayout_fc_Attach.setVisibility(View.GONE);
+                        linLayout_fc_Delete.setVisibility(View.GONE);
 
                     }
 
@@ -366,7 +397,7 @@ public class Tab_Foto_Activity extends Activity {
 // Присоединить изображение к письму
 
 // Attach Container
-            LinearLayout linLayout_fc_Attach = new LinearLayout(this);
+            linLayout_fc_Attach = new LinearLayout(this);
             linLayout_fc_Attach.setOrientation(LinearLayout.VERTICAL);
             linLayout_fc_Attach.setPadding(5, 9, 5, 9);
             linLayout_fc_Attach.setBackgroundColor(Color.rgb(208, 208, 208));
@@ -378,36 +409,17 @@ public class Tab_Foto_Activity extends Activity {
             tv_fc_Attach.setTypeface(Typeface.DEFAULT_BOLD);
             tv_fc_Attach.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
             tv_fc_Attach.setTextColor(Color.BLACK);
-            linLayout_fc.addView(tv_fc_Attach);
+            //linLayout_fc.addView(tv_fc_Attach);
+            linLayout_fc_Attach.addView(tv_fc_Attach);
 
 // CheckBox
             checkBox_fc_Attach = new CheckBox(this);
             checkBox_fc_Attach.setChecked(fb.fc_image_attach);
-            linLayout_fc.addView(checkBox_fc_Attach);
+            //linLayout_fc.addView(checkBox_fc_Attach);
+            linLayout_fc_Attach.addView(checkBox_fc_Attach);
 
-// ------------------------------------------------------------------------------------------------
-// Удалить изображение после отправки на почту
 
-// Delete Container
-        LinearLayout linLayout_fc_Delete = new LinearLayout(this);
-        linLayout_fc_Delete.setOrientation(LinearLayout.VERTICAL);
-        linLayout_fc_Delete.setPadding(5, 9, 5, 9);
-        linLayout_fc_Delete.setBackgroundColor(Color.rgb(208, 208, 208));
 
-// Delete TextView
-        TextView tv_fc_Delete = new TextView(this);
-        tv_fc_Delete.setText(getResources().getString(R.string.delete_image));
-        tv_fc_Delete.setWidth((screenWidth - padding) / 100 * 90);
-        tv_fc_Delete.setTypeface(Typeface.DEFAULT_BOLD);
-        tv_fc_Delete.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
-        tv_fc_Delete.setTextColor(Color.BLACK);
-        linLayout_fc.addView(tv_fc_Delete);
-
-// CheckBox
-        checkBox_fc_Delete = new CheckBox(this);
-        checkBox_fc_Delete.setChecked(fb.fc_image_delete);
-        linLayout_fc.addView(checkBox_fc_Delete);
-    }
 
 
 
@@ -808,11 +820,18 @@ public class Tab_Foto_Activity extends Activity {
 
         if ( fb.front_camera ) {
             FullFrame.addView(linLayout_fc);
+
+    FullFrame.addView(linLayout_fc_Attach);
+    FullFrame.addView(linLayout_fc_Delete);
+            if ( !fb.make_photo_fc ) {
+                linLayout_fc_Attach.setVisibility(View.GONE);
+                linLayout_fc_Delete.setVisibility(View.GONE);
+            }
         }
 
 
 
-        FullFrame.addView(linLayout_JPEG_Compression);
+            FullFrame.addView(linLayout_JPEG_Compression);
 
         FullFrame.addView(linLayout_Buttons);
 
