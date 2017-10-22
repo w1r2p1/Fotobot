@@ -13,11 +13,11 @@
 
     <string name="Fotobot">Welcome to Fotobot! This application will help you to control remote places thrue thousands of miles. You will receive photo-reports periodically after predefined interval of time.
     You will be able to change Fotobot\'s settings remotely via SMS. Detailed instructions can be found there:
-            &lt;a href=http://v-and-f.ru/fotobot&gt;http://v-and-f.ru/fotobot&lt;/a&gt;</string>
+            &lt;a href=https://andreyv.ru/fotobot&gt;https://andreyv.ru/fotobot&lt;/a&gt;</string>
     <string name="fast_start">If you do not want to study all settings and want to start Fotobot as soon as possible
         just press START button. Fotobot will take a picture every 5 minute by front and back camera and store photos into: </string>
 
-    <string name="update"><![CDATA[<b><u>Version 3.3.2</u></b><br>
+    <string name="update"><![CDATA[<b><u>Version 3.3.4</u></b><br>
         1) bugs fixing<br>
         ]]>
     </string>
