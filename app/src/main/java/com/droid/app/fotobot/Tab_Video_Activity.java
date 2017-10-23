@@ -61,6 +61,8 @@ public class Tab_Video_Activity extends Activity {
     TextView tv_Photo_Size_s_note;
     LinearLayout linLayout_Attach;
     LinearLayout linLayout_Delete;
+    LinearLayout linLayout_fc_Attach;
+    LinearLayout linLayout_fc_Delete;
 
     protected void onCreate(Bundle savedInstanceState) {
         final FotoBot fb = (FotoBot) getApplicationContext();
@@ -224,11 +226,11 @@ public class Tab_Video_Activity extends Activity {
             public void onClick(View v) {
 
                 if (checkBox_bc.isChecked()) {
-                    fb.make_photo_bc = true;
+                    fb.make_video_bc = true;
                     linLayout_Attach.setVisibility(View.VISIBLE);
                     linLayout_Delete.setVisibility(View.VISIBLE);
                 } else {
-                    fb.make_photo_bc = false;
+                    fb.make_video_bc = false;
                     linLayout_Attach.setVisibility(View.GONE);
                     linLayout_Delete.setVisibility(View.GONE);
                 }
@@ -362,11 +364,35 @@ public class Tab_Video_Activity extends Activity {
             checkBox_fc.setChecked(fb.make_video_fc);
             linLayout_fc.addView(checkBox_fc);
 
+            checkBox_fc.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                    if (checkBox_fc.isChecked()) {
+                        fb.make_video_fc = true;
+                        linLayout_fc_Attach.setVisibility(View.VISIBLE);
+                        linLayout_fc_Delete.setVisibility(View.VISIBLE);
+                    } else {
+                        fb.make_video_fc = false;
+                        linLayout_fc_Attach.setVisibility(View.GONE);
+                        linLayout_fc_Delete.setVisibility(View.GONE);
+                    }
+
+                }
+
+                // If no option selected
+                public void onNothingSelected(AdapterView<?> arg0) {
+                    // TODO Auto-generated method stub
+
+                }
+
+            });
 // ------------------------------------------------------------------------------------------------
 // Присоединить видео к письму
 
 // Attach Container
-            LinearLayout linLayout_fc_Attach = new LinearLayout(this);
+            linLayout_fc_Attach = new LinearLayout(this);
             linLayout_fc_Attach.setOrientation(LinearLayout.VERTICAL);
             linLayout_fc_Attach.setPadding(5, 9, 5, 9);
             linLayout_fc_Attach.setBackgroundColor(Color.rgb(208, 208, 208));
@@ -378,18 +404,18 @@ public class Tab_Video_Activity extends Activity {
             tv_fc_Attach.setTypeface(Typeface.DEFAULT_BOLD);
             tv_fc_Attach.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
             tv_fc_Attach.setTextColor(Color.BLACK);
-            linLayout_fc.addView(tv_fc_Attach);
+            linLayout_fc_Attach.addView(tv_fc_Attach);
 
 // CheckBox
             checkBox_fc_Attach = new CheckBox(this);
             checkBox_fc_Attach.setChecked(fb.fc_video_attach);
-            linLayout_fc.addView(checkBox_fc_Attach);
+            linLayout_fc_Attach.addView(checkBox_fc_Attach);
 
 // ------------------------------------------------------------------------------------------------
 // Удалить видео после отправки на почту
 
 // Delete Container
-            LinearLayout linLayout_fc_Delete = new LinearLayout(this);
+            linLayout_fc_Delete = new LinearLayout(this);
             linLayout_fc_Delete.setOrientation(LinearLayout.VERTICAL);
             linLayout_fc_Delete.setPadding(5, 9, 5, 9);
             linLayout_fc_Delete.setBackgroundColor(Color.rgb(208, 208, 208));
@@ -401,12 +427,12 @@ public class Tab_Video_Activity extends Activity {
             tv_fc_Delete.setTypeface(Typeface.DEFAULT_BOLD);
             tv_fc_Delete.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
             tv_fc_Delete.setTextColor(Color.BLACK);
-            linLayout_fc.addView(tv_fc_Delete);
+            linLayout_fc_Delete.addView(tv_fc_Delete);
 
 // CheckBox
             checkBox_fc_Delete = new CheckBox(this);
             checkBox_fc_Delete.setChecked(fb.fc_video_delete);
-            linLayout_fc.addView(checkBox_fc_Delete);
+            linLayout_fc_Delete.addView(checkBox_fc_Delete);
 
         }
 
@@ -567,6 +593,14 @@ public class Tab_Video_Activity extends Activity {
 
         if (fb.front_camera) {
             FullFrame.addView(linLayout_fc);
+            FullFrame.addView(linLayout_fc_Attach);
+            FullFrame.addView(linLayout_fc_Delete);
+
+            if ( !fb.make_video_fc ) {
+                linLayout_fc_Attach.setVisibility(View.GONE);
+                linLayout_fc_Delete.setVisibility(View.GONE);
+            }
+
         }
 
 
