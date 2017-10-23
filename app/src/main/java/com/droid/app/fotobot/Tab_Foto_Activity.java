@@ -68,6 +68,9 @@ public class Tab_Foto_Activity extends Activity {
 
     LinearLayout linLayout_fc_Delete;
 
+    int bc_camera_color = Color.rgb(205, 196, 210);
+    int fc_camera_color = Color.rgb(184, 199, 210);
+
     protected void onCreate(Bundle savedInstanceState) {
         final FotoBot fb = (FotoBot) getApplicationContext();
         super.onCreate(savedInstanceState);
@@ -180,7 +183,7 @@ public class Tab_Foto_Activity extends Activity {
         linLayout_camera = new LinearLayout(this);
         linLayout_camera.setOrientation(LinearLayout.VERTICAL);
         linLayout_camera.setPadding(5, 9, 5, 9);
-        linLayout_camera.setBackgroundColor(Color.rgb(192, 192, 192));
+        linLayout_camera.setBackgroundColor(bc_camera_color);
 // Название
         TextView tv_bc = new TextView(this);
         tv_bc.setTypeface(Typeface.DEFAULT_BOLD);
@@ -279,7 +282,7 @@ public class Tab_Foto_Activity extends Activity {
         linLayout_Flash = new LinearLayout(this);
         linLayout_Flash.setOrientation(LinearLayout.VERTICAL);
         linLayout_Flash.setPadding(5, 9, 5, 9);
-        linLayout_Flash.setBackgroundColor(Color.rgb(208, 208, 208));
+        linLayout_Flash.setBackgroundColor(bc_camera_color);
 
 // Flash TextView
         TextView tv_Flash = new TextView(this);
@@ -304,7 +307,7 @@ public class Tab_Foto_Activity extends Activity {
         linLayout_Autofocus = new LinearLayout(this);
         linLayout_Autofocus.setOrientation(LinearLayout.VERTICAL);
         linLayout_Autofocus.setPadding(5, 9, 5, 9);
-        linLayout_Autofocus.setBackgroundColor(Color.rgb(192,192,192));
+        linLayout_Autofocus.setBackgroundColor(bc_camera_color);
 
 // Autofocus TextView
         TextView tv_Autofocus = new TextView(this);
@@ -382,7 +385,7 @@ public class Tab_Foto_Activity extends Activity {
         linLayout_Attach = new LinearLayout(this);
         linLayout_Attach.setOrientation(LinearLayout.VERTICAL);
         linLayout_Attach.setPadding(5, 9, 5, 9);
-        linLayout_Attach.setBackgroundColor(Color.rgb(208, 208, 208));
+        linLayout_Attach.setBackgroundColor(bc_camera_color);
 
 // Attach TextView
         TextView tv_Attach = new TextView(this);
@@ -405,7 +408,7 @@ public class Tab_Foto_Activity extends Activity {
         linLayout_Delete = new LinearLayout(this);
         linLayout_Delete.setOrientation(LinearLayout.VERTICAL);
         linLayout_Delete.setPadding(5, 9, 5, 9);
-        linLayout_Delete.setBackgroundColor(Color.rgb(208, 208, 208));
+        linLayout_Delete.setBackgroundColor(bc_camera_color);
 
 // Delete TextView
         TextView tv_Delete = new TextView(this);
@@ -429,7 +432,7 @@ public class Tab_Foto_Activity extends Activity {
         linLayout_fc = new LinearLayout(this);
         linLayout_fc.setOrientation(LinearLayout.VERTICAL);
         linLayout_fc.setPadding(5, 9, 5, 9);
-        linLayout_fc.setBackgroundColor(Color.rgb(208, 208, 208));
+        linLayout_fc.setBackgroundColor(fc_camera_color);
 
         if ( fb.front_camera) {
 // Название
@@ -445,7 +448,7 @@ public class Tab_Foto_Activity extends Activity {
             LinearLayout fc_linLayout_Photo_Size = new LinearLayout(this);
             fc_linLayout_Photo_Size.setOrientation(LinearLayout.VERTICAL);
             fc_linLayout_Photo_Size.setPadding(5, 9, 5, 9);
-            fc_linLayout_Photo_Size.setBackgroundColor(Color.rgb(192, 192, 192));
+            fc_linLayout_Photo_Size.setBackgroundColor(fc_camera_color);
 
             // Размер фото
             fc_tv_Photo_Size_s = new TextView(this);
@@ -491,7 +494,7 @@ public class Tab_Foto_Activity extends Activity {
             linLayout_fc_Delete = new LinearLayout(this);
             linLayout_fc_Delete.setOrientation(LinearLayout.VERTICAL);
             linLayout_fc_Delete.setPadding(5, 9, 5, 9);
-            linLayout_fc_Delete.setBackgroundColor(Color.rgb(208, 208, 208));
+            linLayout_fc_Delete.setBackgroundColor(fc_camera_color);
 
 // Delete TextView
             TextView tv_fc_Delete = new TextView(this);
@@ -558,7 +561,7 @@ public class Tab_Foto_Activity extends Activity {
             linLayout_fc_Attach = new LinearLayout(this);
             linLayout_fc_Attach.setOrientation(LinearLayout.VERTICAL);
             linLayout_fc_Attach.setPadding(5, 9, 5, 9);
-            linLayout_fc_Attach.setBackgroundColor(Color.rgb(208, 208, 208));
+            linLayout_fc_Attach.setBackgroundColor(fc_camera_color);
 
 // Attach TextView
             TextView tv_fc_Attach = new TextView(this);
@@ -813,10 +816,8 @@ public class Tab_Foto_Activity extends Activity {
         linLayout_Buttons.addView(btn_mp, lpViewbutton2);
 
 
-        FullFrame.addView(linLayout_Photo_Processing_Method);
-        FullFrame.addView(linLayout_Photo_Size);
-
-
+//        FullFrame.addView(linLayout_Photo_Processing_Method);
+//        FullFrame.addView(linLayout_Photo_Size);
 
 
         FullFrame.addView(linLayout_camera);
@@ -846,8 +847,10 @@ public class Tab_Foto_Activity extends Activity {
         }
 
 
-
             FullFrame.addView(linLayout_JPEG_Compression);
+
+        FullFrame.addView(linLayout_Photo_Processing_Method);
+        FullFrame.addView(linLayout_Photo_Size);
 
         FullFrame.addView(linLayout_Buttons);
 
