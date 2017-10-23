@@ -16,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -58,6 +59,8 @@ public class Tab_Video_Activity extends Activity {
     TextView fc_tv_Photo_Size_s;
     TextView tv_Photo_Size_h_note;
     TextView tv_Photo_Size_s_note;
+    LinearLayout linLayout_Attach;
+    LinearLayout linLayout_Delete;
 
     protected void onCreate(Bundle savedInstanceState) {
         final FotoBot fb = (FotoBot) getApplicationContext();
@@ -215,11 +218,36 @@ public class Tab_Video_Activity extends Activity {
         checkBox_bc.setChecked(fb.make_video_bc);
         linLayout_camera.addView(checkBox_bc);
 
+        checkBox_bc.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                if (checkBox_bc.isChecked()) {
+                    fb.make_photo_bc = true;
+                    linLayout_Attach.setVisibility(View.VISIBLE);
+                    linLayout_Delete.setVisibility(View.VISIBLE);
+                } else {
+                    fb.make_photo_bc = false;
+                    linLayout_Attach.setVisibility(View.GONE);
+                    linLayout_Delete.setVisibility(View.GONE);
+                }
+
+            }
+
+            // If no option selected
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+
+        });
+
 // ------------------------------------------------------------------------------------------------
 // Присоединить видео к письму
 
 // Attach Container
-        LinearLayout linLayout_Attach = new LinearLayout(this);
+        linLayout_Attach = new LinearLayout(this);
         linLayout_Attach.setOrientation(LinearLayout.VERTICAL);
         linLayout_Attach.setPadding(5, 9, 5, 9);
         linLayout_Attach.setBackgroundColor(Color.rgb(208, 208, 208));
@@ -231,20 +259,20 @@ public class Tab_Video_Activity extends Activity {
         tv_Attach.setTypeface(Typeface.DEFAULT_BOLD);
         tv_Attach.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Attach.setTextColor(Color.BLACK);
-//        linLayout_Flash.addView(tv_Flash);
-        linLayout_camera.addView(tv_Attach);
+//        linLayout_camera.addView(tv_Attach);
+        linLayout_Attach.addView(tv_Attach);
 
 // CheckBox
         checkBox_Attach = new CheckBox(this);
         checkBox_Attach.setChecked(fb.bc_video_attach);
-//        linLayout_Flash.addView(checkBox_Flash);
-        linLayout_camera.addView(checkBox_Attach);
+//        linLayout_camera.addView(checkBox_Attach);
+        linLayout_Attach.addView(checkBox_Attach);
 
 // ------------------------------------------------------------------------------------------------
 // Удалить видео после отправки на почту
 
 // Delete Container
-        LinearLayout linLayout_Delete = new LinearLayout(this);
+        linLayout_Delete = new LinearLayout(this);
         linLayout_Delete.setOrientation(LinearLayout.VERTICAL);
         linLayout_Delete.setPadding(5, 9, 5, 9);
         linLayout_Delete.setBackgroundColor(Color.rgb(208, 208, 208));
@@ -256,12 +284,14 @@ public class Tab_Video_Activity extends Activity {
         tv_Delete.setTypeface(Typeface.DEFAULT_BOLD);
         tv_Delete.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size);
         tv_Delete.setTextColor(Color.BLACK);
-        linLayout_camera.addView(tv_Delete);
+//        linLayout_camera.addView(tv_Delete);
+        linLayout_Delete.addView(tv_Delete);
 
 // CheckBox
         checkBox_Delete = new CheckBox(this);
         checkBox_Delete.setChecked(fb.bc_video_delete);
-        linLayout_camera.addView(checkBox_Delete);
+//        linLayout_camera.addView(checkBox_Delete);
+        linLayout_Delete.addView(checkBox_Delete);
 
 // ------------------------------------------------------------------------------------------------
 
@@ -527,7 +557,13 @@ public class Tab_Video_Activity extends Activity {
 
 
         FullFrame.addView(linLayout_camera);
+        FullFrame.addView(linLayout_Attach);
+        FullFrame.addView(linLayout_Delete);
 
+        if ( !fb.make_video_bc ) {
+            linLayout_Attach.setVisibility(View.GONE);
+            linLayout_Delete.setVisibility(View.GONE);
+        }
 
         if (fb.front_camera) {
             FullFrame.addView(linLayout_fc);
