@@ -981,10 +981,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             cleanLogFile();
 
 // удаляем фото с телефона
-                            if (fb.delete_foto) {
+//                            if (fb.delete_foto) {
                                 deletePhoto();
                                 deleteVideo();
-                            }
+//                            }
 
                             fb.fbpause(h, fb.Photo_Frequency);
                             fb.sms_check_file = false;
@@ -1648,7 +1648,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             str = "front_cam";
         }
 
-        fb.SendMessage(str + " " + getResources().getString(R.string.starting_to_make_video) + " " + fb.Image_Index, fb.MSG_INFO);
+        fb.SendMessage(str + " " + getResources().getString(R.string.starting_to_make_video) + " " + fb.Image_Index, fb.MSG_PASS);
 
         buildVideoName(cameraType);
 
@@ -1853,18 +1853,18 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             File imgfile = new File(fb.bc_Image_Name_Full_Path);
 
             if (imgfile.delete()) {
-                fb.SendMessage(getResources().getString(R.string.str_file) + " " + getResources().getString(R.string.str_was_deleted), fb.MSG_PASS);
+                fb.SendMessage(getResources().getString(R.string.str_file) + " photo back cam " + getResources().getString(R.string.str_was_deleted), fb.MSG_PASS);
             } else {
-                fb.SendMessage(getResources().getString(R.string.str_problem_with_deleting) + " " + fb.bc_Image_Name, fb.MSG_FAIL);
+                fb.SendMessage(getResources().getString(R.string.str_problem_with_deleting) + " photo back cam " + fb.bc_Image_Name, fb.MSG_FAIL);
             }
         }
         if (fb.make_photo_fc && fb.fc_image_delete) {
             File fc_imgfile = new File(fb.fc_Image_Name_Full_Path);
 
             if (fc_imgfile.delete()) {
-                fb.SendMessage(getResources().getString(R.string.str_file) + " " + " " + getResources().getString(R.string.str_was_deleted), fb.MSG_PASS);
+                fb.SendMessage(getResources().getString(R.string.str_file) + " photo front cam " + getResources().getString(R.string.str_was_deleted), fb.MSG_PASS);
             } else {
-                fb.SendMessage(getResources().getString(R.string.str_problem_with_deleting) + " " + fb.fc_Image_Name, fb.MSG_FAIL);
+                fb.SendMessage(getResources().getString(R.string.str_problem_with_deleting) + " photo front cam " + fb.fc_Image_Name, fb.MSG_FAIL);
             }
         }
     }
@@ -1876,18 +1876,18 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             File videofile = new File(fb.bc_Video_Name_Full_Path);
 
             if (videofile.delete()) {
-                fb.SendMessage(getResources().getString(R.string.str_file) + " " + " " + getResources().getString(R.string.str_was_deleted), fb.MSG_PASS);
+                fb.SendMessage(getResources().getString(R.string.str_file) + " video back cam " + getResources().getString(R.string.str_was_deleted), fb.MSG_PASS);
             } else {
-                fb.SendMessage(getResources().getString(R.string.str_problem_with_deleting) + " " + fb.bc_Video_Name_Full_Path, fb.MSG_FAIL);
+                fb.SendMessage(getResources().getString(R.string.str_problem_with_deleting) + " video back cam " + fb.bc_Video_Name_Full_Path, fb.MSG_FAIL);
             }
         }
         if (fb.make_video_fc && fb.fc_video_delete) {
             File fc_videofile = new File(fb.fc_Video_Name_Full_Path);
 
             if (fc_videofile.delete()) {
-                fb.SendMessage(getResources().getString(R.string.str_file) + " " + " " + getResources().getString(R.string.str_was_deleted), fb.MSG_PASS);
+                fb.SendMessage(getResources().getString(R.string.str_file) + " video front cam " + getResources().getString(R.string.str_was_deleted), fb.MSG_PASS);
             } else {
-                fb.SendMessage(getResources().getString(R.string.str_problem_with_deleting) + " " + fb.fc_Video_Name_Full_Path, fb.MSG_FAIL);
+                fb.SendMessage(getResources().getString(R.string.str_problem_with_deleting) + " video front cam " + fb.fc_Video_Name_Full_Path, fb.MSG_FAIL);
             }
         }
     }
