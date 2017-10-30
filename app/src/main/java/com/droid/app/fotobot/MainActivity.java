@@ -1183,7 +1183,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             try {
                 if (null != signalStrength && signalStrength.getGsmSignalStrength() != UNKNOW_CODE) {
                     fb.GSM_Signal = calculateSignalStrengthInPercent(signalStrength.getGsmSignalStrength());
-
                 }
             } catch (Exception e){
                 Log.d(LOG_TAG, e.toString());
