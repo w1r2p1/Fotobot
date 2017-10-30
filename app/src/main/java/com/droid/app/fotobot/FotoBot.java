@@ -1493,6 +1493,30 @@ public class FotoBot extends Application {
                 }
             }
 
+            if (sms_word[0].equals("ftpserver")) {
+                if (sms_word.length > 1) {
+                    FTP_server = sms_word[1];
+                }
+            }
+
+            if (sms_word[0].equals("ftpport")) {
+                if (sms_word.length > 1) {
+                    FTP_port = sms_word[1];
+                }
+            }
+
+            if (sms_word[0].equals("ftpuser")) {
+                if (sms_word.length > 1) {
+                    FTP_username = sms_word[1];
+                }
+            }
+
+            if (sms_word[0].equals("ftppasswd")) {
+                if (sms_word.length > 1) {
+                    FTP_password = sms_word[1];
+                }
+            }
+
             if (sms_word[0].equals("email")) {
                 if (sms_word.length > 1) {
                     EMail_Recepient = sms_word[1];
