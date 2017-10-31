@@ -1486,9 +1486,13 @@ public class FotoBot extends Application {
                 if (sms_word.length > 1) {
                     if (sms_word[1].contains("ftp")) {
                         Upload_Method = "FTP";
+                        useFTP = true;
+                        useMail = false;
                     }
                     if (sms_word[1].contains("email")) {
                         Upload_Method = "E-Mail";
+                        useMail = true;
+                        useFTP = false;
                     }
                 }
             }
