@@ -15,8 +15,7 @@ This file is part of Fotobot.
 
     You should have received a copy of the GNU General Public License
     along with Fotobot.  If not, see <http://www.gnu.org/licenses/>.
- */
-
+*/
 
 package com.droid.app.fotobot;
 
