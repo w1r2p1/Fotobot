@@ -1,3 +1,61 @@
+/*
+Copyright (C) 2017 Andrey Voronin
+
+This file is part of Fotobot.
+
+    Fotobot is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Fotobot is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Fotobot.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/*
+* DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+ *
+ * Copyright (c) 1997-2017 Oracle and/or its affiliates. All rights reserved.
+ *
+ * The contents of this file are subject to the terms of either the GNU
+ * General Public License Version 2 only ("GPL") or the Common Development
+ * and Distribution License("CDDL") (collectively, the "License").  You
+ * may not use this file except in compliance with the License.  You can
+ * obtain a copy of the License at
+ * https://oss.oracle.com/licenses/CDDL+GPL-1.1
+ * or LICENSE.txt.  See the License for the specific
+ * language governing permissions and limitations under the License.
+ *
+ * When distributing the software, include this License Header Notice in each
+ * file and include the License file at LICENSE.txt.
+ *
+ * GPL Classpath Exception:
+ * Oracle designates this particular file as subject to the "Classpath"
+ * exception as provided by Oracle in the GPL Version 2 section of the License
+ * file that accompanied this code.
+ *
+ * Modifications:
+ * If applicable, add the following below the License Header, with the fields
+ * enclosed by brackets [] replaced by your own identifying information:
+ * "Portions Copyright [year] [name of copyright owner]"
+ *
+ * Contributor(s):
+ * If you wish your version of this file to be governed by only the CDDL or
+ * only the GPL Version 2, indicate your decision by adding "[Contributor]
+ * elects to include this software in this distribution under the [CDDL or GPL
+ * Version 2] license."  If you don't indicate a single choice of license, a
+ * recipient has the option to distribute your version of this file under
+ * either the CDDL, the GPL Version 2 or to extend the choice of license to
+ * its licensees as provided above.  However, if you add GPL Version 2 code
+ * and therefore, elected the GPL Version 2 license, then the option applies
+ * only if the new code is made subject to such option by the copyright
+ * holder.
+*/
 package com.droid.app.fotobot;
 
 import android.content.Context;
@@ -130,38 +188,31 @@ public class Mail extends javax.mail.Authenticator {
                 Log.d("LOG_TAG", "Transport passed");
                 return true;
             } catch (AuthenticationFailedException e) {
-                fb.error_message = true;
-                fb.SendMessage("ERROR: email bad user name or password");
+                fb.SendMessage("ERROR: email bad user name or password", fb.MSG_FAIL);
                 Log.d("LOG_TAG", "Mail bad user name or password");
                 return false;
             } catch (SMTPAddressFailedException e) {
-                fb.error_message = true;
-                fb.SendMessage("ERROR: SMTPAddressFailedException");
+                fb.SendMessage("ERROR: SMTPAddressFailedException", fb.MSG_FAIL);
                 Log.d("LOG_TAG", "Mail host failed ");
                 return false;
             } catch (SMTPSendFailedException e) {
-                fb.error_message = true;
-                fb.SendMessage("ERROR: SMTPSendFailedException");
+                fb.SendMessage("ERROR: SMTPSendFailedException", fb.MSG_FAIL);
                 Log.d("LOG_TAG", "SMTP timeout");
                 return false;
             } catch (SendFailedException e) {
-                fb.error_message = true;
-                fb.SendMessage("ERROR: SendFailedException");
+                fb.SendMessage("ERROR: SendFailedException", fb.MSG_FAIL);
                 Log.d("LOG_TAG", "SMTP timeout");
                 return false;
             } catch (MethodNotSupportedException e) {
-                fb.error_message = true;
-                fb.SendMessage("ERROR: MethodNotSupportedException");
+                fb.SendMessage("ERROR: MethodNotSupportedException", fb.MSG_FAIL);
                 Log.d("LOG_TAG", "SMTP timeout");
                 return false;
             } catch (NoSuchProviderException e) {
-                fb.error_message = true;
-                fb.SendMessage("ERROR: NoSuchProviderException");
+                fb.SendMessage("ERROR: NoSuchProviderException", fb.MSG_FAIL);
                 Log.d("LOG_TAG", "SMTP timeout");
                 return false;
             } catch (Exception e) {
-                fb.error_message = true;
-                fb.SendMessage("ERROR: problem with connecting to email server");
+                fb.SendMessage("ERROR: problem with connecting to email server", fb.MSG_FAIL);
                 Log.d("LOG_TAG", "Transport.send exception");
                 e.printStackTrace();
                 StringWriter sw = new StringWriter();

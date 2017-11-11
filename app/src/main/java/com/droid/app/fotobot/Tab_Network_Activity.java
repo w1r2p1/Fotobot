@@ -1,3 +1,22 @@
+/*
+Copyright (C) 2017 Andrey Voronin
+
+This file is part of Fotobot.
+
+    Fotobot is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Fotobot is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Fotobot.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 package com.droid.app.fotobot;
 
 import android.app.Activity;
@@ -285,6 +304,14 @@ public class Tab_Network_Activity extends Activity {
         editText_FTP_Host.setText(fb.FTP_server);
         editText_FTP_Host.setTextColor(Color.rgb(50, 100, 150));
         linLayout_FTP.addView(editText_FTP_Host);
+
+        // Заметка для сервера FTP
+        TextView tv_FTP_Server_note = new TextView(this);
+        tv_FTP_Server_note.setTypeface(null, Typeface.NORMAL);
+        tv_FTP_Server_note.setTextSize(TypedValue.COMPLEX_UNIT_SP, fb.Config_Font_Size - 2);
+        tv_FTP_Server_note.setTextColor(Color.BLACK);
+        tv_FTP_Server_note.setText(getResources().getString(R.string.ftp_server_note));
+        linLayout_FTP.addView(tv_FTP_Server_note);
 // port
         TextView tv_FTP_Port = new TextView(this);
         tv_FTP_Port.setTypeface(Typeface.DEFAULT_BOLD);
@@ -758,12 +785,15 @@ public class Tab_Network_Activity extends Activity {
 
                 if (spinner_Upload_Method.getSelectedItem().toString().contains("FTP")) {
                     editor.putString("Upload_Method", "FTP");
+                    editor.putBoolean("Use_Mail", false);
+                    editor.putBoolean("Use_FTP", true);
                 } else {
                     editor.putString("Upload_Method", "E-Mail");
+                    editor.putBoolean("Use_Mail", true);
+                    editor.putBoolean("Use_FTP", false);
                 }
 
-                editor.putBoolean("Use_Mail", fb.useMail);
-                editor.putBoolean("Use_FTP", fb.useFTP);
+
 
 // Save the changes in SharedPreferences
                 editor.commit(); // commit changes
@@ -807,10 +837,11 @@ public class Tab_Network_Activity extends Activity {
 
         FullFrame.addView(linLayout_Net_Stat);
 
-        if (Build.VERSION.SDK_INT <= 21) {
+        //if (Build.VERSION.SDK_INT <= 21) {
             FullFrame.addView(linLayout_Channels);
             FullFrame.addView(linLayout_Connection_Method);
-        }
+        //}
+
         FullFrame.addView(linLayout_Upload_Method);
         FullFrame.addView(linLayout_Fotobot_Email);
         FullFrame.addView(linLayout_Fotobot_Password);

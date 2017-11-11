@@ -1,3 +1,22 @@
+<!--
+Copyright (C) 2017 Andrey Voronin
+
+This file is part of Fotobot.
+
+    Fotobot is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Fotobot is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Fotobot.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
 <resources>
     <string name="app_name">Фотобот</string>
     <string name="start_button">Пуск</string>
@@ -17,7 +36,6 @@
     &lt;a href=https://andreyv.ru/fotobot&gt;https://andreyv.ru/fotobot&lt;/a&gt;&lt;br&gt;
         &lt;hr&gt;
     </string>
-
      <string name="fast_start">Если лень выставлять все настройки и хочется быстрей попробовать
         Fotobot в деле нажмите кнопку пуск, выключите дисплей телефона и поставьте
         телефон в точку контроля. Fotobot начнет делать фото каждые 5 минут
@@ -27,10 +45,10 @@
 
     <!-- http://daniel-codes.blogspot.ru/2011/04/html-in-textviews.html -->
 
-    <string name="update"><![CDATA[<b><u>Версия 3.2.0</u></b><br>
-        1) добавлено SMS о пропаже/восстановлении напряжения в сети;<br>
-        2) добавлена возможность загружать файлы на FTP;<br>
-        3) добавлен флажок вкл/выкл звук (sms, фото/видео камера, входящие звонки, оповещения и другие), по умолчанию звук включен.
+    <string name="update"><![CDATA[<b><u>Версия 3.3.5</u></b><br>
+        1) исправление ошибка с удалением фото и видео;<br>
+        2) настройки для основной и фронтальной камеры сгруппированы по группам;<br>
+        3) ftp - предупреждение при переходе в несуществующую директорию.
         ]]></string>
 
     <string name="Camera_Name">Название камеры</string>
@@ -45,12 +63,12 @@
     <string name="delete_video">Удалить видео после загрузки в сеть</string>
 
     <string name="SMS_Password">SMS пароль</string>
-    <string name="SMS_Password_description">Пароль для управления через SMS (если пароль не совпадает с заданным, то SMS будет игнорироваться)</string>
+    <string name="SMS_Password_description">Пароль для управления через SMS (если пароль не совпадает с заданным, то SMS будет игнорироваться). Если телефон работает с 2-мя СИМ картами, то отключите запрос на отправку через конкретную симку.</string>
 
     <string name="Work_Dir">Папка для фотографий</string>
     <string name="Work_Dir_description">Полный путь к папке с фотографиями.
         Можете изменить ее. Воспользуйтесь любым менеджером файлов для получения полного пути к папке.
-    По умолчанию Fotobot предлагает складывать фото во внутреннюю память телефона.</string>
+    По умолчанию Fotobot предлагает складывать фото во внутреннюю память телефона. Для Android &gt; 6.0 внешняя SD может не работать.</string>
     <string name="Work_Dir_error1">Нет директории для записи фото</string>
     <string name="Work_Dir_error2">Пожалуйста проверьте поле \"Папка для фотографий\"</string>
 
@@ -81,24 +99,24 @@
 
     <string name="connection_channel_wifi">Метод подключения Wi-Fi</string>
     <string name="turning_on_wifi">Включаем Wi-Fi</string>
-    <string name="turning_on_wifi_message">Wi-Fi включается долго, нужно подождать</string>
+    <string name="turning_on_wifi_message">Wi-Fi включается</string>
     <string name="Internet_connection">Связь с Internet появилась</string>
     <string name="Internet_connection_is_already_created">есть соединение с Internet</string>
     <string name="no_Internet_connection">нет соединения с Internet</string>
-    <string name="pause_between_connections">Пауза перед следующей попыткой подсоединения к сети </string>
+    <string name="pause_between_connections">Пауза</string>
 
-    <string name="connection_channel_mobiledata">Метод подключения Mobile Data</string>
+    <string name="connection_channel_mobiledata">Метод Mobile Data</string>
     <string name="turning_on_mobiledata">включаем Mobile Data</string>
-    <string name="connection_attempt">Соединяемся с Internet, попытка  </string>
-    <string name="starting_to_make_photo">начинаем делать фото</string>
-    <string name="starting_to_make_video">начинаем записывать видео</string>
+    <string name="connection_attempt">Internet, попытка  </string>
+    <string name="starting_to_make_photo">фото</string>
+    <string name="starting_to_make_video">видео</string>
     <string name="video_recording_time">Время записи видео (сек)</string>
     <string name="video_recorded">видео записано</string>
     <string name="video_profile">Алгоритм автоматического определения видеопрофиля в этой версии не реализован. Поддерживаемый профиль можно найти вручную. Для этого выбираете, а затем запускаете Fotobot и смотрите ругнется он или нет:-)</string>
 
     <string name="request_for_stopping">Запрос на остановку Fotobot\'а отправлен, дождитесь корректного завершения и соответствующей надписи на экране</string>
 
-    <string name="connection_channel_wifimobiledata">Метод подключения Wi-Fi и Mobile Data</string>
+    <string name="connection_channel_wifimobiledata">Метод Wi-Fi и Mobile Data</string>
     <string name="connection_channel_wifimobiledata_wifi">Подключилиись через Wi-Fi</string>
     <string name="connection_channel_wifimobiledata_mobiledata">Подключились через Mobile Data</string>
     <string name="connection_channel_wifimobiledata_message">По Wi-Fi нет связи, включаем Mobile Data</string>
@@ -114,12 +132,12 @@
             через заданные промежутки времени.
             Все что нужно сделать - это завести почтовый ящик для Fotobot с которого он будет присылать фото.
             Подробную инструкцию по установке и настройке
-            этого приложения вы найдете на &lt;a href=http://v-and-f.ru/fotobot&gt;http://v-and-f.ru/fotobot&lt;/a&gt;</string>
+            этого приложения вы найдете на &lt;a href=https://andreyv.ru/fotobot&gt;http://v-and-f.ru/fotobot&lt;/a&gt;</string>
 
     <string name="welcome_to_fotobot">Фотобот приветствует Вас!
             Если Вы здесь впервые, то ознакомьтесь пожалуйста с документацией (кнопка Помощь внизу экрана).</string>
 
-    <string name="start_message">Фотобот начал свою работу</string>
+    <string name="start_message">Фотобот стартовал</string>
     <string name="stop_message">Фотобот остановлен</string>
 
     <string name="photo_has_been_taken">Фото сделано</string>
@@ -144,7 +162,7 @@
     <string name="Internet_connection_channel_description">Выберите способ подключения к Internet (мобильные данные, wi-fi или оба).</string>
     <string name="connection_method">Метод подключения</string>
     <string name="connection_method_description">Выберите режим установки связи с Internet. Method 1 - связь будет установлена сразу и телефон не будет отключаться от сети.
-                Method 2 - соедение с Internet будет устонавливаться перед тем, как сделать фото, затем, после загрузки фото или видео в сеть фотобот отключится от Internet.</string>
+                Method 2(в разработке) - соедение с Internet будет устонавливаться перед тем, как сделать фото, затем, после загрузки фото или видео в сеть фотобот отключится от Internet (Android &lt; v5).</string>
 
     <string name="Fotobot_email">Почтовый адрес Фотобота</string>
     <string name="Fotobot_email_description">С этого адреса Фотобот будет рассылать письма.</string>
@@ -262,12 +280,12 @@ mediastatus\n
     <string name="sms_voltage">Статус электросети (SMS)</string>
     <string name="sms_voltage_note">Если пропадет/появится напряжение, то будет отправлено SMS (для того, чтобы определялся статус электросети телефон должен быть на зарядке)</string>
 
-    <string name="no_voltage">Пропало напряжение в сети</string>
-    <string name="voltage_restored">Напряжение в сети восстановлено</string>
+    <string name="no_voltage">Нет напряжения в сети</string>
+    <string name="voltage_restored">Напряжение 220V</string>
 
     <string name="SMS_Voltage_Alert_Number">Номер для отправки SMS</string>
 
-    <string name="SMS_Voltage_Alert_Number_note">Номер, на который будут приходить SMS о состоянии электросети (пароль не требуется).</string>
+    <string name="SMS_Voltage_Alert_Number_note">Номер, на который будут приходить SMS о состоянии электросети (пароль не требуется). Если телефон работает с 2-мя СИМ картами, то отключите запрос на отправку через конкретную симку.</string>
 
     <string name="sound_mute">Выключить звук</string>
     <string name="sound_mute_note">Все звуки будут выключены (sms, фото/видео камера, входящие звонки, оповещения и другие).</string>
@@ -276,6 +294,7 @@ mediastatus\n
     <string name="upload_method_note">Выберите способ загрузки фото, видео и логов в сеть</string>
 
     <string name="ftp_server">FTP Server</string>
+    <string name="ftp_server_note">ftp.server.com/folder/subfolder</string>
     <string name="ftp_port">FTP Port</string>
     <string name="ftp_user">FTP User</string>
     <string name="ftp_password">FTP Password</string>

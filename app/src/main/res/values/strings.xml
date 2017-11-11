@@ -1,3 +1,21 @@
+<!--
+Copyright (C) 2017 Andrey Voronin
+
+This file is part of Fotobot.
+
+    Fotobot is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Fotobot is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Fotobot.  If not, see <http://www.gnu.org/licenses/>.
+-->
 <resources>
     <string name="app_name">Fotobot</string>
     <string name="start_button">Start</string>
@@ -13,12 +31,12 @@
 
     <string name="Fotobot">Welcome to Fotobot! This application will help you to control remote places thrue thousands of miles. You will receive photo-reports periodically after predefined interval of time.
     You will be able to change Fotobot\'s settings remotely via SMS. Detailed instructions can be found there:
-            &lt;a href=http://v-and-f.ru/fotobot&gt;http://v-and-f.ru/fotobot&lt;/a&gt;</string>
+            &lt;a href=https://andreyv.ru/fotobot&gt;https://andreyv.ru/fotobot&lt;/a&gt;</string>
     <string name="fast_start">If you do not want to study all settings and want to start Fotobot as soon as possible
         just press START button. Fotobot will take a picture every 5 minute by front and back camera and store photos into: </string>
 
-    <string name="update"><![CDATA[<b><u>Version 3.1.1</u></b><br>
-        1) AutoStart has been added.<br>
+    <string name="update"><![CDATA[<b><u>Version 3.3.5</u></b><br>
+        1) bugs fixing<br>
         ]]>
     </string>
 
@@ -35,7 +53,7 @@
     <string name="video_profile">Automatic video profile detection is not implemented in this version. You can find supported profile manually. Just select particular profile, run Fotobot. If error message appear change profile to another:-)</string>
 
     <string name="SMS_Password">SMS Password</string>
-    <string name="SMS_Password_description">Password for administration via SMS (if password is wrong than rest part of SMS will be ignored)</string>
+    <string name="SMS_Password_description">Password for administration via SMS (if password is wrong than rest part of SMS will be ignored). If phone has 2 SIM cards make one of them default (phone should not ask about which SIM card to use).</string>
 
     <string name="sms_cmd_list">
 passwd &lt;passwd&gt;\n
@@ -73,7 +91,7 @@ mediastatus\n
     <string name="advanced_settings">Show advanced settings</string>
 
     <string name="Work_Dir">Working Folder</string>
-    <string name="Work_Dir_description">Absolute path to folder with photos</string>
+    <string name="Work_Dir_description">Absolute path to folder with photos (external SD may not work for Android &gt; 6.0)</string>
     <string name="Work_Dir_error1">No such folder for images</string>
     <string name="Work_Dir_error2">Please check \"Working Folder\" field.</string>
 
@@ -103,8 +121,8 @@ mediastatus\n
     <string name="connection_channel_wifimobiledata_mobiledata">Mobile Data is up</string>
     <string name="connection_channel_wifimobiledata_message">No connection via Wi-Fi, is switching to Mobile Data</string>
     <string name="connection_attempt">Fotobot is connecting to Internet, attempt  </string>
-    <string name="starting_to_make_photo">Fotobot is starting to make photo </string>
-    <string name="starting_to_make_video">Fotobot is starting to make video </string>
+    <string name="starting_to_make_photo">is starting to make photo </string>
+    <string name="starting_to_make_video">is starting to make video </string>
     <string name="video_recording_time">Video recording time (sec)</string>
     <string name="video_recorded">video has been recorded</string>
     <string name="Internet_connection_is_closed">Internet connection has been closed</string>
@@ -249,7 +267,7 @@ mediastatus\n
     <string name="voltage_restored">Voltage restored</string>
 
     <string name="SMS_Voltage_Alert_Number">Phone number for voltage alert SMS</string>
-    <string name="SMS_Voltage_Alert_Number_note">Phone numbers for SMS voltage alerts. Password is not required.</string>
+    <string name="SMS_Voltage_Alert_Number_note">Phone numbers for SMS voltage alerts. Password is not required. If phone has 2 SIM cards make one of them default (phone should not ask about which SIM card to use).</string>
 
     <string name="sound_mute">Mute sound</string>
     <string name="sound_mute_note">All phone sounds will be muted (sms, camera, incoming calls, notifications and others)</string>
@@ -258,6 +276,7 @@ mediastatus\n
     <string name="upload_method_note">Select a way how to upload data to network</string>
 
     <string name="ftp_server">FTP Server</string>
+    <string name="ftp_server_note">ftp.server.com/folder/subfolder</string>
     <string name="ftp_port">FTP Port</string>
     <string name="ftp_user">FTP User</string>
     <string name="ftp_password">FTP Password</string>

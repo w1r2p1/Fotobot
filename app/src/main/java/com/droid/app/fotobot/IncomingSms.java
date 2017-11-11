@@ -1,3 +1,22 @@
+/*
+Copyright (C) 2017 Andrey Voronin
+
+This file is part of Fotobot.
+
+    Fotobot is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Fotobot is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Fotobot.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 package com.droid.app.fotobot;
 
 import android.content.BroadcastReceiver;
@@ -17,8 +36,19 @@ public class IncomingSms extends BroadcastReceiver {
 
     // Get the object of SmsManager
     final SmsManager sms = SmsManager.getDefault();
+    public static String sms_file="";
 
     public void onReceive(Context context, Intent intent) {
+
+        String action = intent.getAction();
+
+        Log.i("Receiver", "Broadcast received: " + action);
+
+        if(action.equals("workdir_intent")){
+            sms_file = intent.getExtras().getString("workdir");
+            Log.i("Receiver", "sms_file: " + sms_file);
+        }
+
 
        // Retrieves a map of extended data from the intent.
         final Bundle bundle = intent.getExtras();
@@ -53,7 +83,9 @@ public class IncomingSms extends BroadcastReceiver {
 
 public void sms2file(Context context, String sms_message_body) {
 
-    File file = new File(context.getFilesDir().toString() + "/sms.txt");
+  //  final FotoBot fb = (FotoBot) context;
+
+    File file = new File(sms_file + "/sms.txt");
 
     FileOutputStream fos = null;
 
