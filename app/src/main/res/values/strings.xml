@@ -46,10 +46,10 @@ This file is part of Fotobot.
     <string name="Back_Camera">Back camera</string>
     <string name="use_fc_camera">Use front camera</string>
     <string name="use_bc_camera">Use back camera</string>
-    <string name="attach_image">Attach image to e-mail</string>
-    <string name="delete_image">Delete image after sending to e-mail</string>
-    <string name="attach_video">Attach video to e-mail</string>
-    <string name="delete_video">Delete video after sending to e-mail</string>
+    <string name="attach_image">Upload image</string>
+    <string name="delete_image">Delete image after uploading</string>
+    <string name="attach_video">Upload image</string>
+    <string name="delete_video">Delete video after uploading</string>
     <string name="video_profile">Automatic video profile detection is not implemented in this version. You can find supported profile manually. Just select particular profile, run Fotobot. If error message appear change profile to another:-)</string>
 
     <string name="SMS_Password">SMS Password</string>
