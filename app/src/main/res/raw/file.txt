@@ -1,6 +1,6 @@
 <h2>User Manual</h2>
 
-Fotobot is powerful photo server which is running on your device.<br>
+This simple, lightweight and free application will help you to monitor remote places. You will receive photos and videos in you email inbox. Designed for slow Internet connections. Email contains photo, video and detailed information about device (GSM network signal strength, battery charge and temperature, free space in device storage). Most of settings can be changed remotely via SMS.<br>
 <br>
 Below are main features of Fotobot:<br>
 <br>
@@ -10,11 +10,11 @@ Below are main features of Fotobot:<br>
 <br>
 3) works on all devices starting from Android 2.3;<br>
 <br>
-4) installation package less than 1MB (important for old phones with small amount of internal storage);<br>
+4) installation package less than 1.9MB (important for old phones with small amount of internal storage);<br>
 <br>
 5) can be adjusted for slow-CPU devices (has an option for timing between processes).<br>
 <br>
-6) detailed reports in email (signal strength (db), battery charge(%), battery temperature (C), free space (MB));<br>
+6) detailed reports via email (signal strength (db), battery charge(%), battery temperature (C), free space (MB));<br>
 <br>
 7) can be controlled via SMS;<br>
 <br>
@@ -22,63 +22,21 @@ Below are main features of Fotobot:<br>
 <br>
 9) internla/external(SD) storage;<br>
 <br>
-10) offline mode (no emails, just saving photos into storage);<br>
+10) offline mode (just saving photos into storage);<br>
 <br>
-<h1>Typical workflow (fast start)</h1>
-Launch Fotobot and make some important settings<br>
+11) autofocus;<br>
 <br>
-<u><b>Settings/Behaviour</b></u><br>
+12) video recording;<br>
 <br>
-<b>Camera Name</b> (f.e. Fazenda), helps to sort out email in Inbox.<br>
+13) upload video to FTP;<br>
 <br>
-<b>Storage Type</b><br>
+14) voltage control (alert SMS when circuit off).<br>
 <br>
-<b>Pause between frames (sec)</b><br>
-Do not use numbers less than 30sec, cause old phones do not have powerfull CPU for image processing.<br>
+Fotobot is open source project under GPL v3:<br>
+<a href=https://github.com/andreiyv/Fotobot>https://github.com/andreiyv/Fotobot</a><br>
 <br>
-<u><b>Settings/Network</b></u><br>
-<br>
-<b>Network</b><br>
-on - photos will be sent to email;<br>
-off - photos will be written to SD-card;<br>
-<br>
-<b>Internet connection</b><br>
-Select Wi-Fi, Mobile Data or both<br>
-<br>
-<b>Fotobots email</b><br>
-It sounds strange, but Fotobot has to have it's own email address (use email account with one level authentication (without SMS confirmation)).<br>
-<br>
-<b>Fotobots password</b><br>
-Password for Fotobots email account.<br>
-<br>
-SMTP server and port are very important too. If you cretaed email account for Fotobot on Google Mail leave this fields unchanged.<br>
-<br>
-That's all for fast start, go to main window and press START button, after that Fotobot will start to make photos.<br>
-<br>
-Control via SMS:<br>
-1) password required in settings;<br>
-2) launch Fotobot by pressing START (Fotobot checks for SMS only when started);<br>
-3) send SMS to phone with started Fotobot:<br>
-<br>
-[SMS body]<br>
-passwd pass <br>
-update 300 <br>
-network on <br>
-log on <br>
-flash on <br>
-jpg 50 <br>
-status on <br>
-<br>
-Description:<br>
-passwd - password <br>
-update 300 - make photo each 300sec<br>
-network on - photo to email and storage, network off - photo to storage<br>
-log on - log will be attached to email<br>
-log on 50 - log will be attached to email (size of log is 50Kb)<br>
-flash on - photo with flash<br>
-jpg 50 - JPEG quality<br>
-status on - after that you will receive SMS with report.<br>
-<br>
+Detailed documentation:<br>
+<a href=https://andreyv.ru/fotobot>https://andreyv.ru/fotobot</a><br>
 <br>
 <br>
 <br>
